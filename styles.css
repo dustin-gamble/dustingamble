@@ -1,0 +1,145 @@
+:root {
+  --bg: #0f172a;
+  --bg-soft: #1e293b;
+  --panel: rgba(15, 23, 42, 0.72);
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --accent: #f59e0b;
+  --accent-soft: #fbbf24;
+  --shadow: 0 24px 45px rgba(2, 6, 23, 0.35);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Space Grotesk", sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 20% 5%, #334155 0%, transparent 38%),
+    radial-gradient(circle at 90% 10%, #7c2d12 0%, transparent 30%),
+    linear-gradient(145deg, var(--bg) 0%, var(--bg-soft) 100%);
+  line-height: 1.6;
+  padding: 2rem 1.25rem 3rem;
+}
+
+.page-glow {
+  position: fixed;
+  inset: -30vh auto auto -20vw;
+  width: 60vw;
+  height: 60vw;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.18), transparent 65%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.hero,
+main,
+footer {
+  width: min(760px, 100%);
+  margin: 0 auto;
+}
+
+.hero {
+  padding: 2rem;
+  border-radius: 20px;
+  background: var(--panel);
+  backdrop-filter: blur(6px);
+  box-shadow: var(--shadow);
+  animation: rise 650ms ease-out both;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  font-size: 0.8rem;
+  margin: 0 0 0.8rem;
+}
+
+h1,
+h2 {
+  font-family: "DM Serif Display", serif;
+  line-height: 1.1;
+}
+
+h1 {
+  font-size: clamp(2rem, 6vw, 3.7rem);
+  margin: 0;
+}
+
+.intro {
+  font-size: 1.1rem;
+  max-width: 36ch;
+}
+
+.button {
+  display: inline-block;
+  text-decoration: none;
+  background: linear-gradient(120deg, var(--accent), var(--accent-soft));
+  color: #1f2937;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 0.7rem 1.2rem;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 20px rgba(251, 191, 36, 0.28);
+}
+
+main {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.card {
+  background: var(--panel);
+  padding: 1.4rem;
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  animation: rise 850ms ease-out both;
+}
+
+.card:nth-child(2) {
+  animation-delay: 90ms;
+}
+
+ul {
+  padding-left: 1.2rem;
+  margin-bottom: 0;
+}
+
+footer {
+  margin-top: 1.4rem;
+  color: var(--muted);
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 1.25rem 0.85rem 2rem;
+  }
+
+  .hero,
+  .card {
+    padding: 1.2rem;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
