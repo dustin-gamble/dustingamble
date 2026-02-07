@@ -15,7 +15,7 @@ Large organizations can execute complex programs at scale, but early-stage conce
 
 ## Approach
 
-DIG was structured as a rapid learning environment with constrained prototype cycles, cross-disciplinary collaboration, and simulation-first habits. Efforts emphasized repeatable development loops, transparent decision logs, and mentorship integrated into day-to-day technical work. The model prioritized useful engineering outcomes over presentation-driven demo activity.
+DIG was structured as a rapid learning environment with constrained prototype cycles, cross-disciplinary collaboration, and simulation-first habits. The operating model was intentionally inspired by classic Skunk Works principles: small teams, fast iteration, clear ownership, and direct technical accountability. In practice, DIG functions as a \"skunk works inside the Skunk Works\" for early autonomous-system concepts and tool development. Efforts emphasized repeatable development loops, transparent decision logs, and mentorship integrated into day-to-day technical work. The model prioritized useful engineering outcomes over presentation-driven demo activity.
 
 ## Outcome / lessons
 

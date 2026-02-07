@@ -2,10 +2,9 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import WritingCard from "../components/WritingCard.astro";
 import ProjectCard from "../components/ProjectCard.astro";
-import { getFeaturedWriting, getFeaturedProjects, getProjects, getWriting, formatDate } from "../lib/content";
+import { getFeaturedWriting, getFeaturedProjects, getProjects } from "../lib/content";
 
 const featuredWriting = getFeaturedWriting(4);
-const recentWriting = getWriting().slice(0, 7);
 const featuredProjects = getFeaturedProjects(4);
 const tools = getProjects().filter((project) =>
   project.tags.some((tag) => ["Tools", "Experiments", "Simulation"].includes(tag))
@@ -26,27 +25,6 @@ const tools = getProjects().filter((project) =>
     <div class="grid cols-2">
       {featuredWriting.map((post) => <WritingCard post={post} />)}
     </div>
-  </section>
-
-  <section class="section-block" aria-labelledby="recent-writing-title">
-    <h2 id="recent-writing-title" class="section-heading">Recent Writing</h2>
-    <ol class="list-reset writing-list">
-      {
-        recentWriting.map((post) => (
-          <li>
-            <p class="meta-row">
-              <time datetime={post.date}>{formatDate(post.date)}</time>
-              <span aria-hidden="true">&middot;</span>
-              <span>{post.readingTime} min read</span>
-            </p>
-            <h3>
-              <a href={`/writing/${post.slug}/`}>{post.title}</a>
-            </h3>
-            <p>{post.summary}</p>
-          </li>
-        ))
-      }
-    </ol>
     <p><a href="/writing/">Browse all essays</a></p>
   </section>
 
