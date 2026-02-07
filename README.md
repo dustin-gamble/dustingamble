@@ -1,38 +1,70 @@
 # dustingamble.com
 
-Personal website source for deployment on GitHub Pages.
+Source code for the personal website of Dustin Gamble.
+
+Live site:
+- `https://dustingamble.com`
+
+Repository:
+- `https://github.com/dustin-gamble/dustingamble`
+
+## Site contents
+
+This static site includes:
+- Profile header and bio
+- Professional highlights and technical focus areas
+- Selected publications, records, patents, and project links
+- Direct links to project videos, LifeGuideTool, GitHub, and YouTube
+- Profile photo (`Dustin.JPG`)
+
+## Project structure
+
+- `index.html`: main page markup
+- `styles.css`: site styling and responsive layout
+- `Dustin.JPG`: profile image shown on the homepage
+- `CNAME`: custom domain for GitHub Pages
 
 ## Local preview
 
-Open `index.html` in a browser.
-
-## 1) Create the GitHub repo
-
-Create a new GitHub repository named `dustingamble` (empty repo, no README/license).
-
-## 2) Push this code to GitHub
+Quick preview options:
 
 ```bash
 cd "/Users/dustingamble/Documents/New project/dustingamble"
-git remote add origin https://github.com/<github-username>/dustingamble.git
-git push -u origin main
+open index.html
 ```
 
-## 3) Enable GitHub Pages
+Or run a local server:
 
-1. Open the repository on GitHub.
-2. Go to `Settings` -> `Pages`.
-3. Under `Build and deployment`, set:
-   - `Source`: `Deploy from a branch`
-   - `Branch`: `main` and `/ (root)`
-4. Save.
-5. In the same Pages settings, set `Custom domain` to `dustingamble.com`.
-6. Wait for the certificate, then enable `Enforce HTTPS`.
+```bash
+cd "/Users/dustingamble/Documents/New project/dustingamble"
+python3 -m http.server 8080
+```
 
-## 4) DNS records at your domain registrar
+Then open `http://localhost:8080`.
 
-For apex/root (`@`) records:
+## Update and publish
 
+```bash
+cd "/Users/dustingamble/Documents/New project/dustingamble"
+git add .
+git commit -m "Update website content"
+git push
+```
+
+GitHub Pages deploys from `main` branch root.
+
+## GitHub Pages and domain settings
+
+In GitHub repository settings:
+1. Go to `Settings` -> `Pages`
+2. Set source to `Deploy from a branch`
+3. Set branch to `main` and folder to `/ (root)`
+4. Set custom domain to `dustingamble.com`
+5. Enable `Enforce HTTPS` after certificate is issued
+
+## DNS records for `dustingamble.com`
+
+Root (`@`) records:
 - `A` -> `185.199.108.153`
 - `A` -> `185.199.109.153`
 - `A` -> `185.199.110.153`
@@ -42,14 +74,5 @@ For apex/root (`@`) records:
 - `AAAA` -> `2606:50c0:8002::153`
 - `AAAA` -> `2606:50c0:8003::153`
 
-For `www`:
-
-- `CNAME` -> `<github-username>.github.io`
-
-## 5) Verify DNS
-
-```bash
-dig +short dustingamble.com A
-dig +short dustingamble.com AAAA
-dig +short www.dustingamble.com CNAME
-```
+`www` record:
+- `CNAME` -> `dustin-gamble.github.io`
