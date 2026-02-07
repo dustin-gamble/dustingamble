@@ -116,4 +116,7 @@ If there is one takeaway, it is this: the "unsexy" work is often the decisive wo
 
 That is not a compromise. It is what serious engineering looks like.
 
-TODO: Add links to public references and non-sensitive lessons-learned examples.
+Related public references:
+
+- Technical paper (PDF): [/papers/world-record-duration-flight-2023-aiaa.pdf](/papers/world-record-duration-flight-2023-aiaa.pdf)
+- AIAA DOI abstract: https://arc.aiaa.org/doi/abs/10.2514/6.2023-1725
