@@ -1,0 +1,32 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { formatDate, getProjects } from "../../lib/content";
+
+export async function getStaticPaths() {
+  const projects = getProjects();
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project }
+  }));
+}
+
+const { project } = Astro.props;
+---
+<BaseLayout
+  title={project.title}
+  description={project.summary}
+>
+  <article class="prose">
+    <p><a href="/projects/">&larr; Back to projects</a></p>
+    <h1>{project.title}</h1>
+    <p class="meta-row">
+      <time datetime={project.date}>{formatDate(project.date)}</time>
+    </p>
+    <ul class="tag-list" aria-label="Tags">
+      {project.tags.map((tag) => <li>{tag}</li>)}
+    </ul>
+    <p>{project.summary}</p>
+    <hr />
+    <Fragment set:html={project.html} />
+  </article>
+</BaseLayout>

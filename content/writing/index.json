@@ -1,0 +1,47 @@
+[
+  {
+    "slug": "ai-wont-replace-engineers-but-it-will-change-how-we-build",
+    "title": "AI Won't Replace Engineers - But It Will Change How We Build",
+    "date": "2026-01-29",
+    "summary": "AI is becoming a practical engineering partner, not a substitute for accountable technical judgment.",
+    "tags": ["AI", "Engineering Workflows", "Autonomy"],
+    "draft": false,
+    "featured": true
+  },
+  {
+    "slug": "simulation-first-engineering-shortening-the-loop",
+    "title": "Simulation-First Engineering: Shortening the Loop",
+    "date": "2026-01-21",
+    "summary": "Shorter design cycles come from better simulation habits, not bigger models or more process overhead.",
+    "tags": ["Simulation", "UAV", "Systems Engineering"],
+    "draft": false,
+    "featured": true
+  },
+  {
+    "slug": "modular-aircraft-why-reconfigurability-matters",
+    "title": "Modular Aircraft: Why Reconfigurability Matters",
+    "date": "2026-01-14",
+    "summary": "Reconfigurable aircraft architectures reduce organizational risk and increase mission adaptability.",
+    "tags": ["Aircraft Design", "Modularity", "Mission Engineering"],
+    "draft": false,
+    "featured": true
+  },
+  {
+    "slug": "long-endurance-uavs-the-unsexy-lessons",
+    "title": "Long-Endurance UAVs: The Unsexy Lessons",
+    "date": "2026-01-08",
+    "summary": "Endurance comes from operational discipline and integration quality more than any single breakthrough.",
+    "tags": ["UAV", "Flight Test", "Reliability"],
+    "draft": false,
+    "featured": true
+  },
+  {
+    "slug": "building-an-innovation-lab-inside-a-big-company",
+    "title": "Building an Innovation Lab Inside a Big Company",
+    "date": "2025-12-30",
+    "summary": "A practical playbook for creating a rapid innovation environment that survives contact with reality.",
+    "tags": ["Leadership", "Innovation", "Engineering Culture"],
+    "draft": false,
+    "featured": false
+  }
+]

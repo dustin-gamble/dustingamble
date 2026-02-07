@@ -1,0 +1,45 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+<BaseLayout
+  title="Contact"
+  description="Contact Dustin Gamble for speaking, collaboration, and technical discussions."
+>
+  <section class="prose section-block">
+    <h1>Contact</h1>
+    <p>
+      For collaboration, speaking, or technical discussions, use the links below.
+    </p>
+
+    <ul>
+      <li>Email: <a href="mailto:TODO@example.com">TODO@example.com</a></li>
+      <li>LinkedIn: <a href="https://www.linkedin.com/in/TODO">https://www.linkedin.com/in/TODO</a></li>
+      <li>GitHub: <a href="https://github.com/dustin-gamble">https://github.com/dustin-gamble</a></li>
+      <li>YouTube: <a href="https://www.youtube.com/@dustingamble4137">@dustingamble4137</a></li>
+    </ul>
+
+    <h2>Simple Contact Form</h2>
+    <form
+      class="form-grid"
+      action="mailto:TODO@example.com"
+      method="post"
+      enctype="text/plain"
+    >
+      <label>
+        Name
+        <input type="text" name="name" required />
+      </label>
+      <label>
+        Email
+        <input type="email" name="email" required />
+      </label>
+      <label>
+        Message
+        <textarea name="message" rows="6" required></textarea>
+      </label>
+      <button type="submit">Send by Email</button>
+    </form>
+
+    <p>TODO: Replace placeholder email and LinkedIn URL.</p>
+  </section>
+</BaseLayout>

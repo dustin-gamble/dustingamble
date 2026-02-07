@@ -1,0 +1,17 @@
+---
+import { formatDate } from "../lib/content";
+
+const { post, compact = false } = Astro.props;
+---
+<article class={`card writing-card ${compact ? "compact" : ""}`}>
+  <p class="meta-row">
+    <time datetime={post.date}>{formatDate(post.date)}</time>
+    <span aria-hidden="true">&middot;</span>
+    <span>{post.readingTime} min read</span>
+  </p>
+  <h3><a href={`/writing/${post.slug}/`}>{post.title}</a></h3>
+  <p>{post.summary}</p>
+  <ul class="tag-list" aria-label="Tags">
+    {post.tags.map((tag) => <li>{tag}</li>)}
+  </ul>
+</article>

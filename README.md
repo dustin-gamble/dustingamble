@@ -1,78 +1,106 @@
 # dustingamble.com
 
-Source code for the personal website of Dustin Gamble.
+Writing-led personal site for Dustin Gamble, built as a static Astro project and deployable on GitHub Pages.
 
-Live site:
-- `https://dustingamble.com`
+## Stack
 
-Repository:
-- `https://github.com/dustin-gamble/dustingamble`
+- Astro (static output)
+- Markdown content in `/content`
+- JSON content indexes for ordering/featured control
 
-## Site contents
-
-This static site includes:
-- Profile header and bio
-- Professional highlights and technical focus areas
-- Selected publications, records, patents, and project links
-- Direct links to project videos, LifeGuideTool, GitHub, and YouTube
-- Profile photo (`Dustin.JPG`)
-
-## Project structure
-
-- `index.html`: main page markup
-- `styles.css`: site styling and responsive layout
-- `Dustin.JPG`: profile image shown on the homepage
-- `CNAME`: custom domain for GitHub Pages
-
-## Local preview
-
-Quick preview options:
+## Local development
 
 ```bash
 cd "/Users/dustingamble/Documents/New project/dustingamble"
-open index.html
+npm install
+npm run dev
 ```
 
-Or run a local server:
+Open `http://localhost:4321`.
+
+## Build
 
 ```bash
-cd "/Users/dustingamble/Documents/New project/dustingamble"
-python3 -m http.server 8080
+npm run build
 ```
 
-Then open `http://localhost:8080`.
+Build output goes to `dist/`.
 
-## Update and publish
+## Deploy to GitHub Pages
 
-```bash
-cd "/Users/dustingamble/Documents/New project/dustingamble"
-git add .
-git commit -m "Update website content"
-git push
+This repo includes a workflow at `.github/workflows/deploy.yml`.
+
+1. Push to `main`.
+2. In GitHub repo settings, ensure Pages source is **GitHub Actions**.
+3. The workflow builds Astro and deploys `dist/` automatically.
+
+## Custom domain
+
+- Domain file: `public/CNAME`
+- Current value: `dustingamble.com`
+
+DNS setup (at registrar):
+
+- `A` records for apex `@`:
+  - `185.199.108.153`
+  - `185.199.109.153`
+  - `185.199.110.153`
+  - `185.199.111.153`
+- `AAAA` records for apex `@`:
+  - `2606:50c0:8000::153`
+  - `2606:50c0:8001::153`
+  - `2606:50c0:8002::153`
+  - `2606:50c0:8003::153`
+- `CNAME` for `www`:
+  - `dustin-gamble.github.io`
+
+After DNS propagation, enable HTTPS in GitHub Pages settings.
+
+## Where to edit content
+
+### Writing
+
+- Index/order/featured flags: `content/writing/index.json`
+- Essays: `content/writing/*.md`
+
+Each writing file uses frontmatter:
+
+```yaml
+title: "..."
+date: "YYYY-MM-DD"
+summary: "..."
+tags: ["..."]
+draft: false
 ```
 
-GitHub Pages deploys from `main` branch root.
+### Projects
 
-## GitHub Pages and domain settings
+- Index/order/featured flags: `content/projects/index.json`
+- Project pages: `content/projects/*.md`
 
-In GitHub repository settings:
-1. Go to `Settings` -> `Pages`
-2. Set source to `Deploy from a branch`
-3. Set branch to `main` and folder to `/ (root)`
-4. Set custom domain to `dustingamble.com`
-5. Enable `Enforce HTTPS` after certificate is issued
+Each project file uses the same required frontmatter:
 
-## DNS records for `dustingamble.com`
+```yaml
+title: "..."
+date: "YYYY-MM-DD"
+summary: "..."
+tags: ["..."]
+draft: false
+```
 
-Root (`@`) records:
-- `A` -> `185.199.108.153`
-- `A` -> `185.199.109.153`
-- `A` -> `185.199.110.153`
-- `A` -> `185.199.111.153`
-- `AAAA` -> `2606:50c0:8000::153`
-- `AAAA` -> `2606:50c0:8001::153`
-- `AAAA` -> `2606:50c0:8002::153`
-- `AAAA` -> `2606:50c0:8003::153`
+## Site structure
 
-`www` record:
-- `CNAME` -> `dustin-gamble.github.io`
+- `src/pages/index.astro` -> Home (writing-led)
+- `src/pages/writing/` -> Writing index and essay pages
+- `src/pages/projects/` -> Projects index and detail pages
+- `src/pages/about.astro` -> About (short + expandable long bio)
+- `src/pages/resume.astro` -> HTML resume
+- `src/pages/contact.astro` -> Contact links + mailto form
+- `src/pages/rss.xml.ts` -> RSS feed
+- `src/pages/sitemap.xml.ts` -> Dynamic sitemap
+- `public/robots.txt` -> robots rules
+
+## Notes
+
+- Keep proprietary program details out of public markdown content.
+- Replace all `TODO` placeholders for links, email, LinkedIn, and approved references.

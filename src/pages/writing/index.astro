@@ -1,0 +1,28 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import WritingCard from "../../components/WritingCard.astro";
+import { getWriting } from "../../lib/content";
+
+const posts = getWriting();
+---
+<BaseLayout
+  title="Writing"
+  description="Essays from Dustin Gamble on autonomous systems, simulation-first engineering, and AI-augmented technical workflows."
+  type="article"
+>
+  <section class="section-block prose">
+    <h1>Writing</h1>
+    <p>
+      Notes on building autonomous systems, simulation-driven development, and practical uses of AI in
+      engineering.
+    </p>
+    <p><a href="/rss.xml">Subscribe via RSS</a></p>
+  </section>
+
+  <section class="section-block" aria-labelledby="writing-list-title">
+    <h2 id="writing-list-title" class="section-heading">All Essays</h2>
+    <div class="grid cols-2">
+      {posts.map((post) => <WritingCard post={post} />)}
+    </div>
+  </section>
+</BaseLayout>

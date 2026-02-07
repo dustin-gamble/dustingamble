@@ -1,0 +1,35 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { formatDate, getWriting } from "../../lib/content";
+
+export async function getStaticPaths() {
+  const posts = getWriting();
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post }
+  }));
+}
+
+const { post } = Astro.props;
+---
+<BaseLayout
+  title={post.title}
+  description={post.summary}
+  type="article"
+>
+  <article class="prose">
+    <p><a href="/writing/">&larr; Back to writing</a></p>
+    <h1>{post.title}</h1>
+    <p class="meta-row">
+      <time datetime={post.date}>{formatDate(post.date)}</time>
+      <span aria-hidden="true">&middot;</span>
+      <span>{post.readingTime} min read</span>
+    </p>
+    <ul class="tag-list" aria-label="Tags">
+      {post.tags.map((tag) => <li>{tag}</li>)}
+    </ul>
+    <p>{post.summary}</p>
+    <hr />
+    <Fragment set:html={post.html} />
+  </article>
+</BaseLayout>

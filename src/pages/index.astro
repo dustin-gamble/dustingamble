@@ -1,0 +1,86 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import WritingCard from "../components/WritingCard.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import { getFeaturedWriting, getFeaturedProjects, getProjects, getWriting, formatDate } from "../lib/content";
+
+const featuredWriting = getFeaturedWriting(4);
+const recentWriting = getWriting().slice(0, 7);
+const featuredProjects = getFeaturedProjects(4);
+const tools = getProjects().filter((project) =>
+  project.tags.some((tag) => ["Tools", "Experiments", "Simulation"].includes(tag))
+).slice(0, 4);
+---
+<BaseLayout
+  title="Dustin Gamble"
+  description="Autonomous systems, aerospace engineering, and AI-augmented design workflows. Essays and project notes from Dustin Gamble."
+>
+  <section class="home-hero section-block">
+    <p class="kicker">Writing-led technical notes</p>
+    <h1>Dustin Gamble</h1>
+    <p>Autonomous systems, aerospace engineering, and AI-augmented design workflows.</p>
+  </section>
+
+  <section class="section-block" aria-labelledby="featured-writing-title">
+    <h2 id="featured-writing-title" class="section-heading">Featured Writing</h2>
+    <div class="grid cols-2">
+      {featuredWriting.map((post) => <WritingCard post={post} />)}
+    </div>
+  </section>
+
+  <section class="section-block" aria-labelledby="recent-writing-title">
+    <h2 id="recent-writing-title" class="section-heading">Recent Writing</h2>
+    <ol class="list-reset writing-list">
+      {
+        recentWriting.map((post) => (
+          <li>
+            <p class="meta-row">
+              <time datetime={post.date}>{formatDate(post.date)}</time>
+              <span aria-hidden="true">&middot;</span>
+              <span>{post.readingTime} min read</span>
+            </p>
+            <h3>
+              <a href={`/writing/${post.slug}/`}>{post.title}</a>
+            </h3>
+            <p>{post.summary}</p>
+          </li>
+        ))
+      }
+    </ol>
+    <p><a href="/writing/">Browse all essays</a></p>
+  </section>
+
+  <section class="section-block" aria-labelledby="selected-projects-title">
+    <h2 id="selected-projects-title" class="section-heading">Selected Projects</h2>
+    <div class="grid cols-2">
+      {featuredProjects.map((project) => <ProjectCard project={project} />)}
+    </div>
+    <p><a href="/projects/">View project archive</a></p>
+  </section>
+
+  <section class="section-block" aria-labelledby="tools-title">
+    <h2 id="tools-title" class="section-heading">Tools / Experiments</h2>
+    <ul class="list-reset writing-list">
+      {
+        tools.map((tool) => (
+          <li>
+            <h3>
+              <a href={`/projects/${tool.slug}/`}>{tool.title}</a>
+            </h3>
+            <p>{tool.summary}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="section-block about-teaser" aria-labelledby="about-teaser-title">
+    <h2 id="about-teaser-title" class="section-heading">About</h2>
+    <p>
+      I build practical aerospace systems and the workflows that support them, from prototype concepts to
+      simulation-heavy design loops. Most of my writing here is about how teams can move faster without
+      losing engineering rigor.
+    </p>
+    <p><a href="/about/">Read the full about page</a></p>
+  </section>
+</BaseLayout>
