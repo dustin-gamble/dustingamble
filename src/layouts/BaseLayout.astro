@@ -1,5 +1,6 @@
 ---
-import "../styles/global.css";
+import fs from "node:fs";
+import path from "node:path";
 
 const {
   title = "Dustin Gamble",
@@ -7,6 +8,11 @@ const {
   ogImage = "/og-default.svg",
   type = "website"
 } = Astro.props;
+
+const inlineCss = fs.readFileSync(
+  path.resolve(process.cwd(), "src/styles/global.css"),
+  "utf-8"
+);
 
 const pathname = Astro.url.pathname;
 const canonical = new URL(pathname, Astro.site).toString();
@@ -46,6 +52,14 @@ function isActive(href) {
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={new URL(ogImage, Astro.site).toString()} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style is:global set:html={inlineCss}></style>
 
     <script is:inline>
       const saved = localStorage.getItem("theme");

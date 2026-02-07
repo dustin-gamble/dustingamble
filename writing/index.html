@@ -1,10 +1,481 @@
-<!DOCTYPE html><html lang="en" data-theme="light"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Writing | Dustin Gamble</title><meta name="description" content="Essays from Dustin Gamble on autonomous systems, simulation-first engineering, and AI-augmented technical workflows."><link rel="canonical" href="https://dustingamble.com/writing/"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta property="og:type" content="article"><meta property="og:title" content="Writing | Dustin Gamble"><meta property="og:description" content="Essays from Dustin Gamble on autonomous systems, simulation-first engineering, and AI-augmented technical workflows."><meta property="og:url" content="https://dustingamble.com/writing/"><meta property="og:image" content="https://dustingamble.com/og-default.svg"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Writing | Dustin Gamble"><meta name="twitter:description" content="Essays from Dustin Gamble on autonomous systems, simulation-first engineering, and AI-augmented technical workflows."><meta name="twitter:image" content="https://dustingamble.com/og-default.svg"><script>
+<!DOCTYPE html><html lang="en" data-theme="light"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Writing | Dustin Gamble</title><meta name="description" content="Essays from Dustin Gamble on autonomous systems, simulation-first engineering, and AI-augmented technical workflows."><link rel="canonical" href="https://dustingamble.com/writing/"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta property="og:type" content="article"><meta property="og:title" content="Writing | Dustin Gamble"><meta property="og:description" content="Essays from Dustin Gamble on autonomous systems, simulation-first engineering, and AI-augmented technical workflows."><meta property="og:url" content="https://dustingamble.com/writing/"><meta property="og:image" content="https://dustingamble.com/og-default.svg"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Writing | Dustin Gamble"><meta name="twitter:description" content="Essays from Dustin Gamble on autonomous systems, simulation-first engineering, and AI-augmented technical workflows."><meta name="twitter:image" content="https://dustingamble.com/og-default.svg"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet"><style is:global>:root {
+  color-scheme: light dark;
+  --bg: #f3f4ef;
+  --bg-alt: #edf2f8;
+  --surface: #ffffffcc;
+  --text: #152236;
+  --muted: #49556a;
+  --line: #d4ddea;
+  --accent: #1e5f99;
+  --accent-strong: #133d63;
+  --accent-soft: #e5f0fb;
+  --shadow: 0 12px 30px rgba(17, 36, 56, 0.08);
+  --radius: 16px;
+  --container: 76rem;
+}
+
+:root[data-theme="dark"] {
+  --bg: #0f1623;
+  --bg-alt: #121d2f;
+  --surface: #1a2536dd;
+  --text: #e7eef9;
+  --muted: #aab8ce;
+  --line: #2b3950;
+  --accent: #88bbe8;
+  --accent-strong: #c4def7;
+  --accent-soft: #1d2c42;
+  --shadow: 0 14px 36px rgba(0, 0, 0, 0.32);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 12% 8%, color-mix(in srgb, var(--accent) 18%, transparent) 0, transparent 36%),
+    radial-gradient(circle at 88% 12%, color-mix(in srgb, #c1833a 16%, transparent) 0, transparent 30%),
+    linear-gradient(160deg, var(--bg) 0%, var(--bg-alt) 100%);
+  color: var(--text);
+  font-family: "Source Serif 4", Georgia, serif;
+  line-height: 1.68;
+  font-size: 1.08rem;
+}
+
+a {
+  color: var(--accent);
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 0.08em;
+}
+
+a:hover {
+  color: var(--accent-strong);
+  text-decoration-thickness: 0.13em;
+}
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+}
+
+.skip-link:focus {
+  left: 0.75rem;
+  top: 0.75rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 0.5rem;
+  padding: 0.55rem 0.75rem;
+  z-index: 100;
+}
+
+.container {
+  width: min(var(--container), calc(100% - 2.4rem));
+  margin-inline: auto;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  backdrop-filter: blur(10px);
+  background: color-mix(in srgb, var(--bg) 86%, transparent);
+  border-bottom: 1px solid var(--line);
+  z-index: 20;
+}
+
+.nav-wrap {
+  min-height: 4.3rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding-block: 0.65rem;
+}
+
+.site-title {
+  color: var(--text);
+  text-decoration: none;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  font-size: 1.1rem;
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  gap: 0.92rem;
+  padding: 0;
+  margin: 0;
+  flex-wrap: wrap;
+}
+
+.nav-list a {
+  text-decoration: none;
+  color: var(--muted);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.92rem;
+  font-weight: 500;
+}
+
+.nav-list a[aria-current="page"] {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.theme-toggle {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text);
+  border-radius: 999px;
+  padding: 0.42rem 0.82rem;
+  font: inherit;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+
+.page-shell {
+  padding-block: 2.7rem 4rem;
+}
+
+.section-block + .section-block {
+  margin-top: 2.8rem;
+}
+
+.home-hero {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+  padding: 1.4rem 1.5rem;
+}
+
+.home-hero h1 {
+  margin: 0;
+  font-size: clamp(2.2rem, 4.2vw, 3.35rem);
+  line-height: 1.07;
+  letter-spacing: -0.02em;
+}
+
+.home-hero p {
+  margin-top: 0.82rem;
+  max-width: 60ch;
+  color: var(--muted);
+}
+
+.section-heading {
+  font-size: 1.5rem;
+  letter-spacing: -0.01em;
+  margin: 0 0 1.05rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.grid.cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid.cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.05rem;
+  box-shadow: var(--shadow);
+  animation: fade-up 320ms ease-out both;
+}
+
+.card h3 {
+  margin: 0 0 0.55rem;
+  line-height: 1.25;
+  font-size: 1.14rem;
+}
+
+.card h3 a {
+  text-decoration: none;
+  color: var(--text);
+}
+
+.card h3 a:hover {
+  color: var(--accent);
+}
+
+.card p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.meta-row {
+  margin: 0 0 0.55rem;
+  color: var(--muted);
+  font-size: 0.86rem;
+  display: flex;
+  gap: 0.45rem;
+  align-items: center;
+  flex-wrap: wrap;
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.tag-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.76rem 0 0;
+  display: flex;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.tag-list li {
+  border: 1px solid var(--line);
+  background: var(--accent-soft);
+  color: var(--text);
+  border-radius: 999px;
+  padding: 0.14rem 0.57rem;
+  font-size: 0.77rem;
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.compact {
+  padding: 0.9rem;
+}
+
+.list-reset {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.writing-list {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 0.2rem 1rem;
+}
+
+.writing-list li {
+  padding: 0.95rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.writing-list li:last-child {
+  border-bottom: none;
+}
+
+.writing-list h3 {
+  margin: 0;
+  font-size: 1.09rem;
+}
+
+.writing-list p {
+  margin: 0.3rem 0 0;
+  color: var(--muted);
+}
+
+.kicker {
+  margin: 0 0 0.42rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  font-size: 0.74rem;
+  color: var(--muted);
+  font-weight: 700;
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.about-teaser {
+  padding: 1rem 1.1rem;
+  border-left: 3px solid var(--accent);
+  background: var(--surface);
+  border-radius: 12px;
+}
+
+.prose {
+  max-width: 74ch;
+}
+
+.prose h1 {
+  margin: 0;
+  font-size: clamp(2.05rem, 3.6vw, 2.85rem);
+  line-height: 1.15;
+}
+
+.prose h2,
+.prose h3 {
+  margin-top: 1.9rem;
+  line-height: 1.24;
+}
+
+.prose p,
+.prose ul,
+.prose ol,
+.prose blockquote {
+  margin: 1rem 0;
+}
+
+.prose blockquote {
+  margin-inline: 0;
+  padding: 0.8rem 1rem;
+  border-left: 3px solid var(--accent);
+  color: var(--muted);
+  background: var(--surface);
+  border-radius: 8px;
+}
+
+.prose hr {
+  border: none;
+  border-top: 1px solid var(--line);
+  margin: 2rem 0;
+}
+
+.prose img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.75rem;
+}
+
+.profile-photo {
+  width: min(16rem, 100%);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+details {
+  border: 1px solid var(--line);
+  border-radius: 0.8rem;
+  padding: 0.7rem 0.9rem;
+  background: var(--surface);
+}
+
+summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.form-grid {
+  display: grid;
+  gap: 0.8rem;
+  max-width: 40rem;
+}
+
+label {
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.95rem;
+}
+
+input,
+textarea {
+  border: 1px solid var(--line);
+  border-radius: 0.65rem;
+  padding: 0.62rem 0.72rem;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+}
+
+.button-link,
+button[type="submit"] {
+  display: inline-block;
+  border: 1px solid var(--line);
+  border-radius: 0.7rem;
+  padding: 0.52rem 0.9rem;
+  text-decoration: none;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+}
+
+.button-link:hover,
+button[type="submit"]:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.site-footer {
+  border-top: 1px solid var(--line);
+  padding: 1.5rem 0 2.1rem;
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 950px) {
+  .grid.cols-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 740px) {
+  .container {
+    width: min(var(--container), calc(100% - 1.3rem));
+  }
+
+  .grid.cols-2,
+  .grid.cols-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .page-shell {
+    padding-top: 1.7rem;
+  }
+
+  .home-hero {
+    padding: 1.2rem;
+  }
+
+  .home-hero h1 {
+    font-size: 2rem;
+  }
+}
+</style><script>
       const saved = localStorage.getItem("theme");
       const prefersDark =
         window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
       const theme = saved || (prefersDark ? "dark" : "light");
       document.documentElement.setAttribute("data-theme", theme);
-    </script><link rel="stylesheet" href="/_astro/about.CcihsiCQ.css"></head> <body> <a class="skip-link" href="#main-content">Skip to content</a> <header class="site-header"> <div class="container nav-wrap"> <a href="/" class="site-title">Dustin Gamble</a> <nav aria-label="Primary"> <ul class="nav-list"> <li> <a href="/"> Home </a> </li><li> <a href="/writing/" aria-current="page"> Writing </a> </li><li> <a href="/projects/"> Projects </a> </li><li> <a href="/about/"> About </a> </li><li> <a href="/resume/"> Resume </a> </li><li> <a href="/contact/"> Contact </a> </li> </ul> </nav> <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" type="button">
+    </script></head> <body> <a class="skip-link" href="#main-content">Skip to content</a> <header class="site-header"> <div class="container nav-wrap"> <a href="/" class="site-title">Dustin Gamble</a> <nav aria-label="Primary"> <ul class="nav-list"> <li> <a href="/"> Home </a> </li><li> <a href="/writing/" aria-current="page"> Writing </a> </li><li> <a href="/projects/"> Projects </a> </li><li> <a href="/about/"> About </a> </li><li> <a href="/resume/"> Resume </a> </li><li> <a href="/contact/"> Contact </a> </li> </ul> </nav> <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" type="button">
 Theme
 </button> </div> </header> <main id="main-content" class="container page-shell">  <section class="section-block prose"> <h1>Writing</h1> <p>
 Notes on building autonomous systems, simulation-driven development, and practical uses of AI in
