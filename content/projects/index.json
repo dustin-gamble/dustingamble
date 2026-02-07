@@ -20,14 +20,24 @@
     "order": 2
   },
   {
-    "slug": "navy-decoy-signature-simulation-concept",
-    "title": "Navy Decoy Signature-Simulation Concept",
-    "date": "2023-05-18",
-    "summary": "A concept effort focused on emulating mission-relevant signatures in a small autonomous platform.",
-    "tags": ["Autonomy", "Mission Systems", "Concept Development"],
+    "slug": "fast-mechanical-safe-decoder",
+    "title": "Fast Mechanical Safe Decoder",
+    "date": "2020-03-25",
+    "summary": "A rapid mechanical concept for decoding combination-safe behavior with physical feedback and iteration.",
+    "tags": ["Experiments", "Mechanisms", "Rapid Prototyping"],
     "draft": false,
     "featured": true,
     "order": 3
+  },
+  {
+    "slug": "electromagnetic-flip-digit-display",
+    "title": "Electromagnetic Flip Digit Display",
+    "date": "2022-03-20",
+    "summary": "A hardware experiment using electromagnetic actuation to create a compact, high-contrast flip-digit display.",
+    "tags": ["Experiments", "Embedded", "Hardware"],
+    "draft": false,
+    "featured": true,
+    "order": 4
   },
   {
     "slug": "web-based-engineering-simulation-tools",
@@ -37,7 +47,7 @@
     "tags": ["Tools", "Simulation", "Web"],
     "draft": false,
     "featured": true,
-    "order": 4
+    "order": 5
   },
   {
     "slug": "autonomy-simulation-ecosystem-ardupilot-jsbsim-web",
@@ -47,7 +57,7 @@
     "tags": ["Simulation", "Autonomy", "Tools"],
     "draft": false,
     "featured": true,
-    "order": 5
+    "order": 6
   },
   {
     "slug": "flight-test-review-workbench",
@@ -57,7 +67,7 @@
     "tags": ["Experiments", "Flight Test", "Tools"],
     "draft": false,
     "featured": false,
-    "order": 6
+    "order": 7
   },
   {
     "slug": "mission-trade-study-companion",
@@ -67,6 +77,6 @@
     "tags": ["Experiments", "Mission Engineering", "Tools"],
     "draft": false,
     "featured": false,
-    "order": 7
+    "order": 8
   }
 ]
