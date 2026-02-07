@@ -1,0 +1,106 @@
+<!DOCTYPE html><html lang="en" data-theme="light"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Simulation-First Engineering: Shortening the Loop | Dustin Gamble</title><meta name="description" content="Shorter design cycles come from better simulation habits, not bigger models or more process overhead."><link rel="canonical" href="https://dustingamble.com/writing/simulation-first-engineering-shortening-the-loop/"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta property="og:type" content="article"><meta property="og:title" content="Simulation-First Engineering: Shortening the Loop | Dustin Gamble"><meta property="og:description" content="Shorter design cycles come from better simulation habits, not bigger models or more process overhead."><meta property="og:url" content="https://dustingamble.com/writing/simulation-first-engineering-shortening-the-loop/"><meta property="og:image" content="https://dustingamble.com/og-default.svg"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Simulation-First Engineering: Shortening the Loop | Dustin Gamble"><meta name="twitter:description" content="Shorter design cycles come from better simulation habits, not bigger models or more process overhead."><meta name="twitter:image" content="https://dustingamble.com/og-default.svg"><script>
+      const saved = localStorage.getItem("theme");
+      const prefersDark =
+        window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const theme = saved || (prefersDark ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+    </script><link rel="stylesheet" href="/_astro/about.CcihsiCQ.css"></head> <body> <a class="skip-link" href="#main-content">Skip to content</a> <header class="site-header"> <div class="container nav-wrap"> <a href="/" class="site-title">Dustin Gamble</a> <nav aria-label="Primary"> <ul class="nav-list"> <li> <a href="/"> Home </a> </li><li> <a href="/writing/" aria-current="page"> Writing </a> </li><li> <a href="/projects/"> Projects </a> </li><li> <a href="/about/"> About </a> </li><li> <a href="/resume/"> Resume </a> </li><li> <a href="/contact/"> Contact </a> </li> </ul> </nav> <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" type="button">
+Theme
+</button> </div> </header> <main id="main-content" class="container page-shell">  <article class="prose"> <p><a href="/writing/">&larr; Back to writing</a></p> <h1>Simulation-First Engineering: Shortening the Loop</h1> <p class="meta-row"> <time datetime="2026-01-21">January 20, 2026</time> <span aria-hidden="true">&middot;</span> <span>4 min read</span> </p> <ul class="tag-list" aria-label="Tags"> <li>Simulation</li><li>UAV</li><li>Systems Engineering</li> </ul> <p>Shorter design cycles come from better simulation habits, not bigger models or more process overhead.</p> <hr> <p>Engineering teams often talk about moving faster, but speed is usually discussed at the wrong layer. The common conversation is about working longer, adding automation scripts, or compressing reviews. Those changes can help at the margins. The major gains come from reducing the time between a technical question and a defensible answer.</p>
+<p>That is what simulation-first engineering does when it is implemented well.</p>
+<p>Simulation-first is not &quot;simulate everything&quot; and it is not &quot;trust the model.&quot; It is a workflow choice: put simulation at the front of decision loops so uncertainty is surfaced early, before downstream effort becomes expensive.</p>
+<h2>What simulation-first is really solving</h2>
+<p>Most delays in complex programs are not caused by a lack of effort. They come from late discovery. A design assumption survives too long, then fails in integration or test. A team realizes a key tradeoff was never properly explored. Documentation says one thing; operational behavior says another.</p>
+<p>Simulation-first workflows reduce those surprises by forcing assumptions into explicit form earlier:</p>
+<ul>
+<li>What regime are we operating in?</li>
+<li>Which disturbances matter most?</li>
+<li>What constraints are fixed versus adjustable?</li>
+<li>What does acceptable behavior look like?</li>
+</ul>
+<p>When these questions are encoded in simulation scenarios from day one, teams get faster feedback on what is plausible and what is fragile.</p>
+<h2>The loop to optimize</h2>
+<p>A useful simulation loop has five steps:</p>
+<ol>
+<li>Define the decision question.</li>
+<li>Configure a scenario set that can answer that question.</li>
+<li>Run quickly with traceable parameters.</li>
+<li>Compare outcomes against explicit criteria.</li>
+<li>Update design assumptions and repeat.</li>
+</ol>
+<p>Most organizations do steps 2 and 3 reasonably well. They struggle with steps 1 and 4. People run many cases but do not frame the question tightly, then collect outputs without a clear pass/fail lens.</p>
+<p>This is why simulation can feel busy but not decisive.</p>
+<p>If you want faster engineering, optimize for decision throughput, not simulation throughput.</p>
+<h2>Why model fidelity is not the first priority</h2>
+<p>Engineers naturally want higher-fidelity models. Higher fidelity has value, but it can also be a trap if it arrives before workflow discipline.</p>
+<p>A medium-fidelity model with clear assumptions, parameter control, and good regression baselines is often more useful than a high-fidelity model no one can configure consistently. Reproducibility beats sophistication in early loops.</p>
+<p>The practical sequence is:</p>
+<ol>
+<li>Build a stable baseline model.</li>
+<li>Prove repeatability and parameter traceability.</li>
+<li>Add fidelity where uncertainty is driving decisions.</li>
+</ol>
+<p>This keeps the model aligned to engineering priorities instead of becoming an isolated technical artifact.</p>
+<h2>Simulation as a communication tool</h2>
+<p>A strong simulation environment is not just for analysts. It is a shared language across disciplines.</p>
+<p>Aerodynamics, controls, propulsion, software, and operations teams do not always think in the same abstractions. Simulation can bridge that gap if results are presented in mission-relevant terms.</p>
+<p>For example, an operations stakeholder may not care about controller pole placement, but they care about mission completion under realistic disturbances. A controls engineer may not care about CONOPS language, but they care about disturbance envelopes and actuator margins. Simulation artifacts can connect those concerns if dashboards and reports are built with audience in mind.</p>
+<p>This is why lightweight web tooling around simulation often provides outsized value. The model matters, but so does how people interact with results.</p>
+<h2>The role of hardware in simulation-first programs</h2>
+<p>Simulation-first does not mean hardware-last. It means hardware is used strategically.</p>
+<p>A common anti-pattern is waiting for physical integration to discover what simulation could have exposed earlier. Another anti-pattern is over-trusting simulation and delaying physical checks for too long.</p>
+<p>A balanced approach uses staged validation:</p>
+<ul>
+<li>Early: concept screening and sensitivity checks in simulation.</li>
+<li>Mid: hardware-in-the-loop and interface validation.</li>
+<li>Late: focused flight or field tests for uncertainties simulation cannot resolve.</li>
+</ul>
+<p>This approach protects both schedule and credibility.</p>
+<h2>Integrating AI without degrading rigor</h2>
+<p>AI can improve simulation-first loops when used carefully. Useful tasks include scenario generation, run classification, anomaly tagging, and draft report generation. These reduce manual overhead and help teams focus on decisions.</p>
+<p>The danger is allowing AI-generated interpretation to become authoritative without verification. Model-assisted summaries should always be traceable back to raw run data and explicit acceptance criteria.</p>
+<p>In practice, this means teams need lightweight quality gates:</p>
+<ul>
+<li>Required evidence links for every conclusion.</li>
+<li>Versioned scenario definitions.</li>
+<li>Regression checks before adopting new model behavior.</li>
+</ul>
+<p>AI can accelerate the loop, but only if evidence quality remains high.</p>
+<h2>Building a simulation-first culture</h2>
+<p>Tools are not enough. Teams need habits.</p>
+<p>Three habits matter most:</p>
+<ol>
+<li><strong>Hypothesis discipline:</strong> every run set should test a concrete claim.</li>
+<li><strong>Decision logging:</strong> document what changed and why.</li>
+<li><strong>Baseline stewardship:</strong> treat model baselines like production infrastructure.</li>
+</ol>
+<p>When these habits are in place, simulation outputs become cumulative knowledge rather than temporary slide content.</p>
+<p>Without these habits, teams rerun old questions and re-argue old conclusions.</p>
+<h2>Signals that the loop is working</h2>
+<p>How do you know a simulation-first workflow is healthy? Look for these signs:</p>
+<ul>
+<li>Teams can explain why a scenario exists.</li>
+<li>New engineers can reproduce canonical runs quickly.</li>
+<li>Model changes are accompanied by clear impact summaries.</li>
+<li>Design meetings end with explicit next questions, not generic action items.</li>
+<li>Flight or field tests confirm trends already seen in simulation.</li>
+</ul>
+<p>The final signal is organizational confidence. Stakeholders stop asking for extra analysis &quot;just in case&quot; because the decision process is already transparent.</p>
+<h2>Closing thought</h2>
+<p>Simulation-first engineering is less about software and more about posture. It is a commitment to learning early, documenting assumptions, and making decisions with evidence instead of intuition alone.</p>
+<p>When teams do this well, development speed improves as a side effect. They do not move faster because they are rushing. They move faster because they are wrong for shorter periods of time.</p>
+<p>That is the real advantage.</p>
+<p>TODO: Add links to public simulation case studies and tooling screenshots.</p>
+ </article>  </main> <footer class="site-footer"> <div class="container footer-inner"> <p>
+Thoughts on autonomous systems, aerospace engineering, and practical AI workflows.
+</p> <p>&copy; 2026 Dustin Gamble</p> </div> </footer> <script>
+      const toggle = document.getElementById("theme-toggle");
+      if (toggle) {
+        toggle.addEventListener("click", () => {
+          const root = document.documentElement;
+          const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+          root.setAttribute("data-theme", next);
+          localStorage.setItem("theme", next);
+        });
+      }
+    </script> </body> </html>
