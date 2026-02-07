@@ -1,0 +1,33 @@
+<!DOCTYPE html><html lang="en" data-theme="light"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>World-Record Endurance Flight (Stalker VXE) | Dustin Gamble</title><meta name="description" content="High-level lessons from supporting a 39-hour endurance flight record program."><link rel="canonical" href="https://dustingamble.com/projects/world-record-endurance-flight-stalker-vxe/"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta property="og:type" content="website"><meta property="og:title" content="World-Record Endurance Flight (Stalker VXE) | Dustin Gamble"><meta property="og:description" content="High-level lessons from supporting a 39-hour endurance flight record program."><meta property="og:url" content="https://dustingamble.com/projects/world-record-endurance-flight-stalker-vxe/"><meta property="og:image" content="https://dustingamble.com/og-default.svg"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="World-Record Endurance Flight (Stalker VXE) | Dustin Gamble"><meta name="twitter:description" content="High-level lessons from supporting a 39-hour endurance flight record program."><meta name="twitter:image" content="https://dustingamble.com/og-default.svg"><script>
+      const saved = localStorage.getItem("theme");
+      const prefersDark =
+        window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const theme = saved || (prefersDark ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+    </script><link rel="stylesheet" href="/_astro/about.CcihsiCQ.css"></head> <body> <a class="skip-link" href="#main-content">Skip to content</a> <header class="site-header"> <div class="container nav-wrap"> <a href="/" class="site-title">Dustin Gamble</a> <nav aria-label="Primary"> <ul class="nav-list"> <li> <a href="/"> Home </a> </li><li> <a href="/writing/"> Writing </a> </li><li> <a href="/projects/" aria-current="page"> Projects </a> </li><li> <a href="/about/"> About </a> </li><li> <a href="/resume/"> Resume </a> </li><li> <a href="/contact/"> Contact </a> </li> </ul> </nav> <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" type="button">
+Theme
+</button> </div> </header> <main id="main-content" class="container page-shell">  <article class="prose"> <p><a href="/projects/">&larr; Back to projects</a></p> <h1>World-Record Endurance Flight (Stalker VXE)</h1> <p class="meta-row"> <time datetime="2022-04-11">April 10, 2022</time> </p> <ul class="tag-list" aria-label="Tags"> <li>UAV</li><li>Flight Test</li><li>Endurance</li> </ul> <p>High-level lessons from supporting a 39-hour endurance flight record program.</p> <hr> <h2>Problem / context</h2>
+<p>Long-endurance unmanned aircraft programs face a compounding challenge: aerodynamic and propulsion efficiency are necessary, but operational reliability and integration quality usually decide real mission duration. The objective in this effort was to support a flight profile that could sustain performance over an exceptionally long period while maintaining robust operational execution.</p>
+<h2>Approach</h2>
+<p>The work emphasized whole-system discipline rather than a single subsystem optimization. Focus areas included mission planning, simulation-informed preparation, reliability-oriented test practices, and clear decision criteria through execution windows. The technical posture prioritized repeatability, conservative risk framing, and strong integration between engineering and operations teams.</p>
+<h2>Outcome / lessons</h2>
+<p>The program publicly achieved a 39-hour endurance flight world record with the Stalker VXE. The main lesson is that endurance performance is a systems outcome, not an isolated design trick. Operational rigor, integration quality, and disciplined preflight/test workflows are as important as raw efficiency metrics.</p>
+<h2>Links</h2>
+<ul>
+<li>Lockheed Martin public release: <a href="https://news.lockheedmartin.com/2022-04-11-Lockheed-Martin-Stalker-VXE-UAS-Completes-World-Record-39-Hour-Flight">https://news.lockheedmartin.com/2022-04-11-Lockheed-Martin-Stalker-VXE-UAS-Completes-World-Record-39-Hour-Flight</a></li>
+<li>FAI record listing: <a href="https://www.fai.org/record/19634">https://www.fai.org/record/19634</a></li>
+<li>TODO: Add additional publicly approved references.</li>
+</ul>
+ </article>  </main> <footer class="site-footer"> <div class="container footer-inner"> <p>
+Thoughts on autonomous systems, aerospace engineering, and practical AI workflows.
+</p> <p>&copy; 2026 Dustin Gamble</p> </div> </footer> <script>
+      const toggle = document.getElementById("theme-toggle");
+      if (toggle) {
+        toggle.addEventListener("click", () => {
+          const root = document.documentElement;
+          const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+          root.setAttribute("data-theme", next);
+          localStorage.setItem("theme", next);
+        });
+      }
+    </script> </body> </html>
