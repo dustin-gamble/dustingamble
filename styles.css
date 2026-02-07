@@ -210,14 +210,16 @@ ul {
 .link-list a {
   color: #fcd34d;
   text-decoration: none;
+  line-height: 1.45;
 }
 
 .link-list a:hover {
   text-decoration: underline;
 }
 
-.pending-link {
-  color: var(--muted);
+.link-label {
+  color: #fde68a;
+  font-weight: 700;
 }
 
 footer {
