@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f4f7fb"/>
+      <stop offset="100%" stop-color="#e5edf7"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#g)"/>
+  <rect x="84" y="88" width="1032" height="454" rx="26" fill="#ffffff" stroke="#d5dfeb"/>
+  <text x="150" y="252" font-size="66" font-family="Georgia, serif" fill="#1f2430">Dustin Gamble</text>
+  <text x="150" y="322" font-size="36" font-family="Georgia, serif" fill="#425069">Autonomous systems, aerospace engineering,</text>
+  <text x="150" y="370" font-size="36" font-family="Georgia, serif" fill="#425069">and AI-augmented design workflows.</text>
+  <text x="150" y="460" font-size="28" font-family="Georgia, serif" fill="#204e78">dustingamble.com</text>
+</svg>

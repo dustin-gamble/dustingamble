@@ -1,0 +1,107 @@
+---
+import "../styles/global.css";
+
+const {
+  title = "Dustin Gamble",
+  description = "Autonomous systems, aerospace engineering, and AI-augmented design workflows.",
+  ogImage = "/og-default.svg",
+  type = "website"
+} = Astro.props;
+
+const pathname = Astro.url.pathname;
+const canonical = new URL(pathname, Astro.site).toString();
+const pageTitle = title.includes("Dustin Gamble") ? title : `${title} | Dustin Gamble`;
+
+const navItems = [
+  { href: "/", label: "Home" },
+  { href: "/writing/", label: "Writing" },
+  { href: "/projects/", label: "Projects" },
+  { href: "/about/", label: "About" },
+  { href: "/resume/", label: "Resume" },
+  { href: "/contact/", label: "Contact" }
+];
+
+function isActive(href) {
+  if (href === "/") return pathname === "/";
+  return pathname.startsWith(href);
+}
+---
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(ogImage, Astro.site).toString()} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(ogImage, Astro.site).toString()} />
+
+    <script is:inline>
+      const saved = localStorage.getItem("theme");
+      const prefersDark =
+        window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const theme = saved || (prefersDark ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a href="/" class="site-title">Dustin Gamble</a>
+        <nav aria-label="Primary">
+          <ul class="nav-list">
+            {
+              navItems.map((item) => (
+                <li>
+                  <a href={item.href} aria-current={isActive(item.href) ? "page" : undefined}>
+                    {item.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" type="button">
+          Theme
+        </button>
+      </div>
+    </header>
+
+    <main id="main-content" class="container page-shell">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>
+          Thoughts on autonomous systems, aerospace engineering, and practical AI workflows.
+        </p>
+        <p>&copy; {new Date().getFullYear()} Dustin Gamble</p>
+      </div>
+    </footer>
+
+    <script is:inline>
+      const toggle = document.getElementById("theme-toggle");
+      if (toggle) {
+        toggle.addEventListener("click", () => {
+          const root = document.documentElement;
+          const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+          root.setAttribute("data-theme", next);
+          localStorage.setItem("theme", next);
+        });
+      }
+    </script>
+  </body>
+</html>

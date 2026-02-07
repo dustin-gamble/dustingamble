@@ -1,0 +1,72 @@
+[
+  {
+    "slug": "world-record-endurance-flight-stalker-vxe",
+    "title": "World-Record Endurance Flight (Stalker VXE)",
+    "date": "2022-04-11",
+    "summary": "High-level lessons from supporting a 39-hour endurance flight record program.",
+    "tags": ["UAV", "Flight Test", "Endurance"],
+    "draft": false,
+    "featured": true,
+    "order": 1
+  },
+  {
+    "slug": "drone-innovation-garage-dig",
+    "title": "Drone Innovation Garage (DIG)",
+    "date": "2024-10-01",
+    "summary": "An internal rapid-innovation environment for autonomous systems experimentation and mentoring.",
+    "tags": ["Innovation", "Leadership", "Rapid Prototyping"],
+    "draft": false,
+    "featured": true,
+    "order": 2
+  },
+  {
+    "slug": "navy-decoy-signature-simulation-concept",
+    "title": "Navy Decoy Signature-Simulation Concept",
+    "date": "2023-05-18",
+    "summary": "A concept effort focused on emulating mission-relevant signatures in a small autonomous platform.",
+    "tags": ["Autonomy", "Mission Systems", "Concept Development"],
+    "draft": false,
+    "featured": true,
+    "order": 3
+  },
+  {
+    "slug": "web-based-engineering-simulation-tools",
+    "title": "Web-Based Engineering and Simulation Tools",
+    "date": "2025-03-11",
+    "summary": "Browser-based tools for design trade studies, visualization, and decision support.",
+    "tags": ["Tools", "Simulation", "Web"],
+    "draft": false,
+    "featured": true,
+    "order": 4
+  },
+  {
+    "slug": "autonomy-simulation-ecosystem-ardupilot-jsbsim-web",
+    "title": "Autonomy and Simulation Ecosystem (ArduPilot / JSBSim / Web Dashboards)",
+    "date": "2025-08-16",
+    "summary": "A repeatable development loop connecting SITL, flight dynamics, and lightweight mission dashboards.",
+    "tags": ["Simulation", "Autonomy", "Tools"],
+    "draft": false,
+    "featured": true,
+    "order": 5
+  },
+  {
+    "slug": "flight-test-review-workbench",
+    "title": "Flight Test Review Workbench",
+    "date": "2025-09-22",
+    "summary": "An experiment for faster post-flight analysis using synchronized telemetry and timeline annotations.",
+    "tags": ["Experiments", "Flight Test", "Tools"],
+    "draft": false,
+    "featured": false,
+    "order": 6
+  },
+  {
+    "slug": "mission-trade-study-companion",
+    "title": "Mission Trade Study Companion",
+    "date": "2025-11-07",
+    "summary": "A lightweight analysis companion to compare mission concepts before committing to detailed design.",
+    "tags": ["Experiments", "Mission Engineering", "Tools"],
+    "draft": false,
+    "featured": false,
+    "order": 7
+  }
+]

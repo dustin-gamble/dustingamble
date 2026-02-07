@@ -1,0 +1,26 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
+import { getProjects } from "../../lib/content";
+
+const projects = getProjects();
+---
+<BaseLayout
+  title="Projects"
+  description="Curated project notes from Dustin Gamble, including endurance UAS work, innovation programs, and simulation tooling."
+>
+  <section class="section-block prose">
+    <h1>Projects</h1>
+    <p>
+      A curated set of projects across autonomous aircraft, rapid prototyping environments, and engineering
+      tooling. Details stay high-level by design.
+    </p>
+  </section>
+
+  <section class="section-block" aria-labelledby="project-list-title">
+    <h2 id="project-list-title" class="section-heading">Project Archive</h2>
+    <div class="grid cols-2">
+      {projects.map((project) => <ProjectCard project={project} />)}
+    </div>
+  </section>
+</BaseLayout>
