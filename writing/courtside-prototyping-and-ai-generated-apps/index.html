@@ -1,0 +1,923 @@
+<!DOCTYPE html><html lang="en" data-theme="light"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Courtside Prototyping: AI-Generated Apps in Real Time | Dustin Gamble</title><meta name="description" content="From a notepad idea during my daughter's basketball game to a working tracker in minutes, this experiment shows where AI-generated software is useful today and where engineering still matters."><link rel="canonical" href="https://dustingamble.com/writing/courtside-prototyping-and-ai-generated-apps/"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta property="og:type" content="article"><meta property="og:title" content="Courtside Prototyping: AI-Generated Apps in Real Time | Dustin Gamble"><meta property="og:description" content="From a notepad idea during my daughter's basketball game to a working tracker in minutes, this experiment shows where AI-generated software is useful today and where engineering still matters."><meta property="og:url" content="https://dustingamble.com/writing/courtside-prototyping-and-ai-generated-apps/"><meta property="og:image" content="https://dustingamble.com/og-default.svg"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Courtside Prototyping: AI-Generated Apps in Real Time | Dustin Gamble"><meta name="twitter:description" content="From a notepad idea during my daughter's basketball game to a working tracker in minutes, this experiment shows where AI-generated software is useful today and where engineering still matters."><meta name="twitter:image" content="https://dustingamble.com/og-default.svg"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet"><style is:global>:root {
+  color-scheme: light dark;
+  --bg: #f3f4ef;
+  --bg-alt: #edf2f8;
+  --surface: #ffffffcc;
+  --text: #152236;
+  --muted: #49556a;
+  --line: #d4ddea;
+  --accent: #1e5f99;
+  --accent-strong: #133d63;
+  --accent-soft: #e5f0fb;
+  --shadow: 0 12px 30px rgba(17, 36, 56, 0.08);
+  --radius: 16px;
+  --container: 76rem;
+}
+
+:root[data-theme="dark"] {
+  --bg: #0f1623;
+  --bg-alt: #121d2f;
+  --surface: #1a2536dd;
+  --text: #e7eef9;
+  --muted: #aab8ce;
+  --line: #2b3950;
+  --accent: #88bbe8;
+  --accent-strong: #c4def7;
+  --accent-soft: #1d2c42;
+  --shadow: 0 14px 36px rgba(0, 0, 0, 0.32);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 12% 8%, color-mix(in srgb, var(--accent) 18%, transparent) 0, transparent 36%),
+    radial-gradient(circle at 88% 12%, color-mix(in srgb, #c1833a 16%, transparent) 0, transparent 30%),
+    linear-gradient(160deg, var(--bg) 0%, var(--bg-alt) 100%);
+  color: var(--text);
+  font-family: "Source Serif 4", Georgia, serif;
+  line-height: 1.68;
+  font-size: 1.08rem;
+}
+
+a {
+  color: var(--accent);
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 0.08em;
+}
+
+a:hover {
+  color: var(--accent-strong);
+  text-decoration-thickness: 0.13em;
+}
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+}
+
+.skip-link:focus {
+  left: 0.75rem;
+  top: 0.75rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 0.5rem;
+  padding: 0.55rem 0.75rem;
+  z-index: 100;
+}
+
+.container {
+  width: min(var(--container), calc(100% - 2.4rem));
+  margin-inline: auto;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  backdrop-filter: blur(10px);
+  background: color-mix(in srgb, var(--bg) 86%, transparent);
+  border-bottom: 1px solid var(--line);
+  z-index: 20;
+}
+
+.nav-wrap {
+  min-height: 4.3rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding-block: 0.65rem;
+}
+
+.site-title {
+  color: var(--text);
+  text-decoration: none;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  font-size: 1.1rem;
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  gap: 0.92rem;
+  padding: 0;
+  margin: 0;
+  flex-wrap: wrap;
+}
+
+.nav-list a {
+  text-decoration: none;
+  color: var(--muted);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.92rem;
+  font-weight: 500;
+}
+
+.nav-list a[aria-current="page"] {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.theme-toggle {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text);
+  border-radius: 999px;
+  padding: 0.42rem 0.82rem;
+  font: inherit;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+
+.page-shell {
+  padding-block: 2.7rem 4rem;
+}
+
+.section-block + .section-block {
+  margin-top: 2.8rem;
+}
+
+.home-hero {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+  padding: 1.4rem 1.5rem;
+}
+
+.home-hero h1 {
+  margin: 0;
+  font-size: clamp(2.2rem, 4.2vw, 3.35rem);
+  line-height: 1.07;
+  letter-spacing: -0.02em;
+}
+
+.home-hero p {
+  margin-top: 0.82rem;
+  max-width: 60ch;
+  color: var(--muted);
+}
+
+.section-heading {
+  font-size: 1.5rem;
+  letter-spacing: -0.01em;
+  margin: 0 0 1.05rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.grid.cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid.cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.05rem;
+  box-shadow: var(--shadow);
+  animation: fade-up 320ms ease-out both;
+}
+
+.card h3 {
+  margin: 0 0 0.55rem;
+  line-height: 1.25;
+  font-size: 1.14rem;
+}
+
+.card h3 a {
+  text-decoration: none;
+  color: var(--text);
+}
+
+.card h3 a:hover {
+  color: var(--accent);
+}
+
+.card p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.meta-row {
+  margin: 0 0 0.55rem;
+  color: var(--muted);
+  font-size: 0.86rem;
+  display: flex;
+  gap: 0.45rem;
+  align-items: center;
+  flex-wrap: wrap;
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.tag-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.76rem 0 0;
+  display: flex;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.tag-list li {
+  border: 1px solid var(--line);
+  background: var(--accent-soft);
+  color: var(--text);
+  border-radius: 999px;
+  padding: 0.14rem 0.57rem;
+  font-size: 0.77rem;
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.compact {
+  padding: 0.9rem;
+}
+
+.list-reset {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.writing-list {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 0.2rem 1rem;
+}
+
+.writing-list li {
+  padding: 0.95rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.writing-list li:last-child {
+  border-bottom: none;
+}
+
+.writing-list h3 {
+  margin: 0;
+  font-size: 1.09rem;
+}
+
+.writing-list p {
+  margin: 0.3rem 0 0;
+  color: var(--muted);
+}
+
+.kicker {
+  margin: 0 0 0.42rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  font-size: 0.74rem;
+  color: var(--muted);
+  font-weight: 700;
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.about-teaser {
+  padding: 1rem 1.1rem;
+  border-left: 3px solid var(--accent);
+  background: var(--surface);
+  border-radius: 12px;
+}
+
+.prose {
+  max-width: 74ch;
+}
+
+.prose h1 {
+  margin: 0;
+  font-size: clamp(2.05rem, 3.6vw, 2.85rem);
+  line-height: 1.15;
+}
+
+.prose h2,
+.prose h3 {
+  margin-top: 1.9rem;
+  line-height: 1.24;
+}
+
+.prose p,
+.prose ul,
+.prose ol,
+.prose blockquote {
+  margin: 1rem 0;
+}
+
+.prose blockquote {
+  margin-inline: 0;
+  padding: 0.8rem 1rem;
+  border-left: 3px solid var(--accent);
+  color: var(--muted);
+  background: var(--surface);
+  border-radius: 8px;
+}
+
+.prose hr {
+  border: none;
+  border-top: 1px solid var(--line);
+  margin: 2rem 0;
+}
+
+.prose img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.75rem;
+}
+
+.profile-photo {
+  width: min(16rem, 100%);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+details {
+  border: 1px solid var(--line);
+  border-radius: 0.8rem;
+  padding: 0.7rem 0.9rem;
+  background: var(--surface);
+}
+
+summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.form-grid {
+  display: grid;
+  gap: 0.8rem;
+  max-width: 40rem;
+}
+
+label {
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.95rem;
+}
+
+input,
+textarea {
+  border: 1px solid var(--line);
+  border-radius: 0.65rem;
+  padding: 0.62rem 0.72rem;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+}
+
+.button-link,
+button[type="submit"] {
+  display: inline-block;
+  border: 1px solid var(--line);
+  border-radius: 0.7rem;
+  padding: 0.52rem 0.9rem;
+  text-decoration: none;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+}
+
+.button-link:hover,
+button[type="submit"]:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.site-footer {
+  border-top: 1px solid var(--line);
+  padding: 1.5rem 0 2.1rem;
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 950px) {
+  .grid.cols-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 740px) {
+  .container {
+    width: min(var(--container), calc(100% - 1.3rem));
+  }
+
+  .grid.cols-2,
+  .grid.cols-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .page-shell {
+    padding-top: 1.7rem;
+  }
+
+  .home-hero {
+    padding: 1.2rem;
+  }
+
+  .home-hero h1 {
+    font-size: 2rem;
+  }
+}
+</style><script>
+      const saved = localStorage.getItem("theme");
+      const prefersDark =
+        window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const theme = saved || (prefersDark ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+    </script></head> <body> <a class="skip-link" href="#main-content">Skip to content</a> <header class="site-header"> <div class="container nav-wrap"> <a href="/" class="site-title">Dustin Gamble</a> <nav aria-label="Primary"> <ul class="nav-list"> <li> <a href="/"> Home </a> </li><li> <a href="/writing/" aria-current="page"> Writing </a> </li><li> <a href="/projects/"> Projects </a> </li><li> <a href="/about/"> About </a> </li><li> <a href="/resume/"> Resume </a> </li><li> <a href="/contact/"> Contact </a> </li> </ul> </nav> <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" type="button">
+Theme
+</button> </div> </header> <main id="main-content" class="container page-shell">  <article class="prose"> <p><a href="/writing/">&larr; Back to writing</a></p> <h1>Courtside Prototyping: AI-Generated Apps in Real Time</h1> <p class="meta-row"> <time datetime="2026-02-08">February 7, 2026</time> <span aria-hidden="true">&middot;</span> <span>10 min read</span> </p> <ul class="tag-list" aria-label="Tags"> <li>AI</li><li>Prototyping</li><li>Personal Tools</li><li>Product Thinking</li> </ul> <p>From a notepad idea during my daughter&#39;s basketball game to a working tracker in minutes, this experiment shows where AI-generated software is useful today and where engineering still matters.</p> <hr> <p>Yesterday, during my daughter&#39;s basketball game, I started with a familiar problem: I wanted a quick way to log what was happening in real time.</p>
+<p>I was planning to do it the old way in a text note. Dribbles, passes, rebounds, shots, scores. My first thought was just to use tally marks or put 1s under each category.</p>
+<p>Then I had a second thought: this should be a tiny app.</p>
+<p>I opened Gemini with Canvas and described what I wanted. In a short loop, I had a mobile-first scoreboard with big tap targets, undo, local save, import/export, and reset.</p>
+<p>That immediate jump from idea to usable tool made me step back and ask a bigger question:</p>
+<p>If AI can generate working apps on demand, do standalone apps start to matter less?</p>
+<h2>The moment in one screenshot</h2>
+<p><img src="/images/basketball_counter.png" alt="Olive basketball tracker app screenshot"></p>
+<p>This is what I was using courtside: dark theme, large controls, and no extra friction.</p>
+<h2>Prompt trail</h2>
+<p>This was the exact evolution from first thought to usable version.</p>
+<h3>First prompt</h3>
+<blockquote>
+<p>Build an html page for tracking olives basketball game. We want to just log her dribbles, pass, shots, and scores.</p>
+<p>Make it a download file so I can do it right now on my phone.</p>
+</blockquote>
+<h3>Follow-up prompt 1</h3>
+<blockquote>
+<p>Load in canvas and also provide export and import of values.</p>
+</blockquote>
+<h3>Follow-up prompt 2</h3>
+<blockquote>
+<p>Please also add a track object for rebounds</p>
+</blockquote>
+<p>The pattern was simple: ask for something concrete, test it immediately, then tighten requirements in short iterations.</p>
+<h2>Optimized prompt</h2>
+<p>After that, I consolidated the working requirements into one tighter prompt:</p>
+<pre><code class="language-text">Build a single-file, mobile-first HTML web application for tracking a basketball player&#39;s game stats. The app should be self-contained (HTML, CSS, and JS in one file) and use Tailwind CSS via CDN for styling.
+
+Design Requirements:
+
+Theme: Dark mode (dark gray/black background) to save battery and look good in gyms.
+
+Layout:
+
+Top: A header with the title &quot;Olive&#39;s Stats,&quot; an &quot;Undo&quot; button, and a &quot;Settings&quot; (gear icon) button.
+
+Scoreboard: A row immediately below the header showing current counts for Dribbles, Passes, Shots, Rebounds, and Points.
+
+Controls: A large button grid filling the rest of the screen. Buttons must be large and easy to tap on a phone.
+
+Button Colors:
+
+Dribble: Blue
+
+Pass: Cyan
+
+Missed Shot: Pink
+
+Rebound: Orange
+
+SCORE!: Green (Make this button larger/prominent, spanning 2 columns if possible).
+
+Functionality &amp; Logic:
+
+Stat Tracking:
+
+Dribble / Pass / Rebound: simple +1 increment.
+
+Missed Shot: +1 to &quot;Shots&quot; (attempts).
+
+SCORE!: +2 to &quot;Points&quot; AND +1 to &quot;Shots&quot; (since a make is also an attempt).
+
+Data Persistence:
+
+Automatically save the stats to the browser&#39;s localStorage on every click so data isn&#39;t lost on refresh.
+
+Undo: Allow the user to undo the last action (keep a history stack).
+
+Settings Menu (Collapsible):
+
+Export: A button to download the current stats as a .json file (e.g., olive_stats_timestamp.json).
+
+Import: A button to load a previously saved .json file and restore stats.
+
+Reset: A button to clear all stats to zero.
+
+Technical Constraints:
+
+Disable double-tap to zoom and text selection via CSS to make it feel like a native app.
+
+Ensure the &quot;Import&quot; feature handles JSON parsing errors gracefully.
+
+Use simple vanilla JavaScript (no external frameworks besides Tailwind).
+</code></pre>
+<h2>Why this was useful immediately</h2>
+<p>A few things were strong right away:</p>
+<ul>
+<li>The app fit the context. Large buttons, no account setup, no menu hunting.</li>
+<li>The logic matched game flow. A made basket increments both attempts and points.</li>
+<li>State was resilient. <code>localStorage</code> handled page refreshes, and JSON export/import made the data portable.</li>
+<li>Iteration cost was tiny. Requirements changed in minutes, not days.</li>
+</ul>
+<p>For personal tools, this is a meaningful shift. The old default was &quot;I should build this later.&quot; The new default can be &quot;I can use this now.&quot;</p>
+<h2>Are apps going away?</h2>
+<p>I do not think apps disappear.</p>
+<p>I do think the center of gravity changes.</p>
+<p>What may fade is the idea that every problem needs a permanently packaged app in an app store. For many narrow workflows, we can generate a fit-for-purpose interface in real time.</p>
+<p>That changes the stack:</p>
+<ul>
+<li>Less emphasis on shipping one static UI for everyone.</li>
+<li>More emphasis on capturing intent, logic, and constraints.</li>
+<li>More emphasis on fast regeneration as needs evolve.</li>
+</ul>
+<p>In that model, the durable artifact is not always the app binary. It is the prompt, the rules, the data model, and the test cases.</p>
+<h2>Where engineering still matters</h2>
+<p>Even in this small example, there are real engineering questions:</p>
+<ul>
+<li>Data integrity: what happens with bad imports, mid-game reset mistakes, or conflicting saves?</li>
+<li>UX reliability: how do we prevent accidental taps under stress?</li>
+<li>Extensibility: can points be 1/2/3 by shot type? Can we track assists, steals, turnovers?</li>
+<li>Validation: do logs reflect what actually happened, and are we consistent across games?</li>
+<li>Privacy: where data is stored, and whether any data leaves the device.</li>
+</ul>
+<p>AI can draft quickly, but judgment about correctness, edge cases, and long-term maintainability is still human work.</p>
+<h2>Practical takeaway</h2>
+<p>For me, this was a concrete example of a broader trend:</p>
+<ul>
+<li>Start with a real, immediate need.</li>
+<li>Generate a first tool quickly.</li>
+<li>Iterate through direct use, not abstract planning.</li>
+<li>Preserve what worked: prompts, code, and data format.</li>
+</ul>
+<p>That workflow blends well with engineering practice. It is still build-test-learn, just compressed.</p>
+<p>And in that compression, more people can build useful software for themselves and their teams without waiting for a full product cycle.</p>
+<h2>Full generated code</h2>
+<p>The code below is the working single-file app from this experiment.</p>
+<details>
+<summary>Open full HTML code</summary>
+
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no&quot;&gt;
+    &lt;title&gt;Olive&#39;s Game Tracker&lt;/title&gt;
+    &lt;script src=&quot;https://cdn.tailwindcss.com&quot;&gt;&lt;/script&gt;
+    &lt;style&gt;
+        /* Custom tweaks for preventing zoom and selection on mobile tapping */
+        body {
+            touch-action: manipulation;
+            -webkit-user-select: none;
+            user-select: none;
+            background-color: #121212;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Helvetica, Arial, sans-serif;
+        }
+        
+        /* Button tap effects */
+        .tap-effect:active {
+            transform: scale(0.95);
+            opacity: 0.9;
+        }
+
+        /* Hide file input */
+        #file-input {
+            display: none;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body class=&quot;h-screen flex flex-col overflow-hidden&quot;&gt;
+
+    &lt;!-- Header / Top Bar --&gt;
+    &lt;header class=&quot;bg-gray-900 p-4 border-b border-gray-800 flex justify-between items-center shrink-0&quot;&gt;
+        &lt;div&gt;
+            &lt;h1 class=&quot;text-xl font-bold text-white tracking-tight&quot;&gt;Olive&#39;s Stats&lt;/h1&gt;
+            &lt;p class=&quot;text-xs text-gray-400&quot; id=&quot;game-time&quot;&gt;Ready to play&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;flex gap-2&quot;&gt;
+            &lt;button onclick=&quot;undo()&quot; class=&quot;bg-gray-700 hover:bg-gray-600 text-white px-3 py-2 rounded-lg text-sm font-medium transition tap-effect&quot;&gt;
+                ↺ Undo
+            &lt;/button&gt;
+            &lt;button onclick=&quot;toggleMenu()&quot; class=&quot;bg-gray-700 hover:bg-gray-600 text-white px-3 py-2 rounded-lg text-sm font-medium transition tap-effect&quot;&gt;
+                ⚙️
+            &lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/header&gt;
+
+    &lt;!-- Settings Menu (Hidden by default) --&gt;
+    &lt;div id=&quot;settings-menu&quot; class=&quot;hidden bg-gray-800 border-b border-gray-700 p-4 absolute top-[70px] w-full z-50 shadow-xl&quot;&gt;
+        &lt;div class=&quot;flex flex-col gap-3&quot;&gt;
+            &lt;p class=&quot;text-sm text-gray-400 uppercase font-semibold&quot;&gt;Data Management&lt;/p&gt;
+            &lt;div class=&quot;flex gap-2&quot;&gt;
+                &lt;button onclick=&quot;exportData()&quot; class=&quot;flex-1 bg-blue-600 text-white py-3 rounded-lg font-bold tap-effect&quot;&gt;
+                    ⬇️ Save to File
+                &lt;/button&gt;
+                &lt;button onclick=&quot;document.getElementById(&#39;file-input&#39;).click()&quot; class=&quot;flex-1 bg-purple-600 text-white py-3 rounded-lg font-bold tap-effect&quot;&gt;
+                    ⬆️ Load File
+                &lt;/button&gt;
+                &lt;input type=&quot;file&quot; id=&quot;file-input&quot; accept=&quot;.json&quot; onchange=&quot;importData(this)&quot;&gt;
+            &lt;/div&gt;
+            &lt;hr class=&quot;border-gray-700 my-1&quot;&gt;
+            &lt;button onclick=&quot;resetGame()&quot; class=&quot;w-full bg-red-900/50 text-red-400 border border-red-900 py-3 rounded-lg font-bold tap-effect&quot;&gt;
+                ✖ Reset All Stats
+            &lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Scoreboard Display --&gt;
+    &lt;div class=&quot;grid grid-cols-5 gap-1 p-2 bg-gray-900 shrink-0&quot;&gt;
+        &lt;div class=&quot;flex flex-col items-center p-2 rounded bg-gray-800&quot;&gt;
+            &lt;span class=&quot;text-[10px] text-gray-400 uppercase&quot;&gt;Dribbles&lt;/span&gt;
+            &lt;span id=&quot;display-dribbles&quot; class=&quot;text-xl font-mono font-bold text-blue-400&quot;&gt;0&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;flex flex-col items-center p-2 rounded bg-gray-800&quot;&gt;
+            &lt;span class=&quot;text-[10px] text-gray-400 uppercase&quot;&gt;Passes&lt;/span&gt;
+            &lt;span id=&quot;display-passes&quot; class=&quot;text-xl font-mono font-bold text-cyan-400&quot;&gt;0&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;flex flex-col items-center p-2 rounded bg-gray-800&quot;&gt;
+            &lt;span class=&quot;text-[10px] text-gray-400 uppercase&quot;&gt;Shots&lt;/span&gt;
+            &lt;span id=&quot;display-shots&quot; class=&quot;text-xl font-mono font-bold text-pink-400&quot;&gt;0&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;flex flex-col items-center p-2 rounded bg-gray-800&quot;&gt;
+            &lt;span class=&quot;text-[10px] text-gray-400 uppercase&quot;&gt;Rebounds&lt;/span&gt;
+            &lt;span id=&quot;display-rebounds&quot; class=&quot;text-xl font-mono font-bold text-orange-400&quot;&gt;0&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;flex flex-col items-center p-2 rounded bg-gray-800 border border-green-900/50&quot;&gt;
+            &lt;span class=&quot;text-[10px] text-green-400 uppercase font-bold&quot;&gt;Points&lt;/span&gt;
+            &lt;span id=&quot;display-score&quot; class=&quot;text-xl font-mono font-bold text-green-400&quot;&gt;0&lt;/span&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Main Action Buttons --&gt;
+    &lt;!-- Updated to 3 rows to accommodate Rebounds and make Score bigger --&gt;
+    &lt;main class=&quot;flex-1 grid grid-cols-2 grid-rows-3 gap-3 p-3 pb-6&quot;&gt;
+        
+        &lt;!-- Dribble --&gt;
+        &lt;button onclick=&quot;addStat(&#39;dribbles&#39;)&quot; class=&quot;tap-effect relative rounded-2xl bg-gradient-to-br from-blue-500/20 to-blue-600/10 border-2 border-blue-500/50 hover:bg-blue-500/30 flex flex-col items-center justify-center group&quot;&gt;
+            &lt;span class=&quot;text-3xl mb-1&quot;&gt;🏀&lt;/span&gt;
+            &lt;span class=&quot;text-xl font-bold text-blue-200&quot;&gt;Dribble&lt;/span&gt;
+            &lt;span class=&quot;text-xs text-blue-400/70 mt-1&quot;&gt;Tap to log&lt;/span&gt;
+        &lt;/button&gt;
+
+        &lt;!-- Pass --&gt;
+        &lt;button onclick=&quot;addStat(&#39;passes&#39;)&quot; class=&quot;tap-effect relative rounded-2xl bg-gradient-to-br from-cyan-500/20 to-cyan-600/10 border-2 border-cyan-500/50 hover:bg-cyan-500/30 flex flex-col items-center justify-center&quot;&gt;
+            &lt;span class=&quot;text-3xl mb-1&quot;&gt;✋&lt;/span&gt;
+            &lt;span class=&quot;text-xl font-bold text-cyan-200&quot;&gt;Pass&lt;/span&gt;
+            &lt;span class=&quot;text-xs text-cyan-400/70 mt-1&quot;&gt;Tap to log&lt;/span&gt;
+        &lt;/button&gt;
+
+        &lt;!-- Shot (Miss) --&gt;
+        &lt;button onclick=&quot;addStat(&#39;shots&#39;)&quot; class=&quot;tap-effect relative rounded-2xl bg-gradient-to-br from-pink-500/20 to-pink-600/10 border-2 border-pink-500/50 hover:bg-pink-500/30 flex flex-col items-center justify-center&quot;&gt;
+            &lt;span class=&quot;text-3xl mb-1&quot;&gt;❌&lt;/span&gt;
+            &lt;span class=&quot;text-xl font-bold text-pink-200&quot;&gt;Missed Shot&lt;/span&gt;
+            &lt;span class=&quot;text-xs text-pink-400/70 mt-1&quot;&gt;Attempt&lt;/span&gt;
+        &lt;/button&gt;
+
+        &lt;!-- Rebound (New) --&gt;
+        &lt;button onclick=&quot;addStat(&#39;rebounds&#39;)&quot; class=&quot;tap-effect relative rounded-2xl bg-gradient-to-br from-orange-500/20 to-orange-600/10 border-2 border-orange-500/50 hover:bg-orange-500/30 flex flex-col items-center justify-center&quot;&gt;
+            &lt;span class=&quot;text-3xl mb-1&quot;&gt;🔄&lt;/span&gt;
+            &lt;span class=&quot;text-xl font-bold text-orange-200&quot;&gt;Rebound&lt;/span&gt;
+            &lt;span class=&quot;text-xs text-orange-400/70 mt-1&quot;&gt;Grabbed board&lt;/span&gt;
+        &lt;/button&gt;
+
+        &lt;!-- Score (Make) - Spans 2 columns --&gt;
+        &lt;button onclick=&quot;addStat(&#39;score&#39;)&quot; class=&quot;col-span-2 tap-effect relative rounded-2xl bg-gradient-to-br from-green-500/20 to-green-600/10 border-2 border-green-500/50 hover:bg-green-500/30 flex flex-col items-center justify-center&quot;&gt;
+            &lt;span class=&quot;text-4xl mb-1&quot;&gt;✅&lt;/span&gt;
+            &lt;span class=&quot;text-3xl font-bold text-green-200&quot;&gt;SCORE!&lt;/span&gt;
+            &lt;span class=&quot;text-sm text-green-400/70 mt-1&quot;&gt;+2 Pts &amp; +1 Attempt&lt;/span&gt;
+        &lt;/button&gt;
+
+    &lt;/main&gt;
+
+    &lt;script&gt;
+        // --- Game State ---
+        // Default structure
+        const defaultStats = {
+            dribbles: 0,
+            passes: 0,
+            shots: 0, // Total attempts
+            score: 0,  // Total points
+            rebounds: 0,
+            startTime: new Date().toISOString()
+        };
+
+        let stats = { ...defaultStats };
+        let historyStack = []; // For undo functionality
+
+        // --- Logic ---
+
+        function updateUI() {
+            document.getElementById(&#39;display-dribbles&#39;).innerText = stats.dribbles || 0;
+            document.getElementById(&#39;display-passes&#39;).innerText = stats.passes || 0;
+            document.getElementById(&#39;display-shots&#39;).innerText = stats.shots || 0;
+            document.getElementById(&#39;display-rebounds&#39;).innerText = stats.rebounds || 0;
+            document.getElementById(&#39;display-score&#39;).innerText = stats.score || 0;
+            
+            // Save to local storage automatically
+            localStorage.setItem(&#39;oliveStats_v2&#39;, JSON.stringify(stats));
+        }
+
+        function addStat(type) {
+            // Save state for undo
+            historyStack.push({...stats});
+            if (historyStack.length &gt; 50) historyStack.shift();
+
+            if (type === &#39;dribbles&#39;) stats.dribbles = (stats.dribbles || 0) + 1;
+            if (type === &#39;passes&#39;) stats.passes = (stats.passes || 0) + 1;
+            if (type === &#39;rebounds&#39;) stats.rebounds = (stats.rebounds || 0) + 1;
+            
+            if (type === &#39;shots&#39;) {
+                // Missed shot: adds to attempts, 0 points
+                stats.shots = (stats.shots || 0) + 1;
+            }
+            
+            if (type === &#39;score&#39;) {
+                // Made shot: adds to attempts AND points
+                stats.shots = (stats.shots || 0) + 1;
+                stats.score = (stats.score || 0) + 2;
+            }
+
+            updateUI();
+            triggerFeedback(type);
+        }
+
+        function undo() {
+            if (historyStack.length === 0) return;
+            stats = historyStack.pop();
+            updateUI();
+        }
+
+        function resetGame() {
+            if (confirm(&quot;Reset all stats to zero?&quot;)) {
+                stats = { ...defaultStats, startTime: new Date().toISOString() };
+                historyStack = [];
+                updateUI();
+                toggleMenu(); // Close menu
+            }
+        }
+
+        function toggleMenu() {
+            const menu = document.getElementById(&#39;settings-menu&#39;);
+            menu.classList.toggle(&#39;hidden&#39;);
+        }
+
+        // --- Visual Feedback ---
+        function triggerFeedback(type) {
+            // Simple visual feedback if needed, currently handled by CSS :active
+        }
+
+        // --- Init ---
+        // Load from local storage if exists
+        const saved = localStorage.getItem(&#39;oliveStats_v2&#39;);
+        if (saved) {
+            try {
+                const loaded = JSON.parse(saved);
+                // Merge with defaults to ensure &#39;rebounds&#39; exists if loading old save
+                stats = { ...defaultStats, ...loaded };
+                document.getElementById(&#39;game-time&#39;).innerText = &quot;Resumed Game&quot;;
+            } catch(e) {
+                console.error(&quot;Save file corrupted&quot;);
+            }
+        }
+        updateUI();
+
+        // --- Export / Import Logic ---
+
+        function exportData() {
+            // Changed MIME type to application/json for better compatibility
+            const dataStr = &quot;data:application/json;charset=utf-8,&quot; + encodeURIComponent(JSON.stringify(stats));
+            const downloadAnchorNode = document.createElement(&#39;a&#39;);
+            const date = new Date();
+            const filename = `olive_stats_${date.getHours()}-${date.getMinutes()}.json`;
+            
+            downloadAnchorNode.setAttribute(&quot;href&quot;, dataStr);
+            downloadAnchorNode.setAttribute(&quot;download&quot;, filename);
+            document.body.appendChild(downloadAnchorNode); // required for firefox
+            downloadAnchorNode.click();
+            downloadAnchorNode.remove();
+            
+            toggleMenu();
+        }
+
+        function importData(inputElement) {
+            const file = inputElement.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                try {
+                    const content = e.target.result;
+                    const loadedStats = JSON.parse(content);
+                    
+                    // Validation: Check for minimal required fields (dribbles or startTime)
+                    if (loadedStats &amp;&amp; (typeof loadedStats.dribbles === &#39;number&#39; || loadedStats.startTime)) {
+                        // Push current state to undo stack before overwriting
+                        historyStack.push({...stats});
+                        
+                        // Merge loaded stats with default structure to handle missing fields (like adding rebounds to old file)
+                        stats = { ...defaultStats, ...loadedStats };
+                        
+                        updateUI();
+                        document.getElementById(&#39;game-time&#39;).innerText = &quot;Stats Loaded!&quot;;
+                        alert(&quot;Stats loaded successfully!&quot;);
+                    } else {
+                        alert(&quot;Error: The file does not appear to contain valid game stats.&quot;);
+                    }
+                } catch (err) {
+                    console.error(&quot;Import Error:&quot;, err);
+                    alert(&quot;Error reading the file. Please make sure it is a valid JSON file.&quot;);
+                }
+                
+                // Clear the input value so the same file can be selected again if needed
+                inputElement.value = &#39;&#39;;
+            };
+            
+            reader.onerror = function() {
+                alert(&quot;Failed to read the file.&quot;);
+                inputElement.value = &#39;&#39;;
+            }
+
+            reader.readAsText(file);
+            toggleMenu();
+        }
+
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+</details>
+
+<h2>What I want to test next</h2>
+<ul>
+<li>Add one-tap event timelines (not just counters) so game flow can be replayed.</li>
+<li>Add per-quarter splits and shot zone notes.</li>
+<li>Add a lightweight post-game summary generated from the event stream.</li>
+</ul>
+<p>These are small features, but they point to a bigger idea: a lot of software may become &quot;situational,&quot; generated for a specific moment and refined in context.</p>
+<p>That does not remove engineering. It changes where the leverage is.</p>
+<p>TODO: Add a public gist link for this exact HTML file if you want others to reuse it directly.</p>
+ </article>  </main> <footer class="site-footer"> <div class="container footer-inner"> <p>
+Thoughts on autonomous systems, aerospace engineering, and practical AI workflows.
+</p> <p>&copy; 2026 Dustin Gamble</p> </div> </footer> <script>
+      const toggle = document.getElementById("theme-toggle");
+      if (toggle) {
+        toggle.addEventListener("click", () => {
+          const root = document.documentElement;
+          const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+          root.setAttribute("data-theme", next);
+          localStorage.setItem("theme", next);
+        });
+      }
+    </script> </body> </html>

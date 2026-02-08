@@ -1,5 +1,14 @@
 [
   {
+    "slug": "courtside-prototyping-and-ai-generated-apps",
+    "title": "Courtside Prototyping: AI-Generated Apps in Real Time",
+    "date": "2026-02-08",
+    "summary": "From a notepad idea during my daughter's basketball game to a working tracker in minutes, this experiment shows where AI-generated software is useful today and where engineering still matters.",
+    "tags": ["AI", "Prototyping", "Personal Tools", "Product Thinking"],
+    "draft": false,
+    "featured": true
+  },
+  {
     "slug": "from-motivation-to-momentum-a-weekly-rhythm",
     "title": "From Motivation to Momentum: A Weekly Rhythm for Teams",
     "date": "2026-02-08",
