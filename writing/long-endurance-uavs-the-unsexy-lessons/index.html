@@ -357,6 +357,29 @@ textarea:focus-visible {
   border-radius: 0.75rem;
 }
 
+.page-image-grid {
+  margin: 1.2rem 0 0.8rem;
+  display: grid;
+  gap: 0.85rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+}
+
+.page-image-card {
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 0.9rem;
+  overflow: hidden;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.page-image-card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
 .profile-photo {
   width: min(16rem, 100%);
   border: 1px solid var(--line);
@@ -477,7 +500,7 @@ button[type="submit"]:hover {
       document.documentElement.setAttribute("data-theme", theme);
     </script></head> <body> <a class="skip-link" href="#main-content">Skip to content</a> <header class="site-header"> <div class="container nav-wrap"> <a href="/" class="site-title">Dustin Gamble</a> <nav aria-label="Primary"> <ul class="nav-list"> <li> <a href="/"> Home </a> </li><li> <a href="/writing/" aria-current="page"> Writing </a> </li><li> <a href="/projects/"> Projects </a> </li><li> <a href="/about/"> About </a> </li><li> <a href="/resume/"> Resume </a> </li><li> <a href="/contact/"> Contact </a> </li> </ul> </nav> <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" type="button">
 Theme
-</button> </div> </header> <main id="main-content" class="container page-shell">  <article class="prose"> <p><a href="/writing/">&larr; Back to writing</a></p> <h1>Long-Endurance UAVs: The Unsexy Lessons</h1> <p class="meta-row"> <time datetime="2026-01-08">January 7, 2026</time> <span aria-hidden="true">&middot;</span> <span>4 min read</span> </p> <ul class="tag-list" aria-label="Tags"> <li>UAV</li><li>Flight Test</li><li>Reliability</li> </ul> <p>Endurance comes from operational discipline and integration quality more than any single breakthrough.</p> <hr> <p>When people hear &quot;long-endurance UAV,&quot; they often imagine a single breakthrough: an aerodynamic trick, a propulsion innovation, or an autonomy leap. Those advances matter, but they are rarely the main reason a system stays in the air for a very long time.</p>
+</button> </div> </header> <main id="main-content" class="container page-shell">  <article class="prose"> <p><a href="/writing/">&larr; Back to writing</a></p> <h1>Long-Endurance UAVs: The Unsexy Lessons</h1> <p class="meta-row"> <time datetime="2026-01-08">January 7, 2026</time> <span aria-hidden="true">&middot;</span> <span>4 min read</span> </p> <ul class="tag-list" aria-label="Tags"> <li>UAV</li><li>Flight Test</li><li>Reliability</li> </ul> <p>Endurance comes from operational discipline and integration quality more than any single breakthrough.</p>  <hr> <p>When people hear &quot;long-endurance UAV,&quot; they often imagine a single breakthrough: an aerodynamic trick, a propulsion innovation, or an autonomy leap. Those advances matter, but they are rarely the main reason a system stays in the air for a very long time.</p>
 <p>The uncomfortable truth is that endurance is usually built from a stack of unglamorous decisions. Margins, procedures, integration details, and operational discipline matter at least as much as headline technology.</p>
 <p>This is good news for engineering teams. It means endurance is not magic. It is mostly system quality.</p>
 <h2>Endurance is a systems problem</h2>

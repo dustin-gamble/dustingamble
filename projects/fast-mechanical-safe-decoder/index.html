@@ -357,6 +357,29 @@ textarea:focus-visible {
   border-radius: 0.75rem;
 }
 
+.page-image-grid {
+  margin: 1.2rem 0 0.8rem;
+  display: grid;
+  gap: 0.85rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+}
+
+.page-image-card {
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 0.9rem;
+  overflow: hidden;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.page-image-card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
 .profile-photo {
   width: min(16rem, 100%);
   border: 1px solid var(--line);
@@ -477,7 +500,7 @@ button[type="submit"]:hover {
       document.documentElement.setAttribute("data-theme", theme);
     </script></head> <body> <a class="skip-link" href="#main-content">Skip to content</a> <header class="site-header"> <div class="container nav-wrap"> <a href="/" class="site-title">Dustin Gamble</a> <nav aria-label="Primary"> <ul class="nav-list"> <li> <a href="/"> Home </a> </li><li> <a href="/writing/"> Writing </a> </li><li> <a href="/projects/" aria-current="page"> Projects </a> </li><li> <a href="/about/"> About </a> </li><li> <a href="/resume/"> Resume </a> </li><li> <a href="/contact/"> Contact </a> </li> </ul> </nav> <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" type="button">
 Theme
-</button> </div> </header> <main id="main-content" class="container page-shell">  <article class="prose"> <p><a href="/projects/">&larr; Back to projects</a></p> <h1>Fast Mechanical Safe Decoder</h1> <p class="meta-row"> <time datetime="2020-03-25">March 24, 2020</time> </p> <ul class="tag-list" aria-label="Tags"> <li>Experiments</li><li>Mechanisms</li><li>Rapid Prototyping</li> </ul> <p>A rapid mechanical concept for decoding combination-safe behavior with physical feedback and iteration.</p> <hr> <h2>Problem / context</h2>
+</button> </div> </header> <main id="main-content" class="container page-shell">  <article class="prose"> <p><a href="/projects/">&larr; Back to projects</a></p> <h1>Fast Mechanical Safe Decoder</h1> <p class="meta-row"> <time datetime="2020-03-25">March 24, 2020</time> </p> <ul class="tag-list" aria-label="Tags"> <li>Experiments</li><li>Mechanisms</li><li>Rapid Prototyping</li> </ul> <p>A rapid mechanical concept for decoding combination-safe behavior with physical feedback and iteration.</p>  <hr> <h2>Problem / context</h2>
 <p>Many lock mechanisms hide useful physical signal behavior behind difficult-to-observe interfaces. The goal for this project was to create a compact, quickly built device that could explore safe mechanism response patterns and speed up experimentation.</p>
 <h2>Approach</h2>
 <p>The design emphasized direct mechanical interaction, repeatable adjustment, and low-complexity construction. Rather than over-optimizing early, the project favored quick build-test iterations and observation-driven tuning.</p>

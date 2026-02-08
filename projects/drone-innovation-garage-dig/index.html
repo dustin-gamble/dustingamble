@@ -357,6 +357,29 @@ textarea:focus-visible {
   border-radius: 0.75rem;
 }
 
+.page-image-grid {
+  margin: 1.2rem 0 0.8rem;
+  display: grid;
+  gap: 0.85rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+}
+
+.page-image-card {
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 0.9rem;
+  overflow: hidden;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.page-image-card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
 .profile-photo {
   width: min(16rem, 100%);
   border: 1px solid var(--line);
@@ -477,7 +500,7 @@ button[type="submit"]:hover {
       document.documentElement.setAttribute("data-theme", theme);
     </script></head> <body> <a class="skip-link" href="#main-content">Skip to content</a> <header class="site-header"> <div class="container nav-wrap"> <a href="/" class="site-title">Dustin Gamble</a> <nav aria-label="Primary"> <ul class="nav-list"> <li> <a href="/"> Home </a> </li><li> <a href="/writing/"> Writing </a> </li><li> <a href="/projects/" aria-current="page"> Projects </a> </li><li> <a href="/about/"> About </a> </li><li> <a href="/resume/"> Resume </a> </li><li> <a href="/contact/"> Contact </a> </li> </ul> </nav> <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" type="button">
 Theme
-</button> </div> </header> <main id="main-content" class="container page-shell">  <article class="prose"> <p><a href="/projects/">&larr; Back to projects</a></p> <h1>Drone Innovation Garage (DIG)</h1> <p class="meta-row"> <time datetime="2024-10-01">September 30, 2024</time> </p> <ul class="tag-list" aria-label="Tags"> <li>Innovation</li><li>Leadership</li><li>Rapid Prototyping</li> </ul> <p>An internal rapid-innovation environment for autonomous systems experimentation and mentoring.</p> <hr> <h2>Problem / context</h2>
+</button> </div> </header> <main id="main-content" class="container page-shell">  <article class="prose"> <p><a href="/projects/">&larr; Back to projects</a></p> <h1>Drone Innovation Garage (DIG)</h1> <p class="meta-row"> <time datetime="2024-10-01">September 30, 2024</time> </p> <ul class="tag-list" aria-label="Tags"> <li>Innovation</li><li>Leadership</li><li>Rapid Prototyping</li> </ul> <p>An internal rapid-innovation environment for autonomous systems experimentation and mentoring.</p>  <hr> <h2>Problem / context</h2>
 <p>Large organizations can execute complex programs at scale, but early-stage concept exploration often struggles against schedule pressure and process overhead. The challenge was to create a practical internal environment where engineers could move from concept to evidence quickly while preserving technical rigor.</p>
 <h2>Approach</h2>
 <p>DIG was structured as a rapid learning environment with constrained prototype cycles, cross-disciplinary collaboration, and simulation-first habits. The operating model was intentionally inspired by classic Skunk Works principles: small teams, fast iteration, clear ownership, and direct technical accountability. In practice, DIG functions as a &quot;skunk works inside the Skunk Works&quot; for early autonomous-system concepts and tool development. Efforts emphasized repeatable development loops, transparent decision logs, and mentorship integrated into day-to-day technical work. The model prioritized useful engineering outcomes over presentation-driven demo activity.</p>

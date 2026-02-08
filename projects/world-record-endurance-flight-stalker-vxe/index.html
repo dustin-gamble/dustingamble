@@ -357,6 +357,29 @@ textarea:focus-visible {
   border-radius: 0.75rem;
 }
 
+.page-image-grid {
+  margin: 1.2rem 0 0.8rem;
+  display: grid;
+  gap: 0.85rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+}
+
+.page-image-card {
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 0.9rem;
+  overflow: hidden;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.page-image-card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
 .profile-photo {
   width: min(16rem, 100%);
   border: 1px solid var(--line);
@@ -477,7 +500,7 @@ button[type="submit"]:hover {
       document.documentElement.setAttribute("data-theme", theme);
     </script></head> <body> <a class="skip-link" href="#main-content">Skip to content</a> <header class="site-header"> <div class="container nav-wrap"> <a href="/" class="site-title">Dustin Gamble</a> <nav aria-label="Primary"> <ul class="nav-list"> <li> <a href="/"> Home </a> </li><li> <a href="/writing/"> Writing </a> </li><li> <a href="/projects/" aria-current="page"> Projects </a> </li><li> <a href="/about/"> About </a> </li><li> <a href="/resume/"> Resume </a> </li><li> <a href="/contact/"> Contact </a> </li> </ul> </nav> <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" type="button">
 Theme
-</button> </div> </header> <main id="main-content" class="container page-shell">  <article class="prose"> <p><a href="/projects/">&larr; Back to projects</a></p> <h1>World-Record Endurance Flight (Stalker VXE)</h1> <p class="meta-row"> <time datetime="2022-04-11">April 10, 2022</time> </p> <ul class="tag-list" aria-label="Tags"> <li>UAV</li><li>Flight Test</li><li>Endurance</li> </ul> <p>High-level lessons from supporting a 39-hour endurance flight record program.</p> <hr> <h2>Problem / context</h2>
+</button> </div> </header> <main id="main-content" class="container page-shell">  <article class="prose"> <p><a href="/projects/">&larr; Back to projects</a></p> <h1>World-Record Endurance Flight (Stalker VXE)</h1> <p class="meta-row"> <time datetime="2022-04-11">April 10, 2022</time> </p> <ul class="tag-list" aria-label="Tags"> <li>UAV</li><li>Flight Test</li><li>Endurance</li> </ul> <p>High-level lessons from supporting a 39-hour endurance flight record program.</p>  <hr> <h2>Problem / context</h2>
 <p>Long-endurance unmanned aircraft programs face a compounding challenge: aerodynamic and propulsion efficiency are necessary, but operational reliability and integration quality usually decide real mission duration. For this effort, the target was a sustained, officially monitored duration flight in the 5-25 kg class with a VTOL-capable platform using hybrid electric propulsion. The event was flown from Santa Margarita, California and adjudicated under official duration-record procedures.</p>
 <h2>Approach</h2>
 <p>The flight used the Stalker VXE30 with a hybrid propane solid oxide fuel cell plus battery architecture, then added targeted configuration changes to extend duration while keeping operations practical:</p>
