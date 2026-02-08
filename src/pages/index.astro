@@ -3,6 +3,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import WritingCard from "../components/WritingCard.astro";
 import ProjectCard from "../components/ProjectCard.astro";
 import { getFeaturedWriting, getFeaturedProjects, getProjects } from "../lib/content";
+import fs from "node:fs";
+import path from "node:path";
 
 const featuredWriting = getFeaturedWriting(4);
 const featuredProjects = getFeaturedProjects(4);
@@ -33,6 +35,22 @@ const activeProjects = [
     summary: "A book written using AI."
   }
 ];
+const publicRoot = path.resolve(process.cwd(), "public");
+const mainHeroImage = {
+  src: "/images/human_AI_robot.png",
+  alt: "Human and AI robotics concept artwork"
+};
+const heroImageExists = fs.existsSync(path.join(publicRoot, mainHeroImage.src.replace(/^\//, "")));
+const lowerHomeImages = [
+  {
+    src: "/images/aerospace_autonomy.png",
+    alt: "Aerospace autonomy concept artwork"
+  },
+  {
+    src: "/images/robot_AI.png",
+    alt: "Robot and AI collaboration concept artwork"
+  }
+].filter((image) => fs.existsSync(path.join(publicRoot, image.src.replace(/^\//, ""))));
 ---
 <BaseLayout
   title="Dustin Gamble"
@@ -42,6 +60,11 @@ const activeProjects = [
     <p class="kicker">Writing-led technical notes</p>
     <h1>Dustin Gamble</h1>
     <p>Autonomous systems, aerospace engineering, and AI-augmented design workflows.</p>
+    {heroImageExists && (
+      <figure class="home-main-visual">
+        <img src={mainHeroImage.src} alt={mainHeroImage.alt} loading="eager" />
+      </figure>
+    )}
   </section>
 
   <section class="section-block" aria-labelledby="active-projects-title">
@@ -61,6 +84,21 @@ const activeProjects = [
       }
     </div>
   </section>
+
+  {lowerHomeImages.length > 0 && (
+    <section class="section-block" aria-labelledby="home-visuals-title">
+      <h2 id="home-visuals-title" class="section-heading">Visual Notes</h2>
+      <div class="home-support-grid">
+        {
+          lowerHomeImages.map((image) => (
+            <figure class="home-support-card">
+              <img src={image.src} alt={image.alt} loading="lazy" />
+            </figure>
+          ))
+        }
+      </div>
+    </section>
+  )}
 
   <section class="section-block" aria-labelledby="featured-writing-title">
     <h2 id="featured-writing-title" class="section-heading">Featured Writing</h2>
