@@ -11,6 +11,28 @@ const tools = getProjects().filter((project) =>
   project.tags.some((tag) => ["Tools", "Experiments", "Simulation"].includes(tag)) &&
   !featuredProjectSlugs.has(project.slug)
 ).slice(0, 4);
+const activeProjects = [
+  {
+    title: "Life Guide Tool",
+    url: "https://lifeguidetool.com/",
+    summary: "AI-generated web tools for humans."
+  },
+  {
+    title: "sim.dustingamble.com",
+    url: "https://sim.dustingamble.com/",
+    summary: "A multiplayer, cloud-hosted, agent-generated flight simulator launching soon."
+  },
+  {
+    title: "CineBooksAI YouTube",
+    url: "https://www.youtube.com/@CineBooksAI",
+    summary: "AI-generated trailers, videos, and experiments."
+  },
+  {
+    title: "AI Fusion Book",
+    url: "https://lifeguidetool.com/aifusion/AI_Fusion_book.html",
+    summary: "A book written using AI."
+  }
+];
 ---
 <BaseLayout
   title="Dustin Gamble"
@@ -20,6 +42,24 @@ const tools = getProjects().filter((project) =>
     <p class="kicker">Writing-led technical notes</p>
     <h1>Dustin Gamble</h1>
     <p>Autonomous systems, aerospace engineering, and AI-augmented design workflows.</p>
+  </section>
+
+  <section class="section-block" aria-labelledby="active-projects-title">
+    <h2 id="active-projects-title" class="section-heading">Active Projects</h2>
+    <div class="grid cols-2">
+      {
+        activeProjects.map((project) => (
+          <article class="card">
+            <h3>
+              <a href={project.url} target="_blank" rel="noopener noreferrer">
+                {project.title}
+              </a>
+            </h3>
+            <p>{project.summary}</p>
+          </article>
+        ))
+      }
+    </div>
   </section>
 
   <section class="section-block" aria-labelledby="featured-writing-title">
