@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { formatDate, getWriting } from "../../lib/content";
+import { getExistingPageImages } from "../../lib/page-images";
 
 export async function getStaticPaths() {
   const posts = getWriting();
@@ -11,6 +12,7 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
+const pageImages = getExistingPageImages("writing", post.slug, post.title);
 ---
 <BaseLayout
   title={post.title}
@@ -29,6 +31,15 @@ const { post } = Astro.props;
       {post.tags.map((tag) => <li>{tag}</li>)}
     </ul>
     <p>{post.summary}</p>
+    {pageImages.length > 0 && (
+      <section class="page-image-grid" aria-label="Article illustrations">
+        {pageImages.map((image) => (
+          <figure class="page-image-card">
+            <img src={image.src} alt={image.alt} loading="lazy" />
+          </figure>
+        ))}
+      </section>
+    )}
     <hr />
     <Fragment set:html={post.html} />
   </article>

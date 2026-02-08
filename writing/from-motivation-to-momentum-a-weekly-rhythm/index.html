@@ -357,6 +357,29 @@ textarea:focus-visible {
   border-radius: 0.75rem;
 }
 
+.page-image-grid {
+  margin: 1.2rem 0 0.8rem;
+  display: grid;
+  gap: 0.85rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+}
+
+.page-image-card {
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 0.9rem;
+  overflow: hidden;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.page-image-card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
 .profile-photo {
   width: min(16rem, 100%);
   border: 1px solid var(--line);
@@ -477,7 +500,7 @@ button[type="submit"]:hover {
       document.documentElement.setAttribute("data-theme", theme);
     </script></head> <body> <a class="skip-link" href="#main-content">Skip to content</a> <header class="site-header"> <div class="container nav-wrap"> <a href="/" class="site-title">Dustin Gamble</a> <nav aria-label="Primary"> <ul class="nav-list"> <li> <a href="/"> Home </a> </li><li> <a href="/writing/" aria-current="page"> Writing </a> </li><li> <a href="/projects/"> Projects </a> </li><li> <a href="/about/"> About </a> </li><li> <a href="/resume/"> Resume </a> </li><li> <a href="/contact/"> Contact </a> </li> </ul> </nav> <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" type="button">
 Theme
-</button> </div> </header> <main id="main-content" class="container page-shell">  <article class="prose"> <p><a href="/writing/">&larr; Back to writing</a></p> <h1>From Motivation to Momentum: A Weekly Rhythm for Teams</h1> <p class="meta-row"> <time datetime="2026-02-08">February 7, 2026</time> <span aria-hidden="true">&middot;</span> <span>5 min read</span> </p> <ul class="tag-list" aria-label="Tags"> <li>Leadership</li><li>Motivation</li><li>Team Systems</li> </ul> <p>Motivation is fragile, so teams need a repeatable weekly rhythm that protects energy and turns effort into momentum.</p> <hr> <p>In the last article, I wrote that motivation is hard to generate and easy to pop. That is still true. The practical question is what to do with that reality.</p>
+</button> </div> </header> <main id="main-content" class="container page-shell">  <article class="prose"> <p><a href="/writing/">&larr; Back to writing</a></p> <h1>From Motivation to Momentum: A Weekly Rhythm for Teams</h1> <p class="meta-row"> <time datetime="2026-02-08">February 7, 2026</time> <span aria-hidden="true">&middot;</span> <span>5 min read</span> </p> <ul class="tag-list" aria-label="Tags"> <li>Leadership</li><li>Motivation</li><li>Team Systems</li> </ul> <p>Motivation is fragile, so teams need a repeatable weekly rhythm that protects energy and turns effort into momentum.</p>  <hr> <p>In the last article, I wrote that motivation is hard to generate and easy to pop. That is still true. The practical question is what to do with that reality.</p>
 <p>A lot of teams wait for motivation to appear, usually after a win, a speech, or a deadline spike. That approach works briefly, then fades. A better approach is to build a rhythm where motivation is not the only fuel. When energy dips, the system still carries the team forward.</p>
 <p>This is where momentum matters.</p>
 <p>Motivation is emotional. Momentum is structural. Good teams need both.</p>

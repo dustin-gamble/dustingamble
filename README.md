@@ -88,6 +88,18 @@ tags: ["..."]
 draft: false
 ```
 
+### Optional AI Images
+
+- Prompt guide: `AI_IMAGE_PROMPTS.md`
+- Writing image folder: `public/images/writing/`
+- Project image folder: `public/images/projects/`
+
+Image loading is automatic and conditional:
+
+- Use `slug-1` through `slug-4` naming (example: `public/images/writing/ai-wont-replace-engineers-but-it-will-change-how-we-build-1.webp`).
+- Supported extensions: `.webp`, `.png`, `.jpg`, `.jpeg`.
+- If an image file does not exist, nothing is shown on the page.
+
 ## Site structure
 
 - `src/pages/index.astro` -> Home (writing-led)
