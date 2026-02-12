@@ -9,6 +9,10 @@ tags:
 draft: false
 ---
 
+<figure class="inline-logo">
+  <img src="/images/writing/Shovel.jpg" alt="Drone Innovation Garage (DIG) logo" loading="lazy" />
+</figure>
+
 ## Problem / context
 
 Large organizations can execute complex programs at scale, but early-stage concept exploration often struggles against schedule pressure and process overhead. The challenge was to create a practical internal environment where engineers could move from concept to evidence quickly while preserving technical rigor.
