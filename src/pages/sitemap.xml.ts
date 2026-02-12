@@ -10,7 +10,6 @@ export async function GET() {
     "/projects/",
     "/about/",
     "/resume/",
-    "/contact/",
     "/rss.xml"
   ];
 

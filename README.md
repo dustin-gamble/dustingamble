@@ -107,7 +107,6 @@ Image loading is automatic and conditional:
 - `src/pages/projects/` -> Projects index and detail pages
 - `src/pages/about.astro` -> About (short + expandable long bio)
 - `src/pages/resume.astro` -> HTML resume
-- `src/pages/contact.astro` -> Contact links + mailto form
 - `src/pages/rss.xml.ts` -> RSS feed
 - `src/pages/sitemap.xml.ts` -> Dynamic sitemap
 - `public/robots.txt` -> robots rules
