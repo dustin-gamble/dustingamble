@@ -595,7 +595,7 @@ button[type="submit"]:hover {
 	animation-duration: 180ms;
 	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
 	animation-fill-mode: both;
-	animation-name: astroFadeIn; }</style></head> <body> <a class="skip-link" href="#main-content">Skip to content</a> <header class="site-header"> <div class="container nav-wrap"> <a href="/" class="site-title">Dustin Gamble</a> <nav aria-label="Primary"> <ul class="nav-list"> <li> <a href="/"> Home </a> </li><li> <a href="/writing/"> Writing </a> </li><li> <a href="/projects/"> Projects </a> </li><li> <a href="/about/" aria-current="page"> About </a> </li><li> <a href="/resume/"> Resume </a> </li><li> <a href="/contact/"> Contact </a> </li> </ul> </nav> <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" type="button">
+	animation-name: astroFadeIn; }</style></head> <body> <a class="skip-link" href="#main-content">Skip to content</a> <header class="site-header"> <div class="container nav-wrap"> <a href="/" class="site-title">Dustin Gamble</a> <nav aria-label="Primary"> <ul class="nav-list"> <li> <a href="/"> Home </a> </li><li> <a href="/writing/"> Writing </a> </li><li> <a href="/projects/"> Projects </a> </li><li> <a href="/about/" aria-current="page"> About </a> </li><li> <a href="/resume/"> Resume </a> </li> </ul> </nav> <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" type="button">
 Theme
 </button> </div> </header> <main id="main-content" class="container page-shell" data-astro-transition-scope="astro-2lfmhzu7-1">  <section class="prose section-block"> <h1>About</h1> <p> <img src="/images/Dustin.JPG" alt="Portrait of Dustin Gamble" class="profile-photo"> </p> <p>
 Dustin Gamble is an aerospace engineer focused on autonomous systems, advanced UAV design, and
@@ -623,7 +623,26 @@ Outside direct program work, Dustin mentors engineers, supports technical review
         mission requirements.
 </p> <p>
 TODO: Add approved public talks, interviews, or external profiles.
-</p> </details> <h2>Contact Links</h2> <ul> <li>Email: <a href="mailto:TODO@example.com">TODO@example.com</a></li> <li>LinkedIn: <a href="https://www.linkedin.com/in/TODO">https://www.linkedin.com/in/TODO</a></li> <li>GitHub: <a href="https://github.com/dustin-gamble">https://github.com/dustin-gamble</a></li> <li>YouTube: <a href="https://www.youtube.com/@dustingamble4137">@dustingamble4137</a></li> </ul> </section>  </main> <footer class="site-footer"> <div class="container footer-inner"> <p>
+</p> </details> <h2>Links</h2> <ul> <li>
+Email: <button id="email-button" type="button" class="button-link">Email</button> <noscript>(dustin dot e dot gamble at gmail dot com)</noscript> </li> <li>
+LinkedIn:  <a href="https://www.linkedin.com/in/dustin-gamble-90276215/" target="_blank" rel="noopener noreferrer">linkedin.com/in/dustin-gamble-90276215</a> </li> <li>GitHub: <a href="https://github.com/dustin-gamble">https://github.com/dustin-gamble</a></li> <li>YouTube: <a href="https://www.youtube.com/@dustingamble4137">@dustingamble4137</a></li> </ul> <script>
+      // Simple bot-resistance: avoid putting a raw email address in HTML.
+      // This won't stop determined scrapers, but it blocks the simplest harvesters.
+      const button = document.getElementById("email-button");
+      if (button) {
+        const userReversed = "elbmag.e.nitsud";
+        const domainReversed = "moc.liamg";
+        const email =
+          userReversed.split("").reverse().join("") +
+          "@" +
+          domainReversed.split("").reverse().join("");
+
+        button.addEventListener("click", () => {
+          button.textContent = email;
+          window.location.href = `mailto:${email}`;
+        });
+      }
+    </script> </section>  </main> <footer class="site-footer"> <div class="container footer-inner"> <p>
 Thoughts on autonomous systems, aerospace engineering, and practical AI workflows.
 </p> <p>&copy; 2026 Dustin Gamble</p> </div> </footer> <script>
       const toggle = document.getElementById("theme-toggle");

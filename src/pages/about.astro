@@ -48,12 +48,39 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       </p>
     </details>
 
-    <h2>Contact Links</h2>
+    <h2>Links</h2>
     <ul>
-      <li>Email: <a href="mailto:TODO@example.com">TODO@example.com</a></li>
-      <li>LinkedIn: <a href="https://www.linkedin.com/in/TODO">https://www.linkedin.com/in/TODO</a></li>
+      <li>
+        Email: <button id="email-button" type="button" class="button-link">Email</button>
+        <noscript>(dustin dot e dot gamble at gmail dot com)</noscript>
+      </li>
+      <li>
+        LinkedIn:{" "}
+        <a href="https://www.linkedin.com/in/dustin-gamble-90276215/" target="_blank" rel="noopener noreferrer"
+          >linkedin.com/in/dustin-gamble-90276215</a
+        >
+      </li>
       <li>GitHub: <a href="https://github.com/dustin-gamble">https://github.com/dustin-gamble</a></li>
       <li>YouTube: <a href="https://www.youtube.com/@dustingamble4137">@dustingamble4137</a></li>
     </ul>
+
+    <script is:inline>
+      // Simple bot-resistance: avoid putting a raw email address in HTML.
+      // This won't stop determined scrapers, but it blocks the simplest harvesters.
+      const button = document.getElementById("email-button");
+      if (button) {
+        const userReversed = "elbmag.e.nitsud";
+        const domainReversed = "moc.liamg";
+        const email =
+          userReversed.split("").reverse().join("") +
+          "@" +
+          domainReversed.split("").reverse().join("");
+
+        button.addEventListener("click", () => {
+          button.textContent = email;
+          window.location.href = `mailto:${email}`;
+        });
+      }
+    </script>
   </section>
 </BaseLayout>
