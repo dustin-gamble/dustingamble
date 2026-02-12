@@ -17,10 +17,11 @@ const pageImages = getExistingPageImages("projects", project.slug, project.title
 <BaseLayout
   title={project.title}
   description={project.summary}
+  showProgress={true}
 >
   <article class="prose">
     <p><a href="/projects/">&larr; Back to projects</a></p>
-    <h1>{project.title}</h1>
+    <h1 transition:name={project.slug}>{project.title}</h1>
     <p class="meta-row">
       <time datetime={project.date}>{formatDate(project.date)}</time>
     </p>

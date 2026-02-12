@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en" data-theme="light"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Dustin Gamble</title><meta name="description" content="Autonomous systems, aerospace engineering, and AI-augmented design workflows. Essays and project notes from Dustin Gamble."><link rel="canonical" href="https://dustingamble.com/"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta property="og:type" content="website"><meta property="og:title" content="Dustin Gamble"><meta property="og:description" content="Autonomous systems, aerospace engineering, and AI-augmented design workflows. Essays and project notes from Dustin Gamble."><meta property="og:url" content="https://dustingamble.com/"><meta property="og:image" content="https://dustingamble.com/og-default.svg"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Dustin Gamble"><meta name="twitter:description" content="Autonomous systems, aerospace engineering, and AI-augmented design workflows. Essays and project notes from Dustin Gamble."><meta name="twitter:image" content="https://dustingamble.com/og-default.svg"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet"><style is:global>:root {
+<!DOCTYPE html><html lang="en" data-theme="light"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="view-transition" content="same-origin"><title>Dustin Gamble</title><meta name="description" content="Autonomous systems, aerospace engineering, and AI-augmented design workflows. Essays and project notes from Dustin Gamble."><link rel="canonical" href="https://dustingamble.com/"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta property="og:type" content="website"><meta property="og:title" content="Dustin Gamble"><meta property="og:description" content="Autonomous systems, aerospace engineering, and AI-augmented design workflows. Essays and project notes from Dustin Gamble."><meta property="og:url" content="https://dustingamble.com/"><meta property="og:image" content="https://dustingamble.com/og-default.svg"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Dustin Gamble"><meta name="twitter:description" content="Autonomous systems, aerospace engineering, and AI-augmented design workflows. Essays and project notes from Dustin Gamble."><meta name="twitter:image" content="https://dustingamble.com/og-default.svg"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet"><style is:global>:root {
   color-scheme: light dark;
   --bg: #f3f4ef;
   --bg-alt: #edf2f8;
@@ -47,6 +47,24 @@ body {
   font-family: "Source Serif 4", Georgia, serif;
   line-height: 1.68;
   font-size: 1.08rem;
+}
+
+.scroll-progress-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  background: color-mix(in srgb, var(--text) 14%, transparent);
+  z-index: 40;
+  pointer-events: none;
+}
+
+.scroll-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: var(--accent);
+  transition: width 80ms linear;
 }
 
 a {
@@ -533,15 +551,341 @@ button[type="submit"]:hover {
     font-size: 2rem;
   }
 }
-</style><script>
+</style><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.CDGfc0hd.js"></script><script>
       const saved = localStorage.getItem("theme");
       const prefersDark =
         window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
       const theme = saved || (prefersDark ? "dark" : "light");
       document.documentElement.setAttribute("data-theme", theme);
-    </script></head> <body> <a class="skip-link" href="#main-content">Skip to content</a> <header class="site-header"> <div class="container nav-wrap"> <a href="/" class="site-title">Dustin Gamble</a> <nav aria-label="Primary"> <ul class="nav-list"> <li> <a href="/" aria-current="page"> Home </a> </li><li> <a href="/writing/"> Writing </a> </li><li> <a href="/projects/"> Projects </a> </li><li> <a href="/about/"> About </a> </li><li> <a href="/resume/"> Resume </a> </li><li> <a href="/contact/"> Contact </a> </li> </ul> </nav> <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" type="button">
+    </script><style>@keyframes astroFadeInOut{0%{opacity:1}to{opacity:0}}@keyframes astroFadeIn{0%{opacity:0;mix-blend-mode:plus-lighter}to{opacity:1;mix-blend-mode:plus-lighter}}@keyframes astroFadeOut{0%{opacity:1;mix-blend-mode:plus-lighter}to{opacity:0;mix-blend-mode:plus-lighter}}@keyframes astroSlideFromRight{0%{transform:translate(100%)}}@keyframes astroSlideFromLeft{0%{transform:translate(-100%)}}@keyframes astroSlideToRight{to{transform:translate(100%)}}@keyframes astroSlideToLeft{to{transform:translate(-100%)}}@media(prefers-reduced-motion){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}[data-astro-transition-scope]{animation:none!important}}
+.astro-route-announcer{position:absolute;left:0;top:0;clip:rect(0 0 0 0);clip-path:inset(50%);overflow:hidden;white-space:nowrap;width:1px;height:1px}
+</style><style>[data-astro-transition-scope="astro-fwbbguf2-1"] { view-transition-name: courtside-prototyping-and-ai-generated-apps; }@layer astro { ::view-transition-old(courtside-prototyping-and-ai-generated-apps) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(courtside-prototyping-and-ai-generated-apps) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(courtside-prototyping-and-ai-generated-apps) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(courtside-prototyping-and-ai-generated-apps) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-fwbbguf2-1"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-fwbbguf2-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-fwbbguf2-1"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-fwbbguf2-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-fwbbguf2-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-fwbbguf2-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-fwbbguf2-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-fwbbguf2-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-fwbbguf2-2"] { view-transition-name: from-motivation-to-momentum-a-weekly-rhythm; }@layer astro { ::view-transition-old(from-motivation-to-momentum-a-weekly-rhythm) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(from-motivation-to-momentum-a-weekly-rhythm) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(from-motivation-to-momentum-a-weekly-rhythm) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(from-motivation-to-momentum-a-weekly-rhythm) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-fwbbguf2-2"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-fwbbguf2-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-fwbbguf2-2"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-fwbbguf2-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-fwbbguf2-2"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-fwbbguf2-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-fwbbguf2-2"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-fwbbguf2-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-fwbbguf2-3"] { view-transition-name: ai-wont-replace-engineers-but-it-will-change-how-we-build; }@layer astro { ::view-transition-old(ai-wont-replace-engineers-but-it-will-change-how-we-build) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(ai-wont-replace-engineers-but-it-will-change-how-we-build) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(ai-wont-replace-engineers-but-it-will-change-how-we-build) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(ai-wont-replace-engineers-but-it-will-change-how-we-build) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-fwbbguf2-3"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-fwbbguf2-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-fwbbguf2-3"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-fwbbguf2-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-fwbbguf2-3"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-fwbbguf2-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-fwbbguf2-3"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-fwbbguf2-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-fwbbguf2-4"] { view-transition-name: simulation-first-engineering-shortening-the-loop; }@layer astro { ::view-transition-old(simulation-first-engineering-shortening-the-loop) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(simulation-first-engineering-shortening-the-loop) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(simulation-first-engineering-shortening-the-loop) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(simulation-first-engineering-shortening-the-loop) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-fwbbguf2-4"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-fwbbguf2-4"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-fwbbguf2-4"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-fwbbguf2-4"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-fwbbguf2-4"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-fwbbguf2-4"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-fwbbguf2-4"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-fwbbguf2-4"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-xpyamjoh-5"] { view-transition-name: world-record-endurance-flight-stalker-vxe; }@layer astro { ::view-transition-old(world-record-endurance-flight-stalker-vxe) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(world-record-endurance-flight-stalker-vxe) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(world-record-endurance-flight-stalker-vxe) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(world-record-endurance-flight-stalker-vxe) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-xpyamjoh-5"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-xpyamjoh-5"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-xpyamjoh-5"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-xpyamjoh-5"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-xpyamjoh-5"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-xpyamjoh-5"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-xpyamjoh-5"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-xpyamjoh-5"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-xpyamjoh-6"] { view-transition-name: drone-innovation-garage-dig; }@layer astro { ::view-transition-old(drone-innovation-garage-dig) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(drone-innovation-garage-dig) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(drone-innovation-garage-dig) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(drone-innovation-garage-dig) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-xpyamjoh-6"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-xpyamjoh-6"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-xpyamjoh-6"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-xpyamjoh-6"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-xpyamjoh-6"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-xpyamjoh-6"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-xpyamjoh-6"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-xpyamjoh-6"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-xpyamjoh-7"] { view-transition-name: fast-mechanical-safe-decoder; }@layer astro { ::view-transition-old(fast-mechanical-safe-decoder) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(fast-mechanical-safe-decoder) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(fast-mechanical-safe-decoder) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(fast-mechanical-safe-decoder) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-xpyamjoh-7"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-xpyamjoh-7"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-xpyamjoh-7"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-xpyamjoh-7"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-xpyamjoh-7"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-xpyamjoh-7"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-xpyamjoh-7"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-xpyamjoh-7"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-xpyamjoh-8"] { view-transition-name: electromagnetic-flip-digit-display; }@layer astro { ::view-transition-old(electromagnetic-flip-digit-display) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(electromagnetic-flip-digit-display) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(electromagnetic-flip-digit-display) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(electromagnetic-flip-digit-display) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-xpyamjoh-8"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-xpyamjoh-8"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-xpyamjoh-8"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-xpyamjoh-8"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-xpyamjoh-8"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-xpyamjoh-8"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-xpyamjoh-8"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-xpyamjoh-8"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-2lfmhzu7-9"] { view-transition-name: astro-2lfmhzu7-9; }@layer astro { ::view-transition-old(astro-2lfmhzu7-9) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(astro-2lfmhzu7-9) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(astro-2lfmhzu7-9) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(astro-2lfmhzu7-9) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-2lfmhzu7-9"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-2lfmhzu7-9"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-2lfmhzu7-9"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-2lfmhzu7-9"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-2lfmhzu7-9"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-2lfmhzu7-9"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-2lfmhzu7-9"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-2lfmhzu7-9"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style></head> <body> <a class="skip-link" href="#main-content">Skip to content</a> <header class="site-header"> <div class="container nav-wrap"> <a href="/" class="site-title">Dustin Gamble</a> <nav aria-label="Primary"> <ul class="nav-list"> <li> <a href="/" aria-current="page"> Home </a> </li><li> <a href="/writing/"> Writing </a> </li><li> <a href="/projects/"> Projects </a> </li><li> <a href="/about/"> About </a> </li><li> <a href="/resume/"> Resume </a> </li><li> <a href="/contact/"> Contact </a> </li> </ul> </nav> <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" type="button">
 Theme
-</button> </div> </header> <main id="main-content" class="container page-shell">  <section class="home-hero section-block"> <p class="kicker">Writing-led technical notes</p> <h1>Dustin Gamble</h1> <p>Autonomous systems, aerospace engineering, and AI-augmented design workflows.</p> <figure class="home-main-visual"> <img src="/images/human_AI_robot.png" alt="Human and AI robotics concept artwork" loading="eager"> </figure> </section> <section class="section-block" aria-labelledby="active-projects-title"> <h2 id="active-projects-title" class="section-heading">Active Projects</h2> <div class="grid cols-2"> <article class="card"> <h3> <a href="https://lifeguidetool.com/" target="_blank" rel="noopener noreferrer"> Life Guide Tool </a> </h3> <p>AI-generated web tools for humans.</p> </article><article class="card"> <h3> <a href="https://sim.dustingamble.com/" target="_blank" rel="noopener noreferrer"> sim.dustingamble.com </a> </h3> <p>A multiplayer, cloud-hosted, agent-generated flight simulator launching soon.</p> </article><article class="card"> <h3> <a href="https://www.youtube.com/@CineBooksAI" target="_blank" rel="noopener noreferrer"> CineBooksAI YouTube </a> </h3> <p>AI-generated trailers, videos, and experiments.</p> </article><article class="card"> <h3> <a href="https://lifeguidetool.com/aifusion/AI_Fusion_book.html" target="_blank" rel="noopener noreferrer"> AI Fusion Book </a> </h3> <p>A book written using AI.</p> </article> </div> </section> <section class="section-block" aria-labelledby="home-visuals-title"> <h2 id="home-visuals-title" class="section-heading">Visual Notes</h2> <div class="home-support-grid"> <figure class="home-support-card"> <img src="/images/aerospace_autonomy.png" alt="Aerospace autonomy concept artwork" loading="lazy"> </figure><figure class="home-support-card"> <img src="/images/robot_AI.png" alt="Robot and AI collaboration concept artwork" loading="lazy"> </figure> </div> </section><section class="section-block" aria-labelledby="featured-writing-title"> <h2 id="featured-writing-title" class="section-heading">Featured Writing</h2> <div class="grid cols-2"> <article class="card writing-card "> <p class="meta-row"> <time datetime="2026-02-08">February 7, 2026</time> <span aria-hidden="true">&middot;</span> <span>10 min read</span> </p> <h3><a href="/writing/courtside-prototyping-and-ai-generated-apps/">Courtside Prototyping: AI-Generated Apps in Real Time</a></h3> <p>From a notepad idea during my daughter&#39;s basketball game to a working tracker in minutes, this experiment shows where AI-generated software is useful today and where engineering still matters.</p> <ul class="tag-list" aria-label="Tags"> <li>AI</li><li>Prototyping</li><li>Personal Tools</li><li>Product Thinking</li> </ul> </article><article class="card writing-card "> <p class="meta-row"> <time datetime="2026-02-08">February 7, 2026</time> <span aria-hidden="true">&middot;</span> <span>5 min read</span> </p> <h3><a href="/writing/from-motivation-to-momentum-a-weekly-rhythm/">From Motivation to Momentum: A Weekly Rhythm for Teams</a></h3> <p>Motivation is fragile, so teams need a repeatable weekly rhythm that protects energy and turns effort into momentum.</p> <ul class="tag-list" aria-label="Tags"> <li>Leadership</li><li>Motivation</li><li>Team Systems</li> </ul> </article><article class="card writing-card "> <p class="meta-row"> <time datetime="2026-01-29">January 28, 2026</time> <span aria-hidden="true">&middot;</span> <span>4 min read</span> </p> <h3><a href="/writing/ai-wont-replace-engineers-but-it-will-change-how-we-build/">AI Won&#39;t Replace Engineers - But It Will Change How We Build</a></h3> <p>AI is a tool, not a replacement for engineers. It will remove routine work and push teams toward higher-value judgment, creativity, and system thinking.</p> <ul class="tag-list" aria-label="Tags"> <li>AI</li><li>Engineering Workflows</li><li>Autonomy</li> </ul> </article><article class="card writing-card "> <p class="meta-row"> <time datetime="2026-01-21">January 20, 2026</time> <span aria-hidden="true">&middot;</span> <span>4 min read</span> </p> <h3><a href="/writing/simulation-first-engineering-shortening-the-loop/">Simulation-First Engineering: Shortening the Loop</a></h3> <p>Shorter design cycles come from better simulation habits, not bigger models or more process overhead.</p> <ul class="tag-list" aria-label="Tags"> <li>Simulation</li><li>UAV</li><li>Systems Engineering</li> </ul> </article> </div> <p><a href="/writing/">Browse all essays</a></p> </section> <section class="section-block" aria-labelledby="selected-projects-title"> <h2 id="selected-projects-title" class="section-heading">Selected Projects</h2> <div class="grid cols-2"> <article class="card project-card"> <h3><a href="/projects/world-record-endurance-flight-stalker-vxe/">World-Record Endurance Flight (Stalker VXE)</a></h3> <p>High-level lessons from supporting a 39-hour endurance flight record program.</p> <ul class="tag-list" aria-label="Project tags"> <li>UAV</li><li>Flight Test</li><li>Endurance</li> </ul> </article><article class="card project-card"> <h3><a href="/projects/drone-innovation-garage-dig/">Drone Innovation Garage (DIG)</a></h3> <p>An internal rapid-innovation environment for autonomous systems experimentation and mentoring.</p> <ul class="tag-list" aria-label="Project tags"> <li>Innovation</li><li>Leadership</li><li>Rapid Prototyping</li> </ul> </article><article class="card project-card"> <h3><a href="/projects/fast-mechanical-safe-decoder/">Fast Mechanical Safe Decoder</a></h3> <p>A rapid mechanical concept for decoding combination-safe behavior with physical feedback and iteration.</p> <ul class="tag-list" aria-label="Project tags"> <li>Experiments</li><li>Mechanisms</li><li>Rapid Prototyping</li> </ul> </article><article class="card project-card"> <h3><a href="/projects/electromagnetic-flip-digit-display/">Electromagnetic Flip Digit Display</a></h3> <p>A hardware experiment using electromagnetic actuation to create a compact, high-contrast flip-digit display.</p> <ul class="tag-list" aria-label="Project tags"> <li>Experiments</li><li>Embedded</li><li>Hardware</li> </ul> </article> </div> <p><a href="/projects/">View project archive</a></p> </section> <section class="section-block" aria-labelledby="tools-title"> <h2 id="tools-title" class="section-heading">Tools / Experiments</h2> <ul class="list-reset writing-list"> <li> <h3> <a href="/projects/web-based-engineering-simulation-tools/">Web-Based Engineering and Simulation Tools</a> </h3> <p>Browser-based tools for design trade studies, visualization, and decision support.</p> </li><li> <h3> <a href="/projects/autonomy-simulation-ecosystem-ardupilot-jsbsim-web/">Autonomy and Simulation Ecosystem (ArduPilot / JSBSim / Web Dashboards)</a> </h3> <p>A repeatable development loop connecting SITL, flight dynamics, and lightweight mission dashboards.</p> </li><li> <h3> <a href="/projects/flight-test-review-workbench/">Flight Test Review Workbench</a> </h3> <p>An experiment for faster post-flight analysis using synchronized telemetry and timeline annotations.</p> </li><li> <h3> <a href="/projects/mission-trade-study-companion/">Mission Trade Study Companion</a> </h3> <p>A lightweight analysis companion to compare mission concepts before committing to detailed design.</p> </li> </ul> </section><section class="section-block about-teaser" aria-labelledby="about-teaser-title"> <h2 id="about-teaser-title" class="section-heading">About</h2> <p>
+</button> </div> </header> <main id="main-content" class="container page-shell" data-astro-transition-scope="astro-2lfmhzu7-9">  <section class="home-hero section-block"> <p class="kicker">Writing-led technical notes</p> <h1>Dustin Gamble</h1> <p>Autonomous systems, aerospace engineering, and AI-augmented design workflows.</p> <figure class="home-main-visual"> <img src="/images/human_AI_robot.png" alt="Human and AI robotics concept artwork" loading="eager"> </figure> </section> <section class="section-block" aria-labelledby="active-projects-title"> <h2 id="active-projects-title" class="section-heading">Active Projects</h2> <div class="grid cols-2"> <article class="card"> <h3> <a href="https://lifeguidetool.com/" target="_blank" rel="noopener noreferrer"> Life Guide Tool </a> </h3> <p>AI-generated web tools for humans.</p> </article><article class="card"> <h3> <a href="https://sim.dustingamble.com/" target="_blank" rel="noopener noreferrer"> sim.dustingamble.com </a> </h3> <p>A multiplayer, cloud-hosted, agent-generated flight simulator launching soon.</p> </article><article class="card"> <h3> <a href="https://www.youtube.com/@CineBooksAI" target="_blank" rel="noopener noreferrer"> CineBooksAI YouTube </a> </h3> <p>AI-generated trailers, videos, and experiments.</p> </article><article class="card"> <h3> <a href="https://lifeguidetool.com/aifusion/AI_Fusion_book.html" target="_blank" rel="noopener noreferrer"> AI Fusion Book </a> </h3> <p>A book written using AI.</p> </article> </div> </section> <section class="section-block" aria-labelledby="home-visuals-title"> <h2 id="home-visuals-title" class="section-heading">Visual Notes</h2> <div class="home-support-grid"> <figure class="home-support-card"> <img src="/images/aerospace_autonomy.png" alt="Aerospace autonomy concept artwork" loading="lazy"> </figure><figure class="home-support-card"> <img src="/images/robot_AI.png" alt="Robot and AI collaboration concept artwork" loading="lazy"> </figure> </div> </section><section class="section-block" aria-labelledby="featured-writing-title"> <h2 id="featured-writing-title" class="section-heading">Featured Writing</h2> <div class="grid cols-2"> <article class="card writing-card "> <p class="meta-row"> <time datetime="2026-02-08">February 7, 2026</time> <span aria-hidden="true">&middot;</span> <span>10 min read</span> </p> <h3> <a href="/writing/courtside-prototyping-and-ai-generated-apps/" data-astro-transition-scope="astro-fwbbguf2-1"> Courtside Prototyping: AI-Generated Apps in Real Time </a> </h3> <p>From a notepad idea during my daughter&#39;s basketball game to a working tracker in minutes, this experiment shows where AI-generated software is useful today and where engineering still matters.</p> <ul class="tag-list" aria-label="Tags"> <li>AI</li><li>Prototyping</li><li>Personal Tools</li><li>Product Thinking</li> </ul> </article><article class="card writing-card "> <p class="meta-row"> <time datetime="2026-02-08">February 7, 2026</time> <span aria-hidden="true">&middot;</span> <span>5 min read</span> </p> <h3> <a href="/writing/from-motivation-to-momentum-a-weekly-rhythm/" data-astro-transition-scope="astro-fwbbguf2-2"> From Motivation to Momentum: A Weekly Rhythm for Teams </a> </h3> <p>Motivation is fragile, so teams need a repeatable weekly rhythm that protects energy and turns effort into momentum.</p> <ul class="tag-list" aria-label="Tags"> <li>Leadership</li><li>Motivation</li><li>Team Systems</li> </ul> </article><article class="card writing-card "> <p class="meta-row"> <time datetime="2026-01-29">January 28, 2026</time> <span aria-hidden="true">&middot;</span> <span>4 min read</span> </p> <h3> <a href="/writing/ai-wont-replace-engineers-but-it-will-change-how-we-build/" data-astro-transition-scope="astro-fwbbguf2-3"> AI Won&#39;t Replace Engineers - But It Will Change How We Build </a> </h3> <p>AI is a tool, not a replacement for engineers. It will remove routine work and push teams toward higher-value judgment, creativity, and system thinking.</p> <ul class="tag-list" aria-label="Tags"> <li>AI</li><li>Engineering Workflows</li><li>Autonomy</li> </ul> </article><article class="card writing-card "> <p class="meta-row"> <time datetime="2026-01-21">January 20, 2026</time> <span aria-hidden="true">&middot;</span> <span>4 min read</span> </p> <h3> <a href="/writing/simulation-first-engineering-shortening-the-loop/" data-astro-transition-scope="astro-fwbbguf2-4"> Simulation-First Engineering: Shortening the Loop </a> </h3> <p>Shorter design cycles come from better simulation habits, not bigger models or more process overhead.</p> <ul class="tag-list" aria-label="Tags"> <li>Simulation</li><li>UAV</li><li>Systems Engineering</li> </ul> </article> </div> <p><a href="/writing/">Browse all essays</a></p> </section> <section class="section-block" aria-labelledby="selected-projects-title"> <h2 id="selected-projects-title" class="section-heading">Selected Projects</h2> <div class="grid cols-2"> <article class="card project-card"> <h3> <a href="/projects/world-record-endurance-flight-stalker-vxe/" data-astro-transition-scope="astro-xpyamjoh-5"> World-Record Endurance Flight (Stalker VXE) </a> </h3> <p>High-level lessons from supporting a 39-hour endurance flight record program.</p> <ul class="tag-list" aria-label="Project tags"> <li>UAV</li><li>Flight Test</li><li>Endurance</li> </ul> </article><article class="card project-card"> <h3> <a href="/projects/drone-innovation-garage-dig/" data-astro-transition-scope="astro-xpyamjoh-6"> Drone Innovation Garage (DIG) </a> </h3> <p>An internal rapid-innovation environment for autonomous systems experimentation and mentoring.</p> <ul class="tag-list" aria-label="Project tags"> <li>Innovation</li><li>Leadership</li><li>Rapid Prototyping</li> </ul> </article><article class="card project-card"> <h3> <a href="/projects/fast-mechanical-safe-decoder/" data-astro-transition-scope="astro-xpyamjoh-7"> Fast Mechanical Safe Decoder </a> </h3> <p>A rapid mechanical concept for decoding combination-safe behavior with physical feedback and iteration.</p> <ul class="tag-list" aria-label="Project tags"> <li>Experiments</li><li>Mechanisms</li><li>Rapid Prototyping</li> </ul> </article><article class="card project-card"> <h3> <a href="/projects/electromagnetic-flip-digit-display/" data-astro-transition-scope="astro-xpyamjoh-8"> Electromagnetic Flip Digit Display </a> </h3> <p>A hardware experiment using electromagnetic actuation to create a compact, high-contrast flip-digit display.</p> <ul class="tag-list" aria-label="Project tags"> <li>Experiments</li><li>Embedded</li><li>Hardware</li> </ul> </article> </div> <p><a href="/projects/">View project archive</a></p> </section> <section class="section-block" aria-labelledby="tools-title"> <h2 id="tools-title" class="section-heading">Tools / Experiments</h2> <ul class="list-reset writing-list"> <li> <h3> <a href="/projects/web-based-engineering-simulation-tools/">Web-Based Engineering and Simulation Tools</a> </h3> <p>Browser-based tools for design trade studies, visualization, and decision support.</p> </li><li> <h3> <a href="/projects/autonomy-simulation-ecosystem-ardupilot-jsbsim-web/">Autonomy and Simulation Ecosystem (ArduPilot / JSBSim / Web Dashboards)</a> </h3> <p>A repeatable development loop connecting SITL, flight dynamics, and lightweight mission dashboards.</p> </li><li> <h3> <a href="/projects/flight-test-review-workbench/">Flight Test Review Workbench</a> </h3> <p>An experiment for faster post-flight analysis using synchronized telemetry and timeline annotations.</p> </li><li> <h3> <a href="/projects/mission-trade-study-companion/">Mission Trade Study Companion</a> </h3> <p>A lightweight analysis companion to compare mission concepts before committing to detailed design.</p> </li> </ul> </section><section class="section-block about-teaser" aria-labelledby="about-teaser-title"> <h2 id="about-teaser-title" class="section-heading">About</h2> <p>
 I build practical aerospace systems and the workflows that support them, from prototype concepts to
       simulation-heavy design loops. Most of my writing here is about how teams can move faster without
       losing engineering rigor.
@@ -557,4 +901,70 @@ Thoughts on autonomous systems, aerospace engineering, and practical AI workflow
           localStorage.setItem("theme", next);
         });
       }
+    </script> <script>
+      // Lightweight reading progress bar for long-form pages.
+      // Enabled when <main> has `data-scroll-progress="true"`.
+      let scrollProgressContainer = null;
+      let scrollProgressBar = null;
+      let scrollHandler = null;
+
+      function ensureProgressElements() {
+        if (scrollProgressContainer && scrollProgressBar) return;
+        scrollProgressContainer = document.createElement("div");
+        scrollProgressContainer.className = "scroll-progress-container";
+        scrollProgressContainer.setAttribute("aria-hidden", "true");
+
+        scrollProgressBar = document.createElement("div");
+        scrollProgressBar.className = "scroll-progress-bar";
+        scrollProgressBar.style.width = "0%";
+
+        scrollProgressContainer.appendChild(scrollProgressBar);
+        document.body.appendChild(scrollProgressContainer);
+      }
+
+      function removeProgressElements() {
+        if (scrollHandler) {
+          window.removeEventListener("scroll", scrollHandler);
+          window.removeEventListener("resize", scrollHandler);
+          scrollHandler = null;
+        }
+        if (scrollProgressContainer) {
+          scrollProgressContainer.remove();
+        }
+        scrollProgressContainer = null;
+        scrollProgressBar = null;
+      }
+
+      function updateScrollProgress() {
+        if (!scrollProgressBar) return;
+        const doc = document.documentElement;
+        const body = document.body;
+        const scrollTop = doc.scrollTop || body.scrollTop || 0;
+        const scrollHeight = doc.scrollHeight || body.scrollHeight || 0;
+        const clientHeight = doc.clientHeight || window.innerHeight || 0;
+        const height = Math.max(1, scrollHeight - clientHeight);
+        const pct = Math.min(100, Math.max(0, (scrollTop / height) * 100));
+        scrollProgressBar.style.width = `${pct}%`;
+      }
+
+      function refreshScrollProgress() {
+        const enabled = Boolean(document.querySelector('main[data-scroll-progress="true"]'));
+        if (!enabled) {
+          removeProgressElements();
+          return;
+        }
+
+        ensureProgressElements();
+        if (!scrollHandler) {
+          scrollHandler = () => updateScrollProgress();
+          window.addEventListener("scroll", scrollHandler, { passive: true });
+          window.addEventListener("resize", scrollHandler, { passive: true });
+        }
+        updateScrollProgress();
+      }
+
+      // Run on initial load and on Astro client-router navigations.
+      refreshScrollProgress();
+      document.addEventListener("astro:page-load", refreshScrollProgress);
+      document.addEventListener("astro:after-swap", refreshScrollProgress);
     </script> </body> </html>
