@@ -9,7 +9,11 @@ const { post, compact = false } = Astro.props;
     <span aria-hidden="true">&middot;</span>
     <span>{post.readingTime} min read</span>
   </p>
-  <h3><a href={`/writing/${post.slug}/`}>{post.title}</a></h3>
+  <h3>
+    <a href={`/writing/${post.slug}/`} transition:name={post.slug}>
+      {post.title}
+    </a>
+  </h3>
   <p>{post.summary}</p>
   <ul class="tag-list" aria-label="Tags">
     {post.tags.map((tag) => <li>{tag}</li>)}

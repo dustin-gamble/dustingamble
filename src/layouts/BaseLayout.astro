@@ -1,12 +1,14 @@
 ---
 import fs from "node:fs";
 import path from "node:path";
+import { ClientRouter, fade } from "astro:transitions";
 
 const {
   title = "Dustin Gamble",
   description = "Autonomous systems, aerospace engineering, and AI-augmented design workflows.",
   ogImage = "/og-default.svg",
-  type = "website"
+  type = "website",
+  showProgress = false
 } = Astro.props;
 
 const inlineCss = fs.readFileSync(
@@ -37,6 +39,7 @@ function isActive(href) {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="view-transition" content="same-origin" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
@@ -60,6 +63,7 @@ function isActive(href) {
       rel="stylesheet"
     />
     <style is:global set:html={inlineCss}></style>
+    <ClientRouter fallback="animate" />
 
     <script is:inline>
       const saved = localStorage.getItem("theme");
@@ -93,7 +97,12 @@ function isActive(href) {
       </div>
     </header>
 
-    <main id="main-content" class="container page-shell">
+    <main
+      id="main-content"
+      class="container page-shell"
+      data-scroll-progress={showProgress ? "true" : undefined}
+      transition:animate={fade()}
+    >
       <slot />
     </main>
 
@@ -116,6 +125,74 @@ function isActive(href) {
           localStorage.setItem("theme", next);
         });
       }
+    </script>
+
+    <script is:inline>
+      // Lightweight reading progress bar for long-form pages.
+      // Enabled when <main> has `data-scroll-progress="true"`.
+      let scrollProgressContainer = null;
+      let scrollProgressBar = null;
+      let scrollHandler = null;
+
+      function ensureProgressElements() {
+        if (scrollProgressContainer && scrollProgressBar) return;
+        scrollProgressContainer = document.createElement("div");
+        scrollProgressContainer.className = "scroll-progress-container";
+        scrollProgressContainer.setAttribute("aria-hidden", "true");
+
+        scrollProgressBar = document.createElement("div");
+        scrollProgressBar.className = "scroll-progress-bar";
+        scrollProgressBar.style.width = "0%";
+
+        scrollProgressContainer.appendChild(scrollProgressBar);
+        document.body.appendChild(scrollProgressContainer);
+      }
+
+      function removeProgressElements() {
+        if (scrollHandler) {
+          window.removeEventListener("scroll", scrollHandler);
+          window.removeEventListener("resize", scrollHandler);
+          scrollHandler = null;
+        }
+        if (scrollProgressContainer) {
+          scrollProgressContainer.remove();
+        }
+        scrollProgressContainer = null;
+        scrollProgressBar = null;
+      }
+
+      function updateScrollProgress() {
+        if (!scrollProgressBar) return;
+        const doc = document.documentElement;
+        const body = document.body;
+        const scrollTop = doc.scrollTop || body.scrollTop || 0;
+        const scrollHeight = doc.scrollHeight || body.scrollHeight || 0;
+        const clientHeight = doc.clientHeight || window.innerHeight || 0;
+        const height = Math.max(1, scrollHeight - clientHeight);
+        const pct = Math.min(100, Math.max(0, (scrollTop / height) * 100));
+        scrollProgressBar.style.width = `${pct}%`;
+      }
+
+      function refreshScrollProgress() {
+        const enabled = Boolean(document.querySelector('main[data-scroll-progress="true"]'));
+        if (!enabled) {
+          removeProgressElements();
+          return;
+        }
+
+        ensureProgressElements();
+        if (!scrollHandler) {
+          scrollHandler = () => updateScrollProgress();
+          window.addEventListener("scroll", scrollHandler, { passive: true });
+          window.addEventListener("resize", scrollHandler, { passive: true });
+        }
+        updateScrollProgress();
+      }
+
+      // Run on initial load and on Astro client-router navigations.
+      refreshScrollProgress();
+      document.addEventListener("astro:page-load", refreshScrollProgress);
+      document.addEventListener("astro:after-swap", refreshScrollProgress);
     </script>
   </body>
 </html>

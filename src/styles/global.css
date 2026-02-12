@@ -49,6 +49,24 @@ body {
   font-size: 1.08rem;
 }
 
+.scroll-progress-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  background: color-mix(in srgb, var(--text) 14%, transparent);
+  z-index: 40;
+  pointer-events: none;
+}
+
+.scroll-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: var(--accent);
+  transition: width 80ms linear;
+}
+
 a {
   color: var(--accent);
   text-underline-offset: 0.18em;
