@@ -1,0 +1,567 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gamble Systems</title>
+    <meta
+      name="description"
+      content="Gamble Systems is a systems lab focused on measurement, iteration, and real-world performance."
+    />
+    <link rel="canonical" href="https://dustingamble.com/gamble-systems/" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Gamble Systems" />
+    <meta
+      property="og:description"
+      content="Gamble Systems is a systems lab focused on measurement, iteration, and real-world performance."
+    />
+    <meta property="og:url" content="https://dustingamble.com/gamble-systems/" />
+    <meta property="og:image" content="https://dustingamble.com/og-default.svg" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Gamble Systems" />
+    <meta
+      name="twitter:description"
+      content="Gamble Systems is a systems lab focused on measurement, iteration, and real-world performance."
+    />
+    <meta name="twitter:image" content="https://dustingamble.com/og-default.svg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #f3f4ef;
+        --bg-alt: #edf2f8;
+        --surface: #ffffffcc;
+        --text: #152236;
+        --muted: #49556a;
+        --line: #d4ddea;
+        --accent: #1e5f99;
+        --accent-strong: #133d63;
+        --accent-soft: #e5f0fb;
+        --shadow: 0 12px 30px rgba(17, 36, 56, 0.08);
+        --radius: 16px;
+        --container: 76rem;
+      }
+
+      :root[data-theme="dark"] {
+        --bg: #0f1623;
+        --bg-alt: #121d2f;
+        --surface: #1a2536dd;
+        --text: #e7eef9;
+        --muted: #aab8ce;
+        --line: #2b3950;
+        --accent: #88bbe8;
+        --accent-strong: #c4def7;
+        --accent-soft: #1d2c42;
+        --shadow: 0 14px 36px rgba(0, 0, 0, 0.32);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        min-height: 100vh;
+        font-family:
+          "Space Grotesk",
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        line-height: 1.45;
+        font-size: 1rem;
+        color: var(--text);
+        background:
+          radial-gradient(circle at 22% 18%, rgba(0, 210, 255, 0.22) 0, transparent 44%),
+          radial-gradient(circle at 80% 30%, rgba(96, 165, 250, 0.16) 0, transparent 46%),
+          radial-gradient(circle at 75% 80%, rgba(16, 185, 129, 0.12) 0, transparent 48%),
+          linear-gradient(160deg, #050a13 0%, #0b1220 65%, #0a0f1a 100%);
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background-image:
+          linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+        background-size: 62px 62px;
+        opacity: 0.18;
+        mask-image: radial-gradient(circle at 30% 10%, black 0, transparent 72%);
+      }
+
+      a {
+        color: var(--accent);
+        text-underline-offset: 0.18em;
+        text-decoration-thickness: 0.08em;
+      }
+
+      a:hover {
+        color: var(--accent-strong);
+        text-decoration-thickness: 0.13em;
+      }
+
+      a:focus-visible,
+      button:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+      }
+
+      .skip-link {
+        position: absolute;
+        left: -9999px;
+        top: 0;
+      }
+
+      .skip-link:focus {
+        left: 0.75rem;
+        top: 0.75rem;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 0.5rem;
+        padding: 0.55rem 0.75rem;
+        z-index: 100;
+      }
+
+      .container {
+        width: min(var(--container), calc(100% - 2.4rem));
+        margin-inline: auto;
+      }
+
+      .shell {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        padding-block: 1.2rem 2.4rem;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 0.55rem 0;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.85rem;
+        text-decoration: none;
+        color: var(--text);
+        min-width: 0;
+      }
+
+      .brand-mark {
+        width: 48px;
+        height: 48px;
+        border-radius: 14px;
+        border: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
+        background: color-mix(in srgb, var(--surface) 70%, transparent);
+        box-shadow: var(--shadow);
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+        flex: 0 0 auto;
+      }
+
+      .brand-mark img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        padding: 0.35rem;
+        display: none;
+      }
+
+      html.has-logo .brand-mark img {
+        display: block;
+      }
+
+      .brand-fallback {
+        font-weight: 800;
+        letter-spacing: -0.04em;
+        color: color-mix(in srgb, var(--accent) 80%, white);
+      }
+
+      html.has-logo .brand-fallback {
+        display: none;
+      }
+
+      .brand-text {
+        display: grid;
+        gap: 0.1rem;
+        line-height: 1.1;
+      }
+
+      .brand-name {
+        font-weight: 800;
+        letter-spacing: -0.02em;
+      }
+
+      .brand-tag {
+        color: var(--muted);
+        font-size: 0.82rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .theme {
+        border: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
+        background: color-mix(in srgb, var(--surface) 70%, transparent);
+        color: var(--text);
+        border-radius: 999px;
+        padding: 0.42rem 0.82rem;
+        font: inherit;
+        font-size: 0.86rem;
+        cursor: pointer;
+        transition: transform 140ms ease, border-color 140ms ease, background 140ms ease;
+      }
+
+      .theme:hover {
+        border-color: var(--accent);
+      }
+
+      .theme:active {
+        transform: translateY(1px);
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 1.6rem;
+        margin-top: 2.4rem;
+        align-items: start;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2.1rem, 4vw, 3.15rem);
+        line-height: 1.05;
+        letter-spacing: -0.03em;
+      }
+
+      .sub {
+        margin: 0.9rem 0 0;
+        color: var(--muted);
+        max-width: 52ch;
+        font-size: 1.05rem;
+        font-family: "Source Serif 4", Georgia, serif;
+        line-height: 1.62;
+      }
+
+      .cta-row {
+        margin-top: 1.4rem;
+        display: grid;
+        gap: 0.85rem;
+      }
+
+      .cta {
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0.95rem;
+        border: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
+        padding: 0.72rem 1rem;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        transition: transform 140ms ease, border-color 140ms ease, background 140ms ease;
+        width: fit-content;
+      }
+
+      .cta.primary {
+        background: linear-gradient(
+          120deg,
+          color-mix(in srgb, var(--accent) 52%, transparent) 0%,
+          color-mix(in srgb, var(--accent-strong) 34%, transparent) 70%
+        );
+        color: var(--text);
+      }
+
+      .cta.secondary {
+        background: color-mix(in srgb, var(--surface) 65%, transparent);
+        color: var(--text);
+        font-weight: 600;
+        padding: 0.55rem 0.85rem;
+        border-radius: 999px;
+      }
+
+      .cta:hover {
+        border-color: var(--accent);
+        transform: translateY(-1px);
+      }
+
+      .cta:active {
+        transform: translateY(0px);
+      }
+
+      .cta-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.55rem;
+      }
+
+      .explainer {
+        margin-top: 2rem;
+        padding: 1.05rem 1.1rem;
+        border: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
+        border-radius: 1.1rem;
+        background: color-mix(in srgb, var(--surface) 60%, transparent);
+        box-shadow: var(--shadow);
+      }
+
+      .explainer h2 {
+        margin: 0 0 0.75rem;
+        font-size: 1.05rem;
+        letter-spacing: -0.01em;
+      }
+
+      .explainer ul {
+        margin: 0;
+        padding-left: 1.1rem;
+        color: var(--muted);
+      }
+
+      .tiles {
+        display: grid;
+        gap: 0.95rem;
+      }
+
+      .tile {
+        position: relative;
+        display: grid;
+        gap: 0.55rem;
+        padding: 1.05rem 1.1rem;
+        border-radius: 1.25rem;
+        border: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
+        background: color-mix(in srgb, var(--surface) 62%, transparent);
+        box-shadow: var(--shadow);
+        text-decoration: none;
+        color: var(--text);
+        transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+        min-height: 5.2rem;
+      }
+
+      .tile:hover {
+        border-color: color-mix(in srgb, var(--accent) 70%, transparent);
+        transform: translateY(-1px);
+        background: color-mix(in srgb, var(--surface) 72%, transparent);
+      }
+
+      .tile:active {
+        transform: translateY(0px);
+      }
+
+      .tile-title {
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        font-size: 1.07rem;
+      }
+
+      .tile-desc {
+        color: var(--muted);
+        font-size: 0.95rem;
+        line-height: 1.45;
+        font-family: "Source Serif 4", Georgia, serif;
+      }
+
+      .tile-arrow {
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+        color: color-mix(in srgb, var(--muted) 70%, transparent);
+        font-weight: 700;
+      }
+
+      footer {
+        margin-top: auto;
+        padding-top: 2.25rem;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 0.85rem;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      footer p {
+        margin: 0;
+      }
+
+      .dot {
+        margin-inline: 0.4rem;
+      }
+
+      @media (max-width: 940px) {
+        .grid {
+          grid-template-columns: 1fr;
+          margin-top: 1.8rem;
+        }
+
+        .sub {
+          max-width: 60ch;
+        }
+
+        .tiles {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 740px) {
+        .container {
+          width: min(var(--container), calc(100% - 1.3rem));
+        }
+      }
+
+      @media (max-width: 640px) {
+        .tiles {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+
+    <script>
+      const saved = localStorage.getItem("theme");
+      const theme = saved || "dark";
+      document.documentElement.setAttribute("data-theme", theme);
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <main id="main-content" class="container shell">
+      <header class="topbar">
+        <a class="brand" href="/gamble-systems/">
+          <span class="brand-mark" aria-hidden="true">
+            <img id="gs-logo" alt="" />
+            <span class="brand-fallback">G</span>
+          </span>
+          <span class="brand-text">
+            <span class="brand-name">Gamble Systems</span>
+            <span class="brand-tag">Systems Lab</span>
+          </span>
+        </a>
+        <button id="theme-toggle" class="theme" type="button" aria-label="Toggle theme">
+          Theme
+        </button>
+      </header>
+
+      <div class="grid">
+        <section aria-labelledby="hero-title">
+          <h1 id="hero-title">Engineering systems that ship.</h1>
+          <p class="sub">
+            Tools and experiments focused on measurement, iteration, and real-world performance.
+          </p>
+
+          <div class="cta-row">
+            <a class="cta primary" href="https://dustingamble.com/">Go to Dustin’s work</a>
+            <div class="cta-links">
+              <a class="cta secondary" href="https://biogyro.io/">BioGyro</a>
+              <a class="cta secondary" href="https://sim.dustingamble.com/">Sim Lab</a>
+            </div>
+          </div>
+
+          <div class="explainer" aria-labelledby="explainer-title">
+            <h2 id="explainer-title">What is Gamble Systems?</h2>
+            <ul>
+              <li>Rapid prototypes with measurable outcomes</li>
+              <li>Tools that compress iteration time</li>
+              <li>Practical applied AI, not hype</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="tiles" aria-label="Destinations">
+          <a class="tile" href="https://dustingamble.com/">
+            <span class="tile-title">Personal / Projects</span>
+            <span class="tile-desc">Tools, builds, writing, and contact.</span>
+            <span class="tile-arrow" aria-hidden="true">↗</span>
+          </a>
+          <a class="tile" href="https://biogyro.io/">
+            <span class="tile-title">BioGyro</span>
+            <span class="tile-desc">Food to body response loop (in progress).</span>
+            <span class="tile-arrow" aria-hidden="true">↗</span>
+          </a>
+          <a class="tile" href="https://sim.dustingamble.com/">
+            <span class="tile-title">Sim Lab</span>
+            <span class="tile-desc">Interactive sims and visualization tools.</span>
+            <span class="tile-arrow" aria-hidden="true">↗</span>
+          </a>
+          <a class="tile" href="https://dustingamble.com/writing/">
+            <span class="tile-title">Notes</span>
+            <span class="tile-desc">Short essays on building and iteration speed.</span>
+            <span class="tile-arrow" aria-hidden="true">↗</span>
+          </a>
+          <a class="tile" href="mailto:hello@gamble.systems">
+            <span class="tile-title">Contact</span>
+            <span class="tile-desc">Reach out.</span>
+            <span class="tile-arrow" aria-hidden="true">↗</span>
+          </a>
+        </section>
+      </div>
+
+      <footer>
+        <p>Founder &amp; CEO: Dustin Gamble. <span class="muted">LLC formation pending.</span></p>
+        <p>
+          &copy; <span id="year"></span> Gamble Systems <span class="dot" aria-hidden="true">·</span>
+          San Luis Obispo, CA
+        </p>
+      </footer>
+    </main>
+
+    <script>
+      document.getElementById("year").textContent = String(new Date().getFullYear());
+
+      const toggle = document.getElementById("theme-toggle");
+      if (toggle) {
+        toggle.addEventListener("click", () => {
+          const root = document.documentElement;
+          const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+          root.setAttribute("data-theme", next);
+          localStorage.setItem("theme", next);
+        });
+      }
+
+      // Try to load the logo if it's been placed in /images/gamble-systems/.
+      const candidates = [
+        "/images/gamble-systems/logo.webp",
+        "/images/gamble-systems/logo.png",
+        "/images/gamble-systems/logo.jpg",
+        "/images/gamble-systems/logo.jpeg"
+      ];
+      const img = document.getElementById("gs-logo");
+      let index = 0;
+
+      function tryNextLogo() {
+        if (!img) return;
+        if (index >= candidates.length) return;
+        img.src = candidates[index++];
+      }
+
+      if (img) {
+        img.addEventListener("load", () => document.documentElement.classList.add("has-logo"));
+        img.addEventListener("error", tryNextLogo);
+        tryNextLogo();
+      }
+    </script>
+  </body>
+</html>
+
