@@ -1,0 +1,420 @@
+---
+import fs from "node:fs";
+import path from "node:path";
+import SystemsLayout from "../../layouts/SystemsLayout.astro";
+
+const publicRoot = path.resolve(process.cwd(), "public");
+const logoCandidates = ["logo.webp", "logo.png", "logo.jpg", "logo.jpeg"];
+let logoSrc = null;
+
+for (const filename of logoCandidates) {
+  const candidate = path.join(publicRoot, "images", "gamble-systems", filename);
+  if (fs.existsSync(candidate)) {
+    logoSrc = `/images/gamble-systems/${filename}`;
+    break;
+  }
+}
+
+const hero = {
+  headline: "Engineering systems that ship.",
+  subheadline:
+    "Tools and experiments focused on measurement, iteration, and real-world performance."
+};
+
+const ctas = {
+  primary: {
+    label: "Go to Dustin’s work",
+    url: "https://dustingamble.com/"
+  },
+  secondary: [
+    { label: "BioGyro", url: "https://biogyro.io/" },
+    { label: "Sim Lab", url: "https://sim.dustingamble.com/" }
+  ]
+};
+
+const tiles = [
+  {
+    title: "Personal / Projects",
+    description: "Tools, builds, writing, and contact.",
+    url: "https://dustingamble.com/"
+  },
+  {
+    title: "BioGyro",
+    description: "Food to body response loop (in progress).",
+    url: "https://biogyro.io/"
+  },
+  {
+    title: "Sim Lab",
+    description: "Interactive sims and visualization tools.",
+    url: "https://sim.dustingamble.com/"
+  },
+  {
+    title: "Notes",
+    description: "Short essays on building and iteration speed.",
+    url: "https://dustingamble.com/writing/"
+  },
+  {
+    title: "Contact",
+    description: "Reach out.",
+    url: "mailto:hello@gamble.systems"
+  }
+];
+
+const bullets = [
+  "Rapid prototypes with measurable outcomes",
+  "Tools that compress iteration time",
+  "Practical applied AI, not hype"
+];
+---
+<SystemsLayout
+  title="Gamble Systems"
+  description="Gamble Systems is a systems lab focused on measurement, iteration, and real-world performance."
+>
+  <header class="systems-topbar">
+    <a class="systems-brand" href="/gamble-systems/">
+      <span class="brand-mark" aria-hidden="true">
+        {logoSrc ? (
+          <img src={logoSrc} alt="" loading="eager" />
+        ) : (
+          <span class="brand-fallback">G</span>
+        )}
+      </span>
+      <span class="brand-text">
+        <span class="brand-name">Gamble Systems</span>
+        <span class="brand-tag">Systems Lab</span>
+      </span>
+    </a>
+    <button id="theme-toggle" class="systems-theme" type="button" aria-label="Toggle theme">
+      Theme
+    </button>
+  </header>
+
+  <div class="systems-grid">
+    <section class="systems-hero" aria-labelledby="systems-hero-title">
+      <h1 id="systems-hero-title">{hero.headline}</h1>
+      <p class="systems-sub">{hero.subheadline}</p>
+
+      <div class="systems-cta-row">
+        <a class="systems-cta primary" href={ctas.primary.url}>
+          {ctas.primary.label}
+        </a>
+        <div class="systems-cta-links">
+          {ctas.secondary.map((link) => (
+            <a class="systems-cta secondary" href={link.url}>
+              {link.label}
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <div class="systems-explainer" aria-labelledby="systems-explainer-title">
+        <h2 id="systems-explainer-title">What is Gamble Systems?</h2>
+        <ul>
+          {bullets.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section class="systems-tiles" aria-label="Destinations">
+      <div class="tiles-grid">
+        {tiles.map((tile) => (
+          <a class="systems-tile" href={tile.url}>
+            <span class="tile-title">{tile.title}</span>
+            <span class="tile-desc">{tile.description}</span>
+            <span class="tile-arrow" aria-hidden="true">
+              ↗
+            </span>
+          </a>
+        ))}
+      </div>
+    </section>
+  </div>
+
+  <footer class="systems-footer">
+    <p>
+      Founder &amp; CEO: Dustin Gamble. <span class="muted">LLC formation pending.</span>
+    </p>
+    <p class="muted">
+      &copy; {new Date().getFullYear()} Gamble Systems{""}
+      <span class="dot" aria-hidden="true">·</span> San Luis Obispo, CA
+    </p>
+  </footer>
+</SystemsLayout>
+
+<style>
+  .systems-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.55rem 0;
+  }
+
+  .systems-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.85rem;
+    text-decoration: none;
+    color: var(--text);
+    min-width: 0;
+  }
+
+  .brand-mark {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    border: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
+    background: color-mix(in srgb, var(--surface) 70%, transparent);
+    box-shadow: var(--shadow);
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    flex: 0 0 auto;
+  }
+
+  .brand-mark img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 0.35rem;
+  }
+
+  .brand-fallback {
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    color: color-mix(in srgb, var(--accent) 80%, white);
+  }
+
+  .brand-text {
+    display: grid;
+    gap: 0.1rem;
+    line-height: 1.1;
+  }
+
+  .brand-name {
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  .brand-tag {
+    color: var(--muted);
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .systems-theme {
+    border: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
+    background: color-mix(in srgb, var(--surface) 70%, transparent);
+    color: var(--text);
+    border-radius: 999px;
+    padding: 0.42rem 0.82rem;
+    font: inherit;
+    font-size: 0.86rem;
+    cursor: pointer;
+    transition: transform 140ms ease, border-color 140ms ease, background 140ms ease;
+  }
+
+  .systems-theme:hover {
+    border-color: var(--accent);
+  }
+
+  .systems-theme:active {
+    transform: translateY(1px);
+  }
+
+  .systems-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 1.6rem;
+    margin-top: 2.4rem;
+    align-items: start;
+  }
+
+  .systems-hero h1 {
+    margin: 0;
+    font-size: clamp(2.1rem, 4vw, 3.15rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+  }
+
+  .systems-sub {
+    margin: 0.9rem 0 0;
+    color: var(--muted);
+    max-width: 52ch;
+    font-size: 1.05rem;
+    font-family: "Source Serif 4", Georgia, serif;
+    line-height: 1.62;
+  }
+
+  .systems-cta-row {
+    margin-top: 1.4rem;
+    display: grid;
+    gap: 0.85rem;
+  }
+
+  .systems-cta {
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.95rem;
+    border: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
+    padding: 0.72rem 1rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    transition: transform 140ms ease, border-color 140ms ease, background 140ms ease;
+    width: fit-content;
+  }
+
+  .systems-cta.primary {
+    background: linear-gradient(
+      120deg,
+      color-mix(in srgb, var(--accent) 52%, transparent) 0%,
+      color-mix(in srgb, var(--accent-strong) 34%, transparent) 70%
+    );
+    color: var(--text);
+  }
+
+  .systems-cta.secondary {
+    background: color-mix(in srgb, var(--surface) 65%, transparent);
+    color: var(--text);
+    font-weight: 600;
+    padding: 0.55rem 0.85rem;
+    border-radius: 999px;
+  }
+
+  .systems-cta:hover {
+    border-color: var(--accent);
+    transform: translateY(-1px);
+  }
+
+  .systems-cta:active {
+    transform: translateY(0px);
+  }
+
+  .systems-cta-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+  }
+
+  .systems-explainer {
+    margin-top: 2rem;
+    padding: 1.05rem 1.1rem;
+    border: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
+    border-radius: 1.1rem;
+    background: color-mix(in srgb, var(--surface) 60%, transparent);
+    box-shadow: var(--shadow);
+  }
+
+  .systems-explainer h2 {
+    margin: 0 0 0.75rem;
+    font-size: 1.05rem;
+    letter-spacing: -0.01em;
+  }
+
+  .systems-explainer ul {
+    margin: 0;
+    padding-left: 1.1rem;
+    color: var(--muted);
+  }
+
+  .tiles-grid {
+    display: grid;
+    gap: 0.95rem;
+  }
+
+  .systems-tile {
+    position: relative;
+    display: grid;
+    gap: 0.55rem;
+    padding: 1.05rem 1.1rem;
+    border-radius: 1.25rem;
+    border: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
+    background: color-mix(in srgb, var(--surface) 62%, transparent);
+    box-shadow: var(--shadow);
+    text-decoration: none;
+    color: var(--text);
+    transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+    min-height: 5.2rem;
+  }
+
+  .systems-tile:hover {
+    border-color: color-mix(in srgb, var(--accent) 70%, transparent);
+    transform: translateY(-1px);
+    background: color-mix(in srgb, var(--surface) 72%, transparent);
+  }
+
+  .systems-tile:active {
+    transform: translateY(0px);
+  }
+
+  .tile-title {
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    font-size: 1.07rem;
+  }
+
+  .tile-desc {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.45;
+    font-family: "Source Serif 4", Georgia, serif;
+  }
+
+  .tile-arrow {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    color: color-mix(in srgb, var(--muted) 70%, transparent);
+    font-weight: 700;
+  }
+
+  .systems-footer {
+    margin-top: auto;
+    padding-top: 2.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.85rem;
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+
+  .systems-footer p {
+    margin: 0;
+  }
+
+  .muted {
+    color: var(--muted);
+  }
+
+  .dot {
+    margin-inline: 0.4rem;
+  }
+
+  @media (max-width: 940px) {
+    .systems-grid {
+      grid-template-columns: 1fr;
+      margin-top: 1.8rem;
+    }
+
+    .systems-sub {
+      max-width: 60ch;
+    }
+
+    .tiles-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 640px) {
+    .tiles-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
