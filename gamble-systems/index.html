@@ -1,535 +1,637 @@
-<!doctype html>
-<html lang="en" data-theme="dark">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Gamble Systems</title>
-    <meta
-      name="description"
-      content="Gamble Systems is a systems lab focused on measurement, iteration, and real-world performance."
-    />
-    <link rel="canonical" href="https://dustingamble.com/gamble-systems/" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<!DOCTYPE html><html lang="en" data-theme="dark"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="view-transition" content="same-origin"><title>Gamble Systems</title><meta name="description" content="Gamble Systems is a systems lab focused on measurement, iteration, and real-world performance."><link rel="canonical" href="https://dustingamble.com/gamble-systems/"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta property="og:type" content="website"><meta property="og:title" content="Gamble Systems"><meta property="og:description" content="Gamble Systems is a systems lab focused on measurement, iteration, and real-world performance."><meta property="og:url" content="https://dustingamble.com/gamble-systems/"><meta property="og:image" content="https://dustingamble.com/og-default.svg"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Gamble Systems"><meta name="twitter:description" content="Gamble Systems is a systems lab focused on measurement, iteration, and real-world performance."><meta name="twitter:image" content="https://dustingamble.com/og-default.svg"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet"><style is:global>:root {
+  color-scheme: light dark;
+  --bg: #f3f4ef;
+  --bg-alt: #edf2f8;
+  --surface: #ffffffcc;
+  --text: #152236;
+  --muted: #49556a;
+  --line: #d4ddea;
+  --accent: #1e5f99;
+  --accent-strong: #133d63;
+  --accent-soft: #e5f0fb;
+  --shadow: 0 12px 30px rgba(17, 36, 56, 0.08);
+  --radius: 16px;
+  --container: 76rem;
+}
 
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Gamble Systems" />
-    <meta
-      property="og:description"
-      content="Gamble Systems is a systems lab focused on measurement, iteration, and real-world performance."
-    />
-    <meta property="og:url" content="https://dustingamble.com/gamble-systems/" />
-    <meta property="og:image" content="https://dustingamble.com/og-default.svg" />
+:root[data-theme="dark"] {
+  --bg: #0f1623;
+  --bg-alt: #121d2f;
+  --surface: #1a2536dd;
+  --text: #e7eef9;
+  --muted: #aab8ce;
+  --line: #2b3950;
+  --accent: #88bbe8;
+  --accent-strong: #c4def7;
+  --accent-soft: #1d2c42;
+  --shadow: 0 14px 36px rgba(0, 0, 0, 0.32);
+}
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Gamble Systems" />
-    <meta
-      name="twitter:description"
-      content="Gamble Systems is a systems lab focused on measurement, iteration, and real-world performance."
-    />
-    <meta name="twitter:image" content="https://dustingamble.com/og-default.svg" />
+* {
+  box-sizing: border-box;
+}
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Space+Grotesk:wght@400;500;700&display=swap"
-      rel="stylesheet"
-    />
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
 
-    <style>
-      :root {
-        color-scheme: light dark;
-        --bg: #f3f4ef;
-        --bg-alt: #edf2f8;
-        --surface: #ffffffcc;
-        --text: #152236;
-        --muted: #49556a;
-        --line: #d4ddea;
-        --accent: #1e5f99;
-        --accent-strong: #133d63;
-        --accent-soft: #e5f0fb;
-        --shadow: 0 12px 30px rgba(17, 36, 56, 0.08);
-        --radius: 16px;
-        --container: 76rem;
-      }
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 12% 8%, color-mix(in srgb, var(--accent) 18%, transparent) 0, transparent 36%),
+    radial-gradient(circle at 88% 12%, color-mix(in srgb, #c1833a 16%, transparent) 0, transparent 30%),
+    linear-gradient(160deg, var(--bg) 0%, var(--bg-alt) 100%);
+  color: var(--text);
+  font-family: "Source Serif 4", Georgia, serif;
+  line-height: 1.68;
+  font-size: 1.08rem;
+}
 
-      :root[data-theme="dark"] {
-        --bg: #0f1623;
-        --bg-alt: #121d2f;
-        --surface: #1a2536dd;
-        --text: #e7eef9;
-        --muted: #aab8ce;
-        --line: #2b3950;
-        --accent: #88bbe8;
-        --accent-strong: #c4def7;
-        --accent-soft: #1d2c42;
-        --shadow: 0 14px 36px rgba(0, 0, 0, 0.32);
-      }
+.scroll-progress-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  background: color-mix(in srgb, var(--text) 14%, transparent);
+  z-index: 40;
+  pointer-events: none;
+}
 
-      * {
-        box-sizing: border-box;
-      }
+.scroll-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: var(--accent);
+  transition: width 80ms linear;
+}
 
-      html,
-      body {
-        margin: 0;
-        padding: 0;
-      }
+a {
+  color: var(--accent);
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 0.08em;
+}
 
-      body {
-        min-height: 100vh;
-        font-family:
-          "Space Grotesk",
-          ui-sans-serif,
-          system-ui,
-          -apple-system,
-          BlinkMacSystemFont,
-          "Segoe UI",
-          sans-serif;
-        line-height: 1.45;
-        font-size: 1rem;
-        color: var(--text);
-        background:
-          radial-gradient(circle at 22% 18%, rgba(0, 210, 255, 0.22) 0, transparent 44%),
-          radial-gradient(circle at 80% 30%, rgba(96, 165, 250, 0.16) 0, transparent 46%),
-          radial-gradient(circle at 75% 80%, rgba(16, 185, 129, 0.12) 0, transparent 48%),
-          linear-gradient(160deg, #050a13 0%, #0b1220 65%, #0a0f1a 100%);
-      }
+a:hover {
+  color: var(--accent-strong);
+  text-decoration-thickness: 0.13em;
+}
 
-      body::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        pointer-events: none;
-        background-image:
-          linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-          linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-        background-size: 62px 62px;
-        opacity: 0.18;
-        mask-image: radial-gradient(circle at 30% 10%, black 0, transparent 72%);
-      }
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
 
-      a {
-        color: var(--accent);
-        text-underline-offset: 0.18em;
-        text-decoration-thickness: 0.08em;
-      }
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+}
 
-      a:hover {
-        color: var(--accent-strong);
-        text-decoration-thickness: 0.13em;
-      }
+.skip-link:focus {
+  left: 0.75rem;
+  top: 0.75rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 0.5rem;
+  padding: 0.55rem 0.75rem;
+  z-index: 100;
+}
 
-      a:focus-visible,
-      button:focus-visible {
-        outline: 2px solid var(--accent);
-        outline-offset: 2px;
-      }
+.container {
+  width: min(var(--container), calc(100% - 2.4rem));
+  margin-inline: auto;
+}
 
-      .skip-link {
-        position: absolute;
-        left: -9999px;
-        top: 0;
-      }
+.site-header {
+  position: sticky;
+  top: 0;
+  backdrop-filter: blur(10px);
+  background: color-mix(in srgb, var(--bg) 86%, transparent);
+  border-bottom: 1px solid var(--line);
+  z-index: 20;
+}
 
-      .skip-link:focus {
-        left: 0.75rem;
-        top: 0.75rem;
-        background: var(--surface);
-        border: 1px solid var(--line);
-        border-radius: 0.5rem;
-        padding: 0.55rem 0.75rem;
-        z-index: 100;
-      }
+.nav-wrap {
+  min-height: 4.3rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding-block: 0.65rem;
+}
 
-      .container {
-        width: min(var(--container), calc(100% - 2.4rem));
-        margin-inline: auto;
-      }
+.site-title {
+  color: var(--text);
+  text-decoration: none;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  font-size: 1.1rem;
+}
 
-      .shell {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        padding-block: 1.2rem 2.4rem;
-      }
+.nav-list {
+  list-style: none;
+  display: flex;
+  gap: 0.92rem;
+  padding: 0;
+  margin: 0;
+  flex-wrap: wrap;
+}
 
-      .topbar {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-        padding: 0.55rem 0;
-      }
+.nav-list a {
+  text-decoration: none;
+  color: var(--muted);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.92rem;
+  font-weight: 500;
+}
 
-      .brand {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.85rem;
-        text-decoration: none;
-        color: var(--text);
-        min-width: 0;
-      }
+.nav-list a[aria-current="page"] {
+  color: var(--text);
+  font-weight: 700;
+}
 
-      .brand-mark {
-        width: 48px;
-        height: 48px;
-        border-radius: 14px;
-        border: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
-        background: color-mix(in srgb, var(--surface) 70%, transparent);
-        box-shadow: var(--shadow);
-        display: grid;
-        place-items: center;
-        overflow: hidden;
-        flex: 0 0 auto;
-      }
+.theme-toggle {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text);
+  border-radius: 999px;
+  padding: 0.42rem 0.82rem;
+  font: inherit;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
 
-      .brand-mark img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        padding: 0.35rem;
-        display: none;
-      }
+.page-shell {
+  padding-block: 2.7rem 4rem;
+}
 
-      html.has-logo .brand-mark img {
-        display: block;
-      }
+.section-block + .section-block {
+  margin-top: 2.8rem;
+}
 
-      .brand-fallback {
-        font-weight: 800;
-        letter-spacing: -0.04em;
-        color: color-mix(in srgb, var(--accent) 80%, white);
-      }
+.home-hero {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+  padding: 1.4rem 1.5rem;
+}
 
-      html.has-logo .brand-fallback {
-        display: none;
-      }
+.home-hero h1 {
+  margin: 0;
+  font-size: clamp(2.2rem, 4.2vw, 3.35rem);
+  line-height: 1.07;
+  letter-spacing: -0.02em;
+}
 
-      .brand-text {
-        display: grid;
-        gap: 0.1rem;
-        line-height: 1.1;
-      }
+.home-hero p {
+  margin-top: 0.82rem;
+  max-width: 60ch;
+  color: var(--muted);
+}
 
-      .brand-name {
-        font-weight: 800;
-        letter-spacing: -0.02em;
-      }
+.home-main-visual {
+  margin: 1.25rem 0 0;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
 
-      .brand-tag {
-        color: var(--muted);
-        font-size: 0.82rem;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-      }
+.home-main-visual img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 7;
+  object-fit: cover;
+}
 
-      .theme {
-        border: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
-        background: color-mix(in srgb, var(--surface) 70%, transparent);
-        color: var(--text);
-        border-radius: 999px;
-        padding: 0.42rem 0.82rem;
-        font: inherit;
-        font-size: 0.86rem;
-        cursor: pointer;
-        transition: transform 140ms ease, border-color 140ms ease, background 140ms ease;
-      }
+.home-support-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
 
-      .theme:hover {
-        border-color: var(--accent);
-      }
+.home-support-card {
+  margin: 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
 
-      .theme:active {
-        transform: translateY(1px);
-      }
+.home-support-card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
 
-      .grid {
-        display: grid;
-        grid-template-columns: 1.05fr 0.95fr;
-        gap: 1.6rem;
-        margin-top: 2.4rem;
-        align-items: start;
-      }
+.section-heading {
+  font-size: 1.5rem;
+  letter-spacing: -0.01em;
+  margin: 0 0 1.05rem;
+}
 
-      h1 {
-        margin: 0;
-        font-size: clamp(2.1rem, 4vw, 3.15rem);
-        line-height: 1.05;
-        letter-spacing: -0.03em;
-      }
+.grid {
+  display: grid;
+  gap: 1rem;
+}
 
-      .sub {
-        margin: 0.9rem 0 0;
-        color: var(--muted);
-        max-width: 52ch;
-        font-size: 1.05rem;
-        font-family: "Source Serif 4", Georgia, serif;
-        line-height: 1.62;
-      }
+.grid.cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
 
-      .cta-row {
-        margin-top: 1.4rem;
-        display: grid;
-        gap: 0.85rem;
-      }
+.grid.cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
 
-      .cta {
-        text-decoration: none;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 0.95rem;
-        border: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
-        padding: 0.72rem 1rem;
-        font-weight: 700;
-        letter-spacing: -0.01em;
-        transition: transform 140ms ease, border-color 140ms ease, background 140ms ease;
-        width: fit-content;
-      }
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.05rem;
+  box-shadow: var(--shadow);
+  animation: fade-up 320ms ease-out both;
+}
 
-      .cta.primary {
-        background: linear-gradient(
-          120deg,
-          color-mix(in srgb, var(--accent) 52%, transparent) 0%,
-          color-mix(in srgb, var(--accent-strong) 34%, transparent) 70%
-        );
-        color: var(--text);
-      }
+.card h3 {
+  margin: 0 0 0.55rem;
+  line-height: 1.25;
+  font-size: 1.14rem;
+}
 
-      .cta.secondary {
-        background: color-mix(in srgb, var(--surface) 65%, transparent);
-        color: var(--text);
-        font-weight: 600;
-        padding: 0.55rem 0.85rem;
-        border-radius: 999px;
-      }
+.card h3 a {
+  text-decoration: none;
+  color: var(--text);
+}
 
-      .cta:hover {
-        border-color: var(--accent);
-        transform: translateY(-1px);
-      }
+.card h3 a:hover {
+  color: var(--accent);
+}
 
-      .cta:active {
-        transform: translateY(0px);
-      }
+.card p {
+  margin: 0;
+  color: var(--muted);
+}
 
-      .cta-links {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.55rem;
-      }
+.meta-row {
+  margin: 0 0 0.55rem;
+  color: var(--muted);
+  font-size: 0.86rem;
+  display: flex;
+  gap: 0.45rem;
+  align-items: center;
+  flex-wrap: wrap;
+  font-family: "Space Grotesk", sans-serif;
+}
 
-      .explainer {
-        margin-top: 2rem;
-        padding: 1.05rem 1.1rem;
-        border: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
-        border-radius: 1.1rem;
-        background: color-mix(in srgb, var(--surface) 60%, transparent);
-        box-shadow: var(--shadow);
-      }
+.tag-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.76rem 0 0;
+  display: flex;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
 
-      .explainer h2 {
-        margin: 0 0 0.75rem;
-        font-size: 1.05rem;
-        letter-spacing: -0.01em;
-      }
+.tag-list li {
+  border: 1px solid var(--line);
+  background: var(--accent-soft);
+  color: var(--text);
+  border-radius: 999px;
+  padding: 0.14rem 0.57rem;
+  font-size: 0.77rem;
+  font-family: "Space Grotesk", sans-serif;
+}
 
-      .explainer ul {
-        margin: 0;
-        padding-left: 1.1rem;
-        color: var(--muted);
-      }
+.compact {
+  padding: 0.9rem;
+}
 
-      .tiles {
-        display: grid;
-        gap: 0.95rem;
-      }
+.list-reset {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
 
-      .tile {
-        position: relative;
-        display: grid;
-        gap: 0.55rem;
-        padding: 1.05rem 1.1rem;
-        border-radius: 1.25rem;
-        border: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
-        background: color-mix(in srgb, var(--surface) 62%, transparent);
-        box-shadow: var(--shadow);
-        text-decoration: none;
-        color: var(--text);
-        transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
-        min-height: 5.2rem;
-      }
+.writing-list {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 0.2rem 1rem;
+}
 
-      .tile:hover {
-        border-color: color-mix(in srgb, var(--accent) 70%, transparent);
-        transform: translateY(-1px);
-        background: color-mix(in srgb, var(--surface) 72%, transparent);
-      }
+.writing-list li {
+  padding: 0.95rem 0;
+  border-bottom: 1px solid var(--line);
+}
 
-      .tile:active {
-        transform: translateY(0px);
-      }
+.writing-list li:last-child {
+  border-bottom: none;
+}
 
-      .tile-title {
-        font-weight: 800;
-        letter-spacing: -0.02em;
-        font-size: 1.07rem;
-      }
+.writing-list h3 {
+  margin: 0;
+  font-size: 1.09rem;
+}
 
-      .tile-desc {
-        color: var(--muted);
-        font-size: 0.95rem;
-        line-height: 1.45;
-        font-family: "Source Serif 4", Georgia, serif;
-      }
+.writing-list p {
+  margin: 0.3rem 0 0;
+  color: var(--muted);
+}
 
-      .tile-arrow {
-        position: absolute;
-        right: 1rem;
-        top: 1rem;
-        color: color-mix(in srgb, var(--muted) 70%, transparent);
-        font-weight: 700;
-      }
+.kicker {
+  margin: 0 0 0.42rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  font-size: 0.74rem;
+  color: var(--muted);
+  font-weight: 700;
+  font-family: "Space Grotesk", sans-serif;
+}
 
-      footer {
-        margin-top: auto;
-        padding-top: 2.25rem;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        gap: 0.85rem;
-        color: var(--muted);
-        font-size: 0.92rem;
-      }
+.about-teaser {
+  padding: 1rem 1.1rem;
+  border-left: 3px solid var(--accent);
+  background: var(--surface);
+  border-radius: 12px;
+}
 
-      footer p {
-        margin: 0;
-      }
+.prose {
+  max-width: 74ch;
+}
 
-      .dot {
-        margin-inline: 0.4rem;
-      }
+.prose h1 {
+  margin: 0;
+  font-size: clamp(2.05rem, 3.6vw, 2.85rem);
+  line-height: 1.15;
+}
 
-      @media (max-width: 940px) {
-        .grid {
-          grid-template-columns: 1fr;
-          margin-top: 1.8rem;
-        }
+.prose h2,
+.prose h3 {
+  margin-top: 1.9rem;
+  line-height: 1.24;
+}
 
-        .sub {
-          max-width: 60ch;
-        }
+.prose p,
+.prose ul,
+.prose ol,
+.prose blockquote {
+  margin: 1rem 0;
+}
 
-        .tiles {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
-      }
+.prose blockquote {
+  margin-inline: 0;
+  padding: 0.8rem 1rem;
+  border-left: 3px solid var(--accent);
+  color: var(--muted);
+  background: var(--surface);
+  border-radius: 8px;
+}
 
-      @media (max-width: 740px) {
-        .container {
-          width: min(var(--container), calc(100% - 1.3rem));
-        }
-      }
+.prose hr {
+  border: none;
+  border-top: 1px solid var(--line);
+  margin: 2rem 0;
+}
 
-      @media (max-width: 640px) {
-        .tiles {
-          grid-template-columns: 1fr;
-        }
-      }
-    </style>
+.prose img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.75rem;
+}
 
-    <script>
+.page-image-grid {
+  margin: 1.2rem 0 0.8rem;
+  display: grid;
+  gap: 0.85rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+}
+
+.page-image-card {
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 0.9rem;
+  overflow: hidden;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.page-image-card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+.inline-logo {
+  margin: 0 auto 1.35rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 0.9rem;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  width: fit-content;
+  max-width: 100%;
+}
+
+.inline-logo img {
+  display: block;
+  max-width: 100%;
+  max-height: 7rem;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 0.6rem;
+}
+
+.profile-photo {
+  width: min(16rem, 100%);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+details {
+  border: 1px solid var(--line);
+  border-radius: 0.8rem;
+  padding: 0.7rem 0.9rem;
+  background: var(--surface);
+}
+
+summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.form-grid {
+  display: grid;
+  gap: 0.8rem;
+  max-width: 40rem;
+}
+
+label {
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.95rem;
+}
+
+input,
+textarea {
+  border: 1px solid var(--line);
+  border-radius: 0.65rem;
+  padding: 0.62rem 0.72rem;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+}
+
+.button-link,
+button[type="submit"] {
+  display: inline-block;
+  border: 1px solid var(--line);
+  border-radius: 0.7rem;
+  padding: 0.52rem 0.9rem;
+  text-decoration: none;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+}
+
+.button-link:hover,
+button[type="submit"]:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.site-footer {
+  border-top: 1px solid var(--line);
+  padding: 1.5rem 0 2.1rem;
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 950px) {
+  .grid.cols-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 740px) {
+  .container {
+    width: min(var(--container), calc(100% - 1.3rem));
+  }
+
+  .grid.cols-2,
+  .grid.cols-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .home-support-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .page-shell {
+    padding-top: 1.7rem;
+  }
+
+  .home-hero {
+    padding: 1.2rem;
+  }
+
+  .home-hero h1 {
+    font-size: 2rem;
+  }
+}
+</style><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.CDGfc0hd.js"></script><script>
+      // Default to dark the first time, but respect any stored preference.
       const saved = localStorage.getItem("theme");
       const theme = saved || "dark";
       document.documentElement.setAttribute("data-theme", theme);
-    </script>
-  </head>
-  <body>
-    <a class="skip-link" href="#main-content">Skip to content</a>
-
-    <main id="main-content" class="container shell">
-      <header class="topbar">
-        <a class="brand" href="/gamble-systems/">
-          <span class="brand-mark" aria-hidden="true">
-            <img id="gs-logo" alt="" />
-            <span class="brand-fallback">G</span>
-          </span>
-          <span class="brand-text">
-            <span class="brand-name">Gamble Systems</span>
-            <span class="brand-tag">Systems Lab</span>
-          </span>
-        </a>
-        <button id="theme-toggle" class="theme" type="button" aria-label="Toggle theme">
-          Theme
-        </button>
-      </header>
-
-      <div class="grid">
-        <section aria-labelledby="hero-title">
-          <h1 id="hero-title">Engineering systems that ship.</h1>
-          <p class="sub">
-            Tools and experiments focused on measurement, iteration, and real-world performance.
-          </p>
-
-          <div class="cta-row">
-            <a class="cta primary" href="https://dustingamble.com/">Go to Dustin’s work</a>
-            <div class="cta-links">
-              <a class="cta secondary" href="https://biogyro.io/">BioGyro</a>
-              <a class="cta secondary" href="https://sim.dustingamble.com/">Sim Lab</a>
-            </div>
-          </div>
-
-          <div class="explainer" aria-labelledby="explainer-title">
-            <h2 id="explainer-title">What is Gamble Systems?</h2>
-            <ul>
-              <li>Rapid prototypes with measurable outcomes</li>
-              <li>Tools that compress iteration time</li>
-              <li>Practical applied AI, not hype</li>
-            </ul>
-          </div>
-        </section>
-
-        <section class="tiles" aria-label="Destinations">
-          <a class="tile" href="https://dustingamble.com/">
-            <span class="tile-title">Personal / Projects</span>
-            <span class="tile-desc">Tools, builds, writing, and contact.</span>
-            <span class="tile-arrow" aria-hidden="true">↗</span>
-          </a>
-          <a class="tile" href="https://biogyro.io/">
-            <span class="tile-title">BioGyro</span>
-            <span class="tile-desc">Food to body response loop (in progress).</span>
-            <span class="tile-arrow" aria-hidden="true">↗</span>
-          </a>
-          <a class="tile" href="https://sim.dustingamble.com/">
-            <span class="tile-title">Sim Lab</span>
-            <span class="tile-desc">Interactive sims and visualization tools.</span>
-            <span class="tile-arrow" aria-hidden="true">↗</span>
-          </a>
-          <a class="tile" href="https://dustingamble.com/writing/">
-            <span class="tile-title">Notes</span>
-            <span class="tile-desc">Short essays on building and iteration speed.</span>
-            <span class="tile-arrow" aria-hidden="true">↗</span>
-          </a>
-          <a class="tile" href="mailto:hello@gamble.systems">
-            <span class="tile-title">Contact</span>
-            <span class="tile-desc">Reach out.</span>
-            <span class="tile-arrow" aria-hidden="true">↗</span>
-          </a>
-        </section>
-      </div>
-
-      <footer>
-        <p>Founder &amp; CEO: Dustin Gamble. <span class="muted">LLC formation pending.</span></p>
-        <p>
-          &copy; <span id="year"></span> Gamble Systems <span class="dot" aria-hidden="true">·</span>
-          San Luis Obispo, CA
-        </p>
-      </footer>
-    </main>
-
-    <script>
-      document.getElementById("year").textContent = String(new Date().getFullYear());
-
+    </script><link rel="stylesheet" href="/_astro/index.CI9TDLnW.css">
+<style>.astro-route-announcer{position:absolute;left:0;top:0;clip:rect(0 0 0 0);clip-path:inset(50%);overflow:hidden;white-space:nowrap;width:1px;height:1px}
+@keyframes astroFadeInOut{0%{opacity:1}to{opacity:0}}@keyframes astroFadeIn{0%{opacity:0;mix-blend-mode:plus-lighter}to{opacity:1;mix-blend-mode:plus-lighter}}@keyframes astroFadeOut{0%{opacity:1;mix-blend-mode:plus-lighter}to{opacity:0;mix-blend-mode:plus-lighter}}@keyframes astroSlideFromRight{0%{transform:translate(100%)}}@keyframes astroSlideFromLeft{0%{transform:translate(-100%)}}@keyframes astroSlideToRight{to{transform:translate(100%)}}@keyframes astroSlideToLeft{to{transform:translate(-100%)}}@media(prefers-reduced-motion){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}[data-astro-transition-scope]{animation:none!important}}
+</style><style>[data-astro-transition-scope="astro-inpgawql-1"] { view-transition-name: astro-inpgawql-1; }@layer astro { ::view-transition-old(astro-inpgawql-1) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(astro-inpgawql-1) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(astro-inpgawql-1) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(astro-inpgawql-1) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-inpgawql-1"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-inpgawql-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-inpgawql-1"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-inpgawql-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-inpgawql-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-inpgawql-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-inpgawql-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-inpgawql-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style></head> <body class="systems-body"> <a class="skip-link" href="#main-content">Skip to content</a> <main id="main-content" class="container systems-shell" data-astro-transition-scope="astro-inpgawql-1">  <header class="systems-topbar" data-astro-cid-ysgkfdef> <a class="systems-brand" href="/gamble-systems/" data-astro-cid-ysgkfdef> <span class="brand-mark" aria-hidden="true" data-astro-cid-ysgkfdef> <span class="brand-fallback" data-astro-cid-ysgkfdef>G</span> </span> <span class="brand-text" data-astro-cid-ysgkfdef> <span class="brand-name" data-astro-cid-ysgkfdef>Gamble Systems</span> <span class="brand-tag" data-astro-cid-ysgkfdef>Systems Lab</span> </span> </a> <button id="theme-toggle" class="systems-theme" type="button" aria-label="Toggle theme" data-astro-cid-ysgkfdef>
+Theme
+</button> </header> <div class="systems-grid" data-astro-cid-ysgkfdef> <section class="systems-hero" aria-labelledby="systems-hero-title" data-astro-cid-ysgkfdef> <h1 id="systems-hero-title" data-astro-cid-ysgkfdef>Engineering systems that ship.</h1> <p class="systems-sub" data-astro-cid-ysgkfdef>Tools and experiments focused on measurement, iteration, and real-world performance.</p> <div class="systems-cta-row" data-astro-cid-ysgkfdef> <a class="systems-cta primary" href="https://dustingamble.com/" data-astro-cid-ysgkfdef> Go to Dustin’s work </a> <div class="systems-cta-links" data-astro-cid-ysgkfdef> <a class="systems-cta secondary" href="https://biogyro.io/" data-astro-cid-ysgkfdef> BioGyro </a><a class="systems-cta secondary" href="https://sim.dustingamble.com/" data-astro-cid-ysgkfdef> Sim Lab </a> </div> </div> <div class="systems-explainer" aria-labelledby="systems-explainer-title" data-astro-cid-ysgkfdef> <h2 id="systems-explainer-title" data-astro-cid-ysgkfdef>What is Gamble Systems?</h2> <ul data-astro-cid-ysgkfdef> <li data-astro-cid-ysgkfdef>Rapid prototypes with measurable outcomes</li><li data-astro-cid-ysgkfdef>Tools that compress iteration time</li><li data-astro-cid-ysgkfdef>Practical applied AI, not hype</li> </ul> </div> </section> <section class="systems-tiles" aria-label="Destinations" data-astro-cid-ysgkfdef> <div class="tiles-grid" data-astro-cid-ysgkfdef> <a class="systems-tile" href="https://dustingamble.com/" data-astro-cid-ysgkfdef> <span class="tile-title" data-astro-cid-ysgkfdef>Personal / Projects</span> <span class="tile-desc" data-astro-cid-ysgkfdef>Tools, builds, writing, and contact.</span> <span class="tile-arrow" aria-hidden="true" data-astro-cid-ysgkfdef>
+↗
+</span> </a><a class="systems-tile" href="https://biogyro.io/" data-astro-cid-ysgkfdef> <span class="tile-title" data-astro-cid-ysgkfdef>BioGyro</span> <span class="tile-desc" data-astro-cid-ysgkfdef>Food to body response loop (in progress).</span> <span class="tile-arrow" aria-hidden="true" data-astro-cid-ysgkfdef>
+↗
+</span> </a><a class="systems-tile" href="https://sim.dustingamble.com/" data-astro-cid-ysgkfdef> <span class="tile-title" data-astro-cid-ysgkfdef>Sim Lab</span> <span class="tile-desc" data-astro-cid-ysgkfdef>Interactive sims and visualization tools.</span> <span class="tile-arrow" aria-hidden="true" data-astro-cid-ysgkfdef>
+↗
+</span> </a><a class="systems-tile" href="https://dustingamble.com/writing/" data-astro-cid-ysgkfdef> <span class="tile-title" data-astro-cid-ysgkfdef>Notes</span> <span class="tile-desc" data-astro-cid-ysgkfdef>Short essays on building and iteration speed.</span> <span class="tile-arrow" aria-hidden="true" data-astro-cid-ysgkfdef>
+↗
+</span> </a><a class="systems-tile" href="mailto:hello@gamble.systems" data-astro-cid-ysgkfdef> <span class="tile-title" data-astro-cid-ysgkfdef>Contact</span> <span class="tile-desc" data-astro-cid-ysgkfdef>Reach out.</span> <span class="tile-arrow" aria-hidden="true" data-astro-cid-ysgkfdef>
+↗
+</span> </a> </div> </section> </div> <footer class="systems-footer" data-astro-cid-ysgkfdef> <p data-astro-cid-ysgkfdef>
+Founder &amp; CEO: Dustin Gamble. <span class="muted" data-astro-cid-ysgkfdef>LLC formation pending.</span> </p> <p class="muted" data-astro-cid-ysgkfdef>
+&copy; 2026 Gamble Systems <span class="dot" aria-hidden="true" data-astro-cid-ysgkfdef>·</span> San Luis Obispo, CA
+</p> </footer>  </main> <script>
       const toggle = document.getElementById("theme-toggle");
       if (toggle) {
         toggle.addEventListener("click", () => {
@@ -539,29 +641,4 @@
           localStorage.setItem("theme", next);
         });
       }
-
-      // Try to load the logo if it's been placed in /images/gamble-systems/.
-      const candidates = [
-        "/images/gamble-systems/logo.webp",
-        "/images/gamble-systems/logo.png",
-        "/images/gamble-systems/logo.jpg",
-        "/images/gamble-systems/logo.jpeg"
-      ];
-      const img = document.getElementById("gs-logo");
-      let index = 0;
-
-      function tryNextLogo() {
-        if (!img) return;
-        if (index >= candidates.length) return;
-        img.src = candidates[index++];
-      }
-
-      if (img) {
-        img.addEventListener("load", () => document.documentElement.classList.add("has-logo"));
-        img.addEventListener("error", tryNextLogo);
-        tryNextLogo();
-      }
-    </script>
-  </body>
-</html>
-
+    </script> </body> </html> 
