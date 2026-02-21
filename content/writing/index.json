@@ -1,5 +1,14 @@
 [
   {
+    "slug": "ai-agent-sweatshops-and-the-union-of-prompts",
+    "title": "AI Agent Sweatshops, Union Cards, and the Future of Work",
+    "date": "2026-02-21",
+    "summary": "A light but practical look at agent-heavy workflows, fictional AI labor politics, and why the best outcomes still come from human judgment plus machine speed.",
+    "tags": ["AI", "Agent Orchestration", "Engineering Culture", "Prompt Engineering"],
+    "draft": false,
+    "featured": true
+  },
+  {
     "slug": "courtside-prototyping-and-ai-generated-apps",
     "title": "Courtside Prototyping: AI-Generated Apps in Real Time",
     "date": "2026-02-08",

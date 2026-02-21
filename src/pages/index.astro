@@ -26,9 +26,10 @@ const activeProjects = [
     summary: "AI-generated web tools for humans."
   },
   {
-    title: "sim.dustingamble.com",
+    title: "AeroVerse",
     url: "https://sim.dustingamble.com/",
-    summary: "A multiplayer, cloud-hosted, agent-generated flight simulator launching soon."
+    summary: "A multiplayer, cloud-hosted, agent-generated flight simulator launching soon.",
+    linkLabel: "sim.dustingamble.com"
   },
   {
     title: "CineBooksAI YouTube",
@@ -84,6 +85,13 @@ const lowerHomeImages = [
               </a>
             </h3>
             <p>{project.summary}</p>
+            {project.linkLabel && (
+              <p>
+                <a href={project.url} target="_blank" rel="noopener noreferrer">
+                  {project.linkLabel}
+                </a>
+              </p>
+            )}
           </article>
         ))
       }
