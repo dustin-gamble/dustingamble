@@ -2,17 +2,12 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import WritingCard from "../components/WritingCard.astro";
 import ProjectCard from "../components/ProjectCard.astro";
-import { getFeaturedWriting, getFeaturedProjects, getProjects } from "../lib/content";
+import { getFeaturedWriting, getFeaturedProjects } from "../lib/content";
 import fs from "node:fs";
 import path from "node:path";
 
 const featuredWriting = getFeaturedWriting(4);
 const featuredProjects = getFeaturedProjects(4);
-const featuredProjectSlugs = new Set(featuredProjects.map((project) => project.slug));
-const tools = getProjects().filter((project) =>
-  project.tags.some((tag) => ["Tools", "Experiments", "Simulation"].includes(tag)) &&
-  !featuredProjectSlugs.has(project.slug)
-).slice(0, 4);
 const activeProjects = [
   {
     title: "BioGyro",
@@ -128,24 +123,6 @@ const lowerHomeImages = [
     </div>
     <p><a href="/projects/">View project archive</a></p>
   </section>
-
-  {tools.length > 0 && (
-    <section class="section-block" aria-labelledby="tools-title">
-      <h2 id="tools-title" class="section-heading">Tools / Experiments</h2>
-      <ul class="list-reset writing-list">
-        {
-          tools.map((tool) => (
-            <li>
-              <h3>
-                <a href={`/projects/${tool.slug}/`}>{tool.title}</a>
-              </h3>
-              <p>{tool.summary}</p>
-            </li>
-          ))
-        }
-      </ul>
-    </section>
-  )}
 
   <section class="section-block about-teaser" aria-labelledby="about-teaser-title">
     <h2 id="about-teaser-title" class="section-heading">About</h2>
