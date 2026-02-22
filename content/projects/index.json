@@ -40,43 +40,13 @@
     "order": 4
   },
   {
-    "slug": "web-based-engineering-simulation-tools",
-    "title": "Web-Based Engineering and Simulation Tools",
-    "date": "2025-03-11",
-    "summary": "Browser-based tools for design trade studies, visualization, and decision support.",
-    "tags": ["Tools", "Simulation", "Web"],
+    "slug": "rbx1-3d-printed-robot-arm",
+    "title": "RBX1 Large 3D-Printed Robot Arm",
+    "date": "2018-04-01",
+    "summary": "Built and tuned a large 3D-printed 6-axis robot arm using stepper motors and kit-driven mechanical integration.",
+    "tags": ["Robotics", "Hardware", "3D Printing"],
     "draft": false,
-    "featured": true,
+    "featured": false,
     "order": 5
-  },
-  {
-    "slug": "autonomy-simulation-ecosystem-ardupilot-jsbsim-web",
-    "title": "Autonomy and Simulation Ecosystem (ArduPilot / JSBSim / Web Dashboards)",
-    "date": "2025-08-16",
-    "summary": "A repeatable development loop connecting SITL, flight dynamics, and lightweight mission dashboards.",
-    "tags": ["Simulation", "Autonomy", "Tools"],
-    "draft": false,
-    "featured": true,
-    "order": 6
-  },
-  {
-    "slug": "flight-test-review-workbench",
-    "title": "Flight Test Review Workbench",
-    "date": "2025-09-22",
-    "summary": "An experiment for faster post-flight analysis using synchronized telemetry and timeline annotations.",
-    "tags": ["Experiments", "Flight Test", "Tools"],
-    "draft": false,
-    "featured": false,
-    "order": 7
-  },
-  {
-    "slug": "mission-trade-study-companion",
-    "title": "Mission Trade Study Companion",
-    "date": "2025-11-07",
-    "summary": "A lightweight analysis companion to compare mission concepts before committing to detailed design.",
-    "tags": ["Experiments", "Mission Engineering", "Tools"],
-    "draft": false,
-    "featured": false,
-    "order": 8
   }
 ]
