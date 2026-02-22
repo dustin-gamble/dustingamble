@@ -654,9 +654,9 @@ button[type="submit"]:hover {
 	animation-fill-mode: both;
 	animation-name: astroFadeIn; }</style></head> <body> <a class="skip-link" href="#main-content">Skip to content</a> <header class="site-header"> <div class="container nav-wrap"> <a href="/" class="site-title">Dustin Gamble</a> <nav aria-label="Primary"> <ul class="nav-list"> <li> <a href="/"> Home </a> </li><li> <a href="/writing/" aria-current="page"> Writing </a> </li><li> <a href="/projects/"> Projects </a> </li><li> <a href="/about/"> About </a> </li><li> <a href="/resume/"> Resume </a> </li> </ul> </nav> <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" type="button">
 Theme
-</button> </div> </header> <main id="main-content" class="container page-shell" data-scroll-progress="true" data-astro-transition-scope="astro-2lfmhzu7-2">  <article class="prose"> <p><a href="/writing/">&larr; Back to writing</a></p> <h1 data-astro-transition-scope="astro-pshtkqfl-1">Build the Tool, Not Just the Answer</h1> <p class="meta-row"> <time datetime="2026-02-22">February 21, 2026</time> <span aria-hidden="true">&middot;</span> <span>5 min read</span> </p> <ul class="tag-list" aria-label="Tags"> <li>AI</li><li>Tool Building</li><li>Productivity</li><li>Prompt Engineering</li> </ul> <p>AI can act as your software programmer, helping you build bespoke tools that fit your exact workflow and scale your impact beyond one-off answers.</p>  <hr> <p>Most people still use AI like a very smart search box.</p>
-<p>They ask a question, get an answer, paste it somewhere, and move on.</p>
-<p>That works, and for many situations it is enough. But there is a much bigger opportunity hiding right behind that habit.</p>
+</button> </div> </header> <main id="main-content" class="container page-shell" data-scroll-progress="true" data-astro-transition-scope="astro-2lfmhzu7-2">  <article class="prose"> <p><a href="/writing/">&larr; Back to writing</a></p> <h1 data-astro-transition-scope="astro-pshtkqfl-1">Build the Tool, Not Just the Answer</h1> <p class="meta-row"> <time datetime="2026-02-22">February 21, 2026</time> <span aria-hidden="true">&middot;</span> <span>6 min read</span> </p> <ul class="tag-list" aria-label="Tags"> <li>AI</li><li>Tool Building</li><li>Productivity</li><li>Prompt Engineering</li> </ul> <p>AI can act as your software programmer, helping you build bespoke tools that fit your exact workflow and scale your impact beyond one-off answers.</p>  <hr> <p>A common way to start with AI is using it like a very smart search box.</p>
+<p>You ask a question, get an answer, paste it somewhere, and move on.</p>
+<p>That works, and for many situations it is enough. The next step, and where leverage really starts to grow, is just one move beyond that pattern.</p>
 <p>Instead of asking AI to solve a problem once, ask AI to build a tool that solves that problem every time.</p>
 <p>That is the shift.</p>
 <p><img src="/images/writing/ai_tool.png" alt="AI building bespoke tools instead of one-off answers"></p>
@@ -709,6 +709,18 @@ Theme
 <li>People spend less time asking &quot;what do I do now?&quot;</li>
 </ul>
 <p>In other words, tools turn expertise into infrastructure.</p>
+<h2>A personal example: building BioGyro in one week</h2>
+<p>I learned this lesson directly while dealing with my own stomach issues.</p>
+<p>At first, I was doing what many of us do: asking for advice and one-off suggestions. Useful, but it still left me manually stitching context together day after day. So I shifted from answer mode to tool mode and started prompting toward a system instead of isolated responses.</p>
+<p>In about a week, I built <a href="https://biogyro.io/">BioGyro</a>, a personal metabolic feedback tool, without traditional coding in the loop. With AI-driven development, I was able to stand up:</p>
+<ul>
+<li>an iOS app workflow</li>
+<li>a server-side component</li>
+<li>DNS/domain setup</li>
+<li>iterative logic tuned to my exact use case</li>
+</ul>
+<p>The key was not writing perfect code from scratch. The key was iterative tool shaping: prompt, test, adjust, repeat.</p>
+<p>That made the output more useful than a static answer ever could be. Instead of asking the same question repeatedly, I had a system that could keep learning with me and support better daily decisions.</p>
 <h2>Quick lesson: Canvas-mode prompt (ChatGPT or Gemini)</h2>
 <p>If you want to start today, here is a practical prompt that works well for canvas-style rapid prototyping:</p>
 <pre><code class="language-text">Build a single-page web app for [your workflow].

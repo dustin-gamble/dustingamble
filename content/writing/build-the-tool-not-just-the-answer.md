@@ -7,11 +7,11 @@ draft: false
 featured: true
 ---
 
-Most people still use AI like a very smart search box.
+A common way to start with AI is using it like a very smart search box.
 
-They ask a question, get an answer, paste it somewhere, and move on.
+You ask a question, get an answer, paste it somewhere, and move on.
 
-That works, and for many situations it is enough. But there is a much bigger opportunity hiding right behind that habit.
+That works, and for many situations it is enough. The next step, and where leverage really starts to grow, is just one move beyond that pattern.
 
 Instead of asking AI to solve a problem once, ask AI to build a tool that solves that problem every time.
 
@@ -96,6 +96,23 @@ This scales across teams fast:
 - People spend less time asking "what do I do now?"
 
 In other words, tools turn expertise into infrastructure.
+
+## A personal example: building BioGyro in one week
+
+I learned this lesson directly while dealing with my own stomach issues.
+
+At first, I was doing what many of us do: asking for advice and one-off suggestions. Useful, but it still left me manually stitching context together day after day. So I shifted from answer mode to tool mode and started prompting toward a system instead of isolated responses.
+
+In about a week, I built [BioGyro](https://biogyro.io/), a personal metabolic feedback tool, without traditional coding in the loop. With AI-driven development, I was able to stand up:
+
+- an iOS app workflow
+- a server-side component
+- DNS/domain setup
+- iterative logic tuned to my exact use case
+
+The key was not writing perfect code from scratch. The key was iterative tool shaping: prompt, test, adjust, repeat.
+
+That made the output more useful than a static answer ever could be. Instead of asking the same question repeatedly, I had a system that could keep learning with me and support better daily decisions.
 
 ## Quick lesson: Canvas-mode prompt (ChatGPT or Gemini)
 
