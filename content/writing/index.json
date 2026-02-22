@@ -1,5 +1,14 @@
 [
   {
+    "slug": "build-the-tool-not-just-the-answer",
+    "title": "Build the Tool, Not Just the Answer",
+    "date": "2026-02-22",
+    "summary": "AI can act as your software programmer, helping you build bespoke tools that fit your exact workflow and scale your impact beyond one-off answers.",
+    "tags": ["AI", "Tool Building", "Productivity", "Prompt Engineering"],
+    "draft": false,
+    "featured": true
+  },
+  {
     "slug": "ai-agent-sweatshops-and-the-union-of-prompts",
     "title": "AI Agent Sweatshops, Union Cards, and the Future of Work",
     "date": "2026-02-21",
