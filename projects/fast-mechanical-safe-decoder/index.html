@@ -655,17 +655,33 @@ button[type="submit"]:hover {
 	animation-name: astroFadeIn; }</style></head> <body> <a class="skip-link" href="#main-content">Skip to content</a> <header class="site-header"> <div class="container nav-wrap"> <a href="/" class="site-title">Dustin Gamble</a> <nav aria-label="Primary"> <ul class="nav-list"> <li> <a href="/"> Home </a> </li><li> <a href="/writing/"> Writing </a> </li><li> <a href="/projects/" aria-current="page"> Projects </a> </li><li> <a href="/about/"> About </a> </li><li> <a href="/resume/"> Resume </a> </li> </ul> </nav> <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" type="button">
 Theme
 </button> </div> </header> <main id="main-content" class="container page-shell" data-scroll-progress="true" data-astro-transition-scope="astro-2lfmhzu7-2">  <article class="prose"> <p><a href="/projects/">&larr; Back to projects</a></p> <h1 data-astro-transition-scope="astro-hsnypqkg-1">Fast Mechanical Safe Decoder</h1> <p class="meta-row"> <time datetime="2020-03-25">March 24, 2020</time> </p> <ul class="tag-list" aria-label="Tags"> <li>Experiments</li><li>Mechanisms</li><li>Rapid Prototyping</li> </ul> <p>A rapid mechanical concept for decoding combination-safe behavior with physical feedback and iteration.</p>  <hr> <h2>Problem / context</h2>
-<p>Many lock mechanisms hide useful physical signal behavior behind difficult-to-observe interfaces. The goal for this project was to create a compact, quickly built device that could explore safe mechanism response patterns and speed up experimentation.</p>
+<p>Many lock mechanisms hide useful physical signal behavior behind interfaces that are hard to observe consistently by hand. The goal for this project was to build a compact electromechanical test rig that could automate dial motion, capture signal cues, and speed up repeatable experimentation.</p>
 <h2>Approach</h2>
-<p>The design emphasized direct mechanical interaction, repeatable adjustment, and low-complexity construction. Rather than over-optimizing early, the project favored quick build-test iterations and observation-driven tuning.</p>
-<p>Follow-on work included a second iteration to improve speed and consistency.</p>
+<p>The build combined fast mechanical prototyping with embedded control software:</p>
+<ul>
+<li>MCU: Teensy 4.0</li>
+<li>Motor control: ODrive over <code>Serial1</code> at 115200</li>
+<li>Dial feedback: rotary encoder on pins <code>2</code> and <code>3</code></li>
+<li>Contact sensing: analog microphone input on <code>A0</code></li>
+<li>Operator interface: SparkFun Qwiic keypad + OpenLCD over I2C</li>
+</ul>
+<p>The original sketch implemented a keypad-driven 3-stage search flow:</p>
+<ol>
+<li>Stage 1 sweep to identify strongest third-number contact signature.</li>
+<li>Stage 2 sweep with stage-1 candidate fixed to identify the best second-number candidate.</li>
+<li>Stage 3 sweep with first two candidates fixed, checking opening behavior with timeout-based detection.</li>
+</ol>
+<p>Auto-run mode chained all three stages, while manual commands supported quick nudges and spot checks. This kept tuning practical during hardware iteration.</p>
+<p>The linked code lab preserves the handwritten baseline (<code>SafeTherapy_v0.33.ino</code>) and documents a suggested cleanup starter (<code>SafeTherapy_v0.34_suggested.ino</code>) to improve readability and future maintainability without losing the original behavior.</p>
 <h2>Outcome / lessons</h2>
-<p>The project demonstrated that hands-on mechanism experiments can generate practical insight quickly when instrumentation and iteration loops are simple. It also reinforced a recurring engineering theme: testability and setup time strongly influence how fast ideas improve.</p>
+<p>The project demonstrated that mechanism-heavy experiments move much faster when motion control, sensing, and logging are tightly integrated. It reinforced a recurring engineering theme: testability and setup time have a first-order effect on iteration speed.</p>
+<p>It also showed the value of preserving historical code while creating a cleaner forward path. Keeping the original implementation intact and documenting a modernization path made the work easier to revisit and improve later.</p>
 <h2>Links</h2>
 <ul>
-<li>Original project video: <a href="https://www.youtube.com/watch?v=ClYQULufH2o">https://www.youtube.com/watch?v=ClYQULufH2o</a></li>
+<li>Project page: <a href="https://dustingamble.com/projects/fast-mechanical-safe-decoder/">https://dustingamble.com/projects/fast-mechanical-safe-decoder/</a></li>
+<li>GitHub code lab: <a href="https://github.com/dustin-gamble/fast-safe-decoder">https://github.com/dustin-gamble/fast-safe-decoder</a></li>
+<li>Original project video: <a href="https://www.youtube.com/watch?v=ClYQULufH2o&t=81s">https://www.youtube.com/watch?v=ClYQULufH2o&amp;t=81s</a></li>
 <li>Iteration / part 2: <a href="https://www.youtube.com/watch?v=2Wp8wdpYOhI">https://www.youtube.com/watch?v=2Wp8wdpYOhI</a></li>
-<li>TODO: Add design notes or photos if you want a deeper build log on this page.</li>
 </ul>
  </article>  </main> <footer class="site-footer"> <div class="container footer-inner"> <p>
 Thoughts on autonomous systems, aerospace engineering, and practical AI workflows.
