@@ -10,6 +10,11 @@ const featuredWriting = getFeaturedWriting(4);
 const featuredProjects = getFeaturedProjects(4);
 const activeProjects = [
   {
+    title: "Cozy Cauldron",
+    url: "/projects/cozy-cauldron/",
+    summary: "An iOS potion-brewing game shaped by ideas from my kids and built with AI."
+  },
+  {
     title: "BioGyro",
     url: "https://biogyro.io/",
     summary:
@@ -75,14 +80,22 @@ const lowerHomeImages = [
         activeProjects.map((project) => (
           <article class="card">
             <h3>
-              <a href={project.url} target="_blank" rel="noopener noreferrer">
+              <a
+                href={project.url}
+                target={project.url.startsWith("/") ? undefined : "_blank"}
+                rel={project.url.startsWith("/") ? undefined : "noopener noreferrer"}
+              >
                 {project.title}
               </a>
             </h3>
             <p>{project.summary}</p>
             {project.linkLabel && (
               <p>
-                <a href={project.url} target="_blank" rel="noopener noreferrer">
+                <a
+                  href={project.url}
+                  target={project.url.startsWith("/") ? undefined : "_blank"}
+                  rel={project.url.startsWith("/") ? undefined : "noopener noreferrer"}
+                >
                   {project.linkLabel}
                 </a>
               </p>
