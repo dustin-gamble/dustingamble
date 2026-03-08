@@ -48,5 +48,15 @@
     "draft": false,
     "featured": false,
     "order": 5
+  },
+  {
+    "slug": "cozy-cauldron",
+    "title": "Cozy Cauldron",
+    "date": "2026-03-07",
+    "summary": "An iOS potion-brewing game prototype inspired by ideas from my kids and developed with AI-assisted workflows.",
+    "tags": ["iOS", "Game Design", "AI Collaboration"],
+    "draft": false,
+    "featured": false,
+    "order": 6
   }
 ]
