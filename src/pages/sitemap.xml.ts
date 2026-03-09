@@ -9,6 +9,7 @@ export async function GET() {
     "/gamble-systems/",
     "/writing/",
     "/projects/",
+    "/projects/cozy-cauldron/privacy-policy/",
     "/about/",
     "/resume/",
     "/rss.xml"
