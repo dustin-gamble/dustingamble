@@ -50,8 +50,9 @@ It also reinforced a useful product lesson: playful ideas become much more compe
 
 ## Status
 
-The prototype is in active development, with core single-player flow, brewing interactions, content loading, save progress, and local nearby multiplayer already working.
+Cozy Cauldron is now live on the App Store, with core single-player flow, brewing interactions, content loading, save progress, and local nearby multiplayer already working.
 
 ## Links
 
+- App Store: https://apps.apple.com/us/app/cozycauldron/id6760245675
 - Privacy Policy: https://dustingamble.com/projects/cozy-cauldron/privacy-policy/
