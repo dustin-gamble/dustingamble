@@ -58,5 +58,15 @@
     "draft": false,
     "featured": false,
     "order": 6
+  },
+  {
+    "slug": "troop-308-new-scout-advancement-plan",
+    "title": "Troop 308 New Scout Advancement Plan",
+    "date": "2026-03-17",
+    "summary": "A first-year advancement plan for new Scouts, built around Monday meetings, monthly outings, and a dedicated 30-minute merit badge block.",
+    "tags": ["Scouting", "Leadership", "Mentoring"],
+    "draft": false,
+    "featured": false,
+    "order": 7
   }
 ]
