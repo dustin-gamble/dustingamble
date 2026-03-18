@@ -10,6 +10,7 @@ export async function GET() {
     "/writing/",
     "/projects/",
     "/projects/cozy-cauldron/privacy-policy/",
+    "/projects/troop-308-new-scout-advancement-plan/meeting-guides/",
     "/about/",
     "/resume/",
     "/rss.xml"
