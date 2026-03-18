@@ -1,0 +1,268 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { formatDate } from "../../../lib/content";
+import { officialReferenceMap, troop308Meetings } from "../../../data/troop308-meetings";
+
+const generalReferenceKeys = [
+  "advancement",
+  "guideToAdvancement",
+  "guideToSafeScouting",
+  "meritBadgeHub"
+];
+
+const monthFormatter = new Intl.DateTimeFormat("en-US", {
+  month: "long",
+  year: "numeric"
+});
+
+const months = troop308Meetings.reduce((groups, meeting) => {
+  const month = monthFormatter.format(new Date(meeting.date));
+  if (!groups.has(month)) groups.set(month, []);
+  groups.get(month).push(meeting);
+  return groups;
+}, new Map());
+
+function meetingId(date) {
+  return `meeting-${date}`;
+}
+---
+<BaseLayout
+  title="Troop 308 Monday Meeting Guides"
+  description="Week-by-week Monday meeting scripts for the Troop 308 new-scout advancement lane, starting Monday, May 4, 2026."
+  showProgress={true}
+>
+  <section class="section-block home-hero">
+    <p><a href="/projects/troop-308-new-scout-advancement-plan/">&larr; Back to project overview</a></p>
+    <h1>Troop 308 Monday Meeting Guides</h1>
+    <p>
+      A week-by-week script for the new-scout lane at Grace Church. This plan assumes a
+      90-minute Monday meeting with a dedicated 30-minute merit badge block starting on
+      <strong>Monday, May 4, 2026</strong>.
+    </p>
+    <p>
+      This is a troop-use planning guide, not official requirement text. Always confirm current
+      wording, signoff policy, and safety guidance on <a href="https://www.scouting.org/">Scouting.org</a>
+      before recording advancement.
+    </p>
+    <p class="meeting-hero-links">
+      <a class="button-link" href="https://www.troopwebhost.org/Troop308SLO/" target="_blank" rel="noopener noreferrer">Troop 308 site</a>
+      <a class="button-link" href="#meeting-calendar">Jump to the Monday list</a>
+    </p>
+  </section>
+
+  <section class="section-block" aria-labelledby="official-docs-title">
+    <h2 id="official-docs-title" class="section-heading">Core Official References</h2>
+    <div class="grid cols-2">
+      {
+        generalReferenceKeys.map((key) => {
+          const ref = officialReferenceMap[key];
+          return (
+            <article class="card compact">
+              <h3><a href={ref.url} target="_blank" rel="noopener noreferrer">{ref.label}</a></h3>
+              <p>{ref.url}</p>
+            </article>
+          );
+        })
+      }
+    </div>
+  </section>
+
+  <section class="section-block" aria-labelledby="meeting-calendar">
+    <h2 id="meeting-calendar" class="section-heading">Monday Overview</h2>
+    <p class="meeting-note">
+      Each row links to a detailed meeting script lower on this page. If the troop calendar skips a
+      holiday, camp week, or church conflict, roll that script to the next available Monday.
+    </p>
+    <div class="grid cols-2 meeting-month-grid">
+      {
+        [...months.entries()].map(([month, entries]) => (
+          <section class="card meeting-month-card">
+            <h3>{month}</h3>
+            <ol class="meeting-link-list">
+              {
+                entries.map((meeting) => (
+                  <li>
+                    <a href={`#${meetingId(meeting.date)}`}>{formatDate(meeting.date)}: {meeting.title}</a>
+                  </li>
+                ))
+              }
+            </ol>
+          </section>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section-block" aria-labelledby="meeting-detail-title">
+    <h2 id="meeting-detail-title" class="section-heading">Detailed Meeting Scripts</h2>
+    <div class="meeting-detail-stack">
+      {
+        troop308Meetings.map((meeting) => (
+          <article id={meetingId(meeting.date)} class="card meeting-detail-card">
+            <p class="meta-row">
+              <time datetime={meeting.date}>{formatDate(meeting.date)}</time>
+              <span>Grace Church</span>
+              <a href="#meeting-calendar">Back to list</a>
+            </p>
+            <h3>{meeting.title}</h3>
+            <p class="meeting-phase">{meeting.phase}</p>
+            <p>{meeting.summary}</p>
+            <div class="meeting-focus-grid">
+              <div>
+                <strong>Rank focus</strong>
+                <p>{meeting.rankFocus}</p>
+              </div>
+              <div>
+                <strong>Merit badge block</strong>
+                <p>{meeting.meritBadgeFocus}</p>
+              </div>
+            </div>
+            <div class="meeting-subsection">
+              <h4>90-minute script</h4>
+              <dl class="meeting-agenda">
+                {
+                  meeting.agenda.map(([time, item]) => (
+                    <>
+                      <dt>{time}</dt>
+                      <dd>{item}</dd>
+                    </>
+                  ))
+                }
+              </dl>
+            </div>
+            <div class="meeting-subsection">
+              <h4>Adult prep</h4>
+              <ul>
+                {meeting.prep.map((item) => <li>{item}</li>)}
+              </ul>
+            </div>
+            <div class="meeting-subsection">
+              <h4>Leader note</h4>
+              <p>{meeting.leaderScript}</p>
+            </div>
+            <div class="meeting-subsection">
+              <h4>Official references</h4>
+              <ul class="meeting-reference-list">
+                {
+                  meeting.references.map((key) => {
+                    const ref = officialReferenceMap[key];
+                    return (
+                      <li>
+                        <a href={ref.url} target="_blank" rel="noopener noreferrer">{ref.label}</a>
+                      </li>
+                    );
+                  })
+                }
+              </ul>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <style>
+    .meeting-hero-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .meeting-note {
+      color: var(--muted);
+      max-width: 70ch;
+    }
+
+    .meeting-month-grid {
+      align-items: start;
+    }
+
+    .meeting-month-card h3,
+    .meeting-detail-card h3 {
+      margin-top: 0;
+    }
+
+    .meeting-link-list {
+      margin: 0;
+      padding-left: 1.1rem;
+      display: grid;
+      gap: 0.45rem;
+    }
+
+    .meeting-link-list li {
+      color: var(--muted);
+    }
+
+    .meeting-detail-stack {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .meeting-phase {
+      margin-top: -0.25rem;
+      color: var(--muted);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 0.92rem;
+    }
+
+    .meeting-focus-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      margin: 1rem 0 0.5rem;
+    }
+
+    .meeting-focus-grid div {
+      padding: 0.9rem;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: color-mix(in srgb, var(--surface) 88%, transparent);
+    }
+
+    .meeting-focus-grid p,
+    .meeting-subsection p,
+    .meeting-subsection ul {
+      margin: 0.4rem 0 0;
+    }
+
+    .meeting-subsection + .meeting-subsection {
+      margin-top: 1rem;
+    }
+
+    .meeting-subsection h4 {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .meeting-agenda {
+      display: grid;
+      grid-template-columns: minmax(6rem, 7rem) minmax(0, 1fr);
+      gap: 0.6rem 1rem;
+      margin-top: 0.8rem;
+    }
+
+    .meeting-agenda dt {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 0.86rem;
+      color: var(--muted);
+    }
+
+    .meeting-agenda dd {
+      margin: 0;
+    }
+
+    .meeting-reference-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.25rem;
+      padding-left: 1.1rem;
+    }
+
+    @media (max-width: 720px) {
+      .meeting-focus-grid,
+      .meeting-agenda {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</BaseLayout>

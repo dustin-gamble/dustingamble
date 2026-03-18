@@ -174,6 +174,21 @@ If the structure is right, rank advancement and merit badges stop competing with
 
 This plan should still be checked against the troop calendar, counselor availability, summer camp timing, and current BSA advancement guidance before final rollout.
 
+## Detailed meeting guide
+
+I also built a week-by-week Monday guide that lays out every meeting from May 2026 through April 2027 with:
+
+- a 90-minute script
+- adult prep notes
+- rank focus
+- merit badge focus
+- direct official references from Scouting.org
+
+Use it as the working script for Monday nights:
+
+- https://dustingamble.com/projects/troop-308-new-scout-advancement-plan/meeting-guides/
+
 ## Links
 
 - Troop 308: https://www.troopwebhost.org/Troop308SLO/
+- Weekly meeting guide: https://dustingamble.com/projects/troop-308-new-scout-advancement-plan/meeting-guides/
