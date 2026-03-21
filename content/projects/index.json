@@ -68,5 +68,35 @@
     "draft": false,
     "featured": false,
     "order": 7
+  },
+  {
+    "slug": "life-guide-tool",
+    "title": "Life Guide Tool",
+    "date": "2026-03-21",
+    "summary": "A growing collection of AI-generated web tools designed to help people think, decide, and reflect more clearly.",
+    "tags": ["AI Tools", "Web", "Product"],
+    "draft": false,
+    "featured": false,
+    "order": 8
+  },
+  {
+    "slug": "cinebooksai",
+    "title": "CineBooksAI",
+    "date": "2026-03-21",
+    "summary": "An ongoing stream of AI-generated trailers, short videos, and visual storytelling experiments.",
+    "tags": ["AI Media", "Video", "Experiments"],
+    "draft": false,
+    "featured": false,
+    "order": 9
+  },
+  {
+    "slug": "ai-fusion-book",
+    "title": "AI Fusion Book",
+    "date": "2026-03-21",
+    "summary": "A book project developed with AI-assisted writing workflows and published as a live web experience.",
+    "tags": ["Writing", "AI Collaboration", "Web"],
+    "draft": false,
+    "featured": false,
+    "order": 10
   }
 ]
