@@ -3,3 +3,6 @@ node_modules/
 dist/
 .astro/
 .env
+
+# Private scout data — never commit raw CSV with PII
+private-data/
