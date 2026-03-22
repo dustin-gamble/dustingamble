@@ -1,5 +1,6 @@
 const EAGLE_REQUIREMENTS = [
   { label: 'First Aid', options: ['First Aid'] },
+  { label: 'Citizenship in Society', options: ['Citizenship in Society'] },
   { label: 'Citizenship in the Community', options: ['Citizenship in the Community'] },
   { label: 'Citizenship in the Nation', options: ['Citizenship in the Nation'] },
   { label: 'Citizenship in the World', options: ['Citizenship in the World'] },
@@ -160,7 +161,7 @@ function aggregateScoutData(rows) {
         memberId: row.memberId,
         firstName: row.firstName,
         lastName: row.lastName,
-        name: `${row.firstName} ${row.lastName}`.trim(),
+        name: row.firstName.trim(),
         rank: row.rank,
         location: row.location,
         badges: new Map()
@@ -320,7 +321,6 @@ function renderScoutRows(scouts) {
     <tr>
       <td>
         <strong>${escapeHtml(scout.name)}</strong>
-        <div class="tracker-subtext">${escapeHtml(scout.location || 'Location not listed')}</div>
       </td>
       <td>${escapeHtml(scout.rank || 'Not listed')}</td>
       <td>
@@ -328,7 +328,7 @@ function renderScoutRows(scouts) {
         <div class="tracker-subtext">${scout.mbcApprovedBadges.length} MBC approved · ${scout.inProgressBadges.length} in progress</div>
       </td>
       <td>
-        <strong>${scout.earnedEagleCount}/13</strong>
+        <strong>${scout.earnedEagleCount}/${EAGLE_REQUIREMENTS.length}</strong>
         <div class="tracker-subtext">${scout.startedEagleCount} started · ${scout.remainingRequirements.filter((item) => item.status === 'missing').length} still missing</div>
       </td>
       <td><div class="tracker-pill-wrap">${renderRequirementPills(scout.remainingRequirements)}</div></td>
