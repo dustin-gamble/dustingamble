@@ -188,7 +188,12 @@ Use it as the working script for Monday nights:
 
 - https://dustingamble.com/projects/troop-308-new-scout-advancement-plan/meeting-guides/
 
+I also added an interactive scout tracker page that reads the troop merit badge CSV export and shows what each Scout has earned, what is still left for Eagle, and a suggested next route:
+
+- https://dustingamble.com/projects/troop-308-new-scout-advancement-plan/meeting-guides/scout-tracker/
+
 ## Links
 
 - Troop 308: https://www.troopwebhost.org/Troop308SLO/
 - Weekly meeting guide: https://dustingamble.com/projects/troop-308-new-scout-advancement-plan/meeting-guides/
+- Interactive scout tracker: https://dustingamble.com/projects/troop-308-new-scout-advancement-plan/meeting-guides/scout-tracker/

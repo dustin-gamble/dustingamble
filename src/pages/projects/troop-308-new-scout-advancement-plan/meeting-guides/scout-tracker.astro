@@ -1,0 +1,309 @@
+---
+import BaseLayout from "../../../../layouts/BaseLayout.astro";
+
+const bundledCsvUrl = "/data/troop308/Troop0308BMBIPReport_current.csv";
+---
+<BaseLayout
+  title="Troop 308 Scout Merit Badge Tracker"
+  description="An interactive merit badge tracker for Troop 308 that reads the troop CSV export and shows scout-by-scout Eagle-required progress."
+>
+  <section class="section-block home-hero">
+    <p><a href="/projects/troop-308-new-scout-advancement-plan/meeting-guides/">&larr; Back to meeting guides</a></p>
+    <h1>Troop 308 Scout Merit Badge Tracker</h1>
+    <p>
+      A scout-by-scout tracker built from the troop merit badge CSV export. It shows earned badges,
+      counselor-approved badges, in-progress badges, current Eagle-required categories left, and a
+      suggested next route for each Scout.
+    </p>
+    <p class="tracker-hero-links">
+      <a class="button-link" href={bundledCsvUrl} target="_blank" rel="noopener noreferrer">Download bundled CSV</a>
+      <a class="button-link" href="https://www.troopwebhost.org/Troop308SLO/" target="_blank" rel="noopener noreferrer">Troop 308 site</a>
+      <a class="button-link" href="#tracker-controls">Jump to tracker</a>
+    </p>
+  </section>
+
+  <section class="section-block" aria-labelledby="tracker-notes-title">
+    <h2 id="tracker-notes-title" class="section-heading">How This Tracker Works</h2>
+    <div class="grid cols-3">
+      <article class="card compact">
+        <h3>Stored Report</h3>
+        <p>
+          The page reads the fixed file at <code>public/data/troop308/Troop0308BMBIPReport_current.csv</code>.
+          Replace that file and push to GitHub when you want the deployed table to update.
+        </p>
+      </article>
+      <article class="card compact">
+        <h3>Archive Folder</h3>
+        <p>
+          Dated exports can be kept in <code>public/data/troop308/exports/</code>. The page only reads the
+          fixed <code>..._current.csv</code> file, so you can archive old reports without breaking the tracker.
+        </p>
+      </article>
+      <article class="card compact">
+        <h3>Local Preview</h3>
+        <p>
+          You can also load a fresh CSV directly from the browser for a quick check. That local upload does
+          not change the deployed site until you replace the stored file in the repo and push.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section-block" aria-labelledby="eagle-rules-title">
+    <h2 id="eagle-rules-title" class="section-heading">Current Eagle Merit Badge Note</h2>
+    <div class="grid cols-2">
+      <article class="card compact">
+        <h3>Tracker Assumption</h3>
+        <p>
+          This tracker uses <strong>13 current Eagle-required merit badge categories</strong> as of
+          <strong>March 22, 2026</strong>. It does <strong>not</strong> require Citizenship in Society in the
+          default count.
+        </p>
+        <p>
+          That logic follows Scouting America&apos;s February 27, 2026 discontinuance update. For transition
+          cases already in flight, verify the individual Scout against official guidance before final signoff.
+        </p>
+      </article>
+      <article class="card compact">
+        <h3>Official References</h3>
+        <ul class="tracker-reference-list">
+          <li><a href="https://www.scouting.org/skills/merit-badges/eagle-required/" target="_blank" rel="noopener noreferrer">Eagle-required merit badges</a></li>
+          <li><a href="https://www.scouting.org/program-updates/citizenship-in-society-merit-badge-discontinuance/" target="_blank" rel="noopener noreferrer">Citizenship in Society discontinuance update</a></li>
+          <li><a href="https://www.scouting.org/resources/guide-to-advancement/" target="_blank" rel="noopener noreferrer">Guide to Advancement</a></li>
+          <li><a href="https://www.scouting.org/programs/scouts-bsa/advancement-and-awards/advancement/" target="_blank" rel="noopener noreferrer">Scouts BSA advancement overview</a></li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section id="troop308-tracker" class="section-block" data-default-csv-url={bundledCsvUrl}>
+    <h2 id="tracker-controls" class="section-heading">Interactive Table</h2>
+    <div class="card tracker-toolbar">
+      <div class="tracker-control-grid">
+        <label class="tracker-control">
+          <span>Search Scout</span>
+          <input id="tracker-search" type="search" placeholder="Jasper, Hayden, Cole..." />
+        </label>
+        <label class="tracker-control">
+          <span>Show</span>
+          <select id="tracker-rank-filter">
+            <option value="all">All Scouts</option>
+            <option value="newScout">New Scout lane</option>
+            <option value="older">First Class and above</option>
+            <option value="eaglePath">Star / Life path</option>
+          </select>
+        </label>
+        <label class="tracker-control">
+          <span>Load Local CSV</span>
+          <input id="tracker-local-file" type="file" accept=".csv,text/csv" />
+        </label>
+      </div>
+      <div class="tracker-toolbar-actions">
+        <button id="tracker-reset" type="button" class="button-link">Use bundled report</button>
+        <p id="tracker-source-note" class="tracker-status">Loading tracker data...</p>
+      </div>
+    </div>
+
+    <div id="tracker-summary" class="grid cols-3"></div>
+
+    <div class="card tracker-table-card">
+      <div class="tracker-table-wrap">
+        <table class="tracker-table">
+          <thead>
+            <tr>
+              <th scope="col">Scout</th>
+              <th scope="col">Rank</th>
+              <th scope="col">Merit Badges</th>
+              <th scope="col">Eagle Progress</th>
+              <th scope="col">Left for Eagle</th>
+              <th scope="col">Suggested Route</th>
+              <th scope="col">Details</th>
+            </tr>
+          </thead>
+          <tbody id="tracker-body"></tbody>
+        </table>
+      </div>
+      <p id="tracker-empty-state" class="tracker-empty-state" hidden>No Scouts match the current filter.</p>
+    </div>
+  </section>
+
+  <script type="module" src="/scripts/troop308-scout-tracker.js"></script>
+
+  <style>
+    .tracker-hero-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .tracker-reference-list {
+      margin: 0.5rem 0 0;
+      padding-left: 1.1rem;
+    }
+
+    .tracker-reference-list li + li {
+      margin-top: 0.45rem;
+    }
+
+    .tracker-toolbar {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .tracker-control-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .tracker-control {
+      display: grid;
+      gap: 0.45rem;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 0.9rem;
+    }
+
+    .tracker-control span {
+      color: var(--muted);
+    }
+
+    .tracker-control input,
+    .tracker-control select {
+      width: 100%;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--text);
+      border-radius: 12px;
+      padding: 0.72rem 0.85rem;
+      font: inherit;
+    }
+
+    .tracker-toolbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .tracker-status {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .tracker-table-card {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .tracker-table-wrap {
+      overflow-x: auto;
+    }
+
+    .tracker-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 78rem;
+    }
+
+    .tracker-table th,
+    .tracker-table td {
+      padding: 0.95rem;
+      vertical-align: top;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+    }
+
+    .tracker-table thead th {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      background: color-mix(in srgb, var(--bg) 92%, transparent);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 0.84rem;
+      color: var(--muted);
+    }
+
+    .tracker-table tbody tr:nth-child(odd) {
+      background: color-mix(in srgb, var(--surface) 78%, transparent);
+    }
+
+    .tracker-subtext {
+      margin-top: 0.28rem;
+      color: var(--muted);
+      font-size: 0.84rem;
+      font-family: "Space Grotesk", sans-serif;
+    }
+
+    .tracker-pill-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+
+    .tracker-pill {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 0.22rem 0.56rem;
+      font-size: 0.76rem;
+      font-family: "Space Grotesk", sans-serif;
+      border: 1px solid var(--line);
+      background: var(--accent-soft);
+    }
+
+    .tracker-pill--missing {
+      background: color-mix(in srgb, #c1833a 18%, var(--surface));
+    }
+
+    .tracker-pill--inProgress {
+      background: color-mix(in srgb, var(--accent) 14%, var(--surface));
+    }
+
+    .tracker-pill--mbcApproved {
+      background: color-mix(in srgb, #3f8c61 18%, var(--surface));
+    }
+
+    .tracker-pill--earned {
+      background: color-mix(in srgb, #3f8c61 22%, var(--surface));
+    }
+
+    .tracker-details summary {
+      cursor: pointer;
+      font-family: "Space Grotesk", sans-serif;
+      color: var(--accent);
+    }
+
+    .tracker-detail-grid {
+      display: grid;
+      gap: 0.75rem;
+      margin-top: 0.85rem;
+    }
+
+    .tracker-detail-grid h4 {
+      margin: 0 0 0.4rem;
+      font-size: 0.95rem;
+    }
+
+    .tracker-detail-grid ul {
+      margin: 0;
+      padding-left: 1.1rem;
+    }
+
+    .tracker-empty,
+    .tracker-empty-state {
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .tracker-empty-state {
+      padding: 0 1rem 1rem;
+    }
+
+    @media (max-width: 900px) {
+      .tracker-control-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</BaseLayout>
