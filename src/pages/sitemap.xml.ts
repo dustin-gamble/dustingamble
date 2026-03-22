@@ -11,6 +11,7 @@ export async function GET() {
     "/projects/",
     "/projects/cozy-cauldron/privacy-policy/",
     "/projects/troop-308-new-scout-advancement-plan/meeting-guides/",
+    "/projects/troop-308-new-scout-advancement-plan/meeting-guides/scout-tracker/",
     "/about/",
     "/resume/",
     "/rss.xml"
