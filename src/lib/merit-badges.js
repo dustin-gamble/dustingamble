@@ -1,0 +1,1180 @@
+// Merit Badge data for Dustin Gamble's counselor pages.
+// Requirements text and resource links sourced from the official
+// Scouting America Merit Badge Hub (scouting.org/merit-badges/<slug>/)
+// and the accompanying free merit badge pamphlets.
+
+const BADGES = [
+  {
+    slug: "aviation",
+    title: "Aviation",
+    icon: "✈️",
+    order: 1,
+    summary:
+      "Mechanics of flight, aircraft operations, airport operations, and aviation careers — including hands-on model flight and a discovery flight.",
+    scoutingUrl: "https://www.scouting.org/merit-badges/aviation/",
+    pamphletUrl: "/merit-badges/pamphlets/Aviation.pdf",
+    pamphletUrlOfficial:
+      "https://filestore.scouting.org/filestore/Merit_Badge_ReqandRes/Pamphlets/Aviation.pdf",
+    drgUrl:
+      "https://www.scouting.org/skills/merit-badges/digital-resource-guides/aviation/",
+    counselorNote:
+      "I'm a strong match here: aerospace engineer, experienced with unmanned aircraft, flight test, and flight simulation. The strongest hook for Scouts is the FPG-9 build and a discovery flight.",
+    myPlan: [
+      "Open every session with a short 'what did you fly/see this week' check-in.",
+      "Bring an FPG-9 template and spare foam plates to session 1 so Scouts can fly by the end of the meeting.",
+      "Have a flight simulator (X-Plane or MSFS) on a laptop ready for req 3(a).",
+      "Keep a list of local CAP squadrons and Exploring posts to hand to Scouts interested in careers.",
+      "Coordinate discovery flights through a local CFI/pilot — get parental permission in writing first.",
+      "Cross-badge tie-in: Scouts working the Space Exploration Telemetry Rocket project (T-Beam flight computer, LoRa to a Heltec ground station) can reuse the altitude/GPS data here to discuss four forces, control surfaces, and instrument readings with real flight data instead of textbook charts.",
+    ],
+    requirements: [
+      {
+        id: "1",
+        title: "Aviation Basics and Mechanics of Flight",
+        text: "Do the following:",
+        sub: [
+          { id: "a", text: 'Define "aircraft." Describe three kinds of aircraft today, and their typical uses.' },
+          { id: "b", text: "Provide a brief overview of the evolution of flight, and discuss three notable times in history important to aviation." },
+          { id: "c", text: "Explain the difference between a fixed wing and a rotary wing aircraft, and the benefits of each." },
+          { id: "d", text: "Explain the operation of piston, turbine, and jet engines." },
+          { id: "e", text: "Using a model aircraft, describe the four forces that act on an aircraft in flight." },
+          { id: "f", text: "Explain how an airfoil generates lift, specifically noting Bernoulli's principle." },
+          { id: "g", text: "Identify and describe the aerodynamic control surfaces on the aircraft of your choice, and explain how they operate to control its attitude and direction of flight." },
+          { id: "h", text: "Explain the purposes and functions of the various instruments found in a typical single-engine aircraft: attitude indicator, heading indicator, altimeter, airspeed indicator, turn and bank indicator, vertical speed indicator, compass, navigation, communication, and engine performance indicators." },
+        ],
+      },
+      {
+        id: "2",
+        title: "Principles of Flight",
+        text: "Do ONE of the following:",
+        sub: [
+          { id: "a", text: "Build a model FPG-9. Get others in your troop or patrol to make their own model, then organize a competition to test the precision of flight and landing of the models." },
+          { id: "b", text: "Build a rubber-band driven balsa wood airplane. Fly the plane for 25 feet in a straight line, with a smooth landing." },
+          { id: "c", text: "Build (or obtain) a fuel-driven or battery-powered electric model aircraft or drone. Obtain The Recreational UAS Safety Test (TRUST) certification, and fly the aircraft with a successful take-off and landing.", resources: [{ label: "FAA TRUST certification", url: "https://www.faa.gov/uas/recreational_flyers/knowledge_test_updates" }] },
+        ],
+      },
+      {
+        id: "3",
+        title: "Flight Operations",
+        text: "Do TWO of the following:",
+        sub: [
+          { id: "a", text: "Using a flight simulator software package, set a course and fly the headings you have established with a successful take-off and landing." },
+          { id: "b", text: "Under supervision, perform a preflight inspection of an aircraft." },
+          { id: "c", text: "Observe and/or participate in an aircraft maintenance activity. Describe the maintenance schedule and requirements for an aircraft of your choice." },
+          { id: "d", text: "Obtain and learn how to read an aeronautical chart. Measure a true course on the chart; correct it for magnetic variation, compass deviation, and wind drift to determine a navigational heading for an aircraft." },
+          { id: "e", text: "With your parent or guardian's permission, take a discovery flight in an aircraft. Record the date, place, type of aircraft, and duration of flight. Report on your impressions of the flight." },
+        ],
+      },
+      {
+        id: "4",
+        title: "Airport Operations",
+        text: "Do ONE of the following:",
+        sub: [
+          { id: "a", text: 'Visit an airport. After the visit, report on how the facilities are used, how runways are numbered, and how runways are determined to be "active."' },
+          { id: "b", text: "Visit a Federal Aviation Administration facility: Airport Traffic Control Tower (ATCT), Terminal Radar Approach Control (TRACON), Air Route Traffic Control Center (ARTCC), or Flight Standards District Office (FSDO). Report on the operation and your impressions of the facility." },
+          { id: "c", text: "Visit a military aviation facility. Learn how that facility supports defense and/or civilian activities. Report on the operation and your impressions of the facility." },
+          { id: "d", text: "Visit an aviation museum or attend an air show. Report on your impressions of the museum or show, and what you learned from the experience." },
+        ],
+      },
+      {
+        id: "5",
+        title: "Personal & Professional Aviation Opportunities",
+        text: "Do the following:",
+        sub: [
+          { id: "a", text: "Explain the following: the student pilot, the recreational pilot, the remote pilot, and the private pilot certificates." },
+          { id: "b", text: "Describe the benefits of the instrument rating." },
+          { id: "c", text: "Explain the following: the commercial pilot certificate, the airline transport pilot certificate, and certified flight instructor (CFI)." },
+          { id: "d", text: "Identify an Aviation Exploring Post and/or Civil Air Patrol facility in your area. Learn about their activities and membership requirements.", resources: [{ label: "Civil Air Patrol", url: "https://www.gocivilairpatrol.com/" }, { label: "Aviation Exploring", url: "https://www.exploring.org/" }] },
+          { id: "e", text: "Identify three career opportunities that would use skills and knowledge in aviation. Pick one and research the training, education, certification requirements, experience, and expenses associated with entering the field. Research the prospects for employment, starting salary, advancement opportunities and career goals associated with this career. Discuss what you learned with your counselor and whether you might be interested in this career." },
+        ],
+      },
+    ],
+    resources: [
+      { label: "FAA — Federal Aviation Administration", url: "https://www.faa.gov/" },
+      { label: "AOPA — Aircraft Owners and Pilots Association", url: "https://www.aopa.org/" },
+      { label: "EAA — Experimental Aircraft Association", url: "https://www.eaa.org/" },
+      { label: "Academy of Model Aeronautics", url: "https://www.modelaircraft.org/" },
+      { label: "NASA", url: "https://www.nasa.gov/" },
+      { label: "Digital Resource Guide (Aviation)", url: "https://www.scouting.org/skills/merit-badges/digital-resource-guides/aviation/" },
+    ],
+  },
+  {
+    slug: "robotics",
+    title: "Robotics",
+    icon: "🤖",
+    order: 2,
+    summary:
+      "Design, build, program, and test a robot. Explore safety, the robotics industry, competitions, and careers.",
+    scoutingUrl: "https://www.scouting.org/merit-badges/robotics/",
+    pamphletUrl: "/merit-badges/pamphlets/Robotics.pdf",
+    pamphletUrlOfficial:
+      "https://filestore.scouting.org/filestore/Merit_Badge_ReqandRes/Pamphlets/Robotics.pdf",
+    counselorNote:
+      "Autonomous systems are my daily work. I focus Scouts on the engineering notebook — the notebook is half the badge. Any VEX, LEGO SPIKE, Arduino, or micro:bit platform qualifies as long as it has sensors and programming.",
+    myPlan: [
+      "Require the engineering notebook from day 1 — dated entries, sketches, and decisions.",
+      "Start with VEXcode VR or a micro:bit so Scouts can be coding in under 15 minutes.",
+      "Steer requirement 4 toward a task with a clear win/lose condition (line follow, object sort).",
+      "Keep a local list of FIRST and VEX teams for the competition requirement.",
+    ],
+    requirements: [
+      {
+        id: "1",
+        title: "Safety",
+        text: "Do the following:",
+        sub: [
+          { id: "a", text: "Explain to your counselor the most likely hazards you may encounter while working with robots and what you should do to anticipate, mitigate and prevent, and respond to these hazards. Describe the appropriate safety gear and clothing that should be used when working with robotics.", resources: [{ label: "Hazards and Robot Safety (video)", url: "https://youtu.be/7v3cylLL9hw?list=PLHGEvyG5wuthXQZzTc-mLwFrP5F6_1Lce" }] },
+          { id: "b", text: "Discuss first aid and prevention for the types of injuries that could occur while participating in robotics activities and competitions, including cuts, eye injuries, and burns (chemical or heat).", resources: [{ label: "How to Treat Cuts and Scrapes (video)", url: "https://www.youtube.com/watch?v=0jp5FgLmKtk" }] },
+        ],
+      },
+      {
+        id: "2",
+        title: "Robotics Industry",
+        text: "Discuss the following with your counselor:",
+        sub: [
+          { id: "a", text: "The kinds of things robots can do and how robots are best used today.", resources: [{ label: "Types of Robots / Robots Classification (video)", url: "https://youtu.be/fc_Cynqr6jM" }] },
+          { id: "b", text: "The similarities and differences between remote-control vehicles, telerobots, and autonomous robots.", resources: [{ label: "Autonomous vs. Controlled Robots (video)", url: "https://youtu.be/kdYJyGQwtL4" }, { label: "Autonomous vs. Teleoperated Robots (article)", url: "https://milvus.io/ai-quick-reference/what-is-the-difference-between-autonomous-and-teleoperated-robots" }] },
+          { id: "c", text: "Three different methods robots can use to move themselves other than wheels or tracks. Describe when it would be appropriate to use each method.", resources: [{ label: "No Wheel, Gear, or Sprocket Robot Race (video)", url: "https://youtu.be/aVuNcVW-gzE" }] },
+        ],
+      },
+      {
+        id: "3",
+        title: "General Knowledge",
+        text: "Discuss with your counselor three of the five major fields of robotics (human-robot interface, mobility, manipulation, programming, sensors) and their importance to robotics development. Discuss either the three fields as they relate to a single robot system OR talk about each field in general. Find pictures or at least one video to aid your discussion.",
+        resources: [{ label: "5 Sub-Disciplines of Robotics (video)", url: "https://youtu.be/exEBkd1Gn0I" }],
+      },
+      {
+        id: "4",
+        title: "Design, Build, Program, Test",
+        text: "Do the following:",
+        resources: [
+          { label: "What Qualifies as a Robot? (video)", url: "https://youtu.be/6dYq9bBSaWc" },
+          { label: "Methods Robots Use to Move (video)", url: "https://youtu.be/T0JeYyU7R-c" },
+          { label: "Robotics: Degrees of Freedom (video)", url: "https://youtu.be/55O-DGeoFic" },
+        ],
+        sub: [
+          { id: "a", text: "With your counselor's approval, choose a task for the robot or robotic subsystem that you plan to build. Include sensor feedback and programming in the task. Document this information in your robot engineering notebook." },
+          { id: "b", text: "Design your robot. The robot design should use sensors and programming and have at least 2 degrees of freedom. Document the design in your robot engineering notebook using drawings and a written description." },
+          { id: "c", text: "Build a robot or robotic subsystem of your original design to accomplish the task you chose for requirement 4(a)." },
+          { id: "d", text: "Discuss with your counselor the programming options available for your robot. Then do ONE of the following: (1) Program your robot to perform the task you chose in 4(a); include a sample of your source code in your notebook; OR (2) Prepare a flowchart of the desired steps to program your robot for accomplishing the task in 4(a). Include procedures that show activities based on sensor inputs. Place this in your notebook.", resources: [{ label: "VEXcode VR (free web-based robot programming)", url: "https://www.vexrobotics.com/vexcode/vr" }, { label: "Flowchart Tutorial for Beginners (video)", url: "https://youtu.be/c8asK8iCaRk" }, { label: "General Guide to Creating Flowcharts (video)", url: "https://youtu.be/SWRDqTx8d4k" }] },
+          { id: "e", text: "Test your robot and record the results in your robot engineering notebook. Include suggestions on how you could improve your robot, as well as pictures or sketches of your finished robot." },
+        ],
+      },
+      {
+        id: "5",
+        title: "Demonstrate",
+        text: "Do the following:",
+        sub: [
+          { id: "a", text: "Demonstrate for your counselor the robot you built in requirement 4." },
+          { id: "b", text: "Share your robot engineering notebook with your counselor. Talk about how well your robot accomplished the task, the improvements you would make in your next design, and what you learned about the design process." },
+        ],
+      },
+      {
+        id: "6",
+        title: "Competitions",
+        text: "Do ONE of the following:",
+        resources: [
+          { label: "About FIRST Robotics Competition (video)", url: "https://youtu.be/Jd29kzjclV0" },
+          { label: "About VEX Robotics (video)", url: "https://youtu.be/Mi6E37oU8yc" },
+        ],
+        sub: [
+          { id: "a", text: "Attend a robotics competition and report to your counselor what you saw and learned about the competition and how teams are organized and managed." },
+          { id: "b", text: "Learn about three youth robotics competitions. Tell your counselor about these, including the type of competition, time commitment, age of the participants, and how many teams are involved." },
+        ],
+      },
+      {
+        id: "7",
+        title: "Careers or Hobby",
+        text: "Do ONE of the following:",
+        sub: [
+          { id: "a", text: "Identify three career opportunities that would use skills and knowledge in Robotics. Pick one and research the training, education, certification requirements, experience, and expenses associated with entering the field. Research the prospects for employment, starting salary, advancement opportunities and career goals associated with this career. Discuss what you learned with your counselor and whether you might be interested in this career.", resources: [{ label: "Careers of Robotics Technicians (video)", url: "https://youtu.be/0dwkGhRPQW4" }, { label: "Careers in Robotics (video)", url: "https://youtu.be/5YTYFrrSdV4" }] },
+          { id: "b", text: "Identify how you might use the skills and knowledge in robotics to pursue a personal hobby. Research the additional training required, expenses, and affiliation with organizations that would help you maximize the enjoyment and benefit you might gain from it." },
+        ],
+      },
+    ],
+    resources: [
+      { label: "FIRST Robotics", url: "https://www.firstinspires.org/" },
+      { label: "VEX Robotics", url: "https://www.vexrobotics.com/" },
+      { label: "VEXcode VR (free online simulator)", url: "https://www.vexrobotics.com/vexcode/vr" },
+      { label: "IEEE Robotics and Automation Society", url: "https://www.ieee-ras.org/" },
+      { label: "NASA Robotics", url: "https://www.nasa.gov/robotics/" },
+    ],
+  },
+  {
+    slug: "programming",
+    title: "Programming",
+    icon: "💻",
+    order: 3,
+    summary:
+      "Write, debug, and demonstrate programs in three different languages / environments. Cover history, IP, and careers.",
+    scoutingUrl: "https://www.scouting.org/merit-badges/programming/",
+    pamphletUrl: "/merit-badges/pamphlets/Programming.pdf",
+    pamphletUrlOfficial:
+      "https://filestore.scouting.org/filestore/Merit_Badge_ReqandRes/Pamphlets/Programming.pdf",
+    counselorNote:
+      "I write production code daily in Python, C/C++, and JavaScript. The trick with req 5 is three genuinely different environments — e.g., Scratch (block), Python (text), HTML/JS (web).",
+    myPlan: [
+      "Set up three ready-to-go environments before the first session: Scratch, Thonny/Python, and a simple HTML/JS page in VS Code.",
+      "Give each Scout a small starter program they can modify — don't ask them to write from a blank file.",
+      "Require each program to take input, make a decision, and produce output. Reject pure 'hello world' demos.",
+      "Discuss free vs. open source vs. commercial using real examples (VS Code, Chrome, a paid app).",
+    ],
+    requirements: [
+      {
+        id: "1",
+        title: "Safety",
+        text: "Do the following:",
+        sub: [
+          { id: "a", text: "View the Personal Safety Awareness 'Digital Safety' video (with your parent or guardian's permission).", resources: [{ label: "Scouting America Social Media Guidelines", url: "https://www.scouting.org/" }] },
+          { id: "b", text: "Discuss first aid and prevention for the types of injuries that could occur during programming activities, including repetitive stress injuries and eyestrain.", resources: [{ label: "Treating Repetitive Stress (video)", url: "https://www.youtube.com/shorts/1yp0jOyARCk" }, { label: "Treating Eye Strain (video)", url: "https://www.youtube.com/watch?v=j3ff4aeItl0" }, { label: "5 Tips to Reduce Eye Strain", url: "https://www.uab.edu/news/health-medicine/new-uab-eye-care-clinic-helps-improve-vision-in-the-workplace" }] },
+        ],
+      },
+      {
+        id: "2",
+        title: "History",
+        text: "Discuss with your counselor the history of programming and the evolution of programming languages, including at least three milestones related to the advancement or development of programming over time.",
+        resources: [
+          { label: "5-Minute Video of Programming Language History", url: "https://youtu.be/K5yv7dY17EA" },
+          { label: "Computer History Museum — Software Languages Timeline", url: "https://www.computerhistory.org/timeline/software-languages/" },
+          { label: "Timeline of Programming Languages (IEEE)", url: "https://www.computer.org/publications/tech-news/insider-membership-news/timeline-of-programming-languages" },
+        ],
+      },
+      {
+        id: "3",
+        title: "General Knowledge",
+        text: "Do the following:",
+        sub: [
+          { id: "a", text: "Create a list of five popular programming languages in use today and describe which industry or industries they are primarily used in and why." },
+          { id: "b", text: "Describe three different programmed devices you rely on every day." },
+        ],
+      },
+      {
+        id: "4",
+        title: "Intellectual Property",
+        text: "Do the following:",
+        sub: [
+          { id: "a", text: "Explain the four types of intellectual property used to protect computer programs." },
+          { id: "b", text: "Describe the difference between licensing and owning software." },
+          { id: "c", text: "Describe the differences between freeware, open source, and commercial software, and why it is important to respect the terms of use of each.", resources: [{ label: "Open Source vs. Commercial Software (video)", url: "https://www.youtube.com/watch?v=SdW5pnha9kg" }, { label: "Free vs. Open Source Software (article)", url: "https://www.geeksforgeeks.org/software-engineering/difference-between-free-software-and-open-source-software/" }] },
+        ],
+      },
+      {
+        id: "5",
+        title: "Project",
+        text: "With your counselor's guidance, select three different programming languages and development environments. For each sub-requirement below: write or modify a program using the indicated language and environment, take input and produce output based on computations and decisions made on the input, debug and demonstrate the program to your counselor, and explain how it processes inputs, makes decisions, and provides outputs.",
+        sub: [
+          { id: "a", text: "In the first language and environment, write or modify a program, debug and demonstrate, and explain as above." },
+          { id: "b", text: "In the second language and environment, write or modify a program, debug and demonstrate, and explain as above.", resources: [{ label: "Programming Merit Badge Welcome (video)", url: "https://www.youtube.com/watch?v=s07aEbPwThM" }] },
+          { id: "c", text: "In the third language and environment, write or modify a program, debug and demonstrate, and explain as above.", resources: [{ label: "Codédex — Start Your Coding Adventure", url: "https://www.codedex.io/" }] },
+        ],
+      },
+      {
+        id: "6",
+        title: "Careers or Hobby",
+        text: "Do ONE of the following:",
+        sub: [
+          { id: "a", text: "Explore careers related to this merit badge. Research one career to learn about the training and education needed, costs, job prospects, salary, job duties, and career advancement." },
+          { id: "b", text: "Explore how you could use knowledge and skills from this merit badge to pursue a hobby or healthy lifestyle. Research any training needed, expenses, and organizations that promote or support it." },
+        ],
+      },
+    ],
+    resources: [
+      { label: "Scratch", url: "https://scratch.mit.edu/" },
+      { label: "Code.org", url: "https://code.org/" },
+      { label: "Python", url: "https://www.python.org/" },
+      { label: "Codédex", url: "https://www.codedex.io/" },
+      { label: "GitHub", url: "https://github.com/" },
+    ],
+  },
+  {
+    slug: "artificial-intelligence",
+    title: "Artificial Intelligence",
+    icon: "🧠",
+    order: 4,
+    summary:
+      "New for 2026. Define AI and automation, explore ethics, deepfakes, and prompt engineering. Complete a project or teach a lesson on AI.",
+    scoutingUrl: "https://www.scouting.org/merit-badges/artificial-intelligence/",
+    pamphletUrl: null,
+    pamphletNote:
+      "The AI merit badge has no printed pamphlet. Scouting America directs Scouts to interact with the Scoutly chatbot at scouting.org while working through requirements.",
+    counselorNote:
+      "Brand-new badge (2025 requirements). I work hands-on with AI-assisted engineering workflows daily. The strongest project path is 7(b): design and teach a short AI lesson to the patrol — it forces Scouts to understand before they can explain.",
+    myPlan: [
+      "Start with the vocabulary list in req 1. Don't let Scouts skip it — the rest of the badge depends on it.",
+      "For req 2(d) and 4(b), I'll bring the 'AI or Not?' and 'What Would You Do?' scenario decks (simple printed cards).",
+      "For req 7(a), require a written objective + data plan + ethics note before any building starts.",
+      "For req 5 (deepfakes), show one obvious deepfake example + one subtle one; emphasize consent and law.",
+      "Keep a running log of career interviews Scouts complete so the next Scout has a head-start list.",
+      "Cross-badge tie-in: the Space Exploration Telemetry Rocket project is a great AI-assisted coding capstone. Scouts use an AI tool to help write and debug the T-Beam firmware and Heltec ground-logger in six stages (sensors → message → LoRa transmit → receive → CSV log → post-flight analysis), which demonstrates responsible, supervised AI use on real embedded code.",
+    ],
+    requirements: [
+      {
+        id: "1",
+        title: "Key Concepts",
+        text: "Define the following terms and share the meaning of each with your counselor: artificial intelligence (AI), artificial intelligence agents, automation, basic programming, bots, data, databases, digital workers, general AI, machine learning (ML), narrow AI, superintelligent AI, tasks, triggers, workflows, and variables.",
+      },
+      {
+        id: "2",
+        title: "Artificial Intelligence (AI) Basics",
+        text: "Do the following and share what you learned with your counselor:",
+        sub: [
+          { id: "a", text: "Identify ten examples of how AI is currently used in everyday life." },
+          { id: "b", text: "Identify five examples of how AI is currently used in the workplace." },
+          { id: "c", text: "Identify five examples of how AI can be used at school or in support of your education." },
+          { id: "d", text: "Meet with your counselor and play ten rounds of the 'AI or Not?' game to determine if the presented scenario utilizes AI. Discuss your answers." },
+          { id: "e", text: "Create a timeline with five key milestones in the development of artificial intelligence." },
+        ],
+      },
+      {
+        id: "3",
+        title: "Automation Basics",
+        text: "Do the following and share what you learned with your counselor:",
+        sub: [
+          { id: "a", text: "Identify 10 examples of how automation is currently used in everyday life." },
+          { id: "b", text: "Identify five examples of how automation is currently used in the workplace." },
+          { id: "c", text: "Identify five examples of how automation can be used at school or in support of your education." },
+          { id: "d", text: "Explain how automation performs repetitive tasks without human intervention and how it reduces human error and optimizes resources." },
+          { id: "e", text: "Create a timeline with five significant milestones in automation development." },
+        ],
+      },
+      {
+        id: "4",
+        title: "Ethics in AI",
+        text: "Do the following and share what you learned with your counselor:",
+        sub: [
+          { id: "a", text: "Research ethical concerns and responsible use in AI, including bias, privacy, and AI decision-making." },
+          { id: "b", text: "Meet with your counselor, play, and discuss five rounds of the 'What Would You Do?' ethical decision-making scenarios." },
+          { id: "c", text: "Develop your own ethical guidelines for the use of AI." },
+          { id: "d", text: "What is the Turing test?" },
+        ],
+      },
+      {
+        id: "5",
+        title: "Deepfakes",
+        text: "Do the following and share what you learned with your counselor:",
+        sub: [
+          { id: "a", text: "Explain what a deepfake is and how it can affect an individual." },
+          { id: "b", text: "Describe what actions to take if you or someone you know is impacted by a deepfake." },
+        ],
+      },
+      {
+        id: "6",
+        title: "Developing AI Skills",
+        text: "Do the following and share what you learned with your counselor:",
+        sub: [
+          { id: "a", text: "Discuss the learning process for AI and its limitations." },
+          { id: "b", text: "Identify five methods of how to effectively communicate with AI." },
+          { id: "c", text: "Explain the importance of prompt engineering when using AI to create better output." },
+          { id: "d", text: "Demonstrate three examples of writing clear instructions for a school-related task." },
+        ],
+      },
+      {
+        id: "7",
+        title: "Practical Application",
+        text: "Do ONE of the following:",
+        sub: [
+          { id: "a", text: "With your counselor's approval, choose an artificial intelligence project based on your personal interest or a community need. Develop a plan outlining the project's objectives, data requirements, and potential ethical considerations. Implement the project utilizing appropriate artificial intelligence tools, languages, or platforms. Share your project with your counselor." },
+          { id: "b", text: "With your counselor's approval, design a short lesson plan on AI and teach it to your patrol or a group of Scouts. Include an AI-generated age-appropriate explanation of AI, examples of AI in everyday life and in the workplace, and an interactive demonstration of how Scouts could use AI to assist with a school assignment, Scouting activity, or rank advancement." },
+        ],
+      },
+      {
+        id: "8",
+        title: "Career Exploration",
+        text: "Do ONE of the following:",
+        sub: [
+          { id: "a", text: "Identify three career opportunities that would use skills and knowledge in artificial intelligence or automation. Pick one and research the training, education, certification requirements, experience, and expenses associated with entering the field." },
+          { id: "b", text: "Interview an artificial intelligence or automation professional. Learn about their day-to-day work, the challenges they face, and their vision for the future of AI or automation." },
+        ],
+      },
+    ],
+    resources: [
+      { label: "Scoutly (Scouting America AI chatbot)", url: "https://scouting.org/" },
+      { label: "AI Merit Badge Counselor Information", url: "https://www.scouting.org/skills/merit-badges/counselor-information/" },
+      { label: "Introduction to Artificial Intelligence (MIT OCW)", url: "https://ocw.mit.edu/courses/6-034-artificial-intelligence-fall-2010/" },
+      { label: "Google — Teachable Machine (no-code ML)", url: "https://teachablemachine.withgoogle.com/" },
+    ],
+  },
+  {
+    slug: "engineering",
+    title: "Engineering",
+    icon: "⚙️",
+    order: 5,
+    summary:
+      "Investigate how things are engineered, meet with an engineer, design and build a project, and study the engineer's code of ethics.",
+    scoutingUrl: "https://www.scouting.org/merit-badges/engineering/",
+    pamphletUrl: "/merit-badges/pamphlets/Engineering.pdf",
+    pamphletUrlOfficial:
+      "https://filestore.scouting.org/filestore/Merit_Badge_ReqandRes/Pamphlets/Engineering.pdf",
+    counselorNote:
+      "For req 4, the engineer visit can be with me. For req 5, I push Scouts toward the systems engineering approach: stakeholders → requirements → concept → design → test.",
+    myPlan: [
+      "Provide a one-page systems engineering worksheet (needs, requirements, concepts, trade, design, verification) for req 5.",
+      "Keep six short blurbs on the six engineering disciplines I've worked alongside (aero, mech, EE, SW, systems, manufacturing).",
+      "Steer Scouts away from 6(g) unless they already have a fair project in flight — it tends to drag.",
+      "Walk through the NSPE Code of Ethics next to the Scout Oath and Law — make them line them up side by side.",
+      "Cross-badge tie-in: the Space Exploration Telemetry Rocket project (T-Beam flight computer + Heltec LoRa ground station, Estes Lil' Spite airframe) is an excellent req 5 systems-engineering example. Scouts can walk the needs → requirements → concept → trade → verification flow using the real payload and motor trade (E16-4 vs. F15-4).",
+    ],
+    requirements: [
+      {
+        id: "1",
+        title: "Investigate a Manufactured Item",
+        text: "Select a manufactured item in your home (such as a toy or an appliance) and, under adult supervision and with the approval of your counselor, investigate how and why it works as it does. Find out what sort of engineering activities were needed to create it.",
+        resources: [{ label: "How to Fix Small Appliances (video)", url: "https://youtu.be/pa9EO7GKt5Q" }],
+      },
+      {
+        id: "2",
+        title: "A Major Engineering Achievement",
+        text: "Select an engineering achievement that has had a major impact on society. Find out about the engineers who made this engineering feat possible, the special obstacles they had to overcome, and how this achievement has influenced the world today.",
+        resources: [
+          { label: "Engineering the Brooklyn Bridge (video)", url: "https://youtu.be/dyckL6HuLRU" },
+          { label: "Engineering America (article)", url: "https://www.popularmechanics.com/technology/infrastructure/g35589790/most-impressive-feats-of-engineering-in-america/" },
+        ],
+      },
+      {
+        id: "3",
+        title: "Six Types of Engineers",
+        text: "Explain the work of six types of engineers. Pick two of the six types and explain how their work is related to engineering.",
+        resources: [
+          { label: "Solve Problems: Be an Engineer (video)", url: "https://youtu.be/D9I35Rqo04E" },
+          { label: "What is Engineering? (video)", url: "https://youtu.be/WcD8ii2ftAw" },
+        ],
+      },
+      {
+        id: "4",
+        title: "Visit with an Engineer",
+        text: "Visit with an engineer (who may be your counselor, parent or guardian) and do the following:",
+        sub: [
+          { id: "a", text: "Discuss the work this engineer does and the tools the engineer uses." },
+          { id: "b", text: "Discuss with the engineer a current project and the engineer's particular role in it." },
+          { id: "c", text: "Find out how the engineer's work is done and how results are achieved." },
+          { id: "d", text: "Ask to see the reports that the engineer writes concerning the project." },
+          { id: "e", text: "Discuss with your counselor what you learned about engineering from this visit." },
+        ],
+      },
+      {
+        id: "5",
+        title: "Systems Engineering Design",
+        text: "Use the systems engineering approach to design an original piece of patrol equipment, a toy or a useful device for the home, office or garage.",
+        resources: [{ label: "The Engineering Process (video)", url: "https://youtu.be/fxJWin195kU" }],
+      },
+      {
+        id: "6",
+        title: "Hands-On Engineering",
+        text: "Do TWO of the following:",
+        sub: [
+          { id: "a", text: "Transforming Motion. Build a simple model that demonstrates motion using levers and inclined planes. Describe an example where this mechanism is used in a real product.", resources: [{ label: "Rube Goldberg Machines (video)", url: "https://youtu.be/9_6TUgWmP6I" }] },
+          { id: "b", text: "Using Electricity. Make a list of 10 electrical appliances in your home. Find out approximately how much electricity each uses in one month. List five ways to conserve electricity.", resources: [{ label: "Ways to Save Electricity at Home (video)", url: "https://youtu.be/37kLS0uW16I" }, { label: "Understanding Home Energy Electric Use (video)", url: "https://youtu.be/zRYESRObKqA" }] },
+          { id: "c", text: "Understanding Electronics. Using a smartphone or tablet, find out how sound, video, text, or images travel from one location to another. Explain how the device was designed for ease of use, function, and durability.", resources: [{ label: "How Does Your Mobile Phone Work? (video)", url: "https://youtu.be/1JZG9x_VOwA" }] },
+          { id: "d", text: "Using Materials. Do experiments to show the differences in strength and heat conductivity in wood, metal, and plastic.", resources: [{ label: "Engineering Material Properties (video)", url: "https://youtu.be/tGfLhPslEjQ" }] },
+          { id: "e", text: "Converting Energy. Do an experiment to show how mechanical, heat, chemical, solar, and/or electrical energy may be converted from one type to another.", resources: [{ label: "STEM: Energy Conversion (video)", url: "https://youtu.be/Z_DXxUbOkSk" }, { label: "Mousetrap Car Ideas (video)", url: "https://youtu.be/b7zWwo9dbiU" }, { label: "Chem-E-Car Competition (video)", url: "https://youtu.be/uQCmr1DlUqk" }] },
+          { id: "f", text: "Moving People. Find out the different ways people in your community get to work. Make a study of traffic flow (volume and relative speed) in both heavy and light traffic periods.", resources: [{ label: "Moving People (video)", url: "https://youtu.be/erYf6NNw8Ec" }, { label: "Engineering Traffic (video)", url: "https://youtu.be/iHzzSao6ypE" }] },
+          { id: "g", text: "Building an Engineering Project. Enter a project in a science or engineering fair or similar competition." },
+        ],
+      },
+      {
+        id: "7",
+        title: "Professional Engineer (P.E.)",
+        text: "Explain what it means to be a registered Professional Engineer (P.E.). Name the types of engineering work for which registration is most important.",
+        resources: [{ label: "How to Become an Engineer & Types of Careers (video)", url: "https://youtu.be/PUBAxUkMcr8" }],
+      },
+      {
+        id: "8",
+        title: "Engineer's Code of Ethics",
+        text: "Study the Engineer's Code of Ethics. Explain how it is like the Scout Oath and Law.",
+        resources: [
+          { label: "NSPE Code of Ethics for Engineers", url: "https://www.nspe.org/career-growth/nspe-code-ethics-engineers" },
+          { label: "Ethics and Conduct for Professional Engineers (video)", url: "https://youtu.be/qVV684jvJV4" },
+          { label: "Engineering Ethics (video)", url: "https://youtu.be/5KZx81crb48" },
+        ],
+      },
+      {
+        id: "9",
+        title: "Careers",
+        text: "Explore careers related to this merit badge. Research one career to learn about the training and education needed, costs, job prospects, salary, job duties, and career advancement.",
+        resources: [{ label: "How to Become an Engineer (video)", url: "https://youtu.be/77xMVKOEZ5g" }],
+      },
+    ],
+    resources: [
+      { label: "DiscoverE — Engineering Outreach", url: "https://discovere.org/" },
+      { label: "ASEE — American Society for Engineering Education", url: "https://www.asee.org/" },
+      { label: "NSPE — National Society of Professional Engineers", url: "https://www.nspe.org/" },
+    ],
+  },
+  {
+    slug: "inventing",
+    title: "Inventing",
+    icon: "💡",
+    order: 6,
+    summary:
+      "Learn about inventors, intellectual property, and the invention process — then design, build, and test your own prototype.",
+    scoutingUrl: "https://www.scouting.org/merit-badges/inventing/",
+    pamphletUrl: "/merit-badges/pamphlets/Inventing.pdf",
+    pamphletUrlOfficial:
+      "https://filestore.scouting.org/filestore/Merit_Badge_ReqandRes/Pamphlets/Inventing.pdf",
+    counselorNote:
+      "I'm named on U.S. patents and I mentor early-stage prototypes for a living. The notebook (req 6) is the deliverable — teach them to date every entry.",
+    myPlan: [
+      "Require a dated, bound (or at minimum page-numbered) inventor's notebook from session 1.",
+      "Walk through USPTO Patent Public Search live so they can actually look up their camping gear's patent (req 3c).",
+      "For req 6, steer toward a 'small, specific, real' problem — Scout's own troop equipment works well.",
+      "Require counselor approval on the design before the prototype build (the badge explicitly requires it).",
+    ],
+    requirements: [
+      {
+        id: "1",
+        title: "Define Inventing",
+        text: "In your own words, define inventing. Then do the following:",
+        sub: [
+          { id: "a", text: "Explain to your counselor the role of inventors and their inventions in the economic development of the United States." },
+          { id: "b", text: "List three inventions and state how they have helped humankind." },
+        ],
+      },
+      {
+        id: "2",
+        title: "Learn From Inventors",
+        text: "Do ONE of the following:",
+        sub: [
+          { id: "a", text: "With your parent or guardian's permission and counselor's approval, interview an adult who has invented a useful item or process. Report what you learned to your counselor." },
+          { id: "b", text: "Read about three inventors. Select the one you find most interesting and tell your counselor what you learned." },
+        ],
+      },
+      {
+        id: "3",
+        title: "Intellectual Property",
+        text: "Do the following:",
+        sub: [
+          { id: "a", text: "Define the term intellectual property. Explain which government agencies oversee the protection of intellectual property, the types of intellectual property that can be protected, how such property is protected, and why protection is necessary.", resources: [{ label: "USPTO — United States Patent and Trademark Office", url: "https://www.uspto.gov/" }] },
+          { id: "b", text: "Explain the components of a patent and the different types of patents available." },
+          { id: "c", text: "Examine your Scouting gear and find a patent number on a camping item you have used. With your parent or guardian's permission, use the internet to find out more about that patent. Compare the finished item with the claims and drawings in the patent.", resources: [{ label: "USPTO Patent Public Search", url: "https://ppubs.uspto.gov/pubwebapp/external.html" }] },
+          { id: "d", text: "Explain to your counselor the term patent infringement." },
+        ],
+      },
+      {
+        id: "4",
+        title: "Sharing Inventions",
+        text: "Discuss with your counselor the types of inventions that are appropriate to share with others, and explain why. Tell your counselor about one unpatented invention and its impact on society.",
+      },
+      {
+        id: "5",
+        title: "Improve a Camping Product",
+        text: "Choose a commercially available product that you have used on an overnight camping trip with your troop. Make recommendations for improving the product, and make a sketch that shows your recommendations. Discuss your recommendations with your counselor.",
+      },
+      {
+        id: "6",
+        title: "Invention Concept",
+        text: "Think of an item you would like to invent that would solve a problem for your family, troop, chartered organization, community, or a special-interest group. Keep a notebook to record your progress.",
+        sub: [
+          { id: "a", text: "Talk to potential users of your invention and determine their needs. Write a statement describing the invention and how it would help solve a problem. Include a detailed sketch of the invention." },
+          { id: "b", text: "Create a model of the invention using clay, cardboard, or any other readily available material. List the materials necessary to build a working prototype of the invention." },
+          { id: "c", text: "Share the idea and the model with your counselor and potential users of your invention. Record their feedback in your notebook." },
+        ],
+      },
+      {
+        id: "7",
+        title: "Working Prototype",
+        text: "Build a working prototype of the item you invented for requirement 6. Test and evaluate the invention. Consider cost, usefulness, marketability, appearance, and function. Describe how your original vision compares to the prototype. Have your counselor evaluate and critique your prototype. (Counselor approval of the design is required before building.)",
+      },
+      {
+        id: "8",
+        title: "Connect With Inventors in Action",
+        text: "Do ONE of the following:",
+        sub: [
+          { id: "a", text: "Participate with a club or team (robotics team, science club, or engineering club) that builds a useful item. Share your experience with your counselor." },
+          { id: "b", text: "Visit a museum or exhibit dedicated to an inventor or invention, and create a presentation of your visit to share with a group such as your troop or patrol." },
+        ],
+      },
+      {
+        id: "9",
+        title: "Careers and Creativity",
+        text: "Discuss with your counselor the diverse skills, education, training, and experience it takes to be an inventor. Discuss how you can prepare yourself to be creative and inventive to solve problems at home, in school, and in your community. Discuss three career fields that might utilize the skills of an inventor.",
+      },
+    ],
+    resources: [
+      { label: "USPTO — U.S. Patent and Trademark Office", url: "https://www.uspto.gov/" },
+      { label: "USPTO Patent Public Search", url: "https://ppubs.uspto.gov/pubwebapp/external.html" },
+      { label: "National Inventors Hall of Fame", url: "https://www.invent.org/" },
+      { label: "Smithsonian — Lemelson Center for the Study of Invention", url: "https://invention.si.edu/" },
+    ],
+  },
+  {
+    slug: "game-design",
+    title: "Game Design",
+    icon: "🎲",
+    order: 7,
+    summary:
+      "Analyze games across media, learn design terms, and design, prototype, and blind-test your own original game.",
+    scoutingUrl: "https://www.scouting.org/merit-badges/game-design/",
+    pamphletUrl: "/merit-badges/pamphlets/Game Design.pdf",
+    pamphletUrlOfficial:
+      "https://filestore.scouting.org/filestore/Merit_Badge_ReqandRes/Pamphlets/Game%20Design.pdf",
+    counselorNote:
+      "The fastest, most rewarding path is a paper/card game. Digital is fine, but Scouts hit the blind-test requirement much sooner with cardboard. I emphasize: test early, test brutally.",
+    myPlan: [
+      "Stock a shoebox of game parts: index cards, dice, meeples, a chess/checker board, graph paper.",
+      "Require the game design notebook from day 1; dated entries, versions labeled v0.1, v0.2, ....",
+      "For blind test (req 7), coach Scouts to SHUT UP and just watch testers struggle with their rules.",
+      "Push Scouts to change at least one rule between each test and record the predicted vs. actual outcome.",
+      "Cross-badge tie-in: the AI-Built Game capstone (see below) pairs this badge with the Artificial Intelligence badge. Scouts design a game on paper, then use an AI coding assistant to turn it into a playable digital build — hitting the prototype, iterate, and blind-test requirements here while demonstrating responsible, supervised AI use for the AI badge.",
+    ],
+    capstone: {
+      title: "AI-Built Game — From Design Doc to Playable Build",
+      slug: "ai-built-game",
+      summary:
+        "Scouts design an original game on paper, write a clean design document and rulebook, then use an AI coding assistant (with the counselor in the room) to turn it into a playable digital build. The capstone covers the full Game Design badge and doubles as the project requirement for the Artificial Intelligence badge.",
+      sections: [
+        {
+          heading: "Project concept",
+          body:
+            "The Scout owns the design. The AI is a junior developer the Scout directs — it does not design the game, pick the mechanics, or decide what is 'fun.' Scouts start with pencil, index cards, and dice to prove their core loop works on the table, then move into a digital build (Scratch, a simple HTML/JS page, or a chosen engine) using AI to scaffold code, explain error messages, and refactor. Every prompt and every AI change is logged in the game design notebook, so the Scout can show exactly what they asked for and what they accepted.",
+        },
+        {
+          heading: "What the Scout ends the project with",
+          list: [
+            "A written vision statement, theme, and player format (paper or digital)",
+            "A paper prototype that has been played at least 3 times with rule changes recorded between sessions",
+            "A clean instruction sheet good enough for a blind test",
+            "A playable digital version of the game (even a minimal one) built with AI assistance",
+            "A game design notebook with dated entries, version labels, and a prompt log",
+            "A short 'What the AI did well / where I had to take over' reflection",
+          ],
+        },
+        {
+          heading: "Phase 1 — Paper prototype (before any code)",
+          body:
+            "No laptops yet. Scouts pick a medium (card, board, dice, or tabletop-movement), write a one-page vision doc, sketch the components, and play their game. We iterate at least three times on paper, changing one rule between each session and predicting the effect before testing. This is where the game becomes actually fun — trying to skip this phase is the single biggest failure mode.",
+        },
+        {
+          heading: "Phase 2 — Rulebook and instruction sheet",
+          body:
+            "Scouts write a standalone instruction sheet: setup, turn order, win condition, edge cases. The test is whether someone who has never seen the game can read the sheet and play without help. This is the blind-test deliverable for Game Design req 7 and also forces the Scout to clarify their mental model before handing anything to the AI.",
+        },
+        {
+          heading: "Phase 3 — AI-assisted digital build",
+          body:
+            "With the counselor in the room, Scouts turn their rulebook into a digital build using an AI coding assistant. We go in small, testable steps — the same discipline used on the Telemetry Rocket project.",
+          list: [
+            "Pick a simple target platform (Scratch, a single HTML/JS page, or an approved engine).",
+            "Prompt the AI to scaffold the game window, board, or card layout; accept only code the Scout can read and roughly explain.",
+            "Implement one mechanic at a time (deal cards, roll dice, move, score). Playtest after each.",
+            "When something breaks, paste the error message to the AI and read the explanation before accepting the fix.",
+            "Log every prompt, every accepted change, and every rejected suggestion in the notebook.",
+            "End Phase 3 with a version the Scout could hand to a friend over a link or a share screen.",
+          ],
+        },
+        {
+          heading: "Phase 4 — Blind test and iterate",
+          body:
+            "Scouts run a blind test on the digital build (Game Design req 7) AND a paper blind test if they have not already. They watch silently, take notes, and then make at least one rule, balance, or UI change with a written prediction of its effect. Then they retest.",
+        },
+        {
+          heading: "Phase 5 — Reflection on the AI's role",
+          body:
+            "The final deliverable is a short reflection: what the Scout directed, what the AI did well, where the AI hallucinated or gave wrong code, and what the Scout fixed by hand. This reflection is the heart of the Artificial Intelligence badge — it proves the Scout used AI responsibly, kept authorship, and can describe the limits of the tool.",
+        },
+        {
+          heading: "Counselor safety and ethics rules",
+          list: [
+            "AI tools are used in a counselor-supervised session or with a parent present.",
+            "No personal information, real names of other Scouts, or photos are pasted into an AI prompt.",
+            "Any art, music, or text the AI produces must be labeled as AI-generated in the game's credits.",
+            "The Scout — not the AI — owns the design decisions and writes the vision statement by hand.",
+          ],
+        },
+      ],
+    },
+    requirements: [
+      {
+        id: "1",
+        title: "Analyze Games",
+        text: "Do the following:",
+        sub: [
+          { id: "a", text: "Analyze four games you have played, each from a different medium. Identify the medium, player format, objectives, rules, resources, and theme (if relevant). Make a chart to compare and contrast the games." },
+          { id: "b", text: "Describe four types of play value and provide an example of a game built around each concept. Discuss with your counselor other reasons people play games." },
+        ],
+      },
+      {
+        id: "2",
+        title: "Game Design Terms",
+        text: "Discuss with your counselor FIVE of the following 17 game design terms. For each term, describe how it relates to a specific game: story, setting, characters, play sequence, level design, interface design, difficulty, balance, depth, pace, replay value, age appropriateness, single-player vs. multiplayer, cooperative vs. competitive, turn-based vs. real-time, strategy vs. reflex vs. chance, or abstract vs. thematic.",
+      },
+      {
+        id: "3",
+        title: "Intellectual Property",
+        text: "Define the term intellectual property. Describe the types of intellectual property associated with the game design industry. Describe how intellectual property is protected and why protection is necessary. Define and give an example of a licensed property.",
+      },
+      {
+        id: "4",
+        title: "Rule Variations",
+        text: "Do the following:",
+        sub: [
+          { id: "a", text: "Pick a game where the players can change the rules or objectives (e.g., basketball, hearts, chess, kickball). Summarize the standard rules and objectives and play through the game normally." },
+          { id: "b", text: "Propose changes to several rules or objectives. Predict how each change will affect gameplay." },
+          { id: "c", text: "Play the game with one rule or objective change, observing how the players' actions and emotional experiences are affected. Repeat with two other changes." },
+          { id: "d", text: "Explain to your counselor how the changes affected the actions and experience of the players. Discuss the accuracy of your predictions." },
+        ],
+      },
+      {
+        id: "5",
+        title: "Design a New Game",
+        text: "Design a new game. Any game medium or combination of mediums is acceptable. Record your work in a game design notebook.",
+        sub: [
+          { id: "a", text: "Write a vision statement. Identify medium, player format, objectives, and theme. If suitable, describe setting, story, and characters." },
+          { id: "b", text: "Describe the reason that someone would want to play your game." },
+          { id: "c", text: "Make a preliminary list of the rules of the game. Define the resources." },
+          { id: "d", text: "Draw the game elements." },
+        ],
+      },
+      {
+        id: "6",
+        title: "Prototype and Iterate",
+        text: "Counselor approval of the concept is required before prototyping.",
+        sub: [
+          { id: "a", text: "Prototype your game from requirement 5. If applicable, demonstrate player safety through the rules and equipment. Record your work." },
+          { id: "b", text: "Test your prototype with as many other people as you need to meet the player format. Correct unclear rules, holes in the rules, dead ends, and obvious rule exploits. Change at least one rule, mechanic, or objective from your first version; describe why. Play again and record whether your change had the expected effect." },
+          { id: "c", text: "Repeat 6(b) at least two more times and record the results in your notebook." },
+        ],
+      },
+      {
+        id: "7",
+        title: "Blind Test",
+        text: "Do the following:",
+        sub: [
+          { id: "a", text: "Write an instruction sheet that includes all information needed to play — setup, play, and end. List the game objectives." },
+          { id: "b", text: "Share your prototype with a group of players that has not played it or witnessed a previous playtest. Provide them with your instruction sheet(s) and components. Watch them play without providing instruction. Record their feedback." },
+          { id: "c", text: "Share your game design notebook with your counselor. Discuss player reactions and what you learned about the game design process. Based on testing, determine what you like most and suggest one or more changes." },
+        ],
+      },
+      {
+        id: "8",
+        title: "Professional Perspective",
+        text: "Do ONE of the following:",
+        sub: [
+          { id: "a", text: "Visit with a professional in the game development industry (with parent or guardian permission and counselor approval). Ask about their job and how it fits into the overall development process." },
+          { id: "b", text: "Meet with a professional in game development education and discuss the skills they emphasize in the classroom." },
+        ],
+      },
+    ],
+    resources: [
+      { label: "The Game Crafter (print-and-play publishing)", url: "https://www.thegamecrafter.com/" },
+      { label: "Global Game Jam", url: "https://globalgamejam.org/" },
+      { label: "IGDA — International Game Developers Association", url: "https://igda.org/" },
+      { label: "Scratch (great for digital-game prototypes)", url: "https://scratch.mit.edu/" },
+    ],
+  },
+  {
+    slug: "space-exploration",
+    title: "Space Exploration",
+    icon: "🚀",
+    order: 8,
+    summary:
+      "History and purpose of space exploration, rocket principles, model-rocket build and launch, and designing an inhabited base.",
+    scoutingUrl: "https://www.scouting.org/merit-badges/space-exploration/",
+    pamphletUrl: "/merit-badges/pamphlets/Space Exploration.pdf",
+    pamphletUrlOfficial:
+      "https://filestore.scouting.org/filestore/Merit_Badge_ReqandRes/Pamphlets/Space%20Exploration.pdf",
+    counselorNote:
+      "Model rocketry is the highlight. I keep an Estes Alpha-III starter kit, a launch pad, and a handful of A8-3 motors ready. Safety code compliance (National Association of Rocketry) is non-negotiable.",
+    myPlan: [
+      "Check local fire/park regulations before scheduling a launch day.",
+      "For req 3, purchase at least 2 rockets per Scout — they will lose one.",
+      "Bring laminated NASA 'Rocket Parts' diagrams for quick identification drills.",
+      "Build the inhabited-base requirement (7) around a shared 'campsite on the Moon' prompt so Scouts can compare designs.",
+      "Capstone option: run the Telemetry Rocket project (see below) as the build-and-launch requirement to turn the badge into a 'mission control' experience.",
+    ],
+    capstone: {
+      title: "Telemetry Rocket — Mission Control Build",
+      slug: "telemetry-rocket",
+      summary:
+        "Go beyond a simple model rocket build. Scouts design, build, launch, and analyze a rocket carrying a live telemetry payload, so the badge becomes an authentic aerospace engineering experience with a natural AI-assisted coding tie-in.",
+      sections: [
+        {
+          heading: "Project concept",
+          body:
+            "A telemetry-enabled model rocket using a LILYGO T-Beam Supreme as the flight computer and a Heltec WiFi LoRa 32 V3 as the laptop-connected ground receiver. The T-Beam includes an ESP32-S3, GPS, LoRa radio, and onboard sensors — a strong all-in-one platform for a Scout STEM activity. The Heltec board is the small USB ground radio that receives the live data stream.",
+        },
+        {
+          heading: "Recommended hardware",
+          body:
+            "Rocket: Estes Lil' Spite (2.0 in diameter, ~292 g dry, projected ~1200 ft unloaded). It is lighter than the larger Estes options, leaving better margin for the telemetry payload. A 29 mm motor retainer is included so motors can be swapped quickly during testing. First-choice motor: Estes E16-4 (lower, more manageable flights than F15-4, while still giving a meaningful motor comparison).",
+        },
+        {
+          heading: "Bill of materials",
+          list: [
+            "1 × LILYGO T-Beam Supreme (US915) — flight computer / GPS / LoRa radio",
+            "1 × Heltec WiFi LoRa 32 V3 (902–928 MHz) — USB ground receiver",
+            "1 × Estes Lil' Spite rocket kit",
+            "1 × Estes Pro Series II 29 mm motor retainer",
+            "1 × Estes E16-4 engine pack",
+            "Optional: 1 × Estes F15-4 engine pack for comparison flights",
+            "Optional: 1 × Estes Jayhawk if a larger airframe is desired for easier packaging",
+          ],
+          footer:
+            "Estimated cost for the core setup is about $167–$170 before tax and shipping, with additional cost for optional motors or a second rocket.",
+        },
+        {
+          heading: "Coding / AI learning component",
+          body:
+            "Scouts use AI to help write and debug the firmware and ground software in stages — a clean progression that makes the project a real software project, not a one-off sketch.",
+          list: [
+            "Read GPS and sensor data on the T-Beam",
+            "Package telemetry data into a simple message",
+            "Transmit the message over LoRa",
+            "Receive the data on the Heltec",
+            "Log the telemetry to a laptop as CSV",
+            "Review the data after flight to compare performance between rocket builds or motor choices",
+          ],
+        },
+        {
+          heading: "Why this fits the badge",
+          body:
+            "This project matches the spirit of Space Exploration — it makes the Scouts think like a real mission team. Instead of just building a rocket, they design the flight experiment, build the payload system, launch and recover the vehicle, analyze the data, and compare how different rocket shapes or motors change results. It gives a natural 'mission control' feel that is more exciting and memorable than a standard rocket build, and it ties the badge into hands-on lessons in space systems, embedded electronics, radio telemetry, coding, data logging, and experimental testing.",
+        },
+      ],
+    },
+    requirements: [
+      {
+        id: "1",
+        title: "Purpose of Space Exploration",
+        text: "Tell the purpose of space exploration and include the following:",
+        sub: [
+          { id: "a", text: "Historical reasons", resources: [{ label: "History of Space Exploration (video)", url: "https://youtu.be/TL__l9gC1Ss" }, { label: "History of Space Exploration: Timeline (video)", url: "https://youtu.be/3JuKR7jf46o" }, { label: "History of the Space Race (Nat Geo)", url: "https://education.nationalgeographic.org/resource/history-space-exploration/" }] },
+          { id: "b", text: "Immediate goals in terms of specific knowledge" },
+          { id: "c", text: "Benefits related to Earth resources, technology, and new products", resources: [{ label: "How Space Benefits Earth (video)", url: "https://youtube.com/shorts/i3D4pCq_lyg" }, { label: "10 Surprising Ways Space Exploration Benefits Life on Earth", url: "https://youtube.com/shorts/_2uSv1C-FDw" }] },
+          { id: "d", text: "International relations and cooperation", resources: [{ label: "International Cooperation in Space (video)", url: "https://youtu.be/TS27Br2-XgY" }] },
+        ],
+      },
+      {
+        id: "2",
+        title: "Space Pioneer Trading Card",
+        text: "Design a collector's card, with a picture on the front and information on the back, about your favorite space pioneer. Share your card and discuss four other space pioneers with your counselor.",
+        resources: [
+          { label: "How I Make Custom Trading Cards (video)", url: "https://youtu.be/PkCCLH_f1us" },
+          { label: "How to Make Trading Cards By Hand (video)", url: "https://youtu.be/vYbeo4iS1Pc" },
+        ],
+      },
+      {
+        id: "3",
+        title: "Model Rocket",
+        text: "Build, launch, and recover a model rocket. Make a second launch to accomplish a specific objective. Rocket must be built to meet the safety code of the National Association of Rocketry. Alternative if local laws prohibit launching: make a model of a NASA rocket, explain the functions of the parts, and give the history of the rocket. Identify and explain the following rocket parts:",
+        resources: [
+          { label: "NASA Rocket Parts — Beginner's Guide", url: "https://www.grc.nasa.gov/www/k-12/VirtualAero/BottleRocket/airplane/bgmr.html" },
+          { label: "National Association of Rocketry — Educational Videos", url: "https://www.nar.org/" },
+        ],
+        sub: [
+          { id: "a", text: "Body tube" },
+          { id: "b", text: "Engine mount" },
+          { id: "c", text: "Fins" },
+          { id: "d", text: "Igniter" },
+          { id: "e", text: "Launch lug" },
+          { id: "f", text: "Nose cone" },
+          { id: "g", text: "Payload" },
+          { id: "h", text: "Recovery system" },
+          { id: "i", text: "Rocket engine" },
+        ],
+      },
+      {
+        id: "4",
+        title: "Principles of Space Flight",
+        text: "Discuss and demonstrate each of the following:",
+        resources: [{ label: "NASA — Basics of Space Flight", url: "https://science.nasa.gov/learn/basics-of-space-flight/" }],
+        sub: [
+          { id: "a", text: "The law of action-reaction", resources: [{ label: "Newton's Laws of Motion", url: "https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/newtons-laws-of-motion/" }] },
+          { id: "b", text: "How rocket engines work", resources: [{ label: "How Rocket Engines Work", url: "https://science.howstuffworks.com/rocket.htm" }, { label: "Rocket Engines Explained (video)", url: "https://youtu.be/gz8L1i0ODeA" }, { label: "How Do We Launch Things Into Space", url: "https://plus.nasa.gov/video/how-do-we-launch-things-into-space/" }] },
+          { id: "c", text: "How satellites stay in orbit", resources: [{ label: "How Do Satellites Get & Stay in Orbit? (video)", url: "https://youtu.be/IC1JQu9xGHQ" }, { label: "How Satellites Orbit (video)", url: "https://youtu.be/5PCY0rTllPg" }] },
+          { id: "d", text: "How satellite pictures of Earth and pictures of other planets are made and transmitted" },
+        ],
+      },
+      {
+        id: "5",
+        title: "Missions",
+        text: "Do TWO of the following:",
+        sub: [
+          { id: "a", text: "Discuss with your counselor a robotic space exploration mission and a historic crewed mission. Tell about each mission's major discoveries, its importance, and what was learned about the planets, moons, or regions of space explored.", resources: [{ label: "Voyager (video)", url: "https://youtu.be/uJpJ79AxrzI" }, { label: "Apollo Program (video)", url: "https://youtu.be/jUW_1XlrWmg" }, { label: "NASA SpaceX Crew Dragon Launch (video)", url: "https://youtu.be/1gmvUPTdoP4" }, { label: "Mars Perseverance Rover (video)", url: "https://www.youtube.com/watch?v=0-oQRSViZQE" }] },
+          { id: "b", text: "Using articles from the internet, photos, and text, create a blog, website, or slide show about a current planetary mission — or make a scrapbook using magazines and news clippings." },
+          { id: "c", text: "Design a robotic mission to another planet, moon, comet, or asteroid that will return samples of its surface to Earth. Show how your design will cope with the conditions of that environment." },
+        ],
+      },
+      {
+        id: "6",
+        title: "Crewed Vehicle or ISS",
+        text: "Describe the purpose, operation, and components of ONE of the following:",
+        sub: [
+          { id: "a", text: "Space shuttle or any other crewed orbital vehicle, whether government-owned (U.S. or foreign) or commercial", resources: [{ label: "First Space Shuttle (video)", url: "https://youtu.be/9zu6gReRV98" }, { label: "How the Space Shuttle Worked (video)", url: "https://www.youtube.com/watch?v=w4FCkbPykdQ" }, { label: "Soyuz (video)", url: "https://youtu.be/_v7YgDum2Sg" }] },
+          { id: "b", text: "International Space Station", resources: [{ label: "What is the International Space Station?", url: "https://www.nasa.gov/learning-resources/for-kids-and-students/what-is-the-international-space-station-grades-5-8/" }, { label: "Spot the Station", url: "https://www.nasa.gov/spot-the-station/" }] },
+        ],
+      },
+      {
+        id: "7",
+        title: "Inhabited Base",
+        text: "Design an inhabited base located within our solar system (such as Titan, asteroids, or other locations). Make drawings or a model of your base. Consider and plan for the following:",
+        resources: [{ label: "How NASA Will Build a City on the Moon (video)", url: "https://youtu.be/ATgwz_hS3Qg" }],
+        sub: [
+          { id: "a", text: "Source of energy", resources: [{ label: "You Can't Take It All With You (NASA PDF)", url: "https://www.nasa.gov/wp-content/uploads/2023/05/you-cant-take-it-all-with-you-grades-6-12-students-tagged.pdf" }] },
+          { id: "b", text: "How it will be constructed", resources: [{ label: "How NASA Plans to Build the First Moon Base (video)", url: "https://youtu.be/ajP0AlYxhug" }] },
+          { id: "c", text: "Life-support system", resources: [{ label: "Robots Building a Mars Base (video)", url: "https://youtu.be/2tr6rJrv8hs" }] },
+          { id: "d", text: "Purpose and function", resources: [{ label: "How Robots Will Build on Mars (video)", url: "https://youtu.be/ZbOg_cC1_Eo" }] },
+        ],
+      },
+      {
+        id: "8",
+        title: "Careers",
+        text: "Explore careers related to this merit badge. Research one career to learn about the training and education needed, costs, job prospects, salary, job duties, and career advancement. Discuss your findings with your counselor.",
+      },
+    ],
+    resources: [
+      { label: "NASA", url: "https://www.nasa.gov/" },
+      { label: "National Association of Rocketry", url: "https://www.nar.org/" },
+      { label: "The Planetary Society", url: "https://www.planetary.org/" },
+      { label: "Estes Rockets (starter kits)", url: "https://estesrockets.com/" },
+    ],
+  },
+];
+
+export function getMeritBadges() {
+  return [...BADGES].sort((a, b) => a.order - b.order);
+}
+
+export function getMeritBadgeBySlug(slug) {
+  return BADGES.find((b) => b.slug === slug);
+}
+
+export function countRequirements(badge) {
+  let n = 0;
+  for (const r of badge.requirements) {
+    if (r.sub && r.sub.length) n += r.sub.length;
+    else n += 1;
+  }
+  return n;
+}
+
+// Capstone projects that span multiple badges. Each capstone lists an
+// executive summary, the primary badge(s) it is built for, and the specific
+// requirement items it covers per badge. Requirement IDs match the `id` /
+// sub `id` fields on each badge's requirements array.
+const CAPSTONES = [
+  {
+    slug: "telemetry-rocket",
+    title: "Telemetry Rocket — Mission Control Build",
+    icon: "🚀",
+    order: 1,
+    primaryBadgeSlug: "space-exploration",
+    executiveSummary:
+      "Scouts design, build, launch, and analyze a model rocket carrying a live telemetry payload (LILYGO T-Beam Supreme flight computer, Heltec LoRa ground receiver). The build turns the Space Exploration badge into a full mission-control experience and gives Aviation, Engineering, and AI Scouts real flight data to work with — the AI badge project requirement is satisfied by using an AI coding assistant, under counselor supervision, to write and debug the telemetry firmware in six small, testable stages.",
+    badgeCoverage: [
+      {
+        badgeSlug: "space-exploration",
+        note:
+          "Used as the model-rocket build-and-launch requirement and the second-launch objective.",
+        items: [
+          { id: "3", note: "Build, launch, recover, and make a second objective-driven launch." },
+          { id: "4", note: "Sketch / identify rocket parts using the real payload bay and flight computer." },
+          { id: "5", note: "Discuss safety code and NAR rules during pre-flight briefings." },
+        ],
+      },
+      {
+        badgeSlug: "artificial-intelligence",
+        note:
+          "Satisfies the AI badge project option. Scouts use AI to help write and debug firmware in six supervised stages.",
+        items: [
+          { id: "6", note: "Hands-on prompt engineering on real embedded code (T-Beam firmware + Heltec ground log)." },
+          { id: "7a", note: "Documented AI-assisted project with written objective, prompt log, and ethics note." },
+        ],
+      },
+      {
+        badgeSlug: "aviation",
+        note:
+          "Altitude and GPS data from the payload become the discussion material for four-forces, control surfaces, and instrument readings.",
+        items: [
+          { id: "1e", note: "Use real altitude / velocity traces to describe the four forces acting during boost, coast, and descent." },
+          { id: "1h", note: "Map telemetry channels (altitude, heading, vertical speed) to the aircraft instruments they mimic." },
+        ],
+      },
+      {
+        badgeSlug: "engineering",
+        note:
+          "A clean end-to-end engineering cycle: requirements, trade study, build, test, data analysis, iterate.",
+        items: [
+          { id: "3", note: "Define the design problem, trade rocket/motor options, and document the chosen solution." },
+          { id: "4", note: "Make measurements before, during, and after flight; compare predicted vs. actual performance." },
+        ],
+      },
+    ],
+    detailSections: [
+      {
+        heading: "Executive summary",
+        body:
+          "A Scout-built model rocket that carries a live telemetry payload, streams altitude and GPS over LoRa to a laptop-connected ground radio, and logs the flight as a CSV file. After each flight, Scouts compare predicted and measured performance, swap motors or rocket bodies, and iterate — the same engineering cycle used on real aerospace programs, scaled to a troop meeting.",
+      },
+      {
+        heading: "Hardware",
+        list: [
+          "LILYGO T-Beam Supreme (US915) — flight computer with ESP32-S3, GPS, LoRa radio, onboard sensors",
+          "Heltec WiFi LoRa 32 V3 (902–928 MHz) — USB ground receiver",
+          "Estes Lil' Spite rocket kit (2.0 in diameter, ~292 g dry) — leaves margin for the payload",
+          "Estes Pro Series II 29 mm motor retainer (motors swap quickly during testing)",
+          "Estes E16-4 engine pack (primary) and optional F15-4 for a motor comparison",
+          "Optional: Estes Jayhawk for a larger airframe if packaging is tight",
+        ],
+        footer:
+          "Estimated cost for the core setup is about $167–$170 before tax and shipping.",
+      },
+      {
+        heading: "Six-stage AI-assisted build",
+        list: [
+          "Read GPS and sensor data on the T-Beam",
+          "Package telemetry data into a simple message",
+          "Transmit the message over LoRa",
+          "Receive the data on the Heltec",
+          "Log the telemetry to a laptop as CSV",
+          "Review the data after flight and compare rocket bodies or motor choices",
+        ],
+      },
+      {
+        heading: "Why it fits the badges",
+        body:
+          "The project turns Space Exploration into a real mission-team experience, gives Aviation Scouts authentic flight data, supports the Engineering design cycle end-to-end, and gives the Artificial Intelligence badge a serious, supervised coding project instead of a toy chatbot prompt.",
+      },
+    ],
+  },
+  {
+    slug: "ai-built-game",
+    title: "AI-Built Game — From Design Doc to Playable Build",
+    icon: "🎮",
+    order: 2,
+    primaryBadgeSlug: "game-design",
+    executiveSummary:
+      "Scouts design an original game on paper, prove the core loop works in at least three playtests, write a clean instruction sheet, then use an AI coding assistant (with the counselor in the room) to turn it into a playable digital build. The Scout directs the AI, logs every prompt and accepted change, and writes a short reflection on what the AI did well and where they took over. Covers the full Game Design badge and satisfies the Artificial Intelligence badge's project requirement with responsible, supervised AI use.",
+    badgeCoverage: [
+      {
+        badgeSlug: "game-design",
+        note: "Covers every requirement 1–8 end-to-end.",
+        items: [
+          { id: "1a", note: "Medium / format / objectives chart comparing four games they already play." },
+          { id: "1b", note: "Discussion of play-value types — done during concept kickoff." },
+          { id: "2", note: "Five design terms discussed against the Scout's own game." },
+          { id: "3", note: "IP discussion naturally triggered by the Scout asking about AI-generated art and music credit." },
+          { id: "4", note: "Rule-variation exercise done on a familiar game before prototyping their own." },
+          { id: "5", note: "Vision statement, rules, resources, and element sketches recorded in the design notebook." },
+          { id: "6", note: "Paper prototype + at least three iterations with a rule change between each." },
+          { id: "7", note: "Blind test run on both the paper and digital versions with counselor-approved instruction sheet." },
+          { id: "8", note: "Optional: interview with a game-development professional or educator to wrap the project." },
+        ],
+      },
+      {
+        badgeSlug: "artificial-intelligence",
+        note:
+          "Satisfies the AI badge project option. Scouts use AI as a supervised junior developer on a real software build.",
+        items: [
+          { id: "1", note: "Every AI-specific vocabulary term (prompt, model, hallucination, training data) appears in the actual build log." },
+          { id: "2", note: "Discussion of what AI is and is not — grounded in concrete cases from the build." },
+          { id: "5", note: "Brief deepfake / misinformation discussion triggered when deciding how to credit AI-generated art or music." },
+          { id: "6", note: "Hands-on prompt engineering — scaffold, implement, debug, refactor. Each prompt is logged." },
+          { id: "7a", note: "Documented AI-assisted software project with written objective, prompt log, and reflection." },
+        ],
+      },
+    ],
+    detailSections: [
+      {
+        heading: "Executive summary",
+        body:
+          "The Scout owns the design; the AI is a junior developer the Scout directs. The project starts with pencil and index cards, moves to a written rulebook that passes a blind test, and finishes with a playable digital build. Every prompt and every AI change is logged in the design notebook so the Scout can show exactly what they asked for, what they accepted, and what they rewrote.",
+      },
+      {
+        heading: "What the Scout ends the project with",
+        list: [
+          "A written vision statement, theme, and player format",
+          "A paper prototype played at least three times with rule changes recorded",
+          "A clean instruction sheet good enough for a blind test",
+          "A playable digital version of the game (Scratch, HTML/JS, or an approved engine)",
+          "A game design notebook with dated entries, version labels, and a prompt log",
+          "A short 'What the AI did well / where I had to take over' reflection",
+        ],
+      },
+      {
+        heading: "Phase 1 — Paper prototype (before any code)",
+        body:
+          "No laptops yet. The Scout picks a medium (card, board, dice, tabletop-movement), writes a one-page vision doc, sketches the components, and plays their game. We iterate at least three times on paper, changing one rule between each session and predicting the effect before testing. This is where the game becomes actually fun — trying to skip this phase is the single biggest failure mode.",
+      },
+      {
+        heading: "Phase 2 — Rulebook and instruction sheet",
+        body:
+          "The Scout writes a standalone instruction sheet: setup, turn order, win condition, edge cases. The test is whether someone who has never seen the game can read the sheet and play without help. This is the blind-test deliverable for Game Design req 7 and forces the Scout to clarify their mental model before handing anything to the AI.",
+      },
+      {
+        heading: "Phase 3 — AI-assisted digital build",
+        body:
+          "With the counselor in the room, the Scout turns the rulebook into a digital build using an AI coding assistant. Small, testable steps — the same discipline used on the Telemetry Rocket project.",
+        list: [
+          "Pick a simple target platform (Scratch, a single HTML/JS page, or an approved engine).",
+          "Prompt the AI to scaffold the game window, board, or card layout; accept only code the Scout can read and roughly explain.",
+          "Implement one mechanic at a time (deal cards, roll dice, move, score). Playtest after each.",
+          "When something breaks, paste the error to the AI and read the explanation before accepting the fix.",
+          "Log every prompt, every accepted change, and every rejected suggestion in the notebook.",
+          "End Phase 3 with a version the Scout could share with a friend.",
+        ],
+      },
+      {
+        heading: "Phase 4 — Blind test and iterate",
+        body:
+          "Run a blind test on the digital build (and on paper if not already done). Watch silently, take notes, then make at least one rule, balance, or UI change with a written prediction of the effect. Retest.",
+      },
+      {
+        heading: "Phase 5 — Reflection on the AI's role",
+        body:
+          "The final deliverable is a short reflection: what the Scout directed, what the AI did well, where the AI hallucinated, and what the Scout fixed by hand. This reflection is the heart of the Artificial Intelligence badge — it proves responsible use, Scout authorship, and awareness of the tool's limits.",
+      },
+      {
+        heading: "Safety and ethics rules",
+        list: [
+          "AI tools are used in a counselor-supervised session or with a parent present.",
+          "No personal information, real names of other Scouts, or photos are pasted into a prompt.",
+          "Any art, music, or text the AI produces is labeled as AI-generated in the game's credits.",
+          "The Scout — not the AI — owns the design decisions and writes the vision statement by hand.",
+        ],
+      },
+    ],
+  },
+];
+
+export function getCapstones() {
+  return [...CAPSTONES].sort((a, b) => a.order - b.order);
+}
+
+export function getCapstoneBySlug(slug) {
+  return CAPSTONES.find((c) => c.slug === slug);
+}
+
+// Resolve badgeCoverage entries into full requirement text for rendering.
+export function resolveCapstoneCoverage(capstone) {
+  return capstone.badgeCoverage.map((cov) => {
+    const badge = getMeritBadgeBySlug(cov.badgeSlug);
+    const items = cov.items.map((item) => {
+      // item.id is either a top-level req id ("3") or a req+sub concat ("1a", "7a").
+      let reqId = item.id;
+      let subId = null;
+      const match = item.id.match(/^(\d+)([a-z])$/i);
+      if (match) {
+        reqId = match[1];
+        subId = match[2];
+      }
+      const req = badge?.requirements.find((r) => r.id === reqId);
+      let title = req?.title ?? `Requirement ${reqId}`;
+      let text = req?.text ?? "";
+      if (subId && req?.sub) {
+        const sub = req.sub.find((s) => s.id === subId);
+        if (sub) {
+          text = sub.text;
+          title = `${req.title} — ${reqId}(${subId})`;
+        }
+      }
+      return { id: item.id, note: item.note, title, text };
+    });
+    return {
+      badgeSlug: cov.badgeSlug,
+      badgeTitle: badge?.title ?? cov.badgeSlug,
+      badgeIcon: badge?.icon ?? "",
+      note: cov.note,
+      items,
+    };
+  });
+}

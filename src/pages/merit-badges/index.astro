@@ -1,0 +1,116 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getMeritBadges, countRequirements, getCapstones, resolveCapstoneCoverage } from "../../lib/merit-badges.js";
+
+const badges = getMeritBadges();
+const capstones = getCapstones().map((c) => ({ ...c, coverage: resolveCapstoneCoverage(c) }));
+---
+<BaseLayout
+  title="Merit Badge Counselor"
+  description="Dustin Gamble is a registered Scouting America Merit Badge Counselor for Aviation, Robotics, Programming, Artificial Intelligence, Engineering, Inventing, Game Design, and Space Exploration. Requirements, resources, and counselor plans for each badge."
+>
+  <section class="section-block prose">
+    <p class="kicker">Scouting America · Los Padres Council · Troop 308</p>
+    <h1>Merit Badge Counselor</h1>
+    <p>
+      I am a registered Merit Badge Counselor and Assistant Scoutmaster with Troop 308 in San Luis Obispo, CA.
+      These pages are a working reference for me as a counselor and a clear, honest guide for Scouts (and their
+      parents) who are considering one of the badges I counsel.
+    </p>
+    <p>
+      Every page includes the official requirements, links to the free Scouting America merit badge pamphlet,
+      curated videos and resources from the Scouting America Digital Resource Guide, and my own session plan.
+      Requirements are the canonical text — always cross-check with the
+      <a href="https://www.scouting.org/skills/merit-badges/all/" target="_blank" rel="noopener noreferrer">
+        current requirements on scouting.org
+      </a> before you start.
+    </p>
+  </section>
+
+  <section class="section-block" aria-labelledby="badges-title">
+    <h2 id="badges-title" class="section-heading">Badges I Counsel</h2>
+    <div class="grid cols-2">
+      {
+        badges.map((badge) => (
+          <article class="card mb-card">
+            <h3>
+              <span class="mb-icon" aria-hidden="true">{badge.icon}</span>
+              <a href={`/merit-badges/${badge.slug}/`}>{badge.title}</a>
+            </h3>
+            <p>{badge.summary}</p>
+            <ul class="tag-list" aria-label="Badge facts">
+              <li>{countRequirements(badge)} requirement items</li>
+              {badge.pamphletUrl && <li>Pamphlet included</li>}
+              {!badge.pamphletUrl && <li>No pamphlet — online only</li>}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section-block" aria-labelledby="capstones-title">
+    <h2 id="capstones-title" class="section-heading">Capstone Projects</h2>
+    <p class="muted">
+      Two optional capstone projects that span multiple badges. Scouts who take one of these
+      on leave with a serious build and evidence across two or three badges at once.
+    </p>
+    <div class="grid cols-2">
+      {
+        capstones.map((cap) => (
+          <article class="card mb-capstone-card">
+            <h3>
+              <span class="mb-icon" aria-hidden="true">{cap.icon}</span>
+              <a href={`/merit-badges/capstones/${cap.slug}/`}>{cap.title}</a>
+            </h3>
+            <p>{cap.executiveSummary}</p>
+            <ul class="mb-capstone-coverage">
+              {cap.coverage.map((cov) => (
+                <li>
+                  <strong>{cov.badgeIcon} {cov.badgeTitle}:</strong>{" "}
+                  {cov.items.map((it, i) => (
+                    <span>
+                      {i > 0 && ", "}
+                      <a href={`/merit-badges/${cov.badgeSlug}/`}>req {it.id}</a>
+                    </span>
+                  ))}
+                </li>
+              ))}
+            </ul>
+            <p>
+              <a class="mb-link-btn" href={`/merit-badges/capstones/${cap.slug}/`}>
+                Read the full project &rarr;
+              </a>
+            </p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section-block prose" aria-labelledby="how-title">
+    <h2 id="how-title" class="section-heading">How to Work With Me on a Badge</h2>
+    <ol>
+      <li>
+        Talk to your Scoutmaster first and get a signed blue card (or make a Scoutbook connection) for the
+        specific badge before we meet.
+      </li>
+      <li>
+        Read the official requirements on the badge page linked above. Skim the pamphlet. If the badge has a
+        project requirement, come with an idea — even a rough one.
+      </li>
+      <li>
+        We meet with your parent or guardian present, or in a group with at least two Scouts and two
+        registered adults, following Scouting America's Guide to Safe Scouting at all times.
+      </li>
+      <li>
+        Bring a notebook. For Robotics, Inventing, and Game Design the notebook is literally a requirement,
+        and for every other badge it is still the best way to finish faster.
+      </li>
+    </ol>
+    <p>
+      If you're a counselor, Scoutmaster, or parent with suggestions or corrections for any of the badge
+      pages, please get in touch via <a href="/contact/">the contact page</a>.
+    </p>
+  </section>
+</BaseLayout>

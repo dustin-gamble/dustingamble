@@ -1,0 +1,91 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { getCapstones, getCapstoneBySlug, resolveCapstoneCoverage } from "../../../lib/merit-badges.js";
+
+export async function getStaticPaths() {
+  const capstones = getCapstones();
+  return capstones.map((cap) => ({
+    params: { slug: cap.slug },
+    props: { capstone: cap }
+  }));
+}
+
+const { capstone } = Astro.props;
+const coverage = resolveCapstoneCoverage(capstone);
+const totalItems = coverage.reduce((sum, c) => sum + c.items.length, 0);
+---
+<BaseLayout
+  title={`${capstone.title} — Merit Badge Capstone`}
+  description={`${capstone.title}: a cross-badge capstone project with executive summary, requirement mapping, and full build plan from Dustin Gamble, Scouting America Merit Badge Counselor.`}
+>
+  <article class="prose mb-page">
+    <p><a href="/merit-badges/">&larr; Back to Merit Badge Counselor</a></p>
+
+    <header class="mb-header">
+      <span class="mb-icon-lg" aria-hidden="true">{capstone.icon}</span>
+      <div>
+        <p class="kicker">Merit Badge Capstone Project</p>
+        <h1>{capstone.title}</h1>
+      </div>
+    </header>
+
+    <section aria-labelledby="exec-title" class="mb-section mb-capstone">
+      <h2 id="exec-title">Executive Summary</h2>
+      <p>{capstone.executiveSummary}</p>
+      <p class="muted">
+        Covers {totalItems} requirement items across {coverage.length} badges.
+      </p>
+    </section>
+
+    <section aria-labelledby="coverage-title" class="mb-section">
+      <h2 id="coverage-title">Requirements This Project Checks Off</h2>
+      <p class="muted">
+        Requirement IDs link back to the corresponding badge page, where the full official text and
+        checklist live. The counselor note under each badge explains how this project maps onto the
+        badge's intent.
+      </p>
+      {coverage.map((cov) => (
+        <div class="mb-capstone-badge">
+          <h3>
+            <span aria-hidden="true">{cov.badgeIcon}</span>{" "}
+            <a href={`/merit-badges/${cov.badgeSlug}/`}>{cov.badgeTitle}</a>
+          </h3>
+          <p class="muted">{cov.note}</p>
+          <ul class="mb-capstone-items">
+            {cov.items.map((it) => (
+              <li>
+                <span class="mb-req-num">{it.id}.</span>{" "}
+                <strong>{it.title}</strong>
+                {it.text && <div class="mb-capstone-item-text">{it.text}</div>}
+                {it.note && <div class="mb-capstone-item-note">Counselor note: {it.note}</div>}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </section>
+
+    <section aria-labelledby="detail-title" class="mb-section mb-capstone">
+      <h2 id="detail-title">Project Details</h2>
+      {capstone.detailSections.map((s) => (
+        <div class="mb-capstone-block">
+          <h3>{s.heading}</h3>
+          {s.body && <p>{s.body}</p>}
+          {s.list && (
+            <ul>
+              {s.list.map((item) => <li>{item}</li>)}
+            </ul>
+          )}
+          {s.footer && <p class="muted">{s.footer}</p>}
+        </div>
+      ))}
+    </section>
+
+    <section class="mb-section">
+      <p>
+        Interested in running this capstone with a Scout? <a href="/contact/">Get in touch</a> or
+        go back to the <a href="/merit-badges/">Merit Badge Counselor page</a>.
+      </p>
+    </section>
+  </article>
+</BaseLayout>

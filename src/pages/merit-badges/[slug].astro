@@ -1,0 +1,212 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getMeritBadges, getMeritBadgeBySlug, countRequirements } from "../../lib/merit-badges.js";
+
+export async function getStaticPaths() {
+  const badges = getMeritBadges();
+  return badges.map((badge) => ({
+    params: { slug: badge.slug },
+    props: { badge }
+  }));
+}
+
+const { badge } = Astro.props;
+const reqCount = countRequirements(badge);
+---
+<BaseLayout
+  title={`${badge.title} Merit Badge`}
+  description={`${badge.title} Merit Badge — requirements, official pamphlet, curated video and resource links, and counselor plan from Dustin Gamble.`}
+>
+  <article class="prose mb-page">
+    <p><a href="/merit-badges/">&larr; Back to Merit Badge Counselor</a></p>
+
+    <header class="mb-header">
+      <span class="mb-icon-lg" aria-hidden="true">{badge.icon}</span>
+      <div>
+        <p class="kicker">Scouting America · Merit Badge</p>
+        <h1>{badge.title}</h1>
+        <p class="mb-summary">{badge.summary}</p>
+      </div>
+    </header>
+
+    <section class="mb-links" aria-label="Official links">
+      <a class="mb-link-btn" href={badge.scoutingUrl} target="_blank" rel="noopener noreferrer">
+        Official requirements ↗
+      </a>
+      {badge.pamphletUrl && (
+        <a class="mb-link-btn" href={badge.pamphletUrl} target="_blank" rel="noopener noreferrer">
+          Pamphlet (PDF)
+        </a>
+      )}
+      {badge.pamphletUrlOfficial && (
+        <a class="mb-link-btn mb-link-btn-outline" href={badge.pamphletUrlOfficial} target="_blank" rel="noopener noreferrer">
+          Pamphlet on scouting.org ↗
+        </a>
+      )}
+      {badge.drgUrl && (
+        <a class="mb-link-btn mb-link-btn-outline" href={badge.drgUrl} target="_blank" rel="noopener noreferrer">
+          Digital Resource Guide ↗
+        </a>
+      )}
+    </section>
+
+    {badge.pamphletNote && (
+      <aside class="mb-note">
+        <strong>Note on materials:</strong> {badge.pamphletNote}
+      </aside>
+    )}
+
+    <section aria-labelledby="quals-title" class="mb-section">
+      <h2 id="quals-title">Counselor Qualifications</h2>
+      <p>{badge.counselorNote}</p>
+      <p class="muted">
+        Dustin Gamble — B.S. and M.S. Aerospace Engineering; Technical Fellow at Lockheed Martin; registered
+        Scouting America Merit Badge Counselor (Los Padres Council).
+      </p>
+    </section>
+
+    <section aria-labelledby="plan-title" class="mb-section mb-plan">
+      <h2 id="plan-title">My Counselor Plan</h2>
+      <p class="muted">My operating notes for counseling this badge. Scouts can skim for context; other counselors are welcome to borrow what's useful.</p>
+      <ul>
+        {badge.myPlan.map((item) => <li>{item}</li>)}
+      </ul>
+    </section>
+
+    {badge.capstone && (
+      <section aria-labelledby="capstone-title" class="mb-section mb-capstone">
+        <h2 id="capstone-title">Capstone Project: {badge.capstone.title}</h2>
+        <p>{badge.capstone.summary}</p>
+        {badge.capstone.slug && (
+          <p>
+            <a class="mb-link-btn" href={`/merit-badges/capstones/${badge.capstone.slug}/`}>
+              See full project page (with requirements mapping) &rarr;
+            </a>
+          </p>
+        )}
+        {badge.capstone.sections.map((s) => (
+          <div class="mb-capstone-block">
+            <h3>{s.heading}</h3>
+            {s.body && <p>{s.body}</p>}
+            {s.list && (
+              <ul>
+                {s.list.map((item) => <li>{item}</li>)}
+              </ul>
+            )}
+            {s.footer && <p class="muted">{s.footer}</p>}
+          </div>
+        ))}
+      </section>
+    )}
+
+    <section aria-labelledby="reqs-title" class="mb-section">
+      <h2 id="reqs-title">Requirements Checklist</h2>
+      <p class="muted">
+        {reqCount} total requirement items. Check marks are saved locally in this browser so you can track
+        progress as you work. This is a convenience view — the official requirements on
+        {" "}<a href={badge.scoutingUrl} target="_blank" rel="noopener noreferrer">scouting.org</a> are the source of truth.
+      </p>
+
+      <div class="mb-checklist" data-badge-slug={badge.slug}>
+        <div class="mb-checklist-actions">
+          <button type="button" class="mb-btn" data-action="reset">Reset my progress</button>
+        </div>
+
+        {badge.requirements.map((req) => (
+          <div class="mb-req">
+            <h3>
+              <span class="mb-req-num">{req.id}.</span> {req.title}
+            </h3>
+            <p>{req.text}</p>
+            {req.resources && req.resources.length > 0 && (
+              <ul class="mb-res">
+                {req.resources.map((r) => (
+                  <li>
+                    <a href={r.url} target="_blank" rel="noopener noreferrer">{r.label} ↗</a>
+                  </li>
+                ))}
+              </ul>
+            )}
+            {req.sub && req.sub.length > 0 ? (
+              <ul class="mb-sub-list">
+                {req.sub.map((s) => (
+                  <li>
+                    <label class="mb-check">
+                      <input type="checkbox" data-req-id={`${req.id}${s.id}`} />
+                      <span class="mb-sub-id">{req.id}({s.id})</span>
+                      <span class="mb-sub-text">{s.text}</span>
+                    </label>
+                    {s.resources && s.resources.length > 0 && (
+                      <ul class="mb-res">
+                        {s.resources.map((r) => (
+                          <li>
+                            <a href={r.url} target="_blank" rel="noopener noreferrer">{r.label} ↗</a>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <label class="mb-check mb-check-top">
+                <input type="checkbox" data-req-id={req.id} />
+                <span class="mb-sub-text">Mark requirement {req.id} complete</span>
+              </label>
+            )}
+          </div>
+        ))}
+      </div>
+    </section>
+
+    {badge.resources && badge.resources.length > 0 && (
+      <section aria-labelledby="res-title" class="mb-section">
+        <h2 id="res-title">Additional Resources</h2>
+        <ul>
+          {badge.resources.map((r) => (
+            <li>
+              <a href={r.url} target="_blank" rel="noopener noreferrer">{r.label} ↗</a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    <section aria-labelledby="safety-title" class="mb-section">
+      <h2 id="safety-title">Safety and Youth Protection</h2>
+      <p>
+        All merit badge counseling sessions follow Scouting America's
+        {" "}<a href="https://www.scouting.org/health-and-safety/gss/" target="_blank" rel="noopener noreferrer">Guide to Safe Scouting</a>.
+        Scouts meet with me either accompanied by a parent or guardian, or in a group with at least one other
+        Scout and one other registered adult present. I hold current Safeguarding Youth training.
+      </p>
+    </section>
+  </article>
+
+  <script is:inline>
+    (function () {
+      const root = document.querySelector(".mb-checklist");
+      if (!root) return;
+      const slug = root.dataset.badgeSlug;
+      const key = "mb-progress-" + slug;
+      const state = JSON.parse(localStorage.getItem(key) || "{}");
+      const boxes = root.querySelectorAll('input[type="checkbox"][data-req-id]');
+      boxes.forEach((cb) => {
+        const id = cb.dataset.reqId;
+        if (state[id]) cb.checked = true;
+        cb.addEventListener("change", () => {
+          state[id] = cb.checked;
+          localStorage.setItem(key, JSON.stringify(state));
+        });
+      });
+      const resetBtn = root.querySelector('[data-action="reset"]');
+      if (resetBtn) {
+        resetBtn.addEventListener("click", () => {
+          if (!confirm("Clear your saved progress for this badge on this device?")) return;
+          localStorage.removeItem(key);
+          boxes.forEach((cb) => (cb.checked = false));
+        });
+      }
+    })();
+  </script>
+</BaseLayout>

@@ -572,3 +572,227 @@ button[type="submit"]:hover {
     font-size: 2rem;
   }
 }
+/* ---------- Merit Badges ---------- */
+.mb-icon { margin-right: 0.4rem; }
+.mb-icon-lg {
+  font-size: 2.8rem;
+  line-height: 1;
+  display: inline-block;
+  margin-right: 1rem;
+}
+.mb-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+.mb-header h1 { margin: 0.2rem 0 0.4rem; }
+.mb-summary { color: var(--muted); margin: 0; }
+.mb-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 1rem 0 1.4rem;
+}
+.mb-link-btn {
+  display: inline-block;
+  padding: 0.45rem 0.9rem;
+  background: var(--accent);
+  color: #fff !important;
+  border-radius: 999px;
+  text-decoration: none;
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  font-size: 0.92rem;
+  font-weight: 500;
+  border: 1px solid var(--accent);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.mb-link-btn:hover {
+  background: var(--accent-strong);
+  border-color: var(--accent-strong);
+  color: #fff !important;
+}
+.mb-link-btn-outline {
+  background: transparent;
+  color: var(--accent) !important;
+}
+.mb-link-btn-outline:hover {
+  background: var(--accent-soft);
+  color: var(--accent-strong) !important;
+}
+.mb-note {
+  background: var(--accent-soft);
+  border-left: 4px solid var(--accent);
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+}
+.mb-section {
+  margin: 2rem 0;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+.mb-section h2 {
+  font-size: 1.4rem;
+  margin-bottom: 0.6rem;
+}
+.mb-plan ul { padding-left: 1.1rem; }
+.mb-plan li { margin-bottom: 0.35rem; }
+.muted { color: var(--muted); font-size: 0.95rem; }
+
+.mb-checklist { margin-top: 1rem; }
+.mb-checklist-actions { margin-bottom: 1rem; }
+.mb-btn {
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  font-size: 0.85rem;
+  padding: 0.35rem 0.75rem;
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  cursor: pointer;
+}
+.mb-btn:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.mb-req {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 1rem 1.1rem;
+  margin-bottom: 1rem;
+}
+.mb-req h3 {
+  margin: 0 0 0.3rem;
+  font-size: 1.12rem;
+}
+.mb-req-num {
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  color: var(--accent);
+  margin-right: 0.25rem;
+}
+.mb-req > p {
+  margin: 0.2rem 0 0.6rem;
+}
+.mb-sub-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0.4rem 0 0;
+}
+.mb-sub-list > li {
+  padding: 0.4rem 0;
+  border-top: 1px dashed var(--line);
+}
+.mb-sub-list > li:first-child { border-top: none; }
+.mb-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  cursor: pointer;
+  line-height: 1.55;
+}
+.mb-check input[type="checkbox"] {
+  margin-top: 0.4rem;
+  width: 1.05rem;
+  height: 1.05rem;
+  accent-color: var(--accent);
+  flex-shrink: 0;
+}
+.mb-check-top { margin-top: 0.3rem; }
+.mb-sub-id {
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  color: var(--accent);
+  font-weight: 500;
+  min-width: 2.8rem;
+  flex-shrink: 0;
+}
+.mb-sub-text { flex: 1; }
+.mb-check input:checked ~ .mb-sub-text {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+.mb-res {
+  list-style: none;
+  padding-left: 2.8rem;
+  margin: 0.35rem 0 0.2rem;
+  font-size: 0.92rem;
+}
+.mb-res li { padding: 0.1rem 0; }
+
+.mb-card h3 { display: flex; align-items: center; }
+
+@media (max-width: 640px) {
+  .mb-header { flex-direction: column; }
+  .mb-icon-lg { font-size: 2.2rem; }
+  .mb-sub-id { min-width: 2.4rem; }
+  .mb-res { padding-left: 2.2rem; }
+}
+
+.mb-capstone {
+  background: var(--accent-soft);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 1.1rem 1.25rem;
+}
+.mb-capstone h2 { margin-top: 0; }
+.mb-capstone-block { margin-top: 1rem; }
+.mb-capstone-block h3 {
+  font-size: 1.05rem;
+  margin: 0 0 0.3rem;
+}
+.mb-capstone-block ul { padding-left: 1.2rem; }
+.mb-capstone-block li { margin-bottom: 0.25rem; }
+
+/* ---------- Merit Badge Capstones ---------- */
+.mb-capstone-card {
+  border-left: 4px solid var(--accent, #2a6df4);
+}
+.mb-capstone-card h3 a {
+  text-decoration: none;
+}
+.mb-capstone-coverage {
+  list-style: none;
+  padding: 0;
+  margin: 0.75rem 0 1rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+.mb-capstone-coverage li {
+  padding: 0.25rem 0;
+}
+.mb-capstone-coverage a {
+  font-variant-numeric: tabular-nums;
+}
+.mb-capstone-badge {
+  margin: 1.25rem 0 1.75rem;
+  padding: 1rem 1.25rem;
+  background: color-mix(in srgb, var(--accent, #2a6df4) 6%, transparent);
+  border-radius: 10px;
+}
+.mb-capstone-badge h3 {
+  margin-top: 0;
+}
+.mb-capstone-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.mb-capstone-items > li {
+  padding: 0.5rem 0;
+  border-top: 1px solid color-mix(in srgb, var(--text, #000) 10%, transparent);
+}
+.mb-capstone-items > li:first-child {
+  border-top: 0;
+}
+.mb-capstone-item-text {
+  margin-top: 0.2rem;
+  font-size: 0.95rem;
+}
+.mb-capstone-item-note {
+  margin-top: 0.2rem;
+  font-size: 0.9rem;
+  opacity: 0.8;
+  font-style: italic;
+}
