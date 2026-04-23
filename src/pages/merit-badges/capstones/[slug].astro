@@ -81,6 +81,34 @@ const totalItems = coverage.reduce((sum, c) => sum + c.items.length, 0);
       ))}
     </section>
 
+    {capstone.schedule && (
+      <section aria-labelledby="schedule-title" class="mb-section">
+        <h2 id="schedule-title">Schedule &amp; Time Commitment</h2>
+        <p>
+          <strong>Total time:</strong> about {capstone.schedule.totalHours} hours of counselor time.
+        </p>
+        <p>{capstone.schedule.overview}</p>
+        <table class="mb-schedule">
+          <thead>
+            <tr>
+              <th>Session</th>
+              <th>Hours</th>
+              <th>Focus</th>
+            </tr>
+          </thead>
+          <tbody>
+            {capstone.schedule.sessions.map((s) => (
+              <tr>
+                <td>{s.day}</td>
+                <td>{s.hours}</td>
+                <td>{s.focus}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
+    )}
+
     <section class="mb-section">
       <p>
         Interested in running this capstone with a Scout? <a href="/contact/">Get in touch</a> or
