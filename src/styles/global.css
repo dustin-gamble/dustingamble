@@ -905,7 +905,7 @@ table.mb-schedule tr:last-child td {
   position: absolute;
   left: 18px;
   top: -4px;
-  background: white;
+  background: var(--bg, #fff);
   border: 1px solid var(--line, #ddd);
   border-radius: 4px;
   padding: 1px 6px;
@@ -937,7 +937,7 @@ table.mb-schedule tr:last-child td {
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
-  background: white;
+  background: var(--bg, #fff);
   border: 1px solid var(--line, #ddd);
   border-radius: 999px;
   padding: 0.15rem 0.5rem 0.15rem 0.7rem;
@@ -965,7 +965,8 @@ table.mb-schedule tr:last-child td {
   padding: 1rem 1.2rem;
   border: 1px solid var(--line, #ddd);
   border-radius: 10px;
-  background: color-mix(in srgb, var(--accent, #2a6df4) 3%, white);
+  background: color-mix(in srgb, var(--accent, #2a6df4) 4%, var(--bg, #fff));
+  color: var(--text, #111);
 }
 .rocket-calc h3 { margin-top: 0; }
 .rocket-calc-grid {
@@ -989,7 +990,8 @@ table.mb-schedule tr:last-child td {
   padding: 0.35rem 0.5rem;
   border: 1px solid var(--line, #ccc);
   border-radius: 6px;
-  background: white;
+  background: var(--bg, #fff);
+  color: var(--text, #111);
   font-size: 0.95rem;
 }
 .rocket-calc-controls input[type="range"] { padding: 0; accent-color: var(--accent, #2a6df4); }
@@ -999,7 +1001,7 @@ table.mb-schedule tr:last-child td {
   gap: 0.3rem 0.8rem;
   margin-top: 0.4rem;
   padding: 0.7rem 0.9rem;
-  background: white;
+  background: var(--bg, #fff);
   border: 1px solid var(--line, #ddd);
   border-radius: 6px;
 }
@@ -1020,11 +1022,11 @@ table.mb-schedule tr:last-child td {
 .rocket-calc-warn {
   margin: 0;
   padding: 0.5rem 0.7rem;
-  background: #fff4e0;
+  background: color-mix(in srgb, #d97706 18%, var(--bg, #fff));
   border-left: 3px solid #d97706;
   border-radius: 4px;
   font-size: 0.85rem;
-  color: #7a4500;
+  color: var(--text, #111);
 }
 .rocket-calc .btn {
   align-self: flex-start;
