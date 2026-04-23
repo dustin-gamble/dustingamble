@@ -71,7 +71,7 @@ const brainstorms: Record<string, any> = {
   },
 };
 
-const showRocketCalc = capstone.slug === "reusable-rocket-recovery";
+const showRocketCalc = capstone.slug === "reusable-rocket-recovery" || capstone.slug === "telemetry-rocket";
 const brainstorm = brainstorms[capstone.slug];
 ---
 <BaseLayout
