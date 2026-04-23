@@ -1,5 +1,7 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
+import BrainstormMatrix from "../../../components/BrainstormMatrix.astro";
+import RocketCalculator from "../../../components/RocketCalculator.astro";
 import { getCapstones, getCapstoneBySlug, resolveCapstoneCoverage } from "../../../lib/merit-badges.js";
 
 export async function getStaticPaths() {
@@ -13,6 +15,64 @@ export async function getStaticPaths() {
 const { capstone } = Astro.props;
 const coverage = resolveCapstoneCoverage(capstone);
 const totalItems = coverage.reduce((sum, c) => sum + c.items.length, 0);
+
+// Per-capstone interactive content
+const brainstorms: Record<string, any> = {
+  "patrol-box-2": {
+    id: "patrolbox",
+    title: "Brainstorm: what's your patrol's biggest gear pain?",
+    intro: "Drag dots to score each idea on impact (vertical) and effort (horizontal). The Quick Wins quadrant is the sweet spot for a 6-week capstone.",
+    xAxis: { low: "Quick to build", high: "Big build" },
+    yAxis: { low: "Nice to have", high: "Patrol can't function without it" },
+    ideas: [
+      { text: "Faster chuck-box setup", x: 0.35, y: 0.85 },
+      { text: "Stove platform that doesn't wobble", x: 0.25, y: 0.75 },
+      { text: "Wind-proof flag stand", x: 0.4, y: 0.55 },
+      { text: "Gear sled for parking-lot to camp", x: 0.7, y: 0.7 },
+      { text: "Lantern hanging tree", x: 0.2, y: 0.4 },
+      { text: "Fold-flat dish-line drying rack", x: 0.55, y: 0.6 },
+      { text: "Patrol box rebuilt with drawers", x: 0.85, y: 0.9 },
+      { text: "Rope-coil organizer", x: 0.15, y: 0.3 },
+    ],
+  },
+  "troop-toolbox-invention": {
+    id: "toolbox",
+    title: "Brainstorm: small, real, fixable problems",
+    intro: "Watch one campout and write down anything lost, dropped, retied, or cursed at. Score each idea here. Aim for the bottom-left quadrant — that's the badge sweet spot.",
+    xAxis: { low: "Cheap + fast", high: "Big project" },
+    yAxis: { low: "Mild annoyance", high: "Happens every campout" },
+    ideas: [
+      { text: "Mess-kit name-tag system", x: 0.15, y: 0.7 },
+      { text: "Tent-stake organizer pouch", x: 0.2, y: 0.6 },
+      { text: "Flashlight dummy-cord clip", x: 0.1, y: 0.55 },
+      { text: "Knot-tying practice board", x: 0.25, y: 0.4 },
+      { text: "Color-coded patrol-rope ends", x: 0.1, y: 0.65 },
+      { text: "Drying line clip that doesn't snap", x: 0.15, y: 0.5 },
+      { text: "Pocket fire-starter dispenser", x: 0.2, y: 0.45 },
+      { text: "Reusable propane-bottle handle", x: 0.4, y: 0.55 },
+    ],
+  },
+  "reusable-rocket-recovery": {
+    id: "recovery",
+    title: "Brainstorm: rocket recovery improvements",
+    intro: "Pick one subsystem to improve. Score on Inventing payoff (vertical — does it teach the badge?) vs build effort (horizontal). The telemetry payload from the paired Telemetry Rocket capstone gives you real before/after data on whichever you pick.",
+    xAxis: { low: "An afternoon of work", high: "Multi-week build" },
+    yAxis: { low: "Marginal improvement", high: "Real flight-day win" },
+    ideas: [
+      { text: "Streamer→chute reefing mechanism", x: 0.6, y: 0.85 },
+      { text: "Tougher shock-cord mount", x: 0.25, y: 0.7 },
+      { text: "Quick-swap fin can", x: 0.65, y: 0.6 },
+      { text: "Rapid-reload payload bay", x: 0.55, y: 0.8 },
+      { text: "Buzzer / LED recovery beacon", x: 0.3, y: 0.65 },
+      { text: "Wadding alternative (Nomex pad)", x: 0.2, y: 0.45 },
+      { text: "Streamer tape change for visibility", x: 0.1, y: 0.3 },
+      { text: "Dual-deploy mod with timer", x: 0.95, y: 0.95 },
+    ],
+  },
+};
+
+const showRocketCalc = capstone.slug === "reusable-rocket-recovery";
+const brainstorm = brainstorms[capstone.slug];
 ---
 <BaseLayout
   title={`${capstone.title} — Merit Badge Capstone`}
@@ -80,6 +140,27 @@ const totalItems = coverage.reduce((sum, c) => sum + c.items.length, 0);
         </div>
       ))}
     </section>
+
+    {brainstorm && (
+      <section aria-labelledby="brainstorm-title" class="mb-section">
+        <h2 id="brainstorm-title">Starting Ideas — Interactive Brainstorm</h2>
+        <BrainstormMatrix
+          id={brainstorm.id}
+          title={brainstorm.title}
+          intro={brainstorm.intro}
+          xAxis={brainstorm.xAxis}
+          yAxis={brainstorm.yAxis}
+          ideas={brainstorm.ideas}
+        />
+      </section>
+    )}
+
+    {showRocketCalc && (
+      <section aria-labelledby="rocketcalc-title" class="mb-section">
+        <h2 id="rocketcalc-title">Rocket Sizing Sandbox</h2>
+        <RocketCalculator />
+      </section>
+    )}
 
     {capstone.schedule && (
       <section aria-labelledby="schedule-title" class="mb-section">

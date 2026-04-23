@@ -818,3 +818,235 @@ table.mb-schedule thead th {
 table.mb-schedule tr:last-child td {
   border-bottom: 0;
 }
+
+/* ---------- Brainstorm Matrix ---------- */
+.brainstorm { margin: 1rem 0 1.5rem; }
+.brainstorm h3 { margin: 0 0 0.4rem; }
+.brainstorm-help { font-size: 0.9rem; }
+.brainstorm-grid {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  grid-template-rows: 1fr 32px;
+  grid-template-areas: "ay canvas" ".  ax";
+  gap: 0.4rem;
+  margin: 0.5rem 0;
+}
+.brainstorm-axis-y {
+  grid-area: ay;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: var(--muted, #666);
+  text-align: right;
+  padding-right: 0.4rem;
+  border-right: 1px solid var(--line, #ddd);
+  font-weight: 500;
+}
+.brainstorm-axis-x {
+  grid-area: ax;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: var(--muted, #666);
+  border-top: 1px solid var(--line, #ddd);
+  padding-top: 0.3rem;
+  font-weight: 500;
+}
+.brainstorm-canvas {
+  grid-area: canvas;
+  position: relative;
+  height: 360px;
+  background:
+    linear-gradient(to right, transparent 49.7%, var(--line, #ddd) 49.7%, var(--line, #ddd) 50.3%, transparent 50.3%),
+    linear-gradient(to bottom, transparent 49.7%, var(--line, #ddd) 49.7%, var(--line, #ddd) 50.3%, transparent 50.3%),
+    color-mix(in srgb, var(--accent, #2a6df4) 4%, transparent);
+  border: 1px solid var(--line, #ddd);
+  border-radius: 8px;
+  cursor: crosshair;
+  overflow: hidden;
+  user-select: none;
+}
+.brainstorm-quadrant {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text, #000) 35%, transparent);
+  pointer-events: none;
+}
+.brainstorm-q-tl { top: 0; left: 0; }
+.brainstorm-q-tr { top: 0; right: 0; }
+.brainstorm-q-bl { bottom: 0; left: 0; align-items: flex-end; }
+.brainstorm-q-br { bottom: 0; right: 0; align-items: flex-end; }
+.brainstorm-dot {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  margin-left: -7px;
+  margin-bottom: -7px;
+  background: var(--accent, #2a6df4);
+  border: 2px solid white;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  cursor: grab;
+  touch-action: none;
+}
+.brainstorm-dot:hover { transform: scale(1.25); }
+.brainstorm-dot-dragging { cursor: grabbing; transform: scale(1.4); z-index: 5; }
+.brainstorm-label {
+  position: absolute;
+  left: 18px;
+  top: -4px;
+  background: white;
+  border: 1px solid var(--line, #ddd);
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  pointer-events: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  color: var(--text, #111);
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.brainstorm-list {
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  padding: 0.6rem 0.9rem;
+  background: var(--accent-soft, #f3f6ff);
+  border-radius: 6px;
+}
+.brainstorm-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0.4rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.brainstorm-list li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: white;
+  border: 1px solid var(--line, #ddd);
+  border-radius: 999px;
+  padding: 0.15rem 0.5rem 0.15rem 0.7rem;
+}
+.brainstorm-remove {
+  background: none;
+  border: 0;
+  color: var(--muted, #888);
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 0.1rem;
+}
+.brainstorm-remove:hover { color: #d33; }
+
+@media (max-width: 640px) {
+  .brainstorm-grid { grid-template-columns: 80px 1fr; }
+  .brainstorm-canvas { height: 300px; }
+  .brainstorm-axis-y, .brainstorm-axis-x { font-size: 0.7rem; }
+}
+
+/* ---------- Rocket Calculator ---------- */
+.rocket-calc {
+  margin: 1rem 0 1.5rem;
+  padding: 1rem 1.2rem;
+  border: 1px solid var(--line, #ddd);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--accent, #2a6df4) 3%, white);
+}
+.rocket-calc h3 { margin-top: 0; }
+.rocket-calc-grid {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 1.2rem;
+  margin-top: 0.8rem;
+}
+.rocket-calc-controls { display: flex; flex-direction: column; gap: 0.7rem; }
+.rocket-calc-controls label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text, #111);
+}
+.rocket-calc-controls select,
+.rocket-calc-controls input[type="range"] {
+  width: 100%;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid var(--line, #ccc);
+  border-radius: 6px;
+  background: white;
+  font-size: 0.95rem;
+}
+.rocket-calc-controls input[type="range"] { padding: 0; accent-color: var(--accent, #2a6df4); }
+.rocket-calc-readout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.3rem 0.8rem;
+  margin-top: 0.4rem;
+  padding: 0.7rem 0.9rem;
+  background: white;
+  border: 1px solid var(--line, #ddd);
+  border-radius: 6px;
+}
+.rocket-calc-readout > div { display: flex; flex-direction: column; }
+.rc-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted, #777);
+  font-weight: 600;
+}
+.rc-value {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 1rem;
+  color: var(--text, #111);
+  font-weight: 600;
+}
+.rocket-calc-warn {
+  margin: 0;
+  padding: 0.5rem 0.7rem;
+  background: #fff4e0;
+  border-left: 3px solid #d97706;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  color: #7a4500;
+}
+.rocket-calc .btn {
+  align-self: flex-start;
+  padding: 0.55rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  background: var(--accent, #2a6df4);
+  color: white;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.rocket-calc .btn:hover { filter: brightness(1.1); }
+.rocket-calc-stage {
+  background: #0c1f3a;
+  border-radius: 8px;
+  overflow: hidden;
+  align-self: start;
+}
+.rocket-calc-stage svg { display: block; width: 100%; height: auto; }
+
+@media (max-width: 720px) {
+  .rocket-calc-grid { grid-template-columns: 1fr; }
+  .rocket-calc-stage { max-width: 320px; margin: 0 auto; }
+}

@@ -1,0 +1,135 @@
+---
+// Interactive 2x2 brainstorming matrix.
+// Props:
+//   id: unique DOM id suffix (matrix can appear multiple times per page)
+//   title: heading for the matrix
+//   xAxis: { low, high } e.g. { low: "Quick to build", high: "Big build" }
+//   yAxis: { low, high } e.g. { low: "Nice to have", high: "High impact" }
+//   ideas: [{ text, x, y }]  x,y in 0..1 (0 = left/bottom, 1 = right/top)
+const { id, title, xAxis, yAxis, ideas, intro } = Astro.props;
+const seed = JSON.stringify(ideas);
+---
+
+<div class="brainstorm" id={`bm-${id}`}>
+    <h3>{title}</h3>
+    {intro && <p class="muted">{intro}</p>}
+    <p class="muted brainstorm-help">
+        Drag any dot to reposition it. Click an empty area to drop a new idea, then type a label and
+        press Enter. Your edits stay in this browser only — refresh to start over.
+    </p>
+    <div class="brainstorm-grid" data-seed={seed} data-id={id}>
+        <div class="brainstorm-axis-y">
+            <span class="brainstorm-axis-high">{yAxis.high}</span>
+            <span class="brainstorm-axis-low">{yAxis.low}</span>
+        </div>
+        <div class="brainstorm-canvas" tabindex="0" aria-label={`${title} matrix`}>
+            <div class="brainstorm-quadrant brainstorm-q-tl"><span>Big bets</span></div>
+            <div class="brainstorm-quadrant brainstorm-q-tr"><span>Stretch goals</span></div>
+            <div class="brainstorm-quadrant brainstorm-q-bl"><span>Quick wins</span></div>
+            <div class="brainstorm-quadrant brainstorm-q-br"><span>Time sinks</span></div>
+        </div>
+        <div class="brainstorm-axis-x">
+            <span class="brainstorm-axis-low">{xAxis.low}</span>
+            <span class="brainstorm-axis-high">{xAxis.high}</span>
+        </div>
+    </div>
+    <div class="brainstorm-list" data-list-for={id}>
+        <strong>Ideas on the board</strong>
+        <ul></ul>
+    </div>
+</div>
+
+<script>
+    type Idea = { text: string; x: number; y: number };
+
+    function initMatrix(grid: HTMLElement) {
+        const id = grid.dataset.id!;
+        const seed: Idea[] = JSON.parse(grid.dataset.seed || "[]");
+        const canvas = grid.querySelector<HTMLElement>(".brainstorm-canvas")!;
+        const list = document.querySelector<HTMLElement>(`[data-list-for="${id}"] ul`)!;
+        const ideas: Idea[] = seed.map((i) => ({ ...i }));
+
+        function render() {
+            // wipe non-quadrant children
+            canvas.querySelectorAll(".brainstorm-dot").forEach((el) => el.remove());
+            list.innerHTML = "";
+            ideas.forEach((idea, idx) => {
+                const dot = document.createElement("div");
+                dot.className = "brainstorm-dot";
+                dot.style.left = `${idea.x * 100}%`;
+                dot.style.bottom = `${idea.y * 100}%`;
+                dot.title = idea.text;
+                dot.dataset.idx = String(idx);
+                const label = document.createElement("span");
+                label.className = "brainstorm-label";
+                label.textContent = idea.text;
+                dot.appendChild(label);
+                canvas.appendChild(dot);
+
+                const li = document.createElement("li");
+                li.textContent = idea.text;
+                const remove = document.createElement("button");
+                remove.type = "button";
+                remove.className = "brainstorm-remove";
+                remove.setAttribute("aria-label", `Remove ${idea.text}`);
+                remove.textContent = "×";
+                remove.addEventListener("click", () => {
+                    ideas.splice(idx, 1);
+                    render();
+                });
+                li.appendChild(remove);
+                list.appendChild(li);
+            });
+        }
+
+        // Drag
+        let dragging: { idx: number; offsetX: number; offsetY: number } | null = null;
+        canvas.addEventListener("pointerdown", (e: PointerEvent) => {
+            const target = (e.target as HTMLElement).closest<HTMLElement>(".brainstorm-dot");
+            if (!target) return;
+            const idx = Number(target.dataset.idx);
+            const rect = target.getBoundingClientRect();
+            dragging = { idx, offsetX: e.clientX - rect.left - rect.width / 2, offsetY: e.clientY - rect.top - rect.height / 2 };
+            target.setPointerCapture(e.pointerId);
+            target.classList.add("brainstorm-dot-dragging");
+        });
+        canvas.addEventListener("pointermove", (e: PointerEvent) => {
+            if (!dragging) return;
+            const rect = canvas.getBoundingClientRect();
+            const px = e.clientX - rect.left - dragging.offsetX;
+            const py = e.clientY - rect.top - dragging.offsetY;
+            const x = Math.max(0, Math.min(1, px / rect.width));
+            const y = Math.max(0, Math.min(1, 1 - py / rect.height));
+            ideas[dragging.idx].x = x;
+            ideas[dragging.idx].y = y;
+            const dot = canvas.querySelector<HTMLElement>(`.brainstorm-dot[data-idx="${dragging.idx}"]`);
+            if (dot) {
+                dot.style.left = `${x * 100}%`;
+                dot.style.bottom = `${y * 100}%`;
+            }
+        });
+        canvas.addEventListener("pointerup", () => {
+            if (dragging) {
+                const dot = canvas.querySelector<HTMLElement>(`.brainstorm-dot[data-idx="${dragging.idx}"]`);
+                dot?.classList.remove("brainstorm-dot-dragging");
+            }
+            dragging = null;
+        });
+
+        // Click empty space to add
+        canvas.addEventListener("click", (e: MouseEvent) => {
+            if ((e.target as HTMLElement).closest(".brainstorm-dot")) return;
+            const rect = canvas.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width;
+            const y = 1 - (e.clientY - rect.top) / rect.height;
+            const text = window.prompt("New idea (short label):");
+            if (!text) return;
+            ideas.push({ text: text.trim(), x, y });
+            render();
+        });
+
+        render();
+    }
+
+    document.querySelectorAll<HTMLElement>(".brainstorm-grid").forEach(initMatrix);
+</script>
