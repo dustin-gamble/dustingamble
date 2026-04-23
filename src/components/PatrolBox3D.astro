@@ -24,22 +24,15 @@
     </p>
 </div>
 
-<script type="importmap" is:inline>
-{
-  "imports": {
-    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
-    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
-  }
-}
-</script>
-
 <script type="module" is:inline>
-    import * as THREE from "three";
-    import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+    import * as THREE from "https://esm.sh/three@0.160.0";
+    import { OrbitControls } from "https://esm.sh/three@0.160.0/examples/jsm/controls/OrbitControls.js";
 
     function init() {
         const stage = document.getElementById("pb3d-stage");
         if (!stage) return;
+        if (stage.dataset.initialized === "1") return;
+        stage.dataset.initialized = "1";
 
         const W = 30, D = 18, H = 24;
         const T = 1;
@@ -230,4 +223,5 @@
     } else {
         init();
     }
+    document.addEventListener("astro:page-load", init);
 </script>
