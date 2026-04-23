@@ -1,0 +1,320 @@
+---
+// Estes-style rocket altitude calculator with animated trajectory.
+// Self-contained: kit + motor data baked into the client script.
+---
+
+<div class="rocket-calc" id="rocket-calc">
+    <h3>Rocket Altitude Calculator &amp; Flight Sim</h3>
+    <p class="muted">
+        Pick a stock Estes airframe and motor, then add the telemetry payload weight. The simulator
+        runs a numerical flight model (thrust, gravity, and drag at every 20 ms step) and animates
+        the trajectory. Treat the altitude as a teaching estimate — wind, exact drag coefficient,
+        and rod tip-off all shift the real number.
+    </p>
+
+    <div class="rocket-calc-grid">
+        <div class="rocket-calc-controls">
+            <label>
+                Airframe (Estes kit)
+                <select id="rc-kit"></select>
+            </label>
+            <label>
+                Motor
+                <select id="rc-motor"></select>
+            </label>
+            <label>
+                Telemetry payload weight: <output id="rc-payload-out">25</output> g
+                <input type="range" id="rc-payload" min="0" max="80" step="1" value="25" />
+            </label>
+
+            <div class="rocket-calc-readout">
+                <div><span class="rc-label">Predicted apogee</span><span class="rc-value" id="rc-apogee">—</span></div>
+                <div><span class="rc-label">Burnout velocity</span><span class="rc-value" id="rc-vmax">—</span></div>
+                <div><span class="rc-label">Time to apogee</span><span class="rc-value" id="rc-tmax">—</span></div>
+                <div><span class="rc-label">Liftoff thrust-to-weight</span><span class="rc-value" id="rc-twr">—</span></div>
+            </div>
+
+            <p id="rc-warn" class="rocket-calc-warn" hidden></p>
+
+            <button type="button" id="rc-launch" class="btn">Launch 🚀</button>
+        </div>
+
+        <div class="rocket-calc-stage">
+            <svg id="rc-stage" viewBox="0 0 320 480" aria-label="Rocket trajectory animation">
+                <defs>
+                    <linearGradient id="rc-sky" x1="0" x2="0" y1="0" y2="1">
+                        <stop offset="0%" stop-color="#0c1f3a" />
+                        <stop offset="60%" stop-color="#2d6cb0" />
+                        <stop offset="100%" stop-color="#88c9ff" />
+                    </linearGradient>
+                </defs>
+                <rect x="0" y="0" width="320" height="450" fill="url(#rc-sky)" />
+                <rect x="0" y="450" width="320" height="30" fill="#3a5a2e" />
+                <g id="rc-grid" stroke="rgba(255,255,255,0.15)" stroke-dasharray="3 3"></g>
+                <g id="rc-grid-labels" fill="rgba(255,255,255,0.55)" font-size="9" font-family="ui-monospace, monospace"></g>
+                <path id="rc-trail" fill="none" stroke="rgba(255,200,80,0.85)" stroke-width="2" />
+                <g id="rc-rocket" transform="translate(160 450)">
+                    <polygon points="0,-14 -5,4 5,4" fill="#e8e8e8" stroke="#222" stroke-width="0.6" />
+                    <polygon points="-5,4 -9,10 -5,10" fill="#c83838" />
+                    <polygon points="5,4 9,10 5,10" fill="#c83838" />
+                    <polygon id="rc-flame" points="-3,4 3,4 0,14" fill="orange" opacity="0" />
+                </g>
+                <text id="rc-altlabel" x="160" y="20" fill="white" font-size="13" font-family="ui-monospace, monospace" text-anchor="middle">0 m</text>
+            </svg>
+        </div>
+    </div>
+</div>
+
+<script>
+    // --- Data: Estes airframes and motors -----------------------------------
+    type Kit = {
+        slug: string;
+        name: string;
+        empty_g: number;
+        diameter_mm: number;
+        cd: number;
+        mounts: string[]; // motor mount sizes: "13mm" | "18mm" | "24mm" | "29mm"
+        note?: string;
+    };
+    type Motor = {
+        slug: string;
+        name: string;
+        size: string; // mount size
+        impulse_ns: number;
+        avg_thrust_n: number;
+        burn_s: number;
+        propellant_g: number;
+        delay_s: number;
+    };
+
+    const KITS: Kit[] = [
+        { slug: "lil-spite", name: "Lil' Spite", empty_g: 14, diameter_mm: 20, cd: 0.75, mounts: ["18mm"], note: "Tiny airframe used in the Telemetry Rocket capstone." },
+        { slug: "alpha", name: "Alpha", empty_g: 25, diameter_mm: 24, cd: 0.75, mounts: ["18mm"] },
+        { slug: "alpha-iii", name: "Alpha III", empty_g: 33, diameter_mm: 25, cd: 0.75, mounts: ["18mm"] },
+        { slug: "wizard", name: "Wizard", empty_g: 13, diameter_mm: 20, cd: 0.7, mounts: ["18mm"], note: "Light + slick — best altitudes per motor." },
+        { slug: "big-bertha", name: "Big Bertha", empty_g: 62, diameter_mm: 41, cd: 0.8, mounts: ["18mm"] },
+        { slug: "der-red-max", name: "Der Red Max", empty_g: 60, diameter_mm: 41, cd: 0.85, mounts: ["18mm"] },
+        { slug: "patriot", name: "Patriot", empty_g: 80, diameter_mm: 41, cd: 0.85, mounts: ["18mm"], note: "Heavier — needs a C motor minimum." },
+        { slug: "majestic", name: "Majestic", empty_g: 145, diameter_mm: 56, cd: 0.85, mounts: ["24mm"], note: "Mid-power; use D or E." },
+        { slug: "ventris", name: "Ventris", empty_g: 220, diameter_mm: 56, cd: 0.85, mounts: ["24mm", "29mm"], note: "Larger payload bay; great telemetry platform." },
+    ];
+
+    const MOTORS: Motor[] = [
+        { slug: "12a6-2", name: "1/2A6-2", size: "18mm", impulse_ns: 1.25, avg_thrust_n: 2.5, burn_s: 0.32, propellant_g: 1.6, delay_s: 2 },
+        { slug: "a8-3", name: "A8-3", size: "18mm", impulse_ns: 2.5, avg_thrust_n: 2.7, burn_s: 0.73, propellant_g: 3.12, delay_s: 3 },
+        { slug: "b4-4", name: "B4-4", size: "18mm", impulse_ns: 5.0, avg_thrust_n: 4.3, burn_s: 1.16, propellant_g: 5.6, delay_s: 4 },
+        { slug: "b6-4", name: "B6-4", size: "18mm", impulse_ns: 5.0, avg_thrust_n: 4.3, burn_s: 0.83, propellant_g: 5.6, delay_s: 4 },
+        { slug: "c6-3", name: "C6-3", size: "18mm", impulse_ns: 10.0, avg_thrust_n: 4.7, burn_s: 1.86, propellant_g: 11.0, delay_s: 3 },
+        { slug: "c6-5", name: "C6-5", size: "18mm", impulse_ns: 10.0, avg_thrust_n: 4.7, burn_s: 1.86, propellant_g: 11.0, delay_s: 5 },
+        { slug: "c6-7", name: "C6-7", size: "18mm", impulse_ns: 10.0, avg_thrust_n: 4.7, burn_s: 1.86, propellant_g: 11.0, delay_s: 7 },
+        { slug: "d12-5", name: "D12-5", size: "24mm", impulse_ns: 16.84, avg_thrust_n: 9.86, burn_s: 1.6, propellant_g: 16.4, delay_s: 5 },
+        { slug: "e9-6", name: "E9-6", size: "24mm", impulse_ns: 30.0, avg_thrust_n: 12.0, burn_s: 2.8, propellant_g: 35.0, delay_s: 6 },
+        { slug: "e12-6", name: "E12-6", size: "24mm", impulse_ns: 30.0, avg_thrust_n: 17.6, burn_s: 1.7, propellant_g: 32.0, delay_s: 6 },
+        { slug: "f15-6", name: "F15-6", size: "29mm", impulse_ns: 49.6, avg_thrust_n: 16.5, burn_s: 3.2, propellant_g: 60.0, delay_s: 6 },
+    ];
+
+    // --- DOM ----------------------------------------------------------------
+    const root = document.getElementById("rocket-calc");
+    if (root) {
+        const kitSel = root.querySelector<HTMLSelectElement>("#rc-kit")!;
+        const motorSel = root.querySelector<HTMLSelectElement>("#rc-motor")!;
+        const payloadIn = root.querySelector<HTMLInputElement>("#rc-payload")!;
+        const payloadOut = root.querySelector<HTMLOutputElement>("#rc-payload-out")!;
+        const apogeeEl = root.querySelector("#rc-apogee")!;
+        const vmaxEl = root.querySelector("#rc-vmax")!;
+        const tmaxEl = root.querySelector("#rc-tmax")!;
+        const twrEl = root.querySelector("#rc-twr")!;
+        const warnEl = root.querySelector<HTMLElement>("#rc-warn")!;
+        const launchBtn = root.querySelector<HTMLButtonElement>("#rc-launch")!;
+        const rocketG = root.querySelector<SVGGElement>("#rc-rocket")!;
+        const flame = root.querySelector<SVGElement>("#rc-flame")!;
+        const trail = root.querySelector<SVGPathElement>("#rc-trail")!;
+        const altLabel = root.querySelector<SVGTextElement>("#rc-altlabel")!;
+        const grid = root.querySelector<SVGGElement>("#rc-grid")!;
+        const gridLabels = root.querySelector<SVGGElement>("#rc-grid-labels")!;
+
+        // Populate kits
+        KITS.forEach((k) => {
+            const o = document.createElement("option");
+            o.value = k.slug;
+            o.textContent = `${k.name} (${k.empty_g} g)`;
+            kitSel.appendChild(o);
+        });
+        kitSel.value = "lil-spite";
+
+        function refreshMotors() {
+            const kit = KITS.find((k) => k.slug === kitSel.value)!;
+            motorSel.innerHTML = "";
+            MOTORS.filter((m) => kit.mounts.includes(m.size)).forEach((m) => {
+                const o = document.createElement("option");
+                o.value = m.slug;
+                o.textContent = `${m.name}  (${m.impulse_ns.toFixed(1)} N·s, ${m.size})`;
+                motorSel.appendChild(o);
+            });
+            // sensible default
+            const def = motorSel.querySelector<HTMLOptionElement>("option[value='b6-4']") || motorSel.querySelector<HTMLOptionElement>("option[value='c6-5']") || motorSel.querySelector<HTMLOptionElement>("option[value='d12-5']");
+            if (def) motorSel.value = def.value;
+        }
+
+        // --- Simulation ------------------------------------------------------
+        type SimResult = {
+            trajectory: { t: number; h: number; v: number }[];
+            apogee: number;
+            apogee_t: number;
+            v_burnout: number;
+            twr: number;
+            warning?: string;
+        };
+
+        function simulate(): SimResult {
+            const kit = KITS.find((k) => k.slug === kitSel.value)!;
+            const motor = MOTORS.find((m) => m.slug === motorSel.value)!;
+            const payload_g = Number(payloadIn.value);
+            const g = 9.81;
+            const rho = 1.225;
+            const dt = 0.02;
+            const m_empty = (kit.empty_g + payload_g + motor.propellant_g) / 1000; // start mass with prop
+            const m_burnout = (kit.empty_g + payload_g) / 1000;
+            const A = Math.PI * Math.pow(kit.diameter_mm / 2000, 2);
+            const Cd = kit.cd;
+
+            const traj: { t: number; h: number; v: number }[] = [{ t: 0, h: 0, v: 0 }];
+            let t = 0,
+                v = 0,
+                h = 0;
+
+            // Burn phase
+            while (t < motor.burn_s) {
+                const m = m_empty - ((m_empty - m_burnout) * t) / motor.burn_s;
+                const drag = 0.5 * rho * v * v * Cd * A * (v >= 0 ? 1 : -1);
+                const F_net = motor.avg_thrust_n - drag - m * g;
+                const a = F_net / m;
+                v += a * dt;
+                h += v * dt;
+                t += dt;
+                traj.push({ t, h, v });
+            }
+            const v_burnout = v;
+
+            // Coast phase
+            while (v > 0 && t < 60) {
+                const drag = 0.5 * rho * v * v * Cd * A;
+                const a = (-drag - m_burnout * g) / m_burnout;
+                v += a * dt;
+                h += v * dt;
+                t += dt;
+                traj.push({ t, h, v });
+            }
+
+            const apogee = Math.max(...traj.map((p) => p.h));
+            const apogee_t = traj.find((p) => p.h === apogee)!.t;
+            const twr = motor.avg_thrust_n / (m_empty * g);
+
+            let warning: string | undefined;
+            if (twr < 5) warning = `⚠ Low thrust-to-weight (${twr.toFixed(1)}). NAR safety code suggests at least 5:1 at liftoff — pick a hotter motor or a lighter airframe.`;
+            else if (apogee < 10) warning = `⚠ Predicted apogee under 10 m. Motor is undersized for this airframe + payload.`;
+
+            return { trajectory: traj, apogee, apogee_t, v_burnout, twr, warning };
+        }
+
+        let lastSim: SimResult | null = null;
+        let animHandle: number | null = null;
+
+        function updateReadout() {
+            const sim = simulate();
+            lastSim = sim;
+            apogeeEl.textContent = `${sim.apogee.toFixed(1)} m  (${(sim.apogee * 3.281).toFixed(0)} ft)`;
+            vmaxEl.textContent = `${sim.v_burnout.toFixed(1)} m/s  (${(sim.v_burnout * 2.237).toFixed(0)} mph)`;
+            tmaxEl.textContent = `${sim.apogee_t.toFixed(2)} s`;
+            twrEl.textContent = `${sim.twr.toFixed(1)} : 1`;
+            if (sim.warning) {
+                warnEl.hidden = false;
+                warnEl.textContent = sim.warning;
+            } else {
+                warnEl.hidden = true;
+            }
+            drawGrid(sim.apogee);
+        }
+
+        function drawGrid(apogee: number) {
+            grid.innerHTML = "";
+            gridLabels.innerHTML = "";
+            // Pick a tick spacing that gives 4-6 lines
+            const spacings = [5, 10, 25, 50, 100, 200, 500];
+            let tick = 50;
+            for (const s of spacings) {
+                if (apogee / s <= 6) {
+                    tick = s;
+                    break;
+                }
+            }
+            const maxAlt = Math.max(apogee, tick);
+            for (let alt = tick; alt <= maxAlt; alt += tick) {
+                const y = 450 - (alt / maxAlt) * 430;
+                const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                line.setAttribute("x1", "0");
+                line.setAttribute("x2", "320");
+                line.setAttribute("y1", String(y));
+                line.setAttribute("y2", String(y));
+                grid.appendChild(line);
+                const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                label.setAttribute("x", "4");
+                label.setAttribute("y", String(y - 2));
+                label.textContent = `${alt} m`;
+                gridLabels.appendChild(label);
+            }
+        }
+
+        function animate() {
+            if (!lastSim) return;
+            if (animHandle) cancelAnimationFrame(animHandle);
+            const sim = lastSim;
+            const startWall = performance.now();
+            const playSpeed = Math.min(1, 3 / sim.apogee_t); // longer flights play faster, capped
+            const maxAlt = Math.max(sim.apogee, 1);
+            flame.setAttribute("opacity", "1");
+            const trailPoints: string[] = [];
+            const motor = MOTORS.find((m) => m.slug === motorSel.value)!;
+
+            function step(now: number) {
+                const tSim = ((now - startWall) / 1000) * playSpeed;
+                if (tSim >= sim.trajectory[sim.trajectory.length - 1].t) {
+                    // settle at apogee then fall back to ground for visual reset
+                    const apogeeY = 450 - (sim.apogee / maxAlt) * 430;
+                    rocketG.setAttribute("transform", `translate(160 ${apogeeY})`);
+                    altLabel.textContent = `Apogee: ${sim.apogee.toFixed(1)} m`;
+                    flame.setAttribute("opacity", "0");
+                    return;
+                }
+                // find nearest sample
+                let i = 0;
+                while (i < sim.trajectory.length - 1 && sim.trajectory[i + 1].t < tSim) i++;
+                const p = sim.trajectory[i];
+                const y = 450 - (p.h / maxAlt) * 430;
+                rocketG.setAttribute("transform", `translate(160 ${y})`);
+                trailPoints.push(`${trailPoints.length === 0 ? "M" : "L"}160,${y}`);
+                trail.setAttribute("d", trailPoints.join(" "));
+                flame.setAttribute("opacity", p.t < motor.burn_s ? "1" : "0");
+                altLabel.textContent = `${p.h.toFixed(1)} m   v=${p.v.toFixed(1)} m/s`;
+                animHandle = requestAnimationFrame(step);
+            }
+            // reset trail
+            trail.setAttribute("d", "");
+            animHandle = requestAnimationFrame(step);
+        }
+
+        kitSel.addEventListener("change", () => {
+            refreshMotors();
+            updateReadout();
+        });
+        motorSel.addEventListener("change", updateReadout);
+        payloadIn.addEventListener("input", () => {
+            payloadOut.textContent = payloadIn.value;
+            updateReadout();
+        });
+        launchBtn.addEventListener("click", animate);
+
+        refreshMotors();
+        updateReadout();
+    }
+</script>
