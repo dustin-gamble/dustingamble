@@ -1052,3 +1052,42 @@ table.mb-schedule tr:last-child td {
   .rocket-calc-grid { grid-template-columns: 1fr; }
   .rocket-calc-stage { max-width: 320px; margin: 0 auto; }
 }
+
+/* ---------- Patrol Box 3D ---------- */
+.pb3d {
+  margin: 1rem 0 1.5rem;
+  padding: 1rem 1.2rem;
+  border: 1px solid var(--line, #ddd);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--accent, #2a6df4) 4%, var(--bg, #fff));
+}
+.pb3d h3 { margin-top: 0; }
+.pb3d-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.2rem;
+  margin: 0.8rem 0;
+  font-size: 0.9rem;
+}
+.pb3d-controls label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  cursor: pointer;
+}
+.pb3d-stage {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #eef1f5;
+  touch-action: none;
+}
+.pb3d-stage canvas {
+  display: block;
+  width: 100% !important;
+  height: auto !important;
+}
+.pb3d-legend {
+  font-size: 0.85rem;
+  margin-top: 0.6rem;
+}
