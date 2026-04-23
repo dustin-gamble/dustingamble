@@ -1313,6 +1313,71 @@ const CAPSTONES = [
                 footer:
                     "Estimated $80–$130 in materials. Most troops can absorb this from the equipment budget if the box stays with the troop.",
             },
+            {
+                heading: "Concept B — 80/20 frame, table-height patrol box",
+                body:
+                    "If the patrol wants the engineered look and a rain-tolerant box that doubles as a cook station, here's the cleaner concept. Body is 30\" W × 18\" D × 24\" H built from 80/20 1010-S extrusion (1\"×1\" smooth 10-series), with all 16 cuts done at the factory so the Scout never has to cut T-slot stock. Walls and dividers are 4 mm black corrugated plastic (Coroplast). Four 8\" folding legs go on the bottom so the box stands at table height when deployed and packs flat for transport. The front is a single coroplast door with a deadbolt latch and two plastic handles. Interior shelf and divider rails create slots for stove, pots, utensils, and cleanup gear.",
+            },
+            {
+                heading: "Cut list — 1010-S extrusion (factory cut)",
+                list: [
+                    "4 × 30\" — top/bottom long rails (front/back, top/bottom)",
+                    "4 × 18\" — top/bottom short rails (left/right, top/bottom)",
+                    "4 × 24\" — vertical corner posts",
+                    "2 × 30\" — interior shelf rails",
+                    "2 × 18\" — interior divider/slot rails",
+                ],
+                footer:
+                    "Total extrusion: 396 inches. At $0.42/in × 396 in = $166.32, plus 16 cuts × $3.00 = $48.00. Extrusion subtotal: $214.32.",
+            },
+            {
+                heading: "BOM — 80/20 structural hardware",
+                list: [
+                    "8 × #3395 — 10 Series anchor fastener assembly @ $4.64 = $37.12",
+                    "8 × #4265-Black — 10 Series 2-hole slotted inside corner bracket @ $8.73 = $69.84",
+                    "8 × #40-4332 — 10 Series 2-hole gusseted inside corner bracket @ $7.48 = $59.84",
+                    "32 × #3393 — 1/4-20 × 0.500\" button head screw assembly @ $0.73 = $23.36",
+                    "32 × #8901 — 10 Series standard slide-in T-nut @ $0.59 = $18.88",
+                    "4 × #3183 — 10 Series single-tab end fastener clip @ $1.35 = $5.40",
+                ],
+                footer: "Structural hardware subtotal: ~$214.44. The connectors — not the extrusion — are what drives this concept's cost.",
+            },
+            {
+                heading: "BOM — door hardware, panels, legs",
+                list: [
+                    "1 × #4486 — 10 & 15 Series deadbolt latch @ $10.76",
+                    "2 × #2062 — 10 Series plastic door handle @ $6.99 = $13.98",
+                    "1 sheet equivalent — 4 mm black Coroplast (~$29.90 if split from a 10-pack; cheaper from a local sign/plastics shop)",
+                    "1 set of 4 — 8\" folding metal legs (~$15–25 from a generic furniture-hardware seller)",
+                    "Misc black washers / panel screws / edge trim / leg retainer clips (~$20–35)",
+                ],
+                footer: "Door + panels + legs + misc subtotal: ~$90–105.",
+            },
+            {
+                heading: "Total cost — 80/20 concept",
+                body:
+                    "Faithful 80/20 build with branded connectors: about $518–$543 per box. Where to save: trim the number of branded brackets (use anchor fasteners + a few corner brackets instead of doubling up gusseted + slotted at every joint). Source the Coroplast locally rather than the Home Depot 10-pack. Buy folding legs from a generic furniture-hardware seller. With those three substitutions you can land closer to $350–$400.",
+            },
+            {
+                heading: "Why this is a better engineering capstone than the plywood version",
+                list: [
+                    "Cuts are factory-perfect — the Scout's design errors don't compound into a wobbly box.",
+                    "Failure modes are obvious and instructive — a loose joint is a loose anchor fastener, not a broken glue seam.",
+                    "Modular: shelf rails and divider rails can be repositioned mid-campout if the layout doesn't work.",
+                    "Weather-tolerant: aluminum extrusion and Coroplast both shrug off rain.",
+                    "Procurement and BOM management is a real engineering deliverable on its own — exactly the kind of artifact Engineering req 5 wants to see in the notebook.",
+                ],
+            },
+            {
+                heading: "Sources",
+                list: [
+                    "80/20 1010-S profile and pricing: 8020.net/1010.html",
+                    "80/20 internal fasteners catalog: 8020.net/fasteningmethods/internalfasteners.html",
+                    "80/20 latches and door components: 8020.net/panelsdoorcomponents/latchescatches.html",
+                    "Coroplast 4 mm black corrugated twinwall sheet (Home Depot 10-pack): homedepot.com",
+                    "Chuck-box reference design (traditional plywood): tombuildsstuff.com — 'Camping Kitchen Chuck Box Plans'",
+                ],
+            },
         ],
     },
     {

@@ -2,6 +2,7 @@
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import BrainstormMatrix from "../../../components/BrainstormMatrix.astro";
 import RocketCalculator from "../../../components/RocketCalculator.astro";
+import PatrolBox3D from "../../../components/PatrolBox3D.astro";
 import { getCapstones, getCapstoneBySlug, resolveCapstoneCoverage } from "../../../lib/merit-badges.js";
 
 export async function getStaticPaths() {
@@ -72,6 +73,7 @@ const brainstorms: Record<string, any> = {
 };
 
 const showRocketCalc = capstone.slug === "reusable-rocket-recovery" || capstone.slug === "telemetry-rocket";
+const showPatrolBox3D = capstone.slug === "patrol-box-2";
 const brainstorm = brainstorms[capstone.slug];
 ---
 <BaseLayout
@@ -159,6 +161,13 @@ const brainstorm = brainstorms[capstone.slug];
       <section aria-labelledby="rocketcalc-title" class="mb-section">
         <h2 id="rocketcalc-title">Rocket Sizing Sandbox</h2>
         <RocketCalculator />
+      </section>
+    )}
+
+    {showPatrolBox3D && (
+      <section aria-labelledby="pb3d-title" class="mb-section">
+        <h2 id="pb3d-title">3D Reference Model</h2>
+        <PatrolBox3D />
       </section>
     )}
 

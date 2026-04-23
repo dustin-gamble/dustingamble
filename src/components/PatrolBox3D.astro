@@ -1,0 +1,263 @@
+---
+// Interactive 3D model of the Patrol Box 2.0 — 80/20 1010-S frame, coroplast
+// panels, folding legs. Drag to rotate, scroll to zoom. Toggle exploded view
+// to see how it goes together.
+---
+
+<div class="pb3d" id="pb3d">
+    <h3>Patrol Box 2.0 — 3D Model</h3>
+    <p class="muted">
+        Drag to rotate. Scroll or pinch to zoom. Toggle controls below to peel off panels, hide
+        folding legs, or explode the frame so you can see how the 80/20 connects up.
+    </p>
+    <div class="pb3d-controls">
+        <label><input type="checkbox" id="pb3d-panels" checked /> Show coroplast panels</label>
+        <label><input type="checkbox" id="pb3d-legs" checked /> Show folding legs</label>
+        <label><input type="checkbox" id="pb3d-shelves" checked /> Show interior shelf rails</label>
+        <label><input type="checkbox" id="pb3d-explode" /> Exploded view</label>
+        <label><input type="checkbox" id="pb3d-spin" /> Auto-rotate</label>
+    </div>
+    <div class="pb3d-stage" id="pb3d-stage" aria-label="Interactive 3D model of the patrol box"></div>
+    <p class="muted pb3d-legend">
+        Silver bars = 80/20 1010-S extrusion (1″×1″). Black panels = 4 mm corrugated plastic.
+        Dark gray rods = 8″ folding metal legs.
+    </p>
+</div>
+
+<script>
+    import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js";
+    import { OrbitControls } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js";
+
+    function init() {
+        const stage = document.getElementById("pb3d-stage");
+        if (!stage) return;
+
+        // Box dimensions in inches (model units = inches)
+        const W = 30,
+            D = 18,
+            H = 24;
+        const T = 1; // 1010-S 1"×1"
+        const PANEL = 0.157; // 4 mm coroplast
+        const LEG_H = 8;
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        function resize() {
+            const w = stage.clientWidth;
+            const h = Math.min(520, Math.max(360, Math.round(w * 0.65)));
+            renderer.setSize(w, h, false);
+            camera.aspect = w / h;
+            camera.updateProjectionMatrix();
+        }
+
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0xeef1f5);
+        const camera = new THREE.PerspectiveCamera(40, 1, 1, 500);
+        camera.position.set(55, 38, 65);
+
+        // Lighting
+        const ambient = new THREE.AmbientLight(0xffffff, 0.55);
+        scene.add(ambient);
+        const key = new THREE.DirectionalLight(0xffffff, 0.85);
+        key.position.set(40, 60, 30);
+        scene.add(key);
+        const fill = new THREE.DirectionalLight(0xffffff, 0.35);
+        fill.position.set(-40, 20, -30);
+        scene.add(fill);
+
+        // Materials
+        const matExtrusion = new THREE.MeshStandardMaterial({ color: 0xb6b9bd, metalness: 0.7, roughness: 0.4 });
+        const matPanel = new THREE.MeshStandardMaterial({ color: 0x111114, metalness: 0.05, roughness: 0.95 });
+        const matLeg = new THREE.MeshStandardMaterial({ color: 0x4a4d52, metalness: 0.6, roughness: 0.4 });
+        const matBracket = new THREE.MeshStandardMaterial({ color: 0x222222, metalness: 0.5, roughness: 0.5 });
+
+        // Group origin = center of base of box (so legs hang below y=0).
+        const root = new THREE.Group();
+        scene.add(root);
+
+        // Helper: a 1010-S bar of given length along an axis, centered at origin.
+        function bar(length: number, axis: "x" | "y" | "z") {
+            let geo: THREE.BoxGeometry;
+            if (axis === "x") geo = new THREE.BoxGeometry(length, T, T);
+            else if (axis === "y") geo = new THREE.BoxGeometry(T, length, T);
+            else geo = new THREE.BoxGeometry(T, T, length);
+            return new THREE.Mesh(geo, matExtrusion);
+        }
+
+        // Frame: 4 corner posts, 4 bottom rails, 4 top rails
+        const frameGroup = new THREE.Group();
+        const xMin = -W / 2 + T / 2;
+        const xMax = W / 2 - T / 2;
+        const zMin = -D / 2 + T / 2;
+        const zMax = D / 2 - T / 2;
+
+        // Vertical posts (4)
+        const postPositions: [number, number][] = [
+            [xMin, zMin],
+            [xMax, zMin],
+            [xMin, zMax],
+            [xMax, zMax],
+        ];
+        const postObjs: THREE.Mesh[] = [];
+        postPositions.forEach(([x, z]) => {
+            const m = bar(H, "y");
+            m.position.set(x, H / 2, z);
+            frameGroup.add(m);
+            postObjs.push(m);
+        });
+
+        // Horizontal rails: 4 long (X axis, 30"), 4 short (Z axis, 18")
+        // Top + bottom, front + back
+        const longRailObjs: THREE.Mesh[] = [];
+        const shortRailObjs: THREE.Mesh[] = [];
+        [T / 2, H - T / 2].forEach((y) => {
+            // Long rails (front + back)
+            [zMin, zMax].forEach((z) => {
+                const m = bar(W - 2 * T, "x");
+                m.position.set(0, y, z);
+                frameGroup.add(m);
+                longRailObjs.push(m);
+            });
+            // Short rails (left + right)
+            [xMin, xMax].forEach((x) => {
+                const m = bar(D - 2 * T, "z");
+                m.position.set(x, y, 0);
+                frameGroup.add(m);
+                shortRailObjs.push(m);
+            });
+        });
+        root.add(frameGroup);
+
+        // Interior shelf + divider rails
+        const shelfGroup = new THREE.Group();
+        const shelfY = H * 0.45;
+        // 2 × 30" along X at front+back
+        [zMin + 0.01, zMax - 0.01].forEach((z) => {
+            const m = bar(W - 2 * T, "x");
+            m.position.set(0, shelfY, z);
+            shelfGroup.add(m);
+        });
+        // 2 × 18" along Z (interior dividers, splitting the shelf into thirds)
+        [-W / 6, W / 6].forEach((x) => {
+            const m = bar(D - 2 * T, "z");
+            m.position.set(x, shelfY, 0);
+            shelfGroup.add(m);
+        });
+        root.add(shelfGroup);
+
+        // Coroplast panels: back, left, right, top, bottom, front-door
+        const panelGroup = new THREE.Group();
+        function panel(w: number, h: number, d: number, x: number, y: number, z: number, rotY = 0) {
+            const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), matPanel);
+            m.position.set(x, y, z);
+            m.rotation.y = rotY;
+            return m;
+        }
+        // Back (full)
+        const backPanel = panel(W - 2 * T, H - 2 * T, PANEL, 0, H / 2, zMin - T / 2 + PANEL / 2 - 0.01);
+        backPanel.userData.dir = new THREE.Vector3(0, 0, -1);
+        panelGroup.add(backPanel);
+        // Front (door — slightly inset and split for visual interest)
+        const frontPanel = panel(W - 2 * T, H - 2 * T, PANEL, 0, H / 2, zMax + T / 2 - PANEL / 2 + 0.01);
+        frontPanel.userData.dir = new THREE.Vector3(0, 0, 1);
+        panelGroup.add(frontPanel);
+        // Add a simple latch puck on the front
+        const latch = new THREE.Mesh(new THREE.CylinderGeometry(0.6, 0.6, 0.4, 16), matBracket);
+        latch.rotation.x = Math.PI / 2;
+        latch.position.set(0, H / 2, zMax + T / 2 + 0.25);
+        latch.userData.dir = new THREE.Vector3(0, 0, 1);
+        panelGroup.add(latch);
+        // Left + right
+        const leftPanel = panel(PANEL, H - 2 * T, D - 2 * T, xMin - T / 2 + PANEL / 2 - 0.01, H / 2, 0);
+        leftPanel.userData.dir = new THREE.Vector3(-1, 0, 0);
+        panelGroup.add(leftPanel);
+        const rightPanel = panel(PANEL, H - 2 * T, D - 2 * T, xMax + T / 2 - PANEL / 2 + 0.01, H / 2, 0);
+        rightPanel.userData.dir = new THREE.Vector3(1, 0, 0);
+        panelGroup.add(rightPanel);
+        // Top + bottom
+        const topPanel = panel(W - 2 * T, PANEL, D - 2 * T, 0, H - T / 2 + PANEL / 2 + 0.01, 0);
+        topPanel.userData.dir = new THREE.Vector3(0, 1, 0);
+        panelGroup.add(topPanel);
+        const bottomPanel = panel(W - 2 * T, PANEL, D - 2 * T, 0, T / 2 - PANEL / 2 - 0.01, 0);
+        bottomPanel.userData.dir = new THREE.Vector3(0, -1, 0);
+        panelGroup.add(bottomPanel);
+        // Save originals for explode toggle
+        panelGroup.children.forEach((c) => {
+            c.userData.origin = c.position.clone();
+        });
+        root.add(panelGroup);
+
+        // Folding legs (8" cylinders at each corner under the box)
+        const legGroup = new THREE.Group();
+        const legGeo = new THREE.CylinderGeometry(0.45, 0.45, LEG_H, 12);
+        postPositions.forEach(([x, z]) => {
+            const m = new THREE.Mesh(legGeo, matLeg);
+            m.position.set(x, -LEG_H / 2, z);
+            legGroup.add(m);
+            // foot pad
+            const pad = new THREE.Mesh(new THREE.CylinderGeometry(0.7, 0.7, 0.15, 12), matBracket);
+            pad.position.set(x, -LEG_H + 0.075, z);
+            legGroup.add(pad);
+        });
+        root.add(legGroup);
+
+        // Ground shadow disc
+        const ground = new THREE.Mesh(
+            new THREE.CircleGeometry(60, 48),
+            new THREE.MeshBasicMaterial({ color: 0xd4d8de })
+        );
+        ground.rotation.x = -Math.PI / 2;
+        ground.position.y = -LEG_H - 0.001;
+        scene.add(ground);
+
+        // Mount + controls
+        stage.appendChild(renderer.domElement);
+        const controls = new OrbitControls(camera, renderer.domElement);
+        controls.target.set(0, H / 2, 0);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.08;
+        controls.minDistance = 30;
+        controls.maxDistance = 160;
+
+        // UI toggles
+        const cbPanels = document.getElementById("pb3d-panels") as HTMLInputElement;
+        const cbLegs = document.getElementById("pb3d-legs") as HTMLInputElement;
+        const cbShelves = document.getElementById("pb3d-shelves") as HTMLInputElement;
+        const cbExplode = document.getElementById("pb3d-explode") as HTMLInputElement;
+        const cbSpin = document.getElementById("pb3d-spin") as HTMLInputElement;
+
+        cbPanels.addEventListener("change", () => (panelGroup.visible = cbPanels.checked));
+        cbLegs.addEventListener("change", () => {
+            legGroup.visible = cbLegs.checked;
+            ground.visible = cbLegs.checked;
+        });
+        cbShelves.addEventListener("change", () => (shelfGroup.visible = cbShelves.checked));
+
+        function applyExplode() {
+            const offset = cbExplode.checked ? 8 : 0;
+            panelGroup.children.forEach((c: any) => {
+                const dir = c.userData.dir as THREE.Vector3;
+                const o = c.userData.origin as THREE.Vector3;
+                c.position.copy(o).add(dir.clone().multiplyScalar(offset));
+            });
+        }
+        cbExplode.addEventListener("change", applyExplode);
+
+        // Render loop
+        function loop() {
+            if (cbSpin.checked) root.rotation.y += 0.005;
+            controls.update();
+            renderer.render(scene, camera);
+            requestAnimationFrame(loop);
+        }
+        resize();
+        window.addEventListener("resize", resize);
+        loop();
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", init);
+    } else {
+        init();
+    }
+</script>
