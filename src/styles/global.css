@@ -967,6 +967,81 @@ tr.mb-detail-table-footer td {
   border-bottom: 0;
 }
 
+/* ---------- Off-the-shelf product cards ---------- */
+.mb-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+  margin: 0.8rem 0 1.2rem;
+}
+
+a.mb-product-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line, #ddd);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg, #fff);
+  color: var(--text, #222);
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+a.mb-product-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent, #2a6df4);
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--accent, #2a6df4) 18%, transparent);
+}
+
+.mb-product-card-img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: color-mix(in srgb, var(--text, #000) 4%, transparent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.mb-product-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.mb-product-card-body {
+  padding: 0.7rem 0.8rem 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.mb-product-card-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1.25;
+}
+
+.mb-product-card-vendor {
+  font-size: 0.8rem;
+  color: var(--muted, #666);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.mb-product-card-price {
+  font-weight: 600;
+  color: var(--accent, #2a6df4);
+  font-variant-numeric: tabular-nums;
+}
+
+.mb-product-card-note {
+  font-size: 0.85rem;
+  color: var(--muted, #666);
+  margin-top: 0.2rem;
+}
+
 /* ---------- Brainstorm Matrix ---------- */
 .brainstorm {
   margin: 1rem 0 1.5rem;
