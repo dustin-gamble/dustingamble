@@ -1,26 +1,35 @@
 ---
-// Interactive 3D model of the Patrol Box 2.0 — 80/20 1010-S frame, coroplast
-// panels, folding legs. Drag to rotate, scroll to zoom. Toggle exploded view
-// to see how it goes together.
+// Interactive 3D model of the Patrol Box 2.0. Two variants:
+//   - "extrusion"  → 80/20 1010-S aluminum frame
+//   - "flexpipe"   → 80/20 Flexpipe 28 mm pipe + joint system
+// Features common to both: 4 swivel casters on the bottom (always attached),
+// slide-in leg extensions that lift the box to cook-table height, a hinged lid
+// that opens flat to become the cooking surface, and a little propane stove
+// that sits on the lid when open. Drag to rotate, scroll to zoom.
 ---
 
 <div class="pb3d" id="pb3d">
     <h3>Patrol Box 2.0 — 3D Model</h3>
+    <div class="pb3d-variant">
+        <button type="button" class="pb3d-tab is-active" data-variant="extrusion">80/20 1010-S (extrusion)</button>
+        <button type="button" class="pb3d-tab" data-variant="flexpipe">Flexpipe (pipe &amp; joint)</button>
+    </div>
     <p class="muted">
-        Drag to rotate. Scroll or pinch to zoom. Toggle controls below to peel off panels, hide
-        folding legs, or explode the frame so you can see how the 80/20 connects up.
+        Drag to rotate. Scroll or pinch to zoom. Toggle the options below to open the lid, drop the
+        slide-in legs for cook-table height, peel off panels, or explode the frame.
     </p>
     <div class="pb3d-controls">
-        <label><input type="checkbox" id="pb3d-panels" checked /> Show coroplast panels</label>
-        <label><input type="checkbox" id="pb3d-legs" checked /> Show folding legs</label>
+        <label><input type="checkbox" id="pb3d-lid" /> Open the lid (deploy cook surface)</label>
+        <label><input type="checkbox" id="pb3d-legs" /> Slide in the extension legs</label>
+        <label><input type="checkbox" id="pb3d-panels" checked /> Show wall panels</label>
         <label><input type="checkbox" id="pb3d-shelves" checked /> Show interior shelf rails</label>
         <label><input type="checkbox" id="pb3d-explode" /> Exploded view</label>
         <label><input type="checkbox" id="pb3d-spin" /> Auto-rotate</label>
     </div>
     <div class="pb3d-stage" id="pb3d-stage" aria-label="Interactive 3D model of the patrol box"></div>
-    <p class="muted pb3d-legend">
-        Silver bars = 80/20 1010-S extrusion (1″×1″). Black panels = 4 mm corrugated plastic.
-        Dark gray rods = 8″ folding metal legs.
+    <p class="muted pb3d-legend" id="pb3d-legend">
+        Silver bars = 80/20 1010-S extrusion (1″×1″). Black panels = 4 mm corrugated plastic (Coroplast).
+        Red discs = 3″ swivel casters. Dark gray rods = removable slide-in extension legs (shown when toggled).
     </p>
 </div>
 
@@ -34,10 +43,14 @@
         if (stage.dataset.initialized === "1") return;
         stage.dataset.initialized = "1";
 
-        const W = 30, D = 18, H = 24;
-        const T = 1;
+        // dimensions (inches)
+        const W = 30, D = 18, H = 20;
+        const T_EXT = 1;
+        const T_PIPE = 1.1;
         const PANEL = 0.157;
-        const LEG_H = 8;
+        const CASTER_H = 3.5;
+        const LEG_EXT = 12;
+        const LID_ANGLE_OPEN = Math.PI / 2 + 0.25;
 
         const renderer = new THREE.WebGLRenderer({ antialias: true });
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -45,167 +58,251 @@
         const scene = new THREE.Scene();
         scene.background = new THREE.Color(0xeef1f5);
         const camera = new THREE.PerspectiveCamera(40, 1, 1, 500);
-        camera.position.set(55, 38, 65);
+        camera.position.set(65, 48, 80);
 
         function resize() {
             const w = stage.clientWidth;
-            const h = Math.min(520, Math.max(360, Math.round(w * 0.65)));
+            const h = Math.min(540, Math.max(380, Math.round(w * 0.65)));
             renderer.setSize(w, h, false);
             camera.aspect = w / h;
             camera.updateProjectionMatrix();
         }
 
-        scene.add(new THREE.AmbientLight(0xffffff, 0.55));
-        const key = new THREE.DirectionalLight(0xffffff, 0.85);
+        scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+        const key = new THREE.DirectionalLight(0xffffff, 0.8);
         key.position.set(40, 60, 30);
         scene.add(key);
         const fill = new THREE.DirectionalLight(0xffffff, 0.35);
         fill.position.set(-40, 20, -30);
         scene.add(fill);
 
-        const matExtrusion = new THREE.MeshStandardMaterial({ color: 0xb6b9bd, metalness: 0.7, roughness: 0.4 });
+        const matExtrusion = new THREE.MeshStandardMaterial({ color: 0xb6b9bd, metalness: 0.7, roughness: 0.35 });
+        const matPipe = new THREE.MeshStandardMaterial({ color: 0x1e1e22, metalness: 0.2, roughness: 0.7 });
+        const matJoint = new THREE.MeshStandardMaterial({ color: 0x2f2f33, metalness: 0.5, roughness: 0.6 });
         const matPanel = new THREE.MeshStandardMaterial({ color: 0x111114, metalness: 0.05, roughness: 0.95 });
         const matLeg = new THREE.MeshStandardMaterial({ color: 0x4a4d52, metalness: 0.6, roughness: 0.4 });
-        const matBracket = new THREE.MeshStandardMaterial({ color: 0x222222, metalness: 0.5, roughness: 0.5 });
+        const matCaster = new THREE.MeshStandardMaterial({ color: 0xc22e2e, metalness: 0.2, roughness: 0.6 });
+        const matCasterHub = new THREE.MeshStandardMaterial({ color: 0x222222, metalness: 0.5, roughness: 0.5 });
+        const matStove = new THREE.MeshStandardMaterial({ color: 0x1c6b2a, metalness: 0.3, roughness: 0.5 });
+        const matPropane = new THREE.MeshStandardMaterial({ color: 0x888c8c, metalness: 0.4, roughness: 0.4 });
+        const matBurner = new THREE.MeshStandardMaterial({ color: 0x222222, metalness: 0.3, roughness: 0.6 });
+        const matFlame = new THREE.MeshStandardMaterial({ color: 0xff7a1a, emissive: 0xff5010, emissiveIntensity: 0.9, roughness: 0.9 });
 
         const root = new THREE.Group();
         scene.add(root);
 
-        function bar(length, axis) {
-            let geo;
-            if (axis === "x") geo = new THREE.BoxGeometry(length, T, T);
-            else if (axis === "y") geo = new THREE.BoxGeometry(T, length, T);
-            else geo = new THREE.BoxGeometry(T, T, length);
-            return new THREE.Mesh(geo, matExtrusion);
-        }
+        let frameGroup, shelfGroup, panelGroup, casterGroup, legGroup, lidPivot, stoveGroup, jointGroup;
 
-        const frameGroup = new THREE.Group();
-        const xMin = -W / 2 + T / 2;
-        const xMax = W / 2 - T / 2;
-        const zMin = -D / 2 + T / 2;
-        const zMax = D / 2 - T / 2;
+        function rebuildFor(variant) {
+            while (root.children.length) root.remove(root.children[0]);
+            frameGroup = new THREE.Group();
+            shelfGroup = new THREE.Group();
+            panelGroup = new THREE.Group();
+            casterGroup = new THREE.Group();
+            legGroup = new THREE.Group();
+            jointGroup = new THREE.Group();
+            lidPivot = new THREE.Group();
+            stoveGroup = new THREE.Group();
 
-        const postPositions = [
-            [xMin, zMin], [xMax, zMin], [xMin, zMax], [xMax, zMax],
-        ];
-        postPositions.forEach(([x, z]) => {
-            const m = bar(H, "y");
-            m.position.set(x, H / 2, z);
-            frameGroup.add(m);
-        });
+            const xMin = -W / 2 + T_EXT / 2;
+            const xMax = W / 2 - T_EXT / 2;
+            const zMin = -D / 2 + T_EXT / 2;
+            const zMax = D / 2 - T_EXT / 2;
+            const corners = [[xMin, zMin], [xMax, zMin], [xMin, zMax], [xMax, zMax]];
 
-        [T / 2, H - T / 2].forEach((y) => {
-            [zMin, zMax].forEach((z) => {
-                const m = bar(W - 2 * T, "x");
-                m.position.set(0, y, z);
+            function makeBar(length, axis) {
+                if (variant === "extrusion") {
+                    let geo;
+                    if (axis === "x") geo = new THREE.BoxGeometry(length, T_EXT, T_EXT);
+                    else if (axis === "y") geo = new THREE.BoxGeometry(T_EXT, length, T_EXT);
+                    else geo = new THREE.BoxGeometry(T_EXT, T_EXT, length);
+                    return new THREE.Mesh(geo, matExtrusion);
+                } else {
+                    const geo = new THREE.CylinderGeometry(T_PIPE / 2, T_PIPE / 2, length, 18);
+                    const m = new THREE.Mesh(geo, matPipe);
+                    if (axis === "x") m.rotation.z = Math.PI / 2;
+                    else if (axis === "z") m.rotation.x = Math.PI / 2;
+                    return m;
+                }
+            }
+
+            // Vertical posts
+            corners.forEach(([x, z]) => {
+                const m = makeBar(H, "y");
+                m.position.set(x, H / 2, z);
                 frameGroup.add(m);
             });
-            [xMin, xMax].forEach((x) => {
-                const m = bar(D - 2 * T, "z");
-                m.position.set(x, y, 0);
-                frameGroup.add(m);
+
+            // Top + bottom rails
+            [T_EXT / 2, H - T_EXT / 2].forEach((y) => {
+                [zMin, zMax].forEach((z) => {
+                    const m = makeBar(W - 2 * T_EXT, "x");
+                    m.position.set(0, y, z);
+                    frameGroup.add(m);
+                });
+                [xMin, xMax].forEach((x) => {
+                    const m = makeBar(D - 2 * T_EXT, "z");
+                    m.position.set(x, y, 0);
+                    frameGroup.add(m);
+                });
             });
-        });
-        root.add(frameGroup);
 
-        const shelfGroup = new THREE.Group();
-        const shelfY = H * 0.45;
-        [zMin + 0.01, zMax - 0.01].forEach((z) => {
-            const m = bar(W - 2 * T, "x");
-            m.position.set(0, shelfY, z);
-            shelfGroup.add(m);
-        });
-        [-W / 6, W / 6].forEach((x) => {
-            const m = bar(D - 2 * T, "z");
-            m.position.set(x, shelfY, 0);
-            shelfGroup.add(m);
-        });
-        root.add(shelfGroup);
+            if (variant === "flexpipe") {
+                const jointGeo = new THREE.SphereGeometry(1.3, 16, 12);
+                [T_EXT / 2, H - T_EXT / 2].forEach((y) => {
+                    corners.forEach(([x, z]) => {
+                        const j = new THREE.Mesh(jointGeo, matJoint);
+                        j.position.set(x, y, z);
+                        jointGroup.add(j);
+                    });
+                });
+            }
 
-        const panelGroup = new THREE.Group();
-        function panel(w, h, d, x, y, z) {
-            const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), matPanel);
-            m.position.set(x, y, z);
-            return m;
+            // Interior shelf rails
+            const shelfY = H * 0.45;
+            [zMin + 0.01, zMax - 0.01].forEach((z) => {
+                const m = makeBar(W - 2 * T_EXT, "x");
+                m.position.set(0, shelfY, z);
+                shelfGroup.add(m);
+            });
+            [-W / 6, W / 6].forEach((x) => {
+                const m = makeBar(D - 2 * T_EXT, "z");
+                m.position.set(x, shelfY, 0);
+                shelfGroup.add(m);
+            });
+
+            // Fixed panels: back, left, right, bottom, front
+            function panel(w, h, d, x, y, z, dirX, dirY, dirZ) {
+                const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), matPanel);
+                m.position.set(x, y, z);
+                m.userData.dir = new THREE.Vector3(dirX, dirY, dirZ);
+                return m;
+            }
+            panelGroup.add(panel(W - 2 * T_EXT, H - 2 * T_EXT, PANEL, 0, H / 2, zMin - T_EXT / 2 + PANEL / 2 - 0.01, 0, 0, -1));
+            panelGroup.add(panel(W - 2 * T_EXT, H - 2 * T_EXT, PANEL, 0, H / 2, zMax + T_EXT / 2 - PANEL / 2 + 0.01, 0, 0, 1));
+            panelGroup.add(panel(PANEL, H - 2 * T_EXT, D - 2 * T_EXT, xMin - T_EXT / 2 + PANEL / 2 - 0.01, H / 2, 0, -1, 0, 0));
+            panelGroup.add(panel(PANEL, H - 2 * T_EXT, D - 2 * T_EXT, xMax + T_EXT / 2 - PANEL / 2 + 0.01, H / 2, 0, 1, 0, 0));
+            panelGroup.add(panel(W - 2 * T_EXT, PANEL, D - 2 * T_EXT, 0, T_EXT / 2 - PANEL / 2 - 0.01, 0, 0, -1, 0));
+            panelGroup.children.forEach((c) => (c.userData.origin = c.position.clone()));
+
+            // Lid hinged at back-top edge
+            lidPivot.position.set(0, H - T_EXT / 2, zMin + T_EXT / 2);
+            const lidMesh = new THREE.Mesh(
+                new THREE.BoxGeometry(W - 2 * T_EXT, PANEL, D - T_EXT),
+                matPanel
+            );
+            lidMesh.position.set(0, PANEL / 2 + 0.01, (D - T_EXT) / 2);
+            lidPivot.add(lidMesh);
+
+            // Propane stove (rides on the lid)
+            const stoveBody = new THREE.Mesh(new THREE.BoxGeometry(14, 3, 9), matStove);
+            stoveBody.position.set(0, PANEL + 1.5 + 0.02, (D - T_EXT) / 2);
+            stoveGroup.add(stoveBody);
+            for (const bx of [-3.2, 3.2]) {
+                const burner = new THREE.Mesh(new THREE.CylinderGeometry(1.6, 1.6, 0.25, 18), matBurner);
+                burner.position.set(bx, PANEL + 3 + 0.14, (D - T_EXT) / 2);
+                stoveGroup.add(burner);
+                const flame = new THREE.Mesh(new THREE.ConeGeometry(0.8, 1.6, 12), matFlame);
+                flame.position.set(bx, PANEL + 3 + 0.14 + 0.8, (D - T_EXT) / 2);
+                stoveGroup.add(flame);
+            }
+            const tank = new THREE.Mesh(new THREE.CylinderGeometry(1.6, 1.6, 3.6, 16), matPropane);
+            tank.rotation.z = Math.PI / 2;
+            tank.position.set(9.5, PANEL + 1.6, (D - T_EXT) / 2);
+            stoveGroup.add(tank);
+            lidPivot.add(stoveGroup);
+
+            // Casters (always on)
+            corners.forEach(([x, z]) => {
+                const plate = new THREE.Mesh(new THREE.BoxGeometry(2.2, 0.4, 2.2), matCasterHub);
+                plate.position.set(x, -0.2, z);
+                casterGroup.add(plate);
+                const hub = new THREE.Mesh(new THREE.CylinderGeometry(0.55, 0.55, 0.8, 14), matCasterHub);
+                hub.position.set(x, -0.8, z);
+                casterGroup.add(hub);
+                const wheel = new THREE.Mesh(new THREE.CylinderGeometry(1.5, 1.5, 0.9, 20), matCaster);
+                wheel.rotation.z = Math.PI / 2;
+                wheel.position.set(x, -2.2, z);
+                casterGroup.add(wheel);
+            });
+
+            // Slide-in extension legs (removable)
+            corners.forEach(([x, z]) => {
+                const legX = x + Math.sign(x) * 1.2;
+                const legZ = z + Math.sign(z) * 1.2;
+                const leg = new THREE.Mesh(new THREE.CylinderGeometry(0.45, 0.45, LEG_EXT, 14), matLeg);
+                leg.position.set(legX, -LEG_EXT / 2 - CASTER_H / 2, legZ);
+                legGroup.add(leg);
+                const pad = new THREE.Mesh(new THREE.CylinderGeometry(0.7, 0.7, 0.2, 14), matCasterHub);
+                pad.position.set(legX, -LEG_EXT - CASTER_H / 2 + 0.1, legZ);
+                legGroup.add(pad);
+            });
+            legGroup.visible = false;
+
+            root.add(frameGroup);
+            root.add(jointGroup);
+            root.add(shelfGroup);
+            root.add(panelGroup);
+            root.add(lidPivot);
+            root.add(casterGroup);
+            root.add(legGroup);
+
+            root.position.y = CASTER_H;
+
+            applyUI();
         }
-        const backPanel = panel(W - 2 * T, H - 2 * T, PANEL, 0, H / 2, zMin - T / 2 + PANEL / 2 - 0.01);
-        backPanel.userData.dir = new THREE.Vector3(0, 0, -1);
-        panelGroup.add(backPanel);
-        const frontPanel = panel(W - 2 * T, H - 2 * T, PANEL, 0, H / 2, zMax + T / 2 - PANEL / 2 + 0.01);
-        frontPanel.userData.dir = new THREE.Vector3(0, 0, 1);
-        panelGroup.add(frontPanel);
-        const latch = new THREE.Mesh(new THREE.CylinderGeometry(0.6, 0.6, 0.4, 16), matBracket);
-        latch.rotation.x = Math.PI / 2;
-        latch.position.set(0, H / 2, zMax + T / 2 + 0.25);
-        latch.userData.dir = new THREE.Vector3(0, 0, 1);
-        panelGroup.add(latch);
-        const leftPanel = panel(PANEL, H - 2 * T, D - 2 * T, xMin - T / 2 + PANEL / 2 - 0.01, H / 2, 0);
-        leftPanel.userData.dir = new THREE.Vector3(-1, 0, 0);
-        panelGroup.add(leftPanel);
-        const rightPanel = panel(PANEL, H - 2 * T, D - 2 * T, xMax + T / 2 - PANEL / 2 + 0.01, H / 2, 0);
-        rightPanel.userData.dir = new THREE.Vector3(1, 0, 0);
-        panelGroup.add(rightPanel);
-        const topPanel = panel(W - 2 * T, PANEL, D - 2 * T, 0, H - T / 2 + PANEL / 2 + 0.01, 0);
-        topPanel.userData.dir = new THREE.Vector3(0, 1, 0);
-        panelGroup.add(topPanel);
-        const bottomPanel = panel(W - 2 * T, PANEL, D - 2 * T, 0, T / 2 - PANEL / 2 - 0.01, 0);
-        bottomPanel.userData.dir = new THREE.Vector3(0, -1, 0);
-        panelGroup.add(bottomPanel);
-        panelGroup.children.forEach((c) => {
-            c.userData.origin = c.position.clone();
-        });
-        root.add(panelGroup);
-
-        const legGroup = new THREE.Group();
-        const legGeo = new THREE.CylinderGeometry(0.45, 0.45, LEG_H, 12);
-        postPositions.forEach(([x, z]) => {
-            const m = new THREE.Mesh(legGeo, matLeg);
-            m.position.set(x, -LEG_H / 2, z);
-            legGroup.add(m);
-            const pad = new THREE.Mesh(new THREE.CylinderGeometry(0.7, 0.7, 0.15, 12), matBracket);
-            pad.position.set(x, -LEG_H + 0.075, z);
-            legGroup.add(pad);
-        });
-        root.add(legGroup);
 
         const ground = new THREE.Mesh(
             new THREE.CircleGeometry(60, 48),
             new THREE.MeshBasicMaterial({ color: 0xd4d8de })
         );
         ground.rotation.x = -Math.PI / 2;
-        ground.position.y = -LEG_H - 0.001;
+        ground.position.y = 0;
         scene.add(ground);
 
         stage.appendChild(renderer.domElement);
         const controls = new OrbitControls(camera, renderer.domElement);
-        controls.target.set(0, H / 2, 0);
+        controls.target.set(0, H / 2 + CASTER_H, 0);
         controls.enableDamping = true;
         controls.dampingFactor = 0.08;
         controls.minDistance = 30;
-        controls.maxDistance = 160;
+        controls.maxDistance = 180;
 
-        const cbPanels = document.getElementById("pb3d-panels");
+        const cbLid = document.getElementById("pb3d-lid");
         const cbLegs = document.getElementById("pb3d-legs");
+        const cbPanels = document.getElementById("pb3d-panels");
         const cbShelves = document.getElementById("pb3d-shelves");
         const cbExplode = document.getElementById("pb3d-explode");
         const cbSpin = document.getElementById("pb3d-spin");
+        const legend = document.getElementById("pb3d-legend");
+        const tabs = document.querySelectorAll(".pb3d-tab");
 
-        cbPanels.addEventListener("change", () => (panelGroup.visible = cbPanels.checked));
-        cbLegs.addEventListener("change", () => {
+        function applyUI() {
+            lidPivot.rotation.x = cbLid.checked ? -LID_ANGLE_OPEN : 0;
+            stoveGroup.visible = cbLid.checked;
             legGroup.visible = cbLegs.checked;
-            ground.visible = cbLegs.checked;
-        });
-        cbShelves.addEventListener("change", () => (shelfGroup.visible = cbShelves.checked));
-
-        function applyExplode() {
+            panelGroup.visible = cbPanels.checked;
+            shelfGroup.visible = cbShelves.checked;
             const offset = cbExplode.checked ? 8 : 0;
             panelGroup.children.forEach((c) => {
-                const dir = c.userData.dir;
-                const o = c.userData.origin;
-                c.position.copy(o).add(dir.clone().multiplyScalar(offset));
+                c.position.copy(c.userData.origin).add(c.userData.dir.clone().multiplyScalar(offset));
             });
         }
-        cbExplode.addEventListener("change", applyExplode);
+
+        [cbLid, cbLegs, cbPanels, cbShelves, cbExplode].forEach((cb) => cb.addEventListener("change", applyUI));
+
+        tabs.forEach((t) => {
+            t.addEventListener("click", () => {
+                tabs.forEach((x) => x.classList.remove("is-active"));
+                t.classList.add("is-active");
+                const v = t.dataset.variant;
+                rebuildFor(v);
+                legend.textContent =
+                    v === "extrusion"
+                        ? "Silver bars = 80/20 1010-S extrusion (1″×1″). Black panels = 4 mm corrugated plastic. Red wheels = 3″ swivel casters. Gray rods = removable slide-in extension legs (shown when toggled)."
+                        : "Black pipes = 28 mm PE-coated steel pipe. Dark spheres at each node = metal Flexpipe joints. Black panels = 4 mm corrugated plastic. Red wheels = 3″ swivel casters. Gray rods = removable slide-in extension legs (shown when toggled).";
+            });
+        });
 
         function loop() {
             if (cbSpin.checked) root.rotation.y += 0.005;
@@ -213,6 +310,8 @@
             renderer.render(scene, camera);
             requestAnimationFrame(loop);
         }
+
+        rebuildFor("extrusion");
         resize();
         window.addEventListener("resize", resize);
         loop();

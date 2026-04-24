@@ -138,6 +138,39 @@ const brainstorm = brainstorms[capstone.slug];
               {s.list.map((item) => <li>{item}</li>)}
             </ul>
           )}
+          {s.table && (
+            <div class="mb-table-wrap">
+              <table class={`mb-detail-table${s.table.variant ? ` is-${s.table.variant}` : ""}`}>
+                <thead>
+                  <tr>
+                    {s.table.columns.map((c) => <th>{c.label}</th>)}
+                  </tr>
+                </thead>
+                <tbody>
+                  {s.table.rows.map((row) => (
+                    <tr>
+                      {s.table.columns.map((c) => (
+                        <td>
+                          {c.key === "link" && row[c.key] ? (
+                            <a href={row[c.key]} target="_blank" rel="noopener">link</a>
+                          ) : (
+                            row[c.key] ?? ""
+                          )}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                  {s.table.footer && (
+                    <tr class="mb-detail-table-footer">
+                      {s.table.columns.map((c, i) => (
+                        <td>{s.table.footer[c.key] ?? (i === 0 ? s.table.footer.label ?? "" : "")}</td>
+                      ))}
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          )}
           {s.footer && <p class="muted">{s.footer}</p>}
         </div>
       ))}
