@@ -1272,6 +1272,67 @@ const CAPSTONES = [
                     "Scout runs the full systems-engineering loop on a real patrol chuck box. Three concepts are on the table: a traditional plywood box (cheap, heavy), a 1010-S aluminum extrusion box (engineered, expensive), and a Flexpipe pipe-and-joint box (reconfigurable, middleweight). All three share the same rolling base + slide-in legs + fold-open cook lid, so only the frame material changes.",
             },
             {
+                heading: "Off-the-shelf alternatives — what you're competing with",
+                body:
+                    "Before the Scout commits to building, they should know what's already on the market. The trade study should explicitly ask: is the DIY box better, cheaper, or more educational than buying one of these? In every case so far, the DIY route is cheaper than the comparable off-the-shelf option, but the off-the-shelf options are more polished — that contrast IS the engineering trade.",
+                cards: [
+                    {
+                        name: "Sidio Camp Kitchen Kit",
+                        vendor: "Sidio",
+                        price: "$288",
+                        note: "Two stackable weather-proof full crates with cutting board and dividers. Modular, but no built-in legs or cook surface.",
+                        image: "https://sidiocrate.com/cdn/shop/files/Photoroom_000_20250113_100431.jpg?v=1736946235&width=960",
+                        link: "https://sidiocrate.com/collections/full-size-crate-wr/products/camp-kitchen-kit?variant=41939416580155",
+                    },
+                    {
+                        name: "Adventure Wagon Large Aux Box",
+                        vendor: "Adventure Wagon",
+                        price: "$316 (sale, reg $395)",
+                        note: "147 L aluminum storage case sized for a 60\" rear slide-out tray. Premium van-life build quality, single compartment.",
+                        image: "https://cdn.shopify.com/s/files/1/0061/4662/1558/files/Aux_box_large_aluminum.png",
+                        link: "https://adventurewagon.com/products/large-aux-box-aluminum-storage-cases",
+                    },
+                    {
+                        name: "Trail Kitchens Chuck Box (Standard)",
+                        vendor: "Trail Kitchens",
+                        price: "~$595",
+                        note: "Closest match to Concept B: aluminum chuck box with fold-open work surface, internal organization, integrated stove platform option.",
+                        image: "https://trailkitchens.com/cdn/shop/files/CB-Standard-Open-3qtr.jpg",
+                        link: "https://trailkitchens.com/products/chuck-box-standard-1",
+                    },
+                    {
+                        name: "Camp Chef Sherpa Table & Organizer",
+                        vendor: "Camp Chef",
+                        price: "$219.99",
+                        note: "Folding aluminum table with four removable storage bins (one waterproof). Lighter and cheaper than the DIY, but no enclosed dry box.",
+                        image: "https://www.campchef.com/cdn/shop/files/41209a7caa08e7c3295d7bd263be1fbe7b4e4f6c_1500x.jpg?v=1768055132",
+                        link: "https://www.campchef.com/products/sherpa-table-organizer",
+                    },
+                ],
+            },
+            {
+                heading: "Build vs. buy — quick take",
+                table: {
+                    columns: [
+                        { key: "option", label: "Option" },
+                        { key: "cost", label: "Cost" },
+                        { key: "wheels", label: "Wheels" },
+                        { key: "legs", label: "Stand-up legs" },
+                        { key: "cooktop", label: "Cook lid" },
+                        { key: "merit", label: "Counts as merit-badge build?" },
+                    ],
+                    rows: [
+                        { option: "Sidio Camp Kitchen Kit", cost: "$288", wheels: "no", legs: "no", cooktop: "no", merit: "no — purchased product" },
+                        { option: "Adventure Wagon Aux Box", cost: "$316", wheels: "no", legs: "no", cooktop: "no", merit: "no" },
+                        { option: "Trail Kitchens Chuck Box", cost: "~$595", wheels: "no", legs: "yes (built-in)", cooktop: "yes (work surface)", merit: "no" },
+                        { option: "Camp Chef Sherpa", cost: "$220", wheels: "no", legs: "yes (built-in)", cooktop: "no (table only)", merit: "no" },
+                        { option: "Concept A — Plywood DIY", cost: "$80–130", wheels: "add", legs: "add", cooktop: "add", merit: "yes" },
+                        { option: "Concept B — 1010-S DIY", cost: "$586", wheels: "yes", legs: "yes", cooktop: "yes", merit: "yes" },
+                        { option: "Concept C — Flexpipe DIY", cost: "$314", wheels: "yes", legs: "yes", cooktop: "yes", merit: "yes" },
+                    ],
+                },
+            },
+            {
                 heading: "Concept snapshot",
                 table: {
                     columns: [

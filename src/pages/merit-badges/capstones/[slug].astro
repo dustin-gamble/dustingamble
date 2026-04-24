@@ -171,6 +171,25 @@ const brainstorm = brainstorms[capstone.slug];
               </table>
             </div>
           )}
+          {s.cards && (
+            <div class="mb-card-grid">
+              {s.cards.map((card) => (
+                <a class="mb-product-card" href={card.link} target="_blank" rel="noopener">
+                  {card.image && (
+                    <div class="mb-product-card-img">
+                      <img src={card.image} alt={card.name} loading="lazy" />
+                    </div>
+                  )}
+                  <div class="mb-product-card-body">
+                    <div class="mb-product-card-name">{card.name}</div>
+                    {card.vendor && <div class="mb-product-card-vendor">{card.vendor}</div>}
+                    {card.price && <div class="mb-product-card-price">{card.price}</div>}
+                    {card.note && <div class="mb-product-card-note">{card.note}</div>}
+                  </div>
+                </a>
+              ))}
+            </div>
+          )}
           {s.footer && <p class="muted">{s.footer}</p>}
         </div>
       ))}
