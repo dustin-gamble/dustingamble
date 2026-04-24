@@ -1289,15 +1289,15 @@ const CAPSTONES = [
                         vendor: "Adventure Wagon",
                         price: "$316 (sale, reg $395)",
                         note: "147 L aluminum storage case sized for a 60\" rear slide-out tray. Premium van-life build quality, single compartment.",
-                        image: "https://cdn.shopify.com/s/files/1/0061/4662/1558/files/Aux_box_large_aluminum.png",
+                        image: "https://cdn.shopify.com/s/files/1/0061/4662/1558/files/OxBox_Large_147L_WEB.jpg?v=1770240494",
                         link: "https://adventurewagon.com/products/large-aux-box-aluminum-storage-cases",
                     },
                     {
                         name: "Trail Kitchens Chuck Box (Standard)",
                         vendor: "Trail Kitchens",
-                        price: "~$595",
-                        note: "Closest match to Concept B: aluminum chuck box with fold-open work surface, internal organization, integrated stove platform option.",
-                        image: "https://trailkitchens.com/cdn/shop/files/CB-Standard-Open-3qtr.jpg",
+                        price: "$399 (base, options to $759)",
+                        note: "Closest match to Concept B: aluminum-framed chuck box with flip-down door, large utensil drawer; +$70 leg system, +$30 cable add-ons.",
+                        image: "https://cdn.shopify.com/s/files/1/1035/4067/files/KCStdModel.png?v=1708303612",
                         link: "https://trailkitchens.com/products/chuck-box-standard-1",
                     },
                     {
@@ -1324,7 +1324,7 @@ const CAPSTONES = [
                     rows: [
                         { option: "Sidio Camp Kitchen Kit", cost: "$288", wheels: "no", legs: "no", cooktop: "no", merit: "no — purchased product" },
                         { option: "Adventure Wagon Aux Box", cost: "$316", wheels: "no", legs: "no", cooktop: "no", merit: "no" },
-                        { option: "Trail Kitchens Chuck Box", cost: "~$595", wheels: "no", legs: "yes (built-in)", cooktop: "yes (work surface)", merit: "no" },
+                        { option: "Trail Kitchens Chuck Box", cost: "$399+", wheels: "no", legs: "+$70 option", cooktop: "yes (work surface)", merit: "no" },
                         { option: "Camp Chef Sherpa", cost: "$220", wheels: "no", legs: "yes (built-in)", cooktop: "no (table only)", merit: "no" },
                         { option: "Concept A — Plywood DIY", cost: "$80–130", wheels: "add", legs: "add", cooktop: "add", merit: "yes" },
                         { option: "Concept B — 1010-S DIY", cost: "$586", wheels: "yes", legs: "yes", cooktop: "yes", merit: "yes" },
