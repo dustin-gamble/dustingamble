@@ -6,3 +6,9 @@ dist/
 
 # Private scout data — never commit raw CSV with PII
 private-data/
+
+# Local scratch / merit-badge PDFs / screenshots — never commit
+.tmp_pdf_venv/
+Scouts merit/
+*.PNG
+fetch_badges.sh
