@@ -1,0 +1,99 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { getActivities, getActivity } from "../../../data/troop-activities.js";
+
+export function getStaticPaths() {
+  return getActivities()
+    .filter((a) => !a.external) // first-aid-corner-relay has its own custom page
+    .map((a) => ({ params: { slug: a.slug } }));
+}
+
+const { slug } = Astro.params;
+const activity = getActivity(slug);
+if (!activity) {
+  throw new Error(`Activity not found: ${slug}`);
+}
+const sections = activity.sections ?? [];
+---
+<BaseLayout
+  title={activity.title}
+  description={activity.summary}
+  showProgress={true}
+>
+  <section class="section-block prose">
+    <p><a href="/scouts/activities/">&larr; Back to Troop Meeting Activities</a></p>
+    <p class="kicker">Troop 308 · {activity.duration} meeting plan</p>
+    <h1>{activity.title}</h1>
+    <p>{activity.summary}</p>
+    {activity.advances?.length > 0 && (
+      <ul class="tag-list" aria-label="Advancement coverage">
+        {activity.advances.map((a) => <li>{a}</li>)}
+      </ul>
+    )}
+  </section>
+
+  {sections.map((s) => {
+    if (s.type === "prose") {
+      return (
+        <section class="section-block prose">
+          {s.heading && <h2 class="section-heading">{s.heading}</h2>}
+          {s.paragraphs?.map((p) => <p>{p}</p>)}
+        </section>
+      );
+    }
+    if (s.type === "list") {
+      return (
+        <section class="section-block prose">
+          {s.heading && <h2 class="section-heading">{s.heading}</h2>}
+          {s.intro && <p>{s.intro}</p>}
+          <ul>
+            {s.items.map((item) => <li>{item}</li>)}
+          </ul>
+          {s.muted && <p class="muted">{s.muted}</p>}
+        </section>
+      );
+    }
+    if (s.type === "blockquote") {
+      return (
+        <section class="section-block prose">
+          {s.heading && <h2 class="section-heading">{s.heading}</h2>}
+          <blockquote>{s.text}</blockquote>
+        </section>
+      );
+    }
+    if (s.type === "code") {
+      return (
+        <section class="section-block prose">
+          {s.heading && <h2 class="section-heading">{s.heading}</h2>}
+          <pre><code>{s.text}</code></pre>
+        </section>
+      );
+    }
+    if (s.type === "table") {
+      return (
+        <section class="section-block">
+          {s.heading && <h2 class="section-heading">{s.heading}</h2>}
+          {s.intro && <p class="muted" style="padding: 0 0 0.5rem">{s.intro}</p>}
+          <div class="mb-table-wrap">
+            <table class="mb-detail-table">
+              <thead>
+                <tr>
+                  {s.columns.map((c) => <th>{c.label}</th>)}
+                </tr>
+              </thead>
+              <tbody>
+                {s.rows.map((row) => (
+                  <tr>
+                    {s.columns.map((c) => <td set:html={row[c.key] ?? ""}></td>)}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          {s.footerNote && <p class="muted">{s.footerNote}</p>}
+        </section>
+      );
+    }
+    return null;
+  })}
+</BaseLayout>
