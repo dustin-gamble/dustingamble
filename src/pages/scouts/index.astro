@@ -1,0 +1,104 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getMeritBadges, getCapstones } from "../../lib/merit-badges.js";
+
+const badges = getMeritBadges();
+const capstones = getCapstones();
+const badgeCount = badges.length;
+const capstoneCount = capstones.length;
+---
+<BaseLayout
+  title="Scouts"
+  description="Scouting America volunteer work with Troop 308 in San Luis Obispo: new-scout advancement plan, merit badge counseling, and troop meeting activities."
+>
+  <section class="section-block prose">
+    <p class="kicker">Scouting America · Los Padres Council · Troop 308</p>
+    <h1>Scouts</h1>
+    <p>
+      I'm an Assistant Scoutmaster and registered Merit Badge Counselor with Troop 308 in San Luis Obispo, CA.
+      This is the working hub for everything I do for the troop — advancement, merit badges, and Monday-night
+      meeting activities. It's organized so a Scout, parent, or another adult leader can find what they need
+      in one click.
+    </p>
+  </section>
+
+  <section class="section-block" aria-labelledby="scouts-tracks-title">
+    <h2 id="scouts-tracks-title" class="section-heading">Three places to start</h2>
+    <div class="grid cols-3">
+      <article class="card mb-card">
+        <h3>
+          <span class="mb-icon" aria-hidden="true">🪢</span>
+          <a href="/projects/troop-308-new-scout-advancement-plan/">Advancement Effort</a>
+        </h3>
+        <p>
+          A first-year advancement plan for new Scouts, built around Monday meetings, monthly outings,
+          and a dedicated 30-minute merit badge block. Includes the week-by-week meeting guides and a
+          per-Scout tracker.
+        </p>
+        <ul class="tag-list" aria-label="Advancement facts">
+          <li>Scout → First Class</li>
+          <li>90-min Monday meetings</li>
+          <li>Starts May 4, 2026</li>
+        </ul>
+        <p>
+          <a class="mb-link-btn" href="/projects/troop-308-new-scout-advancement-plan/">
+            Open the plan &rarr;
+          </a>
+        </p>
+      </article>
+
+      <article class="card mb-card">
+        <h3>
+          <span class="mb-icon" aria-hidden="true">🎖️</span>
+          <a href="/merit-badges/">Merit Badges</a>
+        </h3>
+        <p>
+          The badges I counsel — Aviation, Robotics, Programming, AI, Engineering, Inventing, Game Design,
+          and Space Exploration — plus capstone projects that span multiple badges at once.
+        </p>
+        <ul class="tag-list" aria-label="Counseling facts">
+          <li>{badgeCount} badges</li>
+          <li>{capstoneCount} capstones</li>
+          <li>Pamphlets + session plans</li>
+        </ul>
+        <p>
+          <a class="mb-link-btn" href="/merit-badges/">
+            Browse the badges &rarr;
+          </a>
+        </p>
+      </article>
+
+      <article class="card mb-card">
+        <h3>
+          <span class="mb-icon" aria-hidden="true">⚡</span>
+          <a href="/scouts/activities/">Troop Meeting Activities</a>
+        </h3>
+        <p>
+          Reusable 45–90 minute meeting plans designed to advance multiple Scouts on rank requirements
+          at once. Built for older Scouts to lead, with adults observing and signing off.
+        </p>
+        <ul class="tag-list" aria-label="Activity facts">
+          <li>45–90 min formats</li>
+          <li>Rank + merit-badge crossover</li>
+          <li>Older Scouts lead</li>
+        </ul>
+        <p>
+          <a class="mb-link-btn" href="/scouts/activities/">
+            See the activities &rarr;
+          </a>
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section-block prose" aria-labelledby="how-title">
+    <h2 id="how-title" class="section-heading">How I work with the troop</h2>
+    <p>
+      Everything here follows Scouting America's <a href="https://www.scouting.org/health-and-safety/gss/" target="_blank" rel="noopener noreferrer">Guide
+      to Safe Scouting</a> and <a href="https://www.scouting.org/skills/advancement-and-awards/guide-to-advancement/" target="_blank" rel="noopener noreferrer">Guide
+      to Advancement</a>. Rank requirements come from the official Scouting America rank pages and are always
+      cross-checked before signoff. If you're a counselor, Scoutmaster, or parent with corrections or ideas,
+      please reach out via <a href="/contact/">the contact page</a>.
+    </p>
+  </section>
+</BaseLayout>

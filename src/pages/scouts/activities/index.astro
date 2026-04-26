@@ -1,0 +1,55 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+
+const activities = [
+  {
+    slug: "first-aid-corner-relay",
+    icon: "🩹",
+    title: "First Aid Corner Relay",
+    duration: "45 min",
+    summary:
+      "Four-corner first-aid relay. Each corner is a patient with a scenario card; responders rotate, diagnose, treat, and explain prevention. Built around a simple Stop · Check · Ask · Treat · Call · Prevent pattern.",
+    advances: ["Tenderfoot 4a", "Second Class 6a", "First Class 7a/7b", "First Aid MB practice"]
+  }
+];
+---
+<BaseLayout
+  title="Troop Meeting Activities"
+  description="45–90 minute Monday-night meeting activities for Troop 308 designed to advance multiple Scouts at once on rank and merit-badge requirements."
+>
+  <section class="section-block prose">
+    <p><a href="/scouts/">&larr; Back to Scouts</a></p>
+    <h1>Troop Meeting Activities</h1>
+    <p>
+      Plug-and-play meeting plans for a 90-minute troop night. Each one is written so an older Scout (SPL,
+      ASPL, or PL) can run it with adults observing and signing off advancement. The goal is to make
+      every Monday meaningful for advancement without turning it into school.
+    </p>
+  </section>
+
+  <section class="section-block" aria-labelledby="activities-title">
+    <h2 id="activities-title" class="section-heading">Activities</h2>
+    <div class="grid cols-2">
+      {
+        activities.map((a) => (
+          <article class="card mb-card">
+            <h3>
+              <span class="mb-icon" aria-hidden="true">{a.icon}</span>
+              <a href={`/scouts/activities/${a.slug}/`}>{a.title}</a>
+            </h3>
+            <p>{a.summary}</p>
+            <ul class="tag-list" aria-label="Activity facts">
+              <li>{a.duration}</li>
+              {a.advances.map((adv) => <li>{adv}</li>)}
+            </ul>
+            <p>
+              <a class="mb-link-btn" href={`/scouts/activities/${a.slug}/`}>
+                Open the plan &rarr;
+              </a>
+            </p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

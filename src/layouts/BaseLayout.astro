@@ -24,13 +24,16 @@ const navItems = [
   { href: "/", label: "Home" },
   { href: "/writing/", label: "Writing" },
   { href: "/projects/", label: "Projects" },
-  { href: "/merit-badges/", label: "Merit Badges" },
+  { href: "/scouts/", label: "Scouts" },
   { href: "/about/", label: "About" },
   { href: "/resume/", label: "Resume" }
 ];
 
 function isActive(href) {
   if (href === "/") return pathname === "/";
+  if (href === "/scouts/") {
+    return pathname.startsWith("/scouts/") || pathname.startsWith("/merit-badges/");
+  }
   return pathname.startsWith(href);
 }
 ---

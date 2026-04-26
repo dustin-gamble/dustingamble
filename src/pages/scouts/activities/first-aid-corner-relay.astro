@@ -1,0 +1,299 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+---
+<BaseLayout
+  title="First Aid Corner Relay"
+  description="A 45-minute Monday-night meeting plan for Troop 308: a four-corner first-aid relay using a simple Stop · Check · Ask · Treat · Call · Prevent response pattern."
+  showProgress={true}
+>
+  <section class="section-block prose">
+    <p><a href="/scouts/activities/">&larr; Back to Troop Meeting Activities</a></p>
+    <p class="kicker">Troop 308 · 45-minute meeting plan</p>
+    <h1>First Aid Corner Relay</h1>
+    <p>
+      The room has 4 corners. Each corner has a Scout acting as a patient with a scenario card. The
+      responder Scout rotates through each corner, asks questions, gives first aid, explains what they
+      would do next, then moves on. It feels like a real emergency response, not a worksheet.
+    </p>
+    <p>
+      Also a fine alternate name: <strong>The Patrol Rescue Sprint</strong>. I prefer
+      <em>First Aid Corner Relay</em> because it describes the format clearly and is easy to run at a
+      normal troop meeting.
+    </p>
+  </section>
+
+  <section class="section-block prose" aria-labelledby="schedule-title">
+    <h2 id="schedule-title" class="section-heading">45-minute meeting plan</h2>
+    <table class="mb-detail-table">
+      <thead>
+        <tr><th>Time</th><th>Activity</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>0–5 min</td><td>Explain rules and teach the response pattern</td></tr>
+        <tr><td>5–10 min</td><td>Assign patients, responders, judges, and scenario cards</td></tr>
+        <tr><td>10–30 min</td><td>Relay rotations — 4–5 minutes per station</td></tr>
+        <tr><td>30–38 min</td><td>Switch roles so patient Scouts also get a chance to respond</td></tr>
+        <tr><td>38–43 min</td><td>Final "mystery emergency" challenge</td></tr>
+        <tr><td>43–45 min</td><td>Debrief, recognize patrols/Scouts, collect advancement notes</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section-block prose" aria-labelledby="pattern-title">
+    <h2 id="pattern-title" class="section-heading">The response pattern</h2>
+    <p>Give every Scout a simple script:</p>
+    <blockquote><strong>Stop. Check. Ask. Treat. Call. Prevent.</strong></blockquote>
+    <table class="mb-detail-table">
+      <thead>
+        <tr><th>Step</th><th>What the Scout should say or do</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Stop</strong></td><td>"Is the scene safe?"</td></tr>
+        <tr><td><strong>Check</strong></td><td>"What happened? Where does it hurt?"</td></tr>
+        <tr><td><strong>Ask</strong></td><td>"I know first aid. Can I help you?"</td></tr>
+        <tr><td><strong>Treat</strong></td><td>Demonstrate the correct first aid</td></tr>
+        <tr><td><strong>Call</strong></td><td>"Do we need an adult, 911, or someone for help?"</td></tr>
+        <tr><td><strong>Prevent</strong></td><td>"How could we prevent this next time?"</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section-block prose" aria-labelledby="setup-title">
+    <h2 id="setup-title" class="section-heading">Room setup</h2>
+    <pre><code>Corner 1: Bleeding / cut
+Corner 2: Burn / cooking injury
+Corner 3: Heat illness / dehydration
+Corner 4: Sprain / bandage / carry</code></pre>
+    <p>
+      Put one "patient" Scout in each corner with a card telling them what symptoms to act out. Each
+      responder starts at a different corner. When time is called, they rotate clockwise.
+    </p>
+  </section>
+
+  <section class="section-block" aria-labelledby="stations-title">
+    <h2 id="stations-title" class="section-heading">The four stations</h2>
+    <div class="mb-table-wrap">
+      <table class="mb-detail-table">
+        <thead>
+          <tr>
+            <th>Corner</th>
+            <th>Patient scenario</th>
+            <th>What responder must do</th>
+            <th>Advancement helped</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1. Cut / bleeding</strong></td>
+            <td>"I slipped and cut my hand. It is bleeding."</td>
+            <td>Gloves, direct pressure, gauze/bandage, elevate if needed, explain infection prevention</td>
+            <td>Tenderfoot 4a; Second Class hurry case if severe bleeding</td>
+          </tr>
+          <tr>
+            <td><strong>2. Burn</strong></td>
+            <td>"I touched a hot pan while cooking."</td>
+            <td>Cool with water, cover loosely, do not use butter/ice, identify serious burn signs</td>
+            <td>Tenderfoot 4a; Second Class 6a</td>
+          </tr>
+          <tr>
+            <td><strong>3. Heat illness</strong></td>
+            <td>"I feel dizzy, weak, hot, and thirsty."</td>
+            <td>Move to shade, rest, cool, water if conscious, identify when it becomes 911-level</td>
+            <td>Second Class 6a</td>
+          </tr>
+          <tr>
+            <td><strong>4. Sprained ankle</strong></td>
+            <td>"I rolled my ankle and cannot walk well."</td>
+            <td>Check injury, wrap/support ankle, help move safely, explain when to stop hiking</td>
+            <td>First Class 7a and 7b if done carefully</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="muted">
+      Scouting America's current rank requirements include first-aid skills across Tenderfoot 4,
+      Second Class 6, and First Class 7. The First Aid merit badge pamphlet specifically says these
+      rank requirements are meant to be practiced for skill mastery. The official rank requirements
+      also allow Scout, Tenderfoot, Second Class, and First Class requirements to be worked on
+      simultaneously, though ranks are earned in sequence.
+    </p>
+  </section>
+
+  <section class="section-block prose" aria-labelledby="cards-title">
+    <h2 id="cards-title" class="section-heading">Patient question cards</h2>
+    <p>This makes the acting better and teaches diagnosis. Hand each patient Scout the matching card.</p>
+
+    <h3>Corner 1 · Cut / bleeding</h3>
+    <p>Patient says: <em>"I fell on some rocks and cut my palm. It is bleeding."</em></p>
+    <table class="mb-detail-table">
+      <thead><tr><th>Responder asks</th><th>Patient answer</th></tr></thead>
+      <tbody>
+        <tr><td>"What happened?"</td><td>"I tripped on the trail."</td></tr>
+        <tr><td>"Where does it hurt?"</td><td>"My hand."</td></tr>
+        <tr><td>"Are you dizzy?"</td><td>"No."</td></tr>
+        <tr><td>"Is the bleeding stopping?"</td><td>"Only if you press on it."</td></tr>
+      </tbody>
+    </table>
+    <p><strong>Correct response:</strong> gloves, pressure, clean dressing, bandage, monitor, tell adult.</p>
+
+    <h3>Corner 2 · Burn</h3>
+    <p>Patient says: <em>"I grabbed the hot pot handle and burned my fingers."</em></p>
+    <table class="mb-detail-table">
+      <thead><tr><th>Responder asks</th><th>Patient answer</th></tr></thead>
+      <tbody>
+        <tr><td>"How long ago?"</td><td>"Just now."</td></tr>
+        <tr><td>"Is it blistering?"</td><td>"A little red, maybe starting to blister."</td></tr>
+        <tr><td>"Can you move your fingers?"</td><td>"Yes, but it hurts."</td></tr>
+      </tbody>
+    </table>
+    <p><strong>Correct response:</strong> cool running water, remove from heat, cover loosely, no butter, no ice, adult help if severe.</p>
+
+    <h3>Corner 3 · Heat illness</h3>
+    <p>Patient says: <em>"I feel dizzy and weak. I'm really hot."</em></p>
+    <table class="mb-detail-table">
+      <thead><tr><th>Responder asks</th><th>Patient answer</th></tr></thead>
+      <tbody>
+        <tr><td>"Have you been drinking water?"</td><td>"Not much."</td></tr>
+        <tr><td>"Are you sweating?"</td><td>"Yes."</td></tr>
+        <tr><td>"Are you confused?"</td><td>"No."</td></tr>
+        <tr><td>"Do you feel better in shade?"</td><td>"A little."</td></tr>
+      </tbody>
+    </table>
+    <p><strong>Correct response:</strong> shade, rest, cooling, water if awake, monitor for heatstroke, get adult.</p>
+
+    <h3>Corner 4 · Sprained ankle</h3>
+    <p>Patient says: <em>"I stepped in a hole and twisted my ankle."</em></p>
+    <table class="mb-detail-table">
+      <thead><tr><th>Responder asks</th><th>Patient answer</th></tr></thead>
+      <tbody>
+        <tr><td>"Can you stand?"</td><td>"Barely."</td></tr>
+        <tr><td>"Did you hear a snap?"</td><td>"No."</td></tr>
+        <tr><td>"Where does it hurt?"</td><td>"Outside of my ankle."</td></tr>
+        <tr><td>"Can you wiggle your toes?"</td><td>"Yes."</td></tr>
+      </tbody>
+    </table>
+    <p><strong>Correct response:</strong> stop walking, support/wrap, cold pack if available, elevate, get help, assist movement carefully.</p>
+  </section>
+
+  <section class="section-block prose" aria-labelledby="scoring-title">
+    <h2 id="scoring-title" class="section-heading">Scoring the relay</h2>
+    <p>Each responder gets a scorecard. At each station they have <strong>4 minutes</strong>. Keep it casual — the score mostly makes it fun.</p>
+    <table class="mb-detail-table">
+      <thead><tr><th>Item</th><th>Points</th></tr></thead>
+      <tbody>
+        <tr><td>Checked scene safety</td><td>1</td></tr>
+        <tr><td>Asked what happened</td><td>1</td></tr>
+        <tr><td>Asked permission to help</td><td>1</td></tr>
+        <tr><td>Called/sent for adult help when appropriate</td><td>1</td></tr>
+        <tr><td>Correct treatment</td><td>3</td></tr>
+        <tr><td>Explained prevention</td><td>1</td></tr>
+        <tr><td>Stayed calm and led clearly</td><td>1</td></tr>
+        <tr class="mb-detail-table-footer"><td><strong>Total</strong></td><td><strong>9</strong></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section-block prose" aria-labelledby="tracking-title">
+    <h2 id="tracking-title" class="section-heading">Advancement tracking sheet</h2>
+    <p>One adult or older Scout at each corner with a clipboard.</p>
+    <table class="mb-detail-table">
+      <thead>
+        <tr>
+          <th>Scout name</th>
+          <th>Cut / bleeding</th>
+          <th>Burn</th>
+          <th>Heat illness</th>
+          <th>Sprained ankle / bandage</th>
+          <th>Needs follow-up</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Scout 1</td><td>☐</td><td>☐</td><td>☐</td><td>☐</td><td>☐</td></tr>
+        <tr><td>Scout 2</td><td>☐</td><td>☐</td><td>☐</td><td>☐</td><td>☐</td></tr>
+        <tr><td>Scout 3</td><td>☐</td><td>☐</td><td>☐</td><td>☐</td><td>☐</td></tr>
+      </tbody>
+    </table>
+    <p>
+      <strong>Important:</strong> do <em>not</em> automatically sign everyone off because they rotated through.
+      Sign off only when the Scout individually demonstrates the skill well enough.
+    </p>
+  </section>
+
+  <section class="section-block" aria-labelledby="coverage-title">
+    <h2 id="coverage-title" class="section-heading">What this can help with</h2>
+    <div class="mb-table-wrap">
+      <table class="mb-detail-table">
+        <thead>
+          <tr><th>Requirement area</th><th>Helps?</th><th>Notes</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Tenderfoot first aid</strong></td><td>Yes</td><td>Cuts, minor burns, blisters if added, bites/stings if added, prevention</td></tr>
+          <tr><td><strong>Second Class first aid</strong></td><td>Yes</td><td>Heat illness, serious burns, shock, severe bleeding, emergency response</td></tr>
+          <tr><td><strong>First Class first aid</strong></td><td>Yes</td><td>Sprained ankle bandage and transport if you include it</td></tr>
+          <tr><td><strong>First Aid merit badge</strong></td><td>Partially</td><td>Good practice and partial demonstration, not a full merit badge class</td></tr>
+          <tr><td><strong>Life teaching requirement</strong></td><td>Yes (older Scouts)</td><td>Older Scouts can teach first-aid skills using EDGE if Scoutmaster approves</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section-block prose" aria-labelledby="roles-title">
+    <h2 id="roles-title" class="section-heading">Older-Scout leadership layer</h2>
+    <p>This is how you make it really Scout-like — older Scouts run stations instead of adults lecturing.</p>
+    <table class="mb-detail-table">
+      <thead><tr><th>Role</th><th>Who does it</th></tr></thead>
+      <tbody>
+        <tr><td>Event captain</td><td>SPL or ASPL</td></tr>
+        <tr><td>Station chiefs</td><td>Older Scouts</td></tr>
+        <tr><td>Patients</td><td>Younger or older Scouts</td></tr>
+        <tr><td>Evaluators</td><td>Adults / merit badge counselors / senior Scouts</td></tr>
+        <tr><td>Responders</td><td>Newer Scouts</td></tr>
+        <tr><td>Safety officer</td><td>Adult leader</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section-block prose" aria-labelledby="supplies-title">
+    <h2 id="supplies-title" class="section-heading">Supplies</h2>
+    <table class="mb-detail-table">
+      <thead><tr><th>Item</th><th>Quantity</th></tr></thead>
+      <tbody>
+        <tr><td>Nitrile gloves</td><td>1 box</td></tr>
+        <tr><td>Gauze pads</td><td>1 pack</td></tr>
+        <tr><td>Roller bandages</td><td>4–6</td></tr>
+        <tr><td>Triangular bandages</td><td>4</td></tr>
+        <tr><td>Elastic wraps</td><td>2–4</td></tr>
+        <tr><td>Tape</td><td>2 rolls</td></tr>
+        <tr><td>Fake injury cards</td><td>4–8</td></tr>
+        <tr><td>Clipboards</td><td>4</td></tr>
+        <tr><td>Pens</td><td>4</td></tr>
+        <tr><td>Cones or signs for corners</td><td>4</td></tr>
+        <tr><td>Optional fake blood/makeup</td><td>1 small kit</td></tr>
+        <tr><td>Water bottle / empty bottle prop</td><td>1</td></tr>
+        <tr><td>Cold pack prop</td><td>1</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section-block prose" aria-labelledby="rounds-title">
+    <h2 id="rounds-title" class="section-heading">How to run two rounds</h2>
+    <p>For 45 minutes, do <strong>4 corners</strong>, run <strong>two rounds</strong>, and make sure every Scout gets at least one chance as responder.</p>
+    <h3>Round 1</h3>
+    <p>Older Scouts are patients. Younger Scouts respond.</p>
+    <h3>Round 2</h3>
+    <p>Switch. Younger Scouts are patients. Older Scouts respond or coach.</p>
+    <h3>Final challenge</h3>
+    <p>One surprise scenario in the middle of the room:</p>
+    <blockquote>"A Scout fell while cooking. He has a burned hand and feels dizzy. Patrol leader, take charge."</blockquote>
+    <p>This tests leadership, triage, and communication.</p>
+  </section>
+
+  <section class="section-block prose" aria-labelledby="sources-title">
+    <h2 id="sources-title" class="section-heading">Sources</h2>
+    <ul>
+      <li><a href="https://www.scouting.org/wp-content/uploads/2025/12/Tenderfoot-Rank.pdf" target="_blank" rel="noopener noreferrer">Scouting America — Tenderfoot Rank Requirements (PDF)</a></li>
+      <li><a href="https://www.scouting.org/wp-content/uploads/2025/12/Scouts-BSA-Rank-Requirements.pdf" target="_blank" rel="noopener noreferrer">Scouting America — Scouts BSA Rank Requirements (PDF)</a></li>
+      <li><a href="https://www.scouting.org/health-and-safety/gss/" target="_blank" rel="noopener noreferrer">Guide to Safe Scouting</a></li>
+    </ul>
+  </section>
+</BaseLayout>
