@@ -19,7 +19,7 @@ const pageImages = getExistingPageImages("projects", project.slug, project.title
   description={project.summary}
   showProgress={true}
 >
-  <article class="prose">
+  <article class={`prose project-page project-${project.slug}`}>
     <p><a href="/projects/">&larr; Back to projects</a></p>
     <h1 transition:name={project.slug}>{project.title}</h1>
     <p class="meta-row">

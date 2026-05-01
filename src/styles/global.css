@@ -435,6 +435,20 @@ textarea:focus-visible {
   object-fit: cover;
 }
 
+.project-take-it-in .page-image-grid {
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  align-items: start;
+}
+
+.project-take-it-in .page-image-card {
+  border-radius: 1.2rem;
+}
+
+.project-take-it-in .page-image-card img {
+  aspect-ratio: 2 / 3;
+  object-position: top center;
+}
+
 .inline-logo {
   margin: 0 auto 1.35rem;
   padding: 0.85rem 1rem;

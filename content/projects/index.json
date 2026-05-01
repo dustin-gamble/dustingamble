@@ -108,5 +108,15 @@
     "draft": false,
     "featured": false,
     "order": 11
+  },
+  {
+    "slug": "take-it-in",
+    "title": "Take It In",
+    "date": "2026-04-30",
+    "summary": "An iOS app that turns flights into cinematic, offline, chaptered journey stories.",
+    "tags": ["iOS", "Travel", "AI Storytelling"],
+    "draft": false,
+    "featured": false,
+    "order": 12
   }
 ]
