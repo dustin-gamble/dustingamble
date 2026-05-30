@@ -30,4 +30,4 @@ Life Guide Tool reinforced an idea that shows up across many of my recent projec
 
 ## Links
 
-- Site: https://lifeguidetool.com/
+- Site: https://dustin-gamble.github.io/lifeguidetool/

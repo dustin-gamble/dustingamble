@@ -118,5 +118,15 @@
     "draft": false,
     "featured": false,
     "order": 12
+  },
+  {
+    "slug": "olives-art",
+    "title": "Olive's Art",
+    "date": "2026-05-29",
+    "summary": "A small online art shop I built for my daughter Olive to sell her artwork for a school fundraiser.",
+    "tags": ["Web", "For My Kids", "AI Collaboration"],
+    "draft": false,
+    "featured": false,
+    "order": 13
   }
 ]
