@@ -1,79 +1,157 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { patents } from "../data/patents.js";
+
+const granted = patents.filter((p) => p.granted);
+const pending = patents.filter((p) => !p.granted);
+
+const aiBullets = [
+  "Developed AI-assisted engineering workflows to accelerate aircraft design, analysis, simulation, and prototype development.",
+  "Built custom web-based engineering tools — aircraft sizing, propulsion modeling, flight simulation, stability analysis, and data visualization — using AI-assisted software development.",
+  "Applied AI agents to rapidly generate, test, and iterate software tools for engineering teams.",
+  "Explored AI-supported knowledge capture to preserve and distribute senior engineering expertise.",
+  "Promoted practical AI adoption across aerospace teams — real workflows, usable tools, and measurable productivity gains, treating AI as a force multiplier rather than a replacement for engineers."
+];
+
+const skills = [
+  "Unmanned aircraft (UAV) design — fixed-wing, VTOL/tiltrotor, electric propulsion",
+  "Rapid prototyping, flight test, and design-build-test loops",
+  "Autonomous systems architecture and integration",
+  "Simulation: ArduPilot/SITL, JSBSim, and browser-based tools",
+  "AI-assisted engineering and agent-based software development",
+  "Technical leadership, mentoring, and building rapid-innovation environments"
+];
 ---
 <BaseLayout
   title="Resume"
-  description="Resume of Dustin Gamble, aerospace engineer focused on autonomous systems, UAV design, rapid prototyping, and simulation-driven engineering."
+  description="Resume of Dustin Gamble — aerospace engineer in unmanned aircraft, rapid prototyping, simulation, AI-assisted engineering, and electric propulsion at Lockheed Martin Skunk Works."
 >
   <article class="prose section-block">
     <h1>Resume</h1>
     <p>
       <strong>Dustin Gamble</strong><br />
-      Autonomous Systems | Aerospace Engineering | AI-Augmented Workflows
+      Aerospace Engineer · UAV Innovator · AI-Assisted Engineering · Rapid Prototyping
+    </p>
+    <p class="meta-row">
+      <span>San Luis Obispo, California</span>
+      <span aria-hidden="true">·</span>
+      <a href="/about/">About</a>
+      <span aria-hidden="true">·</span>
+      <a href="https://www.linkedin.com/in/dustin-gamble-90276215/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <span aria-hidden="true">·</span>
+      <a href="https://github.com/dustin-gamble" target="_blank" rel="noopener noreferrer">GitHub</a>
     </p>
 
     <h2>Summary</h2>
     <p>
-      Aerospace engineer with a track record of turning early concepts into practical autonomous-system
-      capabilities. Focused on UAV design, long-endurance mission architecture, rapid prototype cycles, and
-      simulation-driven engineering. Known for building teams and tools that improve iteration speed while
-      preserving engineering discipline.
+      I combine aerospace engineering, rapid prototyping, and AI-assisted software development to help small
+      teams build real hardware faster. My work focuses on unmanned aircraft, autonomy, simulation, electric
+      propulsion, and the engineering tools needed to move quickly from concept to demonstration.
     </p>
 
-    <h2>Key Highlights</h2>
+    <h2>AI-Assisted Engineering</h2>
     <ul>
-      <li>Led work culminating in a publicly referenced 39-hour endurance flight world record (Stalker VXE).</li>
-      <li>Contributed to high-level concept development for signature-simulation drone applications.</li>
-      <li>Founded and developed the Drone Innovation Garage (DIG) for rapid experimentation and mentorship.</li>
-      <li>Built internal engineering tools that combine autonomy frameworks, simulation, and visualization.</li>
+      {aiBullets.map((b) => <li>{b}</li>)}
     </ul>
 
     <h2>Experience</h2>
-    <h3>Lockheed Martin Aeronautics</h3>
-    <p><em>Technical Fellow, Unmanned Systems</em> | Date: TODO</p>
+    <h3>Lockheed Martin — Skunk Works (Advanced Development Programs)</h3>
+    <p><em>Aerospace Engineer · Founder, Drone Innovation Garage</em> — San Luis Obispo, CA · 2010–Present</p>
     <ul>
-      <li>Guides technical direction for unmanned systems initiatives and advanced mission concepts.</li>
-      <li>Supports prototype transitions from concept exploration into structured engineering execution.</li>
-      <li>Mentors engineers in autonomy development, simulation practices, and technical decision framing.</li>
+      <li>
+        Founded the <strong>Drone Innovation Garage</strong> (2024): brought unmanned-aircraft development fully
+        in-house — design, build, and flight test — ending dependence on external suppliers and giving a small
+        team startup-speed iteration.
+      </li>
+      <li>Design, prototyping, and flight test of small unmanned aircraft and advanced UAV concepts.</li>
+      <li>
+        Named inventor on 14 US patents and applications in unmanned-aircraft systems (see <a href="#patents">Patents</a>).
+      </li>
     </ul>
-
-    <h3>Autonomous Systems and Rapid Innovation Roles</h3>
-    <p><em>Engineering Leadership and Advanced Development</em> | Date: TODO</p>
-    <ul>
-      <li>Designed and evaluated long-endurance aircraft concepts and mission-specific UAV configurations.</li>
-      <li>Built and integrated simulation workflows to shorten design-test-learn loops.</li>
-      <li>Led cross-functional teams through rapid prototyping and early-flight demonstrations.</li>
-    </ul>
-
-    <h2>Selected Achievements</h2>
-    <ul>
-      <li>39-hour endurance flight world record contribution (public references available).</li>
-      <li>Creation of internal innovation environment (DIG) with sustained mentoring outcomes.</li>
-      <li>Development of web-based engineering and simulation tools for design-space exploration.</li>
-      <li>Transition support for novel autonomy and mission-system concepts.</li>
-    </ul>
-
-    <h2>Skills and Tools</h2>
-    <ul>
-      <li>Autonomous systems architecture and integration</li>
-      <li>UAV conceptual design and mission-driven trade studies</li>
-      <li>Simulation workflows: ArduPilot/SITL, JSBSim, and browser-based interfaces</li>
-      <li>Rapid prototyping, test planning, and experimental design</li>
-      <li>AI-augmented engineering workflows and decision support</li>
-      <li>Technical leadership, mentoring, and cross-functional collaboration</li>
-    </ul>
+    <h3>Lockheed Martin — Skunk Works</h3>
+    <p><em>Engineering Intern</em> — Palmdale, CA · Summers 2008 &amp; 2009</p>
+    <h3>Oklahoma State University</h3>
+    <p><em>Graduate Teaching Assistant</em> — Stillwater, OK · 2008–2009</p>
 
     <h2>Education</h2>
     <p>
-      <strong>Degree / Institution:</strong> TODO<br />
-      <strong>Additional training or certifications:</strong> TODO
+      <strong>Oklahoma State University</strong><br />
+      M.S. Aerospace Engineering &amp; M.S. Mechanical Engineering (dual degrees), 2009<br />
+      B.S. Aerospace Engineering, 2008<br />
+      Chief Engineer, AIAA Design/Build/Fly (DBF) team
     </p>
 
-    <h2>Speaking and Publications (Optional)</h2>
+    <h2 id="world-records">World Records</h2>
+    <figure class="record-figure">
+      <img
+        src="/images/records/osu-dragonfly-2006.jpg"
+        alt="Oklahoma State students Dustin Gamble (holding the aircraft) and teammate with the record-setting Dragonfly electric UAV"
+        loading="lazy"
+      />
+      <figcaption>OSU's record-setting &ldquo;Dragonfly&rdquo; electric UAV (Stillwater News Press, 2006).</figcaption>
+    </figure>
+    <ul class="record-list">
+      <li>
+        <strong>2006 — &ldquo;Dragonfly&rdquo; electric UAV (FAI), Oklahoma State University.</strong> A core
+        member of OSU's record-setting student team, which set FAI world marks with the Dragonfly — including a
+        144.42 km distance-to-goal flight (nearly doubling the prior 80.43 km record) and a long-endurance flight
+        registered under teammate Thomas Hays (<a href="https://www.fai.org/record/14000" target="_blank" rel="noopener noreferrer">FAI #14000</a>). Featured in the
+        <a href="https://www.stwnewspress.com/news/flying-toward-a-second-world-record/article_f0baca5e-c4dc-5fbb-8ceb-6d7def349de8.html" target="_blank" rel="noopener noreferrer">Stillwater News Press</a>.
+      </li>
+      <li>
+        <strong>2007 — &ldquo;Pterosoar&rdquo; fuel-cell micro-UAV (Guinness World Record).</strong> On the OSU
+        Aerospace Design team behind the Pterosoar hydrogen fuel-cell UAV, which flew 120 km (74.5 mi) — a
+        <a href="https://www.guinnessworldrecords.com/world-records/longest-flight-for-a-micro-unmanned-aerial-vehicle-(uav)" target="_blank" rel="noopener noreferrer">Guinness World Record</a>
+        for the longest micro-UAV flight (Oklahoma State University + Cal State LA). Co-author,
+        <a href="https://saemobilus.sae.org/papers/development-a-small-long-endurance-hybrid-pem-fuel-cell-powered-uav-2007-01-3930" target="_blank" rel="noopener noreferrer">SAE Technical Paper 2007-01-3930</a>.
+      </li>
+      <li>
+        <strong>2022 — Stalker VXE30 (FAI), Lockheed Martin.</strong> Contributor to the Stalker VXE program that
+        set a 39-hour 17-minute UAV endurance world record (<a href="https://www.fai.org/record/19634" target="_blank" rel="noopener noreferrer">FAI #19634</a>).
+        <a href="/projects/world-record-endurance-flight-stalker-vxe/">See the project &rarr;</a>
+      </li>
+    </ul>
+
+    <h2 id="patents">Patents</h2>
+    <p>
+      Named inventor on <strong>{granted.length} granted US patents</strong> and <strong>{pending.length} pending
+      applications</strong> in unmanned-aircraft systems (assignee: Lockheed Martin Corporation) — spanning
+      VTOL/coaxial-tiltrotor propulsion, UAV launch &amp; recovery, wing structures, and fuel-cell endurance.
+      Each tile links to Google Patents.
+    </p>
+    <div class="patent-grid">
+      {patents.map((p) => (
+        <a class="patent-card" href={p.url} target="_blank" rel="noopener noreferrer">
+          <span class="patent-fig">
+            {p.image ? (
+              <img src={p.image} alt={`Representative drawing from ${p.number}`} loading="lazy" />
+            ) : (
+              <span class="patent-noimg">{p.number}</span>
+            )}
+          </span>
+          <span class="patent-meta">
+            <span class={`patent-badge ${p.granted ? "is-granted" : "is-pending"}`}>
+              {p.granted ? "Granted" : "Pending"} · {p.year}
+            </span>
+            <span class="patent-title">{p.title}</span>
+            <span class="patent-num">{p.number}</span>
+          </span>
+        </a>
+      ))}
+    </div>
+
+    <h2>Skills &amp; Tools</h2>
     <ul>
-      <li>AIAA paper: DOI 10.2514/6.2023-1725</li>
-      <li>Public references and records: see <a href="/projects/">Projects</a> and <a href="/about/">About</a></li>
-      <li>TODO: Add talks, panels, and publication links</li>
+      {skills.map((s) => <li>{s}</li>)}
+    </ul>
+
+    <h2>Publications</h2>
+    <ul>
+      <li>AIAA paper — DOI <a href="https://doi.org/10.2514/6.2023-1725" target="_blank" rel="noopener noreferrer">10.2514/6.2023-1725</a></li>
+      <li>
+        SAE Technical Paper <a href="https://saemobilus.sae.org/papers/development-a-small-long-endurance-hybrid-pem-fuel-cell-powered-uav-2007-01-3930" target="_blank" rel="noopener noreferrer">2007-01-3930</a> —
+        &ldquo;Development of a Small Long-Endurance Hybrid PEM Fuel Cell Powered UAV.&rdquo;
+      </li>
     </ul>
   </article>
 </BaseLayout>

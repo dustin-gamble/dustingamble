@@ -3,48 +3,72 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 <BaseLayout
   title="About"
-  description="About Dustin Gamble: aerospace engineer focused on autonomous systems, rapid prototyping, and AI-augmented engineering workflows."
+  description="About Dustin Gamble — aerospace engineer building unmanned aircraft and the AI-assisted tools that help design them at Lockheed Martin Skunk Works."
 >
   <section class="prose section-block">
     <h1>About</h1>
+    <figure class="about-figure">
+      <a href="/images/dustin-action-figure.png" aria-label="View the full-size action figure">
+        <img
+          src="/images/dustin-action-figure.png"
+          alt="Dustin Gamble as a 'Drone Innovator' collectible action figure, packaged with a VTOL drone, laptop, RC transmitter, calipers, and a 3D-printed bracket"
+        />
+      </a>
+      <figcaption>Built for what's next. Ages 14+.</figcaption>
+    </figure>
+    <p class="about-lead">I build flying things &mdash; and the AI-powered tools that help design them.</p>
     <p>
-      <img src="/images/Dustin.JPG" alt="Portrait of Dustin Gamble" class="profile-photo" />
+      My work sits at the intersection of aerospace engineering, unmanned aircraft, rapid prototyping,
+      simulation, and artificial intelligence. I like taking strange or ambitious aircraft ideas and pushing
+      them toward something real: a simulation, a prototype, a flight test, or a useful engineering tool.
     </p>
     <p>
-      Dustin Gamble is an aerospace engineer focused on autonomous systems, advanced UAV design, and
-      AI-augmented engineering workflows. His work spans rapid prototyping, simulation-first development,
-      and practical flight-system integration.
+      At Lockheed Martin Skunk Works, I founded the <strong>Drone Innovation Garage</strong> to help teams
+      explore new unmanned aircraft ideas faster and more creatively. Increasingly, that work includes
+      AI-assisted software development, custom engineering tools, simulation workflows, and agent-based
+      systems that let small teams move with the speed and creativity of a startup.
     </p>
     <p>
-      He has contributed to long-endurance unmanned systems, autonomy experimentation, and internal tooling
-      that helps engineers iterate faster while maintaining technical rigor. Public highlights include a
-      39-hour endurance flight world record and high-level concept work in signature-simulation systems.
+      I believe the future of engineering belongs to people who can combine deep technical judgment with AI,
+      rapid prototyping, simulation, and hands-on experimentation. One public highlight along the way: a
+      39-hour endurance flight world record (Stalker VXE).
     </p>
+
+    <h2>AI-Assisted Engineering</h2>
     <p>
-      He also created the Drone Innovation Garage (DIG), an internal environment for hands-on innovation,
-      mentorship, and cross-disciplinary engineering practice.
+      A major part of my current work is figuring out how AI helps engineers build faster, learn faster, and
+      make better technical decisions &mdash; as a force multiplier, not a replacement for engineers. In
+      practice that looks like:
+    </p>
+    <ul>
+      <li>Custom AI-assisted engineering tools for aircraft design, simulation, and analysis</li>
+      <li>AI agents that generate software, automate workflows, and accelerate prototype development</li>
+      <li>Web-based engineering apps for propulsion modeling, stability analysis, flight simulation, and design trades</li>
+      <li>AI-supported knowledge capture from senior engineers and technical experts</li>
+      <li>Practical AI adoption inside engineering teams, focused on real workflows and usable tools</li>
+    </ul>
+    <p>
+      I write about how this works in practice &mdash; see
+      <a href="/writing/the-agent-is-the-tool/">The Agent Is the Tool</a> and
+      <a href="/writing/build-the-tool-not-just-the-answer/">Build the Tool, Not Just the Answer</a>.
     </p>
 
     <details>
       <summary>Read more</summary>
       <p>
-        Dustin's broader philosophy is that aerospace progress depends on workflow design as much as
-        hardware design. The teams that learn fastest, simulate well, and document decisions clearly are
-        usually the teams that field practical systems first.
+        My broader philosophy is that aerospace progress depends on workflow design as much as hardware
+        design. The teams that learn fastest, simulate well, and document decisions clearly are usually the
+        teams that field practical systems first.
       </p>
       <p>
-        His recent efforts center on connecting simulation environments (including ArduPilot/SITL, JSBSim,
-        and browser-based tools) with lightweight AI assistance. The goal is not automation for its own
+        A lot of my recent effort connects simulation environments &mdash; ArduPilot/SITL, JSBSim, and
+        browser-based tools &mdash; with lightweight AI assistance. The goal is not automation for its own
         sake, but better technical judgment, better handoffs, and fewer surprises late in development.
       </p>
       <p>
-        Outside direct program work, Dustin mentors engineers, supports technical reviews, and builds
-        educational tools that lower the barrier to advanced aerospace methods. He is particularly interested
-        in how modular architectures and shared simulation infrastructure can help teams adapt faster to new
-        mission requirements.
-      </p>
-      <p>
-        TODO: Add approved public talks, interviews, or external profiles.
+        Outside direct program work, I mentor engineers, support technical reviews, and build educational
+        tools that lower the barrier to advanced aerospace methods. I am especially interested in how modular
+        architectures and shared simulation infrastructure help teams adapt faster to new mission requirements.
       </p>
     </details>
 

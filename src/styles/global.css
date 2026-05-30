@@ -476,6 +476,142 @@ textarea:focus-visible {
   box-shadow: var(--shadow);
 }
 
+.about-figure {
+  margin: 0 0 1.5rem;
+  width: min(26rem, 100%);
+}
+
+.about-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 0.9rem;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+.about-figure figcaption {
+  margin-top: 0.5rem;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.about-lead {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 0.4rem;
+}
+
+/* ---------- Resume: world records ---------- */
+.record-figure {
+  width: min(28rem, 100%);
+  margin: 0 0 1.2rem;
+}
+
+.record-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 0.75rem;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+.record-figure figcaption {
+  margin-top: 0.4rem;
+  font-size: 0.82rem;
+  color: var(--muted);
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.record-list li {
+  margin: 0.65rem 0;
+}
+
+/* ---------- Resume: patent gallery ---------- */
+.patent-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 0.9rem;
+  margin: 1rem 0 1.5rem;
+}
+
+.patent-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line);
+  border-radius: 0.7rem;
+  overflow: hidden;
+  background: var(--surface);
+  color: var(--text);
+  text-decoration: none;
+  box-shadow: var(--shadow);
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.patent-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+}
+
+.patent-fig {
+  aspect-ratio: 4 / 3;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
+}
+
+.patent-fig img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 0.4rem;
+}
+
+.patent-noimg {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 0.78rem;
+  color: var(--muted);
+  padding: 0.6rem;
+  text-align: center;
+}
+
+.patent-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.18rem;
+  padding: 0.55rem 0.65rem 0.7rem;
+}
+
+.patent-badge {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+.patent-badge.is-granted {
+  color: var(--accent);
+}
+
+.patent-title {
+  font-size: 0.82rem;
+  line-height: 1.25;
+}
+
+.patent-num {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
 details {
   border: 1px solid var(--line);
   border-radius: 0.8rem;
