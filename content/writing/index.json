@@ -1,5 +1,14 @@
 [
   {
+    "slug": "the-agent-is-the-tool",
+    "title": "The Agent Is the Tool",
+    "date": "2026-05-29",
+    "summary": "After building tools with AI, the next step is keeping an agent inside the tool — delegating judgment at runtime and letting the tool get smarter as the models do.",
+    "tags": ["AI", "Agents", "Tool Building", "Engineering Judgment", "Prompt Engineering"],
+    "draft": false,
+    "featured": true
+  },
+  {
     "slug": "build-the-tool-not-just-the-answer",
     "title": "Build the Tool, Not Just the Answer",
     "date": "2026-02-22",
