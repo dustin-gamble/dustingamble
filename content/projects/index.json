@@ -128,5 +128,15 @@
     "draft": false,
     "featured": false,
     "order": 13
+  },
+  {
+    "slug": "biogyro",
+    "title": "BioGyro",
+    "date": "2026-08-08",
+    "summary": "An iOS app that tracked how food affected your body rather than how many calories it contained. Shipped to the App Store, did not find an audience, and was retired.",
+    "tags": ["iOS", "AI", "Health"],
+    "draft": false,
+    "featured": false,
+    "order": 14
   }
 ]
