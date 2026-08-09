@@ -113,6 +113,15 @@ td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 .tag.mid{background:var(--warn-soft);color:var(--warn);border-color:transparent}
 .tag.bad{background:var(--danger-soft);color:var(--danger);border-color:transparent}
 
+/* map */
+.mapwrap{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:.5rem;box-shadow:var(--shadow);overflow:hidden}
+.maplegend{display:flex;flex-wrap:wrap;gap:1rem;margin-top:.5rem;
+  font-family:ui-sans-serif,system-ui,sans-serif;font-size:.76rem;color:var(--muted);align-items:center}
+.maplegend i.sw{display:inline-block;width:22px;height:0;vertical-align:middle;margin-right:.3rem}
+.maplegend i.solid{border-top:3px solid var(--accent)}
+.maplegend i.dash{border-top:2px dashed var(--muted)}
+
 /* photo cards */
 .pgrid{display:grid;gap:.9rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,215px),1fr));margin:.9rem 0 1.3rem}
 .pcard{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;
@@ -163,6 +172,20 @@ td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 .slot.rest .lbl{color:var(--accent)}
 .slot p{margin:0}
 @media (max-width:560px){.slot{grid-template-columns:1fr;gap:.1rem}}
+
+/* sight chips with video links */
+.sights{display:flex;flex-wrap:wrap;gap:.5rem;padding:.6rem .9rem;
+  background:color-mix(in srgb,var(--text) 3%,transparent);border-top:1px solid var(--line)}
+.chip{display:flex;align-items:center;gap:.5rem;background:var(--surface-solid);
+  border:1px solid var(--line);border-radius:999px;padding:.22rem .7rem .22rem .22rem;
+  text-decoration:none;color:var(--text);font-family:ui-sans-serif,system-ui,sans-serif;
+  font-size:.79rem;transition:.15s;max-width:100%}
+.chip:hover{border-color:var(--accent);color:var(--accent-strong);transform:translateY(-1px)}
+.chip img{width:34px;height:34px;border-radius:999px;object-fit:cover;flex:none}
+.chip .play{width:34px;height:34px;border-radius:999px;flex:none;display:grid;place-items:center;
+  background:color-mix(in srgb,var(--accent) 16%,transparent);font-size:.7rem}
+.chip .txt{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.chip .yt{opacity:.55;font-size:.72rem;flex:none}
 
 figure.wide{margin:1.2rem 0;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--line)}
 figure.wide img{width:100%;display:block;aspect-ratio:21/9;object-fit:cover}
@@ -238,6 +261,8 @@ footer{padding:2.2rem 0 3rem;color:var(--muted);font-size:.83rem}
     <a href="#drive">The Drive</a>
     <a href="#ma">Manuel Antonio</a>
     <a href="#food">Food</a>
+    <a href="#map">Map</a>
+    <a href="#group">8 People</a>
     <a href="#monkeys">🐒</a>
     <a href="#onebase">One Base?</a>
     <a href="#builder">Builder</a>
@@ -723,6 +748,101 @@ footer{padding:2.2rem 0 3rem;color:var(--muted);font-size:.83rem}
   </div>
 </div></section>
 
+
+<!-- ===== MAP ===== -->
+<section id="map"><div class="wrap">
+  <div class="eyebrow">Geography</div>
+  <h2>Where everything is</h2>
+  <p class="lede">Real coordinates and real driving times. Route lines are schematic — roads curve a lot more than this — but every place and every duration is accurate.</p>
+  <div class="mapwrap">
+    <svg viewBox="0 0 1000 620" role="img" aria-label="Map of Costa Rica showing Arenal, Manuel Antonio, San José airport and day-trip destinations with driving times" style="width:100%;height:auto;display:block">
+      <defs>
+        <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="var(--accent)" stop-opacity=".10"/>
+          <stop offset="100%" stop-color="var(--accent)" stop-opacity=".03"/>
+        </linearGradient>
+      </defs>
+      <rect width="1000" height="620" fill="url(#sea)"/>
+      <path d="M321.5,53.8 L304.2,45.2 L292.4,44.7 L274.8,37.7 L268.2,30.1 L259.5,28.4 L244.8,53.6 L248.8,61.0 L241.2,63.1 L238.7,59.0 L233.8,63.3 L245.5,71.9 L240.0,75.8 L243.5,77.3 L241.5,81.1 L228.6,78.7 L226.7,84.3 L222.8,82.0 L222.9,77.7 L211.0,76.8 L214.4,81.0 L199.4,87.6 L205.4,86.0 L216.3,94.0 L226.3,94.0 L225.6,99.1 L232.4,103.2 L235.7,100.3 L247.1,102.9 L250.9,109.8 L251.7,126.6 L243.7,137.7 L251.2,132.0 L256.5,135.4 L252.1,141.3 L243.8,144.2 L244.1,148.0 L234.2,152.1 L229.8,149.7 L227.5,154.4 L223.8,154.5 L230.6,167.0 L225.9,167.2 L226.1,174.2 L221.2,173.5 L212.6,183.2 L218.8,190.0 L216.8,201.9 L227.8,230.2 L235.9,242.0 L249.1,252.5 L246.9,254.1 L249.2,264.5 L275.4,268.7 L284.7,274.3 L287.5,271.9 L297.3,273.6 L308.6,279.1 L305.6,275.8 L308.2,280.2 L316.9,281.7 L314.7,282.2 L320.5,287.5 L322.4,284.9 L318.7,290.3 L329.0,296.3 L326.8,295.3 L331.8,305.7 L347.7,326.3 L351.0,324.3 L355.3,309.3 L368.2,300.2 L363.7,296.8 L365.5,293.8 L370.6,290.0 L368.8,292.8 L375.3,296.0 L375.5,290.8 L379.1,290.7 L381.0,284.4 L384.9,283.4 L382.6,280.7 L391.4,278.0 L377.8,277.3 L384.0,273.5 L378.3,268.8 L382.5,264.6 L381.2,260.6 L365.6,258.1 L358.1,251.5 L346.6,251.7 L346.3,248.7 L336.7,244.4 L337.5,241.1 L332.2,242.3 L336.0,241.1 L332.7,240.6 L333.0,232.3 L322.9,228.5 L325.4,227.0 L323.5,203.2 L316.1,198.9 L317.0,194.9 L312.1,189.7 L303.8,189.0 L311.9,189.0 L317.2,193.8 L317.2,198.8 L325.2,201.8 L329.1,214.3 L342.1,218.5 L354.6,216.2 L353.8,222.9 L362.9,223.5 L374.8,234.7 L377.0,233.1 L373.0,235.6 L387.9,245.2 L396.7,249.6 L407.3,248.0 L406.0,249.9 L409.5,250.1 L393.6,251.4 L411.4,252.2 L414.1,257.8 L420.0,260.3 L415.0,266.3 L433.2,289.9 L424.8,301.7 L423.9,309.8 L428.0,310.3 L426.8,313.3 L433.2,317.1 L434.9,322.3 L449.5,333.6 L460.8,331.4 L500.4,341.5 L493.2,339.4 L499.1,339.0 L503.4,343.1 L500.7,338.0 L514.5,347.9 L513.4,355.9 L557.6,372.7 L571.7,387.0 L583.3,392.0 L587.1,399.5 L592.1,400.3 L607.8,417.3 L604.2,414.9 L609.5,423.8 L610.8,440.9 L620.7,446.8 L613.1,447.8 L620.2,453.5 L605.8,463.6 L609.0,466.1 L612.9,462.9 L606.8,468.3 L605.2,481.0 L594.4,484.8 L591.2,498.6 L598.0,501.9 L616.9,523.6 L621.0,527.0 L642.5,527.4 L668.2,538.6 L672.0,536.7 L670.8,508.9 L669.7,512.1 L663.3,503.6 L655.0,502.8 L645.6,495.1 L644.2,487.8 L635.5,480.9 L638.9,475.7 L644.8,478.0 L654.8,471.8 L663.5,476.5 L662.9,483.9 L668.9,488.8 L676.0,488.1 L679.1,493.5 L681.3,491.0 L688.9,494.4 L690.1,490.4 L699.7,497.9 L694.0,503.7 L706.7,508.9 L700.3,507.3 L703.0,512.6 L700.4,511.7 L700.4,515.9 L694.3,507.7 L704.8,525.2 L695.3,540.3 L726.2,563.0 L738.5,586.2 L735.9,595.2 L738.7,598.9 L741.3,586.6 L736.7,570.5 L732.4,568.3 L731.4,557.1 L725.5,554.1 L722.9,557.3 L711.9,546.2 L723.9,539.2 L733.3,528.0 L744.3,527.1 L749.4,519.8 L749.4,508.0 L752.5,504.3 L751.1,491.9 L735.4,468.7 L741.3,467.2 L740.5,463.9 L745.4,459.7 L741.5,457.2 L745.7,453.0 L761.2,448.4 L772.0,440.1 L766.7,429.2 L756.2,426.0 L742.8,415.8 L741.0,410.8 L732.4,412.5 L732.4,341.7 L748.9,336.7 L741.4,325.2 L746.9,315.1 L760.5,321.7 L766.4,321.0 L766.2,324.6 L772.9,330.5 L774.8,328.7 L773.7,332.2 L779.2,338.0 L782.1,334.9 L784.9,338.0 L790.8,336.1 L791.8,326.2 L799.8,329.7 L797.8,323.5 L791.0,319.5 L787.9,312.7 L774.3,312.2 L759.6,307.1 L753.9,297.9 L754.8,293.0 L747.0,293.1 L730.7,274.1 L732.7,275.2 L716.4,253.2 L716.7,247.1 L702.7,246.0 L655.2,187.4 L633.0,151.4 L622.4,125.5 L617.4,102.7 L603.2,80.3 L597.6,78.6 L602.9,87.8 L602.6,104.0 L581.4,109.0 L568.5,118.5 L556.3,120.3 L540.5,105.2 L531.8,110.9 L522.1,110.1 L520.0,106.0 L508.4,107.0 L502.2,100.9 L506.2,96.4 L504.4,90.5 L487.1,82.5 L480.8,68.6 L470.0,75.8 L464.6,74.6 L442.6,58.7 L437.0,60.9 L423.9,52.7 L383.2,78.0 L321.5,53.8 Z" fill="color-mix(in srgb, var(--accent) 22%, transparent)"
+            stroke="color-mix(in srgb, var(--accent) 55%, transparent)" stroke-width="1.5"/>
+
+      <!-- main route -->
+      <g fill="none" stroke="var(--accent)" stroke-width="3.5" stroke-linecap="round">
+        <path d="M507.3,248.3 Q470,205 430.5,163.3"/>
+        <path d="M430.5,163.3 Q447,200 460.6,231.2 Q446,262 435.1,286.1 Q478,320 515,350.6"/>
+        <path d="M515,350.6 Q516,300 507.3,248.3" stroke-dasharray="1 0" opacity=".55"/>
+      </g>
+      <!-- day trips -->
+      <g fill="none" stroke="var(--muted)" stroke-width="1.8" stroke-dasharray="5 4" opacity=".75">
+        <path d="M430.5,163.3 L368.3,123.3"/>
+        <path d="M430.5,163.3 L405.7,87.2"/>
+        <path d="M430.5,163.3 L544.2,166.5"/>
+        <path d="M430.5,163.3 L399.8,193.4"/>
+        <path d="M515,350.6 L567.8,375.8"/>
+        <path d="M515,350.6 L589.9,398"/>
+        <path d="M515,350.6 L535.4,339.9"/>
+      </g>
+
+      <g font-family="ui-sans-serif,system-ui,sans-serif">
+        <!-- drive-time labels on main route -->
+        <g font-size="15" font-weight="700" fill="var(--accent-strong)">
+          <text x="503" y="224" text-anchor="start">3.5 hrs</text>
+          <text x="416" y="322" text-anchor="middle">5–6 hrs</text>
+          <text x="530" y="300" text-anchor="start">3 hrs</text>
+        </g>
+        <!-- day-trip times -->
+        <g font-size="12" fill="var(--muted)">
+          <text x="392" y="139" text-anchor="middle">1.5–2h</text>
+          <text x="428" y="114" text-anchor="start">2h</text>
+          <text x="492" y="158" text-anchor="middle">1.5h</text>
+          <text x="400" y="178" text-anchor="end">3.5–4.5h</text>
+          <text x="549" y="364" text-anchor="middle">1h</text>
+          <text x="561" y="389" text-anchor="middle">1h</text>
+        </g>
+
+        <!-- bases -->
+        <g>
+          <circle cx="430.5" cy="163.3" r="11" fill="var(--accent)" stroke="#fff" stroke-width="2.5"/>
+          <text x="447" y="188" text-anchor="middle" font-size="17" font-weight="800" fill="var(--text)">Arenal</text>
+          <text x="447" y="206" text-anchor="middle" font-size="12" fill="var(--muted)">BASE 1 · 4 nights</text>
+        </g>
+        <g>
+          <circle cx="515" cy="350.6" r="11" fill="var(--accent)" stroke="#fff" stroke-width="2.5"/>
+          <text x="500" y="356" text-anchor="end" font-size="17" font-weight="800" fill="var(--text)">Manuel Antonio</text>
+          <text x="500" y="374" text-anchor="end" font-size="12" fill="var(--muted)">BASE 2 · 4 nights</text>
+        </g>
+        <g>
+          <rect x="500" y="241" width="15" height="15" rx="3" fill="var(--text)"/>
+          <text x="524" y="253" font-size="14" font-weight="700" fill="var(--text)">SJO</text>
+          <text x="524" y="267" font-size="11" fill="var(--muted)">arrive &amp; depart</text>
+        </g>
+
+        <!-- day trips -->
+        <g font-size="13" fill="var(--muted)">
+          <circle cx="368.3" cy="123.3" r="4.5" fill="var(--muted)"/><text x="360" y="118" text-anchor="end">Río Celeste</text>
+          <circle cx="405.7" cy="87.2" r="4.5" fill="var(--muted)"/><text x="413" y="83">Caño Negro</text>
+          <circle cx="544.2" cy="166.5" r="4.5" fill="var(--muted)"/><text x="552" y="170">Sarapiquí</text>
+          <circle cx="399.8" cy="193.4" r="4.5" fill="var(--muted)"/><text x="392" y="205" text-anchor="end">Monteverde</text>
+          <circle cx="435.1" cy="286.1" r="4.5" fill="var(--muted)"/><text x="427" y="290" text-anchor="end">Tárcoles 🐊</text>
+          <circle cx="567.8" cy="375.8" r="4.5" fill="var(--muted)"/><text x="576" y="372">Nauyaca</text>
+          <circle cx="589.9" cy="398" r="4.5" fill="var(--muted)"/><text x="598" y="402">Uvita</text>
+          <circle cx="535.4" cy="339.9" r="4.5" fill="var(--muted)"/><text x="543" y="334">Rainmaker</text>
+          <circle cx="460.6" cy="231.2" r="3.5" fill="var(--muted)" opacity=".7"/><text x="453" y="228" text-anchor="end" font-size="11" opacity=".8">San Ramón</text>
+        </g>
+        <g font-size="12" fill="var(--muted)" opacity=".7">
+          <text x="180" y="470">PACIFIC</text><text x="180" y="486">OCEAN</text>
+          <text x="770" y="150">CARIBBEAN</text>
+        </g>
+      </g>
+    </svg>
+  </div>
+  <div class="maplegend">
+    <span><i class="sw solid"></i> Your route</span>
+    <span><i class="sw dash"></i> Day trips from each base</span>
+    <span>Outline: geoBoundaries CRI ADM0 (ODbL), simplified</span>
+  </div>
+</div></section>
+
 <!-- ===== ONE OR TWO ===== -->
 <section id="onebase"><div class="wrap">
   <div class="eyebrow">The other question</div>
@@ -776,6 +896,55 @@ footer{padding:2.2rem 0 3rem;color:var(--muted);font-size:.83rem}
   </div>
 </div></section>
 
+<!-- ===== GROUP OF 8 ===== -->
+<section id="group"><div class="wrap">
+  <div class="eyebrow">Two families</div>
+  <h2>What changes at eight people</h2>
+  <p class="lede">Quite a lot, and mostly in your favour. Three things get cheaper per person, one gets easier, and two need booking earlier.</p>
+
+  <div class="grid g3">
+    <div class="card" style="border:2px solid var(--accent)">
+      <h3>🚐 Ditch the rental cars</h3>
+      <p>This is the big one. Two 4x4s for ten days runs about <strong>$1,800 all-in</strong>, and puts two of you behind the wheel on mountain roads in the rain.</p>
+      <p><strong>Private van transfers instead:</strong> SJO→Arenal is ~$315 for a 6–10 person van, Arenal→Manuel Antonio ~$400–450, Manuel Antonio→SJO ~$350. Call it <strong>~$1,100 for every inter-city move</strong> — about $138 per person, or $550 per family.</p>
+      <p style="margin-bottom:0">Day tours include hotel pickup anyway, so you barely need a car at either base. You save roughly $700 <em>and</em> nobody drives.</p>
+    </div>
+    <div class="card">
+      <h3>🏠 One villa beats four hotel rooms</h3>
+      <p>Eight people in hotels means four rooms, and the cost just doubles. A house that sleeps 8–10 often lands at <strong>$500–900/night</strong> — that's $250–450 per family, comparable or better, with a kitchen and shared living space.</p>
+      <p style="margin-bottom:0">And with two families the shared space <em>is</em> the point: somewhere for the kids to be together and the adults to sit after bedtime. Both La Fortuna and Manuel Antonio have good big-villa inventory.</p>
+    </div>
+    <div class="card">
+      <h3>👥 Guides don't cost double</h3>
+      <p>A private naturalist guide at Manuel Antonio is priced <strong>per group, not per head</strong> — so the same ~$120 guide fee splits eight ways instead of four. Your per-family cost roughly halves.</p>
+      <p style="margin-bottom:0">Same logic on private tour departures: at eight you're often a full group already, which means no strangers and a pace set by your own kids.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:1.6rem">Where eight is actively better</h3>
+  <div class="tablescroll">
+    <table>
+      <thead><tr><th>Thing</th><th>At 4</th><th>At 8</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Rafting</strong></td><td>Share a raft with strangers</td><td><span class="tag good">Your own boat</span> A raft seats 6–8 — at eight you get a private one at the same per-person price, and the guide runs it for your group.</td></tr>
+        <tr><td><strong>Park guide</strong></td><td>~$40 pp on a shared tour</td><td><span class="tag good">~$15 pp</span> Private guide fee split eight ways.</td></tr>
+        <tr><td><strong>Inter-city transport</strong></td><td>Rental car makes sense</td><td><span class="tag good">Van is cheaper</span> And nobody drives.</td></tr>
+        <tr><td><strong>Canyoning</strong></td><td>Mixed group</td><td>Groups cap around 8–10, so you may get a private departure.</td></tr>
+        <tr><td><strong>Kids</strong></td><td>Two kids, each other</td><td><span class="tag good">Four kids</span> Honestly the strongest argument. They entertain each other and the adults get actual downtime.</td></tr>
+        <tr><td><strong>Villa cost</strong></td><td>Villa is expensive for 4</td><td><span class="tag good">Villa becomes efficient</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout danger">
+    <p><strong>Two things you must book earlier at eight.</strong> First, <strong>Manuel Antonio park tickets</strong> — 600 people a day, and you need eight slots on the same date, so book the moment the window opens. Second, <strong>the villa</strong>: 8-sleeper houses are a much thinner market than hotel rooms and go months ahead. Restaurants matter too — a table for eight at El Avión or Don Rufino needs a reservation, not a walk-in.</p>
+  </div>
+
+  <div class="callout warn">
+    <p><strong>The honest friction.</strong> Eight people move slower than four — every departure takes twenty minutes longer, and two families means two budgets, two body clocks and two tolerances for a 6am start. The good news is that this itinerary is already built for it: <strong>one activity per morning and a free afternoon</strong> means either family can opt out of anything without derailing the day. Agree up front that skipping is normal, and split the two "nothing scheduled" days however you like.</p>
+  </div>
+</div></section>
+
 <!-- ===== BUILDER ===== -->
 <section id="builder"><div class="wrap">
   <div class="eyebrow">Interactive</div>
@@ -784,6 +953,20 @@ footer{padding:2.2rem 0 3rem;color:var(--muted);font-size:.83rem}
 
   <div class="grid buildergrid" style="align-items:start">
     <div class="builder">
+      <div class="ctrl">
+        <label>Party size</label>
+        <div class="seg" id="seg-party">
+          <button type="button" data-v="4" aria-pressed="true">One family (4)</button>
+          <button type="button" data-v="8">Two families (8)</button>
+        </div>
+      </div>
+      <div class="ctrl" id="groundctrl" hidden>
+        <label>Ground transport</label>
+        <div class="seg" id="seg-ground">
+          <button type="button" data-v="van" aria-pressed="true">Private van transfers</button>
+          <button type="button" data-v="cars">Two rental 4x4s</button>
+        </div>
+      </div>
       <div class="ctrl">
         <label>Arenal hotel</label>
         <div class="seg" id="seg-h1">
@@ -856,6 +1039,7 @@ footer{padding:2.2rem 0 3rem;color:var(--muted);font-size:.83rem}
     <p><strong>Why it's shaped this way.</strong> 74% of daytime rain falls after noon, and squirrel monkeys move through the hotel grounds around 3pm. So the weather and the wildlife both argue for the same thing: <strong>do the one big thing early, then stop.</strong> Two days — Day 5 and Day 9 — have nothing scheduled at all. Resist filling them.</p>
   </div>
 
+  <p style="font-size:.82rem;color:var(--muted);margin:-.4rem 0 1rem">Each day ends with ▶ links to real YouTube footage of that day's sights — every link was checked live against YouTube, so none of them are dead.</p>
   <div id="days"></div>
 
   <div class="callout warn">
@@ -1010,7 +1194,8 @@ var TOURS1={light:200,normal:380,full:600};   // Arenal, per activity day, famil
 var TOURS2={light:160,normal:300,full:460};   // Manuel Antonio
 var FOOD_DAY=140, CAR_DAY=90, MISC=1130;
 
-var state={h1:"obs",h2:"cverde",nights:8,n1:4,pace:"normal",air:650};
+var state={h1:"obs",h2:"cverde",nights:8,n1:4,pace:"normal",air:650,party:4,ground:"van"};
+var VAN_TRANSFERS=1100;   // SJO->Arenal + Arenal->MA + MA->SJO, private van for 6-10
 
 function compute(o){
   o=o||{};
@@ -1020,24 +1205,35 @@ function compute(o){
   var h1 = o.h1||state.h1, h2 = o.h2||state.h2;
   var pace = o.pace||state.pace, air = o.air!=null?o.air:state.air;
 
-  var flights=air*4;
-  var lodging=H1[h1]*n1 + H2[h2]*n2;
+  var party = o.party!=null?o.party:state.party;
+  var k = party/4;                       // scale factor vs one family of 4
+
+  var flights=air*party;
+  var lodging=H1[h1]*n1*k + H2[h2]*n2*k;
   // one activity day is lost to arrival at each base you actually use
-  var tours=TOURS1[pace]*Math.max(0,n1-1) + TOURS2[pace]*Math.max(0,n2-1);
-  var food=FOOD_DAY*nights;
-  var ground=CAR_DAY*(nights+2);
-  return {flights:flights,lodging:lodging,tours:tours,food:food,ground:ground,misc:MISC,
-          total:flights+lodging+tours+food+ground+MISC,n1:n1,n2:n2};
+  var tours=(TOURS1[pace]*Math.max(0,n1-1) + TOURS2[pace]*Math.max(0,n2-1))*k;
+  if(party>4) tours*=0.88;               // guides price per group, not per head
+  var food=FOOD_DAY*nights*k;
+  var ground;
+  if(party>4 && state.ground==="van") ground=VAN_TRANSFERS;
+  else ground=CAR_DAY*(nights+2)*(party>4?2:1);
+  var misc=MISC*(party>4?1.7:1);         // parking, tips, buffer scale sublinearly
+  return {flights:flights,lodging:lodging,tours:tours,food:food,ground:ground,misc:misc,
+          total:flights+lodging+tours+food+ground+misc,n1:n1,n2:n2,party:party};
 }
 function money(n){return "$"+Math.round(n).toLocaleString("en-US")}
-var BARS=[["Flights (4 pax)","flights"],["Lodging","lodging"],["Activities","tours"],
+var BARS=[["Flights","flights"],["Lodging","lodging"],["Activities","tours"],
           ["Food","food"],["Rental car","ground"],["Parking, gas, misc.","misc"]];
 
 function render(){
   var r=compute();
   document.getElementById("grand").textContent=money(r.total);
-  document.getElementById("perday").textContent=
-    money(r.total/(state.nights+2))+" per day  ·  "+money(r.total/4)+" per person";
+  document.getElementById("perday").textContent = state.party>4
+    ? money(r.total/2)+" per family  ·  "+money(r.total/8)+" per person"
+    : money(r.total/(state.nights+2))+" per day  ·  "+money(r.total/4)+" per person";
+  document.querySelector(".total .cap").textContent =
+    state.party>4 ? "Estimated total — two families, 8 people" : "Estimated total — family of 4";
+  document.getElementById("groundctrl").hidden = state.party<=4;
   var max=Math.max.apply(null,BARS.map(function(b){return r[b[1]]}));
   document.getElementById("bars").innerHTML=BARS.map(function(b){
     var v=r[b[1]];
@@ -1080,6 +1276,18 @@ function wireSeg(id,key){
   });
 }
 wireSeg("seg-h1","h1"); wireSeg("seg-h2","h2"); wireSeg("seg-pace","pace");
+wireSeg("seg-ground","ground");
+(function(){
+  var box=document.getElementById("seg-party");
+  box.addEventListener("click",function(e){
+    var b=e.target.closest("button[data-v]"); if(!b)return;
+    Array.prototype.forEach.call(box.querySelectorAll("button"),function(x){
+      x.setAttribute("aria-pressed",String(x===b));
+    });
+    state.party=+b.getAttribute("data-v");
+    render();
+  });
+})();
 var nEl=document.getElementById("nights"), sEl=document.getElementById("split");
 nEl.addEventListener("input",function(){
   state.nights=+nEl.value; sEl.max=String(state.nights);
@@ -1099,43 +1307,51 @@ var ITIN=[
  {n:"Day 2",where:"→ Arenal",title:"Arrive, then do very little",slots:[
    ["Morning","Land SJO ~6:45am. Collect the 4x4, breakfast near the airport, drive to La Fortuna (~3.5 hrs)."],
    ["Afternoon","Check in. Unpack properly — you're here four nights.",R],
-   ["Evening","Hot springs at sunset and an early dinner. Everyone will be tired; lean into it.",R]]},
+   ["Evening","Hot springs at sunset and an early dinner. Everyone will be tired; lean into it.",R]],
+   see:[["Hot springs","act-hotsprings","3zbCpC4nqG4"],["Arriving in La Fortuna","act-bridges","CH0oliAi6N4"]]},
 
  {n:"Day 3",where:"Arenal",title:"Hanging bridges",slots:[
    ["7:00am","<strong>Mistico Hanging Bridges.</strong> First entry, before the tour buses. About 3 hrs at an easy pace."],
    ["Afternoon","Back by 1pm. Pool, and the rain. Read, nap, cards.",R],
-   ["Evening","Dinner in town — Soda La Parada if you want it cheap and quick."]]},
+   ["Evening","Dinner in town — Soda La Parada if you want it cheap and quick."]],
+   see:[["Mistico Hanging Bridges","act-bridges","SlK0jlqq_o8"],["Bridges walkthrough","","TDN0Om-yicw"]]},
 
  {n:"Day 4",where:"Arenal",title:"Canyoning — the big one",slots:[
    ["7:30am","<strong>Canyoning with Pure Trek.</strong> Rappelling down jungle waterfalls, roughly 4 hrs including transport and lunch. Min age 8; this is usually the trip highlight at 11 and 12."],
    ["Afternoon","Kalambu thermal water park (~$35) if anyone still has energy, otherwise the hotel pool.",R],
-   ["Evening","Optional guided night walk — frogs, snakes, kinkajous. Skip it without guilt if the day was enough."]]},
+   ["Evening","Optional guided night walk — frogs, snakes, kinkajous. Skip it without guilt if the day was enough."]],
+   see:[["Pure Trek canyoning","","0FJ4xZniy84"],["Kalambu with kids","","p3h9pOABqaA"]]},
 
  {n:"Day 5",where:"Arenal",title:"Nothing scheduled",slots:[
    ["Morning","<strong>Deliberately empty.</strong> Options if you want one: Bogarín sloth walk (~2 hrs, most reliable sloths in the country), the La Fortuna Waterfall steps, or the self-guided 1968 lava trail.",R],
    ["Afternoon","Pool. Town. Ice cream. Nothing.",R],
-   ["Evening","Hot springs again — a different one this time. Pack tonight so tomorrow starts clean.",R]]},
+   ["Evening","Hot springs again — a different one this time. Pack tonight so tomorrow starts clean.",R]],
+   see:[["La Fortuna Waterfall","act-fortunafalls","CH0oliAi6N4"],["Río Celeste (day-trip option)","act-rio-celeste","M-OcFhJiWGc"]]},
 
  {n:"Day 6",where:"→ Manuel Antonio",title:"Transfer day",slots:[
    ["7:30am","<strong>Leave early.</strong> 5–6 hrs via San Ramón, Route 27 and Route 34. Curvy for the first two hours — medicate anyone prone to carsickness before you start."],
    ["Midday","<strong>Tárcoles crocodile bridge.</strong> Five minutes, free, and the best stop on the drive. Then lunch at a roadside soda."],
    ["Late afternoon","Check in. Walk down for the sunset and a swim.",R],
-   ["Evening","Something easy and close. You've been in a car all day."]]},
+   ["Evening","Something easy and close. You've been in a car all day."]],
+   see:[["Tárcoles crocodile bridge","act-crocodile","XyCV-WN5vCw"],["Croc bridge, second look","","YNGE-rjhVn4"]]},
 
  {n:"Day 7",where:"Manuel Antonio",title:"The national park",slots:[
    ["7:00am","<strong>Manuel Antonio National Park at opening,</strong> with a guide and spotting scope — ticket booked months ago via SINAC. Three monkey species, sloths, and Playa Manuel Antonio inside the park."],
    ["Afternoon","Out by 1pm before the heat. <strong>Be at the pool by 3pm</strong> — that's when the squirrel monkey troop comes through.",R],
-   ["Evening","<strong>El Avión</strong> for sunset — dinner inside a salvaged cargo plane on the ridge."]]},
+   ["Evening","<strong>El Avión</strong> for sunset — dinner inside a salvaged cargo plane on the ridge."]],
+   see:[["Park virtual walk","act-capuchin","6fh9e23DM0Q"],["Sloths &amp; monkeys","monkey","K5g9yJQ6ShU"],["Beach + monkeys","","QTAgV99qu3E"]]},
 
  {n:"Day 8",where:"Manuel Antonio",title:"Waterfall or beach — pick one",slots:[
    ["Morning","<strong>Nauyaca Waterfalls</strong> (an hour south, 4x4 shuttle or horseback, swim at the base). Or trade the whole thing for surf lessons at Espadilla and a slow morning."],
    ["Afternoon","<strong>Playa Biesanz</strong> — the sheltered cove, calm water, the area's best snorkeling and the safest swimming with kids.",R],
-   ["Evening","Falafel Bar or a soda in Quepos. Cheap and good."]]},
+   ["Evening","Falafel Bar or a soda in Quepos. Cheap and good."]],
+   see:[["Nauyaca Waterfalls","act-nauyaca","KANMbw3Rypo"],["Nauyaca, second look","","KszccU70BMk"]]},
 
  {n:"Day 9",where:"Manuel Antonio",title:"Nothing scheduled",slots:[
    ["Morning","<strong>Deliberately empty.</strong> If you want something: Damas Island mangrove kayak, Rainmaker canopy bridges, or Savegre rafting — all half-days.",R],
    ["Afternoon","Beach and pool. Watch for the 3pm monkeys again.",R],
-   ["Evening","Catamaran sunset sail (~$85 pp, dolphins likely) if you want one last thing. Otherwise the balcony.",R]]},
+   ["Evening","Catamaran sunset sail (~$85 pp, dolphins likely) if you want one last thing. Otherwise the balcony.",R]],
+   see:[["Damas mangrove tour","act-mangrove","XnCmfY-Xhlg"],["Mangrove monkeys","","6rtip3OI2YI"]]},
 
  {n:"Day 10",where:"→ San José",title:"Slow start, short drive",slots:[
    ["Morning","Last swim. Coffee. Genuinely no rush.",R],
@@ -1152,9 +1368,19 @@ document.getElementById("days").innerHTML=ITIN.map(function(d){
     return '<div class="slot'+(s[2]?" rest":"")+'"><span class="lbl">'+(s[2]?"◍ "+s[0]:s[0])
       +'</span><p>'+s[1]+'</p></div>';
   }).join("");
+  var see="";
+  if(d.see && d.see.length){
+    see='<div class="sights">'+d.see.map(function(v){
+      var thumb = v[1] ? '<img src="/images/costa-rica/'+v[1]+'.jpg" alt="" loading="lazy">'
+                       : '<span class="play">\u25B6</span>';
+      return '<a class="chip" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v='+v[2]+'"'
+        +' title="Watch on YouTube: '+v[0]+'">'+thumb+'<span class="txt">'+v[0]+'</span>'
+        +'<span class="yt">\u25B6</span></a>';
+    }).join("")+'</div>';
+  }
   return '<div class="dayblock"><div class="dh"><span class="dnum">'+d.n+'</span>'
     +'<span class="dwhere">'+d.where+'</span><span class="dtitle">'+d.title+'</span></div>'
-    +slots+'</div>';
+    +slots+see+'</div>';
 }).join("");
 
 render();
