@@ -113,6 +113,57 @@ td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 .tag.mid{background:var(--warn-soft);color:var(--warn);border-color:transparent}
 .tag.bad{background:var(--danger-soft);color:var(--danger);border-color:transparent}
 
+/* photo cards */
+.pgrid{display:grid;gap:.9rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,215px),1fr));margin:.9rem 0 1.3rem}
+.pcard{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;
+  box-shadow:var(--shadow);display:flex;flex-direction:column}
+.pcard .ph{aspect-ratio:4/3;overflow:hidden;background:var(--bg-alt);position:relative}
+.pcard .ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+.pcard:hover .ph img{transform:scale(1.06)}
+.pcard .ph .cost{position:absolute;right:.5rem;bottom:.5rem;background:rgba(8,24,16,.82);color:#eafaf0;
+  font-family:ui-sans-serif,system-ui,sans-serif;font-size:.7rem;font-weight:700;
+  padding:.18rem .5rem;border-radius:999px;backdrop-filter:blur(3px)}
+.pcard .bd{padding:.7rem .8rem;flex:1;display:flex;flex-direction:column;gap:.2rem}
+.pcard .bd h4{margin:0;font-size:.94rem;line-height:1.25}
+.pcard .bd p{margin:0;font-size:.83rem;color:var(--muted);line-height:1.45}
+
+/* hotel cards */
+.hcard{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;
+  box-shadow:var(--shadow);display:flex;flex-direction:column}
+.hcard.pick{border:2px solid var(--accent)}
+.hcard .hd{padding:.75rem .9rem;background:linear-gradient(135deg,
+  color-mix(in srgb,var(--accent) 20%,transparent),color-mix(in srgb,#c1833a 14%,transparent));
+  border-bottom:1px solid var(--line)}
+.hcard .hd h4{margin:0 0 .12rem;font-size:1rem}
+.hcard .hd .rate{font-family:ui-sans-serif,system-ui,sans-serif;font-size:.78rem;color:var(--muted)}
+.hcard .hd .rate b{color:var(--text);font-variant-numeric:tabular-nums}
+.hcard .bd{padding:.75rem .9rem;flex:1;font-size:.88rem}
+.hcard .bd p{margin:0 0 .5rem}
+.hcard .ft{padding:.6rem .9rem;border-top:1px solid var(--line);
+  font-family:ui-sans-serif,system-ui,sans-serif;font-size:.82rem;
+  display:flex;justify-content:space-between;align-items:center;gap:.5rem;flex-wrap:wrap}
+
+/* day plan */
+.dayblock{background:var(--surface);border:1px solid var(--line);border-radius:14px;
+  overflow:hidden;box-shadow:var(--shadow);margin-bottom:.8rem}
+.dayblock > .dh{display:flex;align-items:baseline;gap:.6rem;flex-wrap:wrap;
+  padding:.6rem .9rem;background:color-mix(in srgb,var(--accent) 8%,transparent);
+  border-bottom:1px solid var(--line)}
+.dayblock .dnum{font-family:ui-sans-serif,system-ui,sans-serif;font-weight:800;font-size:.74rem;
+  background:var(--accent);color:#fff;border-radius:7px;padding:.2rem .5rem}
+.dayblock .dwhere{font-family:ui-sans-serif,system-ui,sans-serif;font-size:.74rem;
+  text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.dayblock .dtitle{font-family:ui-sans-serif,system-ui,sans-serif;font-weight:700;font-size:.9rem}
+.slot{display:grid;grid-template-columns:5.6rem 1fr;gap:.7rem;padding:.5rem .9rem;
+  border-bottom:1px dashed var(--line);font-size:.9rem}
+.slot:last-child{border-bottom:none}
+.slot .lbl{font-family:ui-sans-serif,system-ui,sans-serif;font-size:.7rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.05em;color:var(--muted);padding-top:.15rem}
+.slot.rest{background:color-mix(in srgb,var(--accent) 5%,transparent)}
+.slot.rest .lbl{color:var(--accent)}
+.slot p{margin:0}
+@media (max-width:560px){.slot{grid-template-columns:1fr;gap:.1rem}}
+
 figure.wide{margin:1.2rem 0;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--line)}
 figure.wide img{width:100%;display:block;aspect-ratio:21/9;object-fit:cover}
 figure.wide figcaption{font-family:ui-sans-serif,system-ui,sans-serif;font-size:.76rem;color:var(--muted);
@@ -186,6 +237,7 @@ footer{padding:2.2rem 0 3rem;color:var(--muted);font-size:.83rem}
     <a href="#arenal">Arenal</a>
     <a href="#drive">The Drive</a>
     <a href="#ma">Manuel Antonio</a>
+    <a href="#food">Food</a>
     <a href="#monkeys">🐒</a>
     <a href="#onebase">One Base?</a>
     <a href="#builder">Builder</a>
@@ -334,20 +386,58 @@ footer{padding:2.2rem 0 3rem;color:var(--muted);font-size:.83rem}
   </figure>
 
   <h3>Where to stay</h3>
-  <div class="tablescroll">
-    <table>
-      <thead><tr><th>Property</th><th class="num">Family of 4 / night</th><th>Notes</th></tr></thead>
-      <tbody>
-        <tr><td><a href="https://www.lomasdelvolcan.com/" target="_blank" rel="noopener"><strong>Hotel Lomas del Volcán</strong></a></td><td class="num">~$185</td><td>Freestanding cabins, unobstructed volcano views, 9.6 guest rating. Best value in the area.</td></tr>
-        <tr><td><a href="https://www.arenalobservatorylodge.com/" target="_blank" rel="noopener"><strong>Arenal Observatory Lodge</strong></a> 🐒</td><td class="num">~$230</td><td><strong>Best jungle immersion.</strong> Alone on the volcano's flank in its own reserve — private trails, forest-set pool, sloths, toucans, coatis and the area's best monkey odds. Trades polish for location.</td></tr>
-        <tr><td><a href="https://www.arenalmanoa.com/" target="_blank" rel="noopener"><strong>Arenal Manoa</strong></a></td><td class="num">~$210</td><td>On-site hot springs, spacious family rooms, farm setting. Saves you a hot-springs day pass.</td></tr>
-        <tr><td><a href="https://www.thespringscostarica.com/" target="_blank" rel="noopener"><strong>The Springs Resort</strong></a></td><td class="num">~$520</td><td><strong>The splurge.</strong> 28 thermal pools plus Club Rio — on-site adventure center with rafting, horses, rescued wildlife. At 11 and 12 they won't want to leave the property.</td></tr>
-        <tr><td><a href="https://www.vrbo.com/1165287" target="_blank" rel="noopener"><strong>Vrbo villa</strong></a> / <a href="https://www.airbnb.com/la-fortuna-alajuela-province-costa-rica/stays/pools" target="_blank" rel="noopener">Airbnb</a></td><td class="num">$180–350</td><td>Deep inventory. Private pool, kitchen, volcano view, 1 mi from town. More space than a hotel room; you can cook breakfast.</td></tr>
-      </tbody>
-    </table>
+  <div class="grid g3" style="margin:.8rem 0 .6rem">
+    <div class="hcard pick">
+      <div class="hd"><h4>Arenal Observatory Lodge 🐒</h4><div class="rate"><b>~$230</b> / night, family of 4</div></div>
+      <div class="bd"><p><strong>Best jungle immersion, and my pick.</strong> Alone on the volcano's flank inside its own private reserve — trails from your door, a pool set in the forest, sloths, toucans and coatis on the grounds. Best monkey odds in the region, though Arenal is weak for monkeys generally.</p>
+      <p style="color:var(--muted)">Trades polish for location. Rooms are comfortable, not luxurious.</p></div>
+      <div class="ft"><span class="tag good">Wildlife on site</span><a href="https://www.arenalobservatorylodge.com/gallery/" target="_blank" rel="noopener">Photos &amp; rooms →</a></div>
+    </div>
+    <div class="hcard">
+      <div class="hd"><h4>Hotel Lomas del Volcán</h4><div class="rate"><b>~$185</b> / night, family of 4</div></div>
+      <div class="bd"><p><strong>Best value.</strong> Freestanding cabins spread over grassland with completely unobstructed volcano views from your porch. 9.6 guest rating.</p>
+      <p style="color:var(--muted)">No hot springs on site; you'd buy day passes.</p></div>
+      <div class="ft"><span class="tag">Cabins</span><a href="https://www.lomasdelvolcan.com/" target="_blank" rel="noopener">Photos &amp; rooms →</a></div>
+    </div>
+    <div class="hcard">
+      <div class="hd"><h4>Arenal Manoa</h4><div class="rate"><b>~$210</b> / night, family of 4</div></div>
+      <div class="bd"><p>Farm setting with <strong>hot springs on the property</strong> — which saves you a $35–110 day pass every night you use them. Spacious family rooms.</p></div>
+      <div class="ft"><span class="tag good">Springs included</span><a href="https://www.arenalmanoa.com/" target="_blank" rel="noopener">Photos &amp; rooms →</a></div>
+    </div>
+    <div class="hcard">
+      <div class="hd"><h4>The Springs Resort &amp; Spa</h4><div class="rate"><b>~$520</b> / night, family of 4</div></div>
+      <div class="bd"><p><strong>The splurge.</strong> 28 thermal pools plus Club Rio — an on-site adventure center with rafting, horses and rescued wildlife. At 11 and 12 they may not want to leave the property, which is either the point or the problem.</p></div>
+      <div class="ft"><span class="tag mid">Big spend</span><a href="https://www.thespringscostarica.com/" target="_blank" rel="noopener">Photos &amp; rooms →</a></div>
+    </div>
+    <div class="hcard">
+      <div class="hd"><h4>Private villa (Vrbo / Airbnb)</h4><div class="rate"><b>$180–350</b> / night, whole house</div></div>
+      <div class="bd"><p>Deep inventory here. Private pool, full kitchen, volcano view, a mile from town. <strong>More space than any hotel room</strong> and you can cook breakfast — which meaningfully cuts the food line.</p></div>
+      <div class="ft"><span class="tag">Kitchen</span><a href="https://www.airbnb.com/la-fortuna-alajuela-province-costa-rica/stays/pools" target="_blank" rel="noopener">Browse listings →</a></div>
+    </div>
+  </div>
+  <p style="font-size:.79rem;color:var(--muted);margin:0 0 1.4rem"><strong>Why no hotel photos:</strong> those images belong to the hotels, and this page lives in a public repo — so rather than copy them, every card links straight to the property's own gallery. Photos below are open-licensed and show the actual places you'd go.</p>
+
+  <h3>What you'd actually do</h3>
+  <div class="pgrid">
+    <div class="pcard">
+      <div class="ph"><img src="/images/costa-rica/act-bridges.jpg" alt="A suspension bridge through rainforest canopy at La Fortuna"><span class="cost">$36 pp</span></div>
+      <div class="bd"><h4>Mistico Hanging Bridges</h4><p>Canopy-level suspension bridges through primary rainforest. Go at 7am — wildlife is active and you'll have it nearly to yourselves.</p></div>
+    </div>
+    <div class="pcard">
+      <div class="ph"><img src="/images/costa-rica/act-fortunafalls.jpg" alt="La Fortuna Waterfall falling into a jungle pool"><span class="cost">$18 pp</span></div>
+      <div class="bd"><h4>La Fortuna Waterfall</h4><p>500 steps down to a swimmable 200-ft falls. The stairs are the whole workout. Swim, then climb back up slowly.</p></div>
+    </div>
+    <div class="pcard">
+      <div class="ph"><img src="/images/costa-rica/act-hotsprings.jpg" alt="Thermal hot spring pools surrounded by tropical planting"><span class="cost">$32–110 pp</span></div>
+      <div class="bd"><h4>Hot springs</h4><p>Volcano-heated river water. Kalambu (~$35) has the slides the kids want; Tabacón (~$110) is the beautiful one. Perfect rainy-afternoon move.</p></div>
+    </div>
+    <div class="pcard">
+      <div class="ph"><img src="/images/costa-rica/act-rio-celeste.jpg" alt="The vivid turquoise water of Rio Celeste in Tenorio National Park"><span class="cost">~$60 pp</span></div>
+      <div class="bd"><h4>Río Celeste day trip</h4><p>A genuinely turquoise river — a volcanic mineral reaction, not a filter. 1.5–2 hrs each way. The best day trip in the region.</p></div>
+    </div>
   </div>
 
-  <h3>Activities — pick four, not nine</h3>
+  <h3>Everything else, with prices</h3>
   <div class="tablescroll">
     <table>
       <thead><tr><th>Activity</th><th class="num">/ person</th><th>Notes</th></tr></thead>
@@ -418,6 +508,10 @@ footer{padding:2.2rem 0 3rem;color:var(--muted);font-size:.83rem}
       </ul>
     </div>
   </div>
+  <figure class="wide">
+    <img src="/images/costa-rica/act-crocodile.jpg" alt="A large American crocodile on the bank of the Tárcoles River">
+    <figcaption><strong>Tárcoles bridge.</strong> Pull over, walk out, look down — wild American crocodiles, some over 12 feet, on the riverbank below. Free, takes five minutes, and it's the highlight of the drive at 11 and 12. Watch your bags; the pullout is known for opportunistic theft.</figcaption>
+  </figure>
 </div></section>
 
 <!-- ===== MANUEL ANTONIO ===== -->
@@ -431,17 +525,54 @@ footer{padding:2.2rem 0 3rem;color:var(--muted);font-size:.83rem}
   </div>
 
   <h3>Where to stay</h3>
-  <div class="tablescroll">
-    <table>
-      <thead><tr><th>Property</th><th class="num">Family of 4 / night</th><th>Notes</th></tr></thead>
-      <tbody>
-        <tr><td><a href="https://en.costaverde.com/media/monkeys-wildlife/" target="_blank" rel="noopener"><strong>Hotel Costa Verde</strong></a> 🐒🐒🐒</td><td class="num">~$220</td><td><strong>Best monkey odds, lowest price.</strong> Studios with kitchenettes; squirrel, howler and capuchin monkeys all resident on the grounds. The one with the converted 727 fuselage suite. <a href="#monkeys">Details →</a></td></tr>
-        <tr><td><a href="https://www.tripadvisor.com/Hotel_Review-g309274-d1155011-Reviews-The_Falls_Resort_at_Manuel_Antonio-Manuel_Antonio_Quepos_Province_of_Puntarenas.html" target="_blank" rel="noopener"><strong>The Falls Resort</strong></a> 🐒🐒</td><td class="num">~$270</td><td>Quieter, built around a pool complex, strong breakfast. Squirrel monkeys visit the verandahs regularly.</td></tr>
-        <tr><td><a href="https://www.sicomono.com/" target="_blank" rel="noopener"><strong>Sí Como No</strong></a> 🐒🐒</td><td class="num">~$360</td><td>Waterslide, on-site wildlife refuge, solid restaurant. Good middle ground.</td></tr>
-        <tr><td><a href="https://www.tulemarresort.com/rates/" target="_blank" rel="noopener"><strong>Tulemar Resort</strong></a> 🐒🐒🐒</td><td class="num">~$450</td><td><strong>Best all-round family property.</strong> 33 acres of private jungle, private beach, multiple pools, capuchins and squirrel monkeys on the balcony rails most afternoons.</td></tr>
-        <tr><td><a href="https://www.airbnb.com/manuel-antonio-costa-rica/stays" target="_blank" rel="noopener"><strong>Airbnb / villa</strong></a></td><td class="num">$200–400</td><td>Strong inventory. Quepos side for value; inside the Tulemar gate for beach access without the resort rate.</td></tr>
-      </tbody>
-    </table>
+  <div class="grid g3" style="margin:.8rem 0 .6rem">
+    <div class="hcard pick">
+      <div class="hd"><h4>Hotel Costa Verde 🐒🐒🐒</h4><div class="rate"><b>~$220</b> / night, family of 4</div></div>
+      <div class="bd"><p><strong>Best monkey odds and the lowest price.</strong> Squirrel, howler and capuchin monkeys are all resident on the grounds — the hotel markets itself on cohabiting with them, and reviews read "more monkeys than people."</p>
+      <p>Studios have kitchenettes. It's also the one with a converted 727 fuselage built into the hillside as a suite.</p></div>
+      <div class="ft"><span class="tag good">Monkey pick</span><a href="https://en.costaverde.com/media/monkeys-wildlife/" target="_blank" rel="noopener">Photos &amp; wildlife →</a></div>
+    </div>
+    <div class="hcard pick">
+      <div class="hd"><h4>Tulemar Resort 🐒🐒🐒</h4><div class="rate"><b>~$450</b> / night, family of 4</div></div>
+      <div class="bd"><p><strong>Best all-round family property on this coast.</strong> 33 acres of private jungle, a genuinely private beach, multiple pools. Capuchins and squirrel monkeys on the balcony rails most afternoons.</p>
+      <p style="color:var(--muted)">Twice the price of Costa Verde for roughly equal monkey odds — you're paying for the beach and the grounds.</p></div>
+      <div class="ft"><span class="tag good">Private beach</span><a href="https://www.tulemarresort.com/rates/" target="_blank" rel="noopener">Photos &amp; rates →</a></div>
+    </div>
+    <div class="hcard">
+      <div class="hd"><h4>The Falls Resort 🐒🐒</h4><div class="rate"><b>~$270</b> / night, family of 4</div></div>
+      <div class="bd"><p>Quieter and smaller, built around a pool complex, with a notably good breakfast in the garden. Squirrel monkeys visit the verandahs regularly.</p></div>
+      <div class="ft"><span class="tag">Quiet</span><a href="https://www.tripadvisor.com/Hotel_Review-g309274-d1155011-Reviews-The_Falls_Resort_at_Manuel_Antonio-Manuel_Antonio_Quepos_Province_of_Puntarenas.html" target="_blank" rel="noopener">Photos &amp; reviews →</a></div>
+    </div>
+    <div class="hcard">
+      <div class="hd"><h4>Sí Como No 🐒🐒</h4><div class="rate"><b>~$360</b> / night, family of 4</div></div>
+      <div class="bd"><p>Waterslide, an on-site wildlife refuge, and a solid restaurant. The comfortable middle ground if Costa Verde feels too basic and Tulemar too expensive.</p></div>
+      <div class="ft"><span class="tag">Waterslide</span><a href="https://www.sicomono.com/" target="_blank" rel="noopener">Photos &amp; rooms →</a></div>
+    </div>
+    <div class="hcard">
+      <div class="hd"><h4>Private villa (Airbnb)</h4><div class="rate"><b>$200–400</b> / night, whole house</div></div>
+      <div class="bd"><p>Strong inventory. Look on the <strong>Quepos side for value</strong>, or inside the <strong>Tulemar gate</strong> for the private-beach access without paying the resort rate.</p></div>
+      <div class="ft"><span class="tag">Kitchen</span><a href="https://www.airbnb.com/manuel-antonio-costa-rica/stays" target="_blank" rel="noopener">Browse listings →</a></div>
+    </div>
+  </div>
+
+  <h3>What you'd actually do</h3>
+  <div class="pgrid">
+    <div class="pcard">
+      <div class="ph"><img src="/images/costa-rica/act-capuchin.jpg" alt="A white-faced capuchin monkey in the forest"><span class="cost">$18 + guide</span></div>
+      <div class="bd"><h4>Manuel Antonio National Park</h4><p>7am opening with a guide and spotting scope. Capuchins, squirrel monkeys, sloths and a white-sand bay inside the park. Book the SINAC ticket months ahead.</p></div>
+    </div>
+    <div class="pcard">
+      <div class="ph"><img src="/images/costa-rica/act-nauyaca.jpg" alt="Nauyaca Waterfalls tumbling into a wide pool"><span class="cost">~$50 pp</span></div>
+      <div class="bd"><h4>Nauyaca Waterfalls</h4><p>200-ft two-tier falls with a big swimming pool at the base, an hour south. Go by 4x4 shuttle or horseback. A full, excellent day.</p></div>
+    </div>
+    <div class="pcard">
+      <div class="ph"><img src="/images/costa-rica/act-mangrove.jpg" alt="Kayaking through mangrove channels at Isla Damas"><span class="cost">~$65 pp</span></div>
+      <div class="bd"><h4>Damas Island mangroves</h4><p>Kayak or boat the mangrove channels. A completely different ecosystem — silky anteaters, crabs, herons, and often no other boats.</p></div>
+    </div>
+    <div class="pcard">
+      <div class="ph"><img src="/images/costa-rica/act-sunset.jpg" alt="Sunset over the Pacific coast of Costa Rica"><span class="cost">$0–85 pp</span></div>
+      <div class="bd"><h4>Sunset, every night</h4><p>The ridge faces west. Free from your balcony, or ~$85 pp on a catamaran with a snorkel stop and dolphins. Do both.</p></div>
+    </div>
   </div>
 
   <h3>Beaches — they're genuinely different</h3>
@@ -487,24 +618,73 @@ footer{padding:2.2rem 0 3rem;color:var(--muted);font-size:.83rem}
     </table>
   </div>
 
-  <h3>Eating</h3>
+  <p style="margin-top:1.2rem"><strong>Where to eat</strong> is covered in <a href="#food">the food section →</a></p>
+</div></section>
+
+<!-- ===== FOOD ===== -->
+<section id="food"><div class="wrap">
+  <div class="eyebrow">Eating</div>
+  <h2>Food</h2>
+  <p class="lede">Costa Rican food is not spicy, not fussy, and heavy on rice, beans, plantain and fresh fruit — which makes it an unusually easy country to eat in with kids.</p>
+
+  <div class="pgrid">
+    <div class="pcard">
+      <div class="ph"><img src="/images/costa-rica/food-gallopinto.jpg" alt="Gallo pinto — Costa Rican rice and black beans"></div>
+      <div class="bd"><h4>Gallo pinto</h4><p>Rice and black beans fried together with cilantro and Salsa Lizano. The national breakfast, served everywhere, every morning.</p></div>
+    </div>
+    <div class="pcard">
+      <div class="ph"><img src="/images/costa-rica/food-desayuno.jpg" alt="A traditional Costa Rican breakfast plate"></div>
+      <div class="bd"><h4>Desayuno típico</h4><p>Gallo pinto with eggs, fried sweet plantain, avocado, white cheese and natilla (sour cream). This is the whole breakfast argument for a hotel that includes it.</p></div>
+    </div>
+    <div class="pcard">
+      <div class="ph"><img src="/images/costa-rica/food-olla.jpg" alt="Olla de carne, a Costa Rican beef and vegetable stew"></div>
+      <div class="bd"><h4>Casado &amp; olla de carne</h4><p>The <em>casado</em> is the standard lunch plate — rice, beans, salad, plantain and a protein, usually $7–10. <em>Olla de carne</em> is the slow beef-and-root-vegetable stew.</p></div>
+    </div>
+    <div class="pcard">
+      <div class="ph"><img src="/images/costa-rica/food-ceviche.jpg" alt="Costa Rican ceviche with lime and cilantro"></div>
+      <div class="bd"><h4>Ceviche</h4><p>Lime-cured white fish with cilantro and red onion, served with soda crackers or patacones. Best on the coast — Quepos does it properly and cheaply.</p></div>
+    </div>
+    <div class="pcard">
+      <div class="ph"><img src="/images/costa-rica/food-patacones.jpg" alt="Patacones — twice-fried green plantain"></div>
+      <div class="bd"><h4>Patacones</h4><p>Twice-fried green plantain, salted, served with black bean dip or guacamole. Reliably the thing kids order twice.</p></div>
+    </div>
+    <div class="pcard">
+      <div class="ph"><img src="/images/costa-rica/food-coffee.jpg" alt="A chorreador, the traditional Costa Rican cloth coffee brewer"></div>
+      <div class="bd"><h4>Coffee, from a chorreador</h4><p>A cloth sock on a wooden stand. Slow, and much better than it sounds. Beans from Tarrazú or the Central Valley are worth bringing home.</p></div>
+    </div>
+    <div class="pcard">
+      <div class="ph"><img src="/images/costa-rica/food-soda.jpg" alt="A soda, a small family-run Costa Rican eatery"></div>
+      <div class="bd"><h4>Eat at <em>sodas</em></h4><p>Small family-run counters serving one or two casados a day. A third the price of a tourist restaurant and usually better. Look for the handwritten menu.</p></div>
+    </div>
+    <div class="pcard">
+      <div class="ph"><img src="/images/costa-rica/act-sunset.jpg" alt="Sunset over the Pacific"></div>
+      <div class="bd"><h4>Batidos &amp; fresh fruit</h4><p>Fruit blended with water or milk — mango, blackberry, <em>cas</em>, guanábana. Order <em>en agua</em> for the lighter version. Cheap and everywhere.</p></div>
+    </div>
+  </div>
+
   <div class="grid g2">
     <div class="card">
-      <h4>Worth planning around</h4>
+      <h3>Manuel Antonio — worth planning around</h3>
       <ul class="tight">
-        <li><strong>El Avión</strong> — restaurant built into a salvaged Fairchild C-123 cargo plane on the ridge, sunset views over the ocean. Touristy and completely worth it at 11 and 12</li>
+        <li><strong>El Avión</strong> — built into a salvaged Fairchild C-123 cargo plane on the ridge, sunset over the ocean. Touristy and completely worth it at 11 and 12</li>
         <li><strong>Falafel Bar</strong> — cheap, fast, genuinely good. The between-beach-sessions lunch</li>
         <li><strong>Marisquería Sabromar</strong> (Quepos) — excellent seafood at local prices, away from the ridge markup</li>
+        <li><strong>Emilio's Café</strong> — breakfast and ocean views; the reliable slow-morning option</li>
       </ul>
     </div>
     <div class="card">
-      <h4>Practical notes</h4>
+      <h3>La Fortuna — worth planning around</h3>
       <ul class="tight">
-        <li>Ridge restaurants carry a heavy tourist markup; <strong>Quepos is 10 minutes away and much cheaper</strong></li>
-        <li>A kitchenette (Costa Verde, most Airbnbs) meaningfully cuts the food line — breakfast at home, dinner out</li>
-        <li>10% service and 13% IVA are usually already on the bill — check before tipping again</li>
+        <li><strong>Soda La Parada</strong> — open essentially always, opposite the park, casados and rotisserie chicken at local prices</li>
+        <li><strong>Don Rufino</strong> — the town's proper dinner-out spot; book ahead</li>
+        <li><strong>Rain Forest Café</strong> — good breakfast and smoothies before an early activity</li>
+        <li><strong>Feria del agricultor</strong> — the farmers' market, if your dates land on the weekend</li>
       </ul>
     </div>
+  </div>
+
+  <div class="callout warn">
+    <p><strong>Three practical things.</strong> Ridge restaurants in Manuel Antonio carry a heavy tourist markup — <strong>Quepos is ten minutes away and roughly half the price</strong>. A kitchenette (Costa Verde, most villas) cuts the food line a lot: breakfast in, dinner out. And <strong>10% service plus 13% IVA are usually already on the bill</strong> — check before you tip on top, because most visitors accidentally tip twice.</p>
   </div>
 </div></section>
 
@@ -669,9 +849,18 @@ footer{padding:2.2rem 0 3rem;color:var(--muted);font-size:.83rem}
 <!-- ===== ITINERARY ===== -->
 <section id="itin"><div class="wrap">
   <div class="eyebrow">Day by day</div>
-  <h2>Ten days</h2>
-  <p class="lede">Assumes the late-evening LAX departure and a park ticket secured for Day 7.</p>
-  <div class="days" id="days"></div>
+  <h2>The daily plan</h2>
+  <p class="lede">Four nights Arenal, four Manuel Antonio. One real activity per day, always in the morning — everything after about 1pm is deliberately unstructured.</p>
+
+  <div class="callout">
+    <p><strong>Why it's shaped this way.</strong> 74% of daytime rain falls after noon, and squirrel monkeys move through the hotel grounds around 3pm. So the weather and the wildlife both argue for the same thing: <strong>do the one big thing early, then stop.</strong> Two days — Day 5 and Day 9 — have nothing scheduled at all. Resist filling them.</p>
+  </div>
+
+  <div id="days"></div>
+
+  <div class="callout warn">
+    <p><strong>If you go 3/5 instead:</strong> drop Day 5 (the Arenal slow day) and add a second unstructured day in Manuel Antonio. You lose a hot-springs evening and gain a beach day — which, for the way this trip is shaped, is probably the better trade.</p>
+  </div>
 </div></section>
 
 <!-- ===== WHY NOT ===== -->
@@ -733,10 +922,26 @@ footer{padding:2.2rem 0 3rem;color:var(--muted);font-size:.83rem}
       <h3>Photography</h3>
       <p style="font-size:.84rem;color:var(--muted);margin-top:0">Self-hosted from Wikimedia Commons under open licenses. Nothing hotlinked from hotel or booking sites.</p>
       <ul class="credits">
-        <li><em>Manuel Antonio</em> — Bernard Gagnon, <strong>CC0</strong></li>
-        <li><em>Arenal Volcano</em> — Bernard Gagnon, <strong>CC0</strong></li>
+        <li><em>Manuel Antonio</em> &amp; <em>Arenal Volcano</em> — Bernard Gagnon, <strong>CC0</strong></li>
         <li><em>Red-backed squirrel monkey</em> — Frank Vassen, <strong>CC BY 2.0</strong></li>
+        <li><em>Hanging bridges, La Fortuna</em> — Alanthebox, <strong>CC0</strong></li>
+        <li><em>La Fortuna Waterfall</em> — Isabella Jusková, <strong>CC0</strong></li>
+        <li><em>Tabacón Hot Springs</em> — CIA World Factbook, <strong>public domain</strong></li>
+        <li><em>Río Celeste</em> — MongeNajera, <strong>CC BY-SA 3.0</strong></li>
+        <li><em>Nauyaca Waterfalls</em> — Mark Cowell, <strong>CC BY 3.0</strong></li>
+        <li><em>White-faced capuchin</em> — Hobbyfotowiki, <strong>CC0</strong></li>
+        <li><em>Tárcoles crocodile</em> — Bernard Gagnon, <strong>CC0</strong></li>
+        <li><em>Isla Damas mangrove kayaking</em> — diego_cue, <strong>CC BY-SA 3.0</strong></li>
+        <li><em>Pacific sunset</em> — ImagePerson, <strong>CC BY 4.0</strong></li>
+        <li><em>Gallo pinto</em> — Legendre17, <strong>CC BY 3.0</strong></li>
+        <li><em>Desayuno típico</em> — Aherver, <strong>CC BY 4.0</strong></li>
+        <li><em>Olla de carne</em> — Aleat88, <strong>CC BY-SA 4.0</strong></li>
+        <li><em>Ceviche</em> — BrenDJ, <strong>public domain</strong></li>
+        <li><em>Patacones</em> — Jdvillalobos, <strong>CC BY-SA 3.0</strong></li>
+        <li><em>Chorreador</em> — Sharalds, <strong>public domain</strong></li>
+        <li><em>Soda Líbano, San José</em> — via Wikimedia Commons, <strong>CC BY 2.0</strong></li>
       </ul>
+      <p style="font-size:.82rem;color:var(--muted);margin:.6rem 0 0"><strong>Hotel photos are intentionally absent.</strong> Those images belong to the properties; rather than copy them onto a public repo, each hotel card links to its own gallery.</p>
       <h3 style="margin-top:1.1rem">Climate data</h3>
       <p style="font-size:.84rem;color:var(--muted);margin:0">Monthly rainfall and June hourly profiles computed from ERA5 reanalysis via the <a href="https://open-meteo.com/en/docs/historical-weather-api" target="_blank" rel="noopener">Open-Meteo historical archive</a>, 2015–2024, sampled at 10.468°N 84.643°W (La Fortuna) and 9.424°N 84.165°W (Quepos).</p>
     </div>
@@ -884,23 +1089,72 @@ nEl.addEventListener("input",function(){
 sEl.addEventListener("input",function(){state.n1=+sEl.value; render();});
 document.getElementById("air").addEventListener("input",function(e){state.air=+e.target.value; render();});
 
-/* itinerary */
+/* itinerary — R marks a deliberately unstructured block */
+var R=1;
 var ITIN=[
- ["Day 1","travel","Drive → LAX","Leave home around 2pm. Dinner near the airport. Wheels up ~11:30pm."],
- ["Day 2","","Arenal","Land SJO ~6:45am. Pick up the 4x4, drive to La Fortuna (~3.5 hrs). Easy afternoon, hot springs at sunset."],
- ["Day 3","","Arenal","<strong>Mistico Hanging Bridges</strong> at 7am. La Fortuna Waterfall after lunch."],
- ["Day 4","","Arenal","<strong>Canyoning with Pure Trek</strong> — rappelling waterfalls all morning. Kalambu slides in the afternoon."],
- ["Day 5","","Arenal","Balsa River rafting. Evening: Bogarín sloth walk or a night rainforest tour."],
- ["Day 6","travel","→ Manuel Antonio","<strong>Leave early.</strong> 5–6 hrs via San Ramón and Rte 27. Stop at the Tárcoles crocodile bridge. Beach at sunset."],
- ["Day 7","","Manuel Antonio","<strong>National park at 7am opening</strong> with a guide and scope — ticket booked months ago. Playa Manuel Antonio inside the park. Back at the pool by 3pm for the monkeys."],
- ["Day 8","","Manuel Antonio","Nauyaca Waterfalls day trip. Or trade for surf lessons and a slow beach day at Biesanz."],
- ["Day 9","","Manuel Antonio","Damas Island mangroves in the morning. Catamaran sunset sail. Dinner at El Avión."],
- ["Day 10","travel","→ SJO","Morning swim, then drive to San José (~3 hrs). Overnight near the airport."],
- ["Day 11","travel","SJO → home","Morning flight to LAX. Drive home."]
+ {n:"Day 1",where:"Drive → LAX",title:"Travel day",slots:[
+   ["Afternoon","Leave home around 2pm. Allow 4.5–5 hrs for traffic."],
+   ["Evening","Dinner near the airport, then the ~23:30 nonstop. Sleep on the plane — it's only 6 hours and you gain an hour."]]},
+
+ {n:"Day 2",where:"→ Arenal",title:"Arrive, then do very little",slots:[
+   ["Morning","Land SJO ~6:45am. Collect the 4x4, breakfast near the airport, drive to La Fortuna (~3.5 hrs)."],
+   ["Afternoon","Check in. Unpack properly — you're here four nights.",R],
+   ["Evening","Hot springs at sunset and an early dinner. Everyone will be tired; lean into it.",R]]},
+
+ {n:"Day 3",where:"Arenal",title:"Hanging bridges",slots:[
+   ["7:00am","<strong>Mistico Hanging Bridges.</strong> First entry, before the tour buses. About 3 hrs at an easy pace."],
+   ["Afternoon","Back by 1pm. Pool, and the rain. Read, nap, cards.",R],
+   ["Evening","Dinner in town — Soda La Parada if you want it cheap and quick."]]},
+
+ {n:"Day 4",where:"Arenal",title:"Canyoning — the big one",slots:[
+   ["7:30am","<strong>Canyoning with Pure Trek.</strong> Rappelling down jungle waterfalls, roughly 4 hrs including transport and lunch. Min age 8; this is usually the trip highlight at 11 and 12."],
+   ["Afternoon","Kalambu thermal water park (~$35) if anyone still has energy, otherwise the hotel pool.",R],
+   ["Evening","Optional guided night walk — frogs, snakes, kinkajous. Skip it without guilt if the day was enough."]]},
+
+ {n:"Day 5",where:"Arenal",title:"Nothing scheduled",slots:[
+   ["Morning","<strong>Deliberately empty.</strong> Options if you want one: Bogarín sloth walk (~2 hrs, most reliable sloths in the country), the La Fortuna Waterfall steps, or the self-guided 1968 lava trail.",R],
+   ["Afternoon","Pool. Town. Ice cream. Nothing.",R],
+   ["Evening","Hot springs again — a different one this time. Pack tonight so tomorrow starts clean.",R]]},
+
+ {n:"Day 6",where:"→ Manuel Antonio",title:"Transfer day",slots:[
+   ["7:30am","<strong>Leave early.</strong> 5–6 hrs via San Ramón, Route 27 and Route 34. Curvy for the first two hours — medicate anyone prone to carsickness before you start."],
+   ["Midday","<strong>Tárcoles crocodile bridge.</strong> Five minutes, free, and the best stop on the drive. Then lunch at a roadside soda."],
+   ["Late afternoon","Check in. Walk down for the sunset and a swim.",R],
+   ["Evening","Something easy and close. You've been in a car all day."]]},
+
+ {n:"Day 7",where:"Manuel Antonio",title:"The national park",slots:[
+   ["7:00am","<strong>Manuel Antonio National Park at opening,</strong> with a guide and spotting scope — ticket booked months ago via SINAC. Three monkey species, sloths, and Playa Manuel Antonio inside the park."],
+   ["Afternoon","Out by 1pm before the heat. <strong>Be at the pool by 3pm</strong> — that's when the squirrel monkey troop comes through.",R],
+   ["Evening","<strong>El Avión</strong> for sunset — dinner inside a salvaged cargo plane on the ridge."]]},
+
+ {n:"Day 8",where:"Manuel Antonio",title:"Waterfall or beach — pick one",slots:[
+   ["Morning","<strong>Nauyaca Waterfalls</strong> (an hour south, 4x4 shuttle or horseback, swim at the base). Or trade the whole thing for surf lessons at Espadilla and a slow morning."],
+   ["Afternoon","<strong>Playa Biesanz</strong> — the sheltered cove, calm water, the area's best snorkeling and the safest swimming with kids.",R],
+   ["Evening","Falafel Bar or a soda in Quepos. Cheap and good."]]},
+
+ {n:"Day 9",where:"Manuel Antonio",title:"Nothing scheduled",slots:[
+   ["Morning","<strong>Deliberately empty.</strong> If you want something: Damas Island mangrove kayak, Rainmaker canopy bridges, or Savegre rafting — all half-days.",R],
+   ["Afternoon","Beach and pool. Watch for the 3pm monkeys again.",R],
+   ["Evening","Catamaran sunset sail (~$85 pp, dolphins likely) if you want one last thing. Otherwise the balcony.",R]]},
+
+ {n:"Day 10",where:"→ San José",title:"Slow start, short drive",slots:[
+   ["Morning","Last swim. Coffee. Genuinely no rush.",R],
+   ["Afternoon","Drive to San José (~3 hrs). Overnight near the airport — do not try to make a same-day flight from here."],
+   ["Evening","Airport hotel dinner. Repack, and buy coffee at the airport tomorrow, not tonight."]]},
+
+ {n:"Day 11",where:"SJO → home",title:"Travel day",slots:[
+   ["Morning","Morning nonstop to LAX. Land mid-afternoon."],
+   ["Afternoon","Drive home, or overnight near LAX if nobody wants to face US-101 after a travel day."]]}
 ];
+
 document.getElementById("days").innerHTML=ITIN.map(function(d){
-  return '<div class="day"><span class="n'+(d[1]?" travel":"")+'">'+d[0]+'</span><p><span class="where">'
-    +d[2]+'</span>'+d[3]+'</p></div>';
+  var slots=d.slots.map(function(s){
+    return '<div class="slot'+(s[2]?" rest":"")+'"><span class="lbl">'+(s[2]?"◍ "+s[0]:s[0])
+      +'</span><p>'+s[1]+'</p></div>';
+  }).join("");
+  return '<div class="dayblock"><div class="dh"><span class="dnum">'+d.n+'</span>'
+    +'<span class="dwhere">'+d.where+'</span><span class="dtitle">'+d.title+'</span></div>'
+    +slots+'</div>';
 }).join("");
 
 render();
