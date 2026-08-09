@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
-<title>Costa Rica 2027 — Trip Study</title>
+<title>Costa Rica 2027 — Arenal + Manuel Antonio</title>
 <link rel="icon" href="/favicon.svg">
 <style>
 :root{
@@ -13,185 +13,10 @@
   --text:#16241c; --muted:#4d6157; --line:#d3e0d6;
   --accent:#1f7a52; --accent-strong:#125034; --accent-soft:#e2f2e9;
   --warn:#b06a12; --warn-soft:#fdf1de; --danger:#a33a2c; --danger-soft:#fbeae7;
-  --shadow:0 12px 30px rgba(17,40,28,.09);
-  --radius:16px; --container:78rem;
+  --shadow:0 12px 30px rgba(17,40,28,.09); --radius:16px; --container:74rem;
 }
-:root[data-theme="dark"]{
-  --bg:#0e1712; --bg-alt:#12201a; --surface:#18261fdd; --surface-solid:#18261f;
-  --text:#e8f1ea; --muted:#a5bcaf; --line:#2b3f34;
-  --accent:#6fc79a; --accent-strong:#b6e6cd; --accent-soft:#1b3529;
-  --warn:#e0a95c; --warn-soft:#33270f; --danger:#e89383; --danger-soft:#3a1f1a;
-  --shadow:0 14px 36px rgba(0,0,0,.4);
-}
-*{box-sizing:border-box}
-html,body{margin:0;padding:0}
-body{
-  background:
-    radial-gradient(circle at 10% 4%, color-mix(in srgb, var(--accent) 16%, transparent) 0, transparent 34%),
-    radial-gradient(circle at 92% 10%, color-mix(in srgb, #c1833a 14%, transparent) 0, transparent 28%),
-    linear-gradient(165deg, var(--bg) 0%, var(--bg-alt) 100%);
-  background-attachment:fixed;
-  color:var(--text);
-  font-family:"Source Serif 4",Georgia,serif;
-  line-height:1.65; font-size:1.05rem;
-}
-.wrap{max-width:var(--container);margin:0 auto;padding:0 1.25rem}
-h1,h2,h3,h4{font-family:ui-sans-serif,-apple-system,"Segoe UI",Inter,system-ui,sans-serif;line-height:1.2;letter-spacing:-.015em}
-h2{font-size:clamp(1.5rem,3.2vw,2.1rem);margin:0 0 .35rem}
-h3{font-size:1.2rem;margin:0 0 .4rem}
-a{color:var(--accent);text-underline-offset:.18em}
-a:hover{color:var(--accent-strong)}
-code,.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.9em}
-
-/* header */
-.topbar{position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);
-  background:color-mix(in srgb,var(--bg) 82%,transparent);border-bottom:1px solid var(--line)}
-.topbar .wrap{display:flex;align-items:center;gap:1rem;height:54px}
-.topbar nav{display:flex;gap:1.1rem;overflow-x:auto;font-family:ui-sans-serif,system-ui,sans-serif;font-size:.85rem;scrollbar-width:none}
-.topbar nav::-webkit-scrollbar{display:none}
-.topbar nav a{white-space:nowrap;text-decoration:none;color:var(--muted)}
-.topbar nav a:hover{color:var(--accent)}
-.tbrand{font-family:ui-sans-serif,system-ui,sans-serif;font-weight:700;font-size:.9rem;white-space:nowrap}
-.themebtn{margin-left:auto;border:1px solid var(--line);background:var(--surface);color:var(--text);
-  border-radius:999px;padding:.3rem .7rem;cursor:pointer;font-size:.8rem;font-family:ui-sans-serif,system-ui,sans-serif}
-
-/* hero */
-.hero{position:relative;min-height:clamp(360px,54vh,540px);display:flex;align-items:flex-end;
-  border-bottom:1px solid var(--line);overflow:hidden}
-.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.hero::after{content:"";position:absolute;inset:0;
-  background:linear-gradient(to top, rgba(6,20,13,.92) 0%, rgba(6,20,13,.55) 45%, rgba(6,20,13,.15) 100%)}
-.hero .inner{position:relative;z-index:2;padding:2.5rem 0 2rem;color:#f2fbf5}
-.hero h1{font-size:clamp(2rem,6vw,3.6rem);margin:0 0 .5rem;text-shadow:0 2px 18px rgba(0,0,0,.5)}
-.hero p{margin:0;max-width:46rem;color:#d9ecdf;font-size:1.05rem}
-.herometa{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.1rem}
-.pill{display:inline-flex;align-items:center;gap:.35rem;background:rgba(255,255,255,.14);
-  border:1px solid rgba(255,255,255,.26);color:#eafaf0;border-radius:999px;padding:.28rem .8rem;
-  font-family:ui-sans-serif,system-ui,sans-serif;font-size:.8rem;backdrop-filter:blur(4px)}
-
-section{padding:3rem 0;border-bottom:1px solid var(--line)}
-section:last-of-type{border-bottom:none}
-.eyebrow{font-family:ui-sans-serif,system-ui,sans-serif;font-size:.72rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:.5rem}
-.lede{color:var(--muted);max-width:52rem;margin:.4rem 0 1.6rem}
-
-.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
-  padding:1.3rem;box-shadow:var(--shadow)}
-.grid{display:grid;gap:1.1rem}
-.g2{grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
-.g3{grid-template-columns:repeat(auto-fit,minmax(min(100%,268px),1fr))}
-.g4{grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr))}
-.buildergrid{grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))}
-
-.callout{border-left:4px solid var(--accent);background:var(--accent-soft);
-  border-radius:0 12px 12px 0;padding:1rem 1.2rem;margin:1.2rem 0}
-.callout.warn{border-left-color:var(--warn);background:var(--warn-soft)}
-.callout.danger{border-left-color:var(--danger);background:var(--danger-soft)}
-.callout p:first-child{margin-top:0}.callout p:last-child{margin-bottom:0}
-.callout strong{font-family:ui-sans-serif,system-ui,sans-serif}
-
-/* tables */
-.tablescroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);
-  border-radius:12px;background:var(--surface)}
-table{border-collapse:collapse;width:100%;font-size:.92rem;min-width:520px}
-th,td{padding:.62rem .8rem;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
-th{font-family:ui-sans-serif,system-ui,sans-serif;font-size:.75rem;letter-spacing:.05em;
-  text-transform:uppercase;color:var(--muted);font-weight:700;background:color-mix(in srgb,var(--accent) 6%,transparent)}
-tbody tr:last-child td{border-bottom:none}
-tbody tr:hover{background:color-mix(in srgb,var(--accent) 4%,transparent)}
-td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
-.tag{display:inline-block;font-family:ui-sans-serif,system-ui,sans-serif;font-size:.68rem;
-  font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:.15rem .5rem;border-radius:999px;
-  border:1px solid var(--line);color:var(--muted);white-space:nowrap}
-.tag.good{background:var(--accent-soft);color:var(--accent-strong);border-color:transparent}
-.tag.mid{background:var(--warn-soft);color:var(--warn);border-color:transparent}
-.tag.bad{background:var(--danger-soft);color:var(--danger);border-color:transparent}
-
-/* option cards */
-.opt{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
-  overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
-.opt.pick{border-color:var(--accent);border-width:2px}
-.opt figure{margin:0;position:relative;aspect-ratio:16/10;overflow:hidden;background:var(--bg-alt)}
-.opt figure img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
-.opt:hover figure img{transform:scale(1.045)}
-.opt .badge{position:absolute;top:.7rem;left:.7rem;background:var(--accent);color:#fff;
-  font-family:ui-sans-serif,system-ui,sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.08em;
-  text-transform:uppercase;padding:.24rem .6rem;border-radius:999px}
-.opt .body{padding:1.15rem;flex:1;display:flex;flex-direction:column}
-.opt h3{margin-bottom:.15rem}
-.opt .sub{font-family:ui-sans-serif,system-ui,sans-serif;font-size:.78rem;color:var(--muted);margin-bottom:.6rem}
-.opt ul{margin:.5rem 0 .8rem;padding-left:1.1rem;font-size:.92rem}
-.opt ul li{margin:.2rem 0}
-.opt .foot{margin-top:auto;padding-top:.8rem;border-top:1px solid var(--line);
-  display:flex;justify-content:space-between;align-items:baseline;gap:.5rem}
-.price{font-family:ui-sans-serif,system-ui,sans-serif;font-weight:800;font-size:1.15rem;
-  font-variant-numeric:tabular-nums;color:var(--accent-strong)}
-.pricelabel{font-family:ui-sans-serif,system-ui,sans-serif;font-size:.7rem;color:var(--muted);
-  text-transform:uppercase;letter-spacing:.06em}
-
-/* builder */
-.builder{background:var(--surface-solid);border:2px solid var(--accent);border-radius:var(--radius);
-  padding:1.5rem;box-shadow:var(--shadow)}
-.ctrl{margin-bottom:1.3rem}
-.ctrl > label{display:block;font-family:ui-sans-serif,system-ui,sans-serif;font-size:.75rem;
-  font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
-.seg{display:flex;flex-wrap:wrap;gap:.4rem}
-.seg button{font-family:ui-sans-serif,system-ui,sans-serif;font-size:.85rem;padding:.5rem .85rem;
-  border-radius:10px;border:1px solid var(--line);background:transparent;color:var(--text);cursor:pointer;
-  transition:.15s}
-.seg button:hover{border-color:var(--accent)}
-.seg button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
-input[type=range]{width:100%;accent-color:var(--accent)}
-.rangerow{display:flex;justify-content:space-between;font-family:ui-sans-serif,system-ui,sans-serif;
-  font-size:.85rem;color:var(--muted);margin-top:.3rem}
-.rangerow b{color:var(--text)}
-.total{text-align:center;padding:1.2rem;background:var(--accent-soft);border-radius:12px;margin:1.2rem 0}
-.total .big{font-family:ui-sans-serif,system-ui,sans-serif;font-size:clamp(2rem,7vw,2.9rem);
-  font-weight:800;color:var(--accent-strong);font-variant-numeric:tabular-nums;line-height:1.1}
-.total .cap{font-family:ui-sans-serif,system-ui,sans-serif;font-size:.78rem;color:var(--muted);
-  text-transform:uppercase;letter-spacing:.08em}
-.bars{margin-top:.6rem}
-.bar{display:grid;grid-template-columns:minmax(120px,1.4fr) 3fr minmax(72px,auto);gap:.6rem;
-  align-items:center;font-family:ui-sans-serif,system-ui,sans-serif;font-size:.82rem;margin:.3rem 0}
-.bar .track{background:color-mix(in srgb,var(--text) 8%,transparent);border-radius:999px;height:12px;overflow:hidden}
-.bar .fill{height:100%;border-radius:999px;background:var(--accent);transition:width .35s ease}
-.bar .val{text-align:right;font-variant-numeric:tabular-nums;color:var(--muted)}
-
-/* itinerary */
-.days{display:grid;gap:.55rem}
-.day{display:grid;grid-template-columns:auto 1fr;gap:.9rem;align-items:start;
-  background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:.75rem .95rem}
-.day .n{font-family:ui-sans-serif,system-ui,sans-serif;font-weight:800;font-size:.75rem;
-  background:var(--accent);color:#fff;border-radius:8px;padding:.3rem .55rem;white-space:nowrap;min-width:3.4rem;text-align:center}
-.day .n.travel{background:var(--muted)}
-.day p{margin:0;font-size:.94rem}
-.day .where{font-family:ui-sans-serif,system-ui,sans-serif;font-size:.72rem;text-transform:uppercase;
-  letter-spacing:.06em;color:var(--muted);display:block;margin-bottom:.1rem}
-
-/* rain chart */
-.rain{display:grid;grid-template-columns:repeat(12,1fr);gap:3px;align-items:end;height:150px;margin:1rem 0 .3rem}
-.rain .m{display:flex;flex-direction:column;justify-content:flex-end;height:100%;gap:3px}
-.rain .b{background:color-mix(in srgb,var(--accent) 45%,transparent);border-radius:3px 3px 0 0;min-height:2px}
-.rain .m.hot .b{background:var(--accent);box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 28%,transparent)}
-.rain .lab{font-family:ui-sans-serif,system-ui,sans-serif;font-size:.62rem;text-align:center;color:var(--muted)}
-.rain .m.hot .lab{color:var(--accent-strong);font-weight:800}
-
-figure.wide{margin:1.5rem 0;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--line)}
-figure.wide img{width:100%;display:block;aspect-ratio:21/9;object-fit:cover}
-figure.wide figcaption{font-family:ui-sans-serif,system-ui,sans-serif;font-size:.76rem;color:var(--muted);
-  padding:.55rem .9rem;background:var(--surface)}
-
-.credits{font-size:.8rem;color:var(--muted)}
-.credits li{margin:.2rem 0}
-footer{padding:2.5rem 0 3.5rem;color:var(--muted);font-size:.85rem}
-
-@media (max-width:640px){
-  body{font-size:1rem}
-  section{padding:2.2rem 0}
-  .bar{grid-template-columns:minmax(88px,1.3fr) 2fr auto;font-size:.75rem}
-  .day{grid-template-columns:1fr;gap:.35rem}
-  .day .n{justify-self:start}
-}
+:root[data-theme="dark"],
+:root:not([data-theme="light"]) { }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
     --bg:#0e1712;--bg-alt:#12201a;--surface:#18261fdd;--surface-solid:#18261f;
@@ -201,6 +26,153 @@ footer{padding:2.5rem 0 3.5rem;color:var(--muted);font-size:.85rem}
     --shadow:0 14px 36px rgba(0,0,0,.4);
   }
 }
+:root[data-theme="dark"]{
+  --bg:#0e1712;--bg-alt:#12201a;--surface:#18261fdd;--surface-solid:#18261f;
+  --text:#e8f1ea;--muted:#a5bcaf;--line:#2b3f34;
+  --accent:#6fc79a;--accent-strong:#b6e6cd;--accent-soft:#1b3529;
+  --warn:#e0a95c;--warn-soft:#33270f;--danger:#e89383;--danger-soft:#3a1f1a;
+  --shadow:0 14px 36px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:
+    radial-gradient(circle at 10% 4%, color-mix(in srgb, var(--accent) 15%, transparent) 0, transparent 34%),
+    radial-gradient(circle at 92% 10%, color-mix(in srgb, #c1833a 13%, transparent) 0, transparent 28%),
+    linear-gradient(165deg, var(--bg) 0%, var(--bg-alt) 100%);
+  background-attachment:fixed; color:var(--text);
+  font-family:"Source Serif 4",Georgia,serif; line-height:1.6; font-size:1.02rem;
+}
+.wrap{max-width:var(--container);margin:0 auto;padding:0 1.25rem}
+h1,h2,h3,h4{font-family:ui-sans-serif,-apple-system,"Segoe UI",Inter,system-ui,sans-serif;line-height:1.18;letter-spacing:-.015em}
+h2{font-size:clamp(1.45rem,3vw,1.95rem);margin:0 0 .3rem}
+h3{font-size:1.12rem;margin:0 0 .35rem}
+h4{font-size:.95rem;margin:0 0 .3rem}
+p{margin:.55rem 0}
+a{color:var(--accent);text-underline-offset:.18em}
+a:hover{color:var(--accent-strong)}
+
+.topbar{position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);
+  background:color-mix(in srgb,var(--bg) 84%,transparent);border-bottom:1px solid var(--line)}
+.topbar .wrap{display:flex;align-items:center;gap:1rem;height:52px}
+.topbar nav{display:flex;gap:1.05rem;overflow-x:auto;font-family:ui-sans-serif,system-ui,sans-serif;font-size:.84rem;scrollbar-width:none}
+.topbar nav::-webkit-scrollbar{display:none}
+.topbar nav a{white-space:nowrap;text-decoration:none;color:var(--muted)}
+.topbar nav a:hover{color:var(--accent)}
+.tbrand{font-family:ui-sans-serif,system-ui,sans-serif;font-weight:700;font-size:.88rem;white-space:nowrap}
+.themebtn{margin-left:auto;border:1px solid var(--line);background:var(--surface);color:var(--text);
+  border-radius:999px;padding:.28rem .68rem;cursor:pointer;font-size:.8rem}
+
+.hero{position:relative;min-height:clamp(320px,46vh,460px);display:flex;align-items:flex-end;
+  border-bottom:1px solid var(--line);overflow:hidden}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(6,20,13,.93) 0%,rgba(6,20,13,.55) 48%,rgba(6,20,13,.12) 100%)}
+.hero .inner{position:relative;z-index:2;padding:2.2rem 0 1.8rem;color:#f2fbf5}
+.hero h1{font-size:clamp(1.8rem,5.2vw,3.1rem);margin:0 0 .45rem;text-shadow:0 2px 18px rgba(0,0,0,.5)}
+.hero p{margin:0;max-width:44rem;color:#d9ecdf;font-size:1.02rem}
+.herometa{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:1rem}
+.pill{display:inline-flex;align-items:center;gap:.3rem;background:rgba(255,255,255,.14);
+  border:1px solid rgba(255,255,255,.26);color:#eafaf0;border-radius:999px;padding:.25rem .75rem;
+  font-family:ui-sans-serif,system-ui,sans-serif;font-size:.78rem;backdrop-filter:blur(4px)}
+
+section{padding:2.6rem 0;border-bottom:1px solid var(--line)}
+section:last-of-type{border-bottom:none}
+.eyebrow{font-family:ui-sans-serif,system-ui,sans-serif;font-size:.7rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:.45rem}
+.lede{color:var(--muted);max-width:50rem;margin:.35rem 0 1.3rem}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:1.15rem;box-shadow:var(--shadow)}
+.card h3{margin-bottom:.3rem}
+.card p:last-child{margin-bottom:0}
+.grid{display:grid;gap:1rem}
+.g2{grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(min(100%,255px),1fr))}
+.buildergrid{grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))}
+
+.callout{border-left:4px solid var(--accent);background:var(--accent-soft);
+  border-radius:0 12px 12px 0;padding:.85rem 1.1rem;margin:1rem 0}
+.callout.warn{border-left-color:var(--warn);background:var(--warn-soft)}
+.callout.danger{border-left-color:var(--danger);background:var(--danger-soft)}
+.callout p:first-child{margin-top:0}.callout p:last-child{margin-bottom:0}
+
+.tablescroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);
+  border-radius:12px;background:var(--surface);margin:.6rem 0 1.2rem}
+table{border-collapse:collapse;width:100%;font-size:.9rem;min-width:500px}
+th,td{padding:.55rem .75rem;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:ui-sans-serif,system-ui,sans-serif;font-size:.72rem;letter-spacing:.05em;
+  text-transform:uppercase;color:var(--muted);font-weight:700;background:color-mix(in srgb,var(--accent) 6%,transparent)}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:color-mix(in srgb,var(--accent) 4%,transparent)}
+td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tag{display:inline-block;font-family:ui-sans-serif,system-ui,sans-serif;font-size:.66rem;
+  font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:.13rem .48rem;border-radius:999px;
+  border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.tag.good{background:var(--accent-soft);color:var(--accent-strong);border-color:transparent}
+.tag.mid{background:var(--warn-soft);color:var(--warn);border-color:transparent}
+.tag.bad{background:var(--danger-soft);color:var(--danger);border-color:transparent}
+
+figure.wide{margin:1.2rem 0;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--line)}
+figure.wide img{width:100%;display:block;aspect-ratio:21/9;object-fit:cover}
+figure.wide figcaption{font-family:ui-sans-serif,system-ui,sans-serif;font-size:.76rem;color:var(--muted);
+  padding:.5rem .85rem;background:var(--surface)}
+
+/* builder */
+.builder{background:var(--surface-solid);border:2px solid var(--accent);border-radius:var(--radius);
+  padding:1.3rem;box-shadow:var(--shadow)}
+.ctrl{margin-bottom:1.1rem}
+.ctrl > label{display:block;font-family:ui-sans-serif,system-ui,sans-serif;font-size:.72rem;
+  font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:.42rem}
+.seg{display:flex;flex-wrap:wrap;gap:.35rem}
+.seg button{font-family:ui-sans-serif,system-ui,sans-serif;font-size:.82rem;padding:.42rem .75rem;
+  border-radius:10px;border:1px solid var(--line);background:transparent;color:var(--text);cursor:pointer;transition:.15s}
+.seg button:hover{border-color:var(--accent)}
+.seg button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+.seg button .px{opacity:.72;font-size:.75em;margin-left:.25em}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.rangerow{display:flex;justify-content:space-between;font-family:ui-sans-serif,system-ui,sans-serif;
+  font-size:.82rem;color:var(--muted);margin-top:.25rem}
+.rangerow b{color:var(--text)}
+.total{text-align:center;padding:1.1rem;background:var(--accent-soft);border-radius:12px;margin-bottom:1rem}
+.total .big{font-family:ui-sans-serif,system-ui,sans-serif;font-size:clamp(1.9rem,6.5vw,2.7rem);
+  font-weight:800;color:var(--accent-strong);font-variant-numeric:tabular-nums;line-height:1.1}
+.total .cap{font-family:ui-sans-serif,system-ui,sans-serif;font-size:.75rem;color:var(--muted);
+  text-transform:uppercase;letter-spacing:.08em}
+.bar{display:grid;grid-template-columns:minmax(104px,1.3fr) 3fr minmax(64px,auto);gap:.55rem;
+  align-items:center;font-family:ui-sans-serif,system-ui,sans-serif;font-size:.8rem;margin:.28rem 0}
+.bar .track{background:color-mix(in srgb,var(--text) 9%,transparent);border-radius:999px;height:11px;overflow:hidden}
+.bar .fill{height:100%;border-radius:999px;background:var(--accent);transition:width .35s ease}
+.bar .val{text-align:right;font-variant-numeric:tabular-nums;color:var(--muted)}
+
+.days{display:grid;gap:.5rem}
+.day{display:grid;grid-template-columns:auto 1fr;gap:.85rem;align-items:start;
+  background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:.65rem .9rem}
+.day .n{font-family:ui-sans-serif,system-ui,sans-serif;font-weight:800;font-size:.72rem;
+  background:var(--accent);color:#fff;border-radius:8px;padding:.28rem .5rem;white-space:nowrap;min-width:3.3rem;text-align:center}
+.day .n.travel{background:var(--muted)}
+.day p{margin:0;font-size:.92rem}
+.day .where{font-family:ui-sans-serif,system-ui,sans-serif;font-size:.7rem;text-transform:uppercase;
+  letter-spacing:.06em;color:var(--muted);display:block;margin-bottom:.08rem}
+
+.rain{display:grid;grid-template-columns:repeat(12,1fr);gap:3px;align-items:end;height:120px;margin:.8rem 0 .2rem}
+.rain .m{display:flex;flex-direction:column;justify-content:flex-end;height:100%;gap:3px}
+.rain .b{background:color-mix(in srgb,var(--accent) 42%,transparent);border-radius:3px 3px 0 0;min-height:2px}
+.rain .m.hot .b{background:var(--accent);box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 26%,transparent)}
+.rain .lab{font-family:ui-sans-serif,system-ui,sans-serif;font-size:.6rem;text-align:center;color:var(--muted)}
+.rain .m.hot .lab{color:var(--accent-strong);font-weight:800}
+
+ul.tight{margin:.4rem 0;padding-left:1.05rem}
+ul.tight li{margin:.18rem 0;font-size:.93rem}
+.credits{font-size:.79rem;color:var(--muted)}
+.credits li{margin:.16rem 0}
+footer{padding:2.2rem 0 3rem;color:var(--muted);font-size:.83rem}
+
+@media (max-width:640px){
+  body{font-size:.98rem} section{padding:2rem 0}
+  .bar{grid-template-columns:minmax(80px,1.2fr) 2fr auto;font-size:.73rem}
+  .day{grid-template-columns:1fr;gap:.3rem} .day .n{justify-self:start}
+}
 </style>
 </head>
 <body>
@@ -208,472 +180,386 @@ footer{padding:2.5rem 0 3.5rem;color:var(--muted);font-size:.85rem}
 <div class="topbar"><div class="wrap">
   <span class="tbrand">🇨🇷 CR 2027</span>
   <nav>
-    <a href="#verdict">Verdict</a>
-    <a href="#costco">Costco</a>
+    <a href="#plan">Plan</a>
     <a href="#when">When</a>
     <a href="#getting">Getting There</a>
-    <a href="#options">Options</a>
-    <a href="#lodging">Lodging</a>
-    <a href="#monkeys">🐒 Monkeys</a>
+    <a href="#arenal">Arenal</a>
+    <a href="#drive">The Drive</a>
+    <a href="#ma">Manuel Antonio</a>
+    <a href="#monkeys">🐒</a>
     <a href="#builder">Builder</a>
-    <a href="#itin">Itineraries</a>
-    <a href="#timeline">Timeline</a>
+    <a href="#itin">Itinerary</a>
+    <a href="#book">Book</a>
   </nav>
   <button class="themebtn" id="themebtn" type="button">◐</button>
 </div></div>
 
 <header class="hero">
-  <img src="/images/costa-rica/drakebay.jpg" alt="A kayaker paddling a still jungle river near Drake Bay, Costa Rica">
+  <img src="/images/costa-rica/manuelantonio.jpg" alt="Rainforest meeting a white-sand beach at Manuel Antonio National Park">
   <div class="inner"><div class="wrap">
-    <h1>Costa Rica 2027</h1>
-    <p>A ten-day, two-base, jungle-first family trip. Three route options costed side by side, with lodging, flights, and a builder for mixing your own combination.</p>
+    <h1>Arenal + Manuel Antonio</h1>
+    <p>Ten days, two bases, June 2027. Volcano rainforest first, then rainforest that runs down to a swimmable beach — with monkeys on the balcony rail.</p>
     <div class="herometa">
       <span class="pill">👨‍👩‍👧‍👦 Family of 4 — two kids, 11 and 12</span>
-      <span class="pill">📅 Mid-July 2027</span>
-      <span class="pill">🚗 Central Coast → LAX, then nonstop</span>
-      <span class="pill">🌴 Two bases, mostly jungle</span>
+      <span class="pill">📅 June 2027</span>
+      <span class="pill">✈️ Nonstop to San José</span>
+      <span class="pill">🐒 Monkeys at the pool</span>
     </div>
   </div></div>
 </header>
 
-<!-- ============ VERDICT ============ -->
-<section id="verdict"><div class="wrap">
-  <div class="eyebrow">The short version</div>
-  <h2>What this study concludes</h2>
-  <p class="lede">Five findings drove everything below. If you read nothing else, read these.</p>
-
-  <div class="grid g2">
-    <div class="card">
-      <h3>1. Costco is the wrong product for this trip</h3>
-      <p>Costco Travel's entire Costa Rica catalog is <strong>Guanacaste</strong> — Papagayo and Reserva Conchal beach resorts, flying into Liberia. There is not a single jungle property on offer. It's a good deal on a different vacation. <a href="#costco">See the math →</a></p>
-    </div>
-    <div class="card">
-      <h3>2. Fly into San José, not Liberia</h3>
-      <p>Both have LAX nonstops. But LIR serves dry tropical forest and beach resorts on the Pacific northwest — the opposite of jungle. SJO puts you 3 hours from Arenal and one puddle-jumper from the Osa.</p>
-    </div>
-    <div class="card">
-      <h3>3. Target mid-July for the <em>veranillo</em></h3>
-      <p>The "little summer" is a genuine mid-rainy-season dry spell on the Pacific side and in the Central Valley. Same lush jungle and low-season pricing, meaningfully less rain. <a href="#when">Rainfall chart →</a></p>
-    </div>
-    <div class="card">
-      <h3>4. Two bases is exactly right for 10 days</h3>
-      <p>Eight nights in country. Four and four. Every additional base costs you roughly half a day of transit and a night of unpacking, which is a bad trade at this length.</p>
-    </div>
-    <div class="card pick" style="border:2px solid var(--accent)">
-      <h3>5. Recommended: Osa Peninsula + Arenal</h3>
-      <p>You said "mostly jungle." The Osa is the only honest answer — Corcovado holds roughly 2.5% of global biodiversity. The kids are exactly old enough for the full Sirena hike. <strong>Estimated <span data-est="A">—</span></strong> for four at mixed tier, which is the priciest of the three.</p>
-    </div>
-    <div class="card">
-      <h3>The runner-up depends on what you want</h3>
-      <p><strong>Manuel Antonio</strong> (<span data-est="B">—</span>) for the lowest-friction version, real beach days, and <strong>monkeys around the pool most afternoons</strong>. <strong>Tortuguero</strong> (<span data-est="C">—</span>) if peak green-turtle nesting appeals more than Corcovado — July/August is the only window.</p>
-    </div>
-  </div>
-</div></section>
-
-<!-- ============ COSTCO ============ -->
-<section id="costco"><div class="wrap">
-  <div class="eyebrow">Value check</div>
-  <h2>The Costco question</h2>
-  <p class="lede">You asked how the packaged deals look. Short answer: the pricing is real, but the geography is wrong.</p>
-
-  <div class="callout danger">
-    <p><strong>Every Costa Rica package Costco sells is in Guanacaste.</strong> Their destination page lists exactly one region under "Cities in Costa Rica," and it's Guanacaste. The seven featured deals are Nekajui (Ritz-Carlton Reserve), Westin Reserva Conchal, Planet Hollywood, JW Marriott Guanacaste, W Costa Rica, Andaz Peninsula Papagayo, and Secrets Papagayo — all Pacific-northwest beach resorts, all served by Liberia.</p>
-  </div>
-
-  <h3 style="margin-top:1.6rem">What the packaged model actually gets you</h3>
-  <div class="tablescroll" style="margin:.8rem 0 1.4rem">
-    <table>
-      <thead><tr><th>Dimension</th><th>Costco / all-inclusive package</th><th>This trip, booked direct</th></tr></thead>
-      <tbody>
-        <tr><td><strong>Region</strong></td><td>Guanacaste — dry tropical forest, beach resorts</td><td>Lowland &amp; primary rainforest</td></tr>
-        <tr><td><strong>Airport</strong></td><td>Liberia (LIR)</td><td>San José (SJO)</td></tr>
-        <tr><td><strong>Wildlife</strong></td><td>Resort grounds; day tours are a 2–4 hr drive each way</td><td>Out your door, every morning</td></tr>
-        <tr><td><strong>Bundled value</strong></td><td>Real — resort credits $100–940, kids clubs, breakfast</td><td>None; you pay retail for everything</td></tr>
-        <tr><td><strong>Price transparency</strong></td><td>Good. One number, member pricing, shop card back</td><td>Poor. Twelve line items you assemble yourself</td></tr>
-        <tr><td><strong>Reported real cost</strong></td><td>~$2,800–4,700 for a week, air + all-inclusive resort, family-of-four range</td><td>~$8,600–14,000 depending on option and tier</td></tr>
-        <tr><td><strong>Rain exposure</strong></td><td>Lowest in country — Guanacaste is the dry corner</td><td>Real. You plan mornings and accept afternoon rain</td></tr>
-        <tr><td><strong>Fit for "mostly jungle"</strong></td><td><span class="tag bad">Does not fit</span></td><td><span class="tag good">This is the assignment</span></td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="callout warn">
-    <p><strong>The honest trade.</strong> Costco's Guanacaste packages are genuinely cheaper — plausibly half the cost of the Osa option — and much simpler to book. They are also a poolside beach week with optional excursions, which is a legitimate vacation and not the one you described. If the budget gap matters more than the jungle, that's a real conversation, not a wrong answer.</p>
-  </div>
-
-  <h3>If you want packaged convenience <em>and</em> jungle</h3>
-  <p>The middle path is a Costa Rica specialist operator rather than a warehouse-club resort bundler. They price multi-base jungle itineraries as one number with transfers included, typically at a 10–20% premium over booking direct — often less once you count the domestic flights and transfers they negotiate.</p>
-  <ul>
-    <li><a href="https://www.anywhere.com/costa-rica" target="_blank" rel="noopener">Anywhere Costa Rica</a> — strong multi-base itineraries, transparent lodge-by-lodge pricing</li>
-    <li><a href="https://www.costaricaexpeditions.com/" target="_blank" rel="noopener">Costa Rica Expeditions</a> — the old-guard operator; owns Tortuga Lodge, best naturalist guides in the country</li>
-    <li><a href="https://www.vacationscostarica.com/" target="_blank" rel="noopener">Vacations Costa Rica</a> — good for custom family routings</li>
-    <li>Also worth pricing: <a href="https://www.costcotravel.com/Vacation-Packages/Offers/CRIGUAWESTINRESERVA20201020" target="_blank" rel="noopener">the Westin Conchal package</a> as a pure cost baseline, even if you don't book it</li>
-  </ul>
-</div></section>
-
-<!-- ============ WHEN ============ -->
-<section id="when"><div class="wrap">
-  <div class="eyebrow">Timing</div>
-  <h2>Go mid-July</h2>
-  <p class="lede">Costa Rican summer is green season. That's an advantage, not a problem — but <em>where</em> in summer matters a great deal.</p>
-
-  <div class="grid g2" style="align-items:start">
-    <div class="card">
-      <h3>Pacific / Central Valley rainfall pattern</h3>
-      <div class="rain" id="rainchart"></div>
-      <p style="font-size:.8rem;color:var(--muted);margin:.3rem 0 0">Relative monthly rainfall, Pacific slope. Highlighted bars show the <em>veranillo</em> dip. Late Sept–Oct is the genuine washout.</p>
-    </div>
-    <div>
-      <div class="card" style="margin-bottom:1rem">
-        <h3>What a green-season day looks like</h3>
-        <p style="margin:.3rem 0">Clear, hot morning. Clouds build around 1–2pm. A hard downpour late afternoon. Clearing by evening. <strong>You plan activities for mornings.</strong> It is not all-day drizzle.</p>
-      </div>
-      <div class="card">
-        <h3>Why green season is actually better here</h3>
-        <ul style="margin:.4rem 0;padding-left:1.1rem">
-          <li>Jungle at maximum lushness; waterfalls running hard</li>
-          <li>Wildlife active and breeding</li>
-          <li>Rates 20–40% below dry season</li>
-          <li>Parks close to empty — the Corcovado difference is dramatic</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="callout warn">
-    <p><strong>Regional caveat that shapes the options.</strong> The <em>veranillo</em> barely reaches the Osa Peninsula (still sunny mornings, heavy afternoon rain) and <strong>does not reach the Caribbean at all</strong> — July is one of Tortuguero's wetter months. Guanacaste, where Costco sells, is the driest corner of the country in July. That's not a coincidence; it's why the resorts are there.</p>
-  </div>
-
-  <p><strong>Target dates:</strong> July 8–17 or July 15–24, 2027. Avoid late September and October, when several lodges close outright.</p>
-</div></section>
-
-<!-- ============ GETTING THERE ============ -->
-<section id="getting"><div class="wrap">
-  <div class="eyebrow">Logistics</div>
-  <h2>Getting there</h2>
+<!-- ===== PLAN ===== -->
+<section id="plan"><div class="wrap">
+  <div class="eyebrow">The plan</div>
+  <h2>Four nights Arenal, four nights Manuel Antonio</h2>
+  <p class="lede">Eight nights in country, ten days door to door, June 2027. One road transfer between them, no domestic flights, no boats.</p>
 
   <div class="grid g3">
     <div class="card">
-      <h3>🚗 Central Coast → LAX</h3>
-      <p>~190–200 mi via US-101. <strong>3.5 hrs clean, 4.5–5 hrs realistic.</strong> For a late-night departure, leave by 2–3pm.</p>
-      <p style="font-size:.9rem;color:var(--muted)">Parking: LAX Economy ~$20/day. Off-airport (WallyPark, The Parking Spot) ~$12–16/day. Price a Park-Sleep-Fly hotel for the return so you're not driving home exhausted.</p>
+      <h3>Why this pairing works</h3>
+      <p>Arenal is the densest adventure region in the country — bridges, canyoning, rafting, hot springs. Manuel Antonio is where you stop moving: rainforest, beach, and wildlife on the hotel grounds. Hard week, then a soft landing.</p>
+    </div>
+    <div class="card">
+      <h3>It's also the cheapest option</h3>
+      <p>No domestic flights, no all-inclusive lodge minimums, and real restaurants at both bases. Roughly <strong><span data-est="base">—</span></strong> for four, against $12–15k for an Osa-based version.</p>
+    </div>
+    <div class="card">
+      <h3>Book two things early</h3>
+      <p><strong>Manuel Antonio park tickets</strong> (SINAC only, capped at 600/day) and <strong>passports</strong>. Everything else can wait. <a href="#book">Timeline →</a></p>
+    </div>
+  </div>
+
+  <div class="callout warn">
+    <p><strong>The one honest trade-off.</strong> Manuel Antonio is the most developed and most visited part of Costa Rica's coast — you are not getting wilderness there. What you get instead is three monkey species on the hotel grounds, a swimmable beach, good food, and zero logistics. Given 11 and 12 year olds and a stated interest in monkeys around the pool, that's a good trade.</p>
+  </div>
+</div></section>
+
+<!-- ===== WHEN ===== -->
+<section id="when"><div class="wrap">
+  <div class="eyebrow">Timing</div>
+  <h2>June is the right call — and the data backs it</h2>
+  <p class="lede">I checked this against ten years of ERA5 reanalysis for both towns rather than relying on the usual travel-blog claims. June wins on both.</p>
+
+  <div class="grid g2" style="align-items:start">
+    <div class="card">
+      <h3>Average rainfall by month</h3>
+      <div class="rain" id="rain-q"></div>
+      <p style="font-size:.79rem;color:var(--muted);margin:.2rem 0 .9rem"><strong>Quepos / Manuel Antonio.</strong> June is the <em>driest month of the entire rainy season</em> here — lower than May, July, August, September and October.</p>
+      <div class="rain" id="rain-f"></div>
+      <p style="font-size:.79rem;color:var(--muted);margin:.2rem 0 0"><strong>La Fortuna / Arenal.</strong> June again beats July. (Arenal's true peak is Nov–Jan, when Caribbean-slope weather takes over.)</p>
+    </div>
+
+    <div>
+      <div class="card" style="margin-bottom:1rem">
+        <h3>June vs. July, head to head</h3>
+        <div class="tablescroll" style="margin:.5rem 0 .6rem">
+          <table style="min-width:0">
+            <thead><tr><th>Base</th><th class="num">June</th><th class="num">July</th><th class="num">Δ</th></tr></thead>
+            <tbody>
+              <tr><td>Manuel Antonio</td><td class="num">578 mm</td><td class="num">665 mm</td><td class="num"><span class="tag good">−13%</span></td></tr>
+              <tr><td>Arenal</td><td class="num">411 mm</td><td class="num">515 mm</td><td class="num"><span class="tag good">−20%</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="margin-bottom:0;font-size:.92rem"><strong>June is drier than July at both bases.</strong> The famous <em>veranillo</em> ("little summer") is real, but it's a Guanacaste and Central Valley phenomenon — at these two specific towns it doesn't show up in the station record, and July is simply wetter.</p>
+      </div>
+      <div class="card">
+        <h3>June also beats July on everything else</h3>
+        <ul class="tight">
+          <li><strong>Fewer people.</strong> July is Costa Rica's second high season — North American and European school holidays. June is genuinely quiet</li>
+          <li><strong>Lower rates.</strong> Green-season pricing without the July bump</li>
+          <li><strong>Park tickets.</strong> Manuel Antonio's 600/day cap is far easier to clear in June</li>
+          <li><strong>Availability.</strong> July needs booking a month-plus out for tours and transfers; June doesn't</li>
+        </ul>
+        <p style="margin-bottom:0"><strong>Target: June 5–14 or June 12–21, 2027.</strong> Early June also edges out late June as the rains build.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:1.8rem">It rains most days. That matters far less than when.</h3>
+  <div class="grid g2" style="align-items:start">
+    <div class="card">
+      <h4>Chance of rain by hour — June</h4>
+      <div id="hourly"></div>
+      <p style="font-size:.79rem;color:var(--muted);margin:.6rem 0 0">Share of June hours with measurable rain, 2015–2024. Green band is the activity window.</p>
+    </div>
+    <div class="card">
+      <h4>Read this before worrying about the rain</h4>
+      <p>Yes — it rains on roughly <strong>27 days out of 30</strong> in June at both bases. That number sounds trip-ruining and isn't, because the rain is convective and clockwork:</p>
+      <ul class="tight">
+        <li><strong>Only 26% of daytime rain falls before noon.</strong> The other 74% comes between noon and 8pm</li>
+        <li><strong>7–10am is the driest window of the entire day</strong> at Manuel Antonio — around a 25–28% chance in any given hour</li>
+        <li>Peak is 2–3pm, when it hits roughly 68% at Manuel Antonio and 74% at Arenal</li>
+        <li>It typically arrives hard, lasts an hour or two, and clears</li>
+      </ul>
+      <p style="margin-bottom:0"><strong>So: every activity that matters goes in the morning.</strong> Park at 7am, bridges at 7am, canyoning first thing. Afternoons are for the pool, the hammock, and the monkeys — who show up around 3pm anyway.</p>
+    </div>
+  </div>
+  <p style="font-size:.78rem;color:var(--muted);margin-top:.9rem">Rainfall and hourly figures computed from <a href="https://open-meteo.com/en/docs/historical-weather-api" target="_blank" rel="noopener">Open-Meteo's ERA5 archive</a>, 2015–2024, at each town's coordinates. Reanalysis smooths mountain terrain, so treat absolute totals as indicative and the month-to-month and hour-to-hour <em>patterns</em> as solid.</p>
+</div></section>
+
+<!-- ===== GETTING THERE ===== -->
+<section id="getting"><div class="wrap">
+  <div class="eyebrow">Logistics</div>
+  <h2>Getting there</h2>
+  <div class="grid g3">
+    <div class="card">
+      <h3>🚗 Drive to LAX</h3>
+      <p>~190–200 mi via US-101. 3.5 hrs clean, <strong>4.5–5 realistic</strong>. Leave by 2–3pm for a late departure. Parking: LAX Economy ~$20/day; off-airport ~$12–16/day.</p>
     </div>
     <div class="card">
       <h3>✈️ LAX → SJO nonstop</h3>
-      <p><strong>Alaska, United, and Delta</strong> all fly it nonstop; Southwest sells it too. ~6h05m, roughly 9–10 departures weekly.</p>
-      <p style="font-size:.9rem;color:var(--muted)">Departures spread from midday to 23:30. <strong>Book the late-evening one</strong> — it lands ~6:30–7:00am and buys you a full extra day.</p>
+      <p><strong>Alaska, United, Delta</strong>, ~6h05m, 9–10 flights weekly. Departures spread midday to 23:30 — <strong>take the late one</strong>, land ~6:45am, gain a full day. Costa Rica is UTC−6 with no DST, so just <strong>1 hour ahead</strong> in June.</p>
     </div>
     <div class="card">
-      <h3>🕐 Time zone</h3>
-      <p>Costa Rica is <strong>UTC−6 with no daylight saving</strong>, so in July it runs <strong>one hour ahead</strong> of California. Jet lag is essentially a non-issue — this is the easiest long-haul time zone you'll ever fly to with kids.</p>
+      <h3>🚙 Rental car</h3>
+      <p>Get a 4x4 in green season. <strong>Quoted rates exclude mandatory liability insurance</strong> (~$15–25/day, added at the counter, not waivable by credit card). Book direct with <a href="https://www.adobecar.com/" target="_blank" rel="noopener">Adobe</a> or <a href="https://vamosrentacar.com/" target="_blank" rel="noopener">Vamos</a>, who quote all-in.</p>
     </div>
   </div>
-
-  <div class="callout danger" style="margin-top:1.4rem">
-    <p><strong>Do this week: check all four passport expiration dates.</strong> Costa Rica technically requires validity for the length of stay, but airlines routinely enforce a six-month rule. Kids' passports are five-year documents — there's a real chance the kids' expire before mid-2027, and renewal backlogs are not forgiving. This is the single highest-risk item on the whole plan and it costs nothing to check.</p>
+  <div class="callout danger">
+    <p><strong>Check all four passport expiration dates this week.</strong> Airlines routinely enforce a six-month validity rule. Kids' passports are five-year documents, so there's a real chance the kids' expire before mid-2027 — and renewal backlogs are unforgiving. Highest-risk item on the plan, free to check.</p>
   </div>
-
-  <div class="callout warn">
-    <p><strong>Rental car gotcha.</strong> Quoted rates online exclude Costa Rica's <em>mandatory</em> liability insurance (SLI/TPL), roughly $15–25/day, added at the counter and not waivable by your credit card. A "$12/day" quote is really $35–45/day. Book direct with <a href="https://www.adobecar.com/" target="_blank" rel="noopener">Adobe</a> or <a href="https://vamosrentacar.com/" target="_blank" rel="noopener">Vamos</a>, who quote all-in. Get a 4x4 in green season — not optional on secondary roads.</p>
-  </div>
-
-  <figure class="wide">
-    <img src="/images/costa-rica/drake-airstrip.jpg" alt="The small airstrip at Drake Bay on the Osa Peninsula">
-    <figcaption>Drake Bay's airstrip. Sansa flies SJO→DRK in about an hour for ~$160 per person each way, with a strict ~30 lb baggage limit — leave a bag at your San José hotel. The alternative is 7+ hours of driving and a river crossing.</figcaption>
-  </figure>
 </div></section>
 
-<!-- ============ OPTIONS ============ -->
-<section id="options"><div class="wrap">
-  <div class="eyebrow">The decision</div>
-  <h2>Base 1 is fixed. Base 2 is the choice.</h2>
-  <p class="lede">Arenal / La Fortuna anchors every option — it's the highest-density family adventure region in the country, sits in genuine lowland rainforest under a 5,400-ft volcano, and is close enough to SJO to reach on arrival morning. The real decision is what you pair it with.</p>
+<!-- ===== ARENAL ===== -->
+<section id="arenal"><div class="wrap">
+  <div class="eyebrow">Base 1 · 4 nights</div>
+  <h2>Arenal / La Fortuna</h2>
+  <p class="lede">Three hours from SJO, so you reach it on arrival morning. Lowland rainforest under a 5,400-ft volcano, with more to do per square mile than anywhere else in the country.</p>
 
   <figure class="wide">
     <img src="/images/costa-rica/arenal.jpg" alt="Arenal Volcano rising above rainforest">
-    <figcaption><strong>Base 1 — Arenal / La Fortuna, 4 nights.</strong> Hanging bridges, waterfall canyoning, class III rafting, hot springs, and the most reliable sloth sightings in Costa Rica.</figcaption>
+    <figcaption>Arenal. The cone is usually cloud-wrapped by midday in green season — mornings are your window for views.</figcaption>
   </figure>
 
-  <div class="grid g3" style="margin-top:1.6rem">
-
-    <article class="opt pick">
-      <figure>
-        <img src="/images/costa-rica/sirena.jpg" alt="Primary rainforest hills above Sirena Station in Corcovado National Park">
-        <span class="badge">Recommended</span>
-      </figure>
-      <div class="body">
-        <h3>A · Osa Peninsula</h3>
-        <div class="sub">Drake Bay · 4 nights · deep jungle</div>
-        <p style="font-size:.94rem">Corcovado holds roughly 2.5% of the planet's biodiversity. All four monkey species, tapirs, flocks of scarlet macaws, peccary herds. No road in during rainy season — you arrive by small plane and land on a beach.</p>
-        <ul>
-          <li><strong>Best for:</strong> the actual assignment</li>
-          <li><strong>Access:</strong> 1-hr Sansa flight, ~$160/pp each way</li>
-          <li><strong>Watch out:</strong> wettest option, remote, priciest</li>
-          <li><strong>Kid fit:</strong> 11 &amp; 12 is the perfect age for Sirena</li>
-        </ul>
-        <div class="foot"><span class="pricelabel">Est. total, 4 pax</span><span class="price" data-est="A">—</span></div>
-      </div>
-    </article>
-
-    <article class="opt">
-      <figure><img src="/images/costa-rica/manuelantonio.jpg" alt="Manuel Antonio National Park where rainforest meets the beach"></figure>
-      <div class="body">
-        <h3>B · Manuel Antonio</h3>
-        <div class="sub">Central Pacific · 4 nights · jungle + beach</div>
-        <p style="font-size:.94rem">Rainforest running straight down to white-sand swimming beaches. Squirrel monkeys, capuchins, and sloths inside the first twenty minutes of trail. The easiest, most proven family week in the country.</p>
-        <ul>
-          <li><strong>Best for:</strong> lowest friction, real beach days</li>
-          <li><strong>Access:</strong> 4.5–5 hr drive from Arenal, all paved</li>
-          <li><strong>Watch out:</strong> most developed and touristed</li>
-          <li><strong>Kid fit:</strong> excellent — surf lessons, waterfalls</li>
-          <li>🐒 <strong>Only option with monkeys at the pool</strong> — <a href="#monkeys">see why</a></li>
-        </ul>
-        <div class="foot"><span class="pricelabel">Est. total, 4 pax</span><span class="price" data-est="B">—</span></div>
-      </div>
-    </article>
-
-    <article class="opt">
-      <figure><img src="/images/costa-rica/tortuguero.jpg" alt="A jungle canal in Tortuguero, Costa Rica"></figure>
-      <div class="body">
-        <h3>C · Tortuguero</h3>
-        <div class="sub">Caribbean · 3 nights + Sarapiquí · canal jungle</div>
-        <p style="font-size:.94rem">A road-less village on a sand strip between jungle canals and the sea. July and August are the <strong>absolute peak of green turtle nesting</strong> — thousands of 300-lb females coming ashore. The only option with a hard seasonal reason to go now.</p>
-        <ul>
-          <li><strong>Best for:</strong> a once-in-a-lifetime headline</li>
-          <li><strong>Access:</strong> boat only — shuttle + 1.5 hr canal ride</li>
-          <li><strong>Watch out:</strong> no <em>veranillo</em> here; genuinely wet</li>
-          <li><strong>Kid fit:</strong> the turtle tour is unforgettable at 11/12</li>
-        </ul>
-        <div class="foot"><span class="pricelabel">Est. total, 4 pax</span><span class="price" data-est="C">—</span></div>
-      </div>
-    </article>
-  </div>
-
-  <div class="tablescroll" style="margin-top:1.8rem">
+  <h3>Where to stay</h3>
+  <div class="tablescroll">
     <table>
-      <thead><tr><th>&nbsp;</th><th>A · Osa</th><th>B · Manuel Antonio</th><th>C · Tortuguero</th></tr></thead>
+      <thead><tr><th>Property</th><th class="num">Family of 4 / night</th><th>Notes</th></tr></thead>
       <tbody>
-        <tr><td><strong>Jungle intensity</strong></td><td><span class="tag good">Highest on earth</span></td><td><span class="tag mid">Moderate</span></td><td><span class="tag good">Very high</span></td></tr>
-        <tr><td><strong>July weather</strong></td><td><span class="tag mid">Sunny AM, heavy PM rain</span></td><td><span class="tag good">Best — full veranillo</span></td><td><span class="tag bad">Wettest</span></td></tr>
-        <tr><td><strong>Travel friction</strong></td><td><span class="tag bad">High — flight + boat</span></td><td><span class="tag good">Low — drive</span></td><td><span class="tag mid">Medium — boat only</span></td></tr>
-        <tr><td><strong>Beach / swimming</strong></td><td>Yes, quiet coves</td><td>Yes, the main draw</td><td><span class="tag bad">No — rips &amp; sharks</span></td></tr>
-        <tr><td><strong>Crowds</strong></td><td><span class="tag good">Almost none</span></td><td><span class="tag bad">Busiest park in CR</span></td><td><span class="tag good">Low</span></td></tr>
-        <tr><td><strong>🐒 Monkeys at the pool</strong></td><td>In the forest, not the pool</td><td><span class="tag good">Daily, 3 species</span></td><td>From the boat, not the pool</td></tr>
-        <tr><td><strong>Monkeys overall</strong></td><td><span class="tag good">All 4 species</span></td><td>3 species</td><td>Howlers &amp; spiders</td></tr>
-        <tr><td><strong>Connectivity</strong></td><td>Patchy — a feature</td><td>Full</td><td>Limited</td></tr>
-        <tr><td><strong>Seasonal urgency</strong></td><td>None</td><td>None</td><td><span class="tag good">Peak nesting July–Aug</span></td></tr>
-        <tr><td><strong>Est. total, 4 pax</strong></td><td class="num"><strong data-est="A">—</strong></td><td class="num"><strong data-est="B">—</strong></td><td class="num"><strong data-est="C">—</strong></td></tr>
-      </tbody>
-    </table>
-  </div>
-  <p style="font-size:.8rem;color:var(--muted);margin-top:.5rem">Totals shown at mixed tier, 8 nights, flights and everything else included. Adjust in the <a href="#builder">builder</a>.</p>
-</div></section>
-
-<!-- ============ LODGING ============ -->
-<section id="lodging"><div class="wrap">
-  <div class="eyebrow">Where to sleep</div>
-  <h2>Lodging options</h2>
-  <p class="lede">Prices are indicative 2026 nightly rates for a family of four (family room, or the realistic two-room equivalent). Assume 10–20% inflation by mid-2027, offset somewhat by green-season discounting. Links go to the property or a booking page.</p>
-
-  <h3 style="margin-top:1.5rem">Arenal / La Fortuna — every option</h3>
-  <div class="tablescroll" style="margin:.7rem 0 1.8rem">
-    <table>
-      <thead><tr><th>Property</th><th>Tier</th><th class="num">Est. / night</th><th>Why it's on the list</th></tr></thead>
-      <tbody>
-        <tr><td><a href="https://www.arenalobservatorylodge.com/" target="_blank" rel="noopener">Arenal Observatory Lodge</a> 🐒</td><td><span class="tag">Mid</span></td><td class="num">$180–250</td><td><strong>Top pick for jungle immersion.</strong> Alone on the volcano's flank inside its own reserve. Private trails, forest-set pool, sloths and toucans on property. Best monkey odds in the region, though Arenal is weak for monkeys generally. Trades polish for location.</td></tr>
-        <tr><td><a href="https://www.lomasdelvolcan.com/" target="_blank" rel="noopener">Hotel Lomas del Volcán</a></td><td><span class="tag">Mid</span></td><td class="num">$150–200</td><td>Freestanding cabins, unobstructed volcano views, excellent value. 9.6 guest rating.</td></tr>
-        <tr><td><a href="https://www.arenalmanoa.com/" target="_blank" rel="noopener">Arenal Manoa</a></td><td><span class="tag">Mid</span></td><td class="num">~$200</td><td>On-site hot springs, spacious family rooms, farm setting.</td></tr>
-        <tr><td><a href="https://www.thespringscostarica.com/" target="_blank" rel="noopener">The Springs Resort &amp; Spa</a></td><td><span class="tag mid">Comfort</span></td><td class="num">$450–600</td><td><strong>Strongest family pick in Arenal.</strong> 28 thermal pools plus Club Rio — an on-site adventure center with rafting, horses, and rescued wildlife. The kids will not want to leave.</td></tr>
-        <tr><td><a href="https://www.hotelarenalkioro.com/" target="_blank" rel="noopener">Arenal Kioro</a></td><td><span class="tag mid">Comfort</span></td><td class="num">~$350</td><td>Hot springs, huge volcano-facing rooms, quieter than The Springs.</td></tr>
-        <tr><td><a href="https://www.tabacon.com/" target="_blank" rel="noopener">Tabacón Thermal Resort</a></td><td><span class="tag mid">Comfort</span></td><td class="num">~$450</td><td>The famous natural thermal river running through jungle.</td></tr>
-        <tr><td><a href="https://www.vrbo.com/1165287" target="_blank" rel="noopener">Arenal Family Home (Vrbo)</a></td><td><span class="tag">Rental</span></td><td class="num">~$250–350</td><td>5BR / 3.5BA, private pool, volcano view, 1 mile from town. Way more space than a hotel room; you get a kitchen.</td></tr>
-        <tr><td><a href="https://www.airbnb.com/la-fortuna-alajuela-province-costa-rica/stays/pools" target="_blank" rel="noopener">Airbnb — La Fortuna w/ pool</a></td><td><span class="tag">Rental</span></td><td class="num">$180–500</td><td>Deep inventory here. Villas with private pools and jungle/river frontage run $200–500; the $900+ listings are large-group properties you don't need.</td></tr>
+        <tr><td><a href="https://www.lomasdelvolcan.com/" target="_blank" rel="noopener"><strong>Hotel Lomas del Volcán</strong></a></td><td class="num">~$185</td><td>Freestanding cabins, unobstructed volcano views, 9.6 guest rating. Best value in the area.</td></tr>
+        <tr><td><a href="https://www.arenalobservatorylodge.com/" target="_blank" rel="noopener"><strong>Arenal Observatory Lodge</strong></a> 🐒</td><td class="num">~$230</td><td><strong>Best jungle immersion.</strong> Alone on the volcano's flank in its own reserve — private trails, forest-set pool, sloths, toucans, coatis and the area's best monkey odds. Trades polish for location.</td></tr>
+        <tr><td><a href="https://www.arenalmanoa.com/" target="_blank" rel="noopener"><strong>Arenal Manoa</strong></a></td><td class="num">~$210</td><td>On-site hot springs, spacious family rooms, farm setting. Saves you a hot-springs day pass.</td></tr>
+        <tr><td><a href="https://www.thespringscostarica.com/" target="_blank" rel="noopener"><strong>The Springs Resort</strong></a></td><td class="num">~$520</td><td><strong>The splurge.</strong> 28 thermal pools plus Club Rio — on-site adventure center with rafting, horses, rescued wildlife. At 11 and 12 they won't want to leave the property.</td></tr>
+        <tr><td><a href="https://www.vrbo.com/1165287" target="_blank" rel="noopener"><strong>Vrbo villa</strong></a> / <a href="https://www.airbnb.com/la-fortuna-alajuela-province-costa-rica/stays/pools" target="_blank" rel="noopener">Airbnb</a></td><td class="num">$180–350</td><td>Deep inventory. Private pool, kitchen, volcano view, 1 mi from town. More space than a hotel room; you can cook breakfast.</td></tr>
       </tbody>
     </table>
   </div>
 
-  <h3>Option A — Drake Bay / Osa Peninsula</h3>
-  <div class="callout">
-    <p><strong>Osa lodges price differently.</strong> Most sell all-inclusive multi-night packages — room, all meals, guided tours, and boat transfers in one number — because there's barely any restaurant or tour infrastructure to buy à la carte. Compare total trip cost, not nightly rate.</p>
-  </div>
-  <div class="tablescroll" style="margin:.7rem 0 1.8rem">
+  <h3>Activities — pick four, not nine</h3>
+  <div class="tablescroll">
     <table>
-      <thead><tr><th>Property</th><th>Tier</th><th class="num">Est. pricing</th><th>Notes</th></tr></thead>
+      <thead><tr><th>Activity</th><th class="num">/ person</th><th>Notes</th></tr></thead>
       <tbody>
-        <tr><td><a href="https://www.lapalomalodge.com/rates-reservations-paloma-lodge-drake-bay" target="_blank" rel="noopener">La Paloma Lodge</a></td><td><span class="tag mid">Comfort</span></td><td class="num">~$1,900/pp<br><span style="font-weight:400;font-size:.85em">4 nts all-in</span></td><td><strong>The benchmark.</strong> Ranchos on a ridge over the ocean. Package covers all meals, three guided tours, and every transfer. Offers <strong>year-round family rates plus 10% off</strong> when 2 adults + 2 kids share a deluxe or sunset rancho. Closed Sept 1–Oct 31, so July is fine.</td></tr>
-        <tr><td><a href="https://www.copadearbol.com/" target="_blank" rel="noopener">Copa de Árbol</a></td><td><span class="tag mid">Comfort</span></td><td class="num">$400+/nt</td><td>Small, beachfront, excellent food. Tours ~$125–175/pp.</td></tr>
-        <tr><td><a href="https://www.aguiladeosa.com/" target="_blank" rel="noopener">Aguila de Osa</a></td><td><span class="tag mid">Comfort</span></td><td class="num">~$300/pp/nt</td><td>Strongest on the marine side — Caño Island, sportfishing.</td></tr>
-        <tr><td><a href="https://www.lascaletaslodge.com/" target="_blank" rel="noopener">Las Caletas Lodge</a></td><td><span class="tag">Mid</span></td><td class="num">$120–222/nt</td><td>Off-grid solar/hydro, family-run, on its own cove. Genuinely lovely and a fraction of the price.</td></tr>
-        <tr><td><a href="https://www.fincamaresia.com/" target="_blank" rel="noopener">Finca Maresia</a></td><td><span class="tag">Mid</span></td><td class="num">$68–119/nt</td><td>Best value in Drake Bay. Architect-designed, hillside, simple. Standard rooms from $68, deluxe ~$119.</td></tr>
-        <tr><td><a href="https://miradordrakebay.com/" target="_blank" rel="noopener">El Mirador Lodge</a></td><td><span class="tag">Mid</span></td><td class="num">~$100–160/nt</td><td>Family-run, big ocean views, meals available. Very personal service.</td></tr>
+        <tr><td><strong>Canyoning, Pure Trek</strong></td><td class="num">~$110</td><td>Rappelling down jungle waterfalls. Min age 8. Usually the trip highlight at this age — book it.</td></tr>
+        <tr><td><strong>Mistico Hanging Bridges</strong></td><td class="num">~$36</td><td>Canopy-level suspension bridges through primary rainforest. Go at 7am for wildlife and no crowds.</td></tr>
+        <tr><td><strong>Balsa River rafting II–III</strong></td><td class="num">~$75</td><td>Genuinely fun, genuinely safe at 11/12. Sloths and iguanas on the banks.</td></tr>
+        <tr><td><strong>Bogarín Trail sloth walk</strong></td><td class="num">~$30</td><td>Small family-run reserve in town. Most reliable sloth sightings in Costa Rica.</td></tr>
+        <tr><td><strong>La Fortuna Waterfall</strong></td><td class="num">~$18</td><td>500 steps down to a swimmable 200-ft falls. Steps are the workout.</td></tr>
+        <tr><td><strong>Night rainforest walk</strong></td><td class="num">~$45</td><td>Different animal cast entirely — frogs, snakes, kinkajous, tarantulas.</td></tr>
+        <tr><td><strong>Venado Caves</strong></td><td class="num">~$60</td><td>Muddy, wet, bat-filled caving. Messy and great.</td></tr>
+        <tr><td><strong>Arenal 1968 trail</strong></td><td class="num">~$18</td><td>Self-guided hike across the eruption lava field with the volcano overhead.</td></tr>
       </tbody>
     </table>
   </div>
 
-  <h3>Option B — Manuel Antonio</h3>
-  <div class="tablescroll" style="margin:.7rem 0 1.8rem">
+  <h3>Hot springs — they are not interchangeable</h3>
+  <div class="tablescroll">
     <table>
-      <thead><tr><th>Property</th><th>Tier</th><th class="num">Est. / night</th><th>Notes</th></tr></thead>
+      <thead><tr><th>Springs</th><th class="num">/ adult</th><th>Who it's for</th></tr></thead>
       <tbody>
-        <tr><td><a href="https://www.tulemarresort.com/rates/" target="_blank" rel="noopener">Tulemar Resort</a> 🐒🐒🐒</td><td><span class="tag mid">Comfort</span></td><td class="num">$310–630</td><td><strong>Best family property on this coast.</strong> Private beach, jungle bungalows, multiple pools, and 33 acres of private jungle — capuchins and squirrel monkeys on the balcony railings most afternoons. Base rate around $309–323; larger villas push higher.</td></tr>
-        <tr><td><a href="https://www.arenasdelmar.com/" target="_blank" rel="noopener">Arenas del Mar</a></td><td><span class="tag mid">Comfort</span></td><td class="num">$500+</td><td>Beachfront and rainforest, Rainforest Alliance certified, own beach access.</td></tr>
-        <tr><td><a href="https://www.sicomono.com/" target="_blank" rel="noopener">Sí Como No</a> 🐒🐒</td><td><span class="tag mid">Comfort</span></td><td class="num">$300–400</td><td>Great value at this tier. Waterslide, on-site wildlife refuge, solid restaurant.</td></tr>
-        <tr><td><a href="https://en.costaverde.com/media/monkeys-wildlife/" target="_blank" rel="noopener">Hotel Costa Verde</a> 🐒🐒🐒</td><td><span class="tag">Mid</span></td><td class="num">$150–250</td><td><strong>The monkey pick.</strong> The one with the 727 fuselage suite. Studios with kitchenettes and the densest on-property wildlife in Manuel Antonio — squirrel, howler, and capuchin monkeys all resident. <a href="#monkeys">Details →</a></td></tr>
-        <tr><td><a href="https://www.tripadvisor.com/Hotel_Review-g309274-d1155011-Reviews-The_Falls_Resort_at_Manuel_Antonio-Manuel_Antonio_Quepos_Province_of_Puntarenas.html" target="_blank" rel="noopener">The Falls Resort</a> 🐒🐒</td><td><span class="tag mid">Comfort</span></td><td class="num">$200–320</td><td>Smaller and quieter, built around a pool complex. Squirrel monkeys visit verandahs regularly.</td></tr>
-        <tr><td><a href="https://www.villasnicolas.com/" target="_blank" rel="noopener">Villas Nicolás</a></td><td><span class="tag">Mid</span></td><td class="num">$150–220</td><td>Big terraces, ocean views, quiet. Long-time family favorite.</td></tr>
-        <tr><td><a href="https://www.airbnb.com/manuel-antonio-costa-rica/stays" target="_blank" rel="noopener">Airbnb — Manuel Antonio</a></td><td><span class="tag">Rental</span></td><td class="num">$120–400</td><td>Strong inventory. Look on the Quepos side for value, or in the Tulemar gated community for beach access without the resort rate.</td></tr>
+        <tr><td><strong>Kalambu</strong></td><td class="num">~$35</td><td><span class="tag good">Best for 11 &amp; 12</span> Thermal water park — raft-run slides, dump bucket. The kids' pick, and cheap.</td></tr>
+        <tr><td><strong>Baldi</strong></td><td class="num">~$85</td><td>25 pools plus waterslides and a kids' zone. Big, loud, fun.</td></tr>
+        <tr><td><strong>Los Laureles</strong></td><td class="num">~$32</td><td>Local, low-key, sports facilities. Best value if you just want to soak.</td></tr>
+        <tr><td><strong>Ecotermales</strong></td><td class="num">~$59</td><td>Intimate, capacity-limited, no slides. The grown-up choice.</td></tr>
+        <tr><td><strong>Tabacón</strong></td><td class="num">~$110</td><td>The famous natural thermal river through jungle. Genuinely beautiful, genuinely pricey.</td></tr>
+        <tr><td><strong>The Springs</strong></td><td class="num">~$75</td><td>Day pass; free if you're staying there.</td></tr>
       </tbody>
     </table>
-  </div>
-
-  <h3>Option C — Tortuguero (+ Sarapiquí)</h3>
-  <div class="tablescroll" style="margin:.7rem 0 1.4rem">
-    <table>
-      <thead><tr><th>Property</th><th>Tier</th><th class="num">Est. / night</th><th>Notes</th></tr></thead>
-      <tbody>
-        <tr><td><a href="https://www.manatuscostarica.com/" target="_blank" rel="noopener">Manatus Hotel</a></td><td><span class="tag mid">Comfort</span></td><td class="num">~$517</td><td>The only Tortuguero lodge with A/C and proper hotel rooms. Best choice if comfort matters — it's a hot, humid place.</td></tr>
-        <tr><td><a href="https://www.costaricaexpeditions.com/tortuga-lodge" target="_blank" rel="noopener">Tortuga Lodge &amp; Gardens</a></td><td><span class="tag mid">Comfort</span></td><td class="num">$331–1,033</td><td>The classic, run by Costa Rica Expeditions. Best naturalist guides in Tortuguero by a wide margin.</td></tr>
-        <tr><td><a href="https://www.lagunalodgetortuguero.com/" target="_blank" rel="noopener">Laguna Lodge</a></td><td><span class="tag">Mid</span></td><td class="num">$144–379</td><td>Full-board packages ~$379; room-only deals from ~$144. Big property, pool, good for families.</td></tr>
-        <tr><td><a href="https://www.evergreentortuguero.com/" target="_blank" rel="noopener">Evergreen Lodge</a></td><td><span class="tag">Mid</span></td><td class="num">$150–250</td><td>Built into the jungle itself — the boardwalks run through forest, not lawn.</td></tr>
-        <tr><td><a href="https://selvaverde.com/" target="_blank" rel="noopener">Selva Verde Lodge</a> <em>(Sarapiquí)</em></td><td><span class="tag">Mid</span></td><td class="num">$150–200</td><td>For the add-on night en route to Arenal. 500-acre private reserve, serious birding.</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="callout warn">
-    <p><strong>No Airbnb in Tortuguero, effectively.</strong> The village is tiny, boat-access only, and lodging is almost entirely lodge-based with meals included — there are no restaurants to speak of and no car to fetch groceries. Budget full board.</p>
   </div>
 </div></section>
 
-<!-- ============ MONKEYS ============ -->
+<!-- ===== DRIVE ===== -->
+<section id="drive"><div class="wrap">
+  <div class="eyebrow">The transfer</div>
+  <h2>Arenal → Manuel Antonio</h2>
+  <div class="grid g2" style="align-items:start">
+    <div class="card">
+      <h3>Plan a full day for it</h3>
+      <p><strong>~218 km, 5–6 hours</strong> with stops — longer than most itineraries claim. Route: <strong>702 → San Ramón → Rte 1 → Rte 23 → Rte 27 → Rte 34.</strong></p>
+      <ul class="tight">
+        <li>First 1.5–2 hrs is <strong>tight, curvy mountain road</strong>. If anyone gets carsick, medicate before you start</li>
+        <li>Route 27 is a modern toll highway — <strong>keep cash/coins for tolls</strong></li>
+        <li>Leave early. You want to arrive before the afternoon rain</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Stops worth making</h3>
+      <ul class="tight">
+        <li><strong>Tárcoles crocodile bridge</strong> — pull over and look down at wild American crocodiles, some 12+ ft, sunning on the riverbank. Free, five minutes, and a guaranteed hit at 11 and 12</li>
+        <li><strong>San Ramón</strong> — real town, good coffee, natural break point at the ~1.5 hr mark</li>
+        <li><strong>Roadside sodas and fruit stands</strong> along Rte 34 once you're down the mountain</li>
+        <li>Alternative if you'd rather not drive it: private shuttle ~$65–90/person, or a 30-min Sansa hop SJO→Quepos</li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+<!-- ===== MANUEL ANTONIO ===== -->
+<section id="ma"><div class="wrap">
+  <div class="eyebrow">Base 2 · 4 nights</div>
+  <h2>Manuel Antonio</h2>
+  <p class="lede">A forested ridge running down to the sea, with the national park at one end and Quepos at the other. Rainforest, beach, and wildlife on the hotel grounds — all within about four miles.</p>
+
+  <div class="callout danger">
+    <p><strong>Park tickets are now advance-purchase only, and capped.</strong> Manuel Antonio limits entry to <strong>600 people per day</strong>, tickets are sold <em>only</em> through the official SINAC platform, and <strong>nothing is sold at the gate</strong>. The park is <strong>closed Tuesdays</strong>; Wednesday–Monday it runs 7am–4pm. Adults $18, kids 2–12 $5. You can book months out — do that, and plan the rest of the week around the day you get.</p>
+  </div>
+
+  <h3>Where to stay</h3>
+  <div class="tablescroll">
+    <table>
+      <thead><tr><th>Property</th><th class="num">Family of 4 / night</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><a href="https://en.costaverde.com/media/monkeys-wildlife/" target="_blank" rel="noopener"><strong>Hotel Costa Verde</strong></a> 🐒🐒🐒</td><td class="num">~$220</td><td><strong>Best monkey odds, lowest price.</strong> Studios with kitchenettes; squirrel, howler and capuchin monkeys all resident on the grounds. The one with the converted 727 fuselage suite. <a href="#monkeys">Details →</a></td></tr>
+        <tr><td><a href="https://www.tripadvisor.com/Hotel_Review-g309274-d1155011-Reviews-The_Falls_Resort_at_Manuel_Antonio-Manuel_Antonio_Quepos_Province_of_Puntarenas.html" target="_blank" rel="noopener"><strong>The Falls Resort</strong></a> 🐒🐒</td><td class="num">~$270</td><td>Quieter, built around a pool complex, strong breakfast. Squirrel monkeys visit the verandahs regularly.</td></tr>
+        <tr><td><a href="https://www.sicomono.com/" target="_blank" rel="noopener"><strong>Sí Como No</strong></a> 🐒🐒</td><td class="num">~$360</td><td>Waterslide, on-site wildlife refuge, solid restaurant. Good middle ground.</td></tr>
+        <tr><td><a href="https://www.tulemarresort.com/rates/" target="_blank" rel="noopener"><strong>Tulemar Resort</strong></a> 🐒🐒🐒</td><td class="num">~$450</td><td><strong>Best all-round family property.</strong> 33 acres of private jungle, private beach, multiple pools, capuchins and squirrel monkeys on the balcony rails most afternoons.</td></tr>
+        <tr><td><a href="https://www.airbnb.com/manuel-antonio-costa-rica/stays" target="_blank" rel="noopener"><strong>Airbnb / villa</strong></a></td><td class="num">$200–400</td><td>Strong inventory. Quepos side for value; inside the Tulemar gate for beach access without the resort rate.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Beaches — they're genuinely different</h3>
+  <div class="tablescroll">
+    <table>
+      <thead><tr><th>Beach</th><th>Swimming</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Playa Biesanz</strong></td><td><span class="tag good">Best for families</span></td><td>Sheltered cove, protected from waves and rip currents, clearest water and the area's best snorkeling. Short walk down a forest path. Start here.</td></tr>
+        <tr><td><strong>Playa Manuel Antonio</strong></td><td><span class="tag good">Calm</span></td><td>Inside the park — a curving white-sand bay. Requires a park ticket, so pair it with your park day.</td></tr>
+        <tr><td><strong>Playa Espadilla Norte</strong></td><td><span class="tag bad">Rip currents</span></td><td>The big public beach and the surf break. Fine for lessons with an instructor; watch flags and swim near others. Not a casual kid swim.</td></tr>
+        <tr><td><strong>Playitas</strong></td><td><span class="tag mid">Variable</span></td><td>Quieter stretch north of Espadilla, good at sunset.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>What to do</h3>
+  <div class="tablescroll">
+    <table>
+      <thead><tr><th>Activity</th><th class="num">/ person</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Manuel Antonio NP + guide</strong></td><td class="num">$18 + ~$40</td><td>Book the SINAC ticket ahead. Go at 7am opening. <strong>Hire a guide with a spotting scope</strong> — you will see roughly five times more, and they find the sloths you'd walk straight past.</td></tr>
+        <tr><td><strong>Nauyaca Waterfalls</strong></td><td class="num">~$50</td><td>About an hour south. 200-ft two-tier falls with a big swimming pool at the base. Worth a full day.</td></tr>
+        <tr><td><strong>Surf lessons, Espadilla</strong></td><td class="num">~$60</td><td>Forgiving beach break, ideal first-timer conditions, instructors handle the rip.</td></tr>
+        <tr><td><strong>Damas Island mangroves</strong></td><td class="num">~$65</td><td>Boat or kayak through mangrove channels. Different ecosystem — silky anteaters, crabs, herons.</td></tr>
+        <tr><td><strong>Catamaran sunset sail</strong></td><td class="num">~$85</td><td>Snorkel stop, dolphins fairly often, food and drinks included.</td></tr>
+        <tr><td><strong>Rainmaker Aerial Walkway</strong></td><td class="num">~$60</td><td>Quieter alternative to the park — canopy bridges, swimming holes, far fewer people.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Eating</h3>
+  <div class="grid g2">
+    <div class="card">
+      <h4>Worth planning around</h4>
+      <ul class="tight">
+        <li><strong>El Avión</strong> — restaurant built into a salvaged Fairchild C-123 cargo plane on the ridge, sunset views over the ocean. Touristy and completely worth it at 11 and 12</li>
+        <li><strong>Falafel Bar</strong> — cheap, fast, genuinely good. The between-beach-sessions lunch</li>
+        <li><strong>Marisquería Sabromar</strong> (Quepos) — excellent seafood at local prices, away from the ridge markup</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Practical notes</h4>
+      <ul class="tight">
+        <li>Ridge restaurants carry a heavy tourist markup; <strong>Quepos is 10 minutes away and much cheaper</strong></li>
+        <li>A kitchenette (Costa Verde, most Airbnbs) meaningfully cuts the food line — breakfast at home, dinner out</li>
+        <li>10% service and 13% IVA are usually already on the bill — check before tipping again</li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+<!-- ===== MONKEYS ===== -->
 <section id="monkeys"><div class="wrap">
-  <div class="eyebrow">Special request</div>
+  <div class="eyebrow">Stated priority</div>
   <h2>🐒 Monkeys around the pool</h2>
-  <p class="lede">This is a legitimate way to choose a hotel, and it separates the options more sharply than you'd expect. Short answer: <strong>Manuel Antonio delivers this daily and near-reliably. Nowhere else does.</strong></p>
+  <p class="lede">This is a real reason to pick Manuel Antonio. It's the one place where three species use hotel grounds as part of their daily circuit — not a nearby-park thing, an on-the-balcony thing.</p>
 
   <figure class="wide">
-    <img src="/images/costa-rica/monkey.jpg" alt="Red-backed squirrel monkey in Costa Rica">
-    <figcaption>The Central American squirrel monkey — <em>mono tití</em> — endemic to a narrow strip of Pacific coast running from Manuel Antonio down to the Osa. They move in loud troops of 20–60 and are the ones that end up on your balcony railing.</figcaption>
+    <img src="/images/costa-rica/monkey.jpg" alt="Red-backed squirrel monkey perched on a branch">
+    <figcaption>The Central American squirrel monkey — <em>mono tití</em> — endemic to a narrow strip of Pacific coast. Troops of 20–60, and the ones that end up on your railing.</figcaption>
   </figure>
 
-  <div class="grid g3" style="margin-top:1.4rem">
-    <div class="card" style="border:2px solid var(--accent)">
-      <h3>Manuel Antonio <span class="tag good">Best by far</span></h3>
-      <p style="font-size:.94rem">Three species live <em>on hotel grounds</em> here, not just nearby: squirrel monkeys, white-faced capuchins, and howlers. The hotels are built into the forest strip along the ridge, so the troops move through the properties as part of their daily circuit.</p>
-      <p style="font-size:.94rem;margin-bottom:0"><strong>When:</strong> squirrel monkey troops typically pass through mid-to-late afternoon, roughly 3–4pm, and again near dusk.</p>
+  <div class="grid g3">
+    <div class="card">
+      <h3>The three species</h3>
+      <ul class="tight">
+        <li><strong>Squirrel</strong> — small, fast, in big noisy troops. The balcony visitors</li>
+        <li><strong>White-faced capuchin</strong> — bold, clever, will open your bag</li>
+        <li><strong>Howler</strong> — heard far more than seen; the 5am alarm clock</li>
+      </ul>
     </div>
     <div class="card">
-      <h3>Osa / Drake Bay <span class="tag mid">More monkeys, fewer pools</span></h3>
-      <p style="font-size:.94rem">You will see <strong>more monkeys and more species</strong> here than anywhere else — all four Costa Rican species including spider monkeys, which Manuel Antonio doesn't have. But you'll see them in the forest on guided hikes, not lounging by a pool. The lodges are small and several don't have big pool decks at all.</p>
-      <p style="font-size:.94rem;margin-bottom:0">Howlers <em>will</em> wake you at 4:30am. That counts for something.</p>
+      <h3>Timing</h3>
+      <p>Squirrel monkey troops typically move through hotel grounds <strong>mid-to-late afternoon, roughly 3–4pm</strong>, and again near dusk. Be back from your morning activity and at the pool by three.</p>
     </div>
     <div class="card">
-      <h3>Arenal <span class="tag bad">Weakest</span></h3>
-      <p style="font-size:.94rem">The surprise. Arenal is superb for sloths, coatis, toucans, and birds, but it's the <strong>weakest of the four regions for monkeys</strong>. Howlers are around and audible; white-faced troops are hit-or-miss and rarely on resort grounds.</p>
-      <p style="font-size:.94rem;margin-bottom:0">Arenal Observatory Lodge is the best bet in the region — howler troops and coatis regularly cross the property.</p>
+      <h3>Best properties</h3>
+      <p><strong>Costa Verde</strong> for the highest hit rate at the lowest price. <strong>Tulemar</strong> for the best overall stay with near-equal odds. Both are in the <a href="#ma">lodging table</a>.</p>
     </div>
-  </div>
-
-  <h3 style="margin-top:1.8rem">Properties that actually deliver it</h3>
-  <div class="tablescroll" style="margin:.7rem 0 1.2rem">
-    <table>
-      <thead><tr><th>Property</th><th>Where</th><th>What guests consistently report</th><th class="num">Est. / night</th></tr></thead>
-      <tbody>
-        <tr>
-          <td><a href="https://en.costaverde.com/media/monkeys-wildlife/" target="_blank" rel="noopener"><strong>Hotel Costa Verde</strong></a> 🐒🐒🐒</td>
-          <td>Manuel Antonio</td>
-          <td><strong>The single best pick for this.</strong> The hotel explicitly markets cohabiting with squirrel, howler, and capuchin monkeys. Reviews titled things like "more monkeys than people." Squirrel monkeys show up most evenings near the on-site cantina; guests routinely report sloths and capuchins visible from the balcony within the first hour. Also the cheapest option on this list.</td>
-          <td class="num">$150–250</td>
-        </tr>
-        <tr>
-          <td><a href="https://www.tulemarresort.com/monkeys-of-costa-rica/" target="_blank" rel="noopener"><strong>Tulemar Resort</strong></a> 🐒🐒🐒</td>
-          <td>Manuel Antonio</td>
-          <td>33 acres of private jungle with capuchins and squirrel monkeys resident. Multiple guest accounts of troops climbing the trees beside the balcony between 3 and 4pm — one describes ten squirrel monkeys coming onto the balcony to wrestle. Private beach and multiple pools, so it also happens to be the best all-round family property here.</td>
-          <td class="num">$310–630</td>
-        </tr>
-        <tr>
-          <td><a href="https://www.tripadvisor.com/Hotel_Review-g309274-d1155011-Reviews-The_Falls_Resort_at_Manuel_Antonio-Manuel_Antonio_Quepos_Province_of_Puntarenas.html" target="_blank" rel="noopener"><strong>The Falls Resort</strong></a> 🐒🐒</td>
-          <td>Manuel Antonio</td>
-          <td>Smaller and quieter, built around a pool complex. Repeat reports of squirrel monkeys visiting verandahs more than once per stay.</td>
-          <td class="num">$200–320</td>
-        </tr>
-        <tr>
-          <td><a href="https://www.sicomono.com/" target="_blank" rel="noopener"><strong>Sí Como No</strong></a> 🐒🐒</td>
-          <td>Manuel Antonio</td>
-          <td>Has its own wildlife refuge on site plus a waterslide, which is a strong combination at 11 and 12. Monkeys through the grounds regularly, though less pool-adjacent than Costa Verde.</td>
-          <td class="num">$300–400</td>
-        </tr>
-        <tr>
-          <td><a href="https://www.arenalobservatorylodge.com/" target="_blank" rel="noopener"><strong>Arenal Observatory Lodge</strong></a> 🐒</td>
-          <td>Arenal</td>
-          <td>Best monkey odds in the Arenal area — howler troops and coatis cross the property, and the forest-set pool puts you in their path. Still nowhere near Manuel Antonio's hit rate.</td>
-          <td class="num">$180–250</td>
-        </tr>
-        <tr>
-          <td><a href="https://www.lapalomalodge.com/" target="_blank" rel="noopener"><strong>La Paloma Lodge</strong></a> 🐒🐒</td>
-          <td>Drake Bay</td>
-          <td>Ridge-top ranchos with a pool overlooking the ocean; howlers and capuchins move through the canopy around the property. Monkeys, yes — but they're in the trees above you, not on the deck.</td>
-          <td class="num">all-inclusive</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="callout warn">
-    <p><strong>How this should change the decision.</strong> If monkeys-at-the-pool is a top-three priority rather than a nice-to-have, that's a real argument for <strong>Option B</strong> — and it's the cheapest option too. A middle path worth considering: keep the Osa but swap two Arenal nights for two in Manuel Antonio on the way back to San José. It adds a base, which cuts against the two-base logic, but the drive from Manuel Antonio to SJO is only about three hours.</p>
   </div>
 
   <div class="callout danger">
-    <p><strong>Rules, and they matter with kids.</strong> Never feed monkeys — it's illegal in Costa Rica, it spreads disease in both directions, and it turns troops aggressive toward the next family. Keep balcony doors and windows shut when you're out; capuchins are genuinely skilled at opening bags and raiding rooms. Don't try to touch or hold one, and keep food and drinks off unattended pool tables.</p>
+    <p><strong>Rules, and they matter with kids.</strong> Never feed monkeys — it's illegal in Costa Rica, spreads disease both directions, and turns troops aggressive toward the next family. Keep balcony doors shut when you're out; capuchins are genuinely skilled at raiding rooms. Don't touch or hold them, and keep food and drinks off unattended pool tables.</p>
   </div>
 </div></section>
 
-<!-- ============ BUILDER ============ -->
+<!-- ===== BUILDER ===== -->
 <section id="builder"><div class="wrap">
   <div class="eyebrow">Interactive</div>
-  <h2>Build your combination</h2>
-  <p class="lede">Mix bases, nights, and comfort tier. Everything recalculates — flights, lodging, activities, ground transport, food, and the miscellaneous line that always gets forgotten.</p>
+  <h2>Build the combination</h2>
+  <p class="lede">Mix the two hotels, the night split, and how hard you push. Everything recalculates.</p>
 
   <div class="grid buildergrid" style="align-items:start">
     <div class="builder">
       <div class="ctrl">
-        <label>Base 2 — the choice</label>
-        <div class="seg" id="seg-b2">
-          <button type="button" data-v="osa" aria-pressed="true">Osa / Drake Bay</button>
-          <button type="button" data-v="ma" aria-pressed="false">Manuel Antonio</button>
-          <button type="button" data-v="tort" aria-pressed="false">Tortuguero</button>
+        <label>Arenal hotel</label>
+        <div class="seg" id="seg-h1">
+          <button type="button" data-v="lomas">Lomas del Volcán<span class="px">$185</span></button>
+          <button type="button" data-v="obs" aria-pressed="true">Observatory Lodge<span class="px">$230</span></button>
+          <button type="button" data-v="manoa">Arenal Manoa<span class="px">$210</span></button>
+          <button type="button" data-v="springs">The Springs<span class="px">$520</span></button>
+          <button type="button" data-v="bnb1">Airbnb villa<span class="px">$260</span></button>
         </div>
       </div>
-
       <div class="ctrl">
-        <label for="nights">Nights in country — split</label>
+        <label>Manuel Antonio hotel</label>
+        <div class="seg" id="seg-h2">
+          <button type="button" data-v="cverde" aria-pressed="true">Costa Verde 🐒<span class="px">$220</span></button>
+          <button type="button" data-v="falls">The Falls<span class="px">$270</span></button>
+          <button type="button" data-v="sicomo">Sí Como No<span class="px">$360</span></button>
+          <button type="button" data-v="tulemar">Tulemar 🐒<span class="px">$450</span></button>
+          <button type="button" data-v="bnb2">Airbnb villa<span class="px">$280</span></button>
+        </div>
+      </div>
+      <div class="ctrl">
+        <label>Nights</label>
         <input type="range" id="nights" min="6" max="11" step="1" value="8">
-        <div class="rangerow"><span>Total <b id="ntot">8</b> nights</span><span id="nsplit"></span></div>
-        <div style="margin-top:.7rem">
+        <div class="rangerow"><span>Total <b id="ntot">8</b> nights</span><span><b id="ndays">10</b> days door to door</span></div>
+        <div style="margin-top:.6rem">
           <input type="range" id="split" min="2" max="6" step="1" value="4">
-          <div class="rangerow"><span>Arenal <b id="n1">4</b></span><span><b id="n2">4</b> at base 2</span></div>
+          <div class="rangerow"><span>Arenal <b id="n1">4</b></span><span>Manuel Antonio <b id="n2">4</b></span></div>
         </div>
       </div>
-
-      <div class="ctrl">
-        <label>Lodging tier</label>
-        <div class="seg" id="seg-tier">
-          <button type="button" data-v="mid" aria-pressed="false">Mid-range</button>
-          <button type="button" data-v="mix" aria-pressed="true">Mixed</button>
-          <button type="button" data-v="comf" aria-pressed="false">Comfortable</button>
-        </div>
-      </div>
-
       <div class="ctrl">
         <label>Activity pace</label>
         <div class="seg" id="seg-pace">
-          <button type="button" data-v="light" aria-pressed="false">Light</button>
+          <button type="button" data-v="light">Light</button>
           <button type="button" data-v="normal" aria-pressed="true">Normal</button>
-          <button type="button" data-v="full" aria-pressed="false">Full send</button>
+          <button type="button" data-v="full">Full send</button>
         </div>
       </div>
-
       <div class="ctrl" style="margin-bottom:0">
-        <label>Airfare assumption — per person round trip</label>
+        <label>Airfare per person, round trip</label>
         <input type="range" id="air" min="450" max="1000" step="25" value="650">
         <div class="rangerow"><span>LAX ⇄ SJO nonstop</span><span><b id="airv">$650</b> / person</span></div>
       </div>
@@ -686,371 +572,229 @@ footer{padding:2.5rem 0 3.5rem;color:var(--muted);font-size:.85rem}
         <div class="cap" id="perday">—</div>
       </div>
       <div class="card">
-        <h3 style="margin-bottom:.7rem">Where the money goes</h3>
-        <div class="bars" id="bars"></div>
-        <p style="font-size:.78rem;color:var(--muted);margin:.9rem 0 0;padding-top:.7rem;border-top:1px solid var(--line)">
-          Indicative 2026 pricing in USD. Add roughly 10–20% for 2027. Excludes travel insurance (~$350) and passport renewals. Osa figures assume Sansa flights both ways; Tortuguero assumes shuttle + boat and full-board lodging.
+        <h3 style="margin-bottom:.6rem">Where the money goes</h3>
+        <div id="bars"></div>
+        <p style="font-size:.77rem;color:var(--muted);margin:.8rem 0 0;padding-top:.6rem;border-top:1px solid var(--line)">
+          Indicative 2026 USD; add ~10–20% for 2027. Excludes travel insurance (~$350) and passport renewals. Car is priced all-in with mandatory liability insurance.
         </p>
       </div>
     </div>
   </div>
 </div></section>
 
-<!-- ============ ITINERARIES ============ -->
+<!-- ===== ITINERARY ===== -->
 <section id="itin"><div class="wrap">
   <div class="eyebrow">Day by day</div>
-  <h2>Itineraries</h2>
-  <p class="lede">All three assume the late-evening LAX departure, eight nights in country, and a Saturday-to-Sunday shape. Switch between them.</p>
-
-  <div class="seg" id="seg-itin" style="margin-bottom:1.2rem">
-    <button type="button" data-v="osa" aria-pressed="true">A · Osa + Arenal</button>
-    <button type="button" data-v="ma" aria-pressed="false">B · Manuel Antonio + Arenal</button>
-    <button type="button" data-v="tort" aria-pressed="false">C · Tortuguero + Arenal</button>
-  </div>
-
+  <h2>Ten days</h2>
+  <p class="lede">Assumes the late-evening LAX departure and a park ticket secured for Day 7.</p>
   <div class="days" id="days"></div>
-
-  <div class="callout" style="margin-top:1.4rem">
-    <p><strong>Sequencing note for Option A.</strong> Put the Osa <em>first</em>, Arenal second. Landing SJO at 7am and connecting straight to the Sansa flight saves a full backtrack day, and it means you're not gambling an international departure on a puddle-jumper at the end of the trip. Options B and C run the other way — Arenal first — because both second bases are reachable by road.</p>
-  </div>
 </div></section>
 
-<!-- ============ ACTIVITIES ============ -->
-<section id="activities"><div class="wrap">
-  <div class="eyebrow">What you'll actually do</div>
-  <h2>Activities, and what they cost</h2>
-  <p class="lede">Everything here clears the age bar for 11 and 12 comfortably. Per-person pricing; multiply by four.</p>
-
+<!-- ===== WHY NOT ===== -->
+<section id="whynot"><div class="wrap">
+  <div class="eyebrow">For the record</div>
+  <h2>What we're giving up</h2>
   <div class="grid g2">
-    <div>
-      <h3 style="margin-bottom:.7rem">Arenal — pick four or five, not all</h3>
-      <div class="tablescroll">
-        <table>
-          <thead><tr><th>Activity</th><th class="num">/ person</th><th>Why</th></tr></thead>
-          <tbody>
-            <tr><td><strong>Mistico Hanging Bridges</strong></td><td class="num">~$36</td><td>Canopy-level suspension bridges through primary rainforest. Go at 7am.</td></tr>
-            <tr><td><strong>Canyoning, Pure Trek</strong></td><td class="num">~$110</td><td>Rappelling down jungle waterfalls. Min age 8. Usually <em>the</em> trip highlight at this age.</td></tr>
-            <tr><td><strong>Balsa River rafting II–III</strong></td><td class="num">~$75</td><td>Genuinely fun and genuinely safe at 11/12. Sloths and iguanas on the banks.</td></tr>
-            <tr><td><strong>Bogarín Trail sloth walk</strong></td><td class="num">~$30</td><td>Small family-run reserve in town. Most reliable sloth sightings in the country.</td></tr>
-            <tr><td><strong>La Fortuna Waterfall</strong></td><td class="num">~$18</td><td>500 steps down to a swimmable 200-ft falls.</td></tr>
-            <tr><td><strong>Arenal 1968 trail</strong></td><td class="num">~$18</td><td>Hike the eruption lava field with the volcano overhead. Self-guided.</td></tr>
-            <tr><td><strong>Night rainforest walk</strong></td><td class="num">~$45</td><td>Completely different animal cast — frogs, snakes, kinkajous, tarantulas.</td></tr>
-            <tr><td><strong>Venado Caves</strong></td><td class="num">~$60</td><td>Muddy, wet, bat-filled caving. Messy and great.</td></tr>
-            <tr><td><strong>Hot springs</strong></td><td class="num">$12–90</td><td>Splurge at Tabacón or Eco Termales; or go local at Los Laureles for ~$12.</td></tr>
-          </tbody>
-        </table>
-      </div>
+    <div class="card">
+      <h3>Osa Peninsula / Corcovado</h3>
+      <p>The most biologically intense place in the country — all four monkey species, tapirs, flocks of scarlet macaws. But it's a $1,300 domestic-flight add-on for four, the lodges run $1,500+/night all-inclusive, the <em>veranillo</em> doesn't reach it, and monkeys are in the forest rather than at the pool. <strong>Roughly $4,000 more for a wilder, wetter, harder trip.</strong></p>
     </div>
-    <div>
-      <h3 style="margin-bottom:.7rem">Base 2 highlights</h3>
-      <div class="tablescroll">
-        <table>
-          <thead><tr><th>Activity</th><th class="num">/ person</th><th>Where</th></tr></thead>
-          <tbody>
-            <tr><td><strong>Corcovado — Sirena Station</strong></td><td class="num">$160–190</td><td>Osa. 1-hr boat each way, then 6–10 km of flat trail with a naturalist. The main event.</td></tr>
-            <tr><td><strong>Corcovado — San Pedrillo</strong></td><td class="num">~$130</td><td>Osa. Closer, shorter, includes a waterfall swim. Good easier alternative.</td></tr>
-            <tr><td><strong>Caño Island snorkel</strong></td><td class="num">~$130</td><td>Osa. Reef sharks, rays, turtles. Visibility is a coin flip in July — book as a maybe.</td></tr>
-            <tr><td><strong>The Night Tour (Tracie Stice)</strong></td><td class="num">~$60</td><td>Osa. Legendary. Insects and reptiles by headlamp with a 30-year guide.</td></tr>
-            <tr><td><strong>Manuel Antonio NP + guide</strong></td><td class="num">~$60</td><td>MA. 7am opening, closed Tuesdays. Hire a guide with a scope — you'll see 5× more.</td></tr>
-            <tr><td><strong>Nauyaca Waterfalls</strong></td><td class="num">~$50</td><td>MA. 200-ft two-tier falls with a big swimming pool at the base. Worth the day.</td></tr>
-            <tr><td><strong>Surf lessons, Playa Espadilla</strong></td><td class="num">~$60</td><td>MA. Forgiving beach break, ideal first-timer conditions.</td></tr>
-            <tr><td><strong>Turtle nesting tour</strong></td><td class="num">~$40</td><td>Tortuguero. Guided only, no lights or phones, small groups, ~2 hrs at night.</td></tr>
-            <tr><td><strong>Dawn canal boat tour</strong></td><td class="num">~$35</td><td>Tortuguero. 5:30am. Best wildlife window of the whole trip — caimans, otters, three monkey species.</td></tr>
-          </tbody>
-        </table>
-      </div>
+    <div class="card">
+      <h3>Tortuguero</h3>
+      <p>Boat-only Caribbean canal village where <strong>July–August is peak green turtle nesting</strong> — the one thing summer specifically unlocks. Ruled out because June is wet on the Caribbean side too, nesting only really gets going in July, there's no swimming, and it costs three travel-heavy days for one headline experience.</p>
     </div>
-  </div>
-
-  <figure class="wide">
-    <img src="/images/costa-rica/corcovado.jpg" alt="Entrance sign for Parque Nacional Corcovado">
-    <figcaption>The sign at the edge of Corcovado. <em>"Mira profundamente en la naturaleza y entonces comprenderás todo mejor."</em></figcaption>
-  </figure>
-
-  <div class="callout warn" style="margin-top:1.4rem">
-    <p><strong>Book Corcovado early if you pick Option A.</strong> Entry requires a SINAC permit <em>and</em> a certified guide, daily numbers are capped, and Sirena sells out. Lock it in two to three months ahead — your lodge will handle the paperwork.</p>
-  </div>
-
-  <div class="grid g3" style="margin-top:1.6rem">
-    <figure class="wide" style="margin:0"><img src="/images/costa-rica/sloth.jpg" alt="Brown-throated three-toed sloth" style="aspect-ratio:4/3"><figcaption>Sloths: near-guaranteed at Bogarín Trail in La Fortuna.</figcaption></figure>
-    <figure class="wide" style="margin:0"><img src="/images/costa-rica/macaw.jpg" alt="Scarlet macaw in Costa Rica" style="aspect-ratio:4/3"><figcaption>Scarlet macaws fly in noisy pairs over the Osa daily.</figcaption></figure>
-    <figure class="wide" style="margin:0"><img src="/images/costa-rica/turtle.jpg" alt="Green sea turtle nesting on a beach" style="aspect-ratio:4/3"><figcaption>Green turtle nesting — Tortuguero, peaking exactly in July and August.</figcaption></figure>
   </div>
 </div></section>
 
-<!-- ============ TIMELINE ============ -->
-<section id="timeline"><div class="wrap">
+<!-- ===== BOOK ===== -->
+<section id="book"><div class="wrap">
   <div class="eyebrow">Sequencing</div>
   <h2>Booking timeline</h2>
-  <p class="lede">Nothing here is urgent except the first row, which is urgent today and free.</p>
   <div class="tablescroll">
     <table>
       <thead><tr><th>When</th><th>What</th><th>Why then</th></tr></thead>
       <tbody>
-        <tr><td><strong>This week</strong></td><td>Verify all four passport expirations. Renew anything expiring before Jan 2028.</td><td><span class="tag bad">Highest risk item.</span> Renewal backlogs are long and this gates everything.</td></tr>
-        <tr><td><strong>Aug–Sept 2026</strong></td><td>Pick the option. Lock the dates with whoever else needs to know.</td><td>Everything downstream depends on it.</td></tr>
-        <tr><td><strong>Sept–Oct 2026</strong></td><td>Set fare alerts on LAX⇄SJO.</td><td>Airline schedules for July 2027 load about 11 months out.</td></tr>
-        <tr><td><strong>Nov 2026–Jan 2027</strong></td><td>Book international flights. Book the Base 2 lodge.</td><td>Good small lodges — especially in Drake Bay — sell out far ahead even in green season.</td></tr>
-        <tr><td><strong>Feb–Mar 2027</strong></td><td>Book Arenal lodging and any Sansa domestic flights.</td><td>Sansa's small aircraft fill up; fares don't drop.</td></tr>
-        <tr><td><strong>Apr–May 2027</strong></td><td>Corcovado permits + guide. Canyoning and rafting.</td><td>Sirena permits are capped and go early.</td></tr>
-        <tr><td><strong>June 2027</strong></td><td>Rental car, travel insurance, LAX parking.</td><td>Cheap to do late; no advantage to booking early.</td></tr>
+        <tr><td><strong>This week</strong></td><td>Verify all four passport expirations; renew anything expiring before Dec 2027</td><td><span class="tag bad">Gates everything.</span> Renewal backlogs are long and it's free to check</td></tr>
+        <tr><td><strong>Jul–Aug 2026</strong></td><td>Set fare alerts on LAX⇄SJO</td><td>Airline schedules for June 2027 load ~11 months out</td></tr>
+        <tr><td><strong>Oct–Dec 2026</strong></td><td>Book international flights</td><td>Best pricing window once schedules are live</td></tr>
+        <tr><td><strong>Dec 2026–Jan 2027</strong></td><td>Book both hotels</td><td>Costa Verde and Tulemar fill early even in green season — though June is far easier than July</td></tr>
+        <tr><td><strong>As soon as the window opens</strong></td><td><strong><a href="https://www.sinac.go.cr/" target="_blank" rel="noopener">SINAC park tickets</a></strong> for Manuel Antonio</td><td><span class="tag bad">600/day cap, gate sales don't exist.</span> Pick a non-Tuesday and build the week around it</td></tr>
+        <tr><td><strong>Mar–Apr 2027</strong></td><td>Canyoning, rafting, park guide</td><td>Good operators and guides book out</td></tr>
+        <tr><td><strong>Apr–May 2027</strong></td><td>Rental car, travel insurance, LAX parking</td><td>No advantage to booking these early</td></tr>
       </tbody>
     </table>
   </div>
 </div></section>
 
-<!-- ============ SOURCES ============ -->
+<!-- ===== SOURCES ===== -->
 <section id="sources"><div class="wrap">
   <div class="eyebrow">Provenance</div>
   <h2>Sources &amp; credits</h2>
   <div class="grid g2">
     <div>
-      <h3>Research sources</h3>
+      <h3>Research</h3>
       <ul class="credits">
-        <li><a href="https://www.costcotravel.com/vacation-packages/costa-rica" target="_blank" rel="noopener">Costco Travel — Costa Rica</a> (package list, read Aug 2026)</li>
-        <li><a href="https://www.flightconnections.com/flights-from-lax-to-sjo" target="_blank" rel="noopener">FlightConnections — LAX→SJO</a> and <a href="https://www.flightsfrom.com/LAX-SJO" target="_blank" rel="noopener">FlightsFrom</a></li>
-        <li><a href="https://www.roughguides.com/costa-rica/when-to-go/july/" target="_blank" rel="noopener">Rough Guides — Costa Rica in July</a></li>
-        <li><a href="https://jameskaiser.com/costa-rica-guide/weather/july/" target="_blank" rel="noopener">James Kaiser — July weather</a>; <a href="https://www.vacationscostarica.com/best-time-to-visit-weather/july/" target="_blank" rel="noopener">Vacations Costa Rica</a></li>
-        <li><a href="https://www.lapalomalodge.com/rates-reservations-paloma-lodge-drake-bay" target="_blank" rel="noopener">La Paloma Lodge — rates</a>; <a href="https://www.tulemarresort.com/rates/" target="_blank" rel="noopener">Tulemar — rates</a></li>
-        <li><a href="https://www.twoweeksincostarica.com/drake-bay-costa-rica/" target="_blank" rel="noopener">Two Weeks in Costa Rica — Drake Bay</a></li>
-        <li><a href="https://conserveturtles.org/program-activity/green-turtles-in-tortuguero/" target="_blank" rel="noopener">Sea Turtle Conservancy — Tortuguero nesting</a></li>
-        <li><a href="https://www.familycantravel.com/corcovado-national-park-with-kids/" target="_blank" rel="noopener">Family Can Travel — Corcovado with kids</a></li>
-        <li><a href="https://en.costaverde.com/media/monkeys-wildlife/" target="_blank" rel="noopener">Hotel Costa Verde — Monkeys &amp; Wildlife</a> and <a href="https://www.tulemarresort.com/monkeys-of-costa-rica/" target="_blank" rel="noopener">Tulemar — Monkeys of Costa Rica</a></li>
-        <li><a href="https://www.kimkim.com/d/costa-rica/manuel-antonio/h/abundant-wildlife" target="_blank" rel="noopener">kimkim — Manuel Antonio hotels with abundant wildlife</a>; guest reviews via Tripadvisor</li>
+        <li><a href="https://www.manuelantonioparkonlineservices.com/ticket-purchase-guidance" target="_blank" rel="noopener">Manuel Antonio park ticket guidance</a>; <a href="https://manuelantoniopark.net/park-info/" target="_blank" rel="noopener">park info</a>; <a href="https://www.earthtrekkers.com/manuel-antonio-national-park/" target="_blank" rel="noopener">Earth Trekkers guide</a></li>
+        <li><a href="https://www.kimkim.com/ab/arenal-la-fortuna-to-manuel-antonio" target="_blank" rel="noopener">kimkim — Arenal to Manuel Antonio routes</a>; <a href="https://postcardnarrative.com/la-fortuna-to-manuel-antonio/" target="_blank" rel="noopener">Postcard Narrative — stops on the drive</a></li>
+        <li><a href="https://costaricatravelblog.com/best-la-fortuna-hot-springs/" target="_blank" rel="noopener">Costa Rica Travel Blog — all 14 La Fortuna hot springs compared</a></li>
+        <li><a href="https://www.machupicchu.org/manuel-antonio-beaches-2026-best-beaches-inside-outside-park.htm" target="_blank" rel="noopener">Manuel Antonio beaches guide</a>; <a href="https://costaricaexperts.com/costa-rica-travel-blog/manuel-antonio-beaches/" target="_blank" rel="noopener">Costa Rica Experts</a></li>
+        <li><a href="https://www.roughguides.com/costa-rica/when-to-go/july/" target="_blank" rel="noopener">Rough Guides — July</a>; <a href="https://jameskaiser.com/costa-rica-guide/weather/july/" target="_blank" rel="noopener">James Kaiser — July weather</a></li>
+        <li><a href="https://en.costaverde.com/media/monkeys-wildlife/" target="_blank" rel="noopener">Costa Verde — monkeys &amp; wildlife</a>; <a href="https://www.tulemarresort.com/monkeys-of-costa-rica/" target="_blank" rel="noopener">Tulemar — monkeys</a></li>
+        <li><a href="https://www.tulemarresort.com/rates/" target="_blank" rel="noopener">Tulemar rates</a>; <a href="https://letsjetkids.com/best-la-fortuna-hotels-for-families/" target="_blank" rel="noopener">La Fortuna family hotels</a></li>
+        <li><a href="https://www.flightconnections.com/flights-from-lax-to-sjo" target="_blank" rel="noopener">FlightConnections — LAX→SJO</a></li>
+        <li><a href="https://www.tripadvisor.com/Restaurants-g309274-zfp5-Manuel_Antonio_Quepos_Province_of_Puntarenas.html" target="_blank" rel="noopener">Manuel Antonio family restaurants</a></li>
       </ul>
     </div>
     <div>
       <h3>Photography</h3>
-      <p style="font-size:.85rem;color:var(--muted);margin-top:0">All images self-hosted from Wikimedia Commons under open licenses — nothing is hotlinked from a hotel or booking site.</p>
+      <p style="font-size:.84rem;color:var(--muted);margin-top:0">Self-hosted from Wikimedia Commons under open licenses. Nothing hotlinked from hotel or booking sites.</p>
       <ul class="credits">
-        <li><em>Arenal Volcano</em> — Bernard Gagnon, <strong>CC0</strong></li>
-        <li><em>Corcovado National Park</em> — Bernard Gagnon, <strong>CC0</strong></li>
-        <li><em>Sirena Station</em> — Julio-César Chávez, <strong>CC BY 4.0</strong></li>
-        <li><em>Tortuguero canal</em> — S. Rae, <strong>CC BY 2.0</strong></li>
         <li><em>Manuel Antonio</em> — Bernard Gagnon, <strong>CC0</strong></li>
-        <li><em>Drake Bay</em> — Filip Mroz, <strong>CC0</strong></li>
-        <li><em>Drake airstrip</em> — Ian Poellet, <strong>CC BY-SA 4.0</strong></li>
-        <li><em>Three-toed sloth</em> — Rhododendrites, <strong>CC BY-SA 4.0</strong></li>
-        <li><em>Scarlet macaw</em> — ImagePerson, <strong>CC BY 4.0</strong></li>
-        <li><em>Nesting green turtle</em> — U.S. Fish &amp; Wildlife Service, <strong>public domain</strong></li>
-        <li><em>Red-backed squirrel monkey</em> — Frank Vassen (Flickr), <strong>CC BY 2.0</strong></li>
+        <li><em>Arenal Volcano</em> — Bernard Gagnon, <strong>CC0</strong></li>
+        <li><em>Red-backed squirrel monkey</em> — Frank Vassen, <strong>CC BY 2.0</strong></li>
       </ul>
+      <h3 style="margin-top:1.1rem">Climate data</h3>
+      <p style="font-size:.84rem;color:var(--muted);margin:0">Monthly rainfall and June hourly profiles computed from ERA5 reanalysis via the <a href="https://open-meteo.com/en/docs/historical-weather-api" target="_blank" rel="noopener">Open-Meteo historical archive</a>, 2015–2024, sampled at 10.468°N 84.643°W (La Fortuna) and 9.424°N 84.165°W (Quepos).</p>
     </div>
   </div>
 </div></section>
 
 <footer><div class="wrap">
-  <p>Unlisted planning page — not indexed, not linked from anywhere. Prices are 2026 estimates for planning only; verify everything before booking.</p>
+  <p>Unlisted planning page — not indexed, not linked. Prices are 2026 estimates for planning only; verify before booking.</p>
 </div></footer>
 
 <script>
 (function(){
 "use strict";
-
-/* ---------- theme ---------- */
-var root = document.documentElement;
-var saved = null;
-try { saved = localStorage.getItem("cr-theme"); } catch(e){}
-if (saved) root.setAttribute("data-theme", saved);
-else root.removeAttribute("data-theme");
-document.getElementById("themebtn").addEventListener("click", function(){
-  var cur = root.getAttribute("data-theme");
-  if (!cur) cur = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-  var next = cur === "dark" ? "light" : "dark";
-  root.setAttribute("data-theme", next);
-  try { localStorage.setItem("cr-theme", next); } catch(e){}
+var root=document.documentElement, saved=null;
+try{saved=localStorage.getItem("cr-theme")}catch(e){}
+if(saved)root.setAttribute("data-theme",saved);
+document.getElementById("themebtn").addEventListener("click",function(){
+  var cur=root.getAttribute("data-theme");
+  if(!cur)cur=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";
+  var next=cur==="dark"?"light":"dark";
+  root.setAttribute("data-theme",next);
+  try{localStorage.setItem("cr-theme",next)}catch(e){}
 });
 
-/* ---------- rainfall chart ---------- */
-var RAIN = [
-  {m:"J",v:6},{m:"F",v:4},{m:"M",v:5},{m:"A",v:22},{m:"M",v:62},{m:"J",v:70},
-  {m:"J",v:52},{m:"A",v:60},{m:"S",v:88},{m:"O",v:100},{m:"N",v:44},{m:"D",v:14}
-];
-var rc = document.getElementById("rainchart");
-RAIN.forEach(function(d,i){
-  var hot = (i===6 || i===7);
-  var cell = document.createElement("div");
-  cell.className = "m" + (hot ? " hot" : "");
-  cell.innerHTML = '<div class="b" style="height:' + d.v + '%"></div><div class="lab">' + d.m + '</div>';
-  cell.title = d.m + " — relative rainfall " + d.v + "/100";
-  rc.appendChild(cell);
+/* rainfall — ERA5 2015-2024, mm/month */
+var MLAB=["J","F","M","A","M","J","J","A","S","O","N","D"];
+var SERIES={
+  "rain-q":{name:"Quepos / Manuel Antonio",mm:[62,33,50,211,610,578,665,725,663,949,704,180]},
+  "rain-f":{name:"La Fortuna / Arenal",     mm:[569,317,303,226,333,411,515,346,299,508,594,604]}
+};
+Object.keys(SERIES).forEach(function(id){
+  var s=SERIES[id], el=document.getElementById(id), max=Math.max.apply(null,s.mm);
+  el.innerHTML=s.mm.map(function(v,i){
+    var hot=(i===5);
+    return '<div class="m'+(hot?' hot':'')+'" title="'+MLAB[i]+' — '+v+' mm">'
+      +'<div class="b" style="height:'+(v/max*100)+'%"></div>'
+      +'<div class="lab">'+MLAB[i]+'</div></div>';
+  }).join("");
 });
 
-/* ---------- cost model ----------
-   All figures USD, family of 4, indicative 2026. */
-var BASE2 = {
-  osa:  { label:"Osa / Drake Bay",
-          lodge:{mid:300, comf:1500},        // per night, family of 4; comf tier is all-inclusive
-          inclMeals:{mid:false, comf:true},
-          inclTours:{mid:false, comf:true},
-          tours:{light:400, normal:700, full:950},   // per activity day, family of 4
-          transport:1300,                     // Sansa round trip x4
-          carDays:0 },
-  ma:   { label:"Manuel Antonio",
-          lodge:{mid:230, comf:520},
-          inclMeals:{mid:false, comf:false},
-          inclTours:{mid:false, comf:false},
-          tours:{light:180, normal:320, full:480},
-          transport:0,
-          carDays:1 },
-  tort: { label:"Tortuguero",
-          lodge:{mid:280, comf:560},
-          inclMeals:{mid:true, comf:true},    // lodges are full board
-          inclTours:{mid:false, comf:false},
-          tours:{light:150, normal:280, full:400},
-          transport:520,                      // shuttle + boat transfers x4 round trip
-          carDays:0 }
+/* June hourly rain probability */
+var HOURLY={
+  "Manuel Antonio":[35,36,34,32,33,30,32,25,28,28,35,45,55,66,68,65,65,57,50,51,47,45,39,34],
+  "Arenal":        [37,38,37,37,40,38,40,34,33,39,51,60,69,73,73,74,71,64,59,56,46,41,41,39]
 };
-var ARENAL = {
-  lodge:{mid:220, comf:480},
-  tours:{light:220, normal:400, full:620}
-};
-var FOOD_DAY = 140;      // family of 4, when meals not included
-var CAR_DAY  = 90;       // 4x4 incl. mandatory liability insurance
-var MISC     = 1130;     // LAX parking ~180, gas ~150, tips ~300, SJO transit night ~250, buffer ~250
+document.getElementById("hourly").innerHTML=Object.keys(HOURLY).map(function(k){
+  var a=HOURLY[k];
+  var bars=a.map(function(v,h){
+    var am=(h>=7&&h<=11);
+    return '<div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;height:100%" title="'
+      +k+' '+h+':00 — '+v+'% of hours with rain">'
+      +'<div style="height:'+v+'%;border-radius:2px 2px 0 0;background:'
+      +(am?'var(--accent)':'color-mix(in srgb,var(--accent) 32%,transparent)')+'"></div></div>';
+  }).join("");
+  return '<div style="margin-bottom:.7rem">'
+    +'<div style="font-family:ui-sans-serif,system-ui,sans-serif;font-size:.74rem;color:var(--muted);margin-bottom:.2rem">'+k+'</div>'
+    +'<div style="display:flex;gap:2px;align-items:flex-end;height:64px">'+bars+'</div>'
+    +'<div style="display:flex;justify-content:space-between;font-family:ui-sans-serif,system-ui,sans-serif;font-size:.62rem;color:var(--muted);margin-top:.15rem">'
+    +'<span>12a</span><span>6a</span><span>noon</span><span>6p</span><span>12a</span></div></div>';
+}).join("");
 
-var state = { b2:"osa", nights:8, n1:4, tier:"mix", pace:"normal", air:650 };
+/* cost model — USD, family of 4, indicative 2026 */
+var H1={lomas:185,obs:230,manoa:210,springs:520,bnb1:260};
+var H2={cverde:220,falls:270,sicomo:360,tulemar:450,bnb2:280};
+var TOURS1={light:200,normal:380,full:600};   // Arenal, per activity day, family of 4
+var TOURS2={light:160,normal:300,full:460};   // Manuel Antonio
+var FOOD_DAY=140, CAR_DAY=90, MISC=1130;
 
-function compute(b2key){
-  var s = state;
-  var B = BASE2[b2key];
-  var n1 = Math.min(s.n1, s.nights);
-  var n2 = s.nights - n1;
-  // "mixed" = save on Arenal, splurge on the wild base
-  var tA = s.tier === "comf" ? "comf" : "mid";
-  var tB = s.tier === "mid"  ? "mid"  : "comf";
+var state={h1:"obs",h2:"cverde",nights:8,n1:4,pace:"normal",air:650};
 
-  var flights = s.air * 4;
-  var lodging = ARENAL.lodge[tA]*n1 + B.lodge[tB]*n2;
-
-  // activity days = nights minus one transition/arrival day per base
-  var actA = Math.max(0, n1 - 1), actB = Math.max(0, n2 - 1);
-  var tours = ARENAL.tours[s.pace]*actA + (B.inclTours[tB] ? 0 : B.tours[s.pace]*actB);
-
-  var foodNights = n1 + (B.inclMeals[tB] ? 0 : n2);
-  var food = FOOD_DAY * foodNights;
-
-  var carDays = n1 + 1 + B.carDays;           // Arenal always needs the car, plus transit day
-  var ground  = CAR_DAY*carDays + B.transport;
-
-  var total = flights + lodging + tours + food + ground + MISC;
-  return { flights:flights, lodging:lodging, tours:tours, food:food, ground:ground, misc:MISC, total:total, n1:n1, n2:n2 };
+function compute(){
+  var n1=Math.min(state.n1,state.nights), n2=state.nights-n1;
+  var flights=state.air*4;
+  var lodging=H1[state.h1]*n1 + H2[state.h2]*n2;
+  var tours=TOURS1[state.pace]*Math.max(0,n1-1) + TOURS2[state.pace]*Math.max(0,n2-1);
+  var food=FOOD_DAY*state.nights;
+  var ground=CAR_DAY*(state.nights+2);
+  return {flights:flights,lodging:lodging,tours:tours,food:food,ground:ground,misc:MISC,
+          total:flights+lodging+tours+food+ground+MISC,n1:n1,n2:n2};
 }
-
-var money = function(n){ return "$" + Math.round(n).toLocaleString("en-US"); };
-
-var BARS = [
-  ["Flights (4 pax)","flights"], ["Lodging","lodging"], ["Activities","tours"],
-  ["Food","food"], ["Ground + domestic","ground"], ["Parking, gas, misc.","misc"]
-];
+function money(n){return "$"+Math.round(n).toLocaleString("en-US")}
+var BARS=[["Flights (4 pax)","flights"],["Lodging","lodging"],["Activities","tours"],
+          ["Food","food"],["Rental car","ground"],["Parking, gas, misc.","misc"]];
 
 function render(){
-  var r = compute(state.b2);
-
-  document.getElementById("grand").textContent = money(r.total);
-  document.getElementById("perday").textContent =
-    money(r.total / (state.nights + 2)) + " per travel day  ·  " +
-    money(r.total / 4) + " per person";
-
-  var max = Math.max.apply(null, BARS.map(function(b){ return r[b[1]]; }));
-  document.getElementById("bars").innerHTML = BARS.map(function(b){
-    var v = r[b[1]];
-    return '<div class="bar"><span>' + b[0] + '</span>' +
-           '<span class="track"><span class="fill" style="width:' + (v/max*100) + '%"></span></span>' +
-           '<span class="val">' + money(v) + '</span></div>';
+  var r=compute();
+  document.getElementById("grand").textContent=money(r.total);
+  document.getElementById("perday").textContent=
+    money(r.total/(state.nights+2))+" per day  ·  "+money(r.total/4)+" per person";
+  var max=Math.max.apply(null,BARS.map(function(b){return r[b[1]]}));
+  document.getElementById("bars").innerHTML=BARS.map(function(b){
+    var v=r[b[1]];
+    return '<div class="bar"><span>'+b[0]+'</span><span class="track"><span class="fill" style="width:'
+      +(v/max*100)+'%"></span></span><span class="val">'+money(v)+'</span></div>';
   }).join("");
-
-  document.getElementById("ntot").textContent = state.nights;
-  document.getElementById("n1").textContent = r.n1;
-  document.getElementById("n2").textContent = r.n2;
-  document.getElementById("nsplit").textContent = (state.nights + 2) + " days door to door";
-  document.getElementById("airv").textContent = money(state.air);
-
-  // option-card estimates, always at current tier/pace
-  var keymap = { A:"osa", B:"ma", C:"tort" };
-  Array.prototype.forEach.call(document.querySelectorAll("[data-est]"), function(el){
-    el.textContent = money(compute(keymap[el.getAttribute("data-est")]).total);
+  document.getElementById("ntot").textContent=state.nights;
+  document.getElementById("ndays").textContent=state.nights+2;
+  document.getElementById("n1").textContent=r.n1;
+  document.getElementById("n2").textContent=r.n2;
+  document.getElementById("airv").textContent=money(state.air);
+  Array.prototype.forEach.call(document.querySelectorAll('[data-est="base"]'),function(el){
+    el.textContent=money(r.total);
   });
 }
-
-function wireSeg(id, key, after){
-  var box = document.getElementById(id);
-  box.addEventListener("click", function(e){
-    var btn = e.target.closest("button[data-v]");
-    if (!btn) return;
-    Array.prototype.forEach.call(box.querySelectorAll("button"), function(b){
-      b.setAttribute("aria-pressed", String(b === btn));
+function wireSeg(id,key){
+  var box=document.getElementById(id);
+  box.addEventListener("click",function(e){
+    var btn=e.target.closest("button[data-v]"); if(!btn)return;
+    Array.prototype.forEach.call(box.querySelectorAll("button"),function(b){
+      b.setAttribute("aria-pressed",String(b===btn));
     });
-    if (key) state[key] = btn.getAttribute("data-v");
-    if (after) after(btn.getAttribute("data-v"));
-    render();
+    state[key]=btn.getAttribute("data-v"); render();
   });
 }
-wireSeg("seg-b2","b2");
-wireSeg("seg-tier","tier");
-wireSeg("seg-pace","pace");
-
-var nEl = document.getElementById("nights"), sEl = document.getElementById("split");
-nEl.addEventListener("input", function(){
-  state.nights = +nEl.value;
-  sEl.max = String(state.nights - 2);
-  if (state.n1 > +sEl.max) { state.n1 = +sEl.max; sEl.value = sEl.max; }
+wireSeg("seg-h1","h1"); wireSeg("seg-h2","h2"); wireSeg("seg-pace","pace");
+var nEl=document.getElementById("nights"), sEl=document.getElementById("split");
+nEl.addEventListener("input",function(){
+  state.nights=+nEl.value; sEl.max=String(state.nights-2);
+  if(state.n1>+sEl.max){state.n1=+sEl.max; sEl.value=sEl.max;}
   render();
 });
-sEl.addEventListener("input", function(){ state.n1 = +sEl.value; render(); });
-document.getElementById("air").addEventListener("input", function(e){ state.air = +e.target.value; render(); });
+sEl.addEventListener("input",function(){state.n1=+sEl.value; render();});
+document.getElementById("air").addEventListener("input",function(e){state.air=+e.target.value; render();});
 
-/* ---------- itineraries ---------- */
-var ITIN = {
-  osa: [
-    ["Day 1","travel","Drive → LAX","Leave home around 2pm. Dinner near the airport. Wheels up ~11:30pm."],
-    ["Day 2","","Drake Bay","Land SJO ~6:45am. Sansa to Drake Bay mid-morning. Settle in, beach walk, easy afternoon. <strong>The Night Tour</strong> after dark."],
-    ["Day 3","","Corcovado","<strong>Sirena Station.</strong> Full day — boat out at dawn, 6–10 km with a naturalist, back mid-afternoon. The main event."],
-    ["Day 4","","Osa","Caño Island snorkel if the water's clear, otherwise San Pedrillo station and the waterfall."],
-    ["Day 5","","Osa","Slow morning. Río Claro swimming hole, chocolate tour. Afternoon rain, hammocks, cards."],
-    ["Day 6","travel","Drake → Arenal","Sansa DRK→SJO. Pick up the 4x4, drive to La Fortuna (~3.5 hrs). Hot springs at sunset."],
-    ["Day 7","","Arenal","<strong>Mistico Hanging Bridges</strong> at 7am. Afternoon at La Fortuna Waterfall."],
-    ["Day 8","","Arenal","<strong>Canyoning with Pure Trek.</strong> Rappelling waterfalls all morning."],
-    ["Day 9","","Arenal","Balsa River rafting. Evening: Bogarín sloth walk or a night tour."],
-    ["Day 10","travel","Arenal → SJO","Slow morning on the Arenal 1968 lava trail. Drive to San José. Overnight near the airport."],
-    ["Day 11","travel","SJO → home","Morning flight to LAX, land afternoon. Drive home."]
-  ],
-  ma: [
-    ["Day 1","travel","Drive → LAX","Leave home around 2pm. Wheels up ~11:30pm."],
-    ["Day 2","","Arenal","Land SJO ~6:45am. Rental car, drive to La Fortuna (~3.5 hrs). Easy afternoon, hot springs."],
-    ["Day 3","","Arenal","Mistico Hanging Bridges at 7am. La Fortuna Waterfall after lunch."],
-    ["Day 4","","Arenal","Canyoning with Pure Trek."],
-    ["Day 5","","Arenal","Balsa River rafting. Evening night walk."],
-    ["Day 6","travel","Arenal → MA","Drive to Manuel Antonio (~4.5–5 hrs), stopping at the crocodile bridge over the Tárcoles. Beach at sunset."],
-    ["Day 7","","Manuel Antonio","<strong>Manuel Antonio NP at 7am opening</strong> with a guide and scope. Beach afternoon."],
-    ["Day 8","","Manuel Antonio","Nauyaca Waterfalls day trip, or surf lessons and a lazy beach day."],
-    ["Day 9","","Manuel Antonio","Damas Island mangrove boat in the morning. Catamaran sunset sail."],
-    ["Day 10","travel","MA → SJO","Drive to San José (~3 hrs). Overnight near the airport."],
-    ["Day 11","travel","SJO → home","Morning flight to LAX. Drive home."]
-  ],
-  tort: [
-    ["Day 1","travel","Drive → LAX","Leave home around 2pm. Wheels up ~11:30pm."],
-    ["Day 2","travel","Tortuguero","Land SJO ~6:45am. Shuttle to La Pavona, then the 1.5-hr canal boat in — a wildlife tour in its own right."],
-    ["Day 3","","Tortuguero","<strong>Dawn canal boat at 5:30am</strong> — the best wildlife window of the trip. Village and Sea Turtle Conservancy in the afternoon. <strong>Turtle nesting tour</strong> at night."],
-    ["Day 4","","Tortuguero","Kayak the small caños yourself. Cerro Tortuguero hike. Second nesting tour if the first was quiet."],
-    ["Day 5","travel","Tortuguero → Sarapiquí","Boat and shuttle out. Overnight at Selva Verde. Tirimbina's chocolate-and-bats program in the evening."],
-    ["Day 6","travel","Sarapiquí → Arenal","La Selva Biological Station in the morning, then drive to La Fortuna (~2 hrs). Hot springs."],
-    ["Day 7","","Arenal","Mistico Hanging Bridges at 7am. La Fortuna Waterfall."],
-    ["Day 8","","Arenal","Canyoning with Pure Trek."],
-    ["Day 9","","Arenal","Balsa River rafting. Bogarín sloth walk in the evening."],
-    ["Day 10","travel","Arenal → SJO","Arenal 1968 trail, then drive to San José. Overnight near the airport."],
-    ["Day 11","travel","SJO → home","Morning flight to LAX. Drive home."]
-  ]
-};
-
-function renderItin(k){
-  document.getElementById("days").innerHTML = ITIN[k].map(function(d){
-    return '<div class="day"><span class="n' + (d[1] ? " travel" : "") + '">' + d[0] + '</span>' +
-           '<p><span class="where">' + d[2] + '</span>' + d[3] + '</p></div>';
-  }).join("");
-}
-wireSeg("seg-itin", null, renderItin);
-renderItin("osa");
+/* itinerary */
+var ITIN=[
+ ["Day 1","travel","Drive → LAX","Leave home around 2pm. Dinner near the airport. Wheels up ~11:30pm."],
+ ["Day 2","","Arenal","Land SJO ~6:45am. Pick up the 4x4, drive to La Fortuna (~3.5 hrs). Easy afternoon, hot springs at sunset."],
+ ["Day 3","","Arenal","<strong>Mistico Hanging Bridges</strong> at 7am. La Fortuna Waterfall after lunch."],
+ ["Day 4","","Arenal","<strong>Canyoning with Pure Trek</strong> — rappelling waterfalls all morning. Kalambu slides in the afternoon."],
+ ["Day 5","","Arenal","Balsa River rafting. Evening: Bogarín sloth walk or a night rainforest tour."],
+ ["Day 6","travel","→ Manuel Antonio","<strong>Leave early.</strong> 5–6 hrs via San Ramón and Rte 27. Stop at the Tárcoles crocodile bridge. Beach at sunset."],
+ ["Day 7","","Manuel Antonio","<strong>National park at 7am opening</strong> with a guide and scope — ticket booked months ago. Playa Manuel Antonio inside the park. Back at the pool by 3pm for the monkeys."],
+ ["Day 8","","Manuel Antonio","Nauyaca Waterfalls day trip. Or trade for surf lessons and a slow beach day at Biesanz."],
+ ["Day 9","","Manuel Antonio","Damas Island mangroves in the morning. Catamaran sunset sail. Dinner at El Avión."],
+ ["Day 10","travel","→ SJO","Morning swim, then drive to San José (~3 hrs). Overnight near the airport."],
+ ["Day 11","travel","SJO → home","Morning flight to LAX. Drive home."]
+];
+document.getElementById("days").innerHTML=ITIN.map(function(d){
+  return '<div class="day"><span class="n'+(d[1]?" travel":"")+'">'+d[0]+'</span><p><span class="where">'
+    +d[2]+'</span>'+d[3]+'</p></div>';
+}).join("");
 
 render();
 })();
