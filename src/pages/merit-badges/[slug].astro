@@ -56,6 +56,16 @@ const reqCount = countRequirements(badge);
       </aside>
     )}
 
+    {badge.programme && (
+      <aside class="mb-programme">
+        <p class="kicker">{badge.programme.label}</p>
+        <p>{badge.programme.blurb}</p>
+        <p>
+          <a class="mb-link-btn" href={badge.programme.url}>Open the meeting series &rarr;</a>
+        </p>
+      </aside>
+    )}
+
     <section aria-labelledby="quals-title" class="mb-section">
       <h2 id="quals-title">Counselor Qualifications</h2>
       <p>{badge.counselorNote}</p>
@@ -182,6 +192,18 @@ const reqCount = countRequirements(badge);
       </p>
     </section>
   </article>
+
+  <style>
+    .mb-programme {
+      border: 2px solid var(--accent);
+      border-radius: var(--radius);
+      background: var(--accent-soft);
+      padding: 1rem 1.2rem;
+      margin: 1.4rem 0;
+    }
+
+    .mb-programme p:last-child { margin-bottom: 0; }
+  </style>
 
   <script is:inline>
     (function () {
