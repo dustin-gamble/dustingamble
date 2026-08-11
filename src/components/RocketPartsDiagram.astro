@@ -1,0 +1,348 @@
+---
+// Cutaway model rocket with the nine parts named in Space Exploration
+// requirement 3(a)-(i). Two modes: labeled (teaching) and blank (quiz).
+// Used inside SlideDeck and standalone on the Fall 2026 series page.
+
+const parts = [
+  { id: "nose-cone", letter: "f", name: "Nose cone", what: "Streamlined tip that cuts drag. Friction-fit so the ejection charge can pop it off — snug, but it must pull free by hand." },
+  { id: "payload", letter: "g", name: "Payload", what: "Whatever the rocket is carrying that isn't needed to fly: an altimeter, a camera, a raw egg. The reason the rocket exists." },
+  { id: "recovery", letter: "h", name: "Recovery system", what: "Parachute or streamer, plus shock cord and wadding. Turns a falling rocket into a landing one." },
+  { id: "body-tube", letter: "a", name: "Body tube", what: "The airframe. Holds everything in line, carries flight loads, and sets the diameter that drives drag." },
+  { id: "launch-lug", letter: "e", name: "Launch lug", what: "Small tube glued to the outside that slides over the launch rod. It keeps the rocket pointed straight until it's fast enough for the fins to work." },
+  { id: "fins", letter: "c", name: "Fins", what: "Move the center of pressure behind the center of gravity so the rocket weathercocks into stability instead of tumbling." },
+  { id: "engine-mount", letter: "b", name: "Engine mount", what: "Inner tube, centering rings, and a retainer that hold the motor on the centerline and take the thrust into the airframe." },
+  { id: "engine", letter: "i", name: "Rocket engine", what: "Propellant grain, nozzle, delay charge, and ejection charge in one cardboard tube. C6-5 = C impulse, 6 N thrust, 5 s delay." },
+  { id: "igniter", letter: "d", name: "Igniter", what: "Thin wire that glows hot when the controller closes the circuit, lighting the propellant. Also called a starter." },
+];
+---
+
+<div class="rpd" data-rpd>
+  <div class="rpd-toolbar">
+    <button type="button" class="rpd-btn is-on" data-mode="labeled">Labeled</button>
+    <button type="button" class="rpd-btn" data-mode="quiz">Quiz mode</button>
+    <span class="rpd-hint">Tap a part to read what it does.</span>
+  </div>
+
+  <!-- viewBox starts at -60 so the left-anchored "(d) Igniter" label has room
+       at the larger mobile font size instead of being clipped. -->
+  <svg viewBox="-60 0 1000 400" class="rpd-svg" role="img" aria-label="Cutaway diagram of a model rocket with nine labeled parts">
+    <title>Model rocket parts — Space Exploration requirement 3</title>
+
+    <!-- body tube -->
+    <g class="rpd-part" data-part="body-tube">
+      <rect x="190" y="150" width="480" height="80" rx="4" class="rpd-tube" />
+    </g>
+
+    <!-- payload section -->
+    <g class="rpd-part" data-part="payload">
+      <rect x="560" y="150" width="110" height="80" rx="4" class="rpd-payload-bay" />
+      <rect x="588" y="172" width="54" height="36" rx="4" class="rpd-payload" />
+      <text x="615" y="195" class="rpd-mini" text-anchor="middle">ALT</text>
+    </g>
+
+    <!-- nose cone -->
+    <g class="rpd-part" data-part="nose-cone">
+      <path d="M670 150 Q 790 150 830 190 Q 790 230 670 230 Z" class="rpd-solid" />
+    </g>
+
+    <!-- recovery system: chute + shock cord -->
+    <g class="rpd-part" data-part="recovery">
+      <path d="M400 165 q 30 -14 60 0 l -12 26 h -36 z" class="rpd-chute" />
+      <path d="M400 165 l 12 26 M460 165 l -12 26" class="rpd-line-thin" />
+      <path d="M448 191 q -40 22 -80 8 q -40 -14 -80 6" class="rpd-cord" />
+    </g>
+
+    <!-- engine mount -->
+    <g class="rpd-part" data-part="engine-mount">
+      <rect x="196" y="162" width="120" height="56" rx="3" class="rpd-mount" />
+      <path d="M316 150 v80 M256 150 v80" class="rpd-ring" />
+    </g>
+
+    <!-- rocket engine -->
+    <g class="rpd-part" data-part="engine">
+      <rect x="202" y="170" width="96" height="40" rx="3" class="rpd-engine" />
+      <path d="M202 170 l -14 12 v16 l 14 12 z" class="rpd-nozzle" />
+      <path d="M232 170 v40 M262 170 v40" class="rpd-line-thin" />
+    </g>
+
+    <!-- igniter -->
+    <g class="rpd-part" data-part="igniter">
+      <path d="M188 190 h -46 m 0 -8 v16" class="rpd-igniter" />
+      <circle cx="142" cy="190" r="5" class="rpd-igniter-dot" />
+    </g>
+
+    <!-- fins -->
+    <g class="rpd-part" data-part="fins">
+      <path d="M196 150 L 196 96 L 286 150 Z" class="rpd-solid" />
+      <path d="M196 230 L 196 284 L 286 230 Z" class="rpd-solid" />
+    </g>
+
+    <!-- launch lug -->
+    <g class="rpd-part" data-part="launch-lug">
+      <rect x="392" y="138" width="86" height="13" rx="6" class="rpd-solid" />
+      <path d="M360 144.5 h 150" class="rpd-rod" />
+    </g>
+
+    <!-- leader lines + labels -->
+    <g class="rpd-labels">
+      <g class="rpd-label" data-part="fins">
+        <path d="M232 120 V 60 H 150" class="rpd-leader" />
+        <text x="146" y="56" text-anchor="end">(c) Fins</text>
+      </g>
+      <g class="rpd-label" data-part="launch-lug">
+        <path d="M435 138 V 84 H 520" class="rpd-leader" />
+        <text x="526" y="80">(e) Launch lug</text>
+      </g>
+      <g class="rpd-label" data-part="payload">
+        <path d="M615 172 V 108 H 700" class="rpd-leader" />
+        <text x="706" y="104">(g) Payload</text>
+      </g>
+      <g class="rpd-label" data-part="nose-cone">
+        <path d="M760 176 V 140 H 812" class="rpd-leader" />
+        <text x="818" y="136" text-anchor="end" class="rpd-shift">(f) Nose cone</text>
+      </g>
+      <g class="rpd-label" data-part="recovery">
+        <path d="M430 178 V 128 H 300" class="rpd-leader" />
+        <text x="294" y="124" text-anchor="end">(h) Recovery system</text>
+      </g>
+      <g class="rpd-label" data-part="body-tube">
+        <path d="M520 230 V 300 H 620" class="rpd-leader" />
+        <text x="626" y="304">(a) Body tube</text>
+      </g>
+      <g class="rpd-label" data-part="engine-mount">
+        <path d="M336 218 V 316 H 430" class="rpd-leader" />
+        <text x="436" y="320">(b) Engine mount</text>
+      </g>
+      <g class="rpd-label" data-part="engine">
+        <path d="M250 210 V 352 H 330" class="rpd-leader" />
+        <text x="336" y="356">(i) Rocket engine</text>
+      </g>
+      <g class="rpd-label" data-part="igniter">
+        <path d="M142 196 V 250 H 96" class="rpd-leader" />
+        <text x="90" y="254" text-anchor="end">(d) Igniter</text>
+      </g>
+    </g>
+  </svg>
+
+  <div class="rpd-readout" data-rpd-readout>
+    <p class="rpd-readout-empty">Nine parts, requirement 3(a) through 3(i). Tap one.</p>
+    {parts.map((p) => (
+      <div class="rpd-readout-item" data-readout-for={p.id} hidden>
+        <h4><span class="rpd-readout-letter">3({p.letter})</span> {p.name}</h4>
+        <p>{p.what}</p>
+      </div>
+    ))}
+  </div>
+
+  <ol class="rpd-legend">
+    {parts.map((p) => (
+      <li>
+        <button type="button" class="rpd-chip" data-chip-for={p.id}>
+          <span class="rpd-chip-letter">{p.letter}</span>{p.name}
+        </button>
+      </li>
+    ))}
+  </ol>
+</div>
+
+<style>
+  .rpd {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    padding: 1rem 1.1rem 1.2rem;
+  }
+
+  .rpd-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.6rem;
+  }
+
+  .rpd-btn {
+    font: inherit;
+    font-size: 0.82rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+  }
+
+  .rpd-btn.is-on {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  :root[data-theme="dark"] .rpd-btn.is-on { color: #0f1623; }
+
+  .rpd-hint {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-left: auto;
+  }
+
+  .rpd-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    /* All labels are inside the 920x400 viewBox, so clip rather than letting
+       SVG text spill out of the card on narrow screens. */
+    overflow: hidden;
+  }
+
+  .rpd-tube,
+  .rpd-payload-bay,
+  .rpd-mount { fill: none; stroke: var(--text); stroke-width: 2; opacity: 0.85; }
+  .rpd-payload-bay { stroke-dasharray: 5 4; }
+  .rpd-solid { fill: var(--accent-soft); stroke: var(--text); stroke-width: 2; }
+  .rpd-payload { fill: var(--accent); stroke: var(--accent-strong); stroke-width: 1.5; }
+  .rpd-mini { fill: #fff; font-size: 13px; font-weight: 700; font-family: ui-monospace, monospace; letter-spacing: 0.04em; }
+  :root[data-theme="dark"] .rpd-mini { fill: #0f1623; }
+  .rpd-chute { fill: var(--accent-soft); stroke: var(--text); stroke-width: 1.6; }
+  .rpd-cord { fill: none; stroke: var(--text); stroke-width: 1.6; stroke-dasharray: 4 3; }
+  .rpd-line-thin { fill: none; stroke: var(--text); stroke-width: 1.2; opacity: 0.6; }
+  .rpd-ring { stroke: var(--text); stroke-width: 1.6; opacity: 0.7; }
+  .rpd-engine { fill: var(--muted); stroke: var(--text); stroke-width: 1.6; opacity: 0.55; }
+  .rpd-nozzle { fill: var(--text); opacity: 0.7; }
+  .rpd-igniter { fill: none; stroke: #c8532b; stroke-width: 2.4; stroke-linecap: round; }
+  .rpd-igniter-dot { fill: #c8532b; }
+  .rpd-rod { stroke: var(--muted); stroke-width: 2.4; stroke-linecap: round; opacity: 0.5; }
+
+  .rpd-leader { fill: none; stroke: var(--muted); stroke-width: 1.2; opacity: 0.75; }
+
+  .rpd-labels text {
+    fill: var(--text);
+    font-family: "Space Grotesk", system-ui, sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  .rpd-label,
+  .rpd-part { cursor: pointer; }
+
+  .rpd-label.is-active text { fill: var(--accent-strong); font-weight: 700; }
+  .rpd-label.is-active .rpd-leader { stroke: var(--accent); opacity: 1; stroke-width: 2; }
+
+  .rpd-part.is-active .rpd-solid,
+  .rpd-part.is-active .rpd-chute { fill: var(--accent); stroke: var(--accent-strong); }
+  .rpd-part.is-active .rpd-tube,
+  .rpd-part.is-active .rpd-payload-bay,
+  .rpd-part.is-active .rpd-mount,
+  .rpd-part.is-active .rpd-ring { stroke: var(--accent); stroke-width: 3.4; opacity: 1; }
+  .rpd-part.is-active .rpd-engine { fill: var(--accent); opacity: 0.85; }
+  .rpd-part.is-active .rpd-cord { stroke: var(--accent); opacity: 1; }
+
+  .rpd[data-mode="quiz"] .rpd-labels text { opacity: 0; }
+  .rpd[data-mode="quiz"] .rpd-labels .is-active text { opacity: 1; }
+
+  .rpd-readout {
+    margin-top: 0.4rem;
+    min-height: 5.4rem;
+    border-top: 1px solid var(--line);
+    padding-top: 0.8rem;
+  }
+
+  .rpd-readout-empty { color: var(--muted); font-size: 0.9rem; margin: 0; }
+  .rpd-readout-item h4 { margin: 0 0 0.25rem; font-size: 1.02rem; }
+  .rpd-readout-item p { margin: 0; color: var(--muted); font-size: 0.94rem; line-height: 1.55; }
+
+  .rpd-readout-letter {
+    font-family: ui-monospace, monospace;
+    font-size: 0.82rem;
+    color: var(--accent);
+    margin-right: 0.4rem;
+  }
+
+  .rpd-legend {
+    list-style: none;
+    margin: 0.9rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .rpd-chip {
+    font: inherit;
+    font-size: 0.8rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.28rem 0.7rem;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+  }
+
+  .rpd-chip:hover,
+  .rpd-chip.is-on { border-color: var(--accent); color: var(--accent-strong); background: var(--accent-soft); }
+
+  .rpd-chip-letter {
+    font-family: ui-monospace, monospace;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  @media (max-width: 640px) {
+    .rpd-labels text { font-size: 19px; }
+    .rpd-hint { display: none; }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    function wire(root) {
+      if (root.dataset.rpdWired) return;
+      root.dataset.rpdWired = "1";
+      root.dataset.mode = "labeled";
+
+      const readout = root.querySelector("[data-rpd-readout]");
+      const empty = readout.querySelector(".rpd-readout-empty");
+      let current = null;
+
+      function select(id) {
+        if (current === id) id = null;
+        current = id;
+
+        root.querySelectorAll(".rpd-part, .rpd-label").forEach((el) => {
+          el.classList.toggle("is-active", !!id && el.dataset.part === id);
+        });
+        root.querySelectorAll(".rpd-chip").forEach((el) => {
+          el.classList.toggle("is-on", !!id && el.dataset.chipFor === id);
+        });
+        readout.querySelectorAll(".rpd-readout-item").forEach((el) => {
+          el.hidden = el.dataset.readoutFor !== id;
+        });
+        empty.hidden = !!id;
+      }
+
+      root.querySelectorAll(".rpd-part, .rpd-label").forEach((el) => {
+        el.addEventListener("click", () => select(el.dataset.part));
+      });
+      root.querySelectorAll(".rpd-chip").forEach((el) => {
+        el.addEventListener("click", () => select(el.dataset.chipFor));
+      });
+      root.querySelectorAll("[data-mode]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          root.dataset.mode = btn.dataset.mode;
+          root.querySelectorAll("[data-mode]").forEach((b) => b.classList.toggle("is-on", b === btn));
+          select(null);
+        });
+      });
+    }
+
+    function init() {
+      document.querySelectorAll("[data-rpd]").forEach(wire);
+    }
+
+    init();
+    document.addEventListener("astro:page-load", init);
+  })();
+</script>
