@@ -776,6 +776,12 @@ const BADGES = [
             "https://filestore.scouting.org/filestore/Merit_Badge_ReqandRes/Pamphlets/Space%20Exploration.pdf",
         counselorNote:
             "Model rocketry is the highlight. I keep an Estes Alpha-III starter kit, a launch pad, and a handful of A8-3 motors ready. Safety code compliance (National Association of Rocketry) is non-negotiable.",
+        programme: {
+            label: "Troop 308 · Fall 2026 series",
+            url: "/scouts/space-exploration-fall-2026/",
+            blurb:
+                "Seven 45-minute Monday blocks from Aug 31 through Nov 23 with presenter-ready slide decks, a build night, a group Telemetry Rocket crew project, an ordering plan, a prediction competition, a dedicated guest speaker night, and a launch day the Saturday before Thanksgiving.",
+        },
         myPlan: [
             "Check local fire/park regulations before scheduling a launch day.",
             "For req 3, purchase at least 2 rockets per Scout — they will lose one.",
@@ -797,21 +803,22 @@ const BADGES = [
                 {
                     heading: "Recommended hardware",
                     body:
-                        "Rocket: Estes Lil' Spite (2.0 in diameter, ~292 g dry, projected ~1200 ft unloaded). It is lighter than the larger Estes options, leaving better margin for the telemetry payload. A 29 mm motor retainer is included so motors can be swapped quickly during testing. First-choice motor: Estes E16-4 (lower, more manageable flights than F15-4, while still giving a meaningful motor comparison).",
+                        "Rocket: Estes Pro Series II Lil' Spite — 51.8 in long, 2.0 in diameter, 10.3 oz (292 g) dry, projected ~1,200 ft unloaded on black powder. Be clear about what this is: a mid-power airframe rated intermediate, boxed for ages 18+, about two hours of assembly. It is the counselor's demonstration rocket that Scouts instrument and fly, not a Scout's requirement-3 build — Scouts should build their own smaller kit for requirement 3. Motor delay is a real decision: Estes recommends E16-6 / F15-6 for this kit empty, and E16-4 is the better choice once 60–100 g of telemetry payload is aboard, because the extra mass lowers apogee and shortens the coast. Run both through the altitude simulator with the real loaded mass before ordering. Note that the F15 flights require a 1,000 ft minimum launch site dimension under the NAR safety code.",
                 },
                 {
                     heading: "Bill of materials",
                     list: [
-                        "1 × LILYGO T-Beam Supreme (US915) — flight computer / GPS / LoRa radio",
-                        "1 × Heltec WiFi LoRa 32 V3 (902–928 MHz) — USB ground receiver",
-                        "1 × Estes Lil' Spite rocket kit",
+                        "2 × LILYGO T-Beam Supreme (US915) — one bench unit for development, one flight unit that never gets experimented on",
+                        "1–2 × Heltec WiFi LoRa 32 V3 (902–928 MHz) — USB ground receiver (buy V3 specifically; V4 exists now and has a different pin mapping)",
+                        "1 × Estes Pro Series II Lil' Spite rocket kit ($59.99)",
+                        "1 × Estes Pro Series II launch pad or rail — REQUIRED, this rocket needs a 1/4 in rod; a standard Porta-Pad II is 1/8 in and cannot fly it",
                         "1 × Estes Pro Series II 29 mm motor retainer",
-                        "1 × Estes E16-4 engine pack",
-                        "Optional: 1 × Estes F15-4 engine pack for comparison flights",
-                        "Optional: 1 × Estes Jayhawk if a larger airframe is desired for easier packaging",
+                        "1 × Estes E16-6 engine 2-pack ($31.99) and 1 × E16-4 2-pack — fly -6 empty, -4 with payload",
+                        "Optional: 1 × Estes F15-6 engine pack for comparison flights (needs a 1,000 ft launch site)",
+                        "18650 cells, payload sled, foam and zip ties, and known-good USB-C data cables",
                     ],
                     footer:
-                        "Estimated cost for the core setup is about $167–$170 before tax and shipping, with additional cost for optional motors or a second rocket.",
+                        "Budget about $265–$355 for a single-payload setup, or $360–$465 for a crew build with a spare board set — before tax and shipping. Prices checked August 2026.",
                 },
                 {
                     heading: "Coding / AI learning component",
@@ -968,9 +975,9 @@ const CAPSTONES = [
                 note:
                     "Used as the model-rocket build-and-launch requirement and the second-launch objective.",
                 items: [
-                    { id: "3", note: "Build, launch, recover, and make a second objective-driven launch." },
-                    { id: "4", note: "Sketch / identify rocket parts using the real payload bay and flight computer." },
-                    { id: "5", note: "Discuss safety code and NAR rules during pre-flight briefings." },
+                    { id: "3", note: "Build, launch, recover, and make a second objective-driven launch — and identify every part in 3(a)–(i) on a real airframe, including an actual payload and payload bay. NAR safety code compliance is briefed and checked at the pad." },
+                    { id: "4a", note: "Action-reaction demonstrated with measured thrust-to-weight and a real liftoff, not a diagram." },
+                    { id: "4d", note: "The telemetry chain is the same five steps as a planetary image: sensor → number → packet → radio → ground station log." },
                 ],
             },
             {
@@ -1038,15 +1045,16 @@ const CAPSTONES = [
             {
                 heading: "Hardware",
                 list: [
-                    "LILYGO T-Beam Supreme (US915) — flight computer with ESP32-S3, GPS, LoRa radio, onboard sensors",
-                    "Heltec WiFi LoRa 32 V3 (902–928 MHz) — USB ground receiver",
-                    "Estes Lil' Spite rocket kit (2.0 in diameter, ~292 g dry) — leaves margin for the payload",
+                    "LILYGO T-Beam Supreme (US915) ×2 — flight computer with ESP32-S3, GPS, LoRa radio, onboard sensors. Two boards: one bench unit for development, one flight unit nobody experiments on.",
+                    "Heltec WiFi LoRa 32 V3 (902–928 MHz) — USB ground receiver. Buy V3 specifically; the newer V4 has a different pin mapping and most example code assumes V3.",
+                    "Estes Pro Series II Lil' Spite (51.8 in long, 2.0 in dia, 292 g dry, $59.99) — a mid-power airframe rated intermediate and boxed for 18+. Counselor's rocket, Scout-instrumented.",
+                    "Estes Pro Series II launch pad or rail — required. This rocket needs a 1/4 in rod; the common Porta-Pad II is 1/8 in and will not fly it.",
                     "Estes Pro Series II 29 mm motor retainer (motors swap quickly during testing)",
-                    "Estes E16-4 engine pack (primary) and optional F15-4 for a motor comparison",
-                    "Optional: Estes Jayhawk for a larger airframe if packaging is tight",
+                    "Estes E16-6 for empty flights and E16-4 once the payload is aboard — the extra mass lowers apogee and shortens the coast, so the shorter delay is correct. Optional F15-6 for a motor comparison.",
+                    "18650 cells, a payload sled, foam and zip ties, and USB-C data cables that are actually data cables",
                 ],
                 footer:
-                    "Estimated cost for the core setup is about $167–$170 before tax and shipping.",
+                    "Budget about $265–$355 for one payload, or $360–$465 for a crew build with a spare board set, before tax and shipping. Prices checked August 2026 — re-check at checkout.",
             },
             {
                 heading: "Six-stage AI-assisted build",
