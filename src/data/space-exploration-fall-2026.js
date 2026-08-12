@@ -11,7 +11,7 @@ export const series = {
     kicker: "Scouting America · Troop 308 · Merit Badge Series",
     badgeSlug: "space-exploration",
     summary:
-        "Seven Monday-night 45-minute blocks and a Saturday launch day the weekend before Thanksgiving, taking a Scout from “why do we go to space” to a rocket they built, predicted, flew, recovered, and analyzed. Every minute is mapped to a requirement, and the badge gets signed off with paperwork on a table — not on a tailgate in the wind.",
+        "Five Monday-night 45-minute blocks and a Saturday launch day the weekend before Thanksgiving, taking a Scout from “why do we go to space” to a rocket they built, predicted, flew, recovered, and analyzed. Every minute is mapped to a requirement, and the badge gets signed off with paperwork on a table — not on a tailgate in the wind.",
     groundRules: [
         "45 minutes per Monday. The meeting plan already owns 0:00–0:30 and 1:15–1:30 — this series takes 0:30–1:15 and gives it back on time.",
         "Scouts buy their own rocket kit, and they have to earn the right to order it (see the flight-readiness gate).",
@@ -21,7 +21,7 @@ export const series = {
         "The Telemetry Rocket runs as a group project on a parallel track — three Saturday crew sessions, plus checkpoints on Monday nights. Every Scout who wants a crew role gets one.",
     ],
     counselorFacts: [
-        "7 Mondays × 45 min",
+        "5 Mondays × 45 min",
         "Launch day Sat Nov 21",
         "6–10 Scouts",
         "Reqs 1–8 covered",
@@ -246,6 +246,7 @@ export const decks = {
                 kicker: "Space Exploration Merit Badge · Night 1 of 7",
                 heading: "Why We Go",
                 sub: "Requirement 1 — the purpose of space exploration",
+                art: "four-reasons",
                 notes:
                     "Open standing up, no slides for the first 60 seconds. Ask: 'Name one thing in this room that exists because somebody went to space.' Take three answers. Do not correct wrong ones yet — the benefits slide will do it for you.",
             },
@@ -253,6 +254,7 @@ export const decks = {
                 type: "prompt",
                 heading: "Warm-up",
                 question: "Space is expensive and dangerous. Give me one honest reason a country spends money on it anyway.",
+                art: "four-reasons",
                 answer:
                     "There are four families of answers, and the badge wants all four: history and competition, specific scientific knowledge, benefits back on Earth, and getting along with other countries. That is literally requirement 1a through 1d.",
                 notes:
@@ -277,6 +279,7 @@ export const decks = {
             {
                 type: "bullets",
                 heading: "1b — Immediate goals: what are we actually trying to learn?",
+                art: "careers",
                 intro: "Not 'explore space.' Name the question the mission is built to answer.",
                 bullets: [
                     "Was Mars ever habitable, and is there preserved evidence of it? — Perseverance, sample caching",
@@ -309,6 +312,7 @@ export const decks = {
             {
                 type: "twocol",
                 heading: "1c — The myth and the reality",
+                art: "spinoff",
                 left: {
                     h: "Did NOT come from NASA",
                     items: ["Tang (1957, pre-NASA)", "Velcro (Swiss, 1941)", "Teflon (DuPont, 1938)", "Microwave ovens"],
@@ -339,6 +343,7 @@ export const decks = {
             {
                 type: "bullets",
                 heading: "Requirement 2 — your assignment",
+                art: "gate",
                 intro: "Design a collector's card for your favorite space pioneer. Picture on the front, information on the back. Due September 28.",
                 bullets: [
                     "Pick tonight, on the sign-up sheet. No duplicates — first Scout to claim a name owns it.",
@@ -354,6 +359,7 @@ export const decks = {
             {
                 type: "bullets",
                 heading: "The flight-readiness gate",
+                art: "gate",
                 intro: "You do not get to order a rocket until you have earned it. Four things:",
                 bullets: [
                     "1. Tonight's requirement 1 discussion — done, you're sitting here.",
@@ -369,6 +375,7 @@ export const decks = {
                 type: "title",
                 kicker: "Next up · Monday, September 28",
                 heading: "How Rockets Work",
+                art: "third-law",
                 sub: "Bring your pioneer card. Bring your rocket kit if it's arrived.",
                 notes:
                     "Close by holding up the launch pad and the altimeter. Physical objects on the table at the end of night 1 are worth more than any slide. Tell them the altimeter is what scores the competition.",
@@ -387,6 +394,7 @@ export const decks = {
                 kicker: "Space Exploration Merit Badge · Night 2 of 7",
                 heading: "How Rockets Work",
                 sub: "Requirements 3 (parts) and 4 (principles of space flight)",
+                art: "third-law",
                 notes:
                     "Have a fully built Cosmic Cargo and a spent motor on the table before anyone sits down. Tonight is the most hands-on night of the three — talk less, hand things around more.",
             },
@@ -400,6 +408,7 @@ export const decks = {
             {
                 type: "bullets",
                 heading: "4a — Action and reaction",
+                art: "third-law",
                 intro: "Newton's third law is the whole reason a rocket works in vacuum.",
                 bullets: [
                     "Demo: balloon on a string across the room. Air goes back, balloon goes forward.",
@@ -450,6 +459,7 @@ export const decks = {
             {
                 type: "calculator",
                 heading: "Predict your flight",
+                art: "predicted-vs-measured",
                 intro:
                     "Open the rocket calculator on the merit badge site, pick your airframe and motor, and write down your predicted apogee. That number goes on your competition card and you cannot change it after launch day starts.",
                 notes:
@@ -491,6 +501,7 @@ export const decks = {
             {
                 type: "bullets",
                 heading: "Before you leave",
+                art: "checklist",
                 bullets: [
                     "Pioneer card in the box (req 2). If it's not in the box, it isn't done.",
                     "Rocket kit on the table for inspection — sealed is fine, I just need to see it exists.",
@@ -515,12 +526,14 @@ export const decks = {
                 kicker: "Space Exploration Merit Badge · Night 3 of 7",
                 heading: "Missions",
                 sub: "Requirements 5 and 6 — robotic vs crewed, and one vehicle in real detail",
+                art: "robotic-vs-crewed",
                 notes:
                     "This night used to be crammed with requirement 7 as well. It isn't anymore, so slow down and let the comparison discussion breathe — the robotic-vs-crewed argument is the best conversation in the whole badge and it needs room to be an argument.",
             },
             {
                 type: "bullets",
                 heading: "Requirement 5 — pick TWO",
+                art: "timeline-series",
                 intro: "You only have to do two of these three. Most Scouts should take 5a and 5c.",
                 bullets: [
                     "5a — Discuss one robotic mission and one historic crewed mission with me: discoveries, importance, what we learned.",
@@ -592,14 +605,55 @@ export const decks = {
                 type: "prompt",
                 heading: "The argument worth having",
                 question: "We could send ten robots to Mars for the price of one crewed landing. So why send people at all?",
+                art: "robotic-vs-crewed",
                 answer:
                     "There is no clean answer and Scouts should leave knowing that. Robots: cheap, patient, expendable, no lunch, decades of operation, no ride home needed. People: expensive, fragile, slow — and unmatched at improvising when something breaks in a way nobody planned for. Apollo 13 is the argument for people. Voyager is the argument against.",
                 notes:
                     "Let this run. Take a show of hands, then ask two Scouts on opposite sides to defend it. This is the requirement-5 discussion happening naturally instead of you quizzing them. Do not resolve it — tell them working aerospace engineers still argue about this at lunch.",
             },
             {
+                type: "video",
+                heading: "Requirement 7 — setting up the design problem",
+                youtubeId: "ATgwz_hS3Qg",
+                channel: "The Space Race",
+                videoTitle: "How NASA Will Build A City On The Moon",
+                play: "Play 4 min, then straight into the charrette. Skip entirely if the speaker ran long.",
+                notes:
+                    "The video exists to hand them a vocabulary — regolith, ISRU, radiation shielding, lava tubes — that they will immediately use in their own design. Cut it the moment they start having ideas. An idea in a Scout's head beats four more minutes of video every time.",
+                backup: {
+                    label: "Alternative if you want construction focus",
+                    youtubeId: "ajP0AlYxhug",
+                    channel: "The Space Race",
+                    videoTitle: "How NASA Plans To Build The First Moon Base!",
+                },
+            },
+            {
+                type: "charrette",
+                heading: "Base design charrette",
+                art: "base-subsystems",
+                intro:
+                    "Patrols pick a location, then design a base and sell it in three minutes. Requirement 7 needs a drawing or model plus a plan for energy, construction, life support, and purpose. With a speaker: 15 minutes of design. Without: 30 minutes, and the drawings get genuinely good.",
+                locations: [
+                    { place: "Moon — south pole (Shackleton rim)", hook: "Near-permanent sunlight on the crater rim, permanently shadowed water ice a short drive away. Three days from home." },
+                    { place: "Mars — Jezero Crater", hook: "Ancient river delta, thin CO₂ atmosphere you can make rocket fuel from. Eight months from help." },
+                    { place: "Titan", hook: "Thick atmosphere, liquid methane lakes, −290 °F. The air is thick enough that you could strap on wings and fly." },
+                    { place: "Europa", hook: "A liquid ocean under the ice. Also lethal radiation from Jupiter — you live under the ice or you don't live." },
+                    { place: "Near-Earth asteroid", hook: "Almost no gravity. Everything has to be anchored, including the Scouts." },
+                    { place: "Venus — cloud deck at 50 km", hook: "Earthlike pressure and temperature at altitude. Sulfuric acid rain. Your base is a blimp." },
+                ],
+                required: [
+                    "7a — Source of energy. Solar, nuclear, or something local. Say how much, and say what happens at night.",
+                    "7b — How it gets constructed. Shipped whole, inflated, 3D-printed from local dirt, or buried?",
+                    "7c — Life support. Air, water, food, waste, radiation — and what fails first.",
+                    "7d — Purpose and function. Why does this base exist, and who is paying for it?",
+                ],
+                notes:
+                    "Butcher paper and markers per patrol, visible timer. Each Scout in the patrol owns one of the four subsystems and must speak to it during the pitch — that is where the requirement actually gets met. Two questions to ask every patrol: 'What kills your crew first?' and 'What does this base do that a robot couldn't?' The second one ties straight back to last week's argument.",
+            },
+            {
                 type: "bullets",
                 heading: "Before you leave",
+                art: "checklist",
                 bullets: [
                     "Kits should have arrived by now. If yours hasn't, tell me tonight, not on November 2.",
                     "Next Monday, November 2, is BUILD NIGHT. Bring your kit, your motors, and anything you want to paint it with.",
@@ -623,12 +677,14 @@ export const decks = {
                 kicker: "Space Exploration Merit Badge · Night 4 of 7",
                 heading: "Build Night",
                 sub: "Requirement 3 — build it, and build it straight",
+                art: "build-order",
                 notes:
                     "Talk for six minutes maximum, then get out of the way. Set up four stations before anyone arrives and leave the build-sequence slide projected the whole night so nobody has to ask what step they're on.",
             },
             {
                 type: "bullets",
                 heading: "Three rules for tonight",
+                art: "build-order",
                 bullets: [
                     "Dry-fit everything before glue touches anything. Every single piece. No exceptions.",
                     "Fins straight matters more than fins pretty. A crooked fin makes the rocket corkscrew and ruins your prediction — which is the thing you're actually being scored on.",
@@ -641,6 +697,7 @@ export const decks = {
             {
                 type: "steps",
                 heading: "The build sequence",
+                art: "build-order",
                 intro: "Leave this projected all night. The Cosmic Cargo needs no glue for the main structure, so most of tonight is careful assembly, alignment, and finish.",
                 steps: [
                     { n: 1, title: "Inventory", detail: "Open the bag and count every part against the parts list before you touch anything. Missing part found now is fixable; found on Nov 21 is not." },
@@ -658,6 +715,7 @@ export const decks = {
             {
                 type: "bullets",
                 heading: "Before you leave",
+                art: "checklist",
                 bullets: [
                     "Rocket built, mass written on your competition card, initialed by me.",
                     "Paint at home. Bring it finished on November 16 for inspection.",
@@ -670,91 +728,48 @@ export const decks = {
         ],
     },
 
-    bases: {
-        id: "bases",
-        title: "Deck 5 — Speaker Night and Bases",
-        meeting: "Monday, November 9, 2026",
-        runtime: "Speaker 25 min + charrette 18 min, or charrette 40 min if no speaker",
-        slides: [
-            {
-                type: "title",
-                kicker: "Space Exploration Merit Badge · Night 5 of 7",
-                heading: "Living Out There",
-                sub: "Requirement 7 — design an inhabited base, plus our guest",
-                notes:
-                    "Having its own night is the whole point of the extended schedule. If the speaker lands, run speaker first while attention is fresh, then charrette. If the speaker cancels — and one in three does — you have a full 40 minutes for the charrette and the night is still excellent. Never build a night that depends on someone else showing up.",
-            },
-            {
-                type: "bullets",
-                heading: "Hosting the speaker properly",
-                intro: "This is a Scout-led job, not an adult one. Assign these three roles at the start of the meeting.",
-                bullets: [
-                    "Introducer — one Scout, 30 seconds, states the guest's name, organization, and what they do. Practiced beforehand.",
-                    "Thanker — one Scout, 30 seconds at the end, names one specific thing they learned. Not 'thanks for coming.'",
-                    "Three primed questioners — each has a written question ready so the silence after 'any questions?' never happens.",
-                ],
-                note: "Prime the questions yourself the week before. Good ones: 'What surprised you most about the job?' 'What did you study and would you pick it again?' 'What's the worst day you've had at work?'",
-                notes:
-                    "The primed-question trick is the difference between a great speaker night and eight Scouts staring at the floor. Text the three Scouts their question on Sunday. They will feel important and the room will feel alive.",
-            },
-            {
-                type: "video",
-                heading: "Requirement 7 — setting up the design problem",
-                youtubeId: "ATgwz_hS3Qg",
-                channel: "The Space Race",
-                videoTitle: "How NASA Will Build A City On The Moon",
-                play: "Play 4 min, then straight into the charrette. Skip entirely if the speaker ran long.",
-                notes:
-                    "The video exists to hand them a vocabulary — regolith, ISRU, radiation shielding, lava tubes — that they will immediately use in their own design. Cut it the moment they start having ideas. An idea in a Scout's head beats four more minutes of video every time.",
-                backup: {
-                    label: "Alternative if you want construction focus",
-                    youtubeId: "ajP0AlYxhug",
-                    channel: "The Space Race",
-                    videoTitle: "How NASA Plans To Build The First Moon Base!",
-                },
-            },
-            {
-                type: "charrette",
-                heading: "Base design charrette",
-                intro:
-                    "Patrols pick a location, then design a base and sell it in three minutes. Requirement 7 needs a drawing or model plus a plan for energy, construction, life support, and purpose. With a speaker: 15 minutes of design. Without: 30 minutes, and the drawings get genuinely good.",
-                locations: [
-                    { place: "Moon — south pole (Shackleton rim)", hook: "Near-permanent sunlight on the crater rim, permanently shadowed water ice a short drive away. Three days from home." },
-                    { place: "Mars — Jezero Crater", hook: "Ancient river delta, thin CO₂ atmosphere you can make rocket fuel from. Eight months from help." },
-                    { place: "Titan", hook: "Thick atmosphere, liquid methane lakes, −290 °F. The air is thick enough that you could strap on wings and fly." },
-                    { place: "Europa", hook: "A liquid ocean under the ice. Also lethal radiation from Jupiter — you live under the ice or you don't live." },
-                    { place: "Near-Earth asteroid", hook: "Almost no gravity. Everything has to be anchored, including the Scouts." },
-                    { place: "Venus — cloud deck at 50 km", hook: "Earthlike pressure and temperature at altitude. Sulfuric acid rain. Your base is a blimp." },
-                ],
-                required: [
-                    "7a — Source of energy. Solar, nuclear, or something local. Say how much, and say what happens at night.",
-                    "7b — How it gets constructed. Shipped whole, inflated, 3D-printed from local dirt, or buried?",
-                    "7c — Life support. Air, water, food, waste, radiation — and what fails first.",
-                    "7d — Purpose and function. Why does this base exist, and who is paying for it?",
-                ],
-                notes:
-                    "Butcher paper and markers per patrol, visible timer. Each Scout in the patrol owns one of the four subsystems and must speak to it during the pitch — that is where the requirement actually gets met. Two questions to ask every patrol: 'What kills your crew first?' and 'What does this base do that a robot couldn't?' The second one ties straight back to last week's argument.",
-            },
-        ],
-    },
-
-    "flight-readiness": {
-        id: "flight-readiness",
-        title: "Deck 6 — Flight Readiness Review",
+    "mission-control": {
+        id: "mission-control",
+        title: "Deck 4 — Mission Control and Flight Readiness",
         meeting: "Monday, November 16, 2026",
-        runtime: "~10 min of slides, 35 min of inspections and predictions",
+        runtime: "~15 min of slides, 30 min of crew assignments, inspections and predictions",
         slides: [
             {
                 type: "title",
-                kicker: "Space Exploration Merit Badge · Night 6 of 7",
-                heading: "Flight Readiness Review",
-                sub: "Five days to launch. Nothing flies on Saturday that doesn't pass tonight.",
+                kicker: "Space Exploration Merit Badge · Night 4 of 5",
+                heading: "Mission Control",
+                sub: "Take a station, learn the calls, pass flight readiness. Five days to launch.",
+                art: "go-nogo",
                 notes:
                     "Run this like a real FRR, because that is what it is. Every real launch has one, every real one has a go/no-go, and Scouts respond extremely well to being held to an adult standard. Say 'flight readiness review' every time, never 'checking your rockets.'",
             },
             {
+                type: "launchops",
+                heading: "You are not spectators \u2014 you are the range crew",
+                intro:
+                    "Eight positions, real callsigns, and a countdown that nobody gets to skip. Pick your station tonight and practise the calls, because on Saturday the count runs for real.",
+                notes:
+                    "This is the slide that turns launch day from 'watch an adult press a button' into something Scouts remember for years. Assign the eight positions by name tonight and write them on the whiteboard. Then run the countdown clock at 10x with the room doing the call-and-response \u2014 twice through and they have it. The go/no-go poll lands hardest: tell them plainly that any Scout saying NO-GO stops the count, no explanation required and no argument, exactly as it works at a real range. Then hand a Scout a reason to use it during the rehearsal so they know it is real.",
+            },
+            {
+                type: "bullets",
+                heading: "Build help desk \u2014 open all night",
+                intro: "Your rocket should be built by now. If it is not, or something went wrong, this is the table to come to.",
+                art: "build-order",
+                bullets: [
+                    "Fins crooked and already glued? Bring it. Usually fixable, occasionally not \u2014 far better to know tonight than Saturday morning.",
+                    "Never started? Come to the side table and we will build it here. About 40 minutes, and I have spare kits.",
+                    "Nose cone too tight or too loose? Two minutes with sandpaper or a wrap of tape.",
+                    "Missing a part? Tell me tonight. I have spares of everything small.",
+                ],
+                note: "No judgement and no lecture. A Scout who turns up with an unbuilt kit and asks for help has done exactly the right thing.",
+                notes:
+                    "Staff this with an older Scout so you stay free to run inspections. Say the 'no judgement' line out loud \u2014 the Scout most likely to quietly not show up on Saturday is the one embarrassed about an unbuilt rocket.",
+            },
+            {
                 type: "twocol",
                 heading: "The inspection standard",
+                art: "go-nogo",
                 left: {
                     h: "GO",
                     items: [
@@ -784,6 +799,7 @@ export const decks = {
             {
                 type: "calculator",
                 heading: "Seal your prediction",
+                art: "predicted-vs-measured",
                 intro:
                     "Open the altitude simulator, enter YOUR measured mass — not the box spec — pick your motor, and write the predicted apogee on your competition card. I initial it. It cannot change after tonight.",
                 notes:
@@ -792,6 +808,7 @@ export const decks = {
             {
                 type: "bullets",
                 heading: "Safety readback — on your feet",
+                art: "go-nogo",
                 intro: "I pick three rules from the NAR Model Rocket Safety Code at random. You tell me what they are. Everybody does this.",
                 bullets: [
                     "Minimum safety distance from the pad, and who is allowed inside it",
@@ -807,6 +824,7 @@ export const decks = {
             {
                 type: "bullets",
                 heading: "Saturday, November 21",
+                art: "packing",
                 bullets: [
                     "Range opens 8:30. Craftsmanship judging happens before anything flies, so arrive with it finished.",
                     "Bring: your rocket, your motors, closed-toe shoes, hat, water, sunscreen, a folding chair.",
@@ -831,12 +849,14 @@ export const decks = {
                 kicker: "Space Exploration Merit Badge · Night 7 of 7",
                 heading: "What the Data Said",
                 sub: "Predicted vs measured, the awards, and badge sign-off",
+                art: "predicted-vs-measured",
                 notes:
                     "This is the night the badge actually gets finished, and it is the night most troops skip. Thanksgiving week was already scheduled as a light catch-up night, which makes it perfect — low pressure, high payoff, and Scouts leave the fall with a completed badge instead of a loose end.",
             },
             {
                 type: "bullets",
                 heading: "Predicted vs measured — the whole point",
+                art: "predicted-vs-measured",
                 intro: "Put every Scout's numbers on the whiteboard: predicted, measured, percent error. All of them, together.",
                 bullets: [
                     "Almost everyone will have flown LOWER than predicted. That is normal and it is the lesson.",
@@ -851,6 +871,7 @@ export const decks = {
             {
                 type: "bullets",
                 heading: "Telemetry crew — what the rocket told us",
+                art: "telemetry-trace",
                 intro: "Crew presents the flight data to the troop. Ten minutes, on the projector, with the actual CSV open.",
                 bullets: [
                     "The altitude trace: boost, burnout, coast, apogee, ejection, descent. Point at each one on the plot.",
@@ -865,6 +886,7 @@ export const decks = {
             {
                 type: "bullets",
                 heading: "Awards and sign-off",
+                art: "timeline-series",
                 bullets: [
                     "Prediction Cup — lowest percent error. Read the top three numbers out loud.",
                     "Mission Accomplished — declared an objective, flew it, stated the result with a number and a unit.",
@@ -894,7 +916,7 @@ export const meetings = [
         block: "0:30–1:15 (45 min)",
         deck: "why-we-go",
         objective:
-            "Cover requirement 1 completely, hand out requirement 2 and requirement 8 as homework, publish the flight-readiness gate, and recruit the telemetry crew.",
+            "Cover requirement 1 completely, hand out requirement 2 and requirement 8, publish the flight-readiness gate, and recruit the telemetry crew.",
         covers: [
             { id: "1a", how: "Video clip + discussion of the space race as a prestige and military contest." },
             { id: "1b", how: "Five current missions stated as a specific question each one exists to answer." },
@@ -906,13 +928,13 @@ export const meetings = [
         runOfShow: [
             ["0:30–0:33", "Stand-up hook: 'name one thing in this room that exists because somebody went to space.' Three answers, no corrections yet.", "Counselor"],
             ["0:33–0:36", "Frame the four reasons on the whiteboard: HISTORY / KNOWLEDGE / BENEFITS / COOPERATION.", "Counselor"],
-            ["0:36–0:42", "Deck slides 3–4: history clip (stop at 3:30) + immediate goals.", "Counselor"],
-            ["0:42–0:50", "Deck slides 5–6: two benefit shorts + the myth-vs-reality slide. Highest-energy part of the night.", "Counselor"],
-            ["0:50–0:55", "Deck slide 7: international cooperation clip + ISS discussion.", "Counselor"],
-            ["0:55–1:02", "Pioneer draft. Clipboard goes around DURING this, not after. Scouts claim a name, no duplicates.", "SPL runs the clipboard"],
-            ["1:02–1:07", "TELEMETRY CREW CALL. Hold up the T-Beam and the Heltec. 'This one flies, this one talks to the laptop.' Take names for the Sep 19 crew session.", "Counselor"],
-            ["1:07–1:13", "Flight-readiness gate + order form + NAR safety code printout handed out. Gate closes Friday October 2.", "Counselor"],
-            ["1:13–1:15", "Show the physical launch pad and altimeter on the table. Walk the full calendar through November 23. Release on time.", "Counselor"],
+            ["0:36–0:42", "History clip (stop at 3:30) + immediate goals.", "Counselor"],
+            ["0:42–0:50", "Two benefit shorts + the myth-vs-reality slide. Highest-energy part of the night.", "Counselor"],
+            ["0:50–0:55", "International cooperation clip + ISS discussion.", "Counselor"],
+            ["0:55–1:02", "Pioneer draft. Clipboard goes around DURING this, not after.", "SPL runs the clipboard"],
+            ["1:02–1:07", "TELEMETRY CREW CALL. Hold up the T-Beam and the Heltec. Take names for Sep 19.", "Counselor"],
+            ["1:07–1:13", "Flight-readiness gate + order form + safety code printout. Gate closes Friday October 2.", "Counselor"],
+            ["1:13–1:15", "Show the launch pad and altimeter on the table. Walk the calendar. Release on time.", "Counselor"],
         ],
         materials: [
             "Projector or a large screen, HDMI cable, and the deck loaded before Scouts arrive",
@@ -922,7 +944,7 @@ export const meetings = [
             "Printed NAR Model Rocket Safety Code, one per Scout",
             "The Porta-Pad II and the Estes altimeter, out of the box, on the table",
             "A T-Beam and a Heltec to hold up during the crew call",
-            "A printed one-page calendar: seven Mondays, three Saturdays, one launch day",
+            "A printed one-page calendar: five Mondays, three Saturdays, one launch day",
         ],
         homework: [
             "Build your space pioneer card, due September 28 (req 2).",
@@ -930,7 +952,7 @@ export const meetings = [
             "Get the order form signed and order your kit by Friday, October 2.",
             "Start looking at one space-related career for requirement 8.",
         ],
-        risk: "Hand out the printed calendar. Seven Mondays across three months is a lot to hold in your head, and a parent with the dates on the fridge is the difference between a Scout who finishes and one who drifts.",
+        risk: "Hand out the printed calendar. Five Mondays spread across three months is easy to lose track of, and a parent with the dates on the fridge is the difference between a Scout who finishes and one who drifts.",
     },
     {
         n: 2,
@@ -940,26 +962,25 @@ export const meetings = [
         block: "0:30–1:15 (45 min)",
         deck: "how-rockets-work",
         objective:
-            "Cover requirement 3's nine parts and all of requirement 4 with hands-on demos, collect the pioneer cards, and close the ordering gate this week.",
+            "Cover requirement 3's nine parts and all of requirement 4 with hands-on demos and the simulators, collect the pioneer cards, and close the ordering gate this week.",
         covers: [
             { id: "3", how: "Parts identification relay against a built rocket. Nine labels, two patrols, explain-out-loud scoring." },
             { id: "4a", how: "Balloon-on-a-string demo plus the skateboard thought experiment." },
-            { id: "4b", how: "Video clip plus a spent Estes motor passed hand to hand — nozzle, grain, delay, ejection charge." },
-            { id: "4c", how: "Video plus Newton's cannonball — orbit is falling and missing." },
-            { id: "4d", how: "The five-step imaging chain, mirrored against the troop's own telemetry rocket." },
+            { id: "4b", how: "Video clip, the interactive motor cutaway, and a spent Estes motor passed hand to hand." },
+            { id: "4c", how: "Video plus the ground-to-orbit simulator — orbit is sideways, not up." },
+            { id: "4d", how: "The mission-control diagram: the same six steps as a photograph from Mars." },
             { id: "2", how: "Cards collected and discussed. Each Scout must also speak to four others' pioneers." },
         ],
         runOfShow: [
-            ["0:30–0:33", "Collect pioneer cards into the box. Check off who has ordered a kit and chase who hasn't.", "SPL"],
+            ["0:30–0:33", "Collect pioneer cards. Check off who has ordered a kit and chase who hasn't.", "SPL"],
             ["0:33–0:41", "Parts relay (req 3). Two patrols, nine labels, explain three each, then swap.", "SPL runs it, counselor judges"],
             ["0:41–0:46", "Balloon-on-a-string demo + action-reaction discussion (req 4a).", "Youngest Scout releases it"],
-            ["0:46–0:52", "Rocket engine clip + pass the spent motor. Read the C6-5 code together (req 4b).", "Counselor"],
-            ["0:52–0:57", "Live altitude calculator on the projector: Cosmic Cargo on B6-4 vs C6-5. Scouts predict first.", "Counselor"],
-            ["0:57–1:02", "Scouts run their own prediction to see how it works. Real sealed predictions come Nov 16, after they know their built mass.", "Scouts"],
-            ["1:02–1:06", "Satellites and orbits clip + Newton's cannonball (req 4c).", "Counselor"],
-            ["1:06–1:10", "Imaging chain (req 4d): sensor → number → packet → radio → laptop.", "Counselor"],
-            ["1:10–1:14", "TELEMETRY DEMO. Crew runs it: one Scout at the back wall with the T-Beam, CSV filling on the projector.", "Telemetry crew"],
-            ["1:14–1:15", "Competition rules published. Gate closes Friday. Release.", "Counselor"],
+            ["0:46–0:52", "Motor cutaway + pass the spent motor. Decode C6-5 together (req 4b).", "Counselor"],
+            ["0:52–0:58", "Launch simulator on the projector. Predict first, then press Launch. Add payload and watch T/W fall.", "Counselor"],
+            ["0:58–1:03", "Recovery simulator as a challenge: longest time aloft without shredding the chute.", "Three Scouts try"],
+            ["1:03–1:08", "Orbit simulator (req 4c): straight up with the same fuel still comes back down.", "Counselor"],
+            ["1:08–1:13", "Mission-control diagram (req 4d) + live telemetry packet across the room if ready.", "Telemetry crew"],
+            ["1:13–1:15", "Competition rules published. Gate closes Friday. Build it at home when it arrives. Release.", "Counselor"],
         ],
         materials: [
             "One fully built Cosmic Cargo (yours) as the reference rocket",
@@ -967,212 +988,147 @@ export const meetings = [
             "Balloon-on-a-string rig: fishing line, drinking straw, tape, long balloons — assembled BEFORE the meeting",
             "At least two SPENT Estes motors (never a live one in a hand-to-hand demo)",
             "Competition cards, pre-printed, one per Scout",
-            "Laptop + projector for the live altitude simulator",
+            "Laptop + projector — the simulators carry most of this night",
             "The T-Beam and Heltec pair, working, for the demo",
             "The ordering checklist — who has ordered and who hasn't",
+            "Printed build instructions to take home, since building now happens at home",
         ],
         homework: [
             "Order your kit and motors by Friday, October 2 if you haven't. This is the gate.",
-            "Read the competition rules on the site. The prize is for the best prediction, not the highest flight.",
-            "Decide your mission objective for launch #2 and be ready to defend it.",
-            "Do NOT build your rocket when it arrives. Build night is November 2 and your fins will be straighter.",
+            "BUILD IT AT HOME when it arrives. Take your time, dry-fit everything, keep the fins straight.",
+            "Stuck or unsure? Bring it to the November 16 meeting — there's a help desk and I have spare parts.",
+            "Read the competition rules. The main prize is for the best prediction, not the highest flight.",
         ],
-        risk: "The 'don't build it early' instruction goes against every instinct a Scout has when a box arrives. Say it, put it in the parent email, and say it again — a rocket assembled alone at a kitchen table is where crooked fins come from.",
+        risk: "Building moved home to save meeting time, which means nobody is watching the fin alignment. Push the printed instructions hard, tell them to dry-fit before glue, and make the November 16 help desk sound genuinely welcoming rather than a last resort.",
     },
     {
         n: 3,
         date: "2026-10-26",
         dateLabel: "Monday, October 26, 2026",
-        title: "Missions",
+        title: "Missions and Bases",
         block: "0:30–1:15 (45 min)",
         deck: "missions",
         objective:
-            "Cover requirements 5 and 6 properly, with room for the robotic-vs-crewed argument to actually be an argument.",
+            "Cover requirements 5, 6 and 7 — the robotic-vs-crewed argument, one vehicle in detail, and a patrol base design.",
         covers: [
-            { id: "5a", how: "Voyager clip + Apollo clip, then a structured robotic-vs-crewed debate with two Scouts defending opposite sides." },
-            { id: "5c", how: "Sample-return design assigned to anyone taking 5c, and folded into the Nov 9 base charrette." },
-            { id: "6", how: "Shuttle clip (or ISS), then each Scout gives purpose, operation, and components." },
-        ],
-        runOfShow: [
-            ["0:30–0:35", "Requirement 5 options. Steer most Scouts to 5a + 5c. Get due dates in writing for anyone taking 5b.", "Counselor"],
-            ["0:35–0:43", "Voyager clip. Discovery, importance, what we learned.", "Counselor"],
-            ["0:43–0:51", "Apollo clip. Same three questions, crewed this time.", "Counselor"],
-            ["0:51–1:00", "THE ARGUMENT. Show of hands, then two Scouts defend opposite sides. Do not resolve it.", "Scouts"],
-            ["1:00–1:09", "Shuttle or ISS (req 6). Each Scout owes purpose + operation + components.", "Counselor"],
-            ["1:09–1:15", "Build night briefing: bring your kit, your motors, and paint ideas. Chase anyone whose kit hasn't arrived.", "Counselor"],
-        ],
-        materials: [
-            "Projector, deck loaded",
-            "A whiteboard for the robotic-vs-crewed tally",
-            "The kit-arrival checklist — this is your last chance to catch a missing kit before build night",
-            "Two spare Cosmic Cargo kits in the car for whoever's never arrived",
-        ],
-        homework: [
-            "Bring your unopened kit and your motors on November 2.",
-            "Think about what you want your rocket to look like. Bring paint ideas, not wet paint.",
-            "Anyone taking 5b: your site or scrapbook is due November 16.",
-            "Keep working requirement 8.",
-        ],
-        risk: "This is your last checkpoint before build night. A Scout whose kit hasn't shipped needs to know tonight, and you need a spare in the car — because the alternative is one Scout sitting out the best night of the series.",
-    },
-    {
-        n: 4,
-        date: "2026-11-02",
-        dateLabel: "Monday, November 2, 2026",
-        title: "Build Night",
-        block: "0:30–1:15 (45 min)",
-        deck: "build-night",
-        objective:
-            "Every Scout leaves with a built rocket and their measured mass written down. This is the night that removes the biggest failure mode in the plan.",
-        covers: [
-            { id: "3", how: "The build itself. Requirement 3 says build, launch, and recover — this is the build, done properly, with alignment checked by someone other than the builder." },
-        ],
-        runOfShow: [
-            ["0:30–0:36", "Three rules, then the build sequence goes up on the projector and stays there all night.", "Counselor"],
-            ["0:36–0:40", "Stations open. Station leads (older Scouts) take position and explain their station in one sentence each.", "Station leads"],
-            ["0:40–1:08", "Build. Scouts move through stations at their own pace: fins → lug → recovery → mass and balance.", "Everyone"],
-            ["1:08–1:12", "Mass check and card sign-off. Every Scout weighs their rocket and I initial the number.", "Counselor"],
-            ["1:12–1:15", "Cleanup, and name the catch-up window at the start of Nov 9 for anyone not finished.", "SPL"],
-        ],
-        materials: [
-            "Four station tables: 1 fin alignment, 2 launch lug, 3 recovery system, 4 mass and balance",
-            "Fin alignment guides — print the kit's guide on cardstock, one per station",
-            "Straightedges or metal rulers for checking fin alignment from three angles",
-            "A kitchen scale that reads to 1 gram, and a backup scale",
-            "White glue, plastic cement, sandpaper, masking tape, scissors, spare shock cord",
-            "Paper towels, a drop cloth, and a trash bag — this is the messiest night",
-            "Two pre-built spare kits for Scouts whose kit never arrived",
-            "Competition cards for recording measured mass",
-        ],
-        homework: [
-            "Paint or decorate at home. Light coats — heavy paint adds mass and costs you altitude.",
-            "Bring it finished to the Flight Readiness Review on November 16.",
-            "Bring questions for the guest speaker on November 9.",
-        ],
-        risk: "Running out of table space or alignment guides turns this into a queue. Set up four real stations, not one long table, and recruit two older Scouts as station leads by name the week before — this night lives or dies on the 3:1 ratio.",
-    },
-    {
-        n: 5,
-        date: "2026-11-09",
-        dateLabel: "Monday, November 9, 2026",
-        title: "Speaker Night and Bases",
-        block: "0:30–1:15 (45 min)",
-        deck: "bases",
-        objective:
-            "Host the guest speaker properly, and cover requirement 7 with a patrol design charrette. Works either way if the speaker cancels.",
-        covers: [
-            { id: "7a", how: "Charrette: patrols state energy source, quantity, and what happens at night." },
+            { id: "5a", how: "Voyager and Apollo clips, then a structured debate with two Scouts defending opposite sides." },
+            { id: "5c", how: "Sample-return design folded into the base charrette — same thinking, smaller vehicle." },
+            { id: "6", how: "Shuttle clip (or ISS), then each Scout gives purpose, operation and components." },
+            { id: "7a", how: "Charrette: energy source, quantity, and what happens at night." },
             { id: "7b", how: "Charrette: shipped, inflated, printed from regolith, or buried." },
             { id: "7c", how: "Charrette: air, water, food, waste, radiation — and what fails first." },
             { id: "7d", how: "Charrette pitch: why this base exists and who pays for it." },
-            { id: "8", how: "Speaker's career path is live requirement-8 material. Have Scouts take notes." },
         ],
         runOfShow: [
-            ["0:30–0:33", "Build catch-up window for anyone unfinished, running quietly at a side table all night.", "Station lead"],
-            ["0:33–0:35", "Scout introduces the guest. Practiced, 30 seconds, name and organization and what they do.", "Introducer"],
-            ["0:35–0:57", "Guest speaker + Q&A. Three primed questioners go first so the silence never happens.", "Guest"],
-            ["0:57–0:59", "Scout thanks the guest, naming one specific thing learned.", "Thanker"],
-            ["0:59–1:12", "Base design charrette. Patrols pick a location, design on butcher paper, visible timer.", "Patrols"],
-            ["1:12–1:15", "Three-minute pitches — as many as fit. Remainder pitch first thing on Nov 16.", "Patrols"],
+            ["0:30–0:34", "Requirement 5 options. Steer most Scouts to 5a + 5c.", "Counselor"],
+            ["0:34–0:41", "Voyager clip and Apollo clip. Discovery, importance, what we learned.", "Counselor"],
+            ["0:41–0:47", "Orbit-to-Moon simulator: aim at where the Moon will be, not where it is.", "Counselor"],
+            ["0:47–0:53", "THE ARGUMENT — robotic vs crewed. Show of hands, two Scouts defend opposite sides.", "Scouts"],
+            ["0:53–0:58", "Shuttle or ISS (req 6). Each Scout owes purpose + operation + components.", "Counselor"],
+            ["0:58–1:00", "Moon base video. Cut it the second they start having ideas.", "Counselor"],
+            ["1:00–1:11", "Base design charrette on butcher paper. Visible timer.", "Patrols"],
+            ["1:11–1:15", "Three-minute pitches, then the build reminder for November 16.", "Patrols"],
+        ],
+        materials: [
+            "Projector, deck loaded",
+            "Whiteboard for the robotic-vs-crewed tally",
+            "Butcher paper or flip-chart pad, one sheet per patrol, plus markers and a visible timer",
+            "Printed location cards (six of them) and the requirement 7 subsystem prompts",
+            "The kit-arrival checklist — last chance to catch a missing kit with time to fix it",
+            "Two spare Cosmic Cargo kits in the car",
+        ],
+        homework: [
+            "Rocket built and painted at home, ready for inspection on November 16.",
+            "Not built yet, or it went wrong? Bring it on November 16 — the help desk is open all night.",
+            "Anyone taking 5b: your site or scrapbook is due November 16.",
+            "Keep working requirement 8.",
+        ],
+        risk: "This is the fullest night of the five and the charrette is the first thing that will get squeezed. If you are behind at 0:58, cut the requirement 6 video and keep the charrette — requirement 7 needs a drawing, and there is no other night to make one.",
+    },
+    {
+        n: 4,
+        date: "2026-11-16",
+        dateLabel: "Monday, November 16, 2026",
+        title: "Mission Control and Flight Readiness",
+        block: "0:30–1:15 (45 min)",
+        deck: "mission-control",
+        objective:
+            "Assign the range crew and rehearse the countdown, inspect every rocket, seal every prediction, and run the build help desk for anyone who needs it.",
+        covers: [
+            { id: "3", how: "Safety code compliance verified individually, plus the build help desk for unfinished rockets." },
+            { id: "4", how: "Sealed prediction using their own measured mass — requirement 4 applied to their own vehicle." },
+            { id: "8", how: "If a guest speaker lands on this night, their career path is live requirement-8 material." },
+        ],
+        runOfShow: [
+            ["0:30–0:34", "Frame it as a real Flight Readiness Review. Go / no-go, and what no-go means.", "Counselor"],
+            ["0:34–0:44", "Mission control: assign the eight range positions by name, then run the countdown clock at 10× with call-and-response.", "Everyone"],
+            ["0:44–0:58", "Rocket inspections against the GO/NO-GO standard. Build help desk runs in parallel at a side table.", "Counselor + station lead"],
+            ["0:58–1:06", "Prediction sealing. Simulator with their real measured mass, written, initialled, into the envelope.", "Scouts"],
+            ["1:06–1:11", "Safety readback on your feet. Three random rules each, thirty seconds per Scout.", "Everyone"],
+            ["1:11–1:15", "Permission slips counted against the roster. Weather call plan, packing list, range opens 8:30.", "Counselor"],
         ],
         altRunOfShow: {
-            title: "If the speaker cancels — and roughly one in three does",
+            title: "If a guest speaker lands on this night",
             intro:
-                "Do not scramble. The charrette expands to fill the night and it is genuinely better with room to breathe. This is why requirement 7 got its own night instead of being bolted onto a speaker slot.",
+                "A speaker needs 20–30 minutes and this block is 45, so something has to give. Move the countdown rehearsal to the first 15 minutes of launch day itself — it works there, just with more wind. Never cut the inspections or the safety readback.",
             rows: [
-                ["0:30–0:33", "Build catch-up window opens at a side table.", "Station lead"],
-                ["0:33–0:38", "Moon base video. Cut it the second they start having ideas.", "Counselor"],
-                ["0:38–1:05", "Base design charrette, full 27 minutes. Drawings get genuinely good at this length.", "Patrols"],
-                ["1:05–1:15", "Three-minute pitches from every patrol, with the two killer questions asked of each.", "Patrols"],
+                ["0:30–0:32", "Scout introduces the guest. Practised, 30 seconds.", "Introducer"],
+                ["0:32–0:56", "Guest speaker + Q&A. Three primed questioners go first so the silence never happens.", "Guest"],
+                ["0:56–1:08", "Rocket inspections and the build help desk, running together.", "Counselor"],
+                ["1:08–1:13", "Prediction sealing.", "Scouts"],
+                ["1:13–1:15", "Permission slips, packing list, and crew positions handed out on paper to read before Saturday.", "Counselor"],
             ],
         },
         materials: [
-            "Butcher paper or flip-chart pad, one sheet per patrol",
-            "Markers, and a visible countdown timer",
-            "Printed location cards (six of them) and requirement 7 subsystem prompts",
-            "Projector tested with the guest's laptop or video link 20 minutes early",
-            "A side table with glue and alignment guides for the build catch-up window",
-            "A thank-you card for the guest, signed by the patrol before they arrive",
-        ],
-        homework: [
-            "Rocket painted and flight-ready for the November 16 Flight Readiness Review.",
-            "Permission slips due November 16.",
-            "Anyone taking 5b: site or scrapbook due November 16.",
-        ],
-        risk: "Confirm the speaker on the Thursday before. Vandenberg cancels for mission tempo and university students cancel for midterms — both are normal and neither is personal. The alternate run of show above is not a consolation prize; run it without apology.",
-    },
-    {
-        n: 6,
-        date: "2026-11-16",
-        dateLabel: "Monday, November 16, 2026",
-        title: "Flight Readiness Review",
-        block: "0:30–1:15 (45 min)",
-        deck: "flight-readiness",
-        objective:
-            "Inspect every rocket, seal every prediction, brief every Scout on safety, and collect every permission slip. Five days of margin to fix whatever fails.",
-        covers: [
-            { id: "3", how: "Safety code compliance verified individually. Every Scout answers three NAR safety code questions on their feet." },
-            { id: "4", how: "Sealed prediction using their own measured mass in the simulator — requirement 4 applied to their own vehicle." },
-        ],
-        runOfShow: [
-            ["0:30–0:33", "Any leftover base pitches from Nov 9.", "Patrols"],
-            ["0:33–0:36", "Frame it as a real Flight Readiness Review. Go / no-go, and what no-go means.", "Counselor"],
-            ["0:36–0:52", "Rocket inspections, one at a time, against the GO/NO-GO standard on the screen.", "Counselor + station lead"],
-            ["0:52–1:02", "Prediction sealing. Simulator with their real measured mass, number written, counselor initials, into the envelope.", "Scouts"],
-            ["1:02–1:09", "Safety readback on your feet. Three random rules each, round-robin, thirty seconds per Scout.", "Everyone"],
-            ["1:09–1:13", "Permission slips collected and counted against the roster. Launch day logistics and packing list.", "Counselor"],
-            ["1:13–1:15", "Weather call plan, backup dates, and what time the range opens.", "Counselor"],
-        ],
-        materials: [
             "The GO / NO-GO standard printed large, plus one copy per Scout",
             "A spare launch rod for testing that each launch lug slides freely",
-            "Kitchen scale for anyone who missed the mass check on build night",
-            "Laptops or tablets for the simulator, or one on the projector run one at a time",
+            "Kitchen scale that reads to 1 gram, for anyone who hasn't weighed their rocket",
+            "Laptops or one projector for the simulator, run one Scout at a time",
             "Competition cards, an envelope to seal them in, and a pen that writes",
             "Permission slips and the roster to check them against",
-            "Written fix-lists for any NO-GO rocket, and the parent contact list",
+            "Printed flight cards and the crew position list, one set per Scout",
+            "Side table with glue, sandpaper, spare shock cord, spare parts and two spare kits for the help desk",
         ],
         homework: [
             "Fix anything on your no-go list by Friday. Text me a photo if you want it checked early.",
-            "Saturday November 21, range opens 8:30. Bring rocket, motors, closed-toe shoes, hat, water, chair.",
+            "Learn your crew position and its calls. Saturday runs on the countdown card.",
+            "Saturday November 21, range opens 8:30. Rocket, motors, closed-toe shoes, hat, water, chair.",
             "Requirement 8 career research — due November 23.",
         ],
-        risk: "Do not soften a NO-GO. A Scout with a loose fin who is told 'that's probably fine' will have a shredded rocket on Saturday and remember it as bad luck. Written fix list, photo to the parent, five days. That is a kindness, not a punishment.",
+        risk: "Two things run at once tonight — inspections and the help desk — so you need a second adult or a capable older Scout. Trying to do both yourself is how the safety readback gets skipped, and that is the one item that cannot be skipped.",
     },
     {
-        n: 7,
+        n: 5,
         date: "2026-11-23",
         dateLabel: "Monday, November 23, 2026",
         title: "Post-Flight Debrief",
         block: "0:30–1:15 (45 min)",
         deck: "debrief",
         objective:
-            "Analyze predicted vs measured as a group, hear the telemetry crew's flight report, give out the awards, and sign the blue cards before anyone leaves for Thanksgiving.",
+            "Analyse predicted vs measured as a group, hear the telemetry crew's flight report, give out the awards, and sign the blue cards before anyone leaves for Thanksgiving.",
         covers: [
-            { id: "4", how: "Predicted vs measured across every Scout — the requirement 4 principles tested against real data from their own rocket." },
+            { id: "4", how: "Predicted vs measured across every Scout — requirement 4 tested against real data from their own rocket." },
             { id: "5", how: "Any remaining 5b projects presented and discussed." },
             { id: "8", how: "One-on-one career discussions: training, education, cost, prospects, salary, duties, advancement." },
         ],
         runOfShow: [
-            ["0:30–0:42", "Whiteboard every Scout's predicted, measured, and percent error. Ask the four questions. Let them find the pattern.", "Counselor + Scouts"],
+            ["0:30–0:42", "Whiteboard every Scout's predicted, measured and percent error. Ask the four questions. Let them find the pattern.", "Counselor + Scouts"],
             ["0:42–0:52", "Telemetry crew presents the flight data on the projector with the real CSV open.", "Telemetry crew"],
             ["0:52–0:58", "Anomaly write-ups read aloud. The Anomaly Award should get the biggest laugh and the most respect.", "Scouts"],
-            ["0:58–1:05", "Awards: Prediction Cup, Mission Accomplished, Recovery, Craftsmanship, Anomaly.", "Counselor"],
+            ["0:58–1:05", "Awards: Prediction Cup, Max Altitude, Time Aloft, Mission Accomplished, Recovery, Craftsmanship, Anomaly.", "Counselor"],
             ["1:05–1:13", "Requirement 8 career conversations one-on-one while others finish write-ups. Blue cards signed at the table.", "Counselor"],
             ["1:13–1:15", "Close. What we'd fly next, and who wants to do it again in the spring.", "Counselor"],
         ],
         materials: [
             "Whiteboard, wide, for the full predicted/measured/error table",
-            "The altimeter readings and the sealed prediction envelope from Nov 16",
+            "The altimeter readings, stopwatch times, and the sealed prediction envelope",
             "Laptop + projector with the telemetry CSV and a plot ready",
             "Award certificates — print them, they cost nothing and Scouts keep them",
             "BLUE CARDS, pre-filled except for the signature, one per Scout",
             "The requirement 8 discussion prompts, so each conversation takes three minutes not ten",
         ],
-        homework: [
-            "Nothing. The badge is done.",
-        ],
-        risk: "The single most common way a merit badge dies is a counselor meaning to do the paperwork later. Pre-fill the blue cards, bring them, and sign them in the room. Thanksgiving week is the perfect deadline — nobody wants a loose end going into a holiday.",
+        homework: ["Nothing. The badge is done."],
+        risk: "The most common way a merit badge dies is a counselor meaning to do the paperwork later. Pre-fill the blue cards, bring them, and sign them in the room. Thanksgiving is the perfect deadline — nobody wants a loose end going into a holiday.",
     },
 ];
 
@@ -1288,19 +1244,23 @@ export const orders = {
                 "This is the Lil' Spite build from the capstone page, scoped for a crew instead of one Scout. Be blunt about what the airframe is: 4 ft 4 in, rated intermediate, boxed for ages 18+, about two hours of assembly. Scouts build the payload, write the firmware, and run the ground station; an adult does the motor prep and presses the button. Quantities below assume a group — the single biggest change from the original one-Scout bill of materials is a second T-Beam so there is a bench unit that never flies and a flight unit that never gets experimented on.",
             rows: [
                 { item: "Estes Pro Series II Lil' Spite", detail: "51.8 in long, 2.0 in dia, 10.3 oz (292 g) dry. Plywood fins, 29 mm mount, 18 in ripstop chute. ~1,200 ft on black powder.", qty: "1", price: "$59.99", buy: "https://www.amazon.com/Estes-9737-Designed-Intermediate-Flying-Rocket-Model/dp/B0G1Z9GVGX", mfr: "https://estesrockets.com/products/lil-spite" },
-                { item: "Estes Pro Series II launch pad or rail", detail: "REQUIRED — this rocket needs a 1/4 in rod or the PSII rail. The Porta-Pad II above is 1/8 in and will not fly it. Easy thing to forget until launch morning.", qty: "1", price: "~$45–60", buy: "https://www.amazon.com/s?k=Estes+Pro+Series+II+launch+pad+rail", mfr: "https://estesrockets.com/collections/launch-supplies" },
+                { item: "Estes Pro Series II launch pad", detail: "REQUIRED, and it does NOT replace the Porta-Pad II — see the note below. Ships with a two-piece 1/4 in × 60 in steel rod, which is what this rocket needs. The Porta-Pad II is 1/8 in and cannot fly it.", qty: "1", price: "~$60–65", buy: "https://www.amazon.com/s?k=Estes+Pro+Series+II+launch+pad+rail", mfr: "https://estesrockets.com/collections/launch-supplies" },
                 { item: "Estes E16-6 engines, 2-pack", detail: "33.68 N-s, 6 s delay. Estes's own recommendation for this kit unloaded. Includes 2 starters and 4 plugs.", qty: "1", price: "$31.99", buy: "https://www.amazon.com/EST1697-E16-6-PS-II-ENGINE-Estes/dp/B00G4DSFHW", mfr: "https://estesrockets.com/products/e16-6-engines" },
                 { item: "Estes E16-4 engines, 2-pack", detail: "Same impulse, 4 s delay. This is the one to fly WITH the telemetry payload aboard — more mass means lower apogee means shorter coast to apogee.", qty: "1", price: "~$32", buy: "https://www.amazon.com/s?k=Estes+E16-4+29mm+engine", mfr: "https://estesrockets.com/products/e16-4-engines" },
                 { item: "Estes F15-6 engines, 2-pack", detail: "Optional comparison flight. Needs a 1,000 ft minimum site dimension under the NAR safety code — Camp SLO, not a school field.", qty: "0–1", price: "~$32", buy: "https://www.amazon.com/EST1652-F15-6-29mm-PS-II-ENGINE/dp/B00G4DSDEC", mfr: "https://estesrockets.com/collections/engines" },
                 { item: "Estes Pro Series II 29 mm motor retainer", detail: "Screw-on retention so motors swap fast between flights.", qty: "1", price: "~$10", buy: "https://www.amazon.com/s?k=Estes+Pro+Series+II+29mm+motor+retainer", mfr: "https://estesrockets.com/collections/launch-supplies" },
                 { item: "LILYGO T-Beam Supreme (US915) ×2", detail: "ESP32-S3 + LoRa SX1262 + GPS + onboard sensors. BUY TWO: one bench unit the crew experiments on and takes home, one flight unit nobody touches. Street price swings $40–$52 and it goes out of stock — buy early.", qty: "2", price: "~$80–105", buy: "https://www.amazon.com/LILYGO-T-BeamSUPREME-Development-L76K-915Mhz/dp/B0CXJ71NB6", mfr: "https://lilygo.cc/en-us/products/t-beam-supreme-meshtastic-us0" },
                 { item: "Heltec WiFi LoRa 32 V3 (US915) ×2", detail: "USB ground receivers — two so the ground-station pair can both develop. Note V4 now exists; buy V3 specifically or your pin mapping and half the example code won't match.", qty: "2", price: "~$50–70", buy: "https://www.amazon.com/Heltec-LoRa-32-V3-Meshtastic/dp/B0D1H1FN9Y", mfr: "https://store.rokland.com/products/heltec-wifi-lora-32v3" },
+                { item: "Payload sled + mounting", detail: "Foam, zip ties, and a 3D-printed or cardboard sled. Weigh the finished payload — around 120 g — and re-run the simulator with that real mass before picking a motor delay.", qty: "—", price: "~$15" },
                 { item: "USB-C data cables", detail: "Not charge-only cables. This wastes an hour of crew session 1 every single time. Buy three known-good ones.", qty: "3", price: "~$18", buy: "https://www.amazon.com/s?k=USB-C+data+cable+3+pack" },
-                { item: "Payload mounting + batteries", detail: "18650 cells and holders, foam, zip ties, and a 3D-printed or cardboard sled. Mass and CG shift matters — re-run the simulator with the real payload mass before picking a delay.", qty: "—", price: "~$35", buy: "https://www.amazon.com/s?k=18650+battery+holder+foam+zip+ties" },
+                { item: "18650 Li-ion cells ×3 — NOT INCLUDED with the T-Beam", detail: "The T-Beam Supreme has an 18650 holder but ships with no cell. Without one it runs on USB only and loses GPS hot-start, so a cold lock at the pad takes minutes. Buy button-top protected cells — flat-top cells rattle loose in the holder under boost. Three: flight, bench, spare.", qty: "3", price: "~$24", buy: "https://www.amazon.com/s?k=18650+button+top+protected+battery+3500mAh", buy: "https://www.amazon.com/s?k=18650+battery+holder+foam+zip+ties" },
             ],
-            total: "≈ $360–$465 for the group build",
+            total: "≈ $395–$500 for the group build",
             notes: [
-                "The badge page currently estimates $167–$170 for the core setup. That number is stale even for one Scout — it leaves out the PSII pad, the retainer, the battery, and the payload sled. For a crew build with a spare board set, budget $400.",
+                "CAN ONE PAD FLY BOTH ROCKETS? No — you need both, and it is not an upsell. The Pro Series II pad uses a 1/4 in rod. The Cosmic Cargo's launch lug is sized for a 1/8 in rod and physically will not slide onto it. You could fit oversized lugs to every Scout rocket, but that means modifying twenty rockets, adding drag, and hurting the very altitudes they are trying to predict. Two pads also means two rockets can be prepped at once, which is what gets ten Scouts through two flights each before lunch.",
+                "HOW HIGH DOES THE CAPSTONE ROCKET GO? Lower than you would expect once it is loaded. Unloaded on F15-6 it is about 1,120 ft. With the ~120 g telemetry payload aboard: F15-6 about 820 ft, E16-6 about 500 ft, E12-4 about 350 ft. Recommendation: fly E16-6 with the full payload, for roughly 500 ft. High enough to be a real flight, low enough to keep it in sight, in the field, and recoverable on foot. Check it yourself in the launch simulator — pick the Lil' Spite airframe and drag the payload slider.",
+                "One caveat on going lower still: the NAR minimum site dimension is set by motor impulse class, not by how high you actually fly. An E motor needs 1,000 ft of field whether it reaches 500 ft or 1,500 ft. Only dropping to a D shrinks that to 500 ft — and with the payload aboard a D leaves thrust-to-weight too low to be safe. So fly E16-6, take the lower altitude, and still book the big field.",
+                "The badge page previously estimated $167–$170 for the core setup. That number is stale even for one Scout — it leaves out the PSII pad, the retainer, the battery, and the payload sled. For a crew build with a spare board set, budget $400.",
                 "The bench-unit / flight-unit split is the most valuable $50 in this order. Without it, the crew will be debugging on the article that has to fly, and someone will brick it the week before launch.",
                 "Delay selection is a real decision, not a typo: Estes recommends -6 for this kit empty, and -4 is the right call once you add 60–100 g of payload. Run both through the simulator with the real mass and pick deliberately.",
                 "The F15 flights need a 1,000 ft minimum launch site dimension. That single line is why the launch site conversation starts in August.",
@@ -1596,13 +1556,11 @@ export const calendarEvents = [
     { date: "2026-09-28", label: "Mon Sep 28", kind: "meeting", title: "Meeting 2 — How Rockets Work", note: "Pioneer card due tonight. Rocket parts relay and the flight simulators." },
     { date: "2026-10-02", label: "Fri Oct 2", kind: "deadline", title: "Kit order deadline", note: "Gate closes. If you haven't ordered by tonight you're watching on Nov 21." },
     { date: "2026-10-17", label: "Sat Oct 17", kind: "crew", title: "Telemetry crew session 2", note: "Getting a packet across the room, then a quarter-mile range test." },
-    { date: "2026-10-26", label: "Mon Oct 26", kind: "meeting", title: "Meeting 3 — Missions", note: "Robotic vs crewed, and flying Apollo's trajectory yourself." },
-    { date: "2026-11-02", label: "Mon Nov 2", kind: "meeting", title: "Meeting 4 — BUILD NIGHT", note: "Bring your unopened kit and your motors. Do not build it at home first." },
-    { date: "2026-11-09", label: "Mon Nov 9", kind: "meeting", title: "Meeting 5 — Guest speaker + base design", note: "Bring a question for the speaker." },
+    { date: "2026-10-26", label: "Mon Oct 26", kind: "meeting", title: "Meeting 3 — Missions and Bases", note: "Robotic vs crewed, flying Apollo's trajectory, and designing a base." },
     { date: "2026-11-14", label: "Sat Nov 14", kind: "crew", title: "Telemetry crew session 3", note: "Payload integration and the full dress rehearsal." },
-    { date: "2026-11-16", label: "Mon Nov 16", kind: "meeting", title: "Meeting 6 — Flight Readiness Review", note: "Bring your finished rocket, your motors, and your permission slip." },
+    { date: "2026-11-16", label: "Mon Nov 16", kind: "meeting", title: "Meeting 4 — Mission Control + Flight Readiness", note: "Bring your finished rocket, motors and permission slip. Build help desk open all night." },
     { date: "2026-11-21", label: "Sat Nov 21", kind: "launch", title: "LAUNCH DAY", note: "Range opens 8:30. Rocket, motors, closed-toe shoes, hat, water, chair." },
-    { date: "2026-11-23", label: "Mon Nov 23", kind: "meeting", title: "Meeting 7 — Debrief and awards", note: "Bring your requirement 8 career research. Badges get signed tonight." },
+    { date: "2026-11-23", label: "Mon Nov 23", kind: "meeting", title: "Meeting 5 — Debrief and awards", note: "Bring your requirement 8 career research. Badges get signed tonight." },
     { date: "2026-11-26", label: "Thu Nov 26", kind: "holiday", title: "Thanksgiving", note: "No meeting." },
     { date: "2026-11-28", label: "Sat Nov 28", kind: "backup", title: "Backup launch date", note: "Only if Nov 21 is scrubbed for weather." },
     { date: "2026-12-05", label: "Sat Dec 5", kind: "backup", title: "Second backup launch date", note: "Last resort." },
