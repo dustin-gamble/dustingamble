@@ -261,24 +261,25 @@ export const decks = {
                     "This is the spine of the whole night. Write the four words on the whiteboard — HISTORY / KNOWLEDGE / BENEFITS / COOPERATION — and point at them as you go. Scouts should be able to recite the four at the end.",
             },
             {
-                type: "video",
+                type: "bullets",
                 heading: "1a — Historical reasons",
-                youtubeId: "TL__l9gC1Ss",
-                channel: "SpaceXVideos",
-                videoTitle: "The History of Space Exploration",
-                play: "Play 0:00–3:30, then stop.",
+                art: "four-reasons",
+                image: "apollo-crew",
+                intro: "It did not start as science. It started as a race, and the science came along for the ride.",
+                bullets: [
+                    "1957 — the Soviet Union puts Sputnik in orbit. A metal ball that beeps, and the United States realises it is second.",
+                    "1961 — Gagarin orbits the Earth. Kennedy responds by picking a goal the US could plausibly win: the Moon.",
+                    "1962–69 — Apollo. At its peak it took 4% of the entire federal budget and about 400,000 people.",
+                    "1975 — Apollo–Soyuz. The two rivals dock in orbit and shake hands, and the character of spaceflight changes.",
+                ],
+                note: "Be honest with them about the motive. Scouts find 'it was a Cold War contest and we got the science anyway' far more interesting than a tidy story about curiosity.",
                 notes:
-                    "Do not play the whole thing. Stop it and ask: 'What was the actual reason the US and USSR were racing?' Answer you're steering to: it started as a military and prestige contest, and the science came along for the ride. Scouts find that honesty interesting rather than disappointing.",
-                backup: {
-                    label: "Backup if the room is restless — 3 min, faster cut",
-                    youtubeId: "3JuKR7jf46o",
-                    channel: "Space Junkies",
-                    videoTitle: "The History of Space Exploration: a Timeline",
-                },
+                    "Ask: 'What would make a country spend 4% of everything it had on this?' Steer to fear and prestige. Then the good question — was it worth it? There is no settled answer and they should know that. The photo on this slide is a real Apollo crew standing in front of the rocket that would carry them.",
             },
             {
                 type: "bullets",
                 heading: "1b — Immediate goals: what are we actually trying to learn?",
+                image: "perseverance",
                 art: "careers",
                 intro: "Not 'explore space.' Name the question the mission is built to answer.",
                 bullets: [
@@ -296,22 +297,17 @@ export const decks = {
             {
                 type: "video",
                 heading: "1c — Benefits on Earth",
-                youtubeId: "i3D4pCq_lyg",
-                channel: "The Galactic Gal",
-                videoTitle: "How does space exploration benefit Earth?",
+                youtubeId: "z-bTkxza4I4",
+                channel: "Museum of Science, Boston",
+                videoTitle: "Space Exploration's Surprising Earthly Benefits!",
                 play: "Short — play it straight through, then the second one.",
                 notes:
                     "Both of these are shorts, so they cost you almost nothing. After the second one, kill the myth: Tang, Velcro, and Teflon are NOT NASA inventions. The real ones are less famous and more useful — memory foam, cordless tool motors, scratch-resistant lens coatings, water filtration, LED wound therapy, GPS, weather and crop imaging, and the CMOS camera sensor in every phone in this room.",
-                backup: {
-                    label: "Second short — play both",
-                    youtubeId: "_2uSv1C-FDw",
-                    channel: "FactFusion",
-                    videoTitle: "10 Surprising Ways Space Exploration Benefits Life on Earth",
-                },
             },
             {
                 type: "twocol",
                 heading: "1c — The myth and the reality",
+                image: "iss",
                 art: "spinoff",
                 left: {
                     h: "Did NOT come from NASA",
@@ -331,25 +327,31 @@ export const decks = {
                     "Scouts love catching adults being wrong, so let them catch the world being wrong. This slide is the one they will repeat at dinner. That is how you know the requirement stuck.",
             },
             {
-                type: "video",
+                type: "bullets",
                 heading: "1d — International cooperation",
-                youtubeId: "TS27Br2-XgY",
-                channel: "Space Tech Insider",
-                videoTitle: "What Role Does International Cooperation Play in Space Exploration?",
-                play: "Play through, ~3 min.",
+                image: "iss",
+                intro: "The clearest example is over your head roughly every 90 minutes.",
+                bullets: [
+                    "American, Russian, Japanese, European and Canadian modules, bolted together and continuously crewed since November 2000.",
+                    "It has stayed crewed through wars, sanctions and diplomatic freezes on the ground.",
+                    "Nobody can afford it alone — and for years the only ride home was on the other country's spacecraft.",
+                    "Fifteen countries had to agree on a common docking standard, a common language for procedures, and who fixes what.",
+                ],
+                note: "Ask the real question: why would countries that do not get along keep flying together? The answer is not friendship. It is that the alternative is not flying at all.",
                 notes:
-                    "Land the point with the ISS: American, Russian, Japanese, European, and Canadian hardware, docked together, continuously crewed since November 2000 — through wars and sanctions on the ground. Ask: 'Why would countries that don't get along keep flying together?' Answer: because nobody can afford to do it alone, and because the ride home is on the other guy's spacecraft.",
+                    "Use Spot the Station — the ISS is genuinely visible from San Luis Obispo and knowing you can walk outside and watch it go over changes how real it feels. Look up the next pass before the meeting and tell them the time.",
             },
             {
                 type: "bullets",
-                heading: "Requirement 2 — your assignment",
-                art: "gate",
-                intro: "Design a collector's card for your favorite space pioneer. Picture on the front, information on the back. Due September 28.",
+                heading: "Requirement 2 — the space pioneer card",
+                image: "katherine-johnson",
+                intro: "This is not something I made up — it is requirement 2, written into the badge: \u201cDesign a collector\u2019s card, with a picture on the front and information on the back, about your favorite space pioneer.\u201d Think a baseball card, but the person on it changed spaceflight.",
                 bullets: [
+                    "A \u201cspace pioneer\u201d is anyone who did something first, or made a first possible — engineers, mathematicians, designers and flight controllers count every bit as much as astronauts.",
                     "Pick tonight, on the sign-up sheet. No duplicates — first Scout to claim a name owns it.",
                     "Front: a picture you drew, printed, or cut out. Back: who they were, what they actually did, why it mattered, and one thing that surprised you.",
-                    "Index card, cardstock, or printed — your call. Hand-drawn scores the same as printed.",
-                    "You also have to talk about four OTHER pioneers with me. So know a little about your patrol's cards too.",
+                    "Index card, cardstock, or printed — your call. Hand-drawn scores exactly the same as printed. This is a 30-minute job, not a project.",
+                    "The catch is the second half of the requirement: you also have to talk with me about four OTHER pioneers. So pay attention to your patrol\u2019s cards — that is where the other four come from.",
                 ],
                 note:
                     "Pioneer bench, if you're stuck: Katherine Johnson · Robert Goddard · Yuri Gagarin · Wernher von Braun · Sally Ride · Mae Jemison · Konstantin Tsiolkovsky · Guion Bluford · Margaret Hamilton · Gus Grissom · Valentina Tereshkova · Ellen Ochoa · Homer Hickam · Sergei Korolev",
@@ -430,14 +432,19 @@ export const decks = {
                     "Run this on the projector with the room calling out predictions before you press Launch. Best sequence: C6-5 with no payload (clean), then drag the payload slider to 60 g and let them watch the thrust-to-weight fall under 5:1 and the verdict turn red. That is the whole 'why can't I just put my GoPro on it' conversation, answered in ten seconds.",
             },
             {
-                type: "video",
+                type: "bullets",
                 heading: "4b — How rocket engines work",
-                youtubeId: "gz8L1i0ODeA",
-                channel: "Martian Wolf",
-                videoTitle: "Rocket Engines Explained",
-                play: "Play the first ~4 min.",
+                art: "third-law",
+                intro: "Everything an engine does comes from one sentence: throw mass backwards, hard.",
+                bullets: [
+                    "Burn propellant to make a large volume of very hot gas in a small space.",
+                    "Let it out through one hole — the nozzle throat — so it leaves fast and in one direction.",
+                    "The reaction to throwing that gas backwards is what pushes the rocket forward.",
+                    "No air needed. Rockets work better in vacuum, because there is nothing pushing back on the exhaust.",
+                ],
+                note: "A jet engine breathes air. A rocket carries its own oxidiser, which is why it works on the Moon and a jet does not.",
                 notes:
-                    "Pause and connect it to the object in their hand. Pass around a SPENT Estes motor — never a live one. Point at the nozzle, the propellant grain, the delay charge, and the ejection charge. The delay is the part that matters for them: it is why the number after the dash exists, and picking the wrong one is how you shred your own parachute.",
+                    "Pass a SPENT motor round while you say this — never a live one. Then go straight to the next slide, which is the cutaway, and let them find the four stages themselves. The cutaway does the work here; this slide is just the sentence you want them to leave with.",
             },
             {
                 type: "motor",
@@ -474,12 +481,6 @@ export const decks = {
                 play: "Play through, ~4 min.",
                 notes:
                     "The line that makes it click: orbit is not 'being far away from gravity,' it is falling and missing. Newton's cannonball. Fire it fast enough horizontally and the ground curves away as fast as you fall. The ISS is in about 90% of Earth's surface gravity — the crew is falling, not weightless.",
-                backup: {
-                    label: "Shorter alternative if you're behind",
-                    youtubeId: "5PCY0rTllPg",
-                    channel: "Aviation Austin",
-                    videoTitle: "How Satellites Orbit",
-                },
             },
             {
                 type: "orbitsim",
@@ -493,6 +494,7 @@ export const decks = {
             {
                 type: "missioncontrol",
                 heading: "4d — How the pictures get home",
+                image: "dsn-dish",
                 intro:
                     "A camera on Mars is useless without the other five-sixths of the system. Tap any step: the top row is our rocket, and the same step on a planetary mission is underneath.",
                 notes:
@@ -533,6 +535,7 @@ export const decks = {
             {
                 type: "bullets",
                 heading: "Requirement 5 — pick TWO",
+                image: "voyager",
                 art: "timeline-series",
                 intro: "You only have to do two of these three. Most Scouts should take 5a and 5c.",
                 bullets: [
@@ -588,6 +591,7 @@ export const decks = {
             {
                 type: "video",
                 heading: "Requirement 6 — pick ONE: shuttle or ISS",
+                image: "shuttle-launch",
                 youtubeId: "w4FCkbPykdQ",
                 channel: "Real Engineering",
                 videoTitle: "How The Space Shuttle Worked | Full Documentary",
@@ -605,6 +609,7 @@ export const decks = {
                 type: "prompt",
                 heading: "The argument worth having",
                 question: "We could send ten robots to Mars for the price of one crewed landing. So why send people at all?",
+                image: "apollo-crew",
                 art: "robotic-vs-crewed",
                 answer:
                     "There is no clean answer and Scouts should leave knowing that. Robots: cheap, patient, expendable, no lunch, decades of operation, no ride home needed. People: expensive, fragile, slow — and unmatched at improvising when something breaks in a way nobody planned for. Apollo 13 is the argument for people. Voyager is the argument against.",
@@ -612,24 +617,24 @@ export const decks = {
                     "Let this run. Take a show of hands, then ask two Scouts on opposite sides to defend it. This is the requirement-5 discussion happening naturally instead of you quizzing them. Do not resolve it — tell them working aerospace engineers still argue about this at lunch.",
             },
             {
-                type: "video",
+                type: "bullets",
                 heading: "Requirement 7 — setting up the design problem",
-                youtubeId: "ATgwz_hS3Qg",
-                channel: "The Space Race",
-                videoTitle: "How NASA Will Build A City On The Moon",
-                play: "Play 4 min, then straight into the charrette. Skip entirely if the speaker ran long.",
+                image: "bootprint",
+                intro: "Twelve people have stood on another world. Nobody has ever stayed. Your patrol is going to design the place that lets them stay.",
+                bullets: [
+                    "Vocabulary you will want: regolith (the dust and broken rock), ISRU (making what you need out of what is already there), radiation shielding, lava tube.",
+                    "Lunar dust is glass-sharp and electrostatically clingy. It wrecked Apollo seals and suits in three days.",
+                    "A lunar night is 14 Earth days long. Solar panels do not help you for two weeks.",
+                    "Water ice sits in craters at the south pole that have not seen sunlight in two billion years. Water is drinking water, breathing oxygen, and rocket fuel.",
+                ],
+                note: "That bootprint is still there. No wind, no rain, nothing to erase it.",
                 notes:
-                    "The video exists to hand them a vocabulary — regolith, ISRU, radiation shielding, lava tubes — that they will immediately use in their own design. Cut it the moment they start having ideas. An idea in a Scout's head beats four more minutes of video every time.",
-                backup: {
-                    label: "Alternative if you want construction focus",
-                    youtubeId: "ajP0AlYxhug",
-                    channel: "The Space Race",
-                    videoTitle: "How NASA Plans To Build The First Moon Base!",
-                },
+                    "Give them the vocabulary and then get out of the way — the charrette is where requirement 7 actually gets met. The four bullets above are deliberately problems, not facts: each one is something their base design has to answer.",
             },
             {
                 type: "charrette",
                 heading: "Base design charrette",
+                image: "bootprint",
                 art: "base-subsystems",
                 intro:
                     "Patrols pick a location, then design a base and sell it in three minutes. Requirement 7 needs a drawing or model plus a plan for energy, construction, life support, and purpose. With a speaker: 15 minutes of design. Without: 30 minutes, and the drawings get genuinely good.",
@@ -1244,7 +1249,8 @@ export const orders = {
                 "This is the Lil' Spite build from the capstone page, scoped for a crew instead of one Scout. Be blunt about what the airframe is: 4 ft 4 in, rated intermediate, boxed for ages 18+, about two hours of assembly. Scouts build the payload, write the firmware, and run the ground station; an adult does the motor prep and presses the button. Quantities below assume a group — the single biggest change from the original one-Scout bill of materials is a second T-Beam so there is a bench unit that never flies and a flight unit that never gets experimented on.",
             rows: [
                 { item: "Estes Pro Series II Lil' Spite", detail: "51.8 in long, 2.0 in dia, 10.3 oz (292 g) dry. Plywood fins, 29 mm mount, 18 in ripstop chute. ~1,200 ft on black powder.", qty: "1", price: "$59.99", buy: "https://www.amazon.com/Estes-9737-Designed-Intermediate-Flying-Rocket-Model/dp/B0G1Z9GVGX", mfr: "https://estesrockets.com/products/lil-spite" },
-                { item: "Estes Pro Series II launch pad", detail: "REQUIRED, and it does NOT replace the Porta-Pad II — see the note below. Ships with a two-piece 1/4 in × 60 in steel rod, which is what this rocket needs. The Porta-Pad II is 1/8 in and cannot fly it.", qty: "1", price: "~$60–65", buy: "https://www.amazon.com/s?k=Estes+Pro+Series+II+launch+pad+rail", mfr: "https://estesrockets.com/collections/launch-supplies" },
+                { item: "Estes 3/16 in Maxi launch rod", detail: "THE ONE-PAD OPTION. Fits the Porta-Pad II you already have, and the Lil\u2019 Spite\u2019s 1/4 in lug slides onto it. Buy this instead of the PSII pad below if you want a single pad — see the notes for the stiffness caveat.", qty: "1", price: "~$10", buy: "https://www.amazon.com/s?k=Estes+3%2F16+maxi+launch+rod", mfr: "https://estesrockets.com/collections/launch-supplies" },
+                { item: "Estes Pro Series II launch pad", detail: "OPTIONAL if you buy the 3/16 in Maxi rod above; buy this if you want a dedicated mid-power pad or the thinner rod flexes. Ships with a two-piece 1/4 in × 60 in steel rod, which is what this rocket needs. The Porta-Pad II is 1/8 in and cannot fly it.", qty: "1", price: "~$60–65", buy: "https://www.amazon.com/s?k=Estes+Pro+Series+II+launch+pad+rail", mfr: "https://estesrockets.com/collections/launch-supplies" },
                 { item: "Estes E16-6 engines, 2-pack", detail: "33.68 N-s, 6 s delay. Estes's own recommendation for this kit unloaded. Includes 2 starters and 4 plugs.", qty: "1", price: "$31.99", buy: "https://www.amazon.com/EST1697-E16-6-PS-II-ENGINE-Estes/dp/B00G4DSFHW", mfr: "https://estesrockets.com/products/e16-6-engines" },
                 { item: "Estes E16-4 engines, 2-pack", detail: "Same impulse, 4 s delay. This is the one to fly WITH the telemetry payload aboard — more mass means lower apogee means shorter coast to apogee.", qty: "1", price: "~$32", buy: "https://www.amazon.com/s?k=Estes+E16-4+29mm+engine", mfr: "https://estesrockets.com/products/e16-4-engines" },
                 { item: "Estes F15-6 engines, 2-pack", detail: "Optional comparison flight. Needs a 1,000 ft minimum site dimension under the NAR safety code — Camp SLO, not a school field.", qty: "0–1", price: "~$32", buy: "https://www.amazon.com/EST1652-F15-6-29mm-PS-II-ENGINE/dp/B00G4DSDEC", mfr: "https://estesrockets.com/collections/engines" },
@@ -1257,7 +1263,8 @@ export const orders = {
             ],
             total: "≈ $395–$500 for the group build",
             notes: [
-                "CAN ONE PAD FLY BOTH ROCKETS? No — you need both, and it is not an upsell. The Pro Series II pad uses a 1/4 in rod. The Cosmic Cargo's launch lug is sized for a 1/8 in rod and physically will not slide onto it. You could fit oversized lugs to every Scout rocket, but that means modifying twenty rockets, adding drag, and hurting the very altitudes they are trying to predict. Two pads also means two rockets can be prepped at once, which is what gets ten Scouts through two flights each before lunch.",
+                "CAN ONE PAD FLY BOTH ROCKETS? Yes, but not the way round you would expect — and not with the Pro Series II pad. Lug and rod only fit one direction: a big lug slides onto a thin rod with some slop, but a thin lug will never go onto a fat rod. The Cosmic Cargo\u2019s lug is 1/8 in, so it can NEVER fly on the PSII pad\u2019s 1/4 in rod. Going the other way works: keep the Porta-Pad II, buy the 3/16 in Maxi rod Estes sells for it, and the Lil\u2019 Spite\u2019s 1/4 in lug will slide onto that 3/16 in rod. One pad, two rod sizes, swap between them. That saves you about $65.",
+                "The honest caveat on the one-pad route: rod diameter is not just about fit, it is about stiffness. A 60 in 3/16 in rod carrying a 400 g rocket will flex more than the 1/4 in rod Estes specifies for the Lil\u2019 Spite, and rod whip at the moment of liftoff sends a rocket off-heading. Watch the first launch closely. If the rod visibly bends or the rocket leaves the pad crooked, stop and buy the PSII pad before flying it again. Two pads is still the better answer if the budget allows — not for fit, but because two pads means two rockets prepped at once, which is what gets ten Scouts through two flights each before lunch.",
                 "HOW HIGH DOES THE CAPSTONE ROCKET GO? Lower than you would expect once it is loaded. Unloaded on F15-6 it is about 1,120 ft. With the ~120 g telemetry payload aboard: F15-6 about 820 ft, E16-6 about 500 ft, E12-4 about 350 ft. Recommendation: fly E16-6 with the full payload, for roughly 500 ft. High enough to be a real flight, low enough to keep it in sight, in the field, and recoverable on foot. Check it yourself in the launch simulator — pick the Lil' Spite airframe and drag the payload slider.",
                 "One caveat on going lower still: the NAR minimum site dimension is set by motor impulse class, not by how high you actually fly. An E motor needs 1,000 ft of field whether it reaches 500 ft or 1,500 ft. Only dropping to a D shrinks that to 500 ft — and with the payload aboard a D leaves thrust-to-weight too low to be safe. So fly E16-6, take the lower altitude, and still book the big field.",
                 "The badge page previously estimated $167–$170 for the core setup. That number is stale even for one Scout — it leaves out the PSII pad, the retainer, the battery, and the payload sled. For a crew build with a spare board set, budget $400.",
@@ -1604,7 +1611,7 @@ export const scoutGuide = {
                 doNow: "Nothing to prepare. Just show up.",
                 videos: [
                     { t: "The History of Space Exploration", ch: "SpaceXVideos", id: "TL__l9gC1Ss" },
-                    { t: "How does space exploration benefit Earth?", ch: "The Galactic Gal", id: "i3D4pCq_lyg" },
+                    { t: "Space Exploration's Surprising Earthly Benefits!", ch: "Museum of Science, Boston", id: "z-bTkxza4I4" },
                     { t: "International Cooperation in Space", ch: "Space Tech Insider", id: "TS27Br2-XgY" },
                 ],
             },
@@ -1612,7 +1619,7 @@ export const scoutGuide = {
                 req: "Req 2",
                 title: "Your space pioneer card",
                 forMeeting: "Due Meeting 2 · Sep 28",
-                doNow: "Claim a pioneer at Meeting 1, then make the card. Front: a picture. Back: who they were, what they actually did, why it mattered, and one thing that surprised you. Hand-drawn scores exactly the same as printed.",
+                doNow: "This is requirement 2, straight out of the badge: a collector\u2019s card — like a baseball card — about a \u201cspace pioneer.\u201d That means anyone who did something first or made a first possible: engineers, mathematicians and flight controllers count as much as astronauts. Claim a name at Meeting 1 (no duplicates), then make the card. Front: a picture. Back: who they were, what they actually did, why it mattered, and one thing that surprised you. Hand-drawn scores the same as printed — it is a 30-minute job. Then be ready to talk about four OTHER pioneers, which you pick up from your patrol\u2019s cards.",
                 videos: [
                     { t: "Here's How I Make Custom Trading Cards!", ch: "Wax Museum Podcast", id: "PkCCLH_f1us" },
                     { t: "How to Make Trading Cards By Hand", ch: "ChaosGalaxyTCG", id: "vYbeo4iS1Pc" },
@@ -1647,7 +1654,6 @@ export const scoutGuide = {
                 doNow: "Think about where you'd want to live: the Moon, Mars, Titan, Europa, an asteroid, or floating in the clouds of Venus. You'll design it with your patrol.",
                 videos: [
                     { t: "How NASA Will Build A City On The Moon", ch: "The Space Race", id: "ATgwz_hS3Qg" },
-                    { t: "How NASA Plans To Build The First Moon Base!", ch: "The Space Race", id: "ajP0AlYxhug" },
                 ],
             },
             {

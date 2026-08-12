@@ -65,21 +65,24 @@ const roles = [
   },
 ];
 
+// `quick` marks the calls that survive in the 2-minute version. The full
+// 10-minute count is for the first flight of the day and for rehearsal; after
+// that a range gets through flights on the short one.
 const countdown = [
   { t: "T−10:00", who: "FLIGHT", say: "Flight crew, we are at T minus ten minutes. Positions.", note: "Everyone goes to their station. Talking stops." },
   { t: "T−8:00", who: "RSO", say: "RSO has the rocket. Inspection in progress.", note: "Fins, lug, shock cord, chute, nose cone fit. RSO signs the flight card or sends it back." },
   { t: "T−6:00", who: "PAD", say: "Pad is loading. Rail is clear.", note: "Rocket on the rail, motor installed, igniter in and taped." },
   { t: "T−4:00", who: "PAO", say: "Flight 7, Scout Reyes, rocket 'Half Dome', C6-5, predicted 980 feet.", note: "Read from the flight card so the crowd knows what they're watching." },
-  { t: "T−3:00", who: "FLIGHT", say: "Go/no-go poll. Weather?", note: "This is the moment the whole thing turns into a real launch. See the poll below." },
-  { t: "T−2:00", who: "PAD", say: "Continuity check — we have continuity. Stepping back.", note: "Controller shows the igniter circuit is live. Pad Manager walks back behind the line." },
-  { t: "T−1:00", who: "RSO", say: "Range is HOT. Everyone behind the cones.", note: "RSO physically looks at every person and confirms." },
-  { t: "T−0:30", who: "FLIGHT", say: "Arming. Key is in.", note: "Safety key inserted. The light comes on. Nobody moves." },
-  { t: "T−0:10", who: "ALL", say: "Ten… nine… eight…", note: "The whole crowd counts. This is the part they came for." },
-  { t: "T−0:03", who: "FLIGHT", say: "Three, two, one, ignition.", note: "Button pressed on 'ignition', not after it." },
-  { t: "T+0:00", who: "TIMER", say: "Liftoff — timers running.", note: "Both stopwatches start on visible motion, not on the button." },
-  { t: "T+0:08", who: "RECOVERY", say: "Apogee. Ejection — good chute.", note: "Or 'no chute, ballistic' — which is a call everyone needs to hear immediately." },
-  { t: "T+0:45", who: "RECOVERY", say: "Touchdown, bearing about 200, roughly 300 feet out.", note: "Bearing and distance while the memory is fresh." },
-  { t: "T+1:00", who: "FLIGHT", say: "Range is COLD. Recovery, you are released.", note: "ONLY now does anyone walk downrange." },
+  { quick: true, t: "T−3:00", who: "FLIGHT", say: "Go/no-go poll. Weather?", note: "This is the moment the whole thing turns into a real launch. See the poll below." },
+  { quick: true, t: "T−2:00", who: "PAD", say: "Continuity check — we have continuity. Stepping back.", note: "Controller shows the igniter circuit is live. Pad Manager walks back behind the line." },
+  { quick: true, t: "T−1:00", who: "RSO", say: "Range is HOT. Everyone behind the cones.", note: "RSO physically looks at every person and confirms." },
+  { quick: true, t: "T−0:30", who: "FLIGHT", say: "Arming. Key is in.", note: "Safety key inserted. The light comes on. Nobody moves." },
+  { quick: true, t: "T−0:10", who: "ALL", say: "Ten… nine… eight…", note: "The whole crowd counts. This is the part they came for." },
+  { quick: true, t: "T−0:03", who: "FLIGHT", say: "Three, two, one, ignition.", note: "Button pressed on 'ignition', not after it." },
+  { quick: true, t: "T+0:00", who: "TIMER", say: "Liftoff — timers running.", note: "Both stopwatches start on visible motion, not on the button." },
+  { quick: true, t: "T+0:08", who: "RECOVERY", say: "Apogee. Ejection — good chute.", note: "Or 'no chute, ballistic' — which is a call everyone needs to hear immediately." },
+  { quick: true, t: "T+0:45", who: "RECOVERY", say: "Touchdown, bearing about 200, roughly 300 feet out.", note: "Bearing and distance while the memory is fresh." },
+  { quick: true, t: "T+1:00", who: "FLIGHT", say: "Range is COLD. Recovery, you are released.", note: "ONLY now does anyone walk downrange." },
   { t: "T+3:00", who: "PAO", say: "Measured altitude 1,012 feet. Predicted 980. Error 3.2 percent.", note: "Read it out. The Prediction Cup lives or dies on this number." },
 ];
 
@@ -128,10 +131,18 @@ const poll = ["WEATHER", "RSO", "PAD", "TELEMETRY", "RECOVERY", "TIMER"];
           <button type="button" class="lops-btn" data-lops-reset>Reset</button>
         </div>
         <p class="lops-speed">
+          <label>Count length
+            <select data-lops-length>
+              <option value="quick" selected>Quick &mdash; T&minus;3:00, routine flights</option>
+              <option value="full">Full &mdash; T&minus;10:00, first flight and rehearsal</option>
+            </select>
+          </label>
+        </p>
+        <p class="lops-speed">
           <label>Clock speed
             <select data-lops-speed>
               <option value="60">60&times; — run the whole count in 15 s</option>
-              <option value="10" selected>10&times; — rehearsal pace</option>
+              <option value="10" selected>10&times; &mdash; rehearsal pace</option>
               <option value="1">1&times; — real time</option>
             </select>
           </label>
@@ -153,7 +164,7 @@ const poll = ["WEATHER", "RSO", "PAD", "TELEMETRY", "RECOVERY", "TIMER"];
 
       <ol class="lops-script" data-lops-script>
         {countdown.map((c) => (
-          <li data-mark={c.t}>
+          <li data-mark={c.t} data-quick={c.quick ? "1" : "0"}>
             <span class="lops-mark">{c.t}</span>
             <span class="lops-who-tag">{c.who}</span>
             <span class="lops-say">&ldquo;{c.say}&rdquo;</span>
@@ -414,14 +425,27 @@ const poll = ["WEATHER", "RSO", "PAD", "TELEMETRY", "RECOVERY", "TIMER"];
       var timeEl = root.querySelector("[data-lops-time]");
       var statusEl = root.querySelector("[data-lops-status]");
       var speedSel = root.querySelector("[data-lops-speed]");
-      var items = root.querySelectorAll("[data-lops-script] li");
-      var marks = [];
-      for (var m = 0; m < items.length; m++) marks.push(parseMark(items[m].dataset.mark));
-      var START = marks[0], END = marks[marks.length - 1];
-      var t = START, timer = null;
+      var allItems = Array.prototype.slice.call(root.querySelectorAll("[data-lops-script] li"));
+      var lenSel = root.querySelector("[data-lops-length]");
+      var items = [], marks = [], START = 0, END = 0, t = 0, timer = null;
+
+      function applyLength() {
+        var quick = !lenSel || lenSel.value === "quick";
+        items = [];
+        for (var i = 0; i < allItems.length; i++) {
+          var keep = !quick || allItems[i].dataset.quick === "1";
+          allItems[i].hidden = !keep;
+          if (keep) items.push(allItems[i]);
+        }
+        marks = items.map(function (el) { return parseMark(el.dataset.mark); });
+        START = marks[0]; END = marks[marks.length - 1];
+        t = START;
+      }
+      applyLength();
 
       function render() {
         timeEl.textContent = fmt(Math.round(t));
+        if (!items.length) return;
         var activeIdx = -1;
         for (var i2 = 0; i2 < marks.length; i2++) if (t >= marks[i2]) activeIdx = i2;
         for (var j2 = 0; j2 < items.length; j2++) {
@@ -458,8 +482,12 @@ const poll = ["WEATHER", "RSO", "PAD", "TELEMETRY", "RECOVERY", "TIMER"];
         stop(); setStatus("scrub", "Scrubbed — recycle to T−10:00");
       });
 
+      if (lenSel) lenSel.addEventListener("change", function () {
+        stop(); applyLength(); setStatus("", "Hold"); render();
+      });
+
       root.querySelector("[data-lops-reset]").addEventListener("click", function () {
-        stop(); t = START; setStatus("", "Hold"); render();
+        stop(); applyLength(); setStatus("", "Hold"); render();
         var pb = root.querySelectorAll("[data-poll]");
         for (var p = 0; p < pb.length; p++) { pb[p].removeAttribute("data-state"); pb[p].querySelector("[data-poll-state]").textContent = "—"; }
         root.querySelector("[data-poll-out]").textContent = "Poll not started.";

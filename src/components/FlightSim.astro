@@ -66,6 +66,7 @@ const isLaunch = mode === "launch";
           <label>
             Wind <output data-fsim-out="wind">5</output> mph
             <input type="range" data-fsim-wind min="0" max="20" step="1" value="5" />
+            <span class="fsim-hint">Drag this <strong>while it is falling</strong> — a gust part-way down changes where it lands.</span>
           </label>
         </>
       )}
@@ -177,14 +178,14 @@ const isLaunch = mode === "launch";
       cargo: {
         name: "Cosmic Cargo", dry: 36, area: 4.91e-4, cd: 0.90,
         motors: ["A8-3", "B6-4", "C6-5", "C6-7"], defMotor: "C6-5",
-        maxPay: 60, twGood: 8, twOk: 5, rail: 0.9,
+        maxPay: 60, twGood: 8, twOk: 5, rail: 0.9, axisFt: 1300,
         payHint: "An altimeter is about 25 g. A small camera is 40–60 g.",
         chuteScale: 1
       },
       spite: {
         name: "Lil' Spite", dry: 292, area: 2.027e-3, cd: 0.75,
         motors: ["D12-3", "E12-4", "E16-6", "F15-6"], defMotor: "E16-6",
-        maxPay: 220, twGood: 4.5, twOk: 3, rail: 1.5,
+        maxPay: 220, twGood: 4.5, twOk: 3, rail: 1.5, axisFt: 1300,
         payHint: "The telemetry payload — T-Beam, 18650 cell, sled — is about 120 g.",
         chuteScale: 1.6
       }
@@ -200,6 +201,13 @@ const isLaunch = mode === "launch";
       "E16-6": { I: 33.68,F: 16.0, t: 2.1,  m: 62,   mp: 25,   delay: 6 },
       "F15-6": { I: 49.6, F: 15.0, t: 3.3,  m: 102,  mp: 60,   delay: 6 }
     };
+
+    // Height above the San Luis Obispo valley floor (town sits at about 235 ft).
+    var PEAKS = [
+      { name: "Terrace Hill", ft: 250 },
+      { name: "Cerro San Luis", ft: 1055 },
+      { name: "Bishop Peak", ft: 1315 }
+    ];
 
     var DEVICES = {
       chute12: { label: "12 in chute", v: 4.6 },
@@ -318,6 +326,34 @@ const isLaunch = mode === "launch";
         ctx.fillText(xLabel, W - pad.r - 62, H - pad.b + 14);
       }
 
+      // Ghosted local landmarks so an altitude in feet means something.
+      function drawPeaks(W, H, pad, yMax) {
+        var base = H - pad.b;
+        for (var i = 0; i < PEAKS.length; i++) {
+          var pk = PEAKS[i];
+          var h = (pk.ft * 0.3048 / yMax) * (H - pad.b - pad.t);
+          if (h < 6 || h > H - pad.t) continue;
+          var top = base - h;
+          var halfW = Math.max(30, h * 0.85);
+          var cx = W - pad.r - 40 - i * 8;
+          ctx.fillStyle = "rgba(150,175,205,0.13)";
+          ctx.beginPath();
+          ctx.moveTo(cx - halfW, base);
+          ctx.lineTo(cx - halfW * 0.25, top);
+          ctx.lineTo(cx + halfW * 0.18, top + h * 0.14);
+          ctx.lineTo(cx + halfW, base);
+          ctx.closePath();
+          ctx.fill();
+          ctx.strokeStyle = "rgba(180,205,235,0.28)";
+          ctx.setLineDash([2, 3]); ctx.lineWidth = 1;
+          ctx.beginPath(); ctx.moveTo(pad.l, top); ctx.lineTo(W - pad.r, top); ctx.stroke();
+          ctx.setLineDash([]);
+          ctx.fillStyle = "rgba(190,212,238,0.72)";
+          ctx.font = "10px ui-monospace, monospace";
+          ctx.fillText(pk.name + " " + pk.ft + " ft", pad.l + 6, top - 3);
+        }
+      }
+
       function rocketGlyph(x, y, ang, flame, scale) {
         var s = scale || 1;
         ctx.save(); ctx.translate(x, y); ctx.rotate(ang); ctx.scale(s, s);
@@ -339,9 +375,12 @@ const isLaunch = mode === "launch";
         var W = cv.width, H = cv.height, pad = { l: 44, r: 14, t: 16, b: 26 };
         ctx.fillStyle = "#08111f"; ctx.fillRect(0, 0, W, H);
 
-        var yMax = Math.max(r.apogee * 1.12, 10);
+        // Fixed vertical scale: a B6-4 and a C6-5 should look different, not
+        // identical-but-relabelled. Only grow it if a flight would run off the top.
+        var yMax = Math.max(r.af.axisFt, ft(r.apogee) * 1.06) * 0.3048;
         var xMax = Math.max(r.tApogee * 1.05, 1);
         axes(W, H, pad, xMax, yMax, "time (s)");
+        drawPeaks(W, H, pad, yMax);
 
         var px = function (t) { return pad.l + (t / xMax) * (W - pad.l - pad.r); };
         var py = function (y) { return H - pad.b - (y / yMax) * (H - pad.b - pad.t); };
@@ -410,9 +449,10 @@ const isLaunch = mode === "launch";
         var W = cv.width, H = cv.height, pad = { l: 44, r: 14, t: 16, b: 26 };
         ctx.fillStyle = "#08111f"; ctx.fillRect(0, 0, W, H);
 
-        var yMax = Math.max(r.base.apogee * 1.12, 10);
+        var yMax = Math.max(r.af.axisFt, ft(r.base.apogee) * 1.06) * 0.3048;
         var xMax = Math.max(r.drift * 1.15, 30);
         axes(W, H, pad, xMax, yMax, "drift downwind (ft)");
+        drawPeaks(W, H, pad, yMax);
 
         var px = function (d) { return pad.l + (d / xMax) * (W - pad.l - pad.r); };
         var py = function (y) { return H - pad.b - (y / yMax) * (H - pad.b - pad.t); };
@@ -482,24 +522,32 @@ const isLaunch = mode === "launch";
       var runner = mode === "launch" ? runLaunch : runRecovery;
       function draw(p) { runner(p); }
 
+      var progress = 0, running = false;
+
       function animate() {
         if (raf) cancelAnimationFrame(raf);
         verdict.dataset.tone = ""; verdict.textContent = "";
-        if (reduce) { draw(1); return; }
-        var start = null, dur = mode === "launch" ? 2400 : 2800;
+        if (reduce) { progress = 1; draw(1); return; }
+        var start = null, dur = mode === "launch" ? 2400 : 4200;
+        running = true;
         function step(ts) {
           if (!start) start = ts;
-          var p = Math.min(1, (ts - start) / dur);
-          draw(p);
-          if (p < 1) raf = requestAnimationFrame(step);
+          progress = Math.min(1, (ts - start) / dur);
+          draw(progress);
+          if (progress < 1) raf = requestAnimationFrame(step);
+          else running = false;
         }
         raf = requestAnimationFrame(step);
       }
 
+      // Redraw at wherever the descent has got to, so a control moved mid-flight
+      // changes the rest of the path instead of doing nothing until the next run.
+      function live() { draw(running ? progress : 0); }
+
       function bindOut(input, name) {
         var out = root.querySelector('[data-fsim-out="' + name + '"]');
         if (!input || !out) return;
-        input.addEventListener("input", function () { out.textContent = input.value; draw(0); });
+        input.addEventListener("input", function () { out.textContent = input.value; live(); });
         out.textContent = input.value;
       }
 
@@ -507,14 +555,15 @@ const isLaunch = mode === "launch";
       bindOut(root.querySelector("[data-fsim-delay]"), "delay");
       bindOut(root.querySelector("[data-fsim-wind]"), "wind");
 
-      afSel.addEventListener("change", function () { refreshAirframe(); draw(0); });
-      if (moSel) moSel.addEventListener("change", function () { draw(0); });
+      afSel.addEventListener("change", function () { refreshAirframe(); progress = 0; running = false; draw(0); });
+      if (moSel) moSel.addEventListener("change", function () { progress = 0; running = false; draw(0); });
       var dev = root.querySelector("[data-fsim-device]");
-      if (dev) dev.addEventListener("change", function () { draw(0); });
+      if (dev) dev.addEventListener("change", function () { live(); });
 
       root.querySelector("[data-fsim-run]").addEventListener("click", animate);
       root.querySelector("[data-fsim-reset]").addEventListener("click", function () {
         if (raf) cancelAnimationFrame(raf);
+        progress = 0; running = false;
         verdict.dataset.tone = ""; verdict.textContent = "";
         phaseEl.textContent = "Ready";
         draw(0);

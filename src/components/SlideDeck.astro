@@ -9,6 +9,7 @@ import MissionControl from "./MissionControl.astro";
 import FlightSim from "./FlightSim.astro";
 import OrbitSim from "./OrbitSim.astro";
 import SlideArt from "./SlideArt.astro";
+import SlideImage from "./SlideImage.astro";
 import LaunchOps from "./LaunchOps.astro";
 
 const { deck } = Astro.props;
@@ -36,6 +37,7 @@ const slides = deck.slides;
             <p class="ds-kicker">{s.kicker}</p>
             <h4 class="ds-h1">{s.heading}</h4>
             <p class="ds-sub">{s.sub}</p>
+            {s.image && <SlideImage name={s.image} />}
             {s.art && <SlideArt name={s.art} />}
           </div>
         )}
@@ -44,6 +46,7 @@ const slides = deck.slides;
           <div class="ds ds-prompt">
             <p class="ds-eyebrow">{s.heading}</p>
             <p class="ds-question">{s.question}</p>
+            {s.image && <SlideImage name={s.image} />}
             {s.art && <SlideArt name={s.art} />}
             <details class="ds-reveal">
               <summary>Where you're steering it</summary>
@@ -56,6 +59,7 @@ const slides = deck.slides;
           <div class="ds">
             <h4 class="ds-h2">{s.heading}</h4>
             {s.intro && <p class="ds-intro">{s.intro}</p>}
+            {s.image && <SlideImage name={s.image} />}
             {s.art && <SlideArt name={s.art} />}
             <ul class="ds-list">
               {s.bullets.map((b) => <li>{b}</li>)}
@@ -67,6 +71,7 @@ const slides = deck.slides;
         {s.type === "twocol" && (
           <div class="ds">
             <h4 class="ds-h2">{s.heading}</h4>
+            {s.image && <SlideImage name={s.image} />}
             {s.art && <SlideArt name={s.art} />}
             <div class="ds-cols">
               <div class="ds-col">
@@ -117,6 +122,7 @@ const slides = deck.slides;
           <div class="ds">
             <h4 class="ds-h2">{s.heading}</h4>
             {s.intro && <p class="ds-intro">{s.intro}</p>}
+            {s.image && <SlideImage name={s.image} />}
             {s.art && <SlideArt name={s.art} />}
             <ol class="ds-steps">
               {s.steps.map((st) => (
@@ -184,6 +190,7 @@ const slides = deck.slides;
           <div class="ds">
             <h4 class="ds-h2">{s.heading}</h4>
             <p class="ds-intro">{s.intro}</p>
+            {s.image && <SlideImage name={s.image} />}
             {s.art && <SlideArt name={s.art} />}
             <p>
               <a class="mb-link-btn" href="/merit-badges/capstones/telemetry-rocket/#rocket-calc" target="_blank" rel="noopener noreferrer">
@@ -197,6 +204,7 @@ const slides = deck.slides;
           <div class="ds">
             <h4 class="ds-h2">{s.heading}</h4>
             <p class="ds-intro">{s.intro}</p>
+            {s.image && <SlideImage name={s.image} />}
             {s.art && <SlideArt name={s.art} />}
             <div class="ds-locations">
               {s.locations.map((l) => (
