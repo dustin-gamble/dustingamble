@@ -1,0 +1,103 @@
+---
+// NASA public-domain photographs for slides. Every caption below was written
+// after looking at the actual downloaded file, not from the search title —
+// the "Saturn Apollo Program" result turned out to be a crew portrait, not a
+// liftoff, which is exactly the mistake this guards against.
+const IMAGES = {
+  "apollo-crew": {
+    src: "/images/space/saturn-v-launch.jpg",
+    alt: "Three Apollo astronauts in white pressure suits standing in front of an American flag, with a Saturn V rocket on its pad in the distance",
+    caption: "An Apollo crew at Kennedy Space Center, their Saturn V waiting on the pad behind them.",
+    credit: "NASA",
+  },
+  "shuttle-launch": {
+    src: "/images/space/shuttle-launch.jpg",
+    alt: "Space Shuttle Columbia lifting off across a marsh, exhaust reflected in the water",
+    caption: "Columbia leaves Pad 39A. Two solid boosters and three main engines, burning together.",
+    credit: "NASA",
+  },
+  iss: {
+    src: "/images/space/iss.jpg",
+    alt: "The International Space Station in orbit, solar arrays extended, Earth below",
+    caption: "The ISS — American, Russian, Japanese, European and Canadian hardware, docked together and continuously crewed since November 2000.",
+    credit: "NASA",
+  },
+  voyager: {
+    src: "/images/space/voyager.jpg",
+    alt: "Artist's concept of the Voyager spacecraft against a starfield",
+    caption: "Voyager, launched 1977, still transmitting from interstellar space with less computing power than a modern key fob.",
+    credit: "NASA/JPL-Caltech (artist's concept)",
+  },
+  perseverance: {
+    src: "/images/space/perseverance.jpg",
+    alt: "The Perseverance rover photographed on the surface of Mars with the Ingenuity helicopter nearby",
+    caption: "Perseverance on Mars, with the Ingenuity helicopter. Every picture it sends takes 3 to 22 minutes to reach Earth.",
+    credit: "NASA/JPL-Caltech/MSSS",
+  },
+  bootprint: {
+    src: "/images/space/bootprint.jpg",
+    alt: "Close-up of an astronaut's boot and its print in grey lunar soil",
+    caption: "An Apollo 11 bootprint. No wind, no rain — it is still there.",
+    credit: "NASA",
+  },
+  "dsn-dish": {
+    src: "/images/space/dsn-dish.jpg",
+    alt: "Workers and a crane dwarfed inside the white dish of a Deep Space Network antenna",
+    caption: "Inside a Deep Space Network dish during maintenance. Look for the people — this is what receives the signal from Mars.",
+    credit: "NASA/JPL-Caltech",
+  },
+  "katherine-johnson": {
+    src: "/images/space/katherine-johnson.jpg",
+    alt: "Portrait of Katherine Johnson, NASA mathematician, seated",
+    caption: "Katherine Johnson at NASA Langley, 1971. She calculated the trajectories that put Americans in orbit and on the Moon — John Glenn refused to fly until she personally checked the computer's numbers.",
+    credit: "NASA",
+  },
+};
+
+const { name, size = "full" } = Astro.props;
+const img = IMAGES[name];
+---
+
+{img && (
+  <figure class={`simg simg-${size}`}>
+    <img src={img.src} alt={img.alt} loading="lazy" decoding="async" />
+    <figcaption>
+      <span class="simg-cap">{img.caption}</span>
+      <span class="simg-credit">{img.credit} · public domain</span>
+    </figcaption>
+  </figure>
+)}
+
+<style>
+  .simg { margin: 0.4rem 0 0.9rem; }
+
+  .simg img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 34vh;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    background: var(--bg-alt);
+  }
+
+  .simg-half img { max-height: 26vh; }
+
+  .simg figcaption {
+    display: grid;
+    gap: 0.15rem;
+    margin-top: 0.4rem;
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
+  .simg-cap { color: var(--text); }
+
+  .simg-credit {
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+</style>

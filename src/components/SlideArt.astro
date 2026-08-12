@@ -21,18 +21,18 @@ const { name } = Astro.props;
   )}
 
   {name === "spinoff" && (
-    <svg viewBox="0 0 560 170" class="sart-svg">
-      <circle cx="90" cy="85" r="52" class="a-fill" />
-      <text x="90" y="80" class="a-lab a-mid">SPACE</text>
-      <text x="90" y="98" class="a-tiny a-mid">program</text>
+    <svg viewBox="0 0 560 160" class="sart-svg">
+      <circle cx="90" cy="82" r="48" class="a-fill" />
+      <text x="90" y="78" class="a-lab a-mid a-inv">SPACE</text>
+      <text x="90" y="96" class="a-tiny a-mid a-inv">program</text>
       {[
         ["Phone camera", 26], ["Memory foam", 56], ["Cordless tools", 86],
-        ["Lens coating", 116], ["Water filters", 146]
+        ["Lens coating", 112], ["Water filters", 140]
       ].map(([t, y]) => (
         <g>
-          <path d={`M146 85 C 200 85, 220 ${y}, 268 ${y}`} class="a-line" />
-          <circle cx="268" cy={y} r="4" class="a-dot" />
-          <text x="282" y={y + 4} class="a-lab-sm">{t}</text>
+          <path d={`M140 82 C 196 82, 216 ${y}, 262 ${y}`} class="a-line" />
+          <circle cx="262" cy={y} r="4" class="a-dot" />
+          <text x="276" y={y + 4} class="a-lab-sm">{t}</text>
         </g>
       ))}
     </svg>
@@ -53,14 +53,14 @@ const { name } = Astro.props;
 
   {name === "cannonball" && (
     <svg viewBox="0 0 560 190" class="sart-svg">
-      <circle cx="280" cy="240" r="130" class="a-planet" />
-      <rect x="268" y="100" width="24" height="12" rx="3" class="a-fill" />
-      <path d="M292 106 q 70 6 96 64" class="a-traj-a" />
-      <path d="M292 106 q 130 4 168 118" class="a-traj-b" />
-      <path d="M292 106 a 174 174 0 1 1 -24 0" class="a-traj-c" />
-      <text x="392" y="176" class="a-lab-sm">too slow — falls back</text>
+      <circle cx="280" cy="300" r="150" class="a-planet" />
+      <rect x="266" y="142" width="28" height="12" rx="3" class="a-fill" />
+      <path d="M294 148 q 74 8 100 60" class="a-traj-a" />
+      <path d="M294 148 q 134 6 172 106" class="a-traj-b" />
+      <path d="M294 148 a 152 152 0 1 1 -26 2" class="a-traj-c" />
+      <text x="404" y="196" class="a-lab-sm">too slow — falls back</text>
       <text x="30" y="60" class="a-lab-sm">fast enough — the ground curves away as fast as you fall</text>
-      <text x="280" y="150" class="a-tiny a-mid">Newton's cannonball</text>
+      <text x="280" y="186" class="a-tiny a-mid">Newton's cannonball</text>
     </svg>
   )}
 
@@ -87,9 +87,9 @@ const { name } = Astro.props;
       {[
         ["7a", "ENERGY", 470, 42], ["7b", "BUILD", 470, 74],
         ["7c", "LIFE SUPPORT", 470, 106], ["7d", "PURPOSE", 470, 138]
-      ].map(([n, t, x, y]) => (
+      ].map(([n, t, x, y], i) => (
         <g>
-          <path d={`M348 ${Math.min(126, y)} H ${x - 8}`} class="a-line" />
+          <path d={`M336 ${Math.min(120, 60 + i * 18)} H 396 V ${y} H ${x - 8}`} class="a-line" />
           <text x={x} y={y + 4} class="a-lab-sm">{t}</text>
           <text x={x - 34} y={y + 4} class="a-num-sm">{n}</text>
         </g>
@@ -99,7 +99,7 @@ const { name } = Astro.props;
   )}
 
   {name === "build-order" && (
-    <svg viewBox="0 0 560 120" class="sart-svg">
+    <svg viewBox="0 0 560 124" class="sart-svg">
       {["Inventory", "Body", "Fins", "Lug", "Recovery", "Mass", "Finish"].map((t, i) => (
         <g>
           <circle cx={44 + i * 79} cy="52" r="20" class="a-box a-fill-soft" />
@@ -147,14 +147,14 @@ const { name } = Astro.props;
     <svg viewBox="0 0 560 120" class="sart-svg">
       {["Show up", "Pioneer card", "Safety quiz 8/10", "Signed form"].map((t, i) => (
         <g>
-          <rect x={8 + i * 126} y="34" width="112" height="52" rx="9" class="a-box a-fill-soft" />
-          <text x={64 + i * 126} y="58" class="a-num a-mid">{i + 1}</text>
-          <text x={64 + i * 126} y="76" class="a-lab-sm a-mid">{t}</text>
-          {i < 3 && <path d={`M124 ${60} H ${130 + i * 126}`} class="a-arrow-a" transform={`translate(${i * 126} 0)`} />}
+          <rect x={8 + i * 122} y="34" width="106" height="52" rx="9" class="a-box a-fill-soft" />
+          <text x={61 + i * 122} y="56" class="a-num a-mid">{i + 1}</text>
+          <text x={61 + i * 122} y="76" class="a-lab-sm a-mid">{t}</text>
+          {i < 3 && <path d={`M${116 + i * 122} 60 H ${128 + i * 122}`} class="a-arrow-a" />}
         </g>
       ))}
-      <rect x="512" y="34" width="40" height="52" rx="9" class="a-go" />
-      <text x="532" y="66" class="a-lab a-mid">🚀</text>
+      <rect x="516" y="34" width="36" height="52" rx="9" class="a-go" />
+      <text x="534" y="68" class="a-emoji a-mid">🚀</text>
       <text x="8" y="22" class="a-tiny">clear all four, then you may order a rocket</text>
     </svg>
   )}
@@ -218,14 +218,14 @@ const { name } = Astro.props;
       <circle cx="80" cy="76" r="34" class="a-fill" />
       <text x="80" y="72" class="a-lab-sm a-mid a-inv">ONE</text>
       <text x="80" y="88" class="a-lab-sm a-mid a-inv">JOB</text>
-      {[["Training + education", 26], ["What it costs", 52], ["Is anyone hiring", 78], ["What it pays", 104], ["What you do all day", 130]].map(([t, y]) => (
+      {[["Training + education", 26], ["What it costs", 52], ["Is anyone hiring", 78], ["What it pays", 104], ["What you do all day", 126]].map(([t, y]) => (
         <g>
           <path d={`M118 76 C 170 76, 186 ${y}, 232 ${y}`} class="a-line" />
           <circle cx="232" cy={y} r="4" class="a-dot" />
           <text x="246" y={y + 4} class="a-lab-sm">{t}</text>
         </g>
       ))}
-      <text x="80" y="132" class="a-tiny a-mid">requirement 8</text>
+      <text x="80" y="140" class="a-tiny a-mid">requirement 8</text>
     </svg>
   )}
 </div>
