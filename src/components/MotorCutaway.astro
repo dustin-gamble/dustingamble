@@ -1,0 +1,241 @@
+---
+// Cutaway of a black-powder model rocket motor, keyed to the C6-5 code.
+// Supports Space Exploration requirement 4(b) — how rocket engines work.
+const stages = [
+  { key: "ignite", label: "1. Ignition", t: "0 s", what: "The igniter glows red-hot inside the nozzle and lights the propellant grain from the bottom." },
+  { key: "thrust", label: "2. Thrust", t: "0–1.7 s", what: "Propellant burns, gas accelerates through the nozzle throat, and the reaction pushes the rocket up. The 6 in C6-5 is the average thrust in newtons." },
+  { key: "delay", label: "3. Delay", t: "1.7–6.7 s", what: "Propellant is gone. The delay grain smoulders and makes tracking smoke while the rocket coasts to apogee. The 5 in C6-5 is these seconds." },
+  { key: "eject", label: "4. Ejection", t: "≈6.7 s", what: "The ejection charge fires forward, pressurises the body tube, and pops the nose cone off so the parachute comes out." },
+];
+---
+
+<div class="mcut" data-mcut>
+  <svg viewBox="0 0 900 300" class="mcut-svg" role="img" aria-label="Cutaway of a model rocket motor showing nozzle, propellant, delay charge and ejection charge">
+    <title>Model rocket motor cutaway — C6-5</title>
+
+    <!-- casing -->
+    <rect x="120" y="105" width="640" height="90" rx="6" class="mc-case" />
+
+    <!-- nozzle -->
+    <g class="mc-part" data-part="ignite">
+      <path d="M120 105 L60 78 L60 222 L120 195 Z" class="mc-nozzle" />
+      <path d="M120 122 L96 138 L96 162 L120 178 Z" class="mc-throat" />
+      <path d="M96 150 L30 150" class="mc-igniter" />
+      <circle cx="30" cy="150" r="6" class="mc-igniter-dot" />
+    </g>
+
+    <!-- propellant grain (cored, burns from the inside out) -->
+    <g class="mc-part" data-part="thrust">
+      <rect x="126" y="112" width="300" height="76" rx="4" class="mc-prop" />
+      <path d="M126 150 L300 150" class="mc-core" />
+      <path d="M170 150 l14 -10 M210 150 l14 -10 M250 150 l14 -10 M290 150 l14 -10" class="mc-flow" />
+    </g>
+
+    <!-- delay grain -->
+    <g class="mc-part" data-part="delay">
+      <rect x="430" y="112" width="180" height="76" rx="4" class="mc-delay" />
+      <path d="M448 128 q 14 12 0 24 q -14 12 0 24" class="mc-smoke" />
+      <path d="M486 128 q 14 12 0 24 q -14 12 0 24" class="mc-smoke" />
+      <path d="M524 128 q 14 12 0 24 q -14 12 0 24" class="mc-smoke" />
+    </g>
+
+    <!-- ejection charge + cap -->
+    <g class="mc-part" data-part="eject">
+      <rect x="614" y="112" width="106" height="76" rx="4" class="mc-eject" />
+      <rect x="724" y="108" width="34" height="84" rx="4" class="mc-cap" />
+      <path d="M640 150 l 40 0 M672 138 l 12 12 l -12 12" class="mc-arrow" />
+    </g>
+
+    <!-- labels -->
+    <g class="mc-labels">
+      <g class="mc-label" data-part="ignite">
+        <path d="M78 90 V 52 H 150" class="mc-leader" />
+        <text x="156" y="48">Nozzle + igniter</text>
+      </g>
+      <g class="mc-label" data-part="thrust">
+        <path d="M276 112 V 66 H 340" class="mc-leader" />
+        <text x="346" y="62">Propellant grain</text>
+      </g>
+      <g class="mc-label" data-part="delay">
+        <path d="M520 188 V 240 H 430" class="mc-leader" />
+        <text x="424" y="245" text-anchor="end">Delay grain — the &#8220;5&#8221;</text>
+      </g>
+      <g class="mc-label" data-part="eject">
+        <path d="M667 112 V 62 H 730" class="mc-leader" />
+        <text x="736" y="58">Ejection charge</text>
+      </g>
+    </g>
+
+    <!-- code decoder -->
+    <g class="mc-code">
+      <text x="120" y="284" class="mc-code-txt"><tspan class="mc-c1">C</tspan><tspan class="mc-dim">6</tspan><tspan class="mc-dim">-</tspan><tspan class="mc-dim">5</tspan></text>
+      <text x="176" y="284" class="mc-code-note">total impulse class — each letter is double the one before</text>
+      <text x="120" y="262" class="mc-code-txt"><tspan class="mc-dim">C</tspan><tspan class="mc-c2">6</tspan><tspan class="mc-dim">-5</tspan></text>
+      <text x="176" y="262" class="mc-code-note">average thrust in newtons</text>
+      <text x="120" y="240" class="mc-code-txt"><tspan class="mc-dim">C6-</tspan><tspan class="mc-c3">5</tspan></text>
+      <text x="176" y="240" class="mc-code-note">seconds of delay between burnout and ejection</text>
+    </g>
+  </svg>
+
+  <ol class="mcut-steps">
+    {stages.map((s) => (
+      <li>
+        <button type="button" class="mcut-chip" data-chip-for={s.key}>
+          <span class="mcut-chip-t">{s.t}</span>{s.label}
+        </button>
+      </li>
+    ))}
+  </ol>
+
+  <div class="mcut-readout" data-mcut-readout>
+    <p class="mcut-empty">Four things happen inside one cardboard tube. Tap a stage.</p>
+    {stages.map((s) => (
+      <p class="mcut-item" data-readout-for={s.key} hidden><strong>{s.label}</strong> {s.what}</p>
+    ))}
+  </div>
+</div>
+
+<style>
+  .mcut {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    padding: 1rem 1.15rem 1.1rem;
+  }
+
+  .mcut-svg { width: 100%; height: auto; display: block; overflow: hidden; }
+
+  .mc-case { fill: none; stroke: var(--text); stroke-width: 2.4; opacity: 0.85; }
+  .mc-nozzle { fill: var(--muted); stroke: var(--text); stroke-width: 2; opacity: 0.6; }
+  .mc-throat { fill: var(--bg); stroke: var(--text); stroke-width: 1.4; }
+  .mc-igniter { stroke: #c8532b; stroke-width: 3; stroke-linecap: round; fill: none; }
+  .mc-igniter-dot { fill: #c8532b; }
+  .mc-prop { fill: var(--accent-soft); stroke: var(--text); stroke-width: 1.6; }
+  .mc-core { stroke: var(--text); stroke-width: 6; opacity: 0.35; }
+  .mc-flow { stroke: #d88a2a; stroke-width: 2; fill: none; stroke-linecap: round; }
+  .mc-delay { fill: none; stroke: var(--text); stroke-width: 1.6; stroke-dasharray: 6 4; }
+  .mc-smoke { fill: none; stroke: var(--muted); stroke-width: 1.8; }
+  .mc-eject { fill: #c8532b; opacity: 0.55; stroke: var(--text); stroke-width: 1.6; }
+  .mc-cap { fill: var(--muted); opacity: 0.45; stroke: var(--text); stroke-width: 1.6; }
+  .mc-arrow { stroke: var(--text); stroke-width: 2.4; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .mc-leader { fill: none; stroke: var(--muted); stroke-width: 1.2; opacity: 0.8; }
+
+  .mc-labels text {
+    fill: var(--text);
+    font-family: "Space Grotesk", system-ui, sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .mc-part, .mc-label { cursor: pointer; }
+  .mc-label.is-active text { fill: var(--accent-strong); font-weight: 700; }
+  .mc-label.is-active .mc-leader { stroke: var(--accent); opacity: 1; stroke-width: 2; }
+  .mc-part.is-active rect,
+  .mc-part.is-active path:not(.mc-igniter):not(.mc-flow):not(.mc-smoke):not(.mc-arrow) {
+    stroke: var(--accent);
+    stroke-width: 3;
+  }
+  .mc-part.is-active .mc-prop,
+  .mc-part.is-active .mc-eject { fill: var(--accent); opacity: 0.75; }
+
+  .mc-code-txt {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 17px;
+    font-weight: 700;
+    fill: var(--text);
+  }
+
+  .mc-dim { opacity: 0.28; }
+  .mc-c1, .mc-c2, .mc-c3 { fill: var(--accent-strong); }
+
+  .mc-code-note {
+    font-family: "Space Grotesk", system-ui, sans-serif;
+    font-size: 13px;
+    fill: var(--muted);
+  }
+
+  .mcut-steps {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0.9rem 0 0.8rem;
+    padding: 0;
+  }
+
+  .mcut-chip {
+    font: inherit;
+    font-size: 0.8rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+  }
+
+  .mcut-chip:hover,
+  .mcut-chip.is-on { border-color: var(--accent); color: var(--accent-strong); background: var(--accent-soft); }
+
+  .mcut-chip-t {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.72rem;
+    opacity: 0.75;
+  }
+
+  .mcut-readout { min-height: 3.4rem; border-top: 1px solid var(--line); padding-top: 0.7rem; }
+  .mcut-readout p { margin: 0; font-size: 0.9rem; line-height: 1.6; color: var(--muted); }
+  .mcut-readout strong { color: var(--text); }
+
+  @media (max-width: 640px) {
+    .mc-labels text { font-size: 21px; }
+    .mc-code-note { font-size: 15px; }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    function wire(root) {
+      if (root.dataset.mcutWired) return;
+      root.dataset.mcutWired = "1";
+      var readout = root.querySelector("[data-mcut-readout]");
+      var empty = readout.querySelector(".mcut-empty");
+      var current = null;
+
+      function select(key) {
+        if (current === key) key = null;
+        current = key;
+        var groups = root.querySelectorAll(".mc-part, .mc-label");
+        for (var i = 0; i < groups.length; i++) {
+          groups[i].classList.toggle("is-active", !!key && groups[i].dataset.part === key);
+        }
+        var chips = root.querySelectorAll(".mcut-chip");
+        for (var j = 0; j < chips.length; j++) {
+          chips[j].classList.toggle("is-on", !!key && chips[j].dataset.chipFor === key);
+        }
+        var items = readout.querySelectorAll(".mcut-item");
+        for (var k = 0; k < items.length; k++) items[k].hidden = items[k].dataset.readoutFor !== key;
+        empty.hidden = !!key;
+      }
+
+      var clickable = root.querySelectorAll(".mc-part, .mc-label");
+      for (var a = 0; a < clickable.length; a++) {
+        (function (el) { el.addEventListener("click", function () { select(el.dataset.part); }); })(clickable[a]);
+      }
+      var chips = root.querySelectorAll(".mcut-chip");
+      for (var b = 0; b < chips.length; b++) {
+        (function (el) { el.addEventListener("click", function () { select(el.dataset.chipFor); }); })(chips[b]);
+      }
+    }
+
+    function init() {
+      var all = document.querySelectorAll("[data-mcut]");
+      for (var i = 0; i < all.length; i++) wire(all[i]);
+    }
+    init();
+    document.addEventListener("astro:page-load", init);
+  })();
+</script>

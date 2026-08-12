@@ -4,6 +4,10 @@
 //
 // Slide types: title | prompt | bullets | twocol | video | parts | calculator | charrette
 import RocketPartsDiagram from "./RocketPartsDiagram.astro";
+import MotorCutaway from "./MotorCutaway.astro";
+import MissionControl from "./MissionControl.astro";
+import FlightSim from "./FlightSim.astro";
+import OrbitSim from "./OrbitSim.astro";
 
 const { deck } = Astro.props;
 const slides = deck.slides;
@@ -126,6 +130,38 @@ const slides = deck.slides;
             <h4 class="ds-h2">{s.heading}</h4>
             {s.intro && <p class="ds-intro">{s.intro}</p>}
             <RocketPartsDiagram />
+          </div>
+        )}
+
+        {s.type === "motor" && (
+          <div class="ds">
+            <h4 class="ds-h2">{s.heading}</h4>
+            {s.intro && <p class="ds-intro">{s.intro}</p>}
+            <MotorCutaway />
+          </div>
+        )}
+
+        {s.type === "missioncontrol" && (
+          <div class="ds">
+            <h4 class="ds-h2">{s.heading}</h4>
+            {s.intro && <p class="ds-intro">{s.intro}</p>}
+            <MissionControl />
+          </div>
+        )}
+
+        {s.type === "flightsim" && (
+          <div class="ds">
+            <h4 class="ds-h2">{s.heading}</h4>
+            {s.intro && <p class="ds-intro">{s.intro}</p>}
+            <FlightSim mode={s.sim} id={`${deck.id}-${s.sim}`} />
+          </div>
+        )}
+
+        {s.type === "orbitsim" && (
+          <div class="ds">
+            <h4 class="ds-h2">{s.heading}</h4>
+            {s.intro && <p class="ds-intro">{s.intro}</p>}
+            <OrbitSim mode={s.sim} id={`${deck.id}-${s.sim}`} />
           </div>
         )}
 

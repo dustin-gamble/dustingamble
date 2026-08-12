@@ -1,0 +1,532 @@
+---
+// Orbital mechanics sandbox, two modes.
+//   mode="ascent" — ground launch to orbit: pitch-over and delta-v
+//   mode="moon"   — LEO to the Moon: trans-lunar injection burn and timing
+//
+// Real gravity, real constants, simplified thrust. The point is that Scouts
+// feel why "going up" is the easy half and "going sideways fast enough" is
+// the hard half.
+const { mode = "ascent", id = mode } = Astro.props;
+const isAscent = mode === "ascent";
+---
+
+<div class="osim" data-osim data-mode={mode} id={`osim-${id}`}>
+  <div class="osim-head">
+    <h4>{isAscent ? "Ground to orbit" : "Orbit to the Moon"}</h4>
+    <p>
+      {isAscent
+        ? "Orbit is not about height, it is about sideways speed. Go straight up and you fall straight back. The trick is turning that climb into a horizontal velocity of about 7.8 km/s before the fuel runs out."
+        : "You are already in a 300 km circular orbit. One burn at the right moment stretches that circle until its far end reaches the Moon — and the Moon has to arrive at the same place at the same time."}
+    </p>
+  </div>
+
+  <div class="osim-body">
+    <div class="osim-stage">
+      <canvas data-osim-canvas width="520" height="520" role="img"
+        aria-label={isAscent ? "Animated launch to orbit trajectory" : "Animated trajectory from Earth orbit to the Moon"}></canvas>
+      <div class="osim-clock" data-osim-clock></div>
+    </div>
+
+    <div class="osim-panel">
+      {isAscent ? (
+        <>
+          <label>
+            Pitch-over altitude <output data-osim-out="pitch">12</output> km
+            <input type="range" data-osim-pitch min="1" max="60" step="1" value="12" />
+            <span class="osim-hint">How high you climb before starting to lean over.</span>
+          </label>
+          <label>
+            Total &Delta;v <output data-osim-out="dv">9.8</output> km/s
+            <input type="range" data-osim-dv min="6" max="12" step="0.1" value="9.8" />
+            <span class="osim-hint">Your whole fuel budget, spent as one long burn.</span>
+          </label>
+        </>
+      ) : (
+        <>
+          <label>
+            Injection burn <output data-osim-out="tli">3.14</output> km/s
+            <input type="range" data-osim-tli min="2.80" max="3.40" step="0.01" value="3.14" />
+            <span class="osim-hint">Added to your orbital speed, along the direction you are already travelling.</span>
+          </label>
+          <label>
+            Moon lead angle <output data-osim-out="lead">130</output>&deg;
+            <input type="range" data-osim-lead min="10" max="170" step="1" value="130" />
+            <span class="osim-hint">How far ahead the Moon is when you light the engine. Aim where it will be, not where it is.</span>
+          </label>
+        </>
+      )}
+
+      <dl class="osim-readout" data-osim-readout></dl>
+      <p class="osim-verdict" data-osim-verdict></p>
+
+      <div class="osim-actions">
+        <button type="button" class="osim-btn osim-btn-go" data-osim-run>
+          {isAscent ? "Launch" : "Burn"}
+        </button>
+        <button type="button" class="osim-btn" data-osim-reset>Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <p class="osim-foot">
+    {isAscent
+      ? "Earth radius 6,371 km, μ = 398,600 km³/s². Thrust is modelled as a constant 30 m/s² along a simple gravity-turn program — real rockets throttle and stage."
+      : "Earth and Moon gravity both integrated. Moon at 384,400 km on a circular 27.3-day orbit. A real mission also has to plan the return."}
+  </p>
+</div>
+
+<style>
+  .osim {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    padding: 1rem 1.15rem 1.1rem;
+  }
+
+  .osim-head h4 { margin: 0 0 0.3rem; font-size: 1.05rem; }
+  .osim-head p { margin: 0 0 0.9rem; font-size: 0.9rem; color: var(--muted); line-height: 1.55; }
+
+  .osim-body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(15rem, 19rem); gap: 1.1rem; align-items: start; }
+
+  .osim-stage { position: relative; }
+
+  .osim-stage canvas {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    background: #05070f;
+  }
+
+  .osim-clock {
+    position: absolute;
+    top: 0.6rem;
+    left: 0.6rem;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    padding: 0.2rem 0.55rem;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+  }
+
+  .osim-panel { display: grid; gap: 0.8rem; }
+  .osim-panel label { display: grid; gap: 0.28rem; font-size: 0.82rem; font-weight: 600; }
+  .osim-panel input[type="range"] { width: 100%; }
+  .osim-hint { font-weight: 400; font-size: 0.76rem; color: var(--muted); line-height: 1.45; }
+
+  .osim-panel output {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-weight: 700;
+    color: var(--accent-strong);
+  }
+
+  .osim-readout {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.22rem 0.6rem;
+    margin: 0;
+    padding: 0.6rem 0.7rem;
+    border-radius: 10px;
+    background: var(--bg-alt);
+    border: 1px solid var(--line);
+    font-size: 0.82rem;
+  }
+
+  .osim-readout dt { color: var(--muted); }
+
+  .osim-readout dd {
+    margin: 0;
+    text-align: right;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+  }
+
+  .osim-verdict {
+    margin: 0;
+    min-height: 3.2rem;
+    font-size: 0.84rem;
+    line-height: 1.5;
+    padding: 0.5rem 0.65rem;
+    border-radius: 8px;
+    border-left: 3px solid var(--line);
+    background: var(--bg-alt);
+  }
+
+  .osim-verdict[data-tone="good"] { border-left-color: #3d8b58; }
+  .osim-verdict[data-tone="warn"] { border-left-color: #d8a13a; }
+  .osim-verdict[data-tone="bad"] { border-left-color: #c8532b; }
+
+  .osim-actions { display: flex; gap: 0.4rem; }
+
+  .osim-btn {
+    font: inherit;
+    font-size: 0.85rem;
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--text);
+    cursor: pointer;
+  }
+
+  .osim-btn:hover { border-color: var(--accent); color: var(--accent-strong); }
+
+  .osim-btn-go {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+    font-weight: 700;
+  }
+
+  :root[data-theme="dark"] .osim-btn-go { color: #0f1623; }
+
+  .osim-foot { margin: 0.9rem 0 0; font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+
+  @media (max-width: 760px) {
+    .osim-body { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var RE = 6371;          // km
+    var MU_E = 398600;      // km^3/s^2
+    var MU_M = 4902.8;
+    var RM = 1737;          // km
+    var DM = 384400;        // km
+    var MOON_W = (2 * Math.PI) / (27.32 * 86400); // rad/s
+
+    function grav(rx, ry, mu) {
+      var r = Math.hypot(rx, ry);
+      var k = -mu / (r * r * r);
+      return [k * rx, k * ry, r];
+    }
+
+    // ---------- ascent ----------
+    function simAscent(pitchKm, dvKms) {
+      var acc = 0.030;                  // km/s^2, about 3 g — typical of a real launcher
+      var burn = dvKms / acc;           // s
+      var x = 0, y = RE, vx = 0, vy = 0, t = 0;
+      var pts = [], maxAlt = 0;
+
+      for (var i = 0; i < 200000; i++) {
+        var r = Math.hypot(x, y);
+        var alt = r - RE;
+        if (alt > maxAlt) maxAlt = alt;
+        if (alt < -1) break;
+        if (t > burn + 20000) break;
+        // Small steps under thrust, larger ones out on the coast — a fixed step
+        // big enough to finish the coast loses enough energy to fake a decaying orbit.
+        var dt = t < burn ? 0.5 : Math.max(1, Math.min(30, r / 2500));
+
+        var upx = x / r, upy = y / r;
+        var thx = 0, thy = 0;
+        if (t < burn) {
+          // gravity turn: vertical until pitchKm, then lean toward horizontal by 120 km
+          var f = Math.min(1, Math.max(0, (alt - pitchKm) / (80 - pitchKm)));
+          var ang = (Math.PI / 2) * f;
+          var hx = -upy, hy = upx;   // local horizontal, prograde
+          thx = acc * (Math.cos(ang) * upx + Math.sin(ang) * hx);
+          thy = acc * (Math.cos(ang) * upy + Math.sin(ang) * hy);
+        }
+        var g = grav(x, y, MU_E);
+        vx += (g[0] + thx) * dt;
+        vy += (g[1] + thy) * dt;
+        x += vx * dt; y += vy * dt;
+        t += dt;
+        if (i % 5 === 0 && pts.length < 4000) pts.push([x, y, t <= burn]);
+      }
+
+      // classify the resulting orbit from the final state
+      var rf = Math.hypot(x, y), vf = Math.hypot(vx, vy);
+      var energy = (vf * vf) / 2 - MU_E / rf;
+      var hAng = x * vy - y * vx;
+      var a = -MU_E / (2 * energy);
+      var e = Math.sqrt(Math.max(0, 1 - (hAng * hAng) / (MU_E * a)));
+      var peri = a * (1 - e) - RE;
+      var apo = a * (1 + e) - RE;
+
+      return {
+        pts: pts, maxAlt: maxAlt, burn: burn, energy: energy,
+        peri: peri, apo: apo, e: e, vFinal: vf, t: t,
+        escaped: energy >= 0, orbited: energy < 0 && peri > 100
+      };
+    }
+
+    // ---------- trans-lunar ----------
+    function simMoon(tliKms, leadDeg) {
+      var r0 = RE + 300;
+      var vCirc = Math.sqrt(MU_E / r0);
+      var x = r0, y = 0;
+      var vx = 0, vy = vCirc + tliKms;
+      var moonTheta = (leadDeg * Math.PI) / 180;
+      var t = 0;
+      var pts = [], moonPts = [];
+      var closest = 1e9, tClosest = 0, impact = false, apo = 0;
+
+      for (var i = 0; i < 400000; i++) {
+        var rNow = Math.hypot(x, y);
+        // Adaptive: ~1 s down at perigee where the path bends hard, up to 60 s
+        // out near the Moon. A fixed step loses energy and undershoots badly.
+        var dt = Math.max(1, Math.min(60, rNow / 2500));
+        var mx = DM * Math.cos(moonTheta + MOON_W * t);
+        var my = DM * Math.sin(moonTheta + MOON_W * t);
+
+        var ge = grav(x, y, MU_E);
+        var dx = x - mx, dy = y - my;
+        var dRel = Math.hypot(dx, dy);
+        var km = -MU_M / (dRel * dRel * dRel);
+
+        vx += (ge[0] + km * dx) * dt;
+        vy += (ge[1] + km * dy) * dt;
+        x += vx * dt; y += vy * dt;
+        t += dt;
+
+        var rr = Math.hypot(x, y);
+        if (rr > apo) apo = rr;
+        if (dRel < closest) { closest = dRel; tClosest = t; }
+        if (dRel < RM) { impact = true; }
+        if (rr < RE) break;               // fell back into the atmosphere
+        if (impact) break;
+        if (t > 12 * 86400) break;
+
+        if (i % 60 === 0 && pts.length < 4000) { pts.push([x, y]); moonPts.push([mx, my]); }
+      }
+
+      return {
+        pts: pts, moonPts: moonPts, closest: closest, tClosest: tClosest,
+        impact: impact, apogee: apo - RE, t: t, reached: closest < 66000
+      };
+    }
+
+    function fmtKm(v) {
+      if (v >= 10000) return Math.round(v / 1000) + ",000 km".replace("000 km", "000 km");
+      return Math.round(v).toLocaleString() + " km";
+    }
+    function km(v) { return Math.round(v).toLocaleString() + " km"; }
+
+    function wire(root) {
+      if (root.dataset.osimWired) return;
+      root.dataset.osimWired = "1";
+      var mode = root.dataset.mode;
+      var cv = root.querySelector("[data-osim-canvas]");
+      var ctx = cv.getContext("2d");
+      var clock = root.querySelector("[data-osim-clock]");
+      var readout = root.querySelector("[data-osim-readout]");
+      var verdict = root.querySelector("[data-osim-verdict]");
+      var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      var raf = null;
+
+      function rows(pairs) {
+        readout.innerHTML = pairs.map(function (p) { return "<dt>" + p[0] + "</dt><dd>" + p[1] + "</dd>"; }).join("");
+      }
+
+      function bindOut(input, name, digits) {
+        var out = root.querySelector('[data-osim-out="' + name + '"]');
+        if (!input || !out) return;
+        var sync = function () { out.textContent = digits ? (+input.value).toFixed(digits) : input.value; };
+        input.addEventListener("input", function () { sync(); draw(0); });
+        sync();
+      }
+
+      function stars(W, H) {
+        ctx.fillStyle = "#05070f"; ctx.fillRect(0, 0, W, H);
+        ctx.fillStyle = "rgba(255,255,255,0.5)";
+        for (var i = 0; i < 90; i++) {
+          var sx = (i * 9973) % W, sy = (i * 7919) % H;
+          ctx.fillRect(sx, sy, 1, 1);
+        }
+      }
+
+      function earth(cx, cy, rpx) {
+        var g = ctx.createRadialGradient(cx - rpx * 0.3, cy - rpx * 0.35, rpx * 0.1, cx, cy, rpx);
+        g.addColorStop(0, "#5fa8e8");
+        g.addColorStop(0.6, "#1f5f9e");
+        g.addColorStop(1, "#0d2b4d");
+        ctx.fillStyle = g;
+        ctx.beginPath(); ctx.arc(cx, cy, rpx, 0, 7); ctx.fill();
+        ctx.strokeStyle = "rgba(120,190,255,0.35)"; ctx.lineWidth = 1.5;
+        ctx.beginPath(); ctx.arc(cx, cy, rpx * 1.035, 0, 7); ctx.stroke();
+      }
+
+      // ---------- ascent draw ----------
+      function drawAscent(p) {
+        var pitch = +root.querySelector("[data-osim-pitch]").value;
+        var dv = +root.querySelector("[data-osim-dv]").value;
+        var r = simAscent(pitch, dv);
+        var W = cv.width, H = cv.height;
+        stars(W, H);
+
+        var span = Math.max(RE + r.maxAlt * 1.25, RE * 1.15);
+        var maxR = 0;
+        for (var i = 0; i < r.pts.length; i++) maxR = Math.max(maxR, Math.hypot(r.pts[i][0], r.pts[i][1]));
+        span = Math.max(span, maxR * 1.08);
+        var scale = (Math.min(W, H) / 2 - 14) / span;
+        var cx = W / 2, cy = H / 2;
+
+        earth(cx, cy, RE * scale);
+
+        var n = Math.max(2, Math.floor(r.pts.length * p));
+        ctx.lineWidth = 2;
+        for (var i2 = 1; i2 < n; i2++) {
+          var a = r.pts[i2 - 1], b = r.pts[i2];
+          ctx.strokeStyle = b[2] ? "rgba(255,170,60,0.95)" : "rgba(120,200,255,0.9)";
+          ctx.beginPath();
+          ctx.moveTo(cx + a[0] * scale, cy - a[1] * scale);
+          ctx.lineTo(cx + b[0] * scale, cy - b[1] * scale);
+          ctx.stroke();
+        }
+        var cur = r.pts[n - 1];
+        if (cur) {
+          ctx.fillStyle = "#fff";
+          ctx.beginPath(); ctx.arc(cx + cur[0] * scale, cy - cur[1] * scale, 3.2, 0, 7); ctx.fill();
+        }
+
+        ctx.fillStyle = "rgba(255,255,255,0.6)";
+        ctx.font = "10px ui-monospace, monospace";
+        ctx.fillText("orange = engine burning", 10, H - 22);
+        ctx.fillText("blue = coasting", 10, H - 10);
+
+        clock.textContent = "burn " + Math.round(r.burn) + " s";
+
+        rows([
+          ["Peak altitude", km(r.maxAlt)],
+          ["Final speed", r.vFinal.toFixed(2) + " km/s"],
+          ["Perigee", r.peri > -RE ? km(r.peri) : "—"],
+          ["Apogee", r.apo > 0 && !r.escaped ? km(r.apo) : r.escaped ? "escaped" : "—"],
+          ["Eccentricity", r.e.toFixed(3)]
+        ]);
+
+        if (p >= 1) {
+          if (r.escaped) {
+            verdict.dataset.tone = "warn";
+            verdict.textContent = "You left Earth entirely. More Δv than an orbit needs — useful if you are going to Mars, wasteful if you wanted a satellite.";
+          } else if (r.peri < 100) {
+            verdict.dataset.tone = "bad";
+            verdict.textContent = "Suborbital. You went up " + km(r.maxAlt) + " and came back down — the path is still an ellipse whose low point is inside the Earth. Height was never the problem; you need more sideways speed.";
+          } else if (r.e > 0.25) {
+            verdict.dataset.tone = "warn";
+            verdict.textContent = "You are in orbit, but a lopsided one: " + km(r.peri) + " at the low point, " + km(r.apo) + " at the high point. Pitching over earlier trades altitude for the horizontal speed that rounds it out.";
+          } else {
+            verdict.dataset.tone = "good";
+            verdict.textContent = "Orbit. Near-circular at roughly " + km(r.peri) + ", moving " + r.vFinal.toFixed(2) + " km/s sideways. That sideways number is the whole game — at this speed the ground curves away as fast as you fall.";
+          }
+        }
+      }
+
+      // ---------- moon draw ----------
+      function drawMoon(p) {
+        var tli = +root.querySelector("[data-osim-tli]").value;
+        var lead = +root.querySelector("[data-osim-lead]").value;
+        var r = simMoon(tli, lead);
+        var W = cv.width, H = cv.height;
+        stars(W, H);
+
+        var span = DM * 1.18;
+        var scale = (Math.min(W, H) / 2 - 16) / span;
+        var cx = W / 2, cy = H / 2;
+
+        // Moon's orbit
+        ctx.strokeStyle = "rgba(255,255,255,0.16)";
+        ctx.setLineDash([4, 6]); ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.arc(cx, cy, DM * scale, 0, 7); ctx.stroke();
+        ctx.setLineDash([]);
+
+        earth(cx, cy, Math.max(4, RE * scale));
+
+        var n = Math.max(2, Math.floor(r.pts.length * p));
+        ctx.strokeStyle = "rgba(255,190,90,0.95)"; ctx.lineWidth = 1.8;
+        ctx.beginPath();
+        for (var i = 0; i < n; i++) {
+          var q = r.pts[i];
+          var px = cx + q[0] * scale, py = cy - q[1] * scale;
+          i ? ctx.lineTo(px, py) : ctx.moveTo(px, py);
+        }
+        ctx.stroke();
+
+        var mp = r.moonPts[n - 1] || r.moonPts[0];
+        if (mp) {
+          var mx = cx + mp[0] * scale, my = cy - mp[1] * scale;
+          ctx.fillStyle = "#c9ccd4";
+          ctx.beginPath(); ctx.arc(mx, my, Math.max(4, RM * scale), 0, 7); ctx.fill();
+          ctx.strokeStyle = "rgba(255,255,255,0.18)";
+          ctx.beginPath(); ctx.arc(mx, my, Math.max(4, RM * scale) + 6, 0, 7); ctx.stroke();
+        }
+        var cur = r.pts[n - 1];
+        if (cur) {
+          ctx.fillStyle = "#fff";
+          ctx.beginPath(); ctx.arc(cx + cur[0] * scale, cy - cur[1] * scale, 3, 0, 7); ctx.fill();
+        }
+
+        var days = (r.t * (n / Math.max(1, r.pts.length))) / 86400;
+        clock.textContent = "T + " + days.toFixed(1) + " days";
+
+        rows([
+          ["Apogee reached", km(r.apogee)],
+          ["Moon's orbit radius", km(DM)],
+          ["Closest approach", r.impact ? "impact" : km(r.closest)],
+          ["Time to closest", (r.tClosest / 86400).toFixed(1) + " days"],
+          ["Burn", tli.toFixed(2) + " km/s"]
+        ]);
+
+        if (p >= 1) {
+          if (r.impact) {
+            verdict.dataset.tone = "warn";
+            verdict.textContent = "You hit the Moon. Fine for a probe like Ranger, bad for a crew. Apollo aimed to miss by a few hundred kilometres and then braked into orbit.";
+          } else if (r.reached) {
+            verdict.dataset.tone = "good";
+            verdict.textContent = "Lunar encounter — " + km(r.closest) + " at closest approach after " + (r.tClosest / 86400).toFixed(1) + " days. Apollo took about three. From here a braking burn drops you into lunar orbit.";
+          } else if (r.apogee < DM - RE - 30000) {
+            verdict.dataset.tone = "bad";
+            verdict.textContent = "You did not get out that far — apogee " + km(r.apogee) + " against a Moon orbiting at " + km(DM) + ". You need more burn before timing even matters.";
+          } else {
+            verdict.dataset.tone = "warn";
+            verdict.textContent = "You reached the Moon's distance but missed by " + km(r.closest) + ". Right altitude, wrong timing — change the lead angle so the Moon arrives when you do.";
+          }
+        }
+      }
+
+      var runner = mode === "ascent" ? drawAscent : drawMoon;
+      function draw(p) { runner(p); }
+
+      function animate() {
+        if (raf) cancelAnimationFrame(raf);
+        verdict.dataset.tone = ""; verdict.textContent = "";
+        if (reduce) { draw(1); return; }
+        var start = null, dur = 3200;
+        function step(ts) {
+          if (!start) start = ts;
+          var p = Math.min(1, (ts - start) / dur);
+          draw(p);
+          if (p < 1) raf = requestAnimationFrame(step);
+        }
+        raf = requestAnimationFrame(step);
+      }
+
+      bindOut(root.querySelector("[data-osim-pitch]"), "pitch");
+      bindOut(root.querySelector("[data-osim-dv]"), "dv", 1);
+      bindOut(root.querySelector("[data-osim-tli]"), "tli", 2);
+      bindOut(root.querySelector("[data-osim-lead]"), "lead");
+
+      root.querySelector("[data-osim-run]").addEventListener("click", animate);
+      root.querySelector("[data-osim-reset]").addEventListener("click", function () {
+        if (raf) cancelAnimationFrame(raf);
+        verdict.dataset.tone = ""; verdict.textContent = "";
+        draw(0);
+      });
+
+      draw(0);
+    }
+
+    function init() {
+      var all = document.querySelectorAll("[data-osim]");
+      for (var i = 0; i < all.length; i++) wire(all[i]);
+    }
+    init();
+    document.addEventListener("astro:page-load", init);
+  })();
+</script>

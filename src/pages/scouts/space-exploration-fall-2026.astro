@@ -1,6 +1,9 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import SlideDeck from "../../components/SlideDeck.astro";
+import SeriesCalendar from "../../components/SeriesCalendar.astro";
+import FlightSim from "../../components/FlightSim.astro";
+import OrbitSim from "../../components/OrbitSim.astro";
 import {
   series,
   timeline,
@@ -13,115 +16,261 @@ import {
   speakers,
   launchDay,
   corrections,
+  calendarEvents,
+  scoutGuide,
 } from "../../data/space-exploration-fall-2026.js";
+
+const scoutOrder = orders.groups.find((g) => g.id === "scout");
+const counselorOrders = orders.groups.filter((g) => g.id !== "scout");
 ---
 <BaseLayout
   title="Space Exploration — Fall 2026 Series"
-  description="Troop 308's Space Exploration merit badge series: seven 45-minute Monday blocks, presenter-ready slide decks, a build night, a group telemetry rocket build, an ordering plan, a prediction competition, a guest speaker night, and a launch day before Thanksgiving."
+  description="Troop 308's Space Exploration merit badge series: seven Monday blocks, interactive launch and orbit simulators, presenter-ready slide decks, ordering lists with buy links, a prediction competition, and a launch day before Thanksgiving."
 >
-  <article class="prose mb-page">
-    <p>
+  <div class="se-page">
+    <p class="se-crumbs">
       <a href="/scouts/">&larr; Back to Scouts</a> ·
       <a href="/merit-badges/space-exploration/">Space Exploration badge page</a> ·
       <a href="/merit-badges/capstones/telemetry-rocket/">Telemetry Rocket capstone</a>
     </p>
 
-    <header class="mb-header">
-      <span class="mb-icon-lg" aria-hidden="true">🚀</span>
+    <header class="se-hero">
+      <span class="se-hero-icon" aria-hidden="true">🚀</span>
       <div>
         <p class="kicker">{series.kicker}</p>
         <h1>{series.title}</h1>
-        <p class="mb-summary">{series.summary}</p>
+        <p class="se-hero-sum">{series.summary}</p>
+        <ul class="tag-list" aria-label="Series facts">
+          {series.counselorFacts.map((f) => <li>{f}</li>)}
+        </ul>
       </div>
     </header>
 
-    <ul class="tag-list se-facts" aria-label="Series facts">
-      {series.counselorFacts.map((f) => <li>{f}</li>)}
-    </ul>
+    <!-- ================= audience switch ================= -->
+    <div class="se-switch" data-audience-switch role="tablist" aria-label="Choose your view">
+      <button type="button" role="tab" class="se-switch-btn is-on" data-view="scout" aria-selected="true">
+        <strong>I'm a Scout</strong>
+        <span>What to do, study, and buy</span>
+      </button>
+      <button type="button" role="tab" class="se-switch-btn" data-view="counselor" aria-selected="false">
+        <strong>I'm running it</strong>
+        <span>Run-of-shows, decks, gear, logistics</span>
+      </button>
+    </div>
 
-    <section class="mb-section" aria-labelledby="rules-title">
-      <h2 id="rules-title">How this is scoped</h2>
-      <ul>
-        {series.groundRules.map((r) => <li>{r}</li>)}
-      </ul>
-      <p class="se-note"><strong>On the troop calendar.</strong> {series.calendarNote}</p>
-    </section>
+    <!-- ================= SCOUT VIEW ================= -->
+    <div data-view-panel="scout">
+      <section class="se-block">
+        <h2>The deal</h2>
+        <p class="se-lede">{scoutGuide.theDeal}</p>
+        <p class="muted">{scoutGuide.intro}</p>
+      </section>
 
-    <section class="mb-section" aria-labelledby="path-title">
-      <h2 id="path-title">Critical path</h2>
-      <p class="muted">
-        Two things drive this schedule and neither is the teaching: parts have to ship, and a launch site has to
-        say yes. Everything red below has to happen in August.
-      </p>
-      <ol class="se-timeline">
-        {timeline.map((t) => (
-          <li class={`se-tl-item se-risk-${t.risk}`}>
-            <div class="se-tl-when">
-              <span class="se-tl-window">{t.window}</span>
-              <span class="se-tl-owner">{t.owner}</span>
-            </div>
-            <p>{t.what}</p>
-          </li>
+      <section class="se-block">
+        <h2>Every date, in one place</h2>
+        <SeriesCalendar events={calendarEvents} />
+      </section>
+
+      <section class="se-block">
+        <h2>{scoutGuide.buyList.heading}</h2>
+        <p class="se-callout-line">
+          <span class="se-pill se-pill-strong">{scoutGuide.buyList.total}</span>
+          <span class="se-pill se-pill-warn">{scoutGuide.buyList.deadline}</span>
+        </p>
+        <p>{scoutGuide.buyList.why}</p>
+
+        <div class="se-cards">
+          {scoutGuide.buyList.items.map((it) => (
+            <article class="se-buy">
+              <div class="se-buy-top">
+                <h3>{it.item}</h3>
+                <span class="se-buy-price">{it.price}</span>
+              </div>
+              <p>{it.note}</p>
+              <p class="se-buy-links">
+                <a class="se-btn-buy" href={it.buy} target="_blank" rel="noopener noreferrer">Buy on Amazon ↗</a>
+                {it.mfr && <a class="se-btn-alt" href={it.mfr} target="_blank" rel="noopener noreferrer">Estes ↗</a>}
+              </p>
+            </article>
+          ))}
+        </div>
+        <p class="se-note">{scoutGuide.buyList.alsoNeed}</p>
+
+        <details class="se-exp">
+          <summary>{scoutGuide.gate.heading}</summary>
+          <p>{scoutGuide.gate.intro}</p>
+          <ol class="se-numbered">
+            {scoutGuide.gate.items.map((g) => <li>{g}</li>)}
+          </ol>
+          <p class="se-note">{scoutGuide.gate.objective}</p>
+        </details>
+      </section>
+
+      <section class="se-block">
+        <h2>{scoutGuide.study.heading}</h2>
+        <p class="muted">{scoutGuide.study.intro}</p>
+        {scoutGuide.study.blocks.map((b) => (
+          <details class="se-exp">
+            <summary>
+              <span class="se-req">{b.req}</span> {b.title}
+              <span class="se-exp-when">{b.forMeeting}</span>
+            </summary>
+            <p><strong>What to do:</strong> {b.doNow}</p>
+            {b.videos.length > 0 && (
+              <ul class="se-vids">
+                {b.videos.map((v) => (
+                  <li>
+                    <a href={`https://www.youtube.com/watch?v=${v.id}`} target="_blank" rel="noopener noreferrer">{v.t} ↗</a>
+                    <span>{v.ch}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </details>
         ))}
-      </ol>
-    </section>
+      </section>
 
-    <section class="mb-section" aria-labelledby="meetings-title">
-      <h2 id="meetings-title">The seven Monday nights</h2>
-      <p class="muted">
-        Each block is 45 minutes, 0:30&ndash;1:15, slotted into the existing troop meeting so the opening and
-        closing stay where they are. Run-of-show timings are written to be followed literally &mdash; that is
-        the only way 45 minutes covers a requirement instead of half of one.
-      </p>
-
-      {meetings.map((m) => (
-        <div class="se-meeting" id={`meeting-${m.n}`}>
-          <header class="se-meeting-head">
-            <span class="se-meeting-n">{m.n}</span>
-            <div>
-              <h3>{m.title}</h3>
-              <p class="se-meeting-date">{m.dateLabel} · {m.block}</p>
-            </div>
-          </header>
-
-          <p class="se-objective"><strong>Objective.</strong> {m.objective}</p>
-
-          <h4>Requirements covered</h4>
-          <ul class="se-covers">
-            {m.covers.map((c) => (
-              <li><span class="se-req">{c.id}</span> {c.how}</li>
-            ))}
-          </ul>
-
-          <h4>Run of show</h4>
-          <div class="mb-table-wrap">
-            <table class="se-table">
-            <thead>
-              <tr><th scope="col">Time</th><th scope="col">What happens</th><th scope="col">Who</th></tr>
-            </thead>
-            <tbody>
-              {m.runOfShow.map((row) => (
-                <tr>
-                  <td class="se-time">{row[0]}</td>
-                  <td>{row[1]}</td>
-                  <td class="se-who">{row[2]}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      <section class="se-block">
+        <h2>Try it before you fly it</h2>
+        <p class="muted">
+          The same physics you'll be predicting on launch day. Change one thing at a time and watch what happens &mdash;
+          this is how you get good at the prediction contest without spending a dollar on motors.
+        </p>
+        <div class="se-sims">
+          <FlightSim mode="launch" id="scout-launch" />
+          <FlightSim mode="recovery" id="scout-recovery" />
+        </div>
+        <details class="se-exp">
+          <summary>Going further &mdash; orbital mechanics</summary>
+          <p class="muted">
+            Not required for the badge, but this is the part that makes space actually strange. Orbit is not about
+            going up; it is about going sideways fast enough that you keep missing the ground.
+          </p>
+          <div class="se-sims">
+            <OrbitSim mode="ascent" id="scout-ascent" />
+            <OrbitSim mode="moon" id="scout-moon" />
           </div>
+        </details>
+      </section>
 
-          {m.altRunOfShow && (
-            <details class="se-alt">
-              <summary>{m.altRunOfShow.title}</summary>
-              <p class="muted">{m.altRunOfShow.intro}</p>
-              <div class="mb-table-wrap">
-                <table class="se-table">
+      <section class="se-block">
+        <h2>{competition.name}</h2>
+        <p class="se-tagline">{competition.tagline}</p>
+        <p>{competition.why}</p>
+
+        <div class="se-awards">
+          {competition.scoring.map((s) => (
+            <article class="se-award">
+              <h3>{s.place}</h3>
+              <p>{s.basis}</p>
+              <span class="se-pill">{s.measured}</span>
+            </article>
+          ))}
+        </div>
+
+        <p class="se-note"><strong>The trade-off.</strong> {competition.tension}</p>
+
+        <details class="se-exp">
+          <summary>How scoring works, and how to get scratched</summary>
+          <ol class="se-numbered">
+            {competition.howItWorks.map((h) => <li>{h}</li>)}
+          </ol>
+          <h4>Penalties</h4>
+          <ul>
+            {competition.penalties.map((p) => <li>{p}</li>)}
+          </ul>
+          <p class="se-note">{competition.note}</p>
+        </details>
+      </section>
+
+      <section class="se-block">
+        <h2>{scoutGuide.launchDay.heading}</h2>
+        <p class="se-lede">{scoutGuide.launchDay.timing}</p>
+        <div class="se-two">
+          <div>
+            <h3>Bring</h3>
+            <ul class="se-tight">
+              {scoutGuide.launchDay.bring.map((b) => <li>{b}</li>)}
+            </ul>
+          </div>
+          <div>
+            <h3>Three rules that are not negotiable</h3>
+            <ul class="se-tight">
+              {scoutGuide.launchDay.rules.map((r) => <li>{r}</li>)}
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ================= COUNSELOR VIEW ================= -->
+    <div data-view-panel="counselor" hidden>
+      <section class="se-block">
+        <h2>How this is scoped</h2>
+        <ul>
+          {series.groundRules.map((r) => <li>{r}</li>)}
+        </ul>
+        <p class="se-note"><strong>On the troop calendar.</strong> {series.calendarNote}</p>
+      </section>
+
+      <section class="se-block">
+        <h2>Critical path</h2>
+        <p class="muted">
+          Two things drive this schedule and neither is the teaching: parts have to ship, and a launch site has to
+          say yes. Everything flagged red has to happen in August.
+        </p>
+        <ol class="se-timeline">
+          {timeline.map((t) => (
+            <li class={`se-tl-item se-risk-${t.risk}`}>
+              <div class="se-tl-when">
+                <span class="se-tl-window">{t.window}</span>
+                <span class="se-tl-owner">{t.owner}</span>
+              </div>
+              <p>{t.what}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section class="se-block">
+        <h2>Season calendar</h2>
+        <SeriesCalendar events={calendarEvents} />
+      </section>
+
+      <section class="se-block">
+        <h2>The seven Monday nights</h2>
+        <p class="muted">
+          Each block is 45 minutes, 0:30&ndash;1:15, slotted into the existing troop meeting so the opening and
+          closing stay where they are. Every night is collapsed &mdash; open the one you're running this week.
+        </p>
+
+        {meetings.map((m) => (
+          <details class="se-meeting" id={`meeting-${m.n}`}>
+            <summary>
+              <span class="se-meeting-n">{m.n}</span>
+              <span class="se-meeting-title">
+                <strong>{m.title}</strong>
+                <span>{m.dateLabel} · {m.block}</span>
+              </span>
+            </summary>
+
+            <p class="se-objective"><strong>Objective.</strong> {m.objective}</p>
+
+            <h4>Requirements covered</h4>
+            <ul class="se-covers">
+              {m.covers.map((c) => (
+                <li><span class="se-req">{c.id}</span> {c.how}</li>
+              ))}
+            </ul>
+
+            <h4>Run of show</h4>
+            <div class="mb-table-wrap">
+              <table class="se-table">
                 <thead>
                   <tr><th scope="col">Time</th><th scope="col">What happens</th><th scope="col">Who</th></tr>
                 </thead>
                 <tbody>
-                  {m.altRunOfShow.rows.map((row) => (
+                  {m.runOfShow.map((row) => (
                     <tr>
                       <td class="se-time">{row[0]}</td>
                       <td>{row[1]}</td>
@@ -130,366 +279,549 @@ import {
                   ))}
                 </tbody>
               </table>
+            </div>
+
+            {m.altRunOfShow && (
+              <details class="se-exp">
+                <summary>{m.altRunOfShow.title}</summary>
+                <p class="muted">{m.altRunOfShow.intro}</p>
+                <div class="mb-table-wrap">
+                  <table class="se-table">
+                    <thead>
+                      <tr><th scope="col">Time</th><th scope="col">What happens</th><th scope="col">Who</th></tr>
+                    </thead>
+                    <tbody>
+                      {m.altRunOfShow.rows.map((row) => (
+                        <tr>
+                          <td class="se-time">{row[0]}</td>
+                          <td>{row[1]}</td>
+                          <td class="se-who">{row[2]}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </details>
+            )}
+
+            <h4>The deck</h4>
+            <SlideDeck deck={decks[m.deck]} />
+
+            <div class="se-two">
+              <div>
+                <h4>Bring</h4>
+                <ul class="se-tight">
+                  {m.materials.map((x) => <li>{x}</li>)}
+                </ul>
               </div>
-            </details>
-          )}
-
-          <h4>The deck</h4>
-          <SlideDeck deck={decks[m.deck]} />
-
-          <div class="se-meeting-cols">
-            <div>
-              <h4>Bring</h4>
-              <ul class="se-tight">
-                {m.materials.map((x) => <li>{x}</li>)}
-              </ul>
+              <div>
+                <h4>Scouts leave with</h4>
+                <ul class="se-tight">
+                  {m.homework.map((x) => <li>{x}</li>)}
+                </ul>
+              </div>
             </div>
-            <div>
-              <h4>Scouts leave with</h4>
-              <ul class="se-tight">
-                {m.homework.map((x) => <li>{x}</li>)}
-              </ul>
-            </div>
-          </div>
 
-          <p class="se-risk"><strong>Where this night fails.</strong> {m.risk}</p>
-        </div>
-      ))}
-    </section>
-
-    <section class="mb-section" aria-labelledby="telemetry-title">
-      <h2 id="telemetry-title">The Telemetry Rocket as a group project</h2>
-      <p>{telemetryTrack.intro}</p>
-
-      <div class="se-callout">
-        <h3>{telemetryTrack.theMath.headline}</h3>
-        <p>{telemetryTrack.theMath.detail}</p>
-        <p><strong>{telemetryTrack.theMath.answer}</strong></p>
-      </div>
-
-      <h3>Crew roles</h3>
-      <div class="mb-table-wrap">
-        <table class="se-table">
-        <thead>
-          <tr>
-            <th scope="col">Role</th>
-            <th scope="col">Size</th>
-            <th scope="col">Owns</th>
-            <th scope="col">Build stages</th>
-            <th scope="col">Also earns</th>
-          </tr>
-        </thead>
-        <tbody>
-          {telemetryTrack.crewRoles.map((r) => (
-            <tr>
-              <td><strong>{r.role}</strong></td>
-              <td class="se-who">{r.n}</td>
-              <td>{r.owns}</td>
-              <td class="se-who">{r.stages}</td>
-              <td class="se-who">{r.badges}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      </div>
-      <p class="muted">{telemetryTrack.rolesNote}</p>
-
-      <h3>Three Saturday crew sessions</h3>
-      {telemetryTrack.sessions.map((s) => (
-        <div class="se-session">
-          <p class="se-session-when">{s.when}</p>
-          <h4>{s.title}</h4>
-          <ul class="se-tight">
-            {s.what.map((w) => <li>{w}</li>)}
-          </ul>
-          <p class="se-gotcha"><strong>Gotcha.</strong> {s.gotcha}</p>
-        </div>
-      ))}
-
-      <h3>What shows up on Monday nights</h3>
-      <ul>
-        {telemetryTrack.checkpoints.map((c) => (
-          <li><strong>Meeting {c.meeting} · {c.minutes}</strong> — {c.what}</li>
+            <p class="se-risk"><strong>Where this night fails.</strong> {m.risk}</p>
+          </details>
         ))}
-      </ul>
+      </section>
 
-      <p class="se-note">{telemetryTrack.badgeNote}</p>
-      <p class="se-risk"><strong>Honest risk.</strong> {telemetryTrack.honestRisk}</p>
-    </section>
+      <section class="se-block">
+        <h2>The Telemetry Rocket as a group project</h2>
+        <p>{telemetryTrack.intro}</p>
 
-    <section class="mb-section" aria-labelledby="gate-title">
-      <h2 id="gate-title">The flight-readiness gate</h2>
-      <p>{gate.intro}</p>
+        <div class="se-callout">
+          <h3>{telemetryTrack.theMath.headline}</h3>
+          <p>{telemetryTrack.theMath.detail}</p>
+          <p><strong>{telemetryTrack.theMath.answer}</strong></p>
+        </div>
 
-      <div class="grid cols-2 se-gates">
-        {gate.items.map((g) => (
-          <article class="card">
-            <h3><span class="se-gate-n">{g.n}</span> {g.title}</h3>
-            <p>{g.detail}</p>
-            <ul class="tag-list"><li>{g.maps}</li></ul>
-          </article>
-        ))}
-      </div>
-
-      <h3>Declared mission objectives that actually work</h3>
-      <p class="muted">Requirement 3 wants the second launch to accomplish a specific objective. These all produce a number:</p>
-      <ul>
-        {gate.objectiveExamples.map((o) => <li>{o}</li>)}
-      </ul>
-      <p class="se-note">{gate.note}</p>
-    </section>
-
-    <section class="mb-section" aria-labelledby="order-title">
-      <h2 id="order-title">What to order</h2>
-      <p>{orders.intro}</p>
-
-      {orders.groups.map((g) => (
-        <div class="se-order" id={`order-${g.id}`}>
-          <header class="se-order-head">
-            <h3>{g.title}</h3>
-            <p class="se-order-meta"><span class="se-pill">{g.owner}</span><span class="se-pill se-pill-warn">{g.deadline}</span></p>
-          </header>
-          <p>{g.intro}</p>
-          <div class="mb-table-wrap">
-            <table class="se-table">
+        <h3>Crew roles</h3>
+        <div class="mb-table-wrap">
+          <table class="se-table">
             <thead>
               <tr>
-                <th scope="col">Item</th>
-                <th scope="col">Why / what it is</th>
-                <th scope="col">Qty</th>
-                <th scope="col">Price</th>
+                <th scope="col">Role</th><th scope="col">Size</th><th scope="col">Owns</th>
+                <th scope="col">Build stages</th><th scope="col">Also earns</th>
               </tr>
             </thead>
             <tbody>
-              {g.rows.map((r) => (
+              {telemetryTrack.crewRoles.map((r) => (
                 <tr>
-                  <td><strong>{r.item}</strong></td>
-                  <td>{r.detail}</td>
-                  <td class="se-who">{r.qty}</td>
-                  <td class="se-price">{r.price}</td>
+                  <td><strong>{r.role}</strong></td>
+                  <td class="se-who">{r.n}</td>
+                  <td>{r.owns}</td>
+                  <td class="se-who">{r.stages}</td>
+                  <td class="se-who">{r.badges}</td>
                 </tr>
               ))}
             </tbody>
-            <tfoot>
-              <tr><td colspan="3">Total</td><td class="se-price">{g.total}</td></tr>
-            </tfoot>
           </table>
+        </div>
+        <p class="muted">{telemetryTrack.rolesNote}</p>
+
+        <h3>Three Saturday crew sessions</h3>
+        {telemetryTrack.sessions.map((s) => (
+          <details class="se-exp">
+            <summary>{s.title}<span class="se-exp-when">{s.when}</span></summary>
+            <ul class="se-tight">
+              {s.what.map((w) => <li>{w}</li>)}
+            </ul>
+            <p class="se-gotcha"><strong>Gotcha.</strong> {s.gotcha}</p>
+          </details>
+        ))}
+
+        <h3>What shows up on Monday nights</h3>
+        <ul>
+          {telemetryTrack.checkpoints.map((c) => (
+            <li><strong>Meeting {c.meeting} · {c.minutes}</strong> — {c.what}</li>
+          ))}
+        </ul>
+
+        <p class="se-note">{telemetryTrack.badgeNote}</p>
+        <p class="se-risk"><strong>Honest risk.</strong> {telemetryTrack.honestRisk}</p>
+      </section>
+
+      <section class="se-block">
+        <h2>The flight-readiness gate</h2>
+        <p>{gate.intro}</p>
+        <div class="se-cards">
+          {gate.items.map((g) => (
+            <article class="card">
+              <h3><span class="se-gate-n">{g.n}</span> {g.title}</h3>
+              <p>{g.detail}</p>
+              <ul class="tag-list"><li>{g.maps}</li></ul>
+            </article>
+          ))}
+        </div>
+        <details class="se-exp">
+          <summary>Declared mission objectives that actually work</summary>
+          <p class="muted">Requirement 3 wants the second launch to accomplish a specific objective. These all produce a number:</p>
+          <ul>
+            {gate.objectiveExamples.map((o) => <li>{o}</li>)}
+          </ul>
+          <p class="se-note">{gate.note}</p>
+        </details>
+      </section>
+
+      <section class="se-block">
+        <h2>What to order</h2>
+        <p>{orders.intro}</p>
+        <p class="se-note">{orders.linkNote}</p>
+
+        <details class="se-exp">
+          <summary>What each Scout buys<span class="se-exp-when">{scoutOrder.deadline}</span></summary>
+          <p>{scoutOrder.intro}</p>
+          <div class="mb-table-wrap">
+            <table class="se-table">
+              <thead>
+                <tr><th scope="col">Item</th><th scope="col">Why / what it is</th><th scope="col">Qty</th><th scope="col">Price</th><th scope="col">Buy</th></tr>
+              </thead>
+              <tbody>
+                {scoutOrder.rows.map((r) => (
+                  <tr>
+                    <td><strong>{r.item}</strong></td>
+                    <td>{r.detail}</td>
+                    <td class="se-who">{r.qty}</td>
+                    <td class="se-price">{r.price}</td>
+                    <td class="se-buycell">
+                      {r.buy && <a href={r.buy} target="_blank" rel="noopener noreferrer">Amazon ↗</a>}
+                      {r.mfr && <a href={r.mfr} target="_blank" rel="noopener noreferrer">Estes ↗</a>}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+              <tfoot><tr><td colspan="4">Total</td><td class="se-price">{scoutOrder.total}</td></tr></tfoot>
+            </table>
           </div>
           <ul class="se-tight se-order-notes">
-            {g.notes.map((n) => <li>{n}</li>)}
+            {scoutOrder.notes.map((n) => <li>{n}</li>)}
           </ul>
-        </div>
-      ))}
-    </section>
+        </details>
 
-    <section class="mb-section" aria-labelledby="comp-title">
-      <h2 id="comp-title">{competition.name}</h2>
-      <p class="se-tagline">{competition.tagline}</p>
-      <p>{competition.why}</p>
-
-      <h3>How it works</h3>
-      <ol>
-        {competition.howItWorks.map((h) => <li>{h}</li>)}
-      </ol>
-
-      <h3>Awards</h3>
-      <div class="mb-table-wrap">
-        <table class="se-table">
-        <thead>
-          <tr><th scope="col">Award</th><th scope="col">Scored on</th><th scope="col">Weight</th></tr>
-        </thead>
-        <tbody>
-          {competition.scoring.map((s) => (
-            <tr>
-              <td><strong>{s.place}</strong></td>
-              <td>{s.basis}</td>
-              <td class="se-who">{s.weight}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      </div>
-
-      <h3>Penalties</h3>
-      <ul>
-        {competition.penalties.map((p) => <li>{p}</li>)}
-      </ul>
-      <p class="se-note">{competition.note}</p>
-    </section>
-
-    <section class="mb-section" aria-labelledby="speaker-title">
-      <h2 id="speaker-title">Guest speaker options</h2>
-      <p>{speakers.intro}</p>
-
-      {speakers.options.map((s) => (
-        <div class="se-speaker">
-          <header class="se-speaker-head">
-            <span class="se-speaker-rank">{s.rank}</span>
-            <div>
-              <h3>{s.url ? <a href={s.url} target="_blank" rel="noopener noreferrer">{s.name} ↗</a> : s.name}</h3>
-              <p class="se-speaker-org">{s.org} · {s.distance}</p>
+        {counselorOrders.map((g) => (
+          <details class="se-exp" id={`order-${g.id}`} open>
+            <summary>{g.title}<span class="se-exp-when">{g.deadline}</span></summary>
+            <p class="se-callout-line"><span class="se-pill">{g.owner}</span></p>
+            <p>{g.intro}</p>
+            <div class="mb-table-wrap">
+              <table class="se-table">
+                <thead>
+                  <tr><th scope="col">Item</th><th scope="col">Why / what it is</th><th scope="col">Qty</th><th scope="col">Price</th><th scope="col">Buy</th></tr>
+                </thead>
+                <tbody>
+                  {g.rows.map((r) => (
+                    <tr>
+                      <td><strong>{r.item}</strong></td>
+                      <td>{r.detail}</td>
+                      <td class="se-who">{r.qty}</td>
+                      <td class="se-price">{r.price}</td>
+                      <td class="se-buycell">
+                        {r.buy && <a href={r.buy} target="_blank" rel="noopener noreferrer">Amazon ↗</a>}
+                        {r.mfr && <a href={r.mfr} target="_blank" rel="noopener noreferrer">Maker ↗</a>}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+                <tfoot><tr><td colspan="4">Total</td><td class="se-price">{g.total}</td></tr></tfoot>
+              </table>
             </div>
-          </header>
-          <p><strong>What they are.</strong> {s.what}</p>
-          <p><strong>Why them.</strong> {s.why}</p>
-          <dl class="se-speaker-meta">
-            <div><dt>The ask</dt><dd>{s.ask}</dd></div>
-            <div><dt>Contact</dt><dd>{s.contact}</dd></div>
-            <div><dt>Lead time</dt><dd>{s.lead}</dd></div>
-          </dl>
-        </div>
-      ))}
-    </section>
-
-    <section class="mb-section" aria-labelledby="launch-title">
-      <h2 id="launch-title">Launch day — {launchDay.date}</h2>
-      <p class="muted">Backup dates: {launchDay.backup}</p>
-      <p>{launchDay.intro}</p>
-      <p class="se-note"><strong>Why the 21st and not Thanksgiving weekend.</strong> {launchDay.whyThisDate}</p>
-
-      <h3>The table that picks your field</h3>
-      <p>{launchDay.siteRule.intro}</p>
-      <div class="mb-table-wrap">
-        <table class="se-table se-table-narrow">
-        <thead>
-          <tr><th scope="col">Motor class</th><th scope="col">Minimum site dimension</th><th scope="col">What we fly on it</th></tr>
-        </thead>
-        <tbody>
-          {launchDay.siteRule.rows.map((r) => (
-            <tr class={r.use !== "—" ? "se-row-hit" : ""}>
-              <td class="se-time">{r.motor}</td>
-              <td>{r.dim}</td>
-              <td class="se-who">{r.use}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      </div>
-      <p class="se-note">{launchDay.siteRule.note}</p>
-
-      <h3>Site options</h3>
-      {launchDay.sites.map((s) => (
-        <div class="se-site">
-          <h4>{s.url ? <a href={s.url} target="_blank" rel="noopener noreferrer">{s.name} ↗</a> : s.name}</h4>
-          <p class="se-pill">{s.status}</p>
-          <p>{s.detail}</p>
-          <ul class="se-tight">
-            {s.actions.map((a) => <li>{a}</li>)}
-          </ul>
-        </div>
-      ))}
-
-      <h3>Range schedule</h3>
-      <p class="muted">{launchDay.scheduleNote}</p>
-      <div class="mb-table-wrap">
-        <table class="se-table se-table-narrow">
-        <tbody>
-          {launchDay.schedule.map((row) => (
-            <tr><td class="se-time">{row[0]}</td><td>{row[1]}</td></tr>
-          ))}
-        </tbody>
-      </table>
-      </div>
-
-      <div class="se-meeting-cols">
-        <div>
-          <h3>Load the truck</h3>
-          <ul class="se-tight">
-            {launchDay.checklist.map((c) => <li>{c}</li>)}
-          </ul>
-        </div>
-        <div>
-          <h3>Safety, non-negotiable</h3>
-          <ul class="se-tight">
-            {launchDay.safety.map((s) => <li>{s}</li>)}
-          </ul>
-        </div>
-      </div>
-
-      <p>
-        Full text:
-        {" "}<a href="https://www.nar.org/safety-information/model-rocket-safety-code/" target="_blank" rel="noopener noreferrer">NAR Model Rocket Safety Code ↗</a>
-        {" "}·{" "}
-        <a href="https://www.scouting.org/health-and-safety/gss/" target="_blank" rel="noopener noreferrer">Guide to Safe Scouting ↗</a>
-      </p>
-    </section>
-
-    <section class="mb-section" aria-labelledby="fixes-title">
-      <h2 id="fixes-title">Corrections made to the badge page</h2>
-      <p class="muted">
-        Found while building this series. Everything marked fixed has already been changed on the
-        {" "}<a href="/merit-badges/space-exploration/">Space Exploration page</a> and the
-        {" "}<a href="/merit-badges/capstones/telemetry-rocket/">Telemetry Rocket capstone</a>.
-      </p>
-      <ul class="se-fixes">
-        {corrections.map((c) => (
-          <li class={`se-fix se-fix-${c.status}`}>
-            <span class="se-fix-tag">{c.status}</span>
-            <strong>{c.what}</strong>
-            <p>{c.detail}</p>
-          </li>
+            <ul class="se-tight se-order-notes">
+              {g.notes.map((n) => <li>{n}</li>)}
+            </ul>
+          </details>
         ))}
-      </ul>
-    </section>
-  </article>
+      </section>
+
+      <section class="se-block">
+        <h2>{competition.name}</h2>
+        <p class="se-tagline">{competition.tagline}</p>
+        <p>{competition.why}</p>
+        <div class="mb-table-wrap">
+          <table class="se-table">
+            <thead>
+              <tr><th scope="col">Award</th><th scope="col">Scored on</th><th scope="col">Measured with</th><th scope="col">Type</th></tr>
+            </thead>
+            <tbody>
+              {competition.scoring.map((s) => (
+                <tr>
+                  <td><strong>{s.place}</strong></td>
+                  <td>{s.basis}</td>
+                  <td class="se-who">{s.measured}</td>
+                  <td class="se-who">{s.weight}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="se-note"><strong>The trade-off is the lesson.</strong> {competition.tension}</p>
+        <p class="se-risk"><strong>Gear this needs.</strong> {competition.gearNote}</p>
+      </section>
+
+      <section class="se-block">
+        <h2>Guest speaker options</h2>
+        <p>{speakers.intro}</p>
+        {speakers.options.map((s) => (
+          <details class="se-exp">
+            <summary>
+              <span class="se-speaker-rank">{s.rank}</span>
+              {s.name}
+              <span class="se-exp-when">{s.lead}</span>
+            </summary>
+            <p class="se-speaker-org">{s.org} · {s.distance}</p>
+            <p><strong>What they are.</strong> {s.what}</p>
+            <p><strong>Why them.</strong> {s.why}</p>
+            <dl class="se-speaker-meta">
+              <div><dt>The ask</dt><dd>{s.ask}</dd></div>
+              <div><dt>Contact</dt><dd>{s.contact}</dd></div>
+              <div><dt>Lead time</dt><dd>{s.lead}</dd></div>
+            </dl>
+            {s.url && <p><a class="mb-link-btn" href={s.url} target="_blank" rel="noopener noreferrer">Open their page ↗</a></p>}
+          </details>
+        ))}
+      </section>
+
+      <section class="se-block">
+        <h2>Launch day — {launchDay.date}</h2>
+        <p class="muted">Backup dates: {launchDay.backup}</p>
+        <p>{launchDay.intro}</p>
+        <p class="se-note"><strong>Why the 21st and not Thanksgiving weekend.</strong> {launchDay.whyThisDate}</p>
+
+        <h3>The table that picks your field</h3>
+        <p>{launchDay.siteRule.intro}</p>
+        <div class="mb-table-wrap">
+          <table class="se-table se-table-narrow">
+            <thead>
+              <tr><th scope="col">Motor class</th><th scope="col">Minimum site dimension</th><th scope="col">What we fly on it</th></tr>
+            </thead>
+            <tbody>
+              {launchDay.siteRule.rows.map((r) => (
+                <tr class={r.use !== "—" ? "se-row-hit" : ""}>
+                  <td class="se-time">{r.motor}</td>
+                  <td>{r.dim}</td>
+                  <td class="se-who">{r.use}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="se-note">{launchDay.siteRule.note}</p>
+
+        <h3>Site options</h3>
+        {launchDay.sites.map((s) => (
+          <details class="se-exp">
+            <summary>{s.name}<span class="se-exp-when">{s.status}</span></summary>
+            <p>{s.detail}</p>
+            <ul class="se-tight">
+              {s.actions.map((a) => <li>{a}</li>)}
+            </ul>
+            {s.url && <p><a class="mb-link-btn" href={s.url} target="_blank" rel="noopener noreferrer">Open ↗</a></p>}
+          </details>
+        ))}
+
+        <h3>Range schedule</h3>
+        <p class="muted">{launchDay.scheduleNote}</p>
+        <div class="mb-table-wrap">
+          <table class="se-table se-table-narrow">
+            <tbody>
+              {launchDay.schedule.map((row) => (
+                <tr><td class="se-time">{row[0]}</td><td>{row[1]}</td></tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="se-two">
+          <div>
+            <h3>Load the truck</h3>
+            <ul class="se-tight">
+              {launchDay.checklist.map((c) => <li>{c}</li>)}
+            </ul>
+          </div>
+          <div>
+            <h3>Safety, non-negotiable</h3>
+            <ul class="se-tight">
+              {launchDay.safety.map((s) => <li>{s}</li>)}
+            </ul>
+          </div>
+        </div>
+
+        <p>
+          Full text:
+          {" "}<a href="https://www.nar.org/safety-information/model-rocket-safety-code/" target="_blank" rel="noopener noreferrer">NAR Model Rocket Safety Code ↗</a>
+          {" "}·{" "}
+          <a href="https://www.scouting.org/health-and-safety/gss/" target="_blank" rel="noopener noreferrer">Guide to Safe Scouting ↗</a>
+        </p>
+      </section>
+
+      <section class="se-block">
+        <h2>Corrections made to the badge page</h2>
+        <p class="muted">
+          Found while building this series. Everything marked fixed has already been changed on the
+          {" "}<a href="/merit-badges/space-exploration/">Space Exploration page</a> and the
+          {" "}<a href="/merit-badges/capstones/telemetry-rocket/">Telemetry Rocket capstone</a>.
+        </p>
+        <ul class="se-fixes">
+          {corrections.map((c) => (
+            <li class={`se-fix se-fix-${c.status}`}>
+              <span class="se-fix-tag">{c.status}</span>
+              <strong>{c.what}</strong>
+              <p>{c.detail}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </div>
+  </div>
 </BaseLayout>
 
 <style>
-  .se-facts { margin-bottom: 1.6rem; }
+  /* ---------- wide page shell ---------- */
+  .se-page {
+    max-width: 82rem;
+    margin: 0 auto;
+    padding: 0 1.25rem 5rem;
+    font-size: 1rem;
+    line-height: 1.65;
+  }
 
-  /* timeline */
+  .se-crumbs { font-size: 0.88rem; margin: 0 0 1.4rem; }
+
+  .se-hero { display: flex; gap: 1.1rem; align-items: flex-start; margin-bottom: 1.6rem; }
+  .se-hero-icon { font-size: 2.6rem; line-height: 1; }
+  .se-hero h1 { margin: 0.15rem 0 0.5rem; font-size: clamp(1.9rem, 3.6vw, 2.7rem); line-height: 1.1; }
+  .se-hero-sum { margin: 0 0 0.9rem; font-size: 1.06rem; color: var(--muted); max-width: 62ch; }
+
+  .se-block { margin: 0 0 3rem; }
+  .se-block > h2 {
+    font-size: 1.5rem;
+    margin: 0 0 0.7rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid var(--line);
+  }
+  .se-block h3 { font-size: 1.12rem; margin: 1.6rem 0 0.5rem; }
+  .se-block h4 { font-size: 0.98rem; margin: 1.2rem 0 0.4rem; }
+  .se-block > p, .se-block > ul, .se-block > ol { max-width: 78ch; }
+  .se-lede { font-size: 1.08rem; }
+
+  /* ---------- audience switch ---------- */
+  .se-switch {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    margin: 0 0 2.4rem;
+    padding: 0.4rem;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--bg-alt);
+  }
+
+  .se-switch-btn {
+    font: inherit;
+    display: grid;
+    gap: 0.1rem;
+    text-align: left;
+    padding: 0.7rem 1rem;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+  }
+
+  .se-switch-btn strong { font-size: 1rem; color: var(--text); }
+  .se-switch-btn span { font-size: 0.82rem; }
+  .se-switch-btn:hover { border-color: var(--line); }
+
+  .se-switch-btn.is-on {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .se-switch-btn.is-on strong,
+  .se-switch-btn.is-on span { color: #fff; }
+  :root[data-theme="dark"] .se-switch-btn.is-on strong,
+  :root[data-theme="dark"] .se-switch-btn.is-on span { color: #0f1623; }
+
+  /* ---------- expanders ---------- */
+  .se-exp, .se-meeting {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface);
+    margin: 0.6rem 0;
+    padding: 0 1.1rem;
+  }
+
+  .se-exp > summary, .se-meeting > summary {
+    cursor: pointer;
+    padding: 0.75rem 0;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    list-style: none;
+  }
+
+  .se-exp > summary::-webkit-details-marker,
+  .se-meeting > summary::-webkit-details-marker { display: none; }
+
+  .se-exp > summary::before, .se-meeting > summary::before {
+    content: "＋";
+    font-family: ui-monospace, monospace;
+    color: var(--accent);
+    font-size: 0.95rem;
+    flex: none;
+  }
+
+  .se-exp[open] > summary::before, .se-meeting[open] > summary::before { content: "－"; }
+
+  .se-exp[open], .se-meeting[open] { padding-bottom: 1.1rem; }
+  .se-exp[open] > summary, .se-meeting[open] > summary { border-bottom: 1px solid var(--line); margin-bottom: 0.9rem; }
+
+  .se-exp-when {
+    margin-left: auto;
+    font-weight: 400;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  .se-meeting > summary { padding: 0.95rem 0; }
+  .se-meeting-title { display: grid; gap: 0.05rem; }
+  .se-meeting-title strong { font-size: 1.08rem; }
+  .se-meeting-title span { font-size: 0.85rem; color: var(--muted); font-weight: 400; }
+
+  .se-meeting-n {
+    flex: none;
+    width: 2rem; height: 2rem;
+    display: grid; place-items: center;
+    border-radius: 999px;
+    background: var(--accent); color: #fff;
+    font-family: "Space Grotesk", system-ui, sans-serif; font-weight: 700;
+  }
+
+  :root[data-theme="dark"] .se-meeting-n { color: #0f1623; }
+
+  /* ---------- cards, buys, awards ---------- */
+  .se-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: 0.8rem; margin: 1rem 0; }
+
+  .se-buy {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 0.85rem 1rem;
+    background: var(--surface);
+    display: grid;
+    gap: 0.4rem;
+    align-content: start;
+  }
+
+  .se-buy-top { display: flex; justify-content: space-between; align-items: baseline; gap: 0.6rem; }
+  .se-buy-top h3 { margin: 0; font-size: 1rem; }
+  .se-buy-price { font-family: ui-monospace, monospace; font-weight: 700; color: var(--accent-strong); white-space: nowrap; }
+  .se-buy p { margin: 0; font-size: 0.9rem; color: var(--muted); }
+  .se-buy-links { display: flex; gap: 0.4rem; margin: 0.2rem 0 0 !important; flex-wrap: wrap; }
+
+  .se-btn-buy, .se-btn-alt {
+    font-size: 0.82rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 999px;
+    text-decoration: none;
+    border: 1px solid var(--accent);
+  }
+
+  .se-btn-buy { background: var(--accent); color: #fff; font-weight: 600; }
+  :root[data-theme="dark"] .se-btn-buy { color: #0f1623; }
+  .se-btn-alt { color: var(--accent-strong); }
+  .se-btn-buy:hover, .se-btn-alt:hover { background: var(--accent-strong); color: #fff; }
+  :root[data-theme="dark"] .se-btn-buy:hover, :root[data-theme="dark"] .se-btn-alt:hover { color: #0f1623; }
+
+  .se-awards { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 0.7rem; margin: 1rem 0; }
+
+  .se-award {
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--accent);
+    border-radius: 10px;
+    padding: 0.75rem 0.9rem;
+    background: var(--surface);
+  }
+
+  .se-award h3 { margin: 0 0 0.3rem; font-size: 1rem; }
+  .se-award p { margin: 0 0 0.5rem; font-size: 0.88rem; color: var(--muted); }
+
+  .se-sims { display: grid; gap: 1rem; margin: 1rem 0; }
+
+  .se-vids { list-style: none; margin: 0.6rem 0 0; padding: 0; display: grid; gap: 0.3rem; }
+  .se-vids li { display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: baseline; font-size: 0.92rem; }
+  .se-vids span { font-size: 0.8rem; color: var(--muted); }
+
+  .se-numbered { padding-left: 1.3rem; }
+  .se-numbered li { margin-bottom: 0.4rem; }
+
+  .se-two { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem; }
+  .se-tight li { margin-bottom: 0.3rem; line-height: 1.55; font-size: 0.94rem; }
+
+  /* ---------- timeline ---------- */
   .se-timeline { list-style: none; margin: 1rem 0 0; padding: 0; }
 
   .se-tl-item {
     display: grid;
-    grid-template-columns: 13rem 1fr;
+    grid-template-columns: 13rem minmax(0, 1fr);
     gap: 1rem;
-    padding: 0.7rem 0 0.7rem 0.9rem;
+    padding: 0.65rem 0 0.65rem 0.9rem;
     border-left: 3px solid var(--line);
+    max-width: none;
   }
 
   .se-tl-item p { margin: 0; }
   .se-tl-when { display: flex; flex-direction: column; }
   .se-tl-window { font-family: "Space Grotesk", system-ui, sans-serif; font-weight: 600; font-size: 0.92rem; }
-  .se-tl-owner { font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+  .se-tl-owner { font-size: 0.76rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
   .se-risk-high { border-left-color: #c8532b; }
   .se-risk-med { border-left-color: #d8a13a; }
 
-  /* meetings */
-  .se-meeting {
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 1.2rem 1.4rem 1.4rem;
-    margin: 1.6rem 0 2.4rem;
-    background: var(--surface);
-  }
-
-  .se-meeting-head { display: flex; align-items: center; gap: 0.9rem; margin-bottom: 0.8rem; }
-  .se-meeting-head h3 { margin: 0; }
-  .se-meeting-date { margin: 0.1rem 0 0; color: var(--muted); font-size: 0.9rem; }
-
-  .se-meeting-n {
-    flex: none;
-    width: 2.4rem;
-    height: 2.4rem;
-    display: grid;
-    place-items: center;
-    border-radius: 999px;
-    background: var(--accent);
-    color: #fff;
-    font-family: "Space Grotesk", system-ui, sans-serif;
-    font-weight: 700;
-  }
-
-  :root[data-theme="dark"] .se-meeting-n { color: #0f1623; }
-
-  .se-objective {
-    border-left: 3px solid var(--accent);
-    background: var(--accent-soft);
-    padding: 0.7rem 0.95rem;
-    border-radius: 0 10px 10px 0;
-  }
-
+  /* ---------- shared bits ---------- */
+  .se-objective { border-left: 3px solid var(--accent); background: var(--accent-soft); padding: 0.7rem 0.95rem; border-radius: 0 10px 10px 0; }
   .se-covers { list-style: none; padding-left: 0; }
   .se-covers li { margin-bottom: 0.4rem; line-height: 1.55; }
 
@@ -500,143 +832,65 @@ import {
     font-family: ui-monospace, monospace;
     font-size: 0.78rem;
     font-weight: 700;
-    padding: 0.1rem 0.4rem;
-    margin-right: 0.5rem;
+    padding: 0.1rem 0.45rem;
+    margin-right: 0.4rem;
     border-radius: 5px;
     background: var(--accent-soft);
     color: var(--accent-strong);
     border: 1px solid var(--line);
   }
 
-  .se-meeting-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; }
-  .se-tight li { margin-bottom: 0.3rem; line-height: 1.5; font-size: 0.94rem; }
+  .se-risk { border-left: 3px solid #c8532b; padding: 0.6rem 0.9rem; border-radius: 0 10px 10px 0; background: rgba(200, 83, 43, 0.07); font-size: 0.93rem; }
+  .se-note { border-left: 3px solid var(--accent); background: var(--accent-soft); padding: 0.65rem 0.95rem; border-radius: 0 10px 10px 0; font-size: 0.93rem; }
+  .se-gotcha { font-size: 0.9rem; color: var(--muted); border-top: 1px dashed var(--line); padding-top: 0.6rem; margin-bottom: 0; }
 
-  .se-risk {
-    border-left: 3px solid #c8532b;
-    padding: 0.6rem 0.9rem;
-    border-radius: 0 10px 10px 0;
-    background: rgba(200, 83, 43, 0.07);
-    font-size: 0.93rem;
-  }
-
-  .se-note {
-    border-left: 3px solid var(--accent);
-    background: var(--accent-soft);
-    padding: 0.65rem 0.95rem;
-    border-radius: 0 10px 10px 0;
-    font-size: 0.93rem;
-  }
-
-  .se-alt { margin: 0.6rem 0 1rem; }
-  .se-alt summary { cursor: pointer; color: var(--accent); font-weight: 600; }
-
-  /* tables */
-  .se-table { width: 100%; border-collapse: collapse; margin: 0.6rem 0 1.1rem; font-size: 0.92rem; display: table; }
-  .se-table th, .se-table td { text-align: left; vertical-align: top; padding: 0.5rem 0.6rem; border-bottom: 1px solid var(--line); line-height: 1.5; }
-  .se-table thead th { font-family: "Space Grotesk", system-ui, sans-serif; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
-  .se-table tfoot td { font-weight: 700; border-bottom: none; border-top: 2px solid var(--line); }
-  .se-time { font-family: ui-monospace, monospace; font-size: 0.85rem; white-space: nowrap; }
-  .se-who { color: var(--muted); font-size: 0.85rem; }
-  .se-price { font-family: ui-monospace, monospace; font-size: 0.86rem; white-space: nowrap; }
-  .se-table-narrow { max-width: 44rem; }
-  .se-row-hit td { background: var(--accent-soft); }
-
-  /* telemetry */
-  .se-callout {
-    border: 2px solid #c8532b;
-    border-radius: var(--radius);
-    padding: 1rem 1.2rem;
-    margin: 1.2rem 0 1.6rem;
-    background: rgba(200, 83, 43, 0.06);
-  }
-
+  .se-callout { border: 2px solid #c8532b; border-radius: 14px; padding: 1rem 1.2rem; margin: 1.2rem 0 1.6rem; background: rgba(200, 83, 43, 0.06); }
   .se-callout h3 { margin-top: 0; }
   .se-callout p:last-child { margin-bottom: 0; }
 
-  .se-session {
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 0.9rem 1.2rem 1rem;
-    margin: 1rem 0;
-  }
+  .se-callout-line { display: flex; gap: 0.4rem; flex-wrap: wrap; margin: 0 0 0.8rem; }
 
-  .se-session-when {
-    font-family: "Space Grotesk", system-ui, sans-serif;
-    font-size: 0.8rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin: 0;
-  }
+  .se-pill { display: inline-block; font-size: 0.76rem; padding: 0.18rem 0.65rem; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
+  .se-pill-warn { border-color: #c8532b; color: #c8532b; }
+  .se-pill-strong { border-color: var(--accent); color: var(--accent-strong); font-weight: 600; }
 
-  .se-session h4 { margin: 0.2rem 0 0.5rem; }
-  .se-gotcha { font-size: 0.9rem; color: var(--muted); border-top: 1px dashed var(--line); padding-top: 0.6rem; margin-bottom: 0; }
-
-  /* gate */
-  .se-gates { margin: 1.2rem 0; }
-  .se-gates .card h3 { display: flex; align-items: center; gap: 0.5rem; font-size: 1.02rem; }
+  .se-tagline { font-size: 1.12rem; font-weight: 600; color: var(--accent-strong); }
 
   .se-gate-n {
-    flex: none;
-    width: 1.7rem;
-    height: 1.7rem;
-    display: grid;
-    place-items: center;
-    border-radius: 999px;
-    background: var(--accent-soft);
-    color: var(--accent-strong);
-    font-size: 0.85rem;
-    font-weight: 700;
+    flex: none; width: 1.7rem; height: 1.7rem;
+    display: inline-grid; place-items: center;
+    border-radius: 999px; background: var(--accent-soft); color: var(--accent-strong);
+    font-size: 0.85rem; font-weight: 700; margin-right: 0.4rem;
   }
-
-  /* orders */
-  .se-order { border-top: 2px solid var(--line); padding-top: 1.2rem; margin-top: 1.8rem; }
-  .se-order-head h3 { margin-bottom: 0.4rem; }
-  .se-order-meta { display: flex; gap: 0.4rem; flex-wrap: wrap; margin: 0 0 0.7rem; }
-
-  .se-pill {
-    display: inline-block;
-    font-size: 0.76rem;
-    padding: 0.18rem 0.6rem;
-    border-radius: 999px;
-    border: 1px solid var(--line);
-    color: var(--muted);
-  }
-
-  .se-pill-warn { border-color: #c8532b; color: #c8532b; }
-  .se-order-notes { color: var(--muted); }
-
-  /* competition */
-  .se-tagline { font-size: 1.15rem; font-weight: 600; color: var(--accent-strong); }
-
-  /* speakers */
-  .se-speaker { border: 1px solid var(--line); border-radius: var(--radius); padding: 1rem 1.2rem; margin: 1rem 0; }
-  .se-speaker-head { display: flex; align-items: center; gap: 0.8rem; }
-  .se-speaker-head h3 { margin: 0; font-size: 1.08rem; }
-  .se-speaker-org { margin: 0.1rem 0 0; font-size: 0.86rem; color: var(--muted); }
 
   .se-speaker-rank {
-    flex: none;
-    width: 2rem;
-    height: 2rem;
-    display: grid;
-    place-items: center;
-    border-radius: 999px;
-    border: 1px solid var(--accent);
-    color: var(--accent-strong);
-    font-weight: 700;
-    font-size: 0.9rem;
+    flex: none; width: 1.8rem; height: 1.8rem;
+    display: grid; place-items: center;
+    border-radius: 999px; border: 1px solid var(--accent);
+    color: var(--accent-strong); font-weight: 700; font-size: 0.85rem;
   }
 
-  .se-speaker-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 0.7rem; margin: 0.8rem 0 0; }
+  .se-speaker-org { margin: 0 0 0.7rem; font-size: 0.86rem; color: var(--muted); }
+  .se-speaker-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 0.7rem; margin: 0.8rem 0; }
   .se-speaker-meta dt { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); }
   .se-speaker-meta dd { margin: 0.15rem 0 0; font-size: 0.9rem; line-height: 1.5; }
 
-  /* launch */
-  .se-site { border-left: 3px solid var(--line); padding: 0.2rem 0 0.2rem 1rem; margin: 1.2rem 0; }
-  .se-site h4 { margin: 0 0 0.3rem; }
+  /* ---------- tables ---------- */
+  .mb-table-wrap { width: 100%; overflow-x: auto; margin: 0.7rem 0 1.1rem; }
+  .se-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+  .se-table th, .se-table td { text-align: left; vertical-align: top; padding: 0.5rem 0.6rem; border-bottom: 1px solid var(--line); line-height: 1.5; }
+  .se-table thead th { font-family: "Space Grotesk", system-ui, sans-serif; font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+  .se-table tfoot td { font-weight: 700; border-bottom: none; border-top: 2px solid var(--line); }
+  .se-time { font-family: ui-monospace, monospace; font-size: 0.85rem; white-space: nowrap; }
+  .se-who { color: var(--muted); font-size: 0.85rem; }
+  .se-price { font-family: ui-monospace, monospace; font-size: 0.86rem; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .se-table-narrow { max-width: 46rem; }
+  .se-row-hit td { background: var(--accent-soft); }
+  .se-buycell { white-space: nowrap; font-size: 0.82rem; }
+  .se-buycell a { display: block; }
+  .se-order-notes { color: var(--muted); }
 
-  /* fixes */
+  /* ---------- fixes ---------- */
   .se-fixes { list-style: none; padding-left: 0; }
   .se-fix { border-left: 3px solid var(--line); padding: 0.5rem 0 0.5rem 0.9rem; margin-bottom: 0.9rem; }
   .se-fix p { margin: 0.2rem 0 0; font-size: 0.92rem; color: var(--muted); line-height: 1.55; }
@@ -645,22 +899,56 @@ import {
   .se-fix-noted { border-left-color: #d8a13a; }
 
   .se-fix-tag {
-    display: inline-block;
-    font-size: 0.66rem;
-    letter-spacing: 0.09em;
-    text-transform: uppercase;
-    padding: 0.08rem 0.42rem;
-    border-radius: 4px;
-    border: 1px solid var(--line);
-    color: var(--muted);
-    margin-right: 0.5rem;
+    display: inline-block; font-size: 0.66rem; letter-spacing: 0.09em; text-transform: uppercase;
+    padding: 0.08rem 0.42rem; border-radius: 4px; border: 1px solid var(--line);
+    color: var(--muted); margin-right: 0.5rem;
   }
 
-  @media (max-width: 720px) {
+  @media (max-width: 860px) {
+    .se-two { grid-template-columns: 1fr; }
     .se-tl-item { grid-template-columns: 1fr; gap: 0.2rem; }
-    .se-meeting-cols { grid-template-columns: 1fr; }
-    .se-meeting { padding: 1rem; }
-    .se-table { font-size: 0.86rem; }
-    .se-table th, .se-table td { padding: 0.4rem 0.35rem; }
+    .se-switch { grid-template-columns: 1fr; }
+    .se-hero { flex-direction: column; gap: 0.5rem; }
+    .se-exp-when { margin-left: 0; width: 100%; }
   }
 </style>
+
+<script is:inline>
+  (function () {
+    function init() {
+      var sw = document.querySelector("[data-audience-switch]");
+      if (!sw || sw.dataset.wired) return;
+      sw.dataset.wired = "1";
+
+      var btns = sw.querySelectorAll("[data-view]");
+      var panels = document.querySelectorAll("[data-view-panel]");
+
+      function show(view) {
+        for (var i = 0; i < btns.length; i++) {
+          var on = btns[i].dataset.view === view;
+          btns[i].classList.toggle("is-on", on);
+          btns[i].setAttribute("aria-selected", String(on));
+        }
+        for (var j = 0; j < panels.length; j++) {
+          panels[j].hidden = panels[j].dataset.viewPanel !== view;
+        }
+        try { localStorage.setItem("se-view", view); } catch (e) {}
+      }
+
+      for (var k = 0; k < btns.length; k++) {
+        (function (b) {
+          b.addEventListener("click", function () { show(b.dataset.view); });
+        })(btns[k]);
+      }
+
+      var saved = null;
+      try { saved = localStorage.getItem("se-view"); } catch (e) {}
+      if (location.hash === "#counselor") saved = "counselor";
+      if (location.hash === "#scout") saved = "scout";
+      show(saved === "counselor" ? "counselor" : "scout");
+    }
+
+    init();
+    document.addEventListener("astro:page-load", init);
+  })();
+</script>
