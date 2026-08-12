@@ -8,6 +8,8 @@ import MotorCutaway from "./MotorCutaway.astro";
 import MissionControl from "./MissionControl.astro";
 import FlightSim from "./FlightSim.astro";
 import OrbitSim from "./OrbitSim.astro";
+import SlideArt from "./SlideArt.astro";
+import LaunchOps from "./LaunchOps.astro";
 
 const { deck } = Astro.props;
 const slides = deck.slides;
@@ -34,6 +36,7 @@ const slides = deck.slides;
             <p class="ds-kicker">{s.kicker}</p>
             <h4 class="ds-h1">{s.heading}</h4>
             <p class="ds-sub">{s.sub}</p>
+            {s.art && <SlideArt name={s.art} />}
           </div>
         )}
 
@@ -41,6 +44,7 @@ const slides = deck.slides;
           <div class="ds ds-prompt">
             <p class="ds-eyebrow">{s.heading}</p>
             <p class="ds-question">{s.question}</p>
+            {s.art && <SlideArt name={s.art} />}
             <details class="ds-reveal">
               <summary>Where you're steering it</summary>
               <p>{s.answer}</p>
@@ -52,6 +56,7 @@ const slides = deck.slides;
           <div class="ds">
             <h4 class="ds-h2">{s.heading}</h4>
             {s.intro && <p class="ds-intro">{s.intro}</p>}
+            {s.art && <SlideArt name={s.art} />}
             <ul class="ds-list">
               {s.bullets.map((b) => <li>{b}</li>)}
             </ul>
@@ -62,6 +67,7 @@ const slides = deck.slides;
         {s.type === "twocol" && (
           <div class="ds">
             <h4 class="ds-h2">{s.heading}</h4>
+            {s.art && <SlideArt name={s.art} />}
             <div class="ds-cols">
               <div class="ds-col">
                 <h5>{s.left.h}</h5>
@@ -111,6 +117,7 @@ const slides = deck.slides;
           <div class="ds">
             <h4 class="ds-h2">{s.heading}</h4>
             {s.intro && <p class="ds-intro">{s.intro}</p>}
+            {s.art && <SlideArt name={s.art} />}
             <ol class="ds-steps">
               {s.steps.map((st) => (
                 <li>
@@ -122,6 +129,14 @@ const slides = deck.slides;
                 </li>
               ))}
             </ol>
+          </div>
+        )}
+
+        {s.type === "launchops" && (
+          <div class="ds">
+            <h4 class="ds-h2">{s.heading}</h4>
+            {s.intro && <p class="ds-intro">{s.intro}</p>}
+            <LaunchOps />
           </div>
         )}
 
@@ -169,6 +184,7 @@ const slides = deck.slides;
           <div class="ds">
             <h4 class="ds-h2">{s.heading}</h4>
             <p class="ds-intro">{s.intro}</p>
+            {s.art && <SlideArt name={s.art} />}
             <p>
               <a class="mb-link-btn" href="/merit-badges/capstones/telemetry-rocket/#rocket-calc" target="_blank" rel="noopener noreferrer">
                 Open the altitude simulator ↗
@@ -181,6 +197,7 @@ const slides = deck.slides;
           <div class="ds">
             <h4 class="ds-h2">{s.heading}</h4>
             <p class="ds-intro">{s.intro}</p>
+            {s.art && <SlideArt name={s.art} />}
             <div class="ds-locations">
               {s.locations.map((l) => (
                 <div class="ds-loc">
@@ -390,6 +407,24 @@ const slides = deck.slides;
   .ds-loc { border: 1px solid var(--line); border-radius: 10px; padding: 0.55rem 0.75rem; }
   .ds-loc strong { display: block; font-size: 0.92rem; }
   .ds-loc span { font-size: 0.82rem; color: var(--muted); line-height: 1.45; }
+
+  /* Simulator canvases carry their own intrinsic aspect. Inside a slide — and
+     especially in fullscreen — cap the height so the controls stay on screen
+     and the whole thing fits without scrolling. */
+  .deck :global(.fsim-stage canvas),
+  .deck :global(.osim-stage canvas) {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 38vh;
+    margin-inline: auto;
+  }
+
+  .deck-stage:fullscreen :global(.fsim-stage canvas),
+  .deck-stage:fullscreen :global(.osim-stage canvas) { max-height: 46vh; }
+
+  .deck :global(.fsim), .deck :global(.osim) { border: none; padding: 0; background: transparent; }
+  .deck :global(.fsim-head p), .deck :global(.osim-head p) { max-width: 70ch; }
 
   .deck-notes {
     margin-top: 1.2rem;

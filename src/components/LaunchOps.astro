@@ -1,0 +1,514 @@
+---
+// Mission control for launch day: crew positions, the go/no-go poll, and a
+// working countdown clock with the call-and-response script.
+//
+// Every position is a real one from a range crew, scaled to a troop. The point
+// is that a Scout stops being a spectator holding a rocket and becomes someone
+// with a callsign whose "GO" is required before anything happens.
+
+const roles = [
+  {
+    call: "FLIGHT",
+    title: "Flight Director",
+    who: "Counselor, or a Life/Eagle Scout who has done this before",
+    does: "Runs the countdown, polls the room, and is the only voice that can say launch or scrub. Everyone else reports to Flight.",
+    holds: "The countdown card and the launch key.",
+  },
+  {
+    call: "RSO",
+    title: "Range Safety Officer",
+    who: "A registered adult — always an adult, no exceptions",
+    does: "Inspects every rocket before it goes to the pad, owns the safety perimeter, and can stop a countdown at any point without giving a reason.",
+    holds: "The inspection cards and a whistle.",
+  },
+  {
+    call: "PAD",
+    title: "Pad Manager",
+    who: "Older Scout",
+    does: "Loads the rocket, connects the igniter clips, confirms continuity, and calls the pad clear. Last person to step back from the rail.",
+    holds: "The launch controller and the safety key.",
+  },
+  {
+    call: "WEATHER",
+    title: "Weather Officer",
+    who: "Any Scout",
+    does: "Reads wind speed and direction before every flight, watches for the gust that arrives during the count, and calls the wind hold.",
+    holds: "Wind meter or a ribbon on a stick, and the wind log.",
+  },
+  {
+    call: "TELEMETRY",
+    title: "Telemetry Officer",
+    who: "Telemetry crew Scout",
+    does: "Confirms the ground station has GPS lock and is receiving packets, then confirms the log is recording. On capstone flights this is a real go/no-go item.",
+    holds: "The laptop and the ground radio.",
+  },
+  {
+    call: "RECOVERY",
+    title: "Recovery Officer",
+    who: "Two Scouts, one with binoculars",
+    does: "Tracks the rocket through the whole flight, calls the landing bearing, and leads the walk-out. Nobody moves downrange until Recovery is released by Flight.",
+    holds: "Binoculars and the recovery log.",
+  },
+  {
+    call: "TIMER",
+    title: "Timing Officer",
+    who: "Two adults, timing independently",
+    does: "Starts on liftoff, stops on touchdown. The two times are averaged — that average is the Time Aloft score.",
+    holds: "Two stopwatches.",
+  },
+  {
+    call: "PAO",
+    title: "Public Affairs",
+    who: "Any Scout who wants the mic",
+    does: "Announces each flight to the crowd — Scout's name, rocket name, motor, and predicted altitude — then reads the measured result after recovery.",
+    holds: "The flight cards and a loud voice.",
+  },
+];
+
+const countdown = [
+  { t: "T−10:00", who: "FLIGHT", say: "Flight crew, we are at T minus ten minutes. Positions.", note: "Everyone goes to their station. Talking stops." },
+  { t: "T−8:00", who: "RSO", say: "RSO has the rocket. Inspection in progress.", note: "Fins, lug, shock cord, chute, nose cone fit. RSO signs the flight card or sends it back." },
+  { t: "T−6:00", who: "PAD", say: "Pad is loading. Rail is clear.", note: "Rocket on the rail, motor installed, igniter in and taped." },
+  { t: "T−4:00", who: "PAO", say: "Flight 7, Scout Reyes, rocket 'Half Dome', C6-5, predicted 980 feet.", note: "Read from the flight card so the crowd knows what they're watching." },
+  { t: "T−3:00", who: "FLIGHT", say: "Go/no-go poll. Weather?", note: "This is the moment the whole thing turns into a real launch. See the poll below." },
+  { t: "T−2:00", who: "PAD", say: "Continuity check — we have continuity. Stepping back.", note: "Controller shows the igniter circuit is live. Pad Manager walks back behind the line." },
+  { t: "T−1:00", who: "RSO", say: "Range is HOT. Everyone behind the cones.", note: "RSO physically looks at every person and confirms." },
+  { t: "T−0:30", who: "FLIGHT", say: "Arming. Key is in.", note: "Safety key inserted. The light comes on. Nobody moves." },
+  { t: "T−0:10", who: "ALL", say: "Ten… nine… eight…", note: "The whole crowd counts. This is the part they came for." },
+  { t: "T−0:03", who: "FLIGHT", say: "Three, two, one, ignition.", note: "Button pressed on 'ignition', not after it." },
+  { t: "T+0:00", who: "TIMER", say: "Liftoff — timers running.", note: "Both stopwatches start on visible motion, not on the button." },
+  { t: "T+0:08", who: "RECOVERY", say: "Apogee. Ejection — good chute.", note: "Or 'no chute, ballistic' — which is a call everyone needs to hear immediately." },
+  { t: "T+0:45", who: "RECOVERY", say: "Touchdown, bearing about 200, roughly 300 feet out.", note: "Bearing and distance while the memory is fresh." },
+  { t: "T+1:00", who: "FLIGHT", say: "Range is COLD. Recovery, you are released.", note: "ONLY now does anyone walk downrange." },
+  { t: "T+3:00", who: "PAO", say: "Measured altitude 1,012 feet. Predicted 980. Error 3.2 percent.", note: "Read it out. The Prediction Cup lives or dies on this number." },
+];
+
+const poll = ["WEATHER", "RSO", "PAD", "TELEMETRY", "RECOVERY", "TIMER"];
+---
+
+<div class="lops" data-lops>
+  <div class="lops-tabs" role="tablist" aria-label="Mission control sections">
+    <button type="button" role="tab" class="lops-tab is-on" data-lops-tab="roles" aria-selected="true">Crew positions</button>
+    <button type="button" role="tab" class="lops-tab" data-lops-tab="clock" aria-selected="false">Countdown clock</button>
+    <button type="button" role="tab" class="lops-tab" data-lops-tab="card" aria-selected="false">Flight card</button>
+  </div>
+
+  <!-- ============ roles ============ -->
+  <div data-lops-panel="roles">
+    <p class="lops-intro">
+      Eight positions. At 6&ndash;10 Scouts everybody has one, and they rotate every flight so nobody spends the
+      morning holding a clipboard. Callsigns are used on the range and nowhere else &mdash; that is exactly what
+      makes them work.
+    </p>
+    <div class="lops-roles">
+      {roles.map((r) => (
+        <article class="lops-role">
+          <header>
+            <span class="lops-call">{r.call}</span>
+            <h5>{r.title}</h5>
+          </header>
+          <p class="lops-who">{r.who}</p>
+          <p>{r.does}</p>
+          <p class="lops-holds"><strong>Holds:</strong> {r.holds}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+
+  <!-- ============ countdown ============ -->
+  <div data-lops-panel="clock" hidden>
+    <div class="lops-clock-wrap">
+      <div class="lops-clock">
+        <div class="lops-time" data-lops-time>T&minus;10:00</div>
+        <div class="lops-status" data-lops-status>Hold</div>
+        <div class="lops-controls">
+          <button type="button" class="lops-btn lops-btn-go" data-lops-start>Start count</button>
+          <button type="button" class="lops-btn" data-lops-hold>Hold</button>
+          <button type="button" class="lops-btn" data-lops-abort>Scrub</button>
+          <button type="button" class="lops-btn" data-lops-reset>Reset</button>
+        </div>
+        <p class="lops-speed">
+          <label>Clock speed
+            <select data-lops-speed>
+              <option value="60">60&times; — run the whole count in 15 s</option>
+              <option value="10" selected>10&times; — rehearsal pace</option>
+              <option value="1">1&times; — real time</option>
+            </select>
+          </label>
+        </p>
+
+        <div class="lops-poll">
+          <h5>Go / no-go poll</h5>
+          <p>Flight calls each station by name. Each answers <strong>GO</strong> or <strong>NO-GO</strong>. One NO-GO stops the count &mdash; and any Scout may call it without having to explain first.</p>
+          <div class="lops-poll-grid">
+            {poll.map((p) => (
+              <button type="button" class="lops-poll-btn" data-poll={p}>
+                <span>{p}</span><em data-poll-state>—</em>
+              </button>
+            ))}
+          </div>
+          <p class="lops-poll-out" data-poll-out>Poll not started.</p>
+        </div>
+      </div>
+
+      <ol class="lops-script" data-lops-script>
+        {countdown.map((c) => (
+          <li data-mark={c.t}>
+            <span class="lops-mark">{c.t}</span>
+            <span class="lops-who-tag">{c.who}</span>
+            <span class="lops-say">&ldquo;{c.say}&rdquo;</span>
+            <span class="lops-note">{c.note}</span>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </div>
+
+  <!-- ============ flight card ============ -->
+  <div data-lops-panel="card" hidden>
+    <p class="lops-intro">
+      One card per flight, filled in before the rocket leaves the table. Print a stack of them. The card is what
+      the RSO signs, what PAO reads out, and what the score gets written on &mdash; so it is also the paper trail
+      for requirement 3.
+    </p>
+    <div class="lops-card">
+      <div class="lops-card-head">
+        <span>TROOP 308 · FLIGHT CARD</span>
+        <span>Flight No. ____</span>
+      </div>
+      <div class="lops-card-grid">
+        <label>Scout<span></span></label>
+        <label>Rocket name<span></span></label>
+        <label>Motor<span></span></label>
+        <label>Delay (s)<span></span></label>
+        <label>Rocket mass as flown (g)<span></span></label>
+        <label>Recovery device<span></span></label>
+        <label class="lops-card-wide">Sealed predicted apogee (ft)<span></span></label>
+        <label class="lops-card-wide">Mission objective for this flight<span></span></label>
+      </div>
+      <div class="lops-card-sign">
+        <label>RSO inspection<span>GO / NO-GO &nbsp;&nbsp; initials ______</span></label>
+        <label>Wind at launch<span>____ mph, from ______</span></label>
+      </div>
+      <div class="lops-card-results">
+        <span class="lops-card-res-title">AFTER THE FLIGHT</span>
+        <div class="lops-card-grid">
+          <label>Measured apogee (ft)<span></span></label>
+          <label>Time aloft (avg of 2)<span></span></label>
+          <label>Prediction error (%)<span></span></label>
+          <label>Recovered / condition<span></span></label>
+          <label class="lops-card-wide">What happened &mdash; anything unexpected<span></span></label>
+        </div>
+      </div>
+    </div>
+    <p class="lops-print-note">
+      Print one per Scout per flight, plus spares. Two flights each means at least 20 cards for a troop of ten.
+    </p>
+  </div>
+</div>
+
+<style>
+  .lops { border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); padding: 0.9rem 1.1rem 1rem; }
+
+  .lops-tabs { display: flex; gap: 0.35rem; flex-wrap: wrap; margin-bottom: 0.9rem; }
+
+  .lops-tab {
+    font: inherit; font-size: 0.82rem; padding: 0.32rem 0.8rem;
+    border-radius: 999px; border: 1px solid var(--line);
+    background: transparent; color: var(--muted); cursor: pointer;
+  }
+
+  .lops-tab.is-on { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+  :root[data-theme="dark"] .lops-tab.is-on { color: #0f1623; }
+
+  .lops-intro { margin: 0 0 0.9rem; font-size: 0.9rem; color: var(--muted); line-height: 1.55; }
+
+  /* roles */
+  .lops-roles { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 0.6rem; }
+
+  .lops-role { border: 1px solid var(--line); border-radius: 10px; padding: 0.7rem 0.85rem; background: var(--bg-alt); }
+  .lops-role header { display: flex; align-items: baseline; gap: 0.5rem; margin-bottom: 0.3rem; }
+  .lops-role h5 { margin: 0; font-size: 0.95rem; }
+  .lops-role p { margin: 0 0 0.35rem; font-size: 0.85rem; line-height: 1.5; }
+  .lops-who { color: var(--accent-strong); font-weight: 600; }
+  .lops-holds { color: var(--muted); font-size: 0.8rem !important; margin-bottom: 0 !important; }
+
+  .lops-call {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em;
+    padding: 0.12rem 0.4rem; border-radius: 4px;
+    background: var(--accent); color: #fff;
+  }
+
+  :root[data-theme="dark"] .lops-call { color: #0f1623; }
+
+  /* clock */
+  .lops-clock-wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 1rem; align-items: start; }
+
+  .lops-clock { border: 1px solid var(--line); border-radius: 12px; padding: 0.9rem; background: #08111f; color: #e7eef9; }
+
+  .lops-time {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: clamp(2rem, 5vw, 3rem); font-weight: 700;
+    text-align: center; font-variant-numeric: tabular-nums; letter-spacing: 0.02em;
+  }
+
+  .lops-status {
+    text-align: center; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: #9fb4cc; margin-bottom: 0.7rem;
+  }
+
+  .lops-status[data-state="counting"] { color: #7fd39b; }
+  .lops-status[data-state="hold"] { color: #f0c05a; }
+  .lops-status[data-state="scrub"] { color: #ff8a5c; }
+  .lops-status[data-state="flight"] { color: #7fd39b; }
+
+  .lops-controls { display: flex; gap: 0.3rem; justify-content: center; flex-wrap: wrap; }
+
+  .lops-btn {
+    font: inherit; font-size: 0.76rem; padding: 0.28rem 0.65rem;
+    border-radius: 999px; border: 1px solid rgba(255,255,255,0.25);
+    background: transparent; color: #e7eef9; cursor: pointer;
+  }
+
+  .lops-btn:hover { border-color: #7fb4e0; }
+  .lops-btn-go { background: #2f7d4f; border-color: #2f7d4f; font-weight: 700; }
+
+  .lops-speed { margin: 0.7rem 0 0; font-size: 0.72rem; color: #9fb4cc; }
+  .lops-speed label { display: grid; gap: 0.2rem; }
+
+  .lops-speed select {
+    font: inherit; font-size: 0.74rem; padding: 0.22rem 0.35rem;
+    border-radius: 6px; border: 1px solid rgba(255,255,255,0.25);
+    background: #0d1828; color: #e7eef9;
+  }
+
+  .lops-poll { margin-top: 0.9rem; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 0.7rem; }
+  .lops-poll h5 { margin: 0 0 0.3rem; font-size: 0.9rem; }
+  .lops-poll p { margin: 0 0 0.55rem; font-size: 0.76rem; color: #9fb4cc; line-height: 1.5; }
+  .lops-poll-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(6.2rem, 1fr)); gap: 0.3rem; }
+
+  .lops-poll-btn {
+    font: inherit; display: grid; gap: 0.1rem; padding: 0.3rem 0.4rem;
+    border-radius: 7px; border: 1px solid rgba(255,255,255,0.25);
+    background: transparent; color: #e7eef9; cursor: pointer; text-align: center;
+  }
+
+  .lops-poll-btn span { font-family: ui-monospace, monospace; font-size: 0.64rem; letter-spacing: 0.06em; }
+  .lops-poll-btn em { font-style: normal; font-weight: 700; font-size: 0.82rem; }
+  .lops-poll-btn[data-state="go"] { border-color: #2f7d4f; background: rgba(47,125,79,0.28); }
+  .lops-poll-btn[data-state="go"] em { color: #7fd39b; }
+  .lops-poll-btn[data-state="nogo"] { border-color: #c8532b; background: rgba(200,83,43,0.28); }
+  .lops-poll-btn[data-state="nogo"] em { color: #ff8a5c; }
+
+  .lops-poll-out { margin: 0.5rem 0 0 !important; font-size: 0.78rem !important; font-weight: 600; }
+
+  /* script */
+  .lops-script { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.25rem; max-height: 30rem; overflow-y: auto; }
+
+  .lops-script li {
+    display: grid;
+    grid-template-columns: 4.6rem 5.5rem minmax(0, 1fr);
+    gap: 0.15rem 0.6rem;
+    padding: 0.4rem 0.55rem;
+    border-radius: 8px;
+    border-left: 3px solid var(--line);
+    background: var(--bg-alt);
+    font-size: 0.82rem;
+  }
+
+  .lops-script li.is-now { border-left-color: var(--accent); background: var(--accent-soft); }
+  .lops-script li.is-past { opacity: 0.45; }
+
+  .lops-mark { font-family: ui-monospace, monospace; font-weight: 700; font-size: 0.76rem; }
+
+  .lops-who-tag {
+    font-family: ui-monospace, monospace; font-size: 0.64rem; font-weight: 700;
+    letter-spacing: 0.06em; color: var(--accent-strong); padding-top: 0.12rem;
+  }
+
+  .lops-say { font-weight: 600; }
+  .lops-note { grid-column: 3; font-size: 0.78rem; color: var(--muted); line-height: 1.45; }
+
+  /* flight card */
+  .lops-card { border: 2px solid var(--text); border-radius: 8px; padding: 0.8rem 0.9rem; background: var(--bg); max-width: 44rem; }
+
+  .lops-card-head {
+    display: flex; justify-content: space-between; gap: 1rem;
+    font-family: ui-monospace, monospace; font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.08em; padding-bottom: 0.5rem; margin-bottom: 0.7rem;
+    border-bottom: 2px solid var(--text);
+  }
+
+  .lops-card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem 0.9rem; }
+  .lops-card-wide { grid-column: 1 / -1; }
+
+  .lops-card-grid label, .lops-card-sign label {
+    display: grid; gap: 0.15rem;
+    font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted);
+  }
+
+  .lops-card-grid label span, .lops-card-sign label span {
+    border-bottom: 1px solid var(--line); min-height: 1.35rem;
+    font-size: 0.8rem; text-transform: none; letter-spacing: 0; color: var(--text);
+  }
+
+  .lops-card-sign { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem 0.9rem; margin-top: 0.7rem; padding-top: 0.6rem; border-top: 1px dashed var(--line); }
+  .lops-card-results { margin-top: 0.8rem; padding-top: 0.6rem; border-top: 2px solid var(--text); }
+
+  .lops-card-res-title {
+    display: block; font-family: ui-monospace, monospace; font-size: 0.68rem;
+    font-weight: 700; letter-spacing: 0.1em; margin-bottom: 0.5rem; color: var(--accent-strong);
+  }
+
+  .lops-print-note { font-size: 0.8rem; color: var(--muted); margin: 0.7rem 0 0; }
+
+  @media (max-width: 820px) {
+    .lops-clock-wrap { grid-template-columns: 1fr; }
+    .lops-script li { grid-template-columns: 4.4rem 1fr; }
+    .lops-note { grid-column: 1 / -1; }
+    .lops-card-grid, .lops-card-sign { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    function parseMark(m) {
+      // "T−10:00" / "T+1:00" -> seconds relative to zero
+      var sign = m.indexOf("+") > -1 ? 1 : -1;
+      var body = m.replace(/^T[−+-]/, "");
+      var bits = body.split(":");
+      return sign * (parseInt(bits[0], 10) * 60 + parseInt(bits[1], 10));
+    }
+
+    function fmt(sec) {
+      var sign = sec < 0 ? "−" : "+";
+      var a = Math.abs(sec);
+      var mm = Math.floor(a / 60), ss = Math.floor(a % 60);
+      return "T" + sign + mm + ":" + (ss < 10 ? "0" : "") + ss;
+    }
+
+    function wire(root) {
+      if (root.dataset.lopsWired) return;
+      root.dataset.lopsWired = "1";
+
+      // tabs
+      var tabs = root.querySelectorAll("[data-lops-tab]");
+      var panels = root.querySelectorAll("[data-lops-panel]");
+      for (var i = 0; i < tabs.length; i++) {
+        (function (b) {
+          b.addEventListener("click", function () {
+            for (var j = 0; j < tabs.length; j++) {
+              var on = tabs[j] === b;
+              tabs[j].classList.toggle("is-on", on);
+              tabs[j].setAttribute("aria-selected", String(on));
+            }
+            for (var k = 0; k < panels.length; k++) {
+              panels[k].hidden = panels[k].dataset.lopsPanel !== b.dataset.lopsTab;
+            }
+          });
+        })(tabs[i]);
+      }
+
+      // countdown
+      var timeEl = root.querySelector("[data-lops-time]");
+      var statusEl = root.querySelector("[data-lops-status]");
+      var speedSel = root.querySelector("[data-lops-speed]");
+      var items = root.querySelectorAll("[data-lops-script] li");
+      var marks = [];
+      for (var m = 0; m < items.length; m++) marks.push(parseMark(items[m].dataset.mark));
+      var START = marks[0], END = marks[marks.length - 1];
+      var t = START, timer = null;
+
+      function render() {
+        timeEl.textContent = fmt(Math.round(t));
+        var activeIdx = -1;
+        for (var i2 = 0; i2 < marks.length; i2++) if (t >= marks[i2]) activeIdx = i2;
+        for (var j2 = 0; j2 < items.length; j2++) {
+          items[j2].classList.toggle("is-now", j2 === activeIdx);
+          items[j2].classList.toggle("is-past", j2 < activeIdx);
+        }
+        if (activeIdx >= 0 && items[activeIdx].scrollIntoView) {
+          var box = items[activeIdx].parentNode;
+          var top = items[activeIdx].offsetTop - box.offsetTop;
+          if (top < box.scrollTop || top > box.scrollTop + box.clientHeight - 60) box.scrollTop = top - 20;
+        }
+      }
+
+      function setStatus(s, label) { statusEl.dataset.state = s; statusEl.textContent = label; }
+
+      function stop() { if (timer) { clearInterval(timer); timer = null; } }
+
+      root.querySelector("[data-lops-start]").addEventListener("click", function () {
+        stop();
+        setStatus(t >= 0 ? "flight" : "counting", t >= 0 ? "In flight" : "Counting");
+        timer = setInterval(function () {
+          t += 1;
+          if (t >= 0 && t < 1.5) setStatus("flight", "Liftoff");
+          if (t >= END) { t = END; stop(); setStatus("flight", "Flight complete"); }
+          render();
+        }, 1000 / +speedSel.value);
+      });
+
+      root.querySelector("[data-lops-hold]").addEventListener("click", function () {
+        stop(); setStatus("hold", "Hold — clock stopped");
+      });
+
+      root.querySelector("[data-lops-abort]").addEventListener("click", function () {
+        stop(); setStatus("scrub", "Scrubbed — recycle to T−10:00");
+      });
+
+      root.querySelector("[data-lops-reset]").addEventListener("click", function () {
+        stop(); t = START; setStatus("", "Hold"); render();
+        var pb = root.querySelectorAll("[data-poll]");
+        for (var p = 0; p < pb.length; p++) { pb[p].removeAttribute("data-state"); pb[p].querySelector("[data-poll-state]").textContent = "—"; }
+        root.querySelector("[data-poll-out]").textContent = "Poll not started.";
+      });
+
+      // go / no-go poll
+      var pollBtns = root.querySelectorAll("[data-poll]");
+      var out = root.querySelector("[data-poll-out]");
+
+      function tally() {
+        var go = 0, nogo = 0, pending = 0, blockers = [];
+        for (var i3 = 0; i3 < pollBtns.length; i3++) {
+          var s = pollBtns[i3].getAttribute("data-state");
+          if (s === "go") go++;
+          else if (s === "nogo") { nogo++; blockers.push(pollBtns[i3].dataset.poll); }
+          else pending++;
+        }
+        if (nogo > 0) {
+          out.textContent = "NO-GO from " + blockers.join(", ") + ". Flight holds the count. Fix it or scrub.";
+          out.style.color = "#ff8a5c";
+        } else if (pending > 0) {
+          out.textContent = go + " of " + pollBtns.length + " reported. Poll in progress.";
+          out.style.color = "#9fb4cc";
+        } else {
+          out.textContent = "All stations GO. Flight, you are cleared to launch.";
+          out.style.color = "#7fd39b";
+        }
+      }
+
+      for (var b2 = 0; b2 < pollBtns.length; b2++) {
+        (function (btn) {
+          btn.addEventListener("click", function () {
+            var s = btn.getAttribute("data-state");
+            var next = s === "go" ? "nogo" : s === "nogo" ? null : "go";
+            if (next) btn.setAttribute("data-state", next); else btn.removeAttribute("data-state");
+            btn.querySelector("[data-poll-state]").textContent = next === "go" ? "GO" : next === "nogo" ? "NO-GO" : "—";
+            tally();
+          });
+        })(pollBtns[b2]);
+      }
+
+      render();
+    }
+
+    function init() {
+      var all = document.querySelectorAll("[data-lops]");
+      for (var i = 0; i < all.length; i++) wire(all[i]);
+    }
+    init();
+    document.addEventListener("astro:page-load", init);
+  })();
+</script>
