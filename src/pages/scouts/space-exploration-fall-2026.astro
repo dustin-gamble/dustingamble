@@ -5,6 +5,7 @@ import SeriesCalendar from "../../components/SeriesCalendar.astro";
 import FlightSim from "../../components/FlightSim.astro";
 import OrbitSim from "../../components/OrbitSim.astro";
 import LaunchOps from "../../components/LaunchOps.astro";
+import SlideImage from "../../components/SlideImage.astro";
 import {
   series,
   timeline,
@@ -205,6 +206,7 @@ const counselorOrders = orders.groups.filter((g) => g.id !== "scout");
 
       <section class="se-block">
         <h2>{scoutGuide.launchDay.heading}</h2>
+        <SlideImage name="model-liftoff" />
         <p class="se-lede">{scoutGuide.launchDay.timing}</p>
         <div class="se-two">
           <div>

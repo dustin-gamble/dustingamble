@@ -90,6 +90,7 @@ const slides = deck.slides;
         {s.type === "video" && (
           <div class="ds">
             <h4 class="ds-h2">{s.heading}</h4>
+            {s.image && <SlideImage name={s.image} />}
             <div class="ds-video" data-yt={s.youtubeId}>
               <button type="button" class="ds-video-face" data-yt-play aria-label={`Play: ${s.videoTitle}`}>
                 <img
@@ -142,6 +143,7 @@ const slides = deck.slides;
           <div class="ds">
             <h4 class="ds-h2">{s.heading}</h4>
             {s.intro && <p class="ds-intro">{s.intro}</p>}
+            {s.image && <SlideImage name={s.image} />}
             <LaunchOps />
           </div>
         )}
@@ -150,6 +152,7 @@ const slides = deck.slides;
           <div class="ds">
             <h4 class="ds-h2">{s.heading}</h4>
             {s.intro && <p class="ds-intro">{s.intro}</p>}
+            {s.image && <SlideImage name={s.image} />}
             <RocketPartsDiagram />
           </div>
         )}
@@ -158,6 +161,7 @@ const slides = deck.slides;
           <div class="ds">
             <h4 class="ds-h2">{s.heading}</h4>
             {s.intro && <p class="ds-intro">{s.intro}</p>}
+            {s.image && <SlideImage name={s.image} />}
             <MotorCutaway />
           </div>
         )}
@@ -166,6 +170,7 @@ const slides = deck.slides;
           <div class="ds">
             <h4 class="ds-h2">{s.heading}</h4>
             {s.intro && <p class="ds-intro">{s.intro}</p>}
+            {s.image && <SlideImage name={s.image} />}
             <MissionControl />
           </div>
         )}
@@ -174,6 +179,7 @@ const slides = deck.slides;
           <div class="ds">
             <h4 class="ds-h2">{s.heading}</h4>
             {s.intro && <p class="ds-intro">{s.intro}</p>}
+            {s.image && <SlideImage name={s.image} size="half" />}
             <FlightSim mode={s.sim} id={`${deck.id}-${s.sim}`} />
           </div>
         )}
@@ -182,6 +188,7 @@ const slides = deck.slides;
           <div class="ds">
             <h4 class="ds-h2">{s.heading}</h4>
             {s.intro && <p class="ds-intro">{s.intro}</p>}
+            {s.image && <SlideImage name={s.image} size="half" />}
             <OrbitSim mode={s.sim} id={`${deck.id}-${s.sim}`} />
           </div>
         )}

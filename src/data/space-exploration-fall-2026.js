@@ -426,6 +426,7 @@ export const decks = {
                 type: "flightsim",
                 sim: "launch",
                 heading: "Fly it before you fly it",
+                image: "model-liftoff",
                 intro:
                     "Same airframe every Scout is building. Change the motor and the payload and watch what happens to thrust-to-weight — the number that decides whether it goes straight up or corkscrews off the rod.",
                 notes:
@@ -458,6 +459,7 @@ export const decks = {
                 type: "flightsim",
                 sim: "recovery",
                 heading: "Why the delay number matters",
+                image: "model-descent",
                 intro:
                     "The delay decides when the chute comes out. Drag it away from apogee in either direction and watch what happens to the rocket — and to your time aloft.",
                 notes:
@@ -702,6 +704,7 @@ export const decks = {
             {
                 type: "steps",
                 heading: "The build sequence",
+                image: "model-liftoff",
                 art: "build-order",
                 intro: "Leave this projected all night. The Cosmic Cargo needs no glue for the main structure, so most of tonight is careful assembly, alignment, and finish.",
                 steps: [
@@ -751,6 +754,7 @@ export const decks = {
             {
                 type: "launchops",
                 heading: "You are not spectators \u2014 you are the range crew",
+                image: "field-ground-station",
                 intro:
                     "Eight positions, real callsigns, and a countdown that nobody gets to skip. Pick your station tonight and practise the calls, because on Saturday the count runs for real.",
                 notes:

@@ -46,6 +46,24 @@ const IMAGES = {
     caption: "Inside a Deep Space Network dish during maintenance. Look for the people — this is what receives the signal from Mars.",
     credit: "NASA/JPL-Caltech",
   },
+  "model-liftoff": {
+    src: "/images/rocketry/liftoff.jpg",
+    alt: "A small model rocket lifting off from a launch pad in a wide grassy field, white smoke at the base",
+    caption: "This is the moment everything else is preparation for. About a second and a half of thrust, and then it is on its own.",
+    credit: "Illustration",
+  },
+  "model-descent": {
+    src: "/images/rocketry/descent.jpg",
+    alt: "A model rocket descending under an orange and white parachute over an open field",
+    caption: "Ejection happened near apogee and the chute opened cleanly. From here it is a walk, not a search.",
+    credit: "Illustration",
+  },
+  "field-ground-station": {
+    src: "/images/rocketry/ground-station.jpg",
+    alt: "A folding table at the edge of a field holding a laptop showing a graph, a radio receiver, a clipboard, binoculars and a stopwatch",
+    caption: "Mission control, Troop 308 edition. Laptop, ground radio, flight cards, binoculars, stopwatch — that is the whole range.",
+    credit: "Illustration",
+  },
   "katherine-johnson": {
     src: "/images/space/katherine-johnson.jpg",
     alt: "Portrait of Katherine Johnson, NASA mathematician, seated",
@@ -63,7 +81,9 @@ const img = IMAGES[name];
     <img src={img.src} alt={img.alt} loading="lazy" decoding="async" />
     <figcaption>
       <span class="simg-cap">{img.caption}</span>
-      <span class="simg-credit">{img.credit} · public domain</span>
+      <span class="simg-credit">
+        {img.credit === "Illustration" ? "AI-generated illustration" : img.credit + " · public domain"}
+      </span>
     </figcaption>
   </figure>
 )}
