@@ -412,6 +412,15 @@ export const decks = {
                     "Fishing line, a drinking straw, tape, and a long balloon. Set it up before the meeting. Let a younger Scout release it — the one who does will remember the third law forever.",
             },
             {
+                type: "flightsim",
+                sim: "launch",
+                heading: "Fly it before you fly it",
+                intro:
+                    "Same airframe every Scout is building. Change the motor and the payload and watch what happens to thrust-to-weight — the number that decides whether it goes straight up or corkscrews off the rod.",
+                notes:
+                    "Run this on the projector with the room calling out predictions before you press Launch. Best sequence: C6-5 with no payload (clean), then drag the payload slider to 60 g and let them watch the thrust-to-weight fall under 5:1 and the verdict turn red. That is the whole 'why can't I just put my GoPro on it' conversation, answered in ten seconds.",
+            },
+            {
                 type: "video",
                 heading: "4b — How rocket engines work",
                 youtubeId: "gz8L1i0ODeA",
@@ -422,27 +431,21 @@ export const decks = {
                     "Pause and connect it to the object in their hand. Pass around a SPENT Estes motor — never a live one. Point at the nozzle, the propellant grain, the delay charge, and the ejection charge. The delay is the part that matters for them: it is why the number after the dash exists, and picking the wrong one is how you shred your own parachute.",
             },
             {
-                type: "twocol",
-                heading: "4b — Reading a motor code: C6-5",
-                left: {
-                    h: "What the code means",
-                    items: [
-                        "C — total impulse class. Each letter is DOUBLE the one before.",
-                        "6 — average thrust in newtons.",
-                        "5 — delay in seconds from burnout to ejection charge.",
-                    ],
-                },
-                right: {
-                    h: "Why the delay decides your flight",
-                    items: [
-                        "Too short: chute pops while still going fast. Shredded chute, or the body zippers.",
-                        "Too long: rocket noses over and comes down under power of gravity before the chute. Bent fins at best.",
-                        "Heavier rocket = lower apogee = shorter coast = shorter delay.",
-                    ],
-                },
-                note: "This is exactly why the site's altitude simulator matters — it tells you your coast time before you spend $12 on motors.",
+                type: "motor",
+                heading: "4b — Inside the motor, and what C6-5 means",
+                intro:
+                    "One cardboard tube does four jobs in sequence. Tap each stage — and notice that the two numbers in the motor code are two of those four jobs.",
                 notes:
-                    "This is the single most useful slide of the series for launch day. Make them say it back: 'letter is impulse, first number is thrust, second number is delay.' Then send them to the calculator on the badge page.",
+                    "Walk the four stages in order with a SPENT motor in your other hand so they can see the real thing next to the diagram. Then make them say the code back: 'letter is impulse, first number is thrust, second number is delay.' If they leave knowing only one thing tonight, this is the one.",
+            },
+            {
+                type: "flightsim",
+                sim: "recovery",
+                heading: "Why the delay number matters",
+                intro:
+                    "The delay decides when the chute comes out. Drag it away from apogee in either direction and watch what happens to the rocket — and to your time aloft.",
+                notes:
+                    "Do this as a challenge, not a demo. 'Who can get the longest time aloft without shredding the chute?' Let three Scouts come up and try. They will discover on their own that ejection has to happen within about a second of apogee, and that a streamer keeps it close while a big chute walks away downwind. That discovery is worth more than you telling them, and it directly sets up two of the launch-day awards.",
             },
             {
                 type: "calculator",
@@ -469,19 +472,21 @@ export const decks = {
                 },
             },
             {
-                type: "bullets",
-                heading: "4d — How the pictures get home",
-                intro: "A camera on Mars is useless without the other three-quarters of the system.",
-                bullets: [
-                    "Sensor: a CMOS chip counts photons per pixel. Same family of chip as your phone camera — and JPL helped invent it.",
-                    "Digitize: brightness becomes numbers. A picture is now just a very long list of numbers.",
-                    "Compress and encode: throw away what the eye won't miss, then add error-correcting code so a corrupted bit can be repaired.",
-                    "Transmit: radio to an orbiter overhead, orbiter relays to the Deep Space Network dishes at Goldstone, Madrid, and Canberra.",
-                    "Reassemble: the numbers become an image again on the ground, hours later. Mars is 3 to 22 minutes away at light speed depending on where both planets are — there is no live video from Mars.",
-                ],
-                note: "This is the same five steps your telemetry rocket does, just at a different scale. Sensor → number → packet → radio → laptop.",
+                type: "orbitsim",
+                sim: "ascent",
+                heading: "4c — Orbit is sideways, not up",
+                intro:
+                    "Launch it yourself. Straight up and it falls straight back, no matter how much fuel you burn. The only thing that puts you in orbit is horizontal speed — about 7.8 km/s.",
                 notes:
-                    "Land the connection to the telemetry rocket hard. If you have the T-Beam and Heltec working by now, transmit one live packet across the room and show the CSV line appearing on the laptop. That single demo is worth the whole night.",
+                    "The killer demo, and it only works if you change ONE thing: leave Δv at 9.8 and drag pitch-over up to 60 km, so the rocket goes almost straight up. It climbs far higher than the default — and still comes straight back down, suborbital. Then drag pitch-over back to 12 km with exactly the same fuel and it settles into a clean orbit. Same Δv, opposite outcome. That is the single hardest idea in requirement 4c and the surprise does the teaching better than you can.",
+            },
+            {
+                type: "missioncontrol",
+                heading: "4d — How the pictures get home",
+                intro:
+                    "A camera on Mars is useless without the other five-sixths of the system. Tap any step: the top row is our rocket, and the same step on a planetary mission is underneath.",
+                notes:
+                    "Kill the myth first: there is no live video from Mars. Light takes 3 to 22 minutes each way depending on where both planets are. Then walk the six steps and point out that our rocket does every single one of them — the only difference is the size of the dish. If the T-Beam and Heltec are working by now, transmit one live packet across the room and show the CSV line appear on the laptop. That demo is worth the whole night.",
             },
             {
                 type: "bullets",
@@ -557,6 +562,15 @@ export const decks = {
                     channel: "C-SPAN",
                     videoTitle: "\"Let's light this candle.\" — NASA SpaceX Crew Dragon Launch",
                 },
+            },
+            {
+                type: "orbitsim",
+                sim: "moon",
+                heading: "Flying Apollo's trajectory yourself",
+                intro:
+                    "You are in a 300 km orbit. One burn stretches that circle out to the Moon — but the Moon is moving at a kilometre a second, so you have to aim at where it will be in three days, not where it is now.",
+                notes:
+                    "Start with the lead angle deliberately wrong — set it to 10° and burn. The path reaches the Moon's distance and sails through empty space, because the Moon has not arrived yet. Then walk the lead angle up until you get an encounter. This is the single best five minutes you can spend on why Apollo launches had a narrow window: miss the window and the Moon simply is not there. Ask: 'what happens if the engine fails halfway?' — that is Apollo 13, and the answer is the free-return trajectory.",
             },
             {
                 type: "video",
@@ -1218,6 +1232,8 @@ export const gate = {
 export const orders = {
     intro:
         "Three separate orders with three separate owners. Prices checked against estesrockets.com and vendor listings in August 2026 — re-check at checkout, they move.",
+    linkNote:
+        "Every row has a buy link. Amazon first because most families already have an account and Prime shipping is the difference between a kit arriving before build night and not. Where a specific listing was verified, the link goes straight to it; otherwise it is an Amazon search that will always resolve even after a listing changes. The manufacturer link next to it is the authority on specs and the fallback when Amazon is out of stock — Estes ships direct and their education store sometimes has bulk pricing Amazon does not. Nothing here is an affiliate link.",
     groups: [
         {
             id: "scout",
@@ -1227,10 +1243,10 @@ export const orders = {
             intro:
                 "One airframe for everybody. Same kit, same motor class, so the competition measures thinking instead of budget. The Cosmic Cargo is the pick because it is beginner-level, needs no glue, and — the part that matters — has a real payload bay, which makes requirement 3(g) something the Scout can point at instead of imagine.",
             rows: [
-                { item: "Estes Cosmic Cargo rocket kit", detail: "Skill level: beginner. 16.7 in long, 0.98 in dia, 1.27 oz. 12 in parachute. No glue needed. Payload bay.", qty: "1", price: "$16.99" },
-                { item: "Estes B6-4 engine 3-pack", detail: "The safe first flight. Lower and slower — easier to track, easier to recover.", qty: "1", price: "~$12" },
-                { item: "Estes C6-5 engine 3-pack", detail: "The competition flight. Recommended engines for this kit are A8-3, A8-5, B4-4, B6-6, C6-5, C6-7.", qty: "1", price: "~$12" },
-                { item: "Recovery wadding", detail: "Or share the troop's. Do not fly without it — the ejection charge will melt a chute.", qty: "1 pack", price: "~$6" },
+                { item: "Estes Cosmic Cargo rocket kit", detail: "Skill level: beginner. 16.7 in long, 0.98 in dia, 1.27 oz. 12 in parachute. No glue needed. Payload bay.", qty: "1", price: "$16.99", buy: "https://www.amazon.com/s?k=Estes+Cosmic+Cargo+rocket+kit", mfr: "https://estesrockets.com/products/cosmic-cargo" },
+                { item: "Estes B6-4 engine 3-pack", detail: "The safe first flight. Lower and slower — easier to track, easier to recover.", qty: "1", price: "~$12", buy: "https://www.amazon.com/s?k=Estes+B6-4+engines+3+pack", mfr: "https://estesrockets.com/products/b6-4-engines" },
+                { item: "Estes C6-5 engine 3-pack", detail: "The competition flight. Recommended engines for this kit are A8-3, A8-5, B4-4, B6-6, C6-5, C6-7.", qty: "1", price: "~$12", buy: "https://www.amazon.com/s?k=Estes+C6-5+engines+3+pack", mfr: "https://estesrockets.com/products/c6-5-engines" },
+                { item: "Recovery wadding", detail: "Or share the troop's. Do not fly without it — the ejection charge will melt a chute.", qty: "1 pack", price: "~$6", buy: "https://www.amazon.com/s?k=Estes+recovery+wadding", mfr: "https://estesrockets.com/products/recovery-wadding" },
             ],
             total: "≈ $35–$47 per Scout",
             notes: [
@@ -1247,16 +1263,17 @@ export const orders = {
             intro:
                 "This is the order with the schedule risk. The pad and the altimeter need to be physically on the table at Meeting 1, and the altimeter is what scores the competition — it is the reason the whole thing is an engineering contest.",
             rows: [
-                { item: "Estes Porta-Pad II + Electron Beam controller", detail: "1/8 in rod, blast deflector, 17 ft cable, safety key, adjustable to 30° from vertical. Handles every Scout rocket in this series.", qty: "1", price: "~$40" },
-                { item: "Estes Altimeter", detail: "0–9,999 ft, 4-digit LCD, stores 10 flights. Fits a payload section. This is the scoring instrument.", qty: "1", price: "$43.99" },
-                { item: "Second Estes Altimeter", detail: "Optional but recommended at 10 Scouts — halves the swap time on the field and gives you a spare if one walks off.", qty: "0–1", price: "$43.99" },
-                { item: "Two spare Cosmic Cargo kits, pre-built", detail: "One as the reference rocket for the Meeting 2 parts relay, one for the Scout whose kit never arrived by build night. You will need it.", qty: "2", price: "~$34" },
-                { item: "Spare B6-4 and C6-5 engines", detail: "Somebody will forget. Somebody else will misfire. Budget four spare flights.", qty: "2 packs", price: "~$24" },
-                { item: "Recovery wadding, bulk", detail: "Cheap, and running out mid-launch-day ends the launch day.", qty: "2 packs", price: "~$12" },
+                { item: "Estes Porta-Pad II + Electron Beam controller", detail: "1/8 in rod, blast deflector, 17 ft cable, safety key, adjustable to 30° from vertical. Handles every Scout rocket in this series.", qty: "1", price: "~$40", buy: "https://www.amazon.com/s?k=Estes+Porta+Pad+II+Electron+Beam+launch+controller", mfr: "https://estesrockets.com/products/porta-pad-ii-launch-pad-and-controller" },
+                { item: "Estes Altimeter", detail: "0–9,999 ft, 4-digit LCD, stores 10 flights. Fits a payload section. This is the scoring instrument.", qty: "1", price: "$43.99", buy: "https://www.amazon.com/s?k=Estes+Altimeter+2246", mfr: "https://estesrockets.com/products/altimeter" },
+                { item: "Second Estes Altimeter", detail: "Strongly recommended now that Max Altitude is a scored award — halves the swap time between flights and is your spare when the first one walks off in a pocket.", qty: "1", price: "$43.99", buy: "https://www.amazon.com/s?k=Estes+Altimeter+2246", mfr: "https://estesrockets.com/products/altimeter" },
+                { item: "Two spare Cosmic Cargo kits, pre-built", detail: "One as the reference rocket for the Meeting 2 parts relay, one for the Scout whose kit never arrived by build night. You will need it.", qty: "2", price: "~$34", buy: "https://www.amazon.com/s?k=Estes+Cosmic+Cargo+rocket+kit", mfr: "https://estesrockets.com/products/cosmic-cargo" },
+                { item: "Spare B6-4 and C6-5 engines", detail: "Somebody will forget. Somebody else will misfire. Budget four spare flights.", qty: "2 packs", price: "~$24", buy: "https://www.amazon.com/s?k=Estes+model+rocket+engines+B6-4+C6-5", mfr: "https://estesrockets.com/collections/engines" },
+                { item: "Recovery wadding, bulk", detail: "Cheap, and running out mid-launch-day ends the launch day.", qty: "2 packs", price: "~$12", buy: "https://www.amazon.com/s?k=Estes+recovery+wadding+bulk", mfr: "https://estesrockets.com/products/recovery-wadding" },
                 { item: "Nine-part label set, laminated", detail: "Print the requirement 3 part names on cardstock and laminate. Reusable every year — this is the drill that makes 3(a–i) stick.", qty: "2 sets", price: "~$10" },
+                { item: "Two stopwatches", detail: "Required for the Time Aloft award. Two adults time independently and the results get averaged — one timer turns every close call into an argument. Phones work.", qty: "2", price: "~$16 or free" , buy: "https://www.amazon.com/s?k=digital+stopwatch+sports+timer" },
                 { item: "Range gear", detail: "Fire extinguisher or water bucket, first aid kit, orange cones, a bullhorn or a loud voice, and a folding table.", qty: "—", price: "on hand" },
             ],
-            total: "≈ $165–$210",
+            total: "≈ $210–$255",
             notes: [
                 "Verify the Estes altimeter actually fits the Cosmic Cargo's 0.98 in payload bay the day it arrives, and definitely before build night. If it doesn't, you fly the altimeter in your own reference rocket and score by matched flights instead. Check this the day it arrives, not the week of the launch.",
                 "The Porta-Pad II uses a 1/8 in rod. It will NOT fly the telemetry rocket — see the next order.",
@@ -1270,16 +1287,16 @@ export const orders = {
             intro:
                 "This is the Lil' Spite build from the capstone page, scoped for a crew instead of one Scout. Be blunt about what the airframe is: 4 ft 4 in, rated intermediate, boxed for ages 18+, about two hours of assembly. Scouts build the payload, write the firmware, and run the ground station; an adult does the motor prep and presses the button. Quantities below assume a group — the single biggest change from the original one-Scout bill of materials is a second T-Beam so there is a bench unit that never flies and a flight unit that never gets experimented on.",
             rows: [
-                { item: "Estes Pro Series II Lil' Spite", detail: "51.8 in long, 2.0 in dia, 10.3 oz (292 g) dry. Plywood fins, 29 mm mount, 18 in ripstop chute. ~1,200 ft on black powder.", qty: "1", price: "$59.99" },
-                { item: "Estes Pro Series II launch pad or rail", detail: "REQUIRED — this rocket needs a 1/4 in rod or the PSII rail. The Porta-Pad II above is 1/8 in and will not fly it. Easy thing to forget until launch morning.", qty: "1", price: "~$45–60" },
-                { item: "Estes E16-6 engines, 2-pack", detail: "33.68 N-s, 6 s delay. Estes's own recommendation for this kit unloaded. Includes 2 starters and 4 plugs.", qty: "1", price: "$31.99" },
-                { item: "Estes E16-4 engines, 2-pack", detail: "Same impulse, 4 s delay. This is the one to fly WITH the telemetry payload aboard — more mass means lower apogee means shorter coast to apogee.", qty: "1", price: "~$32" },
-                { item: "Estes F15-6 engines, 2-pack", detail: "Optional comparison flight. Needs a 1,000 ft minimum site dimension under the NAR safety code — Camp SLO, not a school field.", qty: "0–1", price: "~$32" },
-                { item: "Estes Pro Series II 29 mm motor retainer", detail: "Screw-on retention so motors swap fast between flights.", qty: "1", price: "~$10" },
-                { item: "LILYGO T-Beam Supreme (US915) ×2", detail: "ESP32-S3 + LoRa SX1262 + GPS + onboard sensors. BUY TWO: one bench unit the crew experiments on and takes home, one flight unit nobody touches. Street price swings $40–$52 and it goes out of stock — buy early.", qty: "2", price: "~$80–105" },
-                { item: "Heltec WiFi LoRa 32 V3 (US915) ×2", detail: "USB ground receivers — two so the ground-station pair can both develop. Note V4 now exists; buy V3 specifically or your pin mapping and half the example code won't match.", qty: "2", price: "~$50–70" },
-                { item: "USB-C data cables", detail: "Not charge-only cables. This wastes an hour of crew session 1 every single time. Buy three known-good ones.", qty: "3", price: "~$18" },
-                { item: "Payload mounting + batteries", detail: "18650 cells and holders, foam, zip ties, and a 3D-printed or cardboard sled. Mass and CG shift matters — re-run the simulator with the real payload mass before picking a delay.", qty: "—", price: "~$35" },
+                { item: "Estes Pro Series II Lil' Spite", detail: "51.8 in long, 2.0 in dia, 10.3 oz (292 g) dry. Plywood fins, 29 mm mount, 18 in ripstop chute. ~1,200 ft on black powder.", qty: "1", price: "$59.99", buy: "https://www.amazon.com/Estes-9737-Designed-Intermediate-Flying-Rocket-Model/dp/B0G1Z9GVGX", mfr: "https://estesrockets.com/products/lil-spite" },
+                { item: "Estes Pro Series II launch pad or rail", detail: "REQUIRED — this rocket needs a 1/4 in rod or the PSII rail. The Porta-Pad II above is 1/8 in and will not fly it. Easy thing to forget until launch morning.", qty: "1", price: "~$45–60", buy: "https://www.amazon.com/s?k=Estes+Pro+Series+II+launch+pad+rail", mfr: "https://estesrockets.com/collections/launch-supplies" },
+                { item: "Estes E16-6 engines, 2-pack", detail: "33.68 N-s, 6 s delay. Estes's own recommendation for this kit unloaded. Includes 2 starters and 4 plugs.", qty: "1", price: "$31.99", buy: "https://www.amazon.com/EST1697-E16-6-PS-II-ENGINE-Estes/dp/B00G4DSFHW", mfr: "https://estesrockets.com/products/e16-6-engines" },
+                { item: "Estes E16-4 engines, 2-pack", detail: "Same impulse, 4 s delay. This is the one to fly WITH the telemetry payload aboard — more mass means lower apogee means shorter coast to apogee.", qty: "1", price: "~$32", buy: "https://www.amazon.com/s?k=Estes+E16-4+29mm+engine", mfr: "https://estesrockets.com/products/e16-4-engines" },
+                { item: "Estes F15-6 engines, 2-pack", detail: "Optional comparison flight. Needs a 1,000 ft minimum site dimension under the NAR safety code — Camp SLO, not a school field.", qty: "0–1", price: "~$32", buy: "https://www.amazon.com/EST1652-F15-6-29mm-PS-II-ENGINE/dp/B00G4DSDEC", mfr: "https://estesrockets.com/collections/engines" },
+                { item: "Estes Pro Series II 29 mm motor retainer", detail: "Screw-on retention so motors swap fast between flights.", qty: "1", price: "~$10", buy: "https://www.amazon.com/s?k=Estes+Pro+Series+II+29mm+motor+retainer", mfr: "https://estesrockets.com/collections/launch-supplies" },
+                { item: "LILYGO T-Beam Supreme (US915) ×2", detail: "ESP32-S3 + LoRa SX1262 + GPS + onboard sensors. BUY TWO: one bench unit the crew experiments on and takes home, one flight unit nobody touches. Street price swings $40–$52 and it goes out of stock — buy early.", qty: "2", price: "~$80–105", buy: "https://www.amazon.com/LILYGO-T-BeamSUPREME-Development-L76K-915Mhz/dp/B0CXJ71NB6", mfr: "https://lilygo.cc/en-us/products/t-beam-supreme-meshtastic-us0" },
+                { item: "Heltec WiFi LoRa 32 V3 (US915) ×2", detail: "USB ground receivers — two so the ground-station pair can both develop. Note V4 now exists; buy V3 specifically or your pin mapping and half the example code won't match.", qty: "2", price: "~$50–70", buy: "https://www.amazon.com/Heltec-LoRa-32-V3-Meshtastic/dp/B0D1H1FN9Y", mfr: "https://store.rokland.com/products/heltec-wifi-lora-32v3" },
+                { item: "USB-C data cables", detail: "Not charge-only cables. This wastes an hour of crew session 1 every single time. Buy three known-good ones.", qty: "3", price: "~$18", buy: "https://www.amazon.com/s?k=USB-C+data+cable+3+pack" },
+                { item: "Payload mounting + batteries", detail: "18650 cells and holders, foam, zip ties, and a 3D-printed or cardboard sled. Mass and CG shift matters — re-run the simulator with the real payload mass before picking a delay.", qty: "—", price: "~$35", buy: "https://www.amazon.com/s?k=18650+battery+holder+foam+zip+ties" },
             ],
             total: "≈ $360–$465 for the group build",
             notes: [
@@ -1310,12 +1327,18 @@ export const competition = {
         "Nothing is scored on the field. Numbers get recorded November 21, compiled at home, and announced at the November 23 debrief — where the whole troop sees every prediction and every result on one whiteboard.",
     ],
     scoring: [
-        { place: "Prediction Cup", basis: "Lowest percent error between sealed prediction and altimeter reading on flight 2.", weight: "Primary award" },
-        { place: "Mission Accomplished", basis: "Declared a specific objective at the gate, flew it, and can state the result with a number and a unit.", weight: "Second award" },
-        { place: "Recovery Award", basis: "Both flights recovered, rocket still flight-worthy at the end of the day. Rewards the boring virtues.", weight: "Third award" },
-        { place: "Craftsmanship", basis: "Judged before the first launch by a non-parent: fin alignment, finish, and originality of paint scheme.", weight: "Judged pre-flight" },
-        { place: "The Anomaly Award", basis: "Best written explanation of why a flight went wrong. Deliberately the most fun award to win.", weight: "Honorary" },
+        { place: "Prediction Cup", basis: "Lowest percent error between the sealed prediction and the altimeter reading on flight 2.", weight: "Primary award", measured: "Altimeter + sealed card" },
+        { place: "Max Altitude", basis: "Highest measured apogee. Everyone flies the same airframe and the same motor class, so this is a build-quality contest — straight fins, light paint, clean finish — not a spending contest.", weight: "Measured", measured: "Estes altimeter" },
+        { place: "Time Aloft", basis: "Longest time from liftoff to touchdown. Rewards getting ejection right at apogee and picking the right recovery device. Timed by two adults with stopwatches; the two times get averaged.", weight: "Measured", measured: "Two stopwatches, averaged" },
+        { place: "Mission Accomplished", basis: "Declared a specific objective at the gate, flew it, and can state the result with a number and a unit.", weight: "Judged", measured: "Competition card" },
+        { place: "Recovery Award", basis: "Both flights recovered, rocket still flight-worthy at the end of the day. Rewards the boring virtues that actually win engineering programs.", weight: "Judged", measured: "Post-flight inspection" },
+        { place: "Craftsmanship", basis: "Judged before the first launch by a non-parent: fin alignment, finish, and originality of paint scheme.", weight: "Judged pre-flight", measured: "Non-parent judge" },
+        { place: "The Anomaly Award", basis: "Best written explanation of why a flight went wrong. Deliberately the most fun award to win.", weight: "Honorary", measured: "Written on the field" },
     ],
+    tension:
+        "Max Altitude and Time Aloft pull in opposite directions, and that is the point. Altitude wants a light rocket and a streamer that drops fast; Time Aloft wants a big parachute that then drifts halfway across the field and threatens the Recovery Award. No single build wins all three, so every Scout has to decide what they are optimising for and defend it. That trade is the most grown-up engineering conversation available on a Saturday morning, and the recovery simulator in Deck 2 lets them explore it three weeks before they have to commit.",
+    gearNote:
+        "The measured awards need equipment: the Estes altimeter for the Prediction Cup and Max Altitude, and two stopwatches for Time Aloft. Two adults time independently and the results get averaged — one stopwatch and one timer means every close call becomes an argument. Phones work as stopwatches. A second altimeter is worth the $44 at ten Scouts: it halves the swap time between flights and it is your spare when the first one walks off in someone's pocket.",
     penalties: [
         "Unsafe pad procedure — approaching a rocket that didn't launch before the 60-second wait — is an automatic scratch for that flight. No exceptions, no arguing, and say so at Meeting 2 so nobody is surprised.",
         "Changing your prediction after launch day starts is a scratch from the Prediction Cup. You keep every other award.",
@@ -1499,6 +1522,7 @@ export const launchDay = {
         "Certificate of insurance, if the site required one — printed, in hand",
         "Launch pad, controller, fresh batteries, spare launch rod",
         "Altimeter(s), fresh battery, and the manual",
+        "Two stopwatches (or two phones) for the Time Aloft award, and a second adult to run one",
         "Spare motors, starters, and wadding — more than you think",
         "First aid kit, fire extinguisher or a full water bucket, and a shovel",
         "Cones or flags for the safety distance perimeter",
@@ -1561,3 +1585,151 @@ export const corrections = [
 export function getMeetingByDate(date) {
     return meetings.find((m) => m.date === date);
 }
+
+// ---------------------------------------------------------------------------
+// Calendar — every date in one place
+// ---------------------------------------------------------------------------
+
+export const calendarEvents = [
+    { date: "2026-08-31", label: "Mon Aug 31", kind: "meeting", title: "Meeting 1 — Why We Go", note: "Claim your space pioneer. Pick up the order form and the safety code." },
+    { date: "2026-09-19", label: "Sat Sep 19", kind: "crew", title: "Telemetry crew session 1", note: "Bench day. Optional — only if you're on the rocket's electronics crew." },
+    { date: "2026-09-28", label: "Mon Sep 28", kind: "meeting", title: "Meeting 2 — How Rockets Work", note: "Pioneer card due tonight. Rocket parts relay and the flight simulators." },
+    { date: "2026-10-02", label: "Fri Oct 2", kind: "deadline", title: "Kit order deadline", note: "Gate closes. If you haven't ordered by tonight you're watching on Nov 21." },
+    { date: "2026-10-17", label: "Sat Oct 17", kind: "crew", title: "Telemetry crew session 2", note: "Getting a packet across the room, then a quarter-mile range test." },
+    { date: "2026-10-26", label: "Mon Oct 26", kind: "meeting", title: "Meeting 3 — Missions", note: "Robotic vs crewed, and flying Apollo's trajectory yourself." },
+    { date: "2026-11-02", label: "Mon Nov 2", kind: "meeting", title: "Meeting 4 — BUILD NIGHT", note: "Bring your unopened kit and your motors. Do not build it at home first." },
+    { date: "2026-11-09", label: "Mon Nov 9", kind: "meeting", title: "Meeting 5 — Guest speaker + base design", note: "Bring a question for the speaker." },
+    { date: "2026-11-14", label: "Sat Nov 14", kind: "crew", title: "Telemetry crew session 3", note: "Payload integration and the full dress rehearsal." },
+    { date: "2026-11-16", label: "Mon Nov 16", kind: "meeting", title: "Meeting 6 — Flight Readiness Review", note: "Bring your finished rocket, your motors, and your permission slip." },
+    { date: "2026-11-21", label: "Sat Nov 21", kind: "launch", title: "LAUNCH DAY", note: "Range opens 8:30. Rocket, motors, closed-toe shoes, hat, water, chair." },
+    { date: "2026-11-23", label: "Mon Nov 23", kind: "meeting", title: "Meeting 7 — Debrief and awards", note: "Bring your requirement 8 career research. Badges get signed tonight." },
+    { date: "2026-11-26", label: "Thu Nov 26", kind: "holiday", title: "Thanksgiving", note: "No meeting." },
+    { date: "2026-11-28", label: "Sat Nov 28", kind: "backup", title: "Backup launch date", note: "Only if Nov 21 is scrubbed for weather." },
+    { date: "2026-12-05", label: "Sat Dec 5", kind: "backup", title: "Second backup launch date", note: "Last resort." },
+];
+
+// ---------------------------------------------------------------------------
+// The Scout-facing view
+// ---------------------------------------------------------------------------
+
+export const scoutGuide = {
+    intro:
+        "Everything you personally have to do, in the order you have to do it. The counselor's side of this page has the run-of-shows and the gear lists — you don't need any of that. You need this.",
+    theDeal:
+        "Eight requirements. You'll finish six of them sitting in a meeting on Monday nights. Two of them — building and flying a rocket, and researching a career — you do on your own time. Show up, turn in two pieces of paper on time, and build a rocket that flies twice. That's the badge.",
+
+    buyList: {
+        heading: "What you have to buy",
+        total: "About $35–$47, once.",
+        deadline: "Ordered by Friday, October 2 — earlier is better.",
+        why:
+            "Everybody flies the same rocket on purpose. The competition is scored on how well you predict your own flight, not on who spent the most, so an identical airframe makes it a fair fight. Buy the kit and both motor packs in ONE order — split shipments are how people end up with a rocket and no motors.",
+        items: [
+            { item: "Estes Cosmic Cargo kit", price: "$16.99", note: "Beginner level, no glue needed for the main structure, and it has a real payload bay.", buy: "https://www.amazon.com/s?k=Estes+Cosmic+Cargo+rocket+kit", mfr: "https://estesrockets.com/products/cosmic-cargo" },
+            { item: "Estes B6-4 engines, 3-pack", price: "~$12", note: "Your first flight. Lower and slower, so it's easier to track and easier to get back.", buy: "https://www.amazon.com/s?k=Estes+B6-4+engines+3+pack", mfr: "https://estesrockets.com/products/b6-4-engines" },
+            { item: "Estes C6-5 engines, 3-pack", price: "~$12", note: "Your scored competition flight.", buy: "https://www.amazon.com/s?k=Estes+C6-5+engines+3+pack", mfr: "https://estesrockets.com/products/c6-5-engines" },
+            { item: "Recovery wadding", price: "~$6", note: "Protects the parachute from the ejection charge. Never fly without it. You can share the troop's if money is tight.", buy: "https://www.amazon.com/s?k=Estes+recovery+wadding", mfr: "https://estesrockets.com/products/recovery-wadding" },
+        ],
+        alsoNeed:
+            "From around the house: sandpaper, masking tape, and spray paint if you want to decorate it. White glue helps but isn't required for this kit. If cost is a problem, talk to the counselor privately — this gets solved quietly and it is not a big deal.",
+    },
+
+    study: {
+        heading: "What to study",
+        intro:
+            "You do not have to watch any of this. But if you show up to a night having watched the video for it, that night is more fun and you'll finish the requirement faster. Everything here is short.",
+        blocks: [
+            {
+                req: "Req 1",
+                title: "Why we go to space",
+                forMeeting: "Meeting 1 · Aug 31",
+                doNow: "Nothing to prepare. Just show up.",
+                videos: [
+                    { t: "The History of Space Exploration", ch: "SpaceXVideos", id: "TL__l9gC1Ss" },
+                    { t: "How does space exploration benefit Earth?", ch: "The Galactic Gal", id: "i3D4pCq_lyg" },
+                    { t: "International Cooperation in Space", ch: "Space Tech Insider", id: "TS27Br2-XgY" },
+                ],
+            },
+            {
+                req: "Req 2",
+                title: "Your space pioneer card",
+                forMeeting: "Due Meeting 2 · Sep 28",
+                doNow: "Claim a pioneer at Meeting 1, then make the card. Front: a picture. Back: who they were, what they actually did, why it mattered, and one thing that surprised you. Hand-drawn scores exactly the same as printed.",
+                videos: [
+                    { t: "Here's How I Make Custom Trading Cards!", ch: "Wax Museum Podcast", id: "PkCCLH_f1us" },
+                    { t: "How to Make Trading Cards By Hand", ch: "ChaosGalaxyTCG", id: "vYbeo4iS1Pc" },
+                ],
+            },
+            {
+                req: "Reqs 3 + 4",
+                title: "How rockets work",
+                forMeeting: "Meeting 2 · Sep 28",
+                doNow: "Read the NAR safety code before this meeting — you have to pass a quiz on it to order your kit. Play with the launch and recovery simulators on this page; they are the same physics you'll be predicting on launch day.",
+                videos: [
+                    { t: "Rocket Engines Explained", ch: "Martian Wolf", id: "gz8L1i0ODeA" },
+                    { t: "How Do Satellites Get & Stay in Orbit?", ch: "SciShow Space", id: "IC1JQu9xGHQ" },
+                ],
+            },
+            {
+                req: "Reqs 5 + 6",
+                title: "Missions and spacecraft",
+                forMeeting: "Meeting 3 · Oct 26",
+                doNow: "Pick one robotic mission and one crewed mission you actually find interesting. You'll be asked what each one discovered and why it mattered — so pick ones you want to talk about.",
+                videos: [
+                    { t: "Voyagers' Mission to the Outer Solar System", ch: "NASA JPL", id: "uJpJ79AxrzI" },
+                    { t: "Putting Man on The Moon in 11 Years", ch: "S3 | Science, Startups & Stories", id: "jUW_1XlrWmg" },
+                    { t: "How does a Mars Rover work? (Perseverance)", ch: "Jared Owen", id: "0-oQRSViZQE" },
+                    { t: "How The Space Shuttle Worked", ch: "Real Engineering", id: "w4FCkbPykdQ" },
+                ],
+            },
+            {
+                req: "Req 7",
+                title: "Design a base somewhere else",
+                forMeeting: "Meeting 5 · Nov 9",
+                doNow: "Think about where you'd want to live: the Moon, Mars, Titan, Europa, an asteroid, or floating in the clouds of Venus. You'll design it with your patrol.",
+                videos: [
+                    { t: "How NASA Will Build A City On The Moon", ch: "The Space Race", id: "ATgwz_hS3Qg" },
+                    { t: "How NASA Plans To Build The First Moon Base!", ch: "The Space Race", id: "ajP0AlYxhug" },
+                ],
+            },
+            {
+                req: "Req 8",
+                title: "A career in space",
+                forMeeting: "Due Meeting 7 · Nov 23",
+                doNow: "Pick one job — not 'astronaut' unless you mean it. Find out: what training and education it needs, what that costs, whether anyone is hiring, what it pays, what you'd actually do all day, and where it leads. Half a page is plenty. The guest speaker on Nov 9 is a free source for all of this — ask them.",
+                videos: [],
+            },
+        ],
+    },
+
+    gate: {
+        heading: "Before you can order a rocket",
+        intro: "Four things. All of them are badge requirements anyway, so none of it is busy work.",
+        items: [
+            "Show up to Meeting 1 on August 31 (or catch up with the counselor on requirement 1).",
+            "Turn in your space pioneer card.",
+            "Pass the NAR Model Rocket Safety Code quiz — 8 out of 10, open book, retake it as many times as you want.",
+            "Bring back the order form with a parent signature, and write down your mission objective for launch #2.",
+        ],
+        objective:
+            "Your 'mission objective' is what you're trying to find out on your second flight. It has to produce a NUMBER. Good ones: how much altitude do I lose per gram of nose weight; how much farther does a streamer drift than a chute; how different are two supposedly identical flights. Bad one: 'launch it again.'",
+    },
+
+    launchDay: {
+        heading: "Launch day — Saturday, November 21",
+        bring: [
+            "Your rocket, finished and painted",
+            "Your motors (both packs) and your wadding",
+            "Closed-toe shoes — no sandals, this is a field with a hot pad on it",
+            "Hat, sunscreen, water bottle",
+            "A folding chair, and a parent if you'd like one",
+            "Your competition card with your sealed prediction on it",
+        ],
+        timing: "Range opens 8:30 a.m. Craftsmanship gets judged before anything flies, so arrive finished. Done by about 1:15.",
+        rules: [
+            "Never approach a rocket that didn't launch. Wait 60 seconds. The counselor is the only person who goes to the pad.",
+            "Stay behind the cones when the range is hot.",
+            "If your rocket lands somewhere awkward — a tree, a road, the other side of a fence — you tell an adult. You do not go get it.",
+        ],
+    },
+};

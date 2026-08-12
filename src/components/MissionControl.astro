@@ -1,0 +1,256 @@
+---
+// The telemetry chain, drawn as the same five steps NASA uses to get a picture
+// back from Mars. Supports Space Exploration requirement 4(d) and doubles as
+// the architecture diagram for the Telemetry Rocket capstone.
+const links = [
+  { key: "sensor", n: "1", title: "Sense", ours: "GPS + barometer + IMU on the T-Beam", theirs: "Camera and instruments on the spacecraft" },
+  { key: "encode", n: "2", title: "Turn into numbers", ours: "Altitude, lat/lon, speed → one comma-separated line", theirs: "Photons per pixel → brightness values" },
+  { key: "packet", n: "3", title: "Packetise", ours: "Add a timestamp and a checksum so we can spot corruption", theirs: "Compress, then add error-correcting code" },
+  { key: "radio", n: "4", title: "Transmit", ours: "LoRa at 915 MHz, about 1 km line-of-sight", theirs: "X-band to an orbiter, relayed to the Deep Space Network" },
+  { key: "ground", n: "5", title: "Receive + log", ours: "Heltec board over USB writes a CSV on the laptop", theirs: "70 m dishes at Goldstone, Madrid, Canberra" },
+  { key: "analyse", n: "6", title: "Make it mean something", ours: "Plot altitude vs time, compare predicted to measured", theirs: "Numbers become an image, then a discovery" },
+];
+---
+
+<div class="mctl" data-mctl>
+  <svg viewBox="0 0 960 340" class="mctl-svg" role="img" aria-label="Diagram of the telemetry chain from rocket sensors to a laptop log">
+    <title>Mission control — the telemetry chain</title>
+
+    <!-- rocket -->
+    <g class="mx-node" data-node="sensor">
+      <rect x="20" y="120" width="130" height="100" rx="12" class="mx-box" />
+      <path d="M85 138 l 11 26 h -22 z" class="mx-glyph-fill" />
+      <rect x="78" y="164" width="14" height="30" rx="3" class="mx-glyph-fill" />
+      <path d="M78 194 l -8 12 h 8 z M92 194 l 8 12 h -8 z" class="mx-glyph-fill" />
+      <text x="85" y="240" class="mx-cap">Rocket</text>
+    </g>
+
+    <!-- flight computer -->
+    <g class="mx-node" data-node="encode">
+      <rect x="210" y="120" width="150" height="100" rx="12" class="mx-box" />
+      <rect x="248" y="146" width="74" height="48" rx="5" class="mx-chip" />
+      <path d="M248 158 h -12 M248 172 h -12 M248 186 h -12 M322 158 h 12 M322 172 h 12 M322 186 h 12" class="mx-pins" />
+      <text x="285" y="240" class="mx-cap">T-Beam</text>
+    </g>
+
+    <!-- radio link -->
+    <g class="mx-node" data-node="radio">
+      <path d="M420 170 h 130" class="mx-link" />
+      <path d="M452 148 q 14 22 0 44 M470 138 q 22 32 0 64 M488 128 q 30 42 0 84" class="mx-wave" />
+      <text x="485" y="240" class="mx-cap">LoRa 915 MHz</text>
+      <text x="485" y="112" class="mx-note">~1 km line of sight</text>
+    </g>
+
+    <!-- ground station -->
+    <g class="mx-node" data-node="ground">
+      <rect x="600" y="120" width="150" height="100" rx="12" class="mx-box" />
+      <path d="M645 196 l 18 -44 a 26 26 0 0 1 26 22 z" class="mx-dish" />
+      <path d="M663 196 h 34" class="mx-pins" />
+      <text x="675" y="240" class="mx-cap">Heltec</text>
+    </g>
+
+    <!-- laptop -->
+    <g class="mx-node" data-node="analyse">
+      <rect x="810" y="120" width="130" height="100" rx="12" class="mx-box" />
+      <rect x="842" y="146" width="66" height="42" rx="4" class="mx-chip" />
+      <path d="M834 194 h 82" class="mx-pins" />
+      <path d="M852 158 h 46 M852 168 h 34 M852 178 h 42" class="mx-csv" />
+      <text x="875" y="240" class="mx-cap">Laptop / CSV</text>
+    </g>
+
+    <!-- flow arrows -->
+    <g class="mx-flow">
+      <path d="M156 170 h 46" class="mx-arrow" marker-end="url(#mx-head)" />
+      <path d="M366 170 h 46" class="mx-arrow" marker-end="url(#mx-head)" />
+      <path d="M556 170 h 38" class="mx-arrow" marker-end="url(#mx-head)" />
+      <path d="M756 170 h 48" class="mx-arrow" marker-end="url(#mx-head)" />
+    </g>
+
+    <defs>
+      <marker id="mx-head" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+        <path d="M0 0 L10 5 L0 10 z" class="mx-arrow-head" />
+      </marker>
+    </defs>
+
+    <!-- packet callout -->
+    <g class="mx-node" data-node="packet">
+      <rect x="238" y="270" width="484" height="46" rx="8" class="mx-packet" />
+      <text x="256" y="299" class="mx-mono">1247,34.276,-120.663,412.8,18.4,OK</text>
+      <text x="640" y="299" class="mx-note-sm">one line, one moment in flight</text>
+    </g>
+  </svg>
+
+  <ol class="mctl-steps">
+    {links.map((l) => (
+      <li>
+        <button type="button" class="mctl-chip" data-chip-for={l.key}>
+          <span class="mctl-n">{l.n}</span>{l.title}
+        </button>
+      </li>
+    ))}
+  </ol>
+
+  <div class="mctl-readout" data-mctl-readout>
+    <p class="mctl-empty">Six steps get a number from a rocket to a laptop &mdash; and the same six get a photograph from Mars. Tap one.</p>
+    {links.map((l) => (
+      <div class="mctl-item" data-readout-for={l.key} hidden>
+        <h5><span class="mctl-n">{l.n}</span> {l.title}</h5>
+        <dl>
+          <div><dt>Our rocket</dt><dd>{l.ours}</dd></div>
+          <div><dt>A planetary mission</dt><dd>{l.theirs}</dd></div>
+        </dl>
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .mctl {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    padding: 1rem 1.15rem 1.1rem;
+  }
+
+  .mctl-svg { width: 100%; height: auto; display: block; overflow: hidden; }
+
+  .mx-box { fill: var(--bg-alt); stroke: var(--line); stroke-width: 2; }
+  .mx-glyph-fill { fill: var(--accent); }
+  .mx-chip { fill: none; stroke: var(--text); stroke-width: 2; opacity: 0.8; }
+  .mx-pins { stroke: var(--muted); stroke-width: 2; fill: none; stroke-linecap: round; }
+  .mx-dish { fill: var(--accent); opacity: 0.85; }
+  .mx-csv { stroke: var(--accent); stroke-width: 2; fill: none; stroke-linecap: round; }
+  .mx-link { stroke: var(--line); stroke-width: 2; stroke-dasharray: 5 5; }
+  .mx-wave { fill: none; stroke: var(--accent); stroke-width: 2; opacity: 0.85; }
+  .mx-arrow { stroke: var(--muted); stroke-width: 2; fill: none; }
+  .mx-arrow-head { fill: var(--muted); }
+  .mx-packet { fill: var(--accent-soft); stroke: var(--line); stroke-width: 1.5; }
+
+  .mx-cap {
+    fill: var(--text);
+    font-family: "Space Grotesk", system-ui, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    text-anchor: middle;
+  }
+
+  .mx-note, .mx-note-sm {
+    fill: var(--muted);
+    font-family: "Space Grotesk", system-ui, sans-serif;
+    font-size: 13px;
+    text-anchor: middle;
+  }
+
+  .mx-note-sm { font-size: 12px; text-anchor: start; }
+
+  .mx-mono {
+    fill: var(--accent-strong);
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .mx-node { cursor: pointer; }
+  .mx-node.is-active .mx-box { stroke: var(--accent); stroke-width: 3.2; }
+  .mx-node.is-active .mx-cap { fill: var(--accent-strong); }
+  .mx-node.is-active .mx-packet { stroke: var(--accent); stroke-width: 3; }
+  .mx-node.is-active .mx-wave { stroke-width: 3.2; opacity: 1; }
+
+  .mctl-steps {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0.9rem 0 0.8rem;
+    padding: 0;
+  }
+
+  .mctl-chip {
+    font: inherit;
+    font-size: 0.8rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+  }
+
+  .mctl-chip:hover,
+  .mctl-chip.is-on { border-color: var(--accent); color: var(--accent-strong); background: var(--accent-soft); }
+
+  .mctl-n {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  .mctl-readout { min-height: 5rem; border-top: 1px solid var(--line); padding-top: 0.7rem; }
+  .mctl-empty { margin: 0; font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
+  .mctl-item h5 { margin: 0 0 0.4rem; font-size: 1rem; }
+  .mctl-item dl { display: grid; gap: 0.35rem; margin: 0; }
+  .mctl-item dl > div { display: grid; grid-template-columns: 11rem 1fr; gap: 0.6rem; }
+
+  .mctl-item dt {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--muted);
+    padding-top: 0.15rem;
+  }
+
+  .mctl-item dd { margin: 0; font-size: 0.9rem; line-height: 1.55; }
+
+  @media (max-width: 640px) {
+    .mx-cap { font-size: 20px; }
+    .mx-mono { font-size: 17px; }
+    .mctl-item dl > div { grid-template-columns: 1fr; gap: 0.1rem; }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    function wire(root) {
+      if (root.dataset.mctlWired) return;
+      root.dataset.mctlWired = "1";
+      var readout = root.querySelector("[data-mctl-readout]");
+      var empty = readout.querySelector(".mctl-empty");
+      var current = null;
+
+      function select(key) {
+        if (current === key) key = null;
+        current = key;
+        var nodes = root.querySelectorAll(".mx-node");
+        for (var i = 0; i < nodes.length; i++) {
+          nodes[i].classList.toggle("is-active", !!key && nodes[i].dataset.node === key);
+        }
+        var chips = root.querySelectorAll(".mctl-chip");
+        for (var j = 0; j < chips.length; j++) {
+          chips[j].classList.toggle("is-on", !!key && chips[j].dataset.chipFor === key);
+        }
+        var items = readout.querySelectorAll(".mctl-item");
+        for (var k = 0; k < items.length; k++) items[k].hidden = items[k].dataset.readoutFor !== key;
+        empty.hidden = !!key;
+      }
+
+      var nodes = root.querySelectorAll(".mx-node");
+      for (var a = 0; a < nodes.length; a++) {
+        (function (el) { el.addEventListener("click", function () { select(el.dataset.node); }); })(nodes[a]);
+      }
+      var chips = root.querySelectorAll(".mctl-chip");
+      for (var b = 0; b < chips.length; b++) {
+        (function (el) { el.addEventListener("click", function () { select(el.dataset.chipFor); }); })(chips[b]);
+      }
+    }
+
+    function init() {
+      var all = document.querySelectorAll("[data-mctl]");
+      for (var i = 0; i < all.length; i++) wire(all[i]);
+    }
+    init();
+    document.addEventListener("astro:page-load", init);
+  })();
+</script>

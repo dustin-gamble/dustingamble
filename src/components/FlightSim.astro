@@ -1,0 +1,585 @@
+---
+// Model-rocket flight simulator, two modes.
+//   mode="launch"   — pad to apogee: thrust, drag, gravity, T/W, phases
+//   mode="recovery" — apogee to ground: delay timing, chute vs streamer, wind drift
+//
+// Teaching model, not a design tool. Numbers are tuned to land near Estes'
+// published altitudes for these kits; wind, real Cd, and rod tip-off all move
+// the real number.
+const { mode = "launch", id = mode } = Astro.props;
+const isLaunch = mode === "launch";
+---
+
+<div class="fsim" data-fsim data-mode={mode} id={`fsim-${id}`}>
+  <div class="fsim-head">
+    <h4>{isLaunch ? "Launch: pad to apogee" : "Recovery: apogee to landing"}</h4>
+    <p>
+      {isLaunch
+        ? "Pick a motor and see what actually gets the rocket off the pad. Watch thrust-to-weight — under about 5:1 the rocket leaves the rod too slowly to fly straight."
+        : "The ejection charge fires when the delay burns through. Fire it too early and the rocket is still going fast enough to shred the parachute. Too late and it is already falling."}
+    </p>
+  </div>
+
+  <div class="fsim-body">
+    <div class="fsim-stage">
+      <canvas data-fsim-canvas width="440" height="560" role="img"
+        aria-label={isLaunch ? "Animated rocket ascent" : "Animated rocket descent and wind drift"}></canvas>
+      <div class="fsim-phase" data-fsim-phase>Ready</div>
+    </div>
+
+    <div class="fsim-panel">
+      {isLaunch ? (
+        <>
+          <label>
+            Motor
+            <select data-fsim-motor>
+              <option value="A8-3">A8-3 &mdash; smallest</option>
+              <option value="B6-4">B6-4 &mdash; first flight</option>
+              <option value="C6-5" selected>C6-5 &mdash; competition flight</option>
+              <option value="C6-7">C6-7 &mdash; long delay</option>
+            </select>
+          </label>
+          <label>
+            Extra payload <output data-fsim-out="payload">0</output> g
+            <input type="range" data-fsim-payload min="0" max="60" step="1" value="0" />
+          </label>
+          <label>
+            Launch angle from vertical <output data-fsim-out="angle">0</output>&deg;
+            <input type="range" data-fsim-angle min="0" max="20" step="1" value="0" />
+          </label>
+        </>
+      ) : (
+        <>
+          <label>
+            Motor delay <output data-fsim-out="delay">5</output> s after burnout
+            <input type="range" data-fsim-delay min="0" max="9" step="1" value="5" />
+          </label>
+          <label>
+            Recovery device
+            <select data-fsim-device>
+              <option value="chute12" selected>12 in parachute (stock)</option>
+              <option value="chute18">18 in parachute</option>
+              <option value="streamer">Streamer</option>
+            </select>
+          </label>
+          <label>
+            Wind <output data-fsim-out="wind">5</output> mph
+            <input type="range" data-fsim-wind min="0" max="20" step="1" value="5" />
+          </label>
+        </>
+      )}
+
+      <dl class="fsim-readout" data-fsim-readout></dl>
+
+      <p class="fsim-verdict" data-fsim-verdict></p>
+
+      <div class="fsim-actions">
+        <button type="button" class="fsim-btn fsim-btn-go" data-fsim-run>
+          {isLaunch ? "Launch" : "Deploy"}
+        </button>
+        <button type="button" class="fsim-btn" data-fsim-reset>Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <p class="fsim-foot">
+    Teaching model &mdash; constant-average thrust, fixed drag coefficient, no rod tip-off.
+    Good enough to show which way the numbers move, not good enough to plan a record attempt.
+  </p>
+</div>
+
+<style>
+  .fsim {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    padding: 1rem 1.15rem 1.1rem;
+  }
+
+  .fsim-head h4 { margin: 0 0 0.3rem; font-size: 1.05rem; }
+  .fsim-head p { margin: 0 0 0.9rem; font-size: 0.9rem; color: var(--muted); line-height: 1.55; }
+
+  .fsim-body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(15rem, 19rem); gap: 1.1rem; align-items: start; }
+
+  .fsim-stage { position: relative; }
+
+  .fsim-stage canvas {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    background: #0b1220;
+  }
+
+  .fsim-phase {
+    position: absolute;
+    top: 0.6rem;
+    left: 0.6rem;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.55rem;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.55);
+    color: #fff;
+  }
+
+  .fsim-panel { display: grid; gap: 0.7rem; }
+
+  .fsim-panel label {
+    display: grid;
+    gap: 0.28rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+  }
+
+  .fsim-panel select,
+  .fsim-panel input[type="range"] { width: 100%; font: inherit; }
+
+  .fsim-panel select {
+    padding: 0.35rem 0.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    background: var(--bg);
+    color: var(--text);
+    font-size: 0.85rem;
+  }
+
+  .fsim-panel output {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-weight: 700;
+    color: var(--accent-strong);
+  }
+
+  .fsim-readout {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.22rem 0.6rem;
+    margin: 0.2rem 0 0;
+    padding: 0.6rem 0.7rem;
+    border-radius: 10px;
+    background: var(--bg-alt);
+    border: 1px solid var(--line);
+    font-size: 0.82rem;
+  }
+
+  .fsim-readout dt { color: var(--muted); }
+
+  .fsim-readout dd {
+    margin: 0;
+    text-align: right;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+  }
+
+  .fsim-verdict {
+    margin: 0;
+    min-height: 2.6rem;
+    font-size: 0.84rem;
+    line-height: 1.5;
+    padding: 0.5rem 0.65rem;
+    border-radius: 8px;
+    border-left: 3px solid var(--line);
+    background: var(--bg-alt);
+  }
+
+  .fsim-verdict[data-tone="good"] { border-left-color: #3d8b58; }
+  .fsim-verdict[data-tone="warn"] { border-left-color: #d8a13a; }
+  .fsim-verdict[data-tone="bad"] { border-left-color: #c8532b; }
+
+  .fsim-actions { display: flex; gap: 0.4rem; }
+
+  .fsim-btn {
+    font: inherit;
+    font-size: 0.85rem;
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--text);
+    cursor: pointer;
+  }
+
+  .fsim-btn:hover { border-color: var(--accent); color: var(--accent-strong); }
+
+  .fsim-btn-go {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+    font-weight: 700;
+  }
+
+  :root[data-theme="dark"] .fsim-btn-go { color: #0f1623; }
+  .fsim-btn-go:hover { background: var(--accent-strong); border-color: var(--accent-strong); }
+
+  .fsim-foot { margin: 0.9rem 0 0; font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+
+  @media (max-width: 760px) {
+    .fsim-body { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    // Estes motor data: total impulse (N-s), average thrust (N), burn time (s),
+    // total motor mass (g), propellant mass (g).
+    var MOTORS = {
+      "A8-3": { I: 2.5, F: 4.3, t: 0.58, m: 16.2, mp: 3.12, delay: 3 },
+      "B6-4": { I: 5.0, F: 6.0, t: 0.86, m: 18.2, mp: 5.6, delay: 4 },
+      "C6-5": { I: 10.0, F: 6.0, t: 1.7, m: 25.5, mp: 10.8, delay: 5 },
+      "C6-7": { I: 10.0, F: 6.0, t: 1.7, m: 25.5, mp: 10.8, delay: 7 }
+    };
+
+    var DRY = 36;        // Cosmic Cargo airframe, grams
+    var AREA = 4.91e-4;  // 25 mm body tube, m^2
+    // Tuned so a clean C6-5 flight lands near the ~1,000 ft Estes publishes for
+    // this kit. Real Cd for a well-finished BT-20 is lower; this absorbs rod
+    // tip-off and finish losses the model doesn't carry.
+    var CD = 0.90;
+    var RHO = 1.18;      // kg/m^3
+    var G = 9.81;
+
+    var DEVICES = {
+      chute12: { label: "12 in chute", v: 4.6 },
+      chute18: { label: "18 in chute", v: 3.1 },
+      streamer: { label: "streamer", v: 9.5 }
+    };
+
+    function simLaunch(motorKey, payloadG, angleDeg) {
+      var mo = MOTORS[motorKey];
+      var m0 = (DRY + payloadG + mo.m) / 1000;
+      var burnRate = mo.mp / 1000 / mo.t;
+      var th = (angleDeg * Math.PI) / 180;
+      var vx = 0, vy = 0, x = 0, y = 0, t = 0;
+      var dt = 0.002;
+      var pts = [{ x: 0, y: 0, t: 0, phase: "boost" }];
+      var twr = mo.F / (m0 * G);
+      var vBurn = 0, apogee = 0, tApogee = 0, vmax = 0;
+
+      while (y >= 0 && t < 60) {
+        var m = m0 - (t < mo.t ? burnRate * t : mo.mp / 1000);
+        var thrust = t < mo.t ? mo.F : 0;
+        var v = Math.hypot(vx, vy);
+        if (v > vmax) vmax = v;
+        var drag = 0.5 * RHO * CD * AREA * v * v;
+        var dirx = v > 0.01 ? vx / v : Math.sin(th);
+        var diry = v > 0.01 ? vy / v : Math.cos(th);
+        var tx = thrust * Math.sin(th), ty = thrust * Math.cos(th);
+        var ax = (tx - drag * dirx) / m;
+        var ay = (ty - drag * diry) / m - G;
+        vx += ax * dt; vy += ay * dt;
+        x += vx * dt; y += vy * dt;
+        t += dt;
+        if (t >= mo.t && vBurn === 0) vBurn = Math.hypot(vx, vy);
+        if (vy <= 0 && apogee === 0 && t > mo.t) { apogee = y; tApogee = t; break; }
+        if (pts.length < 20000 && Math.round(t / dt) % 10 === 0) {
+          pts.push({ x: x, y: y, t: t, phase: t < mo.t ? "boost" : "coast" });
+        }
+      }
+      if (apogee === 0) apogee = y;
+      return { pts: pts, apogee: apogee, tApogee: tApogee, vBurn: vBurn, vmax: vmax, twr: twr, drift: x, motor: mo };
+    }
+
+    function simRecovery(delayS, deviceKey, windMph) {
+      // Nominal C6 flight, then coast for `delay` seconds past burnout.
+      var base = simLaunch("C6-5", 0, 0);
+      var mo = MOTORS["C6-5"];
+      var dev = DEVICES[deviceKey];
+      var coastToApogee = base.tApogee - mo.t;
+      var overshoot = delayS - coastToApogee;
+
+      // Speed is zero at apogee and grows roughly as g·t either side of it.
+      // Capped at burnout speed going up — you can never be faster than that.
+      var dtFromApogee = Math.abs(overshoot);
+      var vEject = Math.min(G * dtFromApogee, base.vBurn);
+
+      // Altitude below apogee, same parabola both directions.
+      var ejectAlt = Math.max(0, base.apogee - 0.5 * G * dtFromApogee * dtFromApogee);
+
+      var wind = windMph * 0.44704;
+      var descentV = dev.v;
+      var damaged = vEject > 27;
+      if (damaged) descentV = dev.v * 2.4;
+
+      var tDescent = ejectAlt / descentV;
+      var drift = wind * tDescent;
+      var totalAloft = (overshoot > 0 ? base.tApogee + overshoot : base.tApogee - (coastToApogee - delayS)) + tDescent;
+
+      return {
+        base: base, ejectAlt: ejectAlt, vEject: vEject, descentV: descentV,
+        tDescent: tDescent, drift: drift, damaged: damaged, overshoot: overshoot,
+        totalAloft: totalAloft, device: dev
+      };
+    }
+
+    function ft(m) { return Math.round(m * 3.28084); }
+
+    function wire(root) {
+      if (root.dataset.fsimWired) return;
+      root.dataset.fsimWired = "1";
+      var mode = root.dataset.mode;
+      var cv = root.querySelector("[data-fsim-canvas]");
+      var ctx = cv.getContext("2d");
+      var phaseEl = root.querySelector("[data-fsim-phase]");
+      var readout = root.querySelector("[data-fsim-readout]");
+      var verdict = root.querySelector("[data-fsim-verdict]");
+      var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      var raf = null;
+
+      function bindOut(input, name, fmt) {
+        var out = root.querySelector('[data-fsim-out="' + name + '"]');
+        if (!input || !out) return;
+        var sync = function () { out.textContent = fmt ? fmt(input.value) : input.value; };
+        input.addEventListener("input", function () { sync(); draw(0); });
+        sync();
+      }
+
+      function rows(pairs) {
+        readout.innerHTML = pairs.map(function (p) {
+          return "<dt>" + p[0] + "</dt><dd>" + p[1] + "</dd>";
+        }).join("");
+      }
+
+      function sky(h) {
+        var g = ctx.createLinearGradient(0, 0, 0, h);
+        g.addColorStop(0, "#050a16");
+        g.addColorStop(0.55, "#16406e");
+        g.addColorStop(1, "#7fb4e0");
+        return g;
+      }
+
+      function drawGround(H, W) {
+        ctx.fillStyle = "#2f4a26";
+        ctx.fillRect(0, H - 26, W, 26);
+      }
+
+      function gridlines(W, H, maxAlt, pad) {
+        ctx.strokeStyle = "rgba(255,255,255,0.14)";
+        ctx.fillStyle = "rgba(255,255,255,0.55)";
+        ctx.font = "10px ui-monospace, monospace";
+        ctx.lineWidth = 1;
+        var stepFt = maxAlt * 3.28084 > 800 ? 250 : 100;
+        for (var f = stepFt; f * 0.3048 < maxAlt; f += stepFt) {
+          var yy = H - pad - (f * 0.3048 / maxAlt) * (H - pad - 20);
+          ctx.setLineDash([3, 4]);
+          ctx.beginPath(); ctx.moveTo(0, yy); ctx.lineTo(W, yy); ctx.stroke();
+          ctx.setLineDash([]);
+          ctx.fillText(f + " ft", 6, yy - 3);
+        }
+      }
+
+      function rocket(x, y, angle, flame) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(angle);
+        ctx.fillStyle = "#eef2f7";
+        ctx.beginPath();
+        ctx.moveTo(0, -11); ctx.lineTo(4, 3); ctx.lineTo(-4, 3); ctx.closePath(); ctx.fill();
+        ctx.fillStyle = "#c8532b";
+        ctx.beginPath(); ctx.moveTo(-4, 3); ctx.lineTo(-7, 9); ctx.lineTo(-4, 9); ctx.closePath(); ctx.fill();
+        ctx.beginPath(); ctx.moveTo(4, 3); ctx.lineTo(7, 9); ctx.lineTo(4, 9); ctx.closePath(); ctx.fill();
+        if (flame) {
+          ctx.fillStyle = "rgba(255,170,40,0.95)";
+          ctx.beginPath(); ctx.moveTo(-3, 4); ctx.lineTo(3, 4);
+          ctx.lineTo(0, 12 + Math.random() * 8); ctx.closePath(); ctx.fill();
+        }
+        ctx.restore();
+      }
+
+      function chute(x, y, kind) {
+        ctx.strokeStyle = "#eef2f7"; ctx.lineWidth = 1.2;
+        if (kind === "streamer") {
+          ctx.beginPath();
+          for (var i = 0; i < 5; i++) ctx.lineTo(x + (i % 2 ? 5 : -5), y - 22 + i * 5);
+          ctx.stroke();
+        } else {
+          ctx.fillStyle = "rgba(240,120,60,0.9)";
+          ctx.beginPath(); ctx.arc(x, y - 20, 13, Math.PI, 0); ctx.fill();
+          ctx.beginPath(); ctx.moveTo(x - 13, y - 20); ctx.lineTo(x, y - 6);
+          ctx.lineTo(x + 13, y - 20); ctx.stroke();
+        }
+      }
+
+      // ---- launch mode ----
+      function runLaunch(progress) {
+        var motor = root.querySelector("[data-fsim-motor]").value;
+        var payload = +root.querySelector("[data-fsim-payload]").value;
+        var angle = +root.querySelector("[data-fsim-angle]").value;
+        var r = simLaunch(motor, payload, angle);
+        var W = cv.width, H = cv.height, pad = 26;
+
+        ctx.fillStyle = sky(H); ctx.fillRect(0, 0, W, H);
+        var maxAlt = Math.max(r.apogee * 1.12, 30);
+        gridlines(W, H, maxAlt, pad);
+        drawGround(H, W);
+
+        var n = Math.max(1, Math.floor(r.pts.length * progress));
+        var sx = W / 2;
+        var scaleY = (H - pad - 20) / maxAlt;
+        var maxX = Math.max(Math.abs(r.drift), 1);
+        var scaleX = Math.min(scaleY, (W / 2 - 30) / maxX);
+
+        ctx.strokeStyle = "rgba(255,200,90,0.9)"; ctx.lineWidth = 2;
+        ctx.beginPath();
+        for (var i = 0; i < n; i++) {
+          var p = r.pts[i];
+          var px = sx + p.x * scaleX, py = H - pad - p.y * scaleY;
+          i ? ctx.lineTo(px, py) : ctx.moveTo(px, py);
+        }
+        ctx.stroke();
+
+        var cur = r.pts[Math.min(n, r.pts.length) - 1] || r.pts[0];
+        var burning = cur.t < r.motor.t;
+        rocket(sx + cur.x * scaleX, H - pad - cur.y * scaleY, (angle * Math.PI) / 180, burning && progress < 1);
+        phaseEl.textContent = progress >= 1 ? "Apogee" : burning ? "Boost" : "Coast";
+
+        rows([
+          ["Apogee", ft(r.apogee) + " ft"],
+          ["Burnout speed", Math.round(r.vBurn) + " m/s"],
+          ["Time to apogee", r.tApogee.toFixed(1) + " s"],
+          ["Thrust-to-weight", r.twr.toFixed(1) + " : 1"],
+          ["Downrange", ft(r.drift) + " ft"]
+        ]);
+
+        if (progress >= 1) {
+          if (r.twr < 5) {
+            verdict.dataset.tone = "bad";
+            verdict.textContent = "Thrust-to-weight of " + r.twr.toFixed(1) + ":1 is too low. The rocket leaves the rod too slowly for the fins to bite, and it will weathercock or corkscrew. Rule of thumb is 5:1 minimum.";
+          } else if (r.twr < 8) {
+            verdict.dataset.tone = "warn";
+            verdict.textContent = "Thrust-to-weight of " + r.twr.toFixed(1) + ":1 will fly, but it is marginal on a windy day. More motor or less payload.";
+          } else {
+            verdict.dataset.tone = "good";
+            verdict.textContent = "Clean flight. " + r.twr.toFixed(1) + ":1 off the pad, apogee " + ft(r.apogee) + " ft after " + r.tApogee.toFixed(1) + " s of climb. Note the delay you want is close to that coast time.";
+          }
+        }
+        return r;
+      }
+
+      // ---- recovery mode ----
+      function runRecovery(progress) {
+        var delay = +root.querySelector("[data-fsim-delay]").value;
+        var device = root.querySelector("[data-fsim-device]").value;
+        var wind = +root.querySelector("[data-fsim-wind]").value;
+        var r = simRecovery(delay, device, wind);
+        var W = cv.width, H = cv.height, pad = 26;
+
+        ctx.fillStyle = sky(H); ctx.fillRect(0, 0, W, H);
+        var maxAlt = Math.max(r.base.apogee * 1.12, 30);
+        gridlines(W, H, maxAlt, pad);
+        drawGround(H, W);
+
+        var scaleY = (H - pad - 20) / maxAlt;
+        var maxDrift = Math.max(r.drift, 20);
+        var scaleX = Math.min(scaleY, (W - 90) / maxDrift);
+        var sx = 60;
+
+        // ejection marker
+        var ey = H - pad - r.ejectAlt * scaleY;
+        ctx.strokeStyle = r.damaged ? "#ff8a5c" : "rgba(255,255,255,0.5)";
+        ctx.setLineDash([4, 4]); ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(0, ey); ctx.lineTo(W, ey); ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.fillStyle = r.damaged ? "#ff8a5c" : "rgba(255,255,255,0.75)";
+        ctx.font = "10px ui-monospace, monospace";
+        ctx.fillText("ejection @ " + ft(r.ejectAlt) + " ft", 6, ey - 4);
+
+        // descent path
+        ctx.strokeStyle = "rgba(255,200,90,0.85)"; ctx.lineWidth = 2;
+        ctx.beginPath();
+        var steps = 90;
+        var shown = Math.max(1, Math.floor(steps * progress));
+        for (var i = 0; i <= shown; i++) {
+          var f = i / steps;
+          var px = sx + r.drift * f * scaleX;
+          var py = ey + (H - pad - ey) * f;
+          i ? ctx.lineTo(px, py) : ctx.moveTo(px, py);
+        }
+        ctx.stroke();
+
+        var cf = shown / steps;
+        var cx = sx + r.drift * cf * scaleX, cy = ey + (H - pad - ey) * cf;
+        if (!r.damaged) chute(cx, cy, device === "streamer" ? "streamer" : "chute");
+        rocket(cx, cy, r.damaged ? Math.PI * 0.75 : 0, false);
+
+        // landing marker
+        ctx.fillStyle = "rgba(255,255,255,0.8)";
+        ctx.fillText("landing", Math.min(W - 50, sx + r.drift * scaleX - 16), H - 32);
+
+        phaseEl.textContent = progress >= 1 ? "Landed" : "Descending";
+
+        rows([
+          ["Speed at ejection", Math.round(r.vEject) + " m/s"],
+          ["Ejection altitude", ft(r.ejectAlt) + " ft"],
+          ["Descent rate", r.descentV.toFixed(1) + " m/s"],
+          ["Time aloft", r.totalAloft.toFixed(1) + " s"],
+          ["Drift downwind", ft(r.drift) + " ft"]
+        ]);
+
+        if (progress >= 1) {
+          if (r.damaged) {
+            verdict.dataset.tone = "bad";
+            verdict.textContent = "Ejection at " + Math.round(r.vEject) + " m/s tore the recovery device. It is coming in ballistic. The delay is " + (r.overshoot < 0 ? "too short" : "too long") + " for this flight — aim to eject within about a second of apogee.";
+          } else if (Math.abs(r.overshoot) > 1.2) {
+            verdict.dataset.tone = "warn";
+            verdict.textContent = "It survived, but ejection was " + Math.abs(r.overshoot).toFixed(1) + " s off apogee, so you lost altitude before the chute opened. Closer to apogee means more time aloft.";
+          } else if (r.drift > 150) {
+            verdict.dataset.tone = "warn";
+            verdict.textContent = "Good deployment, but " + ft(r.drift) + " ft of drift. That is a long walk, and on a small field it is a lost rocket. A streamer or a smaller chute trades time aloft for staying close.";
+          } else {
+            verdict.dataset.tone = "good";
+            verdict.textContent = "Textbook. Ejection near apogee, " + r.totalAloft.toFixed(1) + " s aloft, and it lands " + ft(r.drift) + " ft downwind. This is the combination that wins Time Aloft without losing the rocket.";
+          }
+        }
+        return r;
+      }
+
+      var runner = mode === "launch" ? runLaunch : runRecovery;
+
+      function draw(p) { runner(p); }
+
+      function animate() {
+        if (raf) cancelAnimationFrame(raf);
+        verdict.dataset.tone = "";
+        verdict.textContent = "";
+        if (reduce) { draw(1); return; }
+        var start = null;
+        var dur = mode === "launch" ? 2600 : 3200;
+        function step(ts) {
+          if (!start) start = ts;
+          var p = Math.min(1, (ts - start) / dur);
+          draw(p);
+          if (p < 1) raf = requestAnimationFrame(step);
+        }
+        raf = requestAnimationFrame(step);
+      }
+
+      bindOut(root.querySelector("[data-fsim-payload]"), "payload");
+      bindOut(root.querySelector("[data-fsim-angle]"), "angle");
+      bindOut(root.querySelector("[data-fsim-delay]"), "delay");
+      bindOut(root.querySelector("[data-fsim-wind]"), "wind");
+      var sel = root.querySelectorAll("select");
+      for (var i = 0; i < sel.length; i++) sel[i].addEventListener("change", function () { draw(0); });
+
+      root.querySelector("[data-fsim-run]").addEventListener("click", animate);
+      root.querySelector("[data-fsim-reset]").addEventListener("click", function () {
+        if (raf) cancelAnimationFrame(raf);
+        verdict.dataset.tone = ""; verdict.textContent = "";
+        phaseEl.textContent = "Ready";
+        draw(0);
+      });
+
+      draw(0);
+    }
+
+    function init() {
+      var all = document.querySelectorAll("[data-fsim]");
+      for (var i = 0; i < all.length; i++) wire(all[i]);
+    }
+    init();
+    document.addEventListener("astro:page-load", init);
+  })();
+</script>
