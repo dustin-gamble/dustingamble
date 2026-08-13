@@ -10,5 +10,12 @@ private-data/
 # Local scratch / merit-badge PDFs / screenshots — never commit
 .tmp_pdf_venv/
 Scouts merit/
-*.PNG
+# Stray screenshots (was "*.PNG" — but git on macOS matches case-insensitively,
+# so that silently swallowed every intentional .png asset too).
+Screenshot*.png
+Screen Shot*.png
+ChatGPT Image*.png
+
+# Site assets under public/ are always intentional.
+!public/**
 fetch_badges.sh
