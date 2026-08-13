@@ -1,0 +1,183 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const cards = [
+  { n: 1, file: "01-the-purpose-of-space-exploration.png", title: "The Purpose of Space Exploration", req: "Req 1" },
+  { n: 2, file: "02-historical-reasons.png", title: "Historical Reasons", req: "Req 1a" },
+  { n: 3, file: "03-immediate-goals-and-knowledge.png", title: "Immediate Goals & Knowledge", req: "Req 1b" },
+  { n: 4, file: "04-benefits-resources.png", title: "Benefits to Earth: Resources", req: "Req 1c" },
+  { n: 5, file: "05-benefits-technology.png", title: "Benefits to Earth: Technology", req: "Req 1c" },
+  { n: 6, file: "06-benefits-new-products.png", title: "Benefits to Earth: New Products", req: "Req 1c" },
+  { n: 7, file: "07-international-cooperation.png", title: "International Relations & Cooperation", req: "Req 1d" },
+  { n: 8, file: "08-why-it-matters.png", title: "Why It Matters", req: "Req 1" },
+  { n: 9, file: "09-choose-your-pioneer.png", title: "Choose Your Pioneer", req: "Req 2" },
+  { n: 10, file: "10-design-your-card.png", title: "Design Your Collector's Card", req: "Req 2" },
+  { n: 11, file: "11-discuss-four-pioneers.png", title: "Discuss Four Other Space Pioneers", req: "Req 2" },
+  { n: 12, file: "12-take-it-further.png", title: "Take It Further", req: "Req 1–2" },
+];
+---
+<BaseLayout
+  title="Space Exploration Teaching Cards"
+  description="Twelve printable teaching cards covering Space Exploration merit badge requirements 1 and 2, downloadable individually or as a print-ready sheet."
+>
+  <div class="cards-page">
+    <p class="crumbs no-print">
+      <a href="/scouts/space-exploration-fall-2026/">&larr; Fall 2026 Series</a> ·
+      <a href="/merit-badges/space-exploration/">Badge page</a>
+    </p>
+
+    <header class="cards-hero no-print">
+      <p class="kicker">Scouting America · Troop 308</p>
+      <h1>Teaching Cards</h1>
+      <p class="cards-sum">
+        Twelve cards covering requirements 1 and 2 &mdash; the purpose of space exploration and the space pioneer
+        card. Each one downloads on its own, or print the whole set. Handy as table cards during the meeting, or
+        handed out one per patrol so each group teaches its own card back to the room.
+      </p>
+      <div class="cards-actions">
+        <button type="button" class="mb-link-btn" data-print-all>Print all 12</button>
+        <button type="button" class="mb-link-btn mb-link-btn-outline" data-dl-all>Download all</button>
+        <span class="cards-hint" data-dl-msg></span>
+      </div>
+      <p class="cards-note">
+        <strong>Before you print card 11:</strong> the four portraits on it are AI-generated faces, not photographs
+        of real people. Nothing on the card claims otherwise, but a Scout could reasonably assume they are looking
+        at four actual pioneers. Either say so when you hand it out, or use it as the prompt to go and find the
+        real four &mdash; Katherine Johnson, Gagarin, Goddard and the rest are on the badge page.
+      </p>
+    </header>
+
+    <div class="cards-grid">
+      {cards.map((c) => (
+        <figure class="card-item">
+          <img src={`/images/cards/${c.file}`} alt={`Teaching card ${c.n}: ${c.title}`} loading="lazy" />
+          <figcaption class="no-print">
+            <span class="card-n">{c.n}</span>
+            <span class="card-title">{c.title}</span>
+            <span class="card-req">{c.req}</span>
+            <a class="card-dl" href={`/images/cards/${c.file}`} download={`space-exploration-card-${c.file}`}>
+              Download ↓
+            </a>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .cards-page { max-width: 76rem; margin: 0 auto; padding: 0 1.25rem 4rem; }
+  .crumbs { font-size: 0.88rem; margin: 0 0 1.2rem; }
+  .cards-hero h1 { margin: 0.15rem 0 0.5rem; font-size: clamp(1.8rem, 3.4vw, 2.5rem); }
+  .cards-sum { color: var(--muted); max-width: 62ch; line-height: 1.65; margin: 0 0 1rem; }
+  .cards-actions { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; margin-bottom: 1rem; }
+  .cards-hint { font-size: 0.82rem; color: var(--muted); }
+
+  .cards-note {
+    border-left: 3px solid #d8a13a;
+    background: rgba(216, 161, 58, 0.08);
+    padding: 0.7rem 0.95rem;
+    border-radius: 0 10px 10px 0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    max-width: 72ch;
+    margin: 0 0 2rem;
+  }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+    gap: 1.2rem;
+  }
+
+  .card-item { margin: 0; display: grid; gap: 0.5rem; }
+
+  .card-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    background: var(--bg-alt);
+  }
+
+  .card-item figcaption {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.15rem 0.5rem;
+    align-items: baseline;
+    font-size: 0.82rem;
+  }
+
+  .card-n {
+    font-family: ui-monospace, monospace;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  .card-title { font-weight: 600; line-height: 1.35; }
+  .card-req { grid-column: 2; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+  .card-dl { grid-column: 2; font-size: 0.8rem; justify-self: start; }
+
+  /* ---------- print: one card per page, as large as fits ---------- */
+  @media print {
+    .no-print, .site-header, .site-footer, nav { display: none !important; }
+    .cards-page { max-width: none; padding: 0; }
+    .cards-grid { display: block; }
+
+    .card-item {
+      page-break-after: always;
+      break-after: page;
+      display: block;
+      text-align: center;
+    }
+
+    .card-item:last-child { page-break-after: auto; break-after: auto; }
+
+    .card-item img {
+      max-width: 100%;
+      max-height: 96vh;
+      width: auto;
+      border: none;
+      border-radius: 0;
+    }
+  }
+
+  /* print-selected mode: only the chosen card */
+  .cards-page[data-print-one] .card-item { display: none; }
+  .cards-page[data-print-one] .card-item.is-printing { display: block; }
+</style>
+
+<script is:inline>
+  (function () {
+    function init() {
+      var page = document.querySelector(".cards-page");
+      if (!page || page.dataset.wired) return;
+      page.dataset.wired = "1";
+
+      var printBtn = page.querySelector("[data-print-all]");
+      if (printBtn) printBtn.addEventListener("click", function () { window.print(); });
+
+      // "Download all" fires each link in turn. The browser still asks where to
+      // put them, so this is a convenience, not a zip.
+      var dlBtn = page.querySelector("[data-dl-all]");
+      var msg = page.querySelector("[data-dl-msg]");
+      if (dlBtn) {
+        dlBtn.addEventListener("click", function () {
+          var links = page.querySelectorAll(".card-dl");
+          msg.textContent = "Starting " + links.length + " downloads…";
+          links.forEach(function (a, i) {
+            setTimeout(function () {
+              var t = document.createElement("a");
+              t.href = a.href; t.download = a.getAttribute("download");
+              document.body.appendChild(t); t.click(); t.remove();
+              if (i === links.length - 1) msg.textContent = "Done — check your downloads folder.";
+            }, i * 350);
+          });
+        });
+      }
+    }
+    init();
+    document.addEventListener("astro:page-load", init);
+  })();
+</script>

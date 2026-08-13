@@ -1,0 +1,222 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Telemetry3D from "../../components/Telemetry3D.astro";
+import SlideImage from "../../components/SlideImage.astro";
+import { page, measures, stack, packet, procedure } from "../../data/telemetry.js";
+---
+<BaseLayout
+  title="Telemetry Ground Station"
+  description="Ground station and tracking for the Troop 308 Telemetry Rocket: which software to run, what to measure, the packet format, and a 3D flight replay."
+>
+  <div class="tel-page">
+    <p class="tel-crumbs">
+      <a href="/scouts/space-exploration-fall-2026/">&larr; Fall 2026 Series</a> ·
+      <a href="/merit-badges/capstones/telemetry-rocket/">Telemetry Rocket capstone</a>
+    </p>
+
+    <header class="tel-hero">
+      <span class="tel-icon" aria-hidden="true">📡</span>
+      <div>
+        <p class="kicker">{page.kicker}</p>
+        <h1>{page.title}</h1>
+        <p class="tel-sum">{page.summary}</p>
+        <ul class="tag-list">{page.facts.map((f) => <li>{f}</li>)}</ul>
+      </div>
+    </header>
+
+    <!-- ============ 3D replay first: it's the reason to be here ============ -->
+    <section class="tel-block">
+      <h2>See a flight</h2>
+      <p class="muted">
+        This is a simulated Lil&rsquo; Spite flight on an E16-6 with the telemetry payload aboard &mdash; 497 ft,
+        37 seconds, 5 mph of wind. After November 21 you paste in your own CSV and this becomes your flight.
+      </p>
+      <Telemetry3D />
+    </section>
+
+    <!-- ============ software ============ -->
+    <section class="tel-block">
+      <h2>What software to use</h2>
+      <p class="tel-lede">{stack.recommendation}</p>
+
+      <div class="tel-tiers">
+        {stack.tiers.map((t) => (
+          <article class="tel-tier">
+            <header>
+              <span class="tel-tier-n">{t.tier}</span>
+              <div>
+                <h3>{t.url ? <a href={t.url} target="_blank" rel="noopener noreferrer">{t.name} ↗</a> : t.name}</h3>
+                <p class="tel-role">{t.role}</p>
+              </div>
+            </header>
+            <dl class="tel-meta">
+              <div><dt>Cost</dt><dd>{t.cost}</dd></div>
+              <div><dt>Code needed</dt><dd>{t.code}</dd></div>
+              {t.badge && <div><dt>Counts toward</dt><dd>{t.badge}</dd></div>}
+            </dl>
+            <p><strong>What it is.</strong> {t.what}</p>
+            <p><strong>Why.</strong> {t.why}</p>
+          </article>
+        ))}
+      </div>
+
+      <details class="tel-exp">
+        <summary>Also considered, and why not</summary>
+        <dl class="tel-alts">
+          {stack.alsoConsidered.map((a) => (
+            <div><dt>{a.name}</dt><dd>{a.verdict}</dd></div>
+          ))}
+        </dl>
+      </details>
+    </section>
+
+    <!-- ============ what we measure ============ -->
+    <section class="tel-block">
+      <h2>What we measure, and with what</h2>
+      <p class="muted">{measures.intro}</p>
+      {measures.items.map((m) => (
+        <article class="tel-measure">
+          <header>
+            <h3>{m.what}</h3>
+            <span class="tel-pill">{m.from}</span>
+          </header>
+          <p>{m.why}</p>
+          <p class="tel-gotcha"><strong>Watch out.</strong> {m.gotcha}</p>
+        </article>
+      ))}
+    </section>
+
+    <!-- ============ packet ============ -->
+    <section class="tel-block">
+      <h2>The packet format</h2>
+      <p class="muted">{packet.intro}</p>
+      <pre class="tel-frame"><code>{packet.frame}</code></pre>
+      <div class="mb-table-wrap">
+        <table class="tel-table">
+          <thead><tr><th scope="col">Field</th><th scope="col">Meaning</th></tr></thead>
+          <tbody>
+            {packet.fields.map((f) => (
+              <tr><td class="tel-mono">{f.f}</td><td>{f.d}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="tel-note">{packet.note}</p>
+      <p class="tel-note"><strong>Rate.</strong> {packet.rate}</p>
+    </section>
+
+    <!-- ============ launch day ============ -->
+    <section class="tel-block">
+      <h2>Launch-day procedure</h2>
+      <p class="muted">{procedure.intro}</p>
+      <SlideImage name="field-ground-station" />
+      <ol class="tel-steps">
+        {procedure.steps.map((s) => (
+          <li><span class="tel-t">{s.t}</span><span>{s.s}</span></li>
+        ))}
+      </ol>
+      <p class="tel-gotcha"><strong>If it drops out.</strong> {procedure.failure}</p>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .tel-page { max-width: 82rem; margin: 0 auto; padding: 0 1.25rem 5rem; line-height: 1.65; }
+  .tel-crumbs { font-size: 0.88rem; margin: 0 0 1.4rem; }
+
+  .tel-hero { display: flex; gap: 1.1rem; align-items: flex-start; margin-bottom: 2rem; }
+  .tel-icon { font-size: 2.4rem; line-height: 1; }
+  .tel-hero h1 { margin: 0.15rem 0 0.5rem; font-size: clamp(1.8rem, 3.4vw, 2.5rem); }
+  .tel-sum { color: var(--muted); max-width: 66ch; margin: 0 0 0.9rem; }
+
+  .tel-block { margin: 0 0 3rem; }
+  .tel-block > h2 { font-size: 1.45rem; margin: 0 0 0.7rem; padding-bottom: 0.4rem; border-bottom: 2px solid var(--line); }
+  .tel-block > p, .tel-block > ol { max-width: 78ch; }
+  .tel-lede { font-size: 1.06rem; }
+
+  .tel-tiers { display: grid; grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr)); gap: 0.9rem; margin: 1.1rem 0; }
+
+  .tel-tier {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 0.9rem 1.05rem;
+    background: var(--surface);
+  }
+
+  .tel-tier:nth-child(2) { border-color: var(--accent); border-width: 2px; }
+  .tel-tier header { display: flex; gap: 0.7rem; align-items: baseline; margin-bottom: 0.5rem; }
+  .tel-tier h3 { margin: 0; font-size: 1.05rem; }
+  .tel-role { margin: 0.1rem 0 0; font-size: 0.82rem; color: var(--accent-strong); font-weight: 600; }
+  .tel-tier p { font-size: 0.9rem; margin: 0 0 0.5rem; }
+
+  .tel-tier-n {
+    flex: none; width: 1.9rem; height: 1.9rem;
+    display: grid; place-items: center; border-radius: 999px;
+    background: var(--accent-soft); color: var(--accent-strong);
+    font-family: ui-monospace, monospace; font-weight: 700; font-size: 0.85rem;
+  }
+
+  .tel-meta { display: flex; flex-wrap: wrap; gap: 0.3rem 1rem; margin: 0 0 0.6rem; }
+  .tel-meta dt { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); }
+  .tel-meta dd { margin: 0; font-size: 0.84rem; font-weight: 600; }
+
+  .tel-measure { border-left: 3px solid var(--accent); padding: 0.2rem 0 0.2rem 1rem; margin: 1.2rem 0; max-width: 80ch; }
+  .tel-measure header { display: flex; gap: 0.6rem; align-items: baseline; flex-wrap: wrap; }
+  .tel-measure h3 { margin: 0 0 0.3rem; font-size: 1.05rem; }
+  .tel-measure p { font-size: 0.93rem; }
+
+  .tel-pill {
+    display: inline-block; font-size: 0.72rem; padding: 0.15rem 0.6rem;
+    border-radius: 999px; border: 1px solid var(--line); color: var(--muted);
+  }
+
+  .tel-gotcha {
+    border-left: 3px solid #d8a13a;
+    background: rgba(216, 161, 58, 0.08);
+    padding: 0.6rem 0.9rem; border-radius: 0 10px 10px 0;
+    font-size: 0.9rem; max-width: 78ch;
+  }
+
+  .tel-note {
+    border-left: 3px solid var(--accent);
+    background: var(--accent-soft);
+    padding: 0.6rem 0.9rem; border-radius: 0 10px 10px 0;
+    font-size: 0.9rem; max-width: 78ch;
+  }
+
+  .tel-frame {
+    background: #08111f; color: #9fe0a0;
+    padding: 0.8rem 1rem; border-radius: 10px;
+    overflow-x: auto; font-size: 0.86rem;
+    border: 1px solid var(--line);
+  }
+
+  .mb-table-wrap { width: 100%; overflow-x: auto; margin: 0.8rem 0 1rem; }
+  .tel-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; max-width: 60rem; }
+  .tel-table th, .tel-table td { text-align: left; vertical-align: top; padding: 0.45rem 0.6rem; border-bottom: 1px solid var(--line); }
+  .tel-table thead th { font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+  .tel-mono { font-family: ui-monospace, monospace; font-size: 0.85rem; white-space: nowrap; color: var(--accent-strong); }
+
+  .tel-steps { list-style: none; padding: 0; margin: 1rem 0; display: grid; gap: 0.35rem; }
+
+  .tel-steps li {
+    display: grid; grid-template-columns: 6rem 1fr; gap: 0.8rem;
+    padding: 0.5rem 0.7rem; border-radius: 8px;
+    background: var(--bg-alt); border-left: 3px solid var(--line);
+    font-size: 0.92rem;
+  }
+
+  .tel-t { font-family: ui-monospace, monospace; font-weight: 700; font-size: 0.84rem; }
+
+  .tel-exp { border: 1px solid var(--line); border-radius: 12px; padding: 0 1.1rem; background: var(--surface); }
+  .tel-exp summary { cursor: pointer; padding: 0.75rem 0; font-weight: 600; color: var(--accent-strong); }
+  .tel-exp[open] { padding-bottom: 1rem; }
+  .tel-alts { display: grid; gap: 0.7rem; margin: 0; }
+  .tel-alts dt { font-weight: 700; font-size: 0.95rem; }
+  .tel-alts dd { margin: 0.15rem 0 0; font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
+
+  @media (max-width: 700px) {
+    .tel-hero { flex-direction: column; gap: 0.5rem; }
+    .tel-steps li { grid-template-columns: 1fr; gap: 0.1rem; }
+  }
+</style>
