@@ -388,7 +388,32 @@ const slides = deck.slides;
   .deck-stage.is-projecting :global(.osim-head p),
   .deck-stage.is-projecting :global(.fsim-head p),
   .deck-stage.is-projecting :global(.osim-foot),
-  .deck-stage.is-projecting :global(.osim-hint) { display: none; }
+  .deck-stage.is-projecting :global(.fsim-foot),
+  .deck-stage.is-projecting :global(.osim-hint),
+  .deck-stage.is-projecting :global(.fsim-hint) { display: none; }
+
+  /* The control panel, not the canvas, is what makes a simulator slide too
+     tall. Keep the whole component inside the slide and let the canvas be the
+     part that gives way. */
+  .deck-stage.is-projecting :global(.fsim),
+  .deck-stage.is-projecting :global(.osim) {
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .deck-stage.is-projecting :global(.fsim-body),
+  .deck-stage.is-projecting :global(.osim-body) { min-height: 0; }
+
+  .deck-stage.is-projecting :global(.fsim-stage),
+  .deck-stage.is-projecting :global(.osim-stage) { min-height: 0; }
+
+  .deck-stage.is-projecting :global(.fsim-readout),
+  .deck-stage.is-projecting :global(.osim-readout) { font-size: 0.74rem; padding: 0.4rem 0.5rem; }
+
+  .deck-stage.is-projecting :global(.fsim-panel label),
+  .deck-stage.is-projecting :global(.osim-panel label) { font-size: 0.74rem; }
 
   .deck-stage.is-projecting :global(.osim-head h4),
   .deck-stage.is-projecting :global(.fsim-head h4) { margin-bottom: 0.35rem; }
@@ -704,18 +729,35 @@ const slides = deck.slides;
       // Last-resort guard: if a slide still cannot fit the projection, scale it
       // down rather than let it overflow. The CSS above should mean this never
       // fires — it exists so a future content edit degrades gracefully.
+      // Keep a projected slide inside the viewport.
+      //
+      // NOTE: .ds is overflow:hidden when projecting, so scrollHeight always
+      // equals clientHeight and can never reveal overflow - anything spilling
+      // out is silently clipped. Measure the deepest descendant instead, which
+      // is what actually decides whether the room sees the whole slide.
       function fit(el) {
-        if (!document.fullscreenElement && !stage.classList.contains("is-projecting")) {
-          var b0 = el.querySelector(".ds"); if (b0) b0.style.transform = "";
-          return;
-        }
-        var box = el.querySelector(".ds");
+        var box = el && el.querySelector(".ds");
         if (!box) return;
         box.style.transform = "";
-        var avail = stage.clientHeight - 56;
-        var need = box.scrollHeight;
-        if (need > avail && need > 0) {
-          var k = Math.max(0.6, avail / need);
+        if (!stage.classList.contains("is-projecting")) return;
+
+        // Available space is measured from where the slide actually starts, not
+        // from the stage height: the slide is vertically centred, so its top
+        // sits below the stage top and using stage height overestimates room.
+        var stageRect = stage.getBoundingClientRect();
+        var top = box.getBoundingClientRect().top;
+        var avail = (stageRect.bottom - 56) - top;
+        if (avail <= 0) return;
+        var deepest = 0;
+        var kids = box.querySelectorAll("*");
+        for (var n = 0; n < kids.length; n++) {
+          var r = kids[n].getBoundingClientRect();
+          if (r.height > 0 && r.bottom > deepest) deepest = r.bottom;
+        }
+        var need = deepest - top;
+
+        if (need > avail) {
+          var k = Math.max(0.68, avail / need);
           box.style.transformOrigin = "top center";
           box.style.transform = "scale(" + k.toFixed(3) + ")";
         }
