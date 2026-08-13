@@ -763,13 +763,48 @@ const slides = deck.slides;
         }
       }
 
+      // A single measurement one frame after the slide appears is not enough.
+      // The slide's own content is still settling then - the sim canvases are
+      // width-driven (height:auto) and the entry animation holds children in
+      // their translated start state - so an early read under-reports the real
+      // height and locks in a scale that is too generous. Measure again once
+      // things have stopped moving, and keep watching for later growth.
+      function scheduleFit(el) {
+        fit(el);
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () { fit(el); });
+        });
+        // After the 420ms entry animation has finished, and once more for any
+        // late layout (fonts, images decoding).
+        setTimeout(function () { fit(el); }, 500);
+        setTimeout(function () { fit(el); }, 1200);
+        observe(el);
+      }
+
+      // Re-fit whenever anything inside the live slide changes size. fit() only
+      // writes a transform, which does not affect layout, so this cannot loop.
+      var ro = window.ResizeObserver
+        ? new ResizeObserver(function () {
+            if (stage.classList.contains("is-projecting")) fit(slides[i]);
+          })
+        : null;
+
+      function observe(el) {
+        if (!ro) return;
+        ro.disconnect();
+        var box = el && el.querySelector(".ds");
+        if (!box) return;
+        ro.observe(box);
+        for (var c = 0; c < box.children.length; c++) ro.observe(box.children[c]);
+      }
+
       function show(n) {
         i = Math.max(0, Math.min(slides.length - 1, n));
         slides.forEach((s, idx) => (s.hidden = idx !== i));
         cur.textContent = String(i + 1);
         prev.disabled = i === 0;
         next.disabled = i === slides.length - 1;
-        requestAnimationFrame(function () { fit(slides[i]); });
+        scheduleFit(slides[i]);
       }
 
       prev.addEventListener("click", () => show(i - 1));
