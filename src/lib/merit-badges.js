@@ -774,6 +774,7 @@ const BADGES = [
         pamphletUrl: "/merit-badges/pamphlets/Space Exploration.pdf",
         pamphletUrlOfficial:
             "https://filestore.scouting.org/filestore/Merit_Badge_ReqandRes/Pamphlets/Space%20Exploration.pdf",
+        drgUrl: "https://www.scouting.org/skills/merit-badges/digital-resource-guides/space-exploration",
         counselorNote:
             "Model rocketry is the highlight. I keep an Estes Alpha-III starter kit, a launch pad, and a handful of A8-3 motors ready. Safety code compliance (National Association of Rocketry) is non-negotiable.",
         programme: {
@@ -848,8 +849,8 @@ const BADGES = [
                 sub: [
                     { id: "a", text: "Historical reasons", resources: [{ label: "History of Space Exploration (video)", url: "https://youtu.be/TL__l9gC1Ss" }, { label: "History of Space Exploration: Timeline (video)", url: "https://youtu.be/3JuKR7jf46o" }, { label: "History of the Space Race (Nat Geo)", url: "https://education.nationalgeographic.org/resource/history-space-exploration/" }] },
                     { id: "b", text: "Immediate goals in terms of specific knowledge" },
-                    { id: "c", text: "Benefits related to Earth resources, technology, and new products", resources: [{ label: "How Space Benefits Earth (video)", url: "https://youtube.com/shorts/i3D4pCq_lyg" }, { label: "10 Surprising Ways Space Exploration Benefits Life on Earth", url: "https://youtube.com/shorts/_2uSv1C-FDw" }] },
-                    { id: "d", text: "International relations and cooperation", resources: [{ label: "International Cooperation in Space (video)", url: "https://youtu.be/TS27Br2-XgY" }] },
+                    { id: "c", text: "Benefits related to Earth resources, technology, and new products", resources: [{ label: "How Space Benefits Earth (video)", url: "https://youtube.com/shorts/i3D4pCq_lyg" }, { label: "Space Exploration, Is It Really Worth It? Yes. (video)", url: "https://youtube.com/shorts/jPuqA136SfA" }, { label: "10 Surprising Ways Space Exploration Benefits Life on Earth (video)", url: "https://youtube.com/shorts/_2uSv1C-FDw" }] },
+                    { id: "d", text: "International relations and cooperation", resources: [{ label: "The Power of International Collaboration in Space Exploration (video)", url: "https://youtu.be/HvH8fmT9r6U" }] },
                 ],
             },
             {
@@ -867,7 +868,7 @@ const BADGES = [
                 text: "Build, launch, and recover a model rocket. Make a second launch to accomplish a specific objective. Rocket must be built to meet the safety code of the National Association of Rocketry. Alternative if local laws prohibit launching: make a model of a NASA rocket, explain the functions of the parts, and give the history of the rocket. Identify and explain the following rocket parts:",
                 resources: [
                     { label: "NASA Rocket Parts — Beginner's Guide", url: "https://www.grc.nasa.gov/www/k-12/VirtualAero/BottleRocket/airplane/bgmr.html" },
-                    { label: "National Association of Rocketry — Educational Videos", url: "https://www.nar.org/" },
+                    { label: "NAR Educational Video Series on Model Rocketry", url: "https://www.nar.org/content.aspx?page_id=22&club_id=114127&module_id=669619" },
                 ],
                 sub: [
                     { id: "a", text: "Body tube" },
@@ -888,9 +889,9 @@ const BADGES = [
                 resources: [{ label: "NASA — Basics of Space Flight", url: "https://science.nasa.gov/learn/basics-of-space-flight/" }],
                 sub: [
                     { id: "a", text: "The law of action-reaction", resources: [{ label: "Newton's Laws of Motion", url: "https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/newtons-laws-of-motion/" }] },
-                    { id: "b", text: "How rocket engines work", resources: [{ label: "How Rocket Engines Work", url: "https://science.howstuffworks.com/rocket.htm" }, { label: "Rocket Engines Explained (video)", url: "https://youtu.be/gz8L1i0ODeA" }, { label: "How Do We Launch Things Into Space", url: "https://plus.nasa.gov/video/how-do-we-launch-things-into-space/" }] },
-                    { id: "c", text: "How satellites stay in orbit", resources: [{ label: "How Do Satellites Get & Stay in Orbit? (video)", url: "https://youtu.be/IC1JQu9xGHQ" }, { label: "How Satellites Orbit (video)", url: "https://youtu.be/5PCY0rTllPg" }] },
-                    { id: "d", text: "How satellite pictures of Earth and pictures of other planets are made and transmitted" },
+                    { id: "b", text: "How rocket engines work", resources: [{ label: "How Rocket Engines Work", url: "https://science.howstuffworks.com/rocket.htm" }, { label: "Rocket Engines Explained (video)", url: "https://youtu.be/gz8L1i0ODeA" }, { label: "How Do We Launch Things Into Space (video)", url: "https://plus.nasa.gov/video/how-do-we-launch-things-into-space/" }] },
+                    { id: "c", text: "How satellites stay in orbit", resources: [{ label: "How Do Satellites Get & Stay in Orbit? (video)", url: "https://youtu.be/IC1JQu9xGHQ" }, { label: "How Do Satellites Stay in Orbit Around the Earth (video)", url: "https://www.youtube.com/shorts/V08iOHrNyMU" }, { label: "How Orbit Works: Perpetual Free Fall Explained (video)", url: "https://www.youtube.com/shorts/Ieyn5Xzg_nA" }] },
+                    { id: "d", text: "How satellite pictures of Earth and pictures of other planets are made and transmitted", resources: [{ label: "How do Spacecraft Photograph the Planets & get the Images Back to Earth? (video)", url: "https://youtu.be/rrD1oe5_zvw" }, { label: "How Do We Communicate with Faraway Spacecraft? (NASA video)", url: "https://youtu.be/6WFj-CKldv4" }, { label: "What Is The Deep Space Network & How Does It Work? (video)", url: "https://youtu.be/dZRC6Tf2YEo" }] },
                 ],
             },
             {
@@ -928,6 +929,12 @@ const BADGES = [
                 id: "8",
                 title: "Careers",
                 text: "Explore careers related to this merit badge. Research one career to learn about the training and education needed, costs, job prospects, salary, job duties, and career advancement. Discuss your findings with your counselor.",
+                resources: [
+                    { label: "NASA — Astronaut Requirements", url: "https://www.nasa.gov/humans-in-space/astronauts/astronaut-requirements/" },
+                    { label: "So You Want to Be an Aerospace Engineer (video)", url: "https://youtu.be/uTreDAUe7w4" },
+                    { label: "Should I Become an Aerospace Engineer? (video)", url: "https://youtu.be/2Y2fNtYnsFQ" },
+                    { label: "Becoming an Astrobiologist (NASA)", url: "https://astrobiology.nasa.gov/resources/graphic-histories/" },
+                ],
             },
         ],
         resources: [
