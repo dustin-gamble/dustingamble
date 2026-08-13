@@ -25,7 +25,7 @@ const slides = deck.slides;
     </div>
     <div class="deck-head-actions">
       <button type="button" class="deck-btn" data-deck-notes aria-pressed="true">Presenter notes</button>
-      <button type="button" class="deck-btn" data-deck-full>Full screen</button>
+      <button type="button" class="deck-btn" data-deck-full>Present</button>
     </div>
   </header>
 
@@ -120,7 +120,7 @@ const slides = deck.slides;
         )}
 
         {s.type === "steps" && (
-          <div class="ds">
+          <div class="ds ds-heavy">
             <h4 class="ds-h2">{s.heading}</h4>
             {s.intro && <p class="ds-intro">{s.intro}</p>}
             {s.image && <SlideImage name={s.image} />}
@@ -140,7 +140,7 @@ const slides = deck.slides;
         )}
 
         {s.type === "launchops" && (
-          <div class="ds">
+          <div class="ds ds-heavy">
             <h4 class="ds-h2">{s.heading}</h4>
             {s.intro && <p class="ds-intro">{s.intro}</p>}
             {s.image && <SlideImage name={s.image} />}
@@ -149,7 +149,7 @@ const slides = deck.slides;
         )}
 
         {s.type === "parts" && (
-          <div class="ds">
+          <div class="ds ds-heavy">
             <h4 class="ds-h2">{s.heading}</h4>
             {s.intro && <p class="ds-intro">{s.intro}</p>}
             {s.image && <SlideImage name={s.image} />}
@@ -158,7 +158,7 @@ const slides = deck.slides;
         )}
 
         {s.type === "motor" && (
-          <div class="ds">
+          <div class="ds ds-heavy">
             <h4 class="ds-h2">{s.heading}</h4>
             {s.intro && <p class="ds-intro">{s.intro}</p>}
             {s.image && <SlideImage name={s.image} />}
@@ -167,7 +167,7 @@ const slides = deck.slides;
         )}
 
         {s.type === "missioncontrol" && (
-          <div class="ds">
+          <div class="ds ds-heavy">
             <h4 class="ds-h2">{s.heading}</h4>
             {s.intro && <p class="ds-intro">{s.intro}</p>}
             {s.image && <SlideImage name={s.image} />}
@@ -176,7 +176,7 @@ const slides = deck.slides;
         )}
 
         {s.type === "flightsim" && (
-          <div class="ds">
+          <div class="ds ds-heavy">
             <h4 class="ds-h2">{s.heading}</h4>
             {s.intro && <p class="ds-intro">{s.intro}</p>}
             {s.image && <SlideImage name={s.image} size="half" />}
@@ -185,7 +185,7 @@ const slides = deck.slides;
         )}
 
         {s.type === "orbitsim" && (
-          <div class="ds">
+          <div class="ds ds-heavy">
             <h4 class="ds-h2">{s.heading}</h4>
             {s.intro && <p class="ds-intro">{s.intro}</p>}
             {s.image && <SlideImage name={s.image} size="half" />}
@@ -208,7 +208,7 @@ const slides = deck.slides;
         )}
 
         {s.type === "charrette" && (
-          <div class="ds">
+          <div class="ds ds-heavy">
             <h4 class="ds-h2">{s.heading}</h4>
             <p class="ds-intro">{s.intro}</p>
             {s.image && <SlideImage name={s.image} />}
@@ -242,6 +242,8 @@ const slides = deck.slides;
       <button type="button" class="deck-nav-btn" data-deck-next aria-label="Next slide">→</button>
       <span class="deck-kbd">click the deck, then use ← →</span>
     </div>
+
+    <p class="deck-fs-hint">← → move · N notes · Esc exit</p>
   </div>
 </section>
 
@@ -292,18 +294,167 @@ const slides = deck.slides;
 
   .deck-stage:focus-visible { box-shadow: inset 0 0 0 2px var(--accent); }
 
-  .deck-stage:fullscreen {
-    padding: 3rem 4rem 5rem;
+  /* =========================================================
+     PROJECTION MODE
+     One slide = exactly one viewport. Never scroll inside a
+     slide; if it does not fit, the content is too dense and
+     belongs on two slides.
+     ========================================================= */
+  .deck-stage.is-projecting {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    border-radius: 0;
+  }
+
+  .deck-stage.is-projecting {
+    --slide-padding: clamp(1.25rem, 3.5vw, 3.5rem);
+    --content-gap: clamp(0.5rem, 1.6vh, 1.6rem);
+
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    padding: var(--slide-padding) var(--slide-padding) calc(var(--slide-padding) + 2.5rem);
+    display: grid;
+    place-items: center;
+    background: var(--bg);
+  }
+
+  .deck-stage.is-projecting .deck-slide[hidden] { display: none; }
+
+  .deck-stage.is-projecting .deck-slide {
+    width: min(100%, 1600px);
+    max-height: 100%;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: center;
+  }
+
+  .deck-stage.is-projecting .ds {
+    display: flex;
+    flex-direction: column;
+    gap: var(--content-gap);
+    max-height: 100%;
+    overflow: hidden;
+  }
+
+/* Presenter notes belong to the presenter and not to the room.
+     Hidden on the projection by default; press N to peek. */
+  .deck-stage.is-projecting .deck-notes { display: none; }
+  .deck-stage.is-projecting.show-notes .deck-notes {
+    display: block;
+    position: absolute;
+    left: var(--slide-padding);
+    right: var(--slide-padding);
+    bottom: 3.2rem;
+    margin: 0;
+    padding: 0.7rem 0.9rem;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--bg-alt);
+    max-height: 30vh;
     overflow-y: auto;
   }
 
-  .deck-stage:fullscreen .ds-h1 { font-size: clamp(2.4rem, 6vw, 4rem); }
-  .deck-stage:fullscreen .ds-h2 { font-size: clamp(1.7rem, 3.4vw, 2.6rem); }
-  .deck-stage:fullscreen .ds-list li,
-  .deck-stage:fullscreen .ds-intro { font-size: clamp(1.05rem, 1.7vw, 1.5rem); }
+  .deck-stage.is-projecting .ds-h1 { font-size: clamp(2rem, 5.2vw, 4.5rem); line-height: 1.05; }
+  .deck-stage.is-projecting .ds-h2 { font-size: clamp(1.4rem, 3vw, 2.6rem); line-height: 1.15; }
+  .deck-stage.is-projecting .ds-sub { font-size: clamp(1rem, 1.7vw, 1.6rem); }
+  .deck-stage.is-projecting .ds-question { font-size: clamp(1.4rem, 3.2vw, 2.8rem); }
+  .deck-stage.is-projecting .ds-list li,
+  .deck-stage.is-projecting .ds-intro { font-size: clamp(0.95rem, 1.5vw, 1.45rem); }
+  .deck-stage.is-projecting .ds-list li { margin-bottom: 0.35em; }
+  .deck-stage.is-projecting .ds-note { font-size: clamp(0.85rem, 1.2vw, 1.2rem); }
+
+/* Everything visual gets a ceiling so it can never push the slide over. */
+  /* Everything visual gets a ceiling so it can never push the slide over. */
+  .deck-stage.is-projecting :global(.sart-svg) { max-height: 30vh; width: auto; margin-inline: auto; }
+  .deck-stage.is-projecting :global(.simg img) { max-height: 42vh; }
+  .deck-stage.is-projecting :global(.simg figcaption) { font-size: clamp(0.75rem, 1vw, 1rem); }
+  .deck-stage.is-projecting :global(.rpd-svg),
+  .deck-stage.is-projecting :global(.mcut-svg),
+  .deck-stage.is-projecting :global(.mctl-svg) { max-height: 44vh; }
+  .deck-stage.is-projecting :global(.fsim-stage canvas),
+  .deck-stage.is-projecting :global(.osim-stage canvas) { max-height: 42vh; }
+  .deck-stage.is-projecting :global(.lops-script) { max-height: 34vh; }
+  .deck-stage.is-projecting :global(.ds-video) { max-width: min(60vw, 46rem); }
+  .deck-stage.is-projecting :global(.ds-steps) { gap: 0.3rem; }
+  .deck-stage.is-projecting :global(.ds-steps span:not(.ds-step-n)) { font-size: clamp(0.75rem, 1vw, 1rem); }
+
+  /* The simulators carry their own explanatory paragraph, which duplicates the
+     slide intro when projected. Drop it and tighten the layout so the sim
+     slides fit like every other slide. */
+  .deck-stage.is-projecting :global(.osim-head p),
+  .deck-stage.is-projecting :global(.fsim-head p),
+  .deck-stage.is-projecting :global(.osim-foot),
+  .deck-stage.is-projecting :global(.osim-hint) { display: none; }
+
+  .deck-stage.is-projecting :global(.osim-head h4),
+  .deck-stage.is-projecting :global(.fsim-head h4) { margin-bottom: 0.35rem; }
+
+  .deck-stage.is-projecting :global(.osim-body),
+  .deck-stage.is-projecting :global(.fsim-body) { gap: 0.7rem; align-items: center; }
+
+  .deck-stage.is-projecting :global(.osim-panel),
+  .deck-stage.is-projecting :global(.fsim-panel) { gap: 0.4rem; }
+
+  .deck-stage.is-projecting :global(.osim-verdict),
+  .deck-stage.is-projecting :global(.fsim-verdict) { min-height: 0; }
+
+  .deck-stage.is-projecting :global(.osim-stage canvas),
+  .deck-stage.is-projecting :global(.fsim-stage canvas) { max-height: 36vh; }
+
+  /* Slides built around an interactive component: on the projection show the
+     heading and the thing itself. The intro and note are presenter script. */
+  .deck-stage.is-projecting .ds-heavy .ds-note { display: none; }
+
+  @media (max-height: 860px) {
+    .deck-stage.is-projecting .ds-heavy .ds-intro { display: none; }
+  }
+
+  /* Short projectors and laptop screens. 720p is the common case and needs
+     real tightening, not just slightly smaller pictures. */
+  @media (max-height: 860px) {
+  .deck-stage.is-projecting { --content-gap: clamp(0.35rem, 1vh, 0.9rem); }
+  .deck-stage.is-projecting .ds-h1 { font-size: clamp(1.8rem, 4.2vw, 3rem); }
+  .deck-stage.is-projecting .ds-h2 { font-size: clamp(1.2rem, 2.4vw, 1.9rem); }
+  .deck-stage.is-projecting .ds-question { font-size: clamp(1.2rem, 2.6vw, 2rem); }
+  .deck-stage.is-projecting .ds-list li,
+  .deck-stage.is-projecting .ds-intro { font-size: clamp(0.85rem, 1.25vw, 1.1rem); }
+  .deck-stage.is-projecting .ds-list li { margin-bottom: 0.22em; }
+  .deck-stage.is-projecting .ds-note { font-size: clamp(0.75rem, 1vw, 0.95rem); padding: 0.45rem 0.7rem; }
+  .deck-stage.is-projecting :global(.sart-svg) { max-height: 22vh; }
+  .deck-stage.is-projecting :global(.simg img) { max-height: 32vh; }
+  .deck-stage.is-projecting :global(.simg figcaption) { font-size: 0.75rem; }
+  .deck-stage.is-projecting :global(.rpd-svg),
+  .deck-stage.is-projecting :global(.mcut-svg),
+  .deck-stage.is-projecting :global(.mctl-svg) { max-height: 36vh; }
+  .deck-stage.is-projecting :global(.osim-stage canvas),
+  .deck-stage.is-projecting :global(.fsim-stage canvas) { max-height: 30vh; }
+  .deck-stage.is-projecting :global(.osim-readout),
+  .deck-stage.is-projecting :global(.fsim-readout) { font-size: 0.72rem; padding: 0.35rem 0.5rem; }
+  .deck-stage.is-projecting :global(.osim-verdict),
+  .deck-stage.is-projecting :global(.fsim-verdict) { font-size: 0.72rem; }
+  .deck-stage.is-projecting :global(.ds-locations) { gap: 0.3rem; }
+  .deck-stage.is-projecting :global(.ds-loc) { padding: 0.35rem 0.5rem; }
+  .deck-stage.is-projecting :global(.ds-loc strong) { font-size: 0.82rem; }
+  .deck-stage.is-projecting :global(.ds-loc span) { font-size: 0.72rem; }
+  .deck-stage.is-projecting :global(.ds-list-tight li) { font-size: 0.78rem; margin-bottom: 0.15em; }
+  .deck-stage.is-projecting :global(.lops-script) { max-height: 26vh; }
+  .deck-stage.is-projecting :global(.lops-roles) { gap: 0.35rem; }
+  .deck-stage.is-projecting :global(.lops-role p) { font-size: 0.74rem; }
+  .deck-stage.is-projecting :global(.ds-cols) { gap: 0.5rem; }
+  .deck-stage.is-projecting :global(.ds-col li) { font-size: 0.78rem; margin-bottom: 0.2rem; }
+  }
+
+  @media (max-height: 600px) {
+  .deck-stage.is-projecting { --slide-padding: clamp(0.75rem, 2vw, 1.5rem); }
+  .deck-stage.is-projecting .ds-list li,
+  .deck-stage.is-projecting .ds-intro { font-size: clamp(0.8rem, 1.2vw, 1rem); }
+  .deck-stage.is-projecting :global(.sart-svg) { max-height: 20vh; }
+  .deck-stage.is-projecting :global(.simg figcaption) { display: none; }
+  }
 
   .ds-kicker {
     font-family: "Space Grotesk", system-ui, sans-serif;
@@ -435,8 +586,8 @@ const slides = deck.slides;
     margin-inline: auto;
   }
 
-  .deck-stage:fullscreen :global(.fsim-stage canvas),
-  .deck-stage:fullscreen :global(.osim-stage canvas) { max-height: 46vh; }
+  .deck-stage.is-projecting :global(.fsim-stage canvas),
+  .deck-stage.is-projecting :global(.osim-stage canvas) { max-height: 46vh; }
 
   .deck :global(.fsim), .deck :global(.osim) { border: none; padding: 0; background: transparent; }
   .deck :global(.fsim-head p), .deck :global(.osim-head p) { max-width: 70ch; }
@@ -460,6 +611,45 @@ const slides = deck.slides;
   .deck-notes p { margin: 0; font-size: 0.9rem; line-height: 1.6; color: var(--muted); }
 
   .deck[data-notes="off"] .deck-notes { display: none; }
+
+  /* Reveal on slide change — staggered, and switched off entirely for
+     anyone who has asked for reduced motion. */
+  @media (prefers-reduced-motion: no-preference) {
+    .deck-slide:not([hidden]) .ds > * {
+      animation: deckRise 420ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
+    }
+    .deck-slide:not([hidden]) .ds > *:nth-child(1) { animation-delay: 20ms; }
+    .deck-slide:not([hidden]) .ds > *:nth-child(2) { animation-delay: 90ms; }
+    .deck-slide:not([hidden]) .ds > *:nth-child(3) { animation-delay: 160ms; }
+    .deck-slide:not([hidden]) .ds > *:nth-child(4) { animation-delay: 230ms; }
+    .deck-slide:not([hidden]) .ds > *:nth-child(n+5) { animation-delay: 290ms; }
+    .deck-slide:not([hidden]) .ds-list li {
+      animation: deckRise 380ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
+    }
+    .deck-slide:not([hidden]) .ds-list li:nth-child(1) { animation-delay: 200ms; }
+    .deck-slide:not([hidden]) .ds-list li:nth-child(2) { animation-delay: 280ms; }
+    .deck-slide:not([hidden]) .ds-list li:nth-child(3) { animation-delay: 360ms; }
+    .deck-slide:not([hidden]) .ds-list li:nth-child(4) { animation-delay: 440ms; }
+    .deck-slide:not([hidden]) .ds-list li:nth-child(n+5) { animation-delay: 500ms; }
+  }
+
+  @keyframes deckRise {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  .deck-fs-hint {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    font-size: 0.72rem;
+    color: var(--muted);
+    opacity: 0.75;
+    display: none;
+  }
+
+  .deck-stage.is-projecting .deck-fs-hint { display: block; }
+  .deck-stage.is-projecting .deck-nav { bottom: 0.6rem; }
 
   .deck-nav {
     position: absolute;
@@ -511,12 +701,33 @@ const slides = deck.slides;
       const next = deck.querySelector("[data-deck-next]");
       let i = 0;
 
+      // Last-resort guard: if a slide still cannot fit the projection, scale it
+      // down rather than let it overflow. The CSS above should mean this never
+      // fires — it exists so a future content edit degrades gracefully.
+      function fit(el) {
+        if (!document.fullscreenElement && !stage.classList.contains("is-projecting")) {
+          var b0 = el.querySelector(".ds"); if (b0) b0.style.transform = "";
+          return;
+        }
+        var box = el.querySelector(".ds");
+        if (!box) return;
+        box.style.transform = "";
+        var avail = stage.clientHeight - 56;
+        var need = box.scrollHeight;
+        if (need > avail && need > 0) {
+          var k = Math.max(0.6, avail / need);
+          box.style.transformOrigin = "top center";
+          box.style.transform = "scale(" + k.toFixed(3) + ")";
+        }
+      }
+
       function show(n) {
         i = Math.max(0, Math.min(slides.length - 1, n));
         slides.forEach((s, idx) => (s.hidden = idx !== i));
         cur.textContent = String(i + 1);
         prev.disabled = i === 0;
         next.disabled = i === slides.length - 1;
+        requestAnimationFrame(function () { fit(slides[i]); });
       }
 
       prev.addEventListener("click", () => show(i - 1));
@@ -527,6 +738,8 @@ const slides = deck.slides;
         else if (e.key === "ArrowLeft" || e.key === "PageUp") { e.preventDefault(); show(i - 1); }
         else if (e.key === "Home") { e.preventDefault(); show(0); }
         else if (e.key === "End") { e.preventDefault(); show(slides.length - 1); }
+        else if (e.key === "n" || e.key === "N") { stage.classList.toggle("show-notes"); }
+        else if (e.key === "Escape" && stage.classList.contains("is-projecting")) { exitProjection(); }
       });
 
       const notesBtn = deck.querySelector("[data-deck-notes]");
@@ -537,9 +750,41 @@ const slides = deck.slides;
       });
 
       const fullBtn = deck.querySelector("[data-deck-full]");
+
+      function enterProjection() {
+        stage.classList.add("is-projecting");
+        document.documentElement.style.overflow = "hidden";
+        fullBtn.textContent = "Exit";
+        stage.focus();
+        // Real fullscreen looks nicer, but embedded and locked-down browsers
+        // refuse it — and can throw synchronously rather than rejecting. The
+        // class above already gives a full-window deck, so a refusal is not a
+        // failure; the presentation still works.
+        try {
+          if (stage.requestFullscreen) {
+            const r = stage.requestFullscreen();
+            if (r && r.catch) r.catch(() => {});
+          }
+        } catch (e) { /* projection mode still applies */ }
+        requestAnimationFrame(() => show(i));
+      }
+
+      function exitProjection() {
+        stage.classList.remove("is-projecting", "show-notes");
+        document.documentElement.style.overflow = "";
+        fullBtn.textContent = "Present";
+        try {
+          if (document.fullscreenElement) {
+            const r = document.exitFullscreen();
+            if (r && r.catch) r.catch(() => {});
+          }
+        } catch (e) { /* already out */ }
+        requestAnimationFrame(() => show(i));
+      }
+
       fullBtn.addEventListener("click", () => {
-        if (document.fullscreenElement) document.exitFullscreen();
-        else if (stage.requestFullscreen) stage.requestFullscreen().then(() => stage.focus());
+        if (stage.classList.contains("is-projecting")) exitProjection();
+        else enterProjection();
       });
 
       deck.querySelectorAll("[data-yt-play]").forEach((btn) => {
@@ -554,6 +799,12 @@ const slides = deck.slides;
           wrap.replaceChildren(frame);
         });
       });
+
+      document.addEventListener("fullscreenchange", function () {
+        // Leaving real fullscreen (Esc, F11) should also leave projection mode.
+        if (!document.fullscreenElement && stage.classList.contains("is-projecting")) exitProjection();
+      });
+      window.addEventListener("resize", function () { fit(slides[i]); });
 
       show(0);
     }
