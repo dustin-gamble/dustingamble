@@ -23,9 +23,17 @@ const isLaunch = mode === "launch";
 
   <div class="fsim-body">
     <div class="fsim-stage">
-      <canvas data-fsim-canvas width="660" height="380" role="img"
-        aria-label={isLaunch ? "Altitude versus time flight profile" : "Descent and wind drift profile"}></canvas>
-      <div class="fsim-phase" data-fsim-phase>Ready</div>
+      <div class="fsim-canvas-wrap">
+        <canvas data-fsim-canvas width="660" height="380" role="img"
+          aria-label={isLaunch ? "Altitude versus time flight profile" : "Descent and wind drift profile"}></canvas>
+        <div class="fsim-phase" data-fsim-phase>Ready</div>
+      </div>
+
+      <!-- Run/Reset under the picture — see the note in OrbitSim. -->
+      <div class="fsim-actions">
+        <button type="button" class="fsim-btn fsim-btn-go" data-fsim-run>{isLaunch ? "Launch" : "Deploy"}</button>
+        <button type="button" class="fsim-btn" data-fsim-reset>Reset</button>
+      </div>
     </div>
 
     <div class="fsim-panel">
@@ -73,11 +81,6 @@ const isLaunch = mode === "launch";
 
       <dl class="fsim-readout" data-fsim-readout></dl>
       <p class="fsim-verdict" data-fsim-verdict></p>
-
-      <div class="fsim-actions">
-        <button type="button" class="fsim-btn fsim-btn-go" data-fsim-run>{isLaunch ? "Launch" : "Deploy"}</button>
-        <button type="button" class="fsim-btn" data-fsim-reset>Reset</button>
-      </div>
     </div>
   </div>
 </div>
@@ -95,7 +98,8 @@ const isLaunch = mode === "launch";
 
   .fsim-body { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(13rem, 0.65fr); gap: 0.9rem; align-items: start; }
 
-  .fsim-stage { position: relative; }
+  .fsim-stage { display: grid; gap: 0.55rem; align-content: start; }
+  .fsim-canvas-wrap { position: relative; }
 
   .fsim-stage canvas {
     width: 100%; height: auto; display: block;
@@ -153,7 +157,7 @@ const isLaunch = mode === "launch";
   .fsim-verdict[data-tone="warn"] { border-left-color: #d8a13a; }
   .fsim-verdict[data-tone="bad"] { border-left-color: #c8532b; }
 
-  .fsim-actions { display: flex; gap: 0.35rem; }
+  .fsim-actions { display: flex; gap: 0.35rem; justify-content: center; }
 
   .fsim-btn {
     font: inherit; font-size: 0.8rem; padding: 0.35rem 0.8rem;

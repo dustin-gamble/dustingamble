@@ -22,9 +22,21 @@ const isAscent = mode === "ascent";
 
   <div class="osim-body">
     <div class="osim-stage">
-      <canvas data-osim-canvas width="560" height="440" role="img"
-        aria-label={isAscent ? "Animated launch to orbit trajectory" : "Animated trajectory from Earth orbit to the Moon"}></canvas>
-      <div class="osim-clock" data-osim-clock></div>
+      <div class="osim-canvas-wrap">
+        <canvas data-osim-canvas width="560" height="440" role="img"
+          aria-label={isAscent ? "Animated launch to orbit trajectory" : "Animated trajectory from Earth orbit to the Moon"}></canvas>
+        <div class="osim-clock" data-osim-clock></div>
+      </div>
+
+      <!-- Run/Reset live under the picture, not at the foot of the control
+           panel. The panel is far taller than the canvas, so a button down
+           there meant pressing Burn with the trajectory scrolled off screen. -->
+      <div class="osim-actions">
+        <button type="button" class="osim-btn osim-btn-go" data-osim-run>
+          {isAscent ? "Launch" : "Burn"}
+        </button>
+        <button type="button" class="osim-btn" data-osim-reset>Reset</button>
+      </div>
     </div>
 
     <div class="osim-panel">
@@ -72,13 +84,6 @@ const isAscent = mode === "ascent";
 
       <dl class="osim-readout" data-osim-readout></dl>
       <p class="osim-verdict" data-osim-verdict></p>
-
-      <div class="osim-actions">
-        <button type="button" class="osim-btn osim-btn-go" data-osim-run>
-          {isAscent ? "Launch" : "Burn"}
-        </button>
-        <button type="button" class="osim-btn" data-osim-reset>Reset</button>
-      </div>
     </div>
   </div>
 
@@ -102,7 +107,8 @@ const isAscent = mode === "ascent";
 
   .osim-body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(15rem, 19rem); gap: 1.1rem; align-items: start; }
 
-  .osim-stage { position: relative; }
+  .osim-stage { display: grid; gap: 0.6rem; align-content: start; }
+  .osim-canvas-wrap { position: relative; }
 
   .osim-stage canvas {
     width: 100%;
@@ -189,7 +195,7 @@ const isAscent = mode === "ascent";
 
   .osim-preset:hover { border-color: var(--accent); color: var(--accent-strong); background: var(--accent-soft); }
 
-  .osim-actions { display: flex; gap: 0.4rem; }
+  .osim-actions { display: flex; gap: 0.4rem; justify-content: center; }
 
   .osim-btn {
     font: inherit;
