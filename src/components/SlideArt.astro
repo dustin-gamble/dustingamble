@@ -112,6 +112,30 @@ const { name } = Astro.props;
     </svg>
   )}
 
+  {/* Requirement 5c — the round trip, drawn as a loop so the return leg is
+      visibly half the mission. That is the half Scouts forget. */}
+  {name === "sample-return" && (
+    <svg viewBox="0 0 560 150" class="sart-svg">
+      <circle cx="60" cy="86" r="20" class="a-box a-fill-soft" />
+      <text x="60" y="92" class="a-lab-sm a-mid">Earth</text>
+      <circle cx="500" cy="86" r="20" class="a-box a-fill-soft" />
+      <text x="500" y="92" class="a-lab-sm a-mid">Target</text>
+
+      <path d="M82 74 C 200 22, 360 22, 478 74" class="a-arrow-a" />
+      <text x="280" y="30" class="a-lab-sm a-mid">1. cruise out</text>
+
+      <path d="M478 100 C 360 152, 200 152, 82 100" class="a-arrow-a" />
+      <text x="280" y="146" class="a-lab-sm a-mid">4. cruise home, then survive entry</text>
+
+      {[["2. land + grab", 500, 46], ["3. launch back off", 500, 130]].map(([t, x, y]) => (
+        <text x={x} y={y} class="a-tiny a-mid">{t}</text>
+      ))}
+
+      <text x="60" y="46" class="a-tiny a-mid">sample in a lab</text>
+      <text x="280" y="92" class="a-lab-sm a-mid">nobody aboard</text>
+    </svg>
+  )}
+
   {name === "go-nogo" && (
     <svg viewBox="0 0 560 150" class="sart-svg">
       <rect x="8" y="26" width="252" height="106" rx="12" class="a-go" />

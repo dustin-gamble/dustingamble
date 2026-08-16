@@ -781,7 +781,7 @@ const BADGES = [
             label: "Troop 308 · Fall 2026 series",
             url: "/scouts/space-exploration-fall-2026/",
             blurb:
-                "Seven 45-minute Monday blocks from Aug 31 through Nov 23 with presenter-ready slide decks, a build night, a group Telemetry Rocket crew project, an ordering plan, a prediction competition, a dedicated guest speaker night, and a launch day the Saturday before Thanksgiving.",
+                "Five 45-minute Monday blocks from Aug 31 through Nov 23 with presenter-ready slide decks, a build-at-home guide, a group Telemetry Rocket crew project, an ordering plan, a prediction competition, and a launch day the Saturday before Thanksgiving.",
         },
         myPlan: [
             "Check local fire/park regulations before scheduling a launch day.",
@@ -899,9 +899,9 @@ const BADGES = [
                 title: "Missions",
                 text: "Do TWO of the following:",
                 sub: [
-                    { id: "a", text: "Discuss with your counselor a robotic space exploration mission and a historic crewed mission. Tell about each mission's major discoveries, its importance, and what was learned about the planets, moons, or regions of space explored.", resources: [{ label: "Voyager (video)", url: "https://youtu.be/uJpJ79AxrzI" }, { label: "Apollo Program (video)", url: "https://youtu.be/jUW_1XlrWmg" }, { label: "NASA SpaceX Crew Dragon Launch (video)", url: "https://youtu.be/1gmvUPTdoP4" }, { label: "Mars Perseverance Rover (video)", url: "https://www.youtube.com/watch?v=0-oQRSViZQE" }] },
+                    { id: "a", text: "Discuss with your counselor a robotic space exploration mission and a historic crewed mission. Tell about each mission's major discoveries, its importance, and what was learned from it about the planets, moons, or regions of space explored.", resources: [{ label: "Voyager (video)", url: "https://youtu.be/uJpJ79AxrzI" }, { label: "Apollo Program (video)", url: "https://youtu.be/jUW_1XlrWmg" }, { label: "NASA SpaceX Crew Dragon Launch (video)", url: "https://youtu.be/1gmvUPTdoP4" }, { label: "Mars Perseverance Rover (video)", url: "https://www.youtube.com/watch?v=0-oQRSViZQE" }] },
                     { id: "b", text: "Using articles from the internet, photos, and text, create a blog, website, or slide show about a current planetary mission — or make a scrapbook using magazines and news clippings." },
-                    { id: "c", text: "Design a robotic mission to another planet, moon, comet, or asteroid that will return samples of its surface to Earth. Show how your design will cope with the conditions of that environment." },
+                    { id: "c", text: "Design a robotic mission to another planet, moon, comet, or asteroid that will return samples of its surface to Earth. Name the planet, moon, comet, or asteroid your spacecraft will visit. Show how your design will cope with the conditions of the environments of the planet, moon, comet, or asteroid." },
                 ],
             },
             {
@@ -916,7 +916,7 @@ const BADGES = [
             {
                 id: "7",
                 title: "Inhabited Base",
-                text: "Design an inhabited base located within our solar system (such as Titan, asteroids, or other locations). Make drawings or a model of your base. Consider and plan for the following:",
+                text: "Design an inhabited base located within our solar system, such as Titan, asteroids, or other locations that humans might want to explore in person. Make drawings or a model of your base. In your design, consider and plan for the following:",
                 resources: [{ label: "How NASA Will Build a City on the Moon (video)", url: "https://youtu.be/ATgwz_hS3Qg" }],
                 sub: [
                     { id: "a", text: "Source of energy", resources: [{ label: "You Can't Take It All With You (NASA PDF)", url: "https://www.nasa.gov/wp-content/uploads/2023/05/you-cant-take-it-all-with-you-grades-6-12-students-tagged.pdf" }] },
@@ -928,7 +928,7 @@ const BADGES = [
             {
                 id: "8",
                 title: "Careers",
-                text: "Explore careers related to this merit badge. Research one career to learn about the training and education needed, costs, job prospects, salary, job duties, and career advancement. Discuss your findings with your counselor.",
+                text: "Explore careers related to this merit badge. Research one career to learn about the training and education needed, costs, job prospects, salary, job duties, and career advancement. Your research methods may include\u2014with your parent or guardian's permission\u2014an internet or library search, an interview with a professional in the field, or a visit to a location where people in this career work. Discuss with your counselor both your findings and what about this profession might make it an interesting career.",
                 resources: [
                     { label: "NASA — Astronaut Requirements", url: "https://www.nasa.gov/humans-in-space/astronauts/astronaut-requirements/" },
                     { label: "So You Want to Be an Aerospace Engineer (video)", url: "https://youtu.be/uTreDAUe7w4" },

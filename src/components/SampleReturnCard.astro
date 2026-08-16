@@ -1,0 +1,184 @@
+---
+// Requirement 5c — one card per Scout.
+//
+// 5c is its own requirement and it is not the base charrette. The charrette is
+// requirement 7: a place people live. 5c is a robot that goes somewhere, picks
+// something up, and brings it home — and the official wording is specific about
+// two things a group activity tends to skip: the Scout must NAME the
+// destination, and must show how the design copes with the conditions of THAT
+// environment. Six boxes, five minutes, one per Scout.
+const boxes = [
+    {
+        n: 1,
+        q: "Where are you going?",
+        hint: "Name it. Not “a moon” — Europa, Enceladus, Bennu, Phobos, comet 67P. The requirement asks you to name the planet, moon, comet or asteroid, so the whole card hangs on this box.",
+        trap: "“Mars” on its own is thin. “Jezero Crater on Mars” tells me you know why you picked it.",
+    },
+    {
+        n: 2,
+        q: "What are you bringing back, and why that?",
+        hint: "Rock core, surface dust, ice, a gas sample, or something from under the surface. Then the harder half: what question does having it on Earth answer that a camera out there could not?",
+        trap: "If a robot could have just photographed it, you have not justified the trip home.",
+    },
+    {
+        n: 3,
+        q: "How do you get hold of it?",
+        hint: "Drill, scoop, sticky pad, a shot fired into the surface, a robot arm. Match the tool to the surface — you cannot drill a comet the way you drill basalt.",
+        trap: "Low gravity fights you. Push down on an asteroid and you push yourself away from it.",
+    },
+    {
+        n: 4,
+        q: "How does your spacecraft survive there?",
+        hint: "This is the box the requirement actually grades. Pick the two conditions that would kill it — temperature, radiation, dust, pressure, acid, vacuum, distance from the Sun — and say what you did about each one.",
+        trap: "“It has shielding” is not an answer. Shielding against what, and why that much?",
+    },
+    {
+        n: 5,
+        q: "How does the sample get off the surface?",
+        hint: "You need a second rocket, and it has been sitting in the cold since launch. How big is it, what does it burn, and how does it survive the wait?",
+        trap: "Most people forget this box entirely. Getting down is the easy half.",
+    },
+    {
+        n: 6,
+        q: "How does it get home — and land without wrecking the sample?",
+        hint: "Cruise time, then entry. How fast are you coming in, what stops you, and how do you keep the sample cold and uncontaminated all the way to the lab?",
+        trap: "If it lands at 200 mph the mission failed, however good the rest was.",
+    },
+];
+---
+
+<div class="src-card">
+  <div class="src-head">
+    <div>
+      <p class="src-kicker">Requirement 5c &middot; one per Scout</p>
+      <h3>Sample Return Mission Card</h3>
+    </div>
+    <span class="src-time">5 min</span>
+  </div>
+
+  <p class="src-lede">
+    Design a robot that goes somewhere, picks something up, and brings it back. Six boxes. Fill in your own card
+    even if you talk it through with your patrol &mdash; the requirement is yours, not the table's.
+  </p>
+
+  <ol class="src-boxes">
+    {boxes.map((b) => (
+      <li class="src-box">
+        <div class="src-box-head">
+          <span class="src-n">{b.n}</span>
+          <h4>{b.q}</h4>
+        </div>
+        <p class="src-hint">{b.hint}</p>
+        <p class="src-trap"><strong>Watch out.</strong> {b.trap}</p>
+        <div class="src-write" aria-hidden="true"></div>
+      </li>
+    ))}
+  </ol>
+
+  <p class="src-foot">
+    <strong>Not the same as the base.</strong> The base you design later tonight is requirement 7 &mdash; somewhere
+    people live. This is requirement 5c &mdash; a robot on a round trip, with nobody aboard. Same kind of thinking,
+    completely different vehicle, and they are two separate requirements.
+  </p>
+</div>
+
+<style>
+  .src-card {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    padding: 1rem 1.15rem 1.1rem;
+  }
+
+  .src-head { display: flex; gap: 1rem; align-items: flex-start; justify-content: space-between; }
+  .src-head h3 { margin: 0.1rem 0 0; font-size: 1.1rem; }
+
+  .src-kicker {
+    margin: 0;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    color: var(--accent-strong);
+  }
+
+  .src-time {
+    flex: none;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.75rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    color: var(--muted);
+  }
+
+  .src-lede { margin: 0.7rem 0 1rem; font-size: 0.92rem; line-height: 1.6; color: var(--muted); max-width: 74ch; }
+
+  .src-boxes {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+    gap: 0.8rem;
+  }
+
+  .src-box {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 0.7rem 0.85rem 0.8rem;
+    background: var(--bg-alt);
+  }
+
+  .src-box-head { display: flex; gap: 0.55rem; align-items: baseline; }
+  .src-box-head h4 { margin: 0; font-size: 0.95rem; line-height: 1.35; }
+
+  .src-n {
+    flex: none;
+    width: 1.5rem;
+    height: 1.5rem;
+    display: grid;
+    place-items: center;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--accent-strong);
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-weight: 700;
+    font-size: 0.75rem;
+  }
+
+  .src-hint { margin: 0.45rem 0 0.4rem; font-size: 0.83rem; line-height: 1.55; color: var(--muted); }
+  .src-trap { margin: 0; font-size: 0.79rem; line-height: 1.5; color: var(--muted); }
+  .src-trap strong { color: #b0791f; }
+
+  /* Ruled space to actually write in, on paper. */
+  .src-write { display: none; }
+
+  .src-foot {
+    margin: 1rem 0 0;
+    font-size: 0.86rem;
+    line-height: 1.6;
+    border-left: 3px solid var(--accent);
+    background: var(--accent-soft);
+    padding: 0.6rem 0.9rem;
+    border-radius: 0 10px 10px 0;
+  }
+
+  @media print {
+    .src-card { border: none; padding: 0; }
+    .src-boxes { grid-template-columns: 1fr 1fr; }
+    .src-hint, .src-trap { font-size: 0.72rem; }
+    .src-write {
+      display: block;
+      margin-top: 0.5rem;
+      height: 3.2rem;
+      background-image: repeating-linear-gradient(
+        to bottom,
+        transparent 0,
+        transparent 1.05rem,
+        var(--line) 1.05rem,
+        var(--line) calc(1.05rem + 1px)
+      );
+    }
+  }
+</style>

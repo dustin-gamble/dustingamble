@@ -1,0 +1,258 @@
+---
+// Per-Scout requirement checkout.
+//
+// Group instruction is allowed, but the Guide to Advancement is explicit that
+// the counselor still has to be satisfied each Scout personally completed the
+// requirement (GTA 7.0.3.1). Watching a demo from the back of the room is not
+// the same as demonstrating it. These are the prompts that turn a room-wide
+// activity into an individual sign-off, timed so they fit inside the meeting
+// rather than adding one.
+const checks = [
+    {
+        req: "1a–d",
+        night: "Meeting 1 · Aug 31",
+        verb: "Tell",
+        what: "The purpose of space exploration",
+        prompt:
+            "Give me one historical reason we went, one thing we are trying to learn right now, one thing that came back down to Earth, and one country we fly with that we do not always get along with.",
+        pass: "Four answers, in their own words. Not a list they read off the slide.",
+        time: "60 s",
+    },
+    {
+        req: "2",
+        night: "Meeting 2 · Sep 28",
+        verb: "Share + discuss",
+        what: "Space pioneer card, plus four others",
+        prompt:
+            "Show me your card and tell me why this person. Then name four other pioneers and what each one did.",
+        pass:
+            "The card exists and is theirs. The other four are the ones from around the room — this is why patrols present their cards to each other.",
+        time: "90 s",
+    },
+    {
+        req: "4a",
+        night: "Meeting 2 · Sep 28",
+        verb: "Demonstrate",
+        what: "The law of action-reaction",
+        prompt:
+            "Let the balloon go, then tell me what pushed what. Which way did the air go, which way did the balloon go?",
+        pass: "They say the balloon pushes air backwards and the air pushes the balloon forwards. Both halves.",
+        time: "45 s",
+    },
+    {
+        req: "4b",
+        night: "Meeting 2 · Sep 28",
+        verb: "Demonstrate",
+        what: "How rocket engines work",
+        prompt:
+            "Hold the spent motor. Point at where the propellant burned, where the gas got out, what the delay does, and what the ejection charge is for. Then read me the C6-5.",
+        pass:
+            "Four parts pointed to on the real object, and letter = impulse, first number = thrust, second number = delay seconds.",
+        time: "90 s",
+    },
+    {
+        req: "4c",
+        night: "Meeting 2 · Sep 28",
+        verb: "Demonstrate",
+        what: "How satellites stay in orbit",
+        prompt:
+            "Drive the orbit simulator yourself. Get to orbit, then tell me why straight up does not work.",
+        pass:
+            "They say it out loud: orbit is sideways speed, and you are falling the whole time but moving fast enough to keep missing.",
+        time: "90 s",
+    },
+    {
+        req: "4d",
+        night: "Meeting 2 · Sep 28",
+        verb: "Demonstrate",
+        what: "How pictures get made and transmitted",
+        prompt:
+            "Trace it for me end to end: camera → numbers → radio → antenna on Earth → picture on a screen. Where does it get slow, and why?",
+        pass:
+            "The whole chain, in order, plus light-speed delay as the reason Mars pictures take minutes.",
+        time: "90 s",
+    },
+    {
+        req: "5c",
+        night: "Meeting 3 · Oct 26",
+        verb: "Design + show",
+        what: "Sample-return mission",
+        prompt: "Their own sample-return card, filled in and named.",
+        pass:
+            "A named destination, a stated sample, and a specific answer for how the spacecraft survives that particular environment. Generic 'it has shielding' does not clear it.",
+        time: "Card",
+    },
+    {
+        req: "6",
+        night: "Meeting 3 · Oct 26",
+        verb: "Describe",
+        what: "Crewed vehicle or the ISS",
+        prompt:
+            "Pick one — shuttle, Dragon, Soyuz or the ISS — and give me its purpose, how it operates, and three components.",
+        pass: "Purpose, operation and components. All three, about one vehicle they chose.",
+        time: "60 s",
+    },
+    {
+        req: "7",
+        night: "Meeting 3 · Oct 26",
+        verb: "Design + draw",
+        what: "Inhabited base",
+        prompt:
+            "Their own base sheet: a drawing plus energy, construction, life support, and purpose.",
+        pass:
+            "Every Scout has their own drawing, even if the patrol shared a concept. Four boxes filled in on their own sheet.",
+        time: "Sheet",
+    },
+    {
+        req: "3",
+        night: "Launch day · Nov 21",
+        verb: "Build, launch, recover",
+        what: "Model rocket, two flights",
+        prompt:
+            "Their rocket, their two flights, their stated objective on the second one. Then name the nine parts on it.",
+        pass:
+            "They built it, both flights happened, and they can point at all nine parts on their own airframe.",
+        time: "Field",
+    },
+    {
+        req: "8",
+        night: "Meeting 5 · Nov 23",
+        verb: "Discuss",
+        what: "One career",
+        prompt:
+            "Tell me about the job, the training and what it costs, the prospects and pay, what the day is actually like — and what about it interests you.",
+        pass:
+            "Findings AND the interest question. The second half is part of the requirement and it is the half people skip.",
+        time: "2 min",
+    },
+];
+---
+
+<div class="cks">
+  <div class="cks-head">
+    <h3>Individual checkout — every Scout, every requirement</h3>
+    <p>
+      Group instruction is fine. Group <em>credit</em> is not. The Guide to Advancement asks the counselor to be
+      satisfied that each Scout personally completed each requirement, and requirement 4 in particular uses the
+      words <strong>discuss and demonstrate</strong> — which one Scout cannot do on behalf of the patrol. These are
+      the 45-to-90-second prompts that turn a room activity into an individual sign-off. Work the room while
+      they build, simulate and draw; do not stop the meeting to do these.
+    </p>
+  </div>
+
+  <div class="mb-table-wrap">
+    <table class="cks-table">
+      <thead>
+        <tr>
+          <th scope="col">Req</th>
+          <th scope="col">When</th>
+          <th scope="col">What you ask them to do</th>
+          <th scope="col">What clears it</th>
+          <th scope="col">Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        {checks.map((c) => (
+          <tr>
+            <td><span class="cks-req">{c.req}</span></td>
+            <td class="cks-when">{c.night}</td>
+            <td>
+              <span class="cks-verb">{c.verb}</span>
+              <span class="cks-what">{c.what}</span>
+              <span class="cks-prompt">&ldquo;{c.prompt}&rdquo;</span>
+            </td>
+            <td class="cks-pass">{c.pass}</td>
+            <td class="cks-time">{c.time}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <p class="cks-foot">
+    Print this, put your roster down the side, and initial as you go. A Scout with a blank box has not finished the
+    requirement, no matter how good the night was &mdash; and finding that out on November 23 with the paperwork on
+    the table is far too late to fix it.
+  </p>
+</div>
+
+<style>
+  .cks {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    padding: 1rem 1.15rem 1.1rem;
+  }
+
+  .cks-head h3 { margin: 0 0 0.4rem; font-size: 1.05rem; }
+  .cks-head p { margin: 0 0 1rem; font-size: 0.9rem; color: var(--muted); line-height: 1.6; max-width: 78ch; }
+
+  .mb-table-wrap { width: 100%; overflow-x: auto; }
+
+  .cks-table { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
+
+  .cks-table th,
+  .cks-table td {
+    text-align: left;
+    vertical-align: top;
+    padding: 0.5rem 0.6rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .cks-table thead th {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .cks-req {
+    display: inline-block;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-weight: 700;
+    font-size: 0.8rem;
+    padding: 0.1rem 0.45rem;
+    border-radius: 6px;
+    background: var(--accent-soft);
+    color: var(--accent-strong);
+    white-space: nowrap;
+  }
+
+  .cks-when { font-size: 0.78rem; color: var(--muted); white-space: nowrap; }
+
+  .cks-verb {
+    display: inline-block;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 700;
+    color: var(--accent-strong);
+    margin-right: 0.4rem;
+  }
+
+  .cks-what { font-weight: 600; }
+  .cks-prompt { display: block; margin-top: 0.3rem; color: var(--muted); line-height: 1.5; }
+  .cks-pass { line-height: 1.5; min-width: 16rem; }
+
+  .cks-time {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.78rem;
+    white-space: nowrap;
+    color: var(--muted);
+  }
+
+  .cks-foot {
+    margin: 0.9rem 0 0;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--muted);
+    border-top: 1px dashed var(--line);
+    padding-top: 0.7rem;
+  }
+
+  @media print {
+    .cks { border: none; padding: 0; }
+    .cks-table { font-size: 0.72rem; }
+  }
+</style>
