@@ -1,0 +1,201 @@
+---
+// Requirement 7 — one sheet per Scout.
+//
+// The charrette works because patrols argue with each other, and that should
+// stay. But requirement 7 says "make drawings or a model of your base" and
+// asks the Scout to consider four subsystems — so each Scout needs their own
+// drawing and their own four boxes, even when the patrol shared one concept.
+// Otherwise the quiet Scout at the table has watched a requirement happen.
+const subsystems = [
+    {
+        id: "7a",
+        title: "Source of energy",
+        ask: "How much power, from what, and what happens when the sun goes down?",
+        probe: "Solar is the easy answer. The follow-up that makes it real: a lunar night is 14 Earth days long. Now what?",
+    },
+    {
+        id: "7b",
+        title: "How it will be constructed",
+        ask: "Shipped whole, inflated on arrival, 3D-printed from local dirt, or dug in?",
+        probe: "Everything you ship costs a fortune per kilogram. Everything you make there costs you a machine that has to work first time.",
+    },
+    {
+        id: "7c",
+        title: "Life-support system",
+        ask: "Air, water, food, waste, radiation. What is recycled, and what runs out?",
+        probe: "Name what fails first. Every honest base design has an answer to that, and it is usually not the thing people draw.",
+    },
+    {
+        id: "7d",
+        title: "Purpose and function",
+        ask: "Why does this base exist, and who is paying for it?",
+        probe: "The hardest question in the whole requirement: what does this base do that a robot could not do cheaper?",
+    },
+];
+---
+
+<div class="bds">
+  <div class="bds-head">
+    <div>
+      <p class="bds-kicker">Requirement 7 &middot; one per Scout</p>
+      <h3>Base Design Sheet</h3>
+    </div>
+    <span class="bds-time">Own drawing</span>
+  </div>
+
+  <p class="bds-lede">
+    Design with your patrol, argue with your patrol, pitch with your patrol &mdash; but this sheet is yours. Your
+    own drawing, your own four boxes. You can share a concept with the table; you cannot share the requirement.
+  </p>
+
+  <div class="bds-draw">
+    <span class="bds-draw-lab">Your base &mdash; draw it here</span>
+    <span class="bds-draw-hint">
+      Plan view or side view, whichever shows it better. Label the parts. Neatness is not scored; a drawing where
+      I can find the airlock is.
+    </span>
+  </div>
+
+  <p class="bds-where"><strong>Where is it?</strong> Name the world and the spot on it &mdash; and say what made you pick there.</p>
+
+  <ol class="bds-list">
+    {subsystems.map((x) => (
+      <li class="bds-item">
+        <div class="bds-item-head">
+          <span class="bds-id">{x.id}</span>
+          <h4>{x.title}</h4>
+        </div>
+        <p class="bds-ask">{x.ask}</p>
+        <p class="bds-probe">{x.probe}</p>
+        <div class="bds-write" aria-hidden="true"></div>
+      </li>
+    ))}
+  </ol>
+
+  <p class="bds-foot">
+    <strong>Counselor:</strong> during the three-minute pitches, each Scout speaks to the subsystem they own. That
+    is the moment requirement 7 actually gets met for that individual &mdash; not when the patrol's butcher paper
+    goes up on the wall.
+  </p>
+</div>
+
+<style>
+  .bds {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    padding: 1rem 1.15rem 1.1rem;
+  }
+
+  .bds-head { display: flex; gap: 1rem; align-items: flex-start; justify-content: space-between; }
+  .bds-head h3 { margin: 0.1rem 0 0; font-size: 1.1rem; }
+
+  .bds-kicker {
+    margin: 0;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    color: var(--accent-strong);
+  }
+
+  .bds-time {
+    flex: none;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.75rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    color: var(--muted);
+  }
+
+  .bds-lede { margin: 0.7rem 0 0.9rem; font-size: 0.92rem; line-height: 1.6; color: var(--muted); max-width: 74ch; }
+
+  .bds-draw {
+    border: 2px dashed var(--line);
+    border-radius: 12px;
+    min-height: 9rem;
+    display: grid;
+    align-content: center;
+    justify-items: center;
+    gap: 0.35rem;
+    padding: 1rem;
+    text-align: center;
+    background: var(--bg-alt);
+  }
+
+  .bds-draw-lab { font-weight: 700; font-size: 0.95rem; }
+  .bds-draw-hint { font-size: 0.8rem; color: var(--muted); max-width: 46ch; line-height: 1.5; }
+
+  .bds-where {
+    margin: 0.8rem 0 0.9rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    border-left: 3px solid var(--accent);
+    background: var(--accent-soft);
+    padding: 0.55rem 0.85rem;
+    border-radius: 0 10px 10px 0;
+  }
+
+  .bds-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+    gap: 0.75rem;
+  }
+
+  .bds-item {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 0.7rem 0.85rem 0.8rem;
+    background: var(--bg-alt);
+  }
+
+  .bds-item-head { display: flex; gap: 0.55rem; align-items: baseline; }
+  .bds-item-head h4 { margin: 0; font-size: 0.95rem; }
+
+  .bds-id {
+    flex: none;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-weight: 700;
+    font-size: 0.75rem;
+    padding: 0.12rem 0.42rem;
+    border-radius: 6px;
+    background: var(--accent-soft);
+    color: var(--accent-strong);
+  }
+
+  .bds-ask { margin: 0.45rem 0 0.35rem; font-size: 0.85rem; line-height: 1.55; }
+  .bds-probe { margin: 0; font-size: 0.79rem; line-height: 1.5; color: var(--muted); }
+  .bds-write { display: none; }
+
+  .bds-foot {
+    margin: 1rem 0 0;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--muted);
+    border-top: 1px dashed var(--line);
+    padding-top: 0.7rem;
+  }
+
+  @media print {
+    .bds { border: none; padding: 0; }
+    .bds-list { grid-template-columns: 1fr 1fr; }
+    .bds-draw { min-height: 12rem; }
+    .bds-probe { display: none; }
+    .bds-write {
+      display: block;
+      margin-top: 0.5rem;
+      height: 3.6rem;
+      background-image: repeating-linear-gradient(
+        to bottom,
+        transparent 0,
+        transparent 1.05rem,
+        var(--line) 1.05rem,
+        var(--line) calc(1.05rem + 1px)
+      );
+    }
+  }
+</style>
