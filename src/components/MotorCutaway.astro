@@ -57,8 +57,10 @@ const stages = [
         <text x="346" y="62">Propellant grain</text>
       </g>
       <g class="mc-label" data-part="delay">
-        <path d="M520 188 V 240 H 430" class="mc-leader" />
-        <text x="424" y="245" text-anchor="end">Delay grain — the &#8220;5&#8221;</text>
+        <!-- Routed right, not left: the bottom-left quadrant belongs to the
+             C6-5 decoder, and a left-hand label lands on top of its third row. -->
+        <path d="M520 188 V 240 H 600" class="mc-leader" />
+        <text x="606" y="245">Delay grain — the &#8220;5&#8221;</text>
       </g>
       <g class="mc-label" data-part="eject">
         <path d="M667 112 V 62 H 730" class="mc-leader" />

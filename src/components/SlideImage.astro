@@ -66,6 +66,7 @@ const IMAGES = {
   },
   "katherine-johnson": {
     src: "/images/space/katherine-johnson.jpg",
+    tall: true,
     alt: "Portrait of Katherine Johnson, NASA mathematician, seated",
     caption: "Katherine Johnson at NASA Langley, 1971. She calculated the trajectories that put Americans in orbit and on the Moon — John Glenn refused to fly until she personally checked the computer's numbers.",
     credit: "NASA",
@@ -77,7 +78,7 @@ const img = IMAGES[name];
 ---
 
 {img && (
-  <figure class={`simg simg-${size}`}>
+  <figure class={`simg simg-${size}${img.tall ? " simg-tall" : ""}`}>
     <img src={img.src} alt={img.alt} loading="lazy" decoding="async" />
     <figcaption>
       <span class="simg-cap">{img.caption}</span>
@@ -91,18 +92,29 @@ const img = IMAGES[name];
 <style>
   .simg { margin: 0.4rem 0 0.9rem; }
 
+  /* Height-capped and centred, never stretched to the full slide width.
+     These are not all wide photographs — Katherine Johnson is portrait, and
+     the Apollo crew, Columbia, the bootprint and the DSN dish are all square.
+     `width: 100%` plus `object-fit: cover` cropped every one of those into a
+     thin horizontal band through the middle of the picture. */
   .simg img {
     display: block;
-    width: 100%;
+    width: auto;
     height: auto;
+    max-width: 100%;
     max-height: 34vh;
-    object-fit: cover;
+    margin-inline: auto;
+    object-fit: contain;
     border-radius: 10px;
     border: 1px solid var(--line);
     background: var(--bg-alt);
   }
 
+  /* A portrait image capped at the same height as a wide one ends up tiny. */
+  .simg-tall img { max-height: 46vh; }
+
   .simg-half img { max-height: 26vh; }
+  .simg-half.simg-tall img { max-height: 34vh; }
 
   .simg figcaption {
     display: grid;

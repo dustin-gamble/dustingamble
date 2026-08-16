@@ -371,6 +371,7 @@ const slides = deck.slides;
   /* Everything visual gets a ceiling so it can never push the slide over. */
   .deck-stage.is-projecting :global(.sart-svg) { max-height: 30vh; width: auto; margin-inline: auto; }
   .deck-stage.is-projecting :global(.simg img) { max-height: 42vh; }
+  .deck-stage.is-projecting :global(.simg-tall img) { max-height: 54vh; }
   .deck-stage.is-projecting :global(.simg figcaption) { font-size: clamp(0.75rem, 1vw, 1rem); }
   .deck-stage.is-projecting :global(.rpd-svg),
   .deck-stage.is-projecting :global(.mcut-svg),
@@ -602,12 +603,15 @@ const slides = deck.slides;
   /* Simulator canvases carry their own intrinsic aspect. Inside a slide — and
      especially in fullscreen — cap the height so the controls stay on screen
      and the whole thing fits without scrolling. */
+  /* 38vh left the picture at 348px wide inside a 770px column while the
+     control panel ran on for 989px. The visual is the point of these slides,
+     so let it use the width it has. */
   .deck :global(.fsim-stage canvas),
   .deck :global(.osim-stage canvas) {
     width: auto;
     height: auto;
     max-width: 100%;
-    max-height: 38vh;
+    max-height: 62vh;
     margin-inline: auto;
   }
 
