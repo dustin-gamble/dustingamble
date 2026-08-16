@@ -36,11 +36,11 @@ const roles = [
     holds: "Wind meter or a ribbon on a stick, and the wind log.",
   },
   {
-    call: "TELEMETRY",
-    title: "Telemetry Officer",
-    who: "Telemetry crew Scout",
-    does: "Confirms the ground station has GPS lock and is receiving packets, then confirms the log is recording. On capstone flights this is a real go/no-go item.",
-    holds: "The laptop and the ground radio.",
+    call: "DATA",
+    title: "Data Officer",
+    who: "Any Scout — rotates each flight",
+    does: "Confirms the altimeter is armed and in the payload bay before the rocket goes on the rod, then reads it out after recovery and writes the number on the board next to that Scout's prediction. Nothing gets scored until DATA has called it.",
+    holds: "The altimeter log board and a pen that works.",
   },
   {
     call: "RECOVERY",
@@ -86,7 +86,7 @@ const countdown = [
   { t: "T+3:00", who: "PAO", say: "Measured altitude 1,012 feet. Predicted 980. Error 3.2 percent.", note: "Read it out. The Prediction Cup lives or dies on this number." },
 ];
 
-const poll = ["WEATHER", "RSO", "PAD", "TELEMETRY", "RECOVERY", "TIMER"];
+const poll = ["WEATHER", "RSO", "PAD", "DATA", "RECOVERY", "TIMER"];
 ---
 
 <div class="lops" data-lops>

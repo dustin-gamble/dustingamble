@@ -18,15 +18,15 @@ export const series = {
         "Planning for 6–10 Scouts. One launch pad and one shared altimeter is enough at that size.",
         "Requirement 3 cannot be finished in a church parking lot on a Monday night. Launch day is the deliverable — the Mondays exist to make it safe and worth doing.",
         "Five Mondays, not seven. Scouts build at home when the kit arrives, which buys back two whole nights; the November 16 meeting runs a help desk for anyone whose build went sideways. The night that stays is the post-flight one, where the data actually gets analyzed and the badge actually gets signed.",
-        "The Telemetry Rocket runs as a group project on a parallel track — three Saturday crew sessions, plus checkpoints on Monday nights. Every Scout who wants a crew role gets one.",
+        "The Telemetry Rocket is NOT running this year. One counselor cannot carry eight requirements, a build, a range and a firmware project at once — and without a 1,000 ft field the big rocket cannot fly anyway. The Estes altimeter does the same teaching job for the Prediction Cup.",
     ],
     counselorFacts: [
         "5 Mondays × 45 min",
         "Launch day Sat Nov 21",
         "6–10 Scouts",
         "Reqs 1–8 covered",
-        "about $45 per Scout",
-        "+ group telemetry build",
+        "Free to families — troop buys the kits",
+        "Altimeter in every rocket",
     ],
     calendarNote:
         "Nov 16 currently carries Cooking or Camping in the troop meeting plan, and Nov 23 is already scheduled as a short gratitude-and-catch-up night. Space Exploration takes the merit badge block on both; the rank-focused first 30 minutes and last 15 stay exactly as written. Nov 23 is the natural debrief slot precisely because it was already meant to be a light night. Confirm both swaps with whoever owns the troop calendar.",
@@ -37,6 +37,17 @@ export const series = {
 // ---------------------------------------------------------------------------
 
 export const telemetryTrack = {
+    status: "deferred",
+    statusLabel: "Not running in Fall 2026 — parked as a future project",
+    statusWhy: [
+        "One counselor cannot run eight requirements, a build, a range and a firmware project in the same term. Something gets done badly, and it would be the firmware — which is the part with no fallback.",
+        "The telemetry payload is about 120 g and needs the Lil' Spite airframe on an E or F motor. NAR sets a 1,000 ft minimum site dimension for E and F. A college helipad apron almost certainly does not give you 1,000 ft clear in every direction, so the big rocket has nowhere to fly.",
+        "Those two facts are really one fact. Without a 1,000 ft field there is no big rocket; without the big rocket there is nothing for the T-Beam to fly in. Cutting it is the honest call, not a retreat.",
+    ],
+    replacement:
+        "Nothing is lost from the teaching. The Estes altimeter fits the Cosmic Cargo's payload bay, flies in every Scout's own rocket, and produces the one number the whole course is built around — measured apogee against the altitude they predicted and sealed. That is the Prediction Cup intact, with real instrument data, and zero firmware between a Scout and their result.",
+    ifYouRunItAnyway:
+        "Everything below still stands and is worth keeping for a future year — ideally as its own project with its own adult, running in parallel rather than on top of a merit badge course. If you do pick it up, the honest minimum is a second adult who owns the electronics and a field with 1,000 ft in every direction.",
     intro:
         "Running the Telemetry Rocket capstone as a group is the right call — it is much better as a crew project than as a solo one, because a real mission has a flight software person and a ground station person and they have to talk to each other. But be clear-eyed about the arithmetic before you promise it to the Scouts.",
     theMath: {
@@ -153,25 +164,13 @@ export const timeline = [
     {
         window: "Fri Aug 28",
         owner: "Counselor",
-        what: "Order the telemetry hardware — two T-Beams, two Heltecs, cables, batteries, airframe. It has to be on the bench for crew session 1 on Sep 19.",
+        what: "Confirm the launch site. Measure the smallest clear dimension yourself — you need 400 ft for the C6-5 flights — and get written confirmation that no aircraft are scheduled that day.",
         risk: "high",
     },
     {
         window: "Mon Aug 31",
         owner: "Scouts",
-        what: "Meeting 1 — Why We Go. Reqs 1a–d covered live. Req 2 and req 8 assigned. Flight-readiness gate published. Telemetry crew recruited.",
-        risk: "none",
-    },
-    {
-        window: "Sat Sep 19 · 3 hrs",
-        owner: "Telemetry crew",
-        what: "Crew session 1 — bench day. Roles assigned, toolchain working on every laptop, stage 1 reading GPS and sensors.",
-        risk: "med",
-    },
-    {
-        window: "Mon Sep 28",
-        owner: "Scouts",
-        what: "Meeting 2 — How Rockets Work. Reqs 3(a–i) and 4a–d covered live. Trading cards due. Competition rules published.",
+        what: "Meeting 1 — Why We Go. Reqs 1a–d covered live. Req 2 and req 8 assigned. Flight-readiness gate published.",
         risk: "none",
     },
     {
@@ -181,22 +180,16 @@ export const timeline = [
         risk: "high",
     },
     {
-        window: "Sat Oct 17 · 3 hrs",
-        owner: "Telemetry crew",
-        what: "Crew session 2 — packet across the room. Stages 2–5: format, transmit, receive, CSV. Quarter-mile range test.",
-        risk: "med",
+        window: "Mon Sep 28",
+        owner: "Scouts",
+        what: "Meeting 2 — How Rockets Work. Reqs 3(a–i) and 4a–d covered live. Trading cards due. Competition rules published.",
+        risk: "none",
     },
     {
         window: "Mon Oct 26",
         owner: "Scouts",
         what: "Meeting 3 — Missions and Bases. Reqs 5 and 6 covered live, then the sample-return cards (5c) and the base-design charrette (req 7).",
         risk: "none",
-    },
-    {
-        window: "Sat Nov 14 · 3 hrs",
-        owner: "Telemetry crew",
-        what: "Crew session 3 — integration and flight readiness. Payload sled, mass and CG, motor delay decision, shake test, full dress rehearsal with a real GPS lock. One week before launch, on purpose.",
-        risk: "med",
     },
     {
         window: "Mon Nov 16",
@@ -207,7 +200,7 @@ export const timeline = [
     {
         window: "Sat Nov 21",
         owner: "Everyone",
-        what: "LAUNCH DAY. Req 3 completed, Prediction Cup scored, telemetry rocket demo flight. Backup Sat Nov 28, second backup Sat Dec 5.",
+        what: "LAUNCH DAY. Req 3 completed, altimeters read out, Prediction Cup scored. Backup Sat Nov 28, second backup Sat Dec 5.",
         risk: "med",
     },
     {
@@ -882,18 +875,18 @@ export const decks = {
             },
             {
                 type: "bullets",
-                heading: "Telemetry crew — what the rocket told us",
+                heading: "What the altimeters told us",
                 art: "telemetry-trace",
-                intro: "Crew presents the flight data to the troop. Ten minutes, on the projector, with the actual CSV open.",
+                intro: "Every rocket flew with the altimeter in its payload bay. Put all the numbers on the projector at once and read the room's flight as one dataset.",
                 bullets: [
-                    "The altitude trace: boost, burnout, coast, apogee, ejection, descent. Point at each one on the plot.",
-                    "GPS track of where it actually went versus where we aimed.",
-                    "Compare the telemetry apogee to the Estes altimeter and to the simulator. Three numbers, three methods — which do you trust and why?",
+                    "Predicted against measured, every Scout on one chart. Who was closest, and did they get lucky or were they right?",
+                    "Two flights, same rocket, different motor. How much did the C actually buy you over the B?",
+                    "Where the simulator was wrong, and in which direction. It is optimistic — say why, and the answer is drag.",
                     "What broke, what we'd change, and what we'd fly next.",
                 ],
                 note: "This same work can support a Scout who later takes up Engineering or Aviation — each of those badges has its own requirements and its own counselor sign-off, so nothing here is credit already earned. Tell the crew to keep their data and write-up.",
                 notes:
-                    "If the telemetry flight failed — and it might — this slide gets better, not worse. A failed flight with good data on why is a more honest engineering story than a clean one. Let the crew present the failure with their heads up.",
+                    "The Scouts whose predictions were badly wrong give the most useful slide of the night, so ask them first and ask them warmly. A rocket that went half as high as predicted has taught the room more about drag than any video will. Let them present the miss with their heads up.",
             },
             {
                 type: "bullets",
@@ -928,7 +921,7 @@ export const meetings = [
         block: "0:30–1:15 (45 min)",
         deck: "why-we-go",
         objective:
-            "Cover requirement 1 completely, hand out requirement 2 and requirement 8, publish the flight-readiness gate, and recruit the telemetry crew.",
+            "Cover requirement 1 completely, hand out requirement 2 and requirement 8, and publish the flight-readiness gate.",
         covers: [
             { id: "1a", how: "Video clip + discussion of the space race as a prestige and military contest." },
             { id: "1b", how: "Five current missions stated as a specific question each one exists to answer." },
@@ -944,7 +937,7 @@ export const meetings = [
             ["0:42–0:50", "Two benefit shorts + the myth-vs-reality slide. Highest-energy part of the night.", "Counselor"],
             ["0:50–0:55", "International cooperation clip + ISS discussion.", "Counselor"],
             ["0:55–1:02", "Pioneer draft. Clipboard goes around DURING this, not after.", "SPL runs the clipboard"],
-            ["1:02–1:07", "TELEMETRY CREW CALL. Hold up the T-Beam and the Heltec. Take names for Sep 19.", "Counselor"],
+            ["1:02–1:07", "Hold up the altimeter. THIS is what measures your flight — every rocket carries one, and the number it gives you is what the Prediction Cup is scored on.", "Counselor"],
             ["1:07–1:13", "Flight-readiness gate + permission slip + safety code printout. Kits handed out Sep 28 to whoever has cleared.", "Counselor"],
             ["1:13–1:15", "Show the launch pad and altimeter on the table. Walk the calendar. Release on time.", "Counselor"],
         ],
@@ -955,7 +948,7 @@ export const meetings = [
             "Printed launch-day permission slips (one per Scout, plus five spares)",
             "Printed NAR Model Rocket Safety Code, one per Scout",
             "The Porta-Pad II and the Estes altimeter, out of the box, on the table",
-            "A T-Beam and a Heltec to hold up during the crew call",
+            "The Estes altimeter, out of the box, to hold up — small enough to pass round",
             "A printed one-page calendar: five Mondays, three Saturdays, one launch day",
         ],
         homework: [
@@ -991,7 +984,7 @@ export const meetings = [
             ["0:52–0:58", "Launch simulator on the projector. Predict first, then press Launch. Add payload and watch T/W fall.", "Counselor"],
             ["0:58–1:03", "Recovery simulator as a challenge: longest time aloft without shredding the chute.", "Three Scouts try"],
             ["1:03–1:08", "Orbit simulator (req 4c): straight up with the same fuel still comes back down.", "Counselor"],
-            ["1:08–1:13", "Mission-control diagram (req 4d) + live telemetry packet across the room if ready.", "Telemetry crew"],
+            ["1:08–1:13", "Mission-control diagram (req 4d). Trace the picture-to-Earth chain on the board.", "Counselor"],
             ["1:13–1:15", "Competition rules published. Gate closes Friday. Build it at home when it arrives. Release.", "Counselor"],
         ],
         materials: [
@@ -1001,7 +994,7 @@ export const meetings = [
             "At least two SPENT Estes motors (never a live one in a hand-to-hand demo)",
             "Competition cards, pre-printed, one per Scout",
             "Laptop + projector — the simulators carry most of this night",
-            "The T-Beam and Heltec pair, working, for the demo",
+            "The Estes altimeter and a spare, so Scouts can see what goes in the payload bay",
             "The ordering checklist — who has ordered and who hasn't",
             "Printed build instructions to take home, since building now happens at home",
         ],
@@ -1120,7 +1113,7 @@ export const meetings = [
         block: "0:30–1:15 (45 min)",
         deck: "debrief",
         objective:
-            "Analyse predicted vs measured as a group, hear the telemetry crew's flight report, give out the awards, and sign the blue cards before anyone leaves for Thanksgiving.",
+            "Analyse predicted vs measured as a group, give out the awards, and sign the blue cards before anyone leaves for Thanksgiving.",
         covers: [
             { id: "4", how: "Predicted vs measured across every Scout — requirement 4 tested against real data from their own rocket." },
             { id: "5", how: "Any remaining 5b projects presented and discussed." },
@@ -1128,7 +1121,7 @@ export const meetings = [
         ],
         runOfShow: [
             ["0:30–0:42", "Whiteboard every Scout's predicted, measured and percent error. Ask the four questions. Let them find the pattern.", "Counselor + Scouts"],
-            ["0:42–0:52", "Telemetry crew presents the flight data on the projector with the real CSV open.", "Telemetry crew"],
+            ["0:42–0:52", "Altimeter numbers on the projector. Every Scout's predicted vs measured, plotted together.", "Counselor + Scouts"],
             ["0:52–0:58", "Anomaly write-ups read aloud. The Anomaly Award should get the biggest laugh and the most respect.", "Scouts"],
             ["0:58–1:05", "Awards: Prediction Cup, Max Altitude, Time Aloft, Mission Accomplished, Recovery, Craftsmanship, Anomaly.", "Counselor"],
             ["1:05–1:13", "Requirement 8 career conversations one-on-one while others finish write-ups. Blue cards signed at the table.", "Counselor"],
@@ -1250,16 +1243,16 @@ export const orders = {
             total: "≈ $210–$255",
             notes: [
                 "Verify the Estes altimeter actually fits the Cosmic Cargo's 0.98 in payload bay the day it arrives, and definitely before November 16. If it doesn't, you fly the altimeter in your own reference rocket and score by matched flights instead. Check this the day it arrives, not the week of the launch.",
-                "The Porta-Pad II uses a 1/8 in rod. It will NOT fly the telemetry rocket — see the next order.",
+                "The Porta-Pad II uses a 1/8 in rod, which is all you need in 2026 — everything flying is a C6-5 or below. The 3/16 in Maxi rod in the next group only matters if you ever pick the big rocket back up.",
             ],
         },
         {
             id: "telemetry",
-            title: "The big rocket — telemetry capstone hardware (group build)",
-            owner: "Counselor orders; crew builds; adult flies",
-            deadline: "Order by Fri Aug 28 — the electronics have to be in hand for crew session 1 on Sep 19",
+            title: "The big rocket — DO NOT ORDER FOR 2026",
+            owner: "Deferred — kept here as a costed plan for a future year",
+            deadline: "Nothing to order. This whole group is parked.",
             intro:
-                "This is the Lil' Spite build from the capstone page, scoped for a crew instead of one Scout. Be blunt about what the airframe is: 4 ft 4 in, rated intermediate, boxed for ages 18+, about two hours of assembly. Scouts build the payload, write the firmware, and run the ground station; an adult does the motor prep and presses the button. Quantities below assume a group — the single biggest change from the original one-Scout bill of materials is a second T-Beam so there is a bench unit that never flies and a flight unit that never gets experimented on.",
+                "NOT ORDERING THIS IN 2026 — the telemetry track is deferred, and without a 1,000 ft field this airframe has nowhere to fly. Everything below is kept costed and researched so that picking it up in a future year is a decision, not a restart. This is the Lil' Spite build from the capstone page, scoped for a crew instead of one Scout. Be blunt about what the airframe is: 4 ft 4 in, rated intermediate, boxed for ages 18+, about two hours of assembly. Scouts build the payload, write the firmware, and run the ground station; an adult does the motor prep and presses the button. Quantities below assume a group — the single biggest change from the original one-Scout bill of materials is a second T-Beam so there is a bench unit that never flies and a flight unit that never gets experimented on.",
             rows: [
                 { item: "Estes Pro Series II Lil' Spite", detail: "51.8 in long, 2.0 in dia, 10.3 oz (292 g) dry. Plywood fins, 29 mm mount, 18 in ripstop chute. ~1,200 ft on black powder.", qty: "1", price: "$59.99", buy: "https://www.amazon.com/Estes-9737-Designed-Intermediate-Flying-Rocket-Model/dp/B0G1Z9GVGX", mfr: "https://estesrockets.com/products/lil-spite" },
                 { item: "Estes 3/16 in Maxi launch rod", detail: "THE ONE-PAD OPTION. Fits the Porta-Pad II you already have, and the Lil\u2019 Spite\u2019s 1/4 in lug slides onto it. Buy this instead of the PSII pad below if you want a single pad — see the notes for the stiffness caveat.", qty: "1", price: "~$10", buy: "https://www.amazon.com/s?k=Estes+3%2F16+maxi+launch+rod", mfr: "https://estesrockets.com/collections/launch-supplies" },
@@ -1442,16 +1435,29 @@ export const launchDay = {
             { motor: "B", dim: "200 ft", use: "Scout flight 1 (B6-4)" },
             { motor: "C", dim: "400 ft", use: "Scout flight 2 (C6-5)" },
             { motor: "D", dim: "500 ft", use: "—" },
-            { motor: "E", dim: "1,000 ft", use: "Telemetry rocket (E16)" },
-            { motor: "F", dim: "1,000 ft", use: "Telemetry rocket (F15)" },
+            { motor: "E", dim: "1,000 ft", use: "Not flying in 2026" },
+            { motor: "F", dim: "1,000 ft", use: "Not flying in 2026" },
         ],
         note:
-            "The Scout rockets need a field about 400 ft across in its smallest dimension. The telemetry rocket needs 1,000 ft — roughly a quarter mile square. That gap is the whole reason for the Camp SLO conversation: you can fly the Scout portion at a smaller field if you have to, but the big rocket needs real acreage.",
+            "Read the table as a single question: what is the SMALLEST dimension of your field? Everything we are flying in 2026 is a C6-5 or below, so the answer has to be at least 400 ft. That is a manageable number and it is why the big rocket got cut — an E or F needs 1,000 ft, roughly a quarter mile in every direction, and there is no point holding out for a field that large when nothing we own has to fly on one.",
     },
     sites: [
         {
+            name: "Cuesta College — helipad / open apron area",
+            status: "Primary — needs a facilities request and two measurements",
+            detail:
+                "Close, familiar to families, and flat. Two things decide whether it works, and neither is a phone call you can skip. First, measure it: pace or map the SMALLEST clear dimension of the apron and everything you would be willing to walk into. A C6-5 needs 400 ft, and 400 ft is bigger than most people's guess — it is about 130 paces. Second, it is a helipad, which means it may see aircraft. You need to know from the college whether anything flies in or out that day, and you do not launch if the answer is 'sometimes'. A model rocket on a C motor is FAA Class 1 and needs no notification, but the NAR code is explicit that you do not launch near aircraft, and that is the rule that matters here.",
+            actions: [
+                "Find the right office — campus facilities or risk management, not the front desk — and ask what a community group needs to use the area on a Saturday morning.",
+                "Ask directly: does anything fly in or out of that pad, who schedules it, and can we get written confirmation that nothing is scheduled on November 21?",
+                "Measure the smallest clear dimension yourself before you commit. If it is under 400 ft, the site is a no for the C6-5 flights and you either drop to B motors or find another field.",
+                "Ask about the surface and the surroundings: dry grass anywhere downrange is a Cal Fire question, and a parking lot full of cars is a recovery problem.",
+                "Get the insurance certificate request into Los Padres Council as soon as you know who it must name — council paperwork is the long pole, not the field.",
+            ],
+        },
+        {
             name: "Camp San Luis Obispo — O'Sullivan Field",
-            status: "Primary — requires access paperwork",
+            status: "Backup — more space, more paperwork",
             detail:
                 "The Central Coast Model Rocket Club has historically launched from the heliport landing area at Camp San Luis Obispo, a California National Guard installation north of town. Low-power through mid-power, wind permitting. Reported requirements include a $2M insurance certificate and roughly three days of access paperwork — but treat that as a starting point and confirm current requirements yourself, because club activity has been intermittent over the years.",
             actions: [
@@ -1490,7 +1496,7 @@ export const launchDay = {
         ["8:30", "Scouts arrive. Craftsmanship judging happens now, by a non-parent, before anything flies and gets scuffed."],
         ["8:45", "Range safety brief. Everybody, including parents. Safety distances, the 60-second misfire rule, who calls the range hot and cold."],
         ["9:00", "Flight 1 — shakedown, B6-4, one at a time. Unscored. Recover, inspect, repack, and fix anything that shook loose."],
-        ["10:15", "Break. Repack chutes, swap motors, reset. Telemetry crew sets up the ground station and gets a GPS lock."],
+        ["10:15", "Break. Repack chutes, swap motors, reset. Read out the altimeters from flight 1 and write the numbers on the board."],
         ["10:45", "Flight 2 — scored. C6-5, altimeter aboard, sealed prediction read aloud before launch. Measured altitude recorded on the card by a second adult."],
         ["12:00", "Telemetry rocket demo flight. Adult flies it, the crew runs the ground station, everyone watches the CSV fill up live."],
         ["12:30", "Lunch. Anomaly write-ups started on paper while the memory is fresh — this is the only paperwork that happens on the field."],
@@ -1573,11 +1579,8 @@ export function getMeetingByDate(date) {
 export const calendarEvents = [
     { date: "2026-08-31", label: "Mon Aug 31", kind: "meeting", title: "Meeting 1 — Why We Go", note: "Claim your space pioneer. Pick up the permission slip and the safety code." },
     { date: "2026-09-04", label: "Fri Sep 4", kind: "deadline", title: "Troop places the kit order", note: "Counselor task. Kits must be in hand for handout night on September 28." },
-    { date: "2026-09-19", label: "Sat Sep 19", kind: "crew", title: "Telemetry crew session 1", note: "Bench day. Optional — only if you're on the rocket's electronics crew." },
     { date: "2026-09-28", label: "Mon Sep 28", kind: "meeting", title: "Meeting 2 — How Rockets Work", note: "Pioneer card due tonight. KITS HANDED OUT to everyone who cleared the gate." },
-    { date: "2026-10-17", label: "Sat Oct 17", kind: "crew", title: "Telemetry crew session 2", note: "Getting a packet across the room, then a quarter-mile range test." },
     { date: "2026-10-26", label: "Mon Oct 26", kind: "meeting", title: "Meeting 3 — Missions and Bases", note: "Robotic vs crewed, flying Apollo's trajectory, and designing a base." },
-    { date: "2026-11-14", label: "Sat Nov 14", kind: "crew", title: "Telemetry crew session 3", note: "Payload integration and the full dress rehearsal." },
     { date: "2026-11-16", label: "Mon Nov 16", kind: "meeting", title: "Meeting 4 — Mission Control + Flight Readiness", note: "Bring your finished rocket, motors and permission slip. Build help desk open all night." },
     { date: "2026-11-21", label: "Sat Nov 21", kind: "launch", title: "LAUNCH DAY", note: "Range opens 8:30. Rocket, motors, closed-toe shoes, hat, water, chair." },
     { date: "2026-11-23", label: "Mon Nov 23", kind: "meeting", title: "Meeting 5 — Debrief and awards", note: "Bring your requirement 8 career research. Badges get signed tonight." },
