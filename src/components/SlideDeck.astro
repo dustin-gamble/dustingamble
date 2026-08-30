@@ -303,7 +303,10 @@ const slides = deck.slides;
   .deck-stage.is-projecting {
     position: fixed;
     inset: 0;
-    z-index: 999;
+    /* The site header is sticky and was painting over the top of every
+       projected slide, ghosting the heading behind a nav bar. Sit above
+       everything; :global(body) below also hides the chrome outright. */
+    z-index: 2147483000;
     border-radius: 0;
   }
 
@@ -323,6 +326,11 @@ const slides = deck.slides;
 
   .deck-stage.is-projecting .deck-slide[hidden] { display: none; }
 
+  /* Belt and braces with the z-index above: while a deck is projecting, the
+     site header and footer are simply not in the room. */
+  :global(body.deck-projecting) :global(.site-header),
+  :global(body.deck-projecting) :global(.site-footer) { display: none; }
+
   .deck-stage.is-projecting .deck-slide {
     width: min(100%, 1600px);
     max-height: 100%;
@@ -339,6 +347,122 @@ const slides = deck.slides;
     max-height: 100%;
     overflow: hidden;
   }
+
+  /* ------------------------------------------------------------------
+     Two-column projection.
+
+     Everything used to stack in one ~1000px column inside a 1600px stage:
+     heading, intro, photo, diagram, bullets, note. That is ~1130px of
+     content in a ~790px budget, so fit() shrank the whole slide to 70% —
+     which is what made the decks look empty. The photo ended up 357px wide
+     on a 1600px screen with dead cream on three sides.
+
+     So on a wide screen, put the visual in its own column beside the text.
+     Nothing needs shrinking, the picture gets real size, and the frame is
+     full. Slides with no visual keep the single column and simply centre.
+     ------------------------------------------------------------------ */
+  @media (min-width: 1100px) {
+    /* Two things this selector is working around, both found the hard way.
+
+       1. The whole thing is wrapped in :global(). .simg and .sart come from
+          child components and carry a different astro cid, and Astro does not
+          unwrap a :global() nested inside :has() — it emitted the literal text
+          ":global(.simg)" into the stylesheet, which is invalid CSS, so the
+          browser discarded the entire rule.
+
+       2. The classes are repeated (.is-projecting.is-projecting, .ds.ds).
+          Going global costs the two [data-astro-cid] attribute selectors that
+          Astro adds to the scoped `.deck-stage.is-projecting .ds` rule above,
+          so without the repetition that rule wins and display stays flex —
+          grid-template-columns applied while display: grid did not. */
+    :global(.deck-stage.is-projecting.is-projecting .ds.ds:not(.ds-heavy):has(> .simg)) {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+      grid-auto-rows: min-content;
+      /* start, not center: when content is a little too tall, centring
+         overflows in BOTH directions and .ds is overflow:hidden, so the
+         heading was being clipped off the top of the slide entirely. */
+      align-content: start;
+      column-gap: clamp(1.5rem, 3vw, 3.5rem);
+      /* row-gap must be 0 — the body and the visual are pinned to explicit
+         high row numbers (see below) and every empty row between would
+         otherwise contribute a gap. Spacing comes from margins instead. */
+      row-gap: 0;
+    }
+
+    /* Heading and standfirst run the full width. */
+    :global(.deck-stage.is-projecting.is-projecting .ds.ds:not(.ds-heavy):has(> .simg) > .ds-h1),
+    :global(.deck-stage.is-projecting.is-projecting .ds.ds:not(.ds-heavy):has(> .simg) > .ds-h2),
+    :global(.deck-stage.is-projecting.is-projecting .ds.ds:not(.ds-heavy):has(> .simg) > .ds-kicker),
+    :global(.deck-stage.is-projecting.is-projecting .ds.ds:not(.ds-heavy):has(> .simg) > .ds-sub),
+    :global(.deck-stage.is-projecting.is-projecting .ds.ds:not(.ds-heavy):has(> .simg) > .ds-eyebrow),
+    :global(.deck-stage.is-projecting.is-projecting .ds.ds:not(.ds-heavy):has(> .simg) > .ds-question),
+    :global(.deck-stage.is-projecting.is-projecting .ds.ds:not(.ds-heavy):has(> .simg) > .ds-intro) {
+      grid-column: 1 / -1;
+    }
+
+    /* Visuals take the right column.
+
+       The row numbers are the crux. Grid auto-placement flows in DOM order,
+       so simply saying `grid-column: 1` on the bullets put them in the row
+       AFTER the photo — i.e. below it, off the bottom of the slide — rather
+       than beside it. Pinning the visual and the body to the same explicit
+       row is what actually puts them side by side. 90 is just a number
+       comfortably higher than any heading count. */
+    :global(.deck-stage.is-projecting.is-projecting .ds.ds:not(.ds-heavy):has(> .simg) > .simg) {
+      grid-column: 2;
+      grid-row: 90;
+      min-height: 0;
+      align-self: center;
+    }
+
+    :global(.deck-stage.is-projecting.is-projecting .ds.ds:not(.ds-heavy):has(> .simg) > .sart) {
+      grid-column: 2;
+      grid-row: 91;
+      min-height: 0;
+      align-self: center;
+    }
+
+    /* Everything else — bullets, steps, columns — fills the left column,
+       on the same rows as the visual so the two sit side by side. */
+    :global(.deck-stage.is-projecting.is-projecting .ds.ds:not(.ds-heavy):has(> .simg) > .ds-list),
+    :global(.deck-stage.is-projecting.is-projecting .ds.ds:not(.ds-heavy):has(> .simg) > .ds-steps),
+    :global(.deck-stage.is-projecting.is-projecting .ds.ds:not(.ds-heavy):has(> .simg) > .ds-cols),
+    :global(.deck-stage.is-projecting.is-projecting .ds.ds:not(.ds-heavy):has(> .simg) > .ds-reveal),
+    :global(.deck-stage.is-projecting.is-projecting .ds.ds:not(.ds-heavy):has(> .simg) > .ds-video),
+    :global(.deck-stage.is-projecting.is-projecting .ds.ds:not(.ds-heavy):has(> .simg) > .ds-locs) {
+      grid-column: 1;
+      grid-row: 90 / span 2;
+      align-self: start;
+    }
+
+    /* Spacing that row-gap: 0 gave up. */
+    :global(.deck-stage.is-projecting.is-projecting .ds.ds:not(.ds-heavy):has(> .simg) > .ds-h1),
+    :global(.deck-stage.is-projecting.is-projecting .ds.ds:not(.ds-heavy):has(> .simg) > .ds-h2),
+    :global(.deck-stage.is-projecting.is-projecting .ds.ds:not(.ds-heavy):has(> .simg) > .ds-question) { margin-bottom: 0.35rem; }
+
+    :global(.deck-stage.is-projecting.is-projecting .ds.ds:not(.ds-heavy):has(> .simg) > .ds-kicker),
+    :global(.deck-stage.is-projecting.is-projecting .ds.ds:not(.ds-heavy):has(> .simg) > .ds-eyebrow) { margin-bottom: 0.2rem; }
+
+    :global(.deck-stage.is-projecting.is-projecting .ds.ds:not(.ds-heavy):has(> .simg) > .ds-intro),
+    :global(.deck-stage.is-projecting.is-projecting .ds.ds:not(.ds-heavy):has(> .simg) > .ds-sub) { margin-bottom: 0.9rem; }
+
+    /* Only a picture that HAS its own column gets to be big — raising the cap
+       globally overflowed every single-column slide instead. */
+    :global(.deck-stage.is-projecting .ds:not(.ds-heavy):has(> .simg) > .simg img) { max-height: 44vh; }
+    :global(.deck-stage.is-projecting .ds:not(.ds-heavy):has(> .simg) > .simg-tall img) { max-height: 50vh; }
+
+    /* A photo and a diagram sharing the right column split the budget. */
+    :global(.deck-stage.is-projecting .ds:not(.ds-heavy):has(> .simg):has(> .sart) > .simg img) { max-height: 27vh; }
+    :global(.deck-stage.is-projecting .ds:not(.ds-heavy):has(> .simg):has(> .sart) > .sart .sart-svg) { max-height: 21vh; }
+    /* .sart is a bare wrapper div; in a grid column its svg (width:100%) had
+       nothing to resolve against and collapsed to zero. Give it the column. */
+    :global(.deck-stage.is-projecting.is-projecting .ds.ds:not(.ds-heavy):has(> .simg) > .sart) { width: 100%; }
+  }
+
+  /* The note is a presenter aside. It was the deepest element on several
+     slides, dragging the auto-scale down for text the room never reads. */
+  .deck-stage.is-projecting .ds-note { display: none; }
 
 /* Presenter notes belong to the presenter and not to the room.
      Hidden on the projection by default; press N to peek. */
@@ -761,7 +885,7 @@ const slides = deck.slides;
         var need = deepest - top;
 
         if (need > avail) {
-          var k = Math.max(0.68, avail / need);
+          var k = Math.max(0.58, avail / need);
           box.style.transformOrigin = "top center";
           box.style.transform = "scale(" + k.toFixed(3) + ")";
         }
@@ -802,8 +926,23 @@ const slides = deck.slides;
         for (var c = 0; c < box.children.length; c++) ro.observe(box.children[c]);
       }
 
+      // Slide images are loading="lazy", and a slide that has never been shown
+      // is display:none — so the browser has no reason to fetch its photo until
+      // the moment it appears, which on a projector reads as a blank box. Warm
+      // the current slide and the one after it.
+      function preload(n) {
+        [slides[n], slides[n + 1]].forEach(function (sl) {
+          if (!sl) return;
+          sl.querySelectorAll('img[loading="lazy"]').forEach(function (img) {
+            img.loading = "eager";
+            if (!img.complete) img.src = img.src;
+          });
+        });
+      }
+
       function show(n) {
         i = Math.max(0, Math.min(slides.length - 1, n));
+        preload(i);
         slides.forEach((s, idx) => (s.hidden = idx !== i));
         cur.textContent = String(i + 1);
         prev.disabled = i === 0;
@@ -834,6 +973,7 @@ const slides = deck.slides;
 
       function enterProjection() {
         stage.classList.add("is-projecting");
+        document.body.classList.add("deck-projecting");
         document.documentElement.style.overflow = "hidden";
         fullBtn.textContent = "Exit";
         stage.focus();
@@ -852,6 +992,7 @@ const slides = deck.slides;
 
       function exitProjection() {
         stage.classList.remove("is-projecting", "show-notes");
+        document.body.classList.remove("deck-projecting");
         document.documentElement.style.overflow = "";
         fullBtn.textContent = "Present";
         try {

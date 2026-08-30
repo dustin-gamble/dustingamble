@@ -225,9 +225,9 @@ export const decks = {
             {
                 type: "title",
                 kicker: "Space Exploration Merit Badge · Night 1 of 5",
+                image: "bootprint",
                 heading: "Why We Go",
                 sub: "Requirement 1 — the purpose of space exploration",
-                art: "four-reasons",
                 notes:
                     "Open standing up, no slides for the first 60 seconds. Ask: 'Name one thing in this room that exists because somebody went to space.' Take three answers. Do not correct wrong ones yet — the benefits slide will do it for you.",
             },
@@ -244,7 +244,6 @@ export const decks = {
             {
                 type: "bullets",
                 heading: "1a — Historical reasons",
-                art: "four-reasons",
                 image: "apollo-crew",
                 intro: "It did not start as science. It started as a race, and the science came along for the ride.",
                 bullets: [
@@ -261,7 +260,6 @@ export const decks = {
                 type: "bullets",
                 heading: "1b — Immediate goals: what are we actually trying to learn?",
                 image: "perseverance",
-                art: "careers",
                 intro: "Not 'explore space.' Name the question the mission is built to answer.",
                 bullets: [
                     "Was Mars ever habitable, and is there preserved evidence of it? — Perseverance, sample caching",
@@ -375,9 +373,9 @@ export const decks = {
             {
                 type: "title",
                 kicker: "Space Exploration Merit Badge · Night 2 of 5",
+                image: "model-liftoff",
                 heading: "How Rockets Work",
                 sub: "Requirements 3 (parts) and 4 (principles of space flight)",
-                art: "third-law",
                 notes:
                     "Have a fully built Cosmic Cargo and a spent motor on the table before anyone sits down. Tonight is the most hands-on night of the three — talk less, hand things around more.",
             },
@@ -507,9 +505,9 @@ export const decks = {
             {
                 type: "title",
                 kicker: "Space Exploration Merit Badge · Night 3 of 5",
+                image: "voyager",
                 heading: "Missions",
                 sub: "Requirements 5 and 6 — robotic vs crewed, and one vehicle in real detail",
-                art: "robotic-vs-crewed",
                 notes:
                     "This night used to be crammed with requirement 7 as well. It isn't anymore, so slow down and let the comparison discussion breathe — the robotic-vs-crewed argument is the best conversation in the whole badge and it needs room to be an argument.",
             },
@@ -688,7 +686,7 @@ export const decks = {
             {
                 type: "bullets",
                 heading: "Three rules for tonight",
-                art: "build-order",
+                art: "checklist",
                 bullets: [
                     "Dry-fit everything before glue touches anything. Every single piece. No exceptions.",
                     "Fins straight matters more than fins pretty. A crooked fin makes the rocket corkscrew and ruins your prediction — which is the thing you're actually being scored on.",
@@ -750,7 +748,6 @@ export const decks = {
             {
                 type: "launchops",
                 heading: "You are not spectators \u2014 you are the range crew",
-                image: "field-ground-station",
                 intro:
                     "Eight positions, real callsigns, and a countdown that nobody gets to skip. Pick your station tonight and practise the calls, because on Saturday the count runs for real.",
                 notes:
@@ -852,9 +849,9 @@ export const decks = {
             {
                 type: "title",
                 kicker: "Space Exploration Merit Badge · Night 5 of 5",
+                image: "model-descent",
                 heading: "What the Data Said",
                 sub: "Predicted vs measured, the awards, and badge sign-off",
-                art: "predicted-vs-measured",
                 notes:
                     "This is the night the badge actually gets finished, and it is the night most troops skip. Thanksgiving week was already scheduled as a light catch-up night, which makes it perfect — low pressure, high payoff, and Scouts leave the fall with a completed badge instead of a loose end.",
             },
