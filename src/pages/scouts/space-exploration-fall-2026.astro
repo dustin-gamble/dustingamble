@@ -23,6 +23,7 @@ import {
   corrections,
   calendarEvents,
   scoutGuide,
+  drg,
 } from "../../data/space-exploration-fall-2026.js";
 
 const scoutOrder = orders.groups.find((g) => g.id === "scout");
@@ -115,6 +116,62 @@ const counselorOrders = orders.groups.filter((g) => g.id !== "scout");
           </ol>
           <p class="se-note">{scoutGuide.gate.objective}</p>
         </details>
+      </section>
+
+      <section class="se-block">
+        <h2>The official guide — read it on your phone, it's free</h2>
+        <p class="muted">
+          Scouting America publishes a page for every single requirement on this badge. It is free, there is no
+          pamphlet to buy, and it is the same text I am marking you against. If you only open one link on this
+          whole page, make it this one &mdash; and if you miss a Monday, this is how you catch up.
+        </p>
+        <p>
+          <a class="se-btn-buy" href={drg.contents} target="_blank" rel="noopener noreferrer">Open the Digital Resource Guide ↗</a>
+        </p>
+
+        <div class="se-drg">
+          {drg.pages.map((pg) => (
+            <div class="se-drg-row">
+              <span class="se-drg-req">{pg.req}</span>
+              <div>
+                <a href={pg.url} target="_blank" rel="noopener noreferrer">{pg.title} ↗</a>
+                {pg.subs && (
+                  <span class="se-drg-subs">
+                    {pg.subs.map((sub) => (
+                      <a href={sub.url} target="_blank" rel="noopener noreferrer">{sub.id}</a>
+                    ))}
+                  </span>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section class="se-block">
+        <h2>Pick your space pioneer</h2>
+        <p class="muted">
+          Requirement 2 is one card about your favourite pioneer &mdash; and then talking with me about
+          <strong> four others</strong>. Claim a name at Meeting 1, no duplicates. Every name here has a link
+          straight to a real biography, so &ldquo;I don't know who to pick&rdquo; is not a reason to be stuck.
+        </p>
+        <p class="se-note">
+          A pioneer is anyone who did something first or made a first possible. Mathematicians, engineers,
+          programmers and writers count every bit as much as the people who flew.
+        </p>
+
+        <ul class="se-pioneers">
+          {drg.pioneers.map((pi) => (
+            <li class="se-pioneer">
+              <span class="se-pioneer-name">
+                {pi.url
+                  ? <a href={pi.url} target="_blank" rel="noopener noreferrer">{pi.name} ↗</a>
+                  : pi.name}
+              </span>
+              <span class="se-pioneer-did">{pi.did}</span>
+            </li>
+          ))}
+        </ul>
       </section>
 
       <section class="se-block">
@@ -425,6 +482,42 @@ const counselorOrders = orders.groups.filter((g) => g.id !== "scout");
         <p class="se-note">{telemetryTrack.badgeNote}</p>
         <p class="se-risk"><strong>Honest risk.</strong> {telemetryTrack.honestRisk}</p>
         </details>
+      </section>
+
+      <section class="se-block">
+        <h2>The Digital Resource Guide — what it does and doesn't replace</h2>
+        <p>{drg.what}</p>
+        <p class="se-verdict"><strong>Should you just scroll through it in the meeting?</strong> {drg.verdict}</p>
+
+        <div class="se-twocol">
+          <div class="se-col-good">
+            <h3>Lean on it for</h3>
+            <ul class="se-tight">{drg.useItFor.map((x) => <li>{x}</li>)}</ul>
+          </div>
+          <div class="se-col-bad">
+            <h3>Do not lean on it for</h3>
+            <ul class="se-tight">{drg.dontUseItFor.map((x) => <li>{x}</li>)}</ul>
+          </div>
+        </div>
+
+        <p class="muted">
+          Every requirement page, if you want to open one on the projector to settle a question mid-meeting:
+        </p>
+        <div class="se-drg">
+          {drg.pages.map((pg) => (
+            <div class="se-drg-row">
+              <span class="se-drg-req">{pg.req}</span>
+              <div>
+                <a href={pg.url} target="_blank" rel="noopener noreferrer">{pg.title} ↗</a>
+                {pg.subs && (
+                  <span class="se-drg-subs">
+                    {pg.subs.map((sub) => <a href={sub.url} target="_blank" rel="noopener noreferrer">{sub.id}</a>)}
+                  </span>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
       </section>
 
       <section class="se-block">
@@ -924,6 +1017,89 @@ const counselorOrders = orders.groups.filter((g) => g.id !== "scout");
   .se-risk { border-left: 3px solid #c8532b; padding: 0.6rem 0.9rem; border-radius: 0 10px 10px 0; background: rgba(200, 83, 43, 0.07); font-size: 0.93rem; }
   .se-note { border-left: 3px solid var(--accent); background: var(--accent-soft); padding: 0.65rem 0.95rem; border-radius: 0 10px 10px 0; font-size: 0.93rem; }
   .se-gotcha { font-size: 0.9rem; color: var(--muted); border-top: 1px dashed var(--line); padding-top: 0.6rem; margin-bottom: 0; }
+
+  /* Digital Resource Guide link table. */
+  .se-drg { display: grid; gap: 0.35rem; margin: 0.9rem 0 0; }
+
+  .se-drg-row {
+    display: grid;
+    grid-template-columns: 3.4rem 1fr;
+    gap: 0.7rem;
+    align-items: baseline;
+    padding: 0.45rem 0.6rem;
+    border-radius: 8px;
+    background: var(--bg-alt);
+    border-left: 3px solid var(--line);
+    font-size: 0.92rem;
+  }
+
+  .se-drg-req {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-weight: 700;
+    font-size: 0.78rem;
+    color: var(--accent-strong);
+  }
+
+  .se-drg-subs { display: inline-flex; flex-wrap: wrap; gap: 0.3rem; margin-left: 0.5rem; }
+
+  .se-drg-subs a {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.72rem;
+    padding: 0.05rem 0.4rem;
+    border-radius: 5px;
+    border: 1px solid var(--line);
+    text-decoration: none;
+  }
+
+  /* Pioneer bench. Two columns of name + one line of why they matter. */
+  .se-pioneers {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    gap: 0.5rem;
+  }
+
+  .se-pioneer {
+    display: grid;
+    gap: 0.15rem;
+    padding: 0.5rem 0.7rem;
+    border-radius: 8px;
+    background: var(--bg-alt);
+    border-left: 3px solid var(--accent);
+  }
+
+  .se-pioneer-name { font-weight: 700; font-size: 0.93rem; }
+  .se-pioneer-did { font-size: 0.84rem; line-height: 1.5; color: var(--muted); }
+
+  .se-verdict {
+    border-left: 3px solid var(--accent);
+    background: var(--accent-soft);
+    padding: 0.7rem 1rem;
+    border-radius: 0 10px 10px 0;
+    font-size: 0.95rem;
+    line-height: 1.65;
+    max-width: 78ch;
+  }
+
+  .se-twocol {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+    gap: 0.9rem;
+    margin: 1.1rem 0;
+  }
+
+  .se-col-good, .se-col-bad {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 0.8rem 1rem 0.9rem;
+    background: var(--surface);
+  }
+
+  .se-col-good { border-left: 3px solid #3d8b58; }
+  .se-col-bad { border-left: 3px solid #c8532b; }
+  .se-col-good h3, .se-col-bad h3 { margin: 0 0 0.5rem; font-size: 0.98rem; }
 
   /* A scoped-out track. Deliberately loud: the whole point is that a counselor
      skimming the page does not start building something we cut. */
