@@ -234,6 +234,7 @@ export const decks = {
             {
                 type: "prompt",
                 heading: "Warm-up",
+                image: "bootprint",
                 question: "Space is expensive and dangerous. Give me one honest reason a country spends money on it anyway.",
                 art: "four-reasons",
                 answer:
@@ -340,6 +341,7 @@ export const decks = {
             {
                 type: "bullets",
                 heading: "The flight-readiness gate",
+                image: "rocket-on-pad",
                 art: "gate",
                 intro: "You do not get to order a rocket until you have earned it. Four things:",
                 bullets: [
@@ -389,6 +391,7 @@ export const decks = {
             {
                 type: "bullets",
                 heading: "4a — Action and reaction",
+                image: "engine-test",
                 art: "third-law",
                 intro: "Newton's third law is the whole reason a rocket works in vacuum.",
                 bullets: [
@@ -413,7 +416,7 @@ export const decks = {
             {
                 type: "bullets",
                 heading: "4b — How rocket engines work",
-                art: "third-law",
+                image: "engine-test",
                 intro: "Everything an engine does comes from one sentence: throw mass backwards, hard.",
                 bullets: [
                     "Burn propellant to make a large volume of very hot gas in a small space.",
@@ -445,6 +448,7 @@ export const decks = {
             {
                 type: "calculator",
                 heading: "Predict your flight",
+                image: "wind-tunnel-model",
                 art: "predicted-vs-measured",
                 intro:
                     "Open the rocket calculator on the merit badge site, pick your airframe and motor, and write down your predicted apogee. That number goes on your competition card and you cannot change it after launch day starts.",
@@ -613,6 +617,7 @@ export const decks = {
             {
                 type: "steps",
                 heading: "5c — Your sample-return mission",
+                image: "sample-return-capsule",
                 art: "sample-return",
                 intro:
                     "Six boxes, five minutes, your own card. A robot that goes somewhere, picks something up, and brings it home. This is NOT the base you design in a minute — that one has people in it. This one is a round trip with nobody aboard.",
@@ -678,15 +683,15 @@ export const decks = {
                 type: "title",
                 kicker: "Space Exploration Merit Badge · Build it at home",
                 heading: "Build Night",
+                image: "clean-room-build",
                 sub: "Requirement 3 — build it, and build it straight",
-                art: "build-order",
                 notes:
                     "Talk for six minutes maximum, then get out of the way. Set up four stations before anyone arrives and leave the build-sequence slide projected the whole night so nobody has to ask what step they're on.",
             },
             {
                 type: "bullets",
                 heading: "Three rules for tonight",
-                art: "checklist",
+                image: "drop-test",
                 bullets: [
                     "Dry-fit everything before glue touches anything. Every single piece. No exceptions.",
                     "Fins straight matters more than fins pretty. A crooked fin makes the rocket corkscrew and ruins your prediction — which is the thing you're actually being scored on.",
@@ -699,6 +704,7 @@ export const decks = {
             {
                 type: "steps",
                 heading: "The build sequence",
+                image: "clean-room-build",
                 art: "build-order",
                 intro: "Leave this projected all night. The Cosmic Cargo needs no glue for the main structure, so most of tonight is careful assembly, alignment, and finish.",
                 steps: [
@@ -740,8 +746,8 @@ export const decks = {
                 type: "title",
                 kicker: "Space Exploration Merit Badge · Night 4 of 5",
                 heading: "Mission Control",
+                image: "mission-control",
                 sub: "Take a station, learn the calls, pass flight readiness. Five days to launch.",
-                art: "go-nogo",
                 notes:
                     "Run this like a real FRR, because that is what it is. Every real launch has one, every real one has a go/no-go, and Scouts respond extremely well to being held to an adult standard. Say 'flight readiness review' every time, never 'checking your rockets.'",
             },
@@ -771,6 +777,7 @@ export const decks = {
             {
                 type: "twocol",
                 heading: "The inspection standard",
+                image: "rocket-on-pad",
                 art: "go-nogo",
                 left: {
                     h: "GO",
@@ -801,7 +808,7 @@ export const decks = {
             {
                 type: "calculator",
                 heading: "Seal your prediction",
-                art: "predicted-vs-measured",
+                image: "wind-tunnel-model",
                 intro:
                     "Open the altitude simulator, enter YOUR measured mass — not the box spec — pick your motor, and write the predicted apogee on your competition card. I initial it. It cannot change after tonight.",
                 notes:
@@ -810,7 +817,7 @@ export const decks = {
             {
                 type: "bullets",
                 heading: "Safety readback — on your feet",
-                art: "go-nogo",
+                image: "pad-at-night",
                 intro: "I pick three rules from the NAR Model Rocket Safety Code at random. You tell me what they are. Everybody does this.",
                 bullets: [
                     "Minimum safety distance from the pad, and who is allowed inside it",
@@ -826,6 +833,7 @@ export const decks = {
             {
                 type: "bullets",
                 heading: "Saturday, November 21",
+                image: "liftoff",
                 art: "packing",
                 bullets: [
                     "Range opens 8:30. Craftsmanship judging happens before anything flies, so arrive with it finished.",
@@ -858,6 +866,7 @@ export const decks = {
             {
                 type: "bullets",
                 heading: "Predicted vs measured — the whole point",
+                image: "mission-control-plot",
                 art: "predicted-vs-measured",
                 intro: "Put every Scout's numbers on the whiteboard: predicted, measured, percent error. All of them, together.",
                 bullets: [
@@ -873,6 +882,7 @@ export const decks = {
             {
                 type: "bullets",
                 heading: "What the altimeters told us",
+                image: "mission-control-plot",
                 art: "telemetry-trace",
                 intro: "Every rocket flew with the altimeter in its payload bay. Put all the numbers on the projector at once and read the room's flight as one dataset.",
                 bullets: [
