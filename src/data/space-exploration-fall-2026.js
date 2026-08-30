@@ -335,7 +335,7 @@ export const decks = {
                     "The catch is the second half of the requirement: you also have to talk with me about four OTHER pioneers. So pay attention to your patrol\u2019s cards — that is where the other four come from.",
                 ],
                 note:
-                    "Pioneer bench, if you're stuck: Katherine Johnson · Robert Goddard · Yuri Gagarin · Wernher von Braun · Sally Ride · Mae Jemison · Konstantin Tsiolkovsky · Guion Bluford · Margaret Hamilton · Gus Grissom · Valentina Tereshkova · Ellen Ochoa · Homer Hickam · Sergei Korolev",
+                    "Stuck for a name? The Scout page has 26 pioneers, each with a link straight to a real biography — and the official online guide has its own twenty. Nobody has an excuse to sit there blank.",
                 notes:
                     "Pass the clipboard during this slide, not after. If you wait until the end of the meeting, half of them will be out the door. Have the pioneer bench printed on the back of the sign-up sheet.",
             },
@@ -1593,6 +1593,103 @@ export const calendarEvents = [
 // The Scout-facing view
 // ---------------------------------------------------------------------------
 
+// ---------------------------------------------------------------------------
+// Scouting America's Digital Resource Guide
+//
+// New since this plan was first written: Scouts now have a free, official,
+// always-current online guide, one page per requirement. It replaces the
+// pamphlet as the thing a Scout reads. Every URL below was fetched and
+// returned 200 in August 2026.
+// ---------------------------------------------------------------------------
+
+const DRG_BASE = "https://www.scouting.org/skills/merit-badges/digital-resource-guides/space-exploration/";
+
+export const drg = {
+    url: DRG_BASE,
+    contents: DRG_BASE + "contents/",
+    what:
+        "One page per requirement, written by Scouting America, free, and updated when the requirements are. Each page carries the requirement text verbatim, a few hundred words of plain explanation, embedded videos, and links out to NASA. For the newest badges it explicitly replaces the pamphlet — no purchase needed.",
+    useItFor: [
+        "The thing you point Scouts at instead of a pamphlet. It is free, it is on their phone, and it cannot go out of date the way a printout does.",
+        "Requirement 2. The guide has linked biographies for twenty pioneers, which turns 'pick someone' from a blank page into a menu.",
+        "Your own backstop. If a Scout asks something mid-meeting and you are not sure, the answer is on the requirement's own page.",
+        "Catching up. A Scout who misses a night has an official read-through of exactly what they missed.",
+    ],
+    dontUseItFor: [
+        "The meeting itself. It is a reference, not a lesson plan — no timings, no run-of-show, no facilitation, and nothing for a Scout to physically do.",
+        "Requirement 4. The requirement says 'discuss and DEMONSTRATE', and the guide explains the physics well but does not demonstrate anything. The balloon, the spent motor and the simulators are still what meet that word.",
+        "Evidence of individual completion. Reading a page is not a Scout telling you something in their own words. That is what the checkout sheet is for.",
+    ],
+    verdict:
+        "Scrolling through it live would be a bad 45 minutes — it is prose, it is linear, and reading a website aloud is the opposite of the night you have built. Assign it as the reading, keep the room for the doing.",
+    pages: [
+        { req: "Intro", title: "Introduction & overview", url: DRG_BASE },
+        { req: "1", title: "Why explore space?", url: DRG_BASE + "req1", subs: [
+            { id: "1a", title: "Historical reasons", url: DRG_BASE + "req1a" },
+            { id: "1b", title: "Immediate goals", url: DRG_BASE + "req1b" },
+            { id: "1c", title: "Benefits back on Earth", url: DRG_BASE + "req1c" },
+            { id: "1d", title: "International cooperation", url: DRG_BASE + "req1d" },
+        ] },
+        { req: "2", title: "Space pioneers — twenty linked biographies", url: DRG_BASE + "req2" },
+        { req: "3", title: "Build a model rocket", url: DRG_BASE + "req3", subs: [
+            { id: "3 alt", title: "Alternative, if launching is prohibited", url: DRG_BASE + "req3alt" },
+        ] },
+        { req: "4", title: "Space exploration science", url: DRG_BASE + "req4", subs: [
+            { id: "4a", title: "Action–reaction", url: DRG_BASE + "req4a" },
+            { id: "4b", title: "How rocket engines work", url: DRG_BASE + "req4b" },
+            { id: "4c", title: "How satellites stay in orbit", url: DRG_BASE + "req4c" },
+            { id: "4d", title: "How space pictures are made and sent", url: DRG_BASE + "req4d" },
+        ] },
+        { req: "5", title: "Space missions", url: DRG_BASE + "req5", subs: [
+            { id: "5a", title: "A robotic and a crewed mission", url: DRG_BASE + "req5a" },
+            { id: "5b", title: "Blog, site or scrapbook", url: DRG_BASE + "req5b" },
+            { id: "5c", title: "Design a sample-return mission", url: DRG_BASE + "req5c" },
+        ] },
+        { req: "6", title: "Spaceships and space stations", url: DRG_BASE + "req6", subs: [
+            { id: "6a", title: "Crewed orbital vehicle", url: DRG_BASE + "req6a" },
+            { id: "6b", title: "International Space Station", url: DRG_BASE + "req6b" },
+        ] },
+        { req: "7", title: "Design a space base", url: DRG_BASE + "req7" },
+        { req: "8", title: "Space exploration careers", url: DRG_BASE + "req8" },
+        { req: "Extra", title: "Extended learning — space junk, patches, the future", url: DRG_BASE + "extended-learning/" },
+    ],
+
+    // Requirement 2 asks the Scout to discuss FOUR pioneers besides their own.
+    // Twenty of these come straight from the guide's own requirement 2 page;
+    // the five marked `added` are ones the guide leaves out, and they matter —
+    // without them the bench is almost entirely astronauts and businessmen,
+    // and the whole point of the pioneer card is that the mathematician who
+    // checked the numbers counts every bit as much as the man in the capsule.
+    pioneers: [
+        { name: "Katherine Johnson", did: "Calculated the trajectories for Shepard's flight and Glenn's orbit. Glenn refused to fly until she personally rechecked the computer.", url: "https://science.nasa.gov/people/katherine-johnson/", added: true },
+        { name: "Margaret Hamilton", did: "Led the team that wrote the Apollo flight software, and coined the term 'software engineering'.", url: "https://science.nasa.gov/people/margaret-hamilton/", added: true },
+        { name: "Robert H. Goddard", did: "Built and flew the first liquid-fuelled rocket in 1926. Ridiculed for it at the time.", url: "https://www.nasa.gov/dr-robert-h-goddard-american-rocketry-pioneer" },
+        { name: "Konstantin Tsiolkovsky", did: "Worked out the rocket equation in 1903, decades before anyone could build to it.", url: "https://www.britannica.com/biography/Konstantin-Eduardovich-Tsiolkovsky" },
+        { name: "Sergei Korolev", did: "The Soviet chief designer behind Sputnik and Gagarin. His name was a state secret while he was alive.", url: "https://www.nasa.gov/history/sputnik/korolev.html" },
+        { name: "Wernher von Braun", did: "Designed the Saturn V. Also designed the V-2 for Nazi Germany — a genuinely uncomfortable story worth telling honestly.", url: "https://www.nasa.gov/people/wernher-von-braun" },
+        { name: "Yuri Gagarin", did: "First human in space, April 1961. One orbit, 108 minutes.", url: "https://www.britannica.com/biography/Yuri-Gagarin" },
+        { name: "Alan Shepard", did: "First American in space, and later hit a golf ball on the Moon.", url: "https://www.nasa.gov/former-astronaut-alan-shepard" },
+        { name: "John Glenn", did: "First American to orbit Earth, then flew again at 77.", url: "https://www.nasa.gov/former-astronaut-john-h-glenn" },
+        { name: "Neil Armstrong", did: "First person to walk on the Moon — and an Eagle Scout.", url: "https://www.nasa.gov/humans-in-space/astronauts/former-astronauts/former-astronaut-neil-a-armstrong" },
+        { name: "Gus Grissom", did: "Flew Mercury and Gemini, died in the Apollo 1 fire. The badge is partly a safety story and this is where it lives.", url: "https://www.nasa.gov/former-astronaut-virgil-i-grissom/", added: true },
+        { name: "Valentina Tereshkova", did: "First woman in space, 1963 — twenty years before any American woman flew.", url: "https://www.britannica.com/biography/Valentina-Tereshkova" },
+        { name: "Sally Ride", did: "First American woman in space, and later a physicist who investigated both shuttle disasters.", url: "https://www.nasa.gov/former-astronaut-sally-ride" },
+        { name: "Guion Bluford", did: "First African American in space, on the first night launch and landing of the shuttle.", url: "https://www.nasa.gov/former-astronaut-guion-bluford/", added: true },
+        { name: "Mae Jemison", did: "First African American woman in space. Also a physician who served in the Peace Corps.", url: "https://www.nasa.gov/people/mae-jemison-m-d" },
+        { name: "Ellen Ochoa", did: "First Hispanic woman in space, later director of Johnson Space Center.", url: "https://www.nasa.gov/former-astronaut-ellen-ochoa/", added: true },
+        { name: "Eileen Collins", did: "First woman to pilot and then command a space shuttle.", url: "https://www.britannica.com/biography/Eileen-Collins" },
+        { name: "Steve Squyres", did: "Ran the Spirit and Opportunity rovers — a 90-day mission that lasted fifteen years.", url: "https://science.nasa.gov/people/steve-squyres" },
+        { name: "Jules Verne", did: "Wrote a Moon shot in 1865 that launched from Florida and splashed down in the Pacific. He was not far off.", url: "https://www.britannica.com/biography/Jules-Verne" },
+        { name: "Arthur C. Clarke", did: "Described the geostationary communications satellite in 1945, before anyone had launched anything.", url: "https://www.britannica.com/biography/Arthur-C-Clarke" },
+        { name: "Robert A. Heinlein", did: "Science-fiction writer who put a generation of engineers on the path.", url: "https://www.britannica.com/biography/Robert-A-Heinlein" },
+        { name: "Burt Rutan", did: "Designed SpaceShipOne, the first privately built craft to reach space.", url: "https://www.britannica.com/biography/Burt-Rutan" },
+        { name: "Elon Musk", did: "Founded SpaceX and made the reusable orbital booster routine.", url: "https://www.britannica.com/biography/Elon-Musk" },
+        { name: "Jeff Bezos", did: "Founded Blue Origin. A useful contrast with SpaceX on how to spend a fortune on rockets.", url: "https://www.britannica.com/biography/Jeff-Bezos" },
+        { name: "Richard Branson", did: "Founded Virgin Galactic and flew on it.", url: "https://www.britannica.com/biography/Richard-Branson" },
+        { name: "Homer Hickam", did: "The Rocket Boys of October Sky — a coal-town teenager who taught himself rocketry and ended up at NASA. The closest thing on this list to a Scout.", url: null },
+    ],
+};
+
 export const scoutGuide = {
     intro:
         "Everything you personally have to do, in the order you have to do it. The counselor's side of this page has the run-of-shows and the gear lists — you don't need any of that. You need this.",
@@ -1635,7 +1732,7 @@ export const scoutGuide = {
                 req: "Req 2",
                 title: "Your space pioneer card",
                 forMeeting: "Due Meeting 2 · Sep 28",
-                doNow: "This is requirement 2, straight out of the badge: a collector\u2019s card — like a baseball card — about a \u201cspace pioneer.\u201d That means anyone who did something first or made a first possible: engineers, mathematicians and flight controllers count as much as astronauts. Claim a name at Meeting 1 (no duplicates), then make the card. Front: a picture. Back: who they were, what they actually did, why it mattered, and one thing that surprised you. Hand-drawn scores the same as printed — it is a 30-minute job. Then be ready to talk about four OTHER pioneers, which you pick up from your patrol\u2019s cards.",
+                doNow: "This is requirement 2, straight out of the badge: a collector\u2019s card — like a baseball card — about a \u201cspace pioneer.\u201d That means anyone who did something first or made a first possible: engineers, mathematicians and flight controllers count as much as astronauts. Claim a name at Meeting 1 (no duplicates) — the pioneer list further up this page has 26 to choose from, each one linked to a real biography — then make the card. Front: a picture. Back: who they were, what they actually did, why it mattered, and one thing that surprised you. Hand-drawn scores the same as printed — it is a 30-minute job. Then be ready to talk about four OTHER pioneers, which you pick up from your patrol\u2019s cards.",
                 videos: [
                     { t: "Here's How I Make Custom Trading Cards!", ch: "Wax Museum Podcast", id: "PkCCLH_f1us" },
                     { t: "How to Make Trading Cards By Hand", ch: "ChaosGalaxyTCG", id: "vYbeo4iS1Pc" },
