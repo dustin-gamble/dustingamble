@@ -9,6 +9,7 @@ import SlideImage from "../../components/SlideImage.astro";
 import CheckoutSheet from "../../components/CheckoutSheet.astro";
 import SampleReturnCard from "../../components/SampleReturnCard.astro";
 import BaseDesignSheet from "../../components/BaseDesignSheet.astro";
+import ScoutChecklist from "../../components/ScoutChecklist.astro";
 import {
   series,
   timeline,
@@ -72,6 +73,16 @@ const counselorOrders = orders.groups.filter((g) => g.id !== "scout");
         <h2>The deal</h2>
         <p class="se-lede">{scoutGuide.theDeal}</p>
         <p class="muted">{scoutGuide.intro}</p>
+      </section>
+
+      <section class="se-block">
+        <h2>Your checklist — everything you have to do, in one place</h2>
+        <p class="muted">
+          All eight requirements with a box for each one. Tick them off as you go; it saves in this browser, so
+          it will still be here next Monday. Print it and bring it to meetings, or keep it on your phone
+          &mdash; either way, this is the sheet I initial.
+        </p>
+        <ScoutChecklist />
       </section>
 
       <section class="se-block">
@@ -538,6 +549,21 @@ const counselorOrders = orders.groups.filter((g) => g.id !== "scout");
           and owns one of the four subsystems out loud during the pitch.
         </p>
         <BaseDesignSheet />
+      </section>
+
+      <section class="se-block">
+        <h2>The Scout's own checklist</h2>
+        <p class="muted">
+          Print one per Scout at Meeting 1 and have them bring it every week. This is their record and your
+          audit trail &mdash; it pairs with the checkout prompts below, which are what you ask before you
+          initial a box. A
+          <a href="/handouts/space-exploration-scout-checklist.pdf" download>print-ready PDF ↓</a>
+          is available if you would rather not print from the browser.
+        </p>
+        <p class="se-callout-line">
+          <a class="se-btn-buy" href="/handouts/space-exploration-scout-checklist.pdf" download>Download the printable PDF ↓</a>
+          <a class="se-btn-alt" href="#" data-goto-scout-checklist>See the fillable version →</a>
+        </p>
       </section>
 
       <section class="se-block">
@@ -1235,6 +1261,18 @@ const counselorOrders = orders.groups.filter((g) => g.id !== "scout");
         (function (b) {
           b.addEventListener("click", function () { show(b.dataset.view); });
         })(btns[k]);
+      }
+
+      // The counselor view links across to the fillable checklist, which only
+      // exists once — in the Scout panel. Switch views, then scroll to it.
+      var jump = document.querySelector("[data-goto-scout-checklist]");
+      if (jump) {
+        jump.addEventListener("click", function (e) {
+          e.preventDefault();
+          show("scout");
+          var target = document.querySelector("[data-sck]");
+          if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
       }
 
       var saved = null;

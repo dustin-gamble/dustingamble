@@ -1,0 +1,463 @@
+---
+// The Scout's own record for the whole badge — one per Scout, all eight
+// requirements, with a box to tick and a space for the counselor's initials.
+//
+// This is NOT the counselor's checkout sheet. That one lives in
+// CheckoutSheet.astro and holds the prompts a counselor asks to satisfy
+// themselves a Scout personally did the thing. This is the Scout's copy: what
+// is done, what is left, and who signed it off.
+//
+// Requirement wording checked against scouting.org, August 2026. Where this
+// paraphrases, the official requirements control.
+const reqs = [
+    {
+        n: "1",
+        title: "The purpose of space exploration",
+        sub: "Tell the purpose of space exploration and include the following:",
+        rows: [
+            { id: "1a", t: "Historical reasons" },
+            { id: "1b", t: "Immediate goals in terms of specific knowledge" },
+            { id: "1c", t: "Benefits related to Earth resources, technology, and new products" },
+            { id: "1d", t: "International relations and cooperation" },
+        ],
+    },
+    {
+        n: "2",
+        title: "Space pioneer collector card",
+        sub: "Design a collector's card, picture on the front and information on the back, about your favourite space pioneer.",
+        rows: [
+            { id: "2-card", t: "Card designed — picture on the front, information on the back" },
+            { id: "2-share", t: "Shared the card with your counselor AND discussed four other pioneers" },
+        ],
+        fields: [{ id: "2-who", label: "My pioneer" }, { id: "2-four", label: "The other four" }],
+    },
+    {
+        n: "3",
+        title: "Build, launch and recover a model rocket",
+        sub: "Built to the National Association of Rocketry safety code. Two launches — the second one accomplishing a specific objective.",
+        rows: [
+            { id: "3-build", t: "Rocket built to the NAR safety code" },
+            { id: "3-fly1", t: "First launch — launched and recovered" },
+            { id: "3-fly2", t: "Second launch, accomplishing a specific objective" },
+        ],
+        fields: [
+            { id: "3-date", label: "Launch date" },
+            { id: "3-obj", label: "My objective for launch 2" },
+            { id: "3-result", label: "What actually happened" },
+        ],
+        parts: [
+            { id: "3a", t: "Body tube" }, { id: "3b", t: "Engine mount" }, { id: "3c", t: "Fins" },
+            { id: "3d", t: "Igniter" }, { id: "3e", t: "Launch lug" }, { id: "3f", t: "Nose cone" },
+            { id: "3g", t: "Payload" }, { id: "3h", t: "Recovery system" }, { id: "3i", t: "Rocket engine" },
+        ],
+        partsNote: "Identify and explain each part on your own rocket.",
+        alt: "Alternative, only where local law prohibits launching: make a model of a NASA rocket, explain the functions of the parts, and give its history.",
+    },
+    {
+        n: "4",
+        title: "Rocket science and satellites",
+        sub: "Discuss AND demonstrate each of these — demonstrating is half the requirement, so be ready to show, not just say.",
+        rows: [
+            { id: "4a", t: "The law of action–reaction" },
+            { id: "4b", t: "How rocket engines work" },
+            { id: "4c", t: "How satellites stay in orbit" },
+            { id: "4d", t: "How pictures of Earth and other planets are made and transmitted" },
+        ],
+    },
+    {
+        n: "5",
+        title: "Do TWO of the following",
+        sub: "Exactly two. Most Scouts on this course take 5a and 5c.",
+        pick: 2,
+        rows: [
+            { id: "5a", t: "Discuss a robotic mission AND a historic crewed mission — discoveries, importance, what was learned" },
+            { id: "5b", t: "Make a blog, website, slide show or scrapbook about a current planetary mission" },
+            { id: "5c", t: "Design a robotic sample-return mission — name the destination, and show how it copes with that environment" },
+        ],
+        fields: [{ id: "5-choice", label: "My two" }],
+    },
+    {
+        n: "6",
+        title: "Describe ONE vehicle or station",
+        sub: "Purpose, operation and components. All three, about one of them.",
+        pick: 1,
+        rows: [
+            { id: "6a", t: "A space shuttle or other crewed orbital vehicle, government or commercial" },
+            { id: "6b", t: "The International Space Station" },
+        ],
+        fields: [{ id: "6-choice", label: "My choice" }],
+    },
+    {
+        n: "7",
+        title: "Design an inhabited base",
+        sub: "Somewhere in our solar system. Make drawings or a model, and plan for all four.",
+        rows: [
+            { id: "7-draw", t: "Drawings or a model of the base — mine, not the patrol's" },
+            { id: "7a", t: "Source of energy" },
+            { id: "7b", t: "How it will be constructed" },
+            { id: "7c", t: "Life-support system" },
+            { id: "7d", t: "Purpose and function" },
+        ],
+        fields: [{ id: "7-where", label: "Where my base is" }],
+    },
+    {
+        n: "8",
+        title: "Explore a related career",
+        sub: "ONE career. Research it, discuss what you found — and say what about it interests you, which is the half people forget.",
+        rows: [
+            { id: "8-train", t: "Training and education needed" },
+            { id: "8-cost", t: "What that education or training costs" },
+            { id: "8-prospects", t: "Job prospects" },
+            { id: "8-salary", t: "Salary" },
+            { id: "8-duties", t: "Job duties — what you would actually do all day" },
+            { id: "8-adv", t: "Career advancement — where it leads" },
+            { id: "8-why", t: "Why this career interests ME" },
+        ],
+        fields: [{ id: "8-career", label: "The career I researched" }],
+    },
+];
+
+const totalBoxes = reqs.reduce(
+    (n, r) => n + r.rows.length + (r.parts ? r.parts.length : 0),
+    0
+);
+---
+
+<div class="sck" data-sck>
+  <div class="sck-top no-print">
+    <div>
+      <p class="sck-kicker">Scouting America · Troop 308</p>
+      <h3>Space Exploration — individual Scout checklist</h3>
+      <p class="sck-lede">
+        Your own record for the whole badge. Tick things off as you go &mdash; it saves in this browser, so it
+        will still be here next Monday. A ticked box means done <em>and</em> reviewed with me.
+      </p>
+    </div>
+    <div class="sck-actions">
+      <span class="sck-progress" data-sck-progress>0 of {totalBoxes}</span>
+      <button type="button" class="sck-btn" data-sck-print>Print it</button>
+      <a class="sck-btn sck-btn-alt" href="/handouts/space-exploration-scout-checklist.pdf" download>PDF ↓</a>
+      <button type="button" class="sck-btn sck-btn-alt" data-sck-reset>Clear</button>
+    </div>
+  </div>
+
+  <div class="sck-ident">
+    {[
+      { id: "who-scout", label: "Scout" },
+      { id: "who-troop", label: "Troop", value: "308" },
+      { id: "who-counselor", label: "Counselor" },
+      { id: "who-start", label: "Start date" },
+    ].map((f) => (
+      <label class="sck-ident-f">
+        <span>{f.label}</span>
+        <input type="text" data-sck-field={f.id} value={f.value || ""} />
+      </label>
+    ))}
+  </div>
+
+  {reqs.map((r) => (
+    <section class="sck-req">
+      <header class="sck-req-head">
+        <span class="sck-req-n">{r.n}</span>
+        <div>
+          <h4>{r.title}</h4>
+          <p>{r.sub}</p>
+        </div>
+        {r.pick && <span class="sck-pick">pick {r.pick}</span>}
+      </header>
+
+      {r.fields && (
+        <div class="sck-fields">
+          {r.fields.map((f) => (
+            <label class="sck-field">
+              <span>{f.label}</span>
+              <input type="text" data-sck-field={f.id} />
+            </label>
+          ))}
+        </div>
+      )}
+
+      <ul class="sck-rows">
+        {r.rows.map((row) => (
+          <li class="sck-row">
+            <label class="sck-check">
+              <input type="checkbox" data-sck-box={row.id} />
+              <span class="sck-id">{row.id}</span>
+              <span class="sck-t">{row.t}</span>
+            </label>
+            <label class="sck-initial">
+              <span class="no-print">initials / date</span>
+              <input type="text" data-sck-field={`init-${row.id}`} />
+            </label>
+          </li>
+        ))}
+      </ul>
+
+      {r.parts && (
+        <div class="sck-parts">
+          <p class="sck-parts-note">{r.partsNote}</p>
+          <ul>
+            {r.parts.map((p) => (
+              <li>
+                <label class="sck-check sck-check-sm">
+                  <input type="checkbox" data-sck-box={p.id} />
+                  <span class="sck-id">{p.id}</span>
+                  <span class="sck-t">{p.t}</span>
+                </label>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {r.alt && <p class="sck-alt">{r.alt}</p>}
+    </section>
+  ))}
+
+  <section class="sck-final">
+    <h4>Final completion check</h4>
+    <ul class="sck-rows">
+      <li class="sck-row">
+        <label class="sck-check">
+          <input type="checkbox" data-sck-box="final-all" />
+          <span class="sck-t">All eight requirements completed and reviewed with the counselor.</span>
+        </label>
+        <label class="sck-initial"><span class="no-print">initials / date</span><input type="text" data-sck-field="init-final-all" /></label>
+      </li>
+      <li class="sck-row">
+        <label class="sck-check">
+          <input type="checkbox" data-sck-box="final-pick" />
+          <span class="sck-t">Two options done in requirement 5, one in requirement 6.</span>
+        </label>
+        <label class="sck-initial"><span class="no-print">initials / date</span><input type="text" data-sck-field="init-final-pick" /></label>
+      </li>
+    </ul>
+    <div class="sck-sign">
+      <label class="sck-field"><span>Counselor signature</span><input type="text" data-sck-field="sign-name" /></label>
+      <label class="sck-field"><span>Date</span><input type="text" data-sck-field="sign-date" /></label>
+    </div>
+  </section>
+
+  <p class="sck-source">
+    Based on the Space Exploration merit badge requirements published by Scouting America. If anything here
+    differs from the official requirements, the official requirements win &mdash;
+    <a href="https://www.scouting.org/merit-badges/space-exploration/" target="_blank" rel="noopener noreferrer">check them here ↗</a>.
+  </p>
+</div>
+
+<style>
+  .sck {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    padding: 1rem 1.15rem 1.1rem;
+  }
+
+  .sck-top { display: flex; gap: 1rem; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; }
+  .sck-top h3 { margin: 0.1rem 0 0.4rem; font-size: 1.1rem; }
+
+  .sck-kicker {
+    margin: 0; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em;
+    font-weight: 700; color: var(--accent-strong);
+  }
+
+  .sck-lede { margin: 0; font-size: 0.9rem; line-height: 1.6; color: var(--muted); max-width: 62ch; }
+
+  .sck-actions { display: flex; gap: 0.4rem; align-items: center; flex-wrap: wrap; }
+
+  .sck-progress {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.78rem; font-weight: 700;
+    padding: 0.25rem 0.6rem; border-radius: 999px;
+    background: var(--accent-soft); color: var(--accent-strong);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .sck-btn {
+    font: inherit; font-size: 0.8rem; padding: 0.3rem 0.75rem;
+    border-radius: 999px; border: 1px solid var(--accent);
+    background: var(--accent); color: #fff; cursor: pointer; text-decoration: none;
+  }
+
+  :root[data-theme="dark"] .sck-btn { color: #0f1623; }
+  .sck-btn-alt { background: transparent; color: var(--accent-strong); }
+  .sck-btn:hover { filter: brightness(1.08); }
+
+  .sck-ident {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+    gap: 0.6rem; margin: 1rem 0 1.2rem;
+    padding: 0.8rem 0.9rem; border-radius: 10px;
+    background: var(--bg-alt); border: 1px solid var(--line);
+  }
+
+  .sck-ident-f, .sck-field { display: grid; gap: 0.2rem; font-size: 0.78rem; }
+  .sck-ident-f > span, .sck-field > span { font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.68rem; }
+
+  .sck input[type="text"] {
+    font: inherit; font-size: 0.86rem;
+    padding: 0.28rem 0.45rem; border-radius: 6px;
+    border: 1px solid var(--line); background: var(--bg); color: var(--text);
+    width: 100%; min-width: 0;
+  }
+
+  .sck input[type="text"]:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+  .sck-req { margin: 0 0 1.3rem; }
+
+  .sck-req-head { display: flex; gap: 0.7rem; align-items: flex-start; margin-bottom: 0.6rem; }
+  .sck-req-head h4 { margin: 0; font-size: 1rem; }
+  .sck-req-head p { margin: 0.15rem 0 0; font-size: 0.84rem; line-height: 1.55; color: var(--muted); max-width: 74ch; }
+
+  .sck-req-n {
+    flex: none; width: 1.8rem; height: 1.8rem;
+    display: grid; place-items: center; border-radius: 999px;
+    background: var(--accent); color: #fff;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace; font-weight: 700; font-size: 0.85rem;
+  }
+
+  :root[data-theme="dark"] .sck-req-n { color: #0f1623; }
+
+  .sck-pick {
+    flex: none; margin-left: auto;
+    font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700;
+    padding: 0.15rem 0.55rem; border-radius: 999px;
+    border: 1px solid #d8a13a; color: #b0791f;
+  }
+
+  .sck-fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 0.5rem; margin: 0 0 0.6rem; }
+
+  .sck-rows { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.3rem; }
+
+  .sck-row {
+    display: grid; grid-template-columns: 1fr 9rem; gap: 0.7rem; align-items: center;
+    padding: 0.4rem 0.6rem; border-radius: 8px;
+    background: var(--bg-alt); border-left: 3px solid var(--line);
+  }
+
+  .sck-row:has(input[type="checkbox"]:checked) { border-left-color: #3d8b58; background: rgba(61, 139, 88, 0.07); }
+
+  .sck-check { display: flex; gap: 0.55rem; align-items: baseline; cursor: pointer; font-size: 0.88rem; line-height: 1.5; }
+  .sck-check input[type="checkbox"] { flex: none; width: 1rem; height: 1rem; accent-color: var(--accent); cursor: pointer; }
+
+  .sck-id {
+    flex: none; font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-weight: 700; font-size: 0.75rem; color: var(--accent-strong);
+  }
+
+  .sck-initial { display: grid; gap: 0.1rem; }
+  .sck-initial > span { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+
+  .sck-parts { margin: 0.7rem 0 0; padding: 0.7rem 0.8rem; border-radius: 10px; background: var(--bg-alt); border: 1px solid var(--line); }
+  .sck-parts-note { margin: 0 0 0.5rem; font-size: 0.82rem; font-weight: 600; }
+  .sck-parts ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: 0.3rem 0.8rem; }
+  .sck-check-sm { font-size: 0.84rem; }
+
+  .sck-alt {
+    margin: 0.6rem 0 0; font-size: 0.8rem; line-height: 1.55; color: var(--muted);
+    border-left: 3px solid #d8a13a; background: rgba(216, 161, 58, 0.08);
+    padding: 0.5rem 0.75rem; border-radius: 0 8px 8px 0;
+  }
+
+  .sck-final { margin: 1.5rem 0 0; padding: 0.9rem 1rem; border: 2px solid var(--accent); border-radius: 12px; }
+  .sck-final h4 { margin: 0 0 0.6rem; font-size: 1rem; }
+  .sck-sign { display: grid; grid-template-columns: 2fr 1fr; gap: 0.6rem; margin-top: 0.8rem; }
+
+  .sck-source { margin: 1rem 0 0; font-size: 0.78rem; line-height: 1.55; color: var(--muted); }
+
+  @media (max-width: 640px) {
+    .sck-row { grid-template-columns: 1fr; gap: 0.3rem; }
+    .sck-sign { grid-template-columns: 1fr; }
+  }
+
+  /* ---------- print: this is the artifact, so it has to come out right ---- */
+  @media print {
+    .sck { border: none; padding: 0; background: none; }
+    .no-print { display: none !important; }
+    .sck-req { break-inside: avoid; page-break-inside: avoid; margin-bottom: 0.9rem; }
+    .sck-row { background: none; border-left: 1px solid #999; padding: 0.22rem 0.4rem; }
+    .sck-row:has(input:checked) { background: none; }
+    .sck-parts, .sck-ident { background: none; }
+    .sck input[type="text"] { border: none; border-bottom: 1px solid #999; border-radius: 0; padding: 0.1rem 0.2rem; }
+    .sck-check { font-size: 0.78rem; }
+    .sck-req-head p, .sck-alt, .sck-source { font-size: 0.7rem; }
+    .sck-final { break-inside: avoid; }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var KEY = "t308-space-checklist-v1";
+
+    function init() {
+      var root = document.querySelector("[data-sck]");
+      if (!root || root.dataset.wired) return;
+      root.dataset.wired = "1";
+
+      var boxes = root.querySelectorAll("[data-sck-box]");
+      var fields = root.querySelectorAll("[data-sck-field]");
+      var progress = root.querySelector("[data-sck-progress]");
+
+      // localStorage can throw outright in private mode or with site data
+      // blocked, so every read and write is guarded and the sheet still works
+      // as a plain printable if storage is unavailable.
+      function load() {
+        try {
+          var raw = localStorage.getItem(KEY);
+          if (!raw) return {};
+          return JSON.parse(raw) || {};
+        } catch (e) { return {}; }
+      }
+
+      function save(state) {
+        try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) { /* not fatal */ }
+      }
+
+      var state = load();
+
+      boxes.forEach(function (b) {
+        var k = "box:" + b.dataset.sckBox;
+        if (state[k]) b.checked = true;
+        b.addEventListener("change", function () {
+          state[k] = b.checked;
+          save(state);
+          count();
+        });
+      });
+
+      fields.forEach(function (f) {
+        var k = "f:" + f.dataset.sckField;
+        if (typeof state[k] === "string" && state[k] !== "") f.value = state[k];
+        f.addEventListener("input", function () {
+          state[k] = f.value;
+          save(state);
+        });
+      });
+
+      function count() {
+        var done = 0;
+        boxes.forEach(function (b) { if (b.checked) done++; });
+        if (progress) progress.textContent = done + " of " + boxes.length;
+      }
+
+      var printBtn = root.querySelector("[data-sck-print]");
+      if (printBtn) printBtn.addEventListener("click", function () { window.print(); });
+
+      var resetBtn = root.querySelector("[data-sck-reset]");
+      if (resetBtn) {
+        resetBtn.addEventListener("click", function () {
+          if (!window.confirm("Clear every tick and every box on this checklist?")) return;
+          state = {};
+          save(state);
+          boxes.forEach(function (b) { b.checked = false; });
+          fields.forEach(function (f) { f.value = f.dataset.sckField === "who-troop" ? "308" : ""; });
+          count();
+        });
+      }
+
+      count();
+    }
+
+    init();
+    document.addEventListener("astro:page-load", init);
+  })();
+</script>
