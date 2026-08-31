@@ -10,6 +10,8 @@ import CheckoutSheet from "../../components/CheckoutSheet.astro";
 import SampleReturnCard from "../../components/SampleReturnCard.astro";
 import BaseDesignSheet from "../../components/BaseDesignSheet.astro";
 import ScoutChecklist from "../../components/ScoutChecklist.astro";
+import PioneerPicker from "../../components/PioneerPicker.astro";
+import CollectorCard from "../../components/CollectorCard.astro";
 import {
   series,
   timeline,
@@ -162,27 +164,20 @@ const counselorOrders = orders.groups.filter((g) => g.id !== "scout");
       <section class="se-block">
         <h2>Pick your space pioneer</h2>
         <p class="muted">
-          Requirement 2 is one card about your favourite pioneer &mdash; and then talking with me about
-          <strong> four others</strong>. Claim a name at Meeting 1, no duplicates. Every name here has a link
-          straight to a real biography, so &ldquo;I don't know who to pick&rdquo; is not a reason to be stuck.
+          Requirement 2 is one card about your favourite pioneer, plus talking with me about
+          <strong>four others</strong>. This is the same list as the paper handout &mdash; same 26 people, same
+          numbers &mdash; so you can use whichever you have to hand. Claim your card name at Meeting 1.
         </p>
-        <p class="se-note">
-          A pioneer is anyone who did something first or made a first possible. Mathematicians, engineers,
-          programmers and writers count every bit as much as the people who flew.
-        </p>
+        <PioneerPicker />
+      </section>
 
-        <ul class="se-pioneers">
-          {drg.pioneers.map((pi) => (
-            <li class="se-pioneer">
-              <span class="se-pioneer-name">
-                {pi.url
-                  ? <a href={pi.url} target="_blank" rel="noopener noreferrer">{pi.name} ↗</a>
-                  : pi.name}
-              </span>
-              <span class="se-pioneer-did">{pi.did}</span>
-            </li>
-          ))}
-        </ul>
+      <section class="se-block">
+        <h2>The card itself</h2>
+        <p class="muted">
+          Print the template, cut it out, fill it in. Front: a picture. Back: who they were, what they did, why
+          it mattered, and one thing that surprised you.
+        </p>
+        <CollectorCard />
       </section>
 
       <section class="se-block">
@@ -549,6 +544,39 @@ const counselorOrders = orders.groups.filter((g) => g.id !== "scout");
           and owns one of the four subsystems out loud during the pitch.
         </p>
         <BaseDesignSheet />
+      </section>
+
+      <section class="se-block">
+        <h2>Handouts — print these before Meeting 1</h2>
+        <p class="muted">
+          Everything that goes out on paper, in one place. The first two are per-Scout; the tracker is yours.
+        </p>
+        <div class="se-handouts">
+          {[
+            { t: "Individual Scout checklist", w: "One per Scout · 3 pages",
+              d: "All eight requirements with a tick box and an initials/date line for each. This is the Scout's record and your audit trail.",
+              f: "/handouts/space-exploration-scout-checklist.pdf" },
+            { t: "Pick Your Space Pioneer", w: "One per Scout · 2 pages",
+              d: "26 pioneers with a one-line story and a card angle each, grouped by category, with MY CARD and DISCUSS boxes. Hand it out at Meeting 1 with the sign-up clipboard.",
+              f: "/handouts/space-exploration-pick-your-pioneer.pdf" },
+            { t: "Counselor / group master tracker", w: "Yours · 10 Scouts",
+              d: "One row per Scout, one column per requirement. This is the sheet the checkout prompts below feed into.",
+              f: "/handouts/space-exploration-counselor-tracker.pdf" },
+          ].map((h) => (
+            <article class="se-handout">
+              <div class="se-handout-top">
+                <h3>{h.t}</h3>
+                <span class="se-handout-when">{h.w}</span>
+              </div>
+              <p>{h.d}</p>
+              <p><a class="se-btn-buy" href={h.f} download>Download PDF ↓</a></p>
+            </article>
+          ))}
+        </div>
+        <p class="se-note">
+          The pioneer list and the collector's-card template are also on the Scout side as fillable versions
+          that save in the browser &mdash; same 26 people, same numbering as the paper.
+        </p>
       </section>
 
       <section class="se-block">
@@ -1043,6 +1071,25 @@ const counselorOrders = orders.groups.filter((g) => g.id !== "scout");
   .se-risk { border-left: 3px solid #c8532b; padding: 0.6rem 0.9rem; border-radius: 0 10px 10px 0; background: rgba(200, 83, 43, 0.07); font-size: 0.93rem; }
   .se-note { border-left: 3px solid var(--accent); background: var(--accent-soft); padding: 0.65rem 0.95rem; border-radius: 0 10px 10px 0; font-size: 0.93rem; }
   .se-gotcha { font-size: 0.9rem; color: var(--muted); border-top: 1px dashed var(--line); padding-top: 0.6rem; margin-bottom: 0; }
+
+  /* Printable handouts. */
+  .se-handouts { display: grid; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); gap: 0.8rem; margin: 1rem 0; }
+
+  .se-handout {
+    border: 1px solid var(--line); border-radius: 12px;
+    padding: 0.8rem 1rem 0.9rem; background: var(--surface);
+    display: flex; flex-direction: column; gap: 0.4rem;
+  }
+
+  .se-handout-top { display: flex; gap: 0.6rem; align-items: baseline; justify-content: space-between; }
+  .se-handout h3 { margin: 0; font-size: 1rem; }
+  .se-handout p { margin: 0; font-size: 0.86rem; line-height: 1.55; }
+  .se-handout p:last-child { margin-top: auto; padding-top: 0.4rem; }
+
+  .se-handout-when {
+    flex: none; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em;
+    font-weight: 700; color: var(--muted); white-space: nowrap;
+  }
 
   /* Digital Resource Guide link table. */
   .se-drg { display: grid; gap: 0.35rem; margin: 0.9rem 0 0; }

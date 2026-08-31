@@ -1,0 +1,292 @@
+---
+// The web twin of the printed "Pick Your Space Pioneer" handout.
+//
+// Same 26 people, same numbering, same card angles, same biography links — so
+// a Scout holding the paper and a Scout on their phone are looking at exactly
+// the same thing, and can call out "number 14" and mean the same person.
+//
+// Requirement 2 is one card plus four you can discuss, so the two marks are
+// MY CARD (exactly one) and DISCUSS (four or more). The counter enforces
+// nothing; it just tells the Scout where they are.
+import { drg } from "../data/space-exploration-fall-2026.js";
+
+const cats = [...new Set(drg.pioneers.map((p) => p.cat))];
+---
+
+<div class="pick" data-pick>
+  <div class="pick-top">
+    <div>
+      <p class="pick-kicker">Requirement 2 · 26 choices</p>
+      <h3>Pick your space pioneer</h3>
+      <p class="pick-lede">
+        Mark <strong>one</strong> as your card, and <strong>at least four</strong> more you could talk about.
+        Claim your card name at Meeting 1 &mdash; no two Scouts do the same person. A pioneer can be a flyer,
+        engineer, programmer, scientist, writer or leader who made a &ldquo;first&rdquo; possible.
+      </p>
+    </div>
+    <div class="pick-actions">
+      <span class="pick-count" data-pick-count>no card · 0 to discuss</span>
+      <a class="pick-btn" href="/handouts/space-exploration-pick-your-pioneer.pdf" download>Printable PDF ↓</a>
+      <button type="button" class="pick-btn pick-btn-alt" data-pick-reset>Clear</button>
+    </div>
+  </div>
+
+  <p class="pick-warn" data-pick-warn hidden></p>
+
+  {cats.map((cat) => (
+    <section class="pick-cat">
+      <h4>{cat}</h4>
+      <ul class="pick-grid">
+        {drg.pioneers.filter((p) => p.cat === cat).map((p) => (
+          <li class="pick-item" data-pick-item={p.n}>
+            <div class="pick-head">
+              <span class="pick-n">#{p.n}</span>
+              <div>
+                <h5>
+                  <a href={p.url} target="_blank" rel="noopener noreferrer">{p.name} ↗</a>
+                </h5>
+                <p class="pick-meta">{p.role} · {p.country} · {p.life}</p>
+              </div>
+            </div>
+            <p class="pick-did">{p.did}</p>
+            <p class="pick-angle"><span>Card angle</span> {p.angle}</p>
+            <div class="pick-marks">
+              <label class="pick-mark pick-mark-card">
+                <input type="radio" name="pick-card" value={p.n} data-pick-card={p.n} />
+                <span>My card</span>
+              </label>
+              <label class="pick-mark">
+                <input type="checkbox" data-pick-discuss={p.n} />
+                <span>Discuss</span>
+              </label>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+
+  <div class="pick-help">
+    <div>
+      <h4>Choosing your favourite</h4>
+      <ul>{drg.pickHelp.favourite.map((t) => <li>{t}</li>)}</ul>
+    </div>
+    <div>
+      <h4>For each of your four others</h4>
+      <ul>{drg.pickHelp.others.map((t) => <li>{t}</li>)}</ul>
+    </div>
+  </div>
+</div>
+
+<style>
+  .pick {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    padding: 1rem 1.15rem 1.1rem;
+  }
+
+  .pick-top { display: flex; gap: 1rem; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; }
+  .pick-top h3 { margin: 0.1rem 0 0.4rem; font-size: 1.1rem; }
+
+  .pick-kicker {
+    margin: 0; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em;
+    font-weight: 700; color: var(--accent-strong);
+  }
+
+  .pick-lede { margin: 0; font-size: 0.9rem; line-height: 1.6; color: var(--muted); max-width: 68ch; }
+
+  .pick-actions { display: flex; gap: 0.4rem; align-items: center; flex-wrap: wrap; }
+
+  .pick-count {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.75rem; font-weight: 700;
+    padding: 0.25rem 0.6rem; border-radius: 999px;
+    background: var(--accent-soft); color: var(--accent-strong);
+    white-space: nowrap;
+  }
+
+  .pick-btn {
+    font: inherit; font-size: 0.8rem; padding: 0.3rem 0.75rem;
+    border-radius: 999px; border: 1px solid var(--accent);
+    background: var(--accent); color: #fff; cursor: pointer; text-decoration: none;
+  }
+
+  :root[data-theme="dark"] .pick-btn { color: #0f1623; }
+  .pick-btn-alt { background: transparent; color: var(--accent-strong); }
+
+  .pick-warn {
+    margin: 0.8rem 0 0;
+    border-left: 3px solid #d8a13a;
+    background: rgba(216, 161, 58, 0.1);
+    padding: 0.55rem 0.85rem; border-radius: 0 8px 8px 0;
+    font-size: 0.86rem;
+  }
+
+  .pick-cat { margin: 1.3rem 0 0; }
+  .pick-cat h4 {
+    margin: 0 0 0.6rem; font-size: 0.74rem;
+    text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted);
+    border-bottom: 1px solid var(--line); padding-bottom: 0.3rem;
+  }
+
+  .pick-grid {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr)); gap: 0.7rem;
+  }
+
+  .pick-item {
+    border: 1px solid var(--line); border-radius: 12px;
+    padding: 0.7rem 0.85rem 0.75rem; background: var(--bg-alt);
+    display: flex; flex-direction: column; gap: 0.4rem;
+  }
+
+  .pick-item[data-picked="card"] { border-color: var(--accent); border-width: 2px; background: var(--accent-soft); }
+  .pick-item[data-picked="discuss"] { border-left: 3px solid #3d8b58; }
+
+  .pick-head { display: flex; gap: 0.55rem; align-items: baseline; }
+  .pick-head h5 { margin: 0; font-size: 0.98rem; }
+
+  .pick-n {
+    flex: none; font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-weight: 700; font-size: 0.75rem; color: var(--accent-strong);
+  }
+
+  .pick-meta { margin: 0.1rem 0 0; font-size: 0.76rem; color: var(--muted); }
+  .pick-did { margin: 0; font-size: 0.84rem; line-height: 1.55; }
+
+  .pick-angle {
+    margin: 0; font-size: 0.8rem; line-height: 1.5;
+    padding-top: 0.35rem; border-top: 1px dashed var(--line);
+  }
+
+  .pick-angle span {
+    font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.07em;
+    font-weight: 700; color: var(--accent-strong); margin-right: 0.35rem;
+  }
+
+  .pick-marks { display: flex; gap: 0.5rem; margin-top: auto; padding-top: 0.4rem; }
+
+  .pick-mark {
+    display: flex; gap: 0.35rem; align-items: center; cursor: pointer;
+    font-size: 0.78rem; font-weight: 600;
+    padding: 0.22rem 0.6rem; border-radius: 999px;
+    border: 1px solid var(--line); background: var(--bg);
+  }
+
+  .pick-mark input { accent-color: var(--accent); cursor: pointer; margin: 0; }
+  .pick-mark:hover { border-color: var(--accent); }
+  .pick-mark:has(input:checked) { border-color: var(--accent); color: var(--accent-strong); }
+
+  .pick-help {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+    gap: 0.9rem; margin: 1.4rem 0 0;
+  }
+
+  .pick-help > div { border: 1px solid var(--line); border-radius: 12px; padding: 0.75rem 0.95rem; }
+  .pick-help h4 { margin: 0 0 0.4rem; font-size: 0.92rem; }
+  .pick-help ul { margin: 0; padding-left: 1.1rem; display: grid; gap: 0.25rem; }
+  .pick-help li { font-size: 0.84rem; line-height: 1.5; color: var(--muted); }
+
+  @media print {
+    .pick { border: none; padding: 0; }
+    .pick-actions, .pick-warn { display: none; }
+    .pick-grid { grid-template-columns: 1fr 1fr; gap: 0.4rem; }
+    .pick-item { break-inside: avoid; background: none; padding: 0.4rem 0.5rem; }
+    .pick-did { font-size: 0.7rem; }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var KEY = "t308-pioneer-pick-v1";
+
+    function init() {
+      var root = document.querySelector("[data-pick]");
+      if (!root || root.dataset.wired) return;
+      root.dataset.wired = "1";
+
+      var cards = root.querySelectorAll("[data-pick-card]");
+      var discusses = root.querySelectorAll("[data-pick-discuss]");
+      var count = root.querySelector("[data-pick-count]");
+      var warn = root.querySelector("[data-pick-warn]");
+
+      // Guarded: localStorage throws outright in private mode, and the picker
+      // has to keep working as a plain list if it does.
+      function load() {
+        try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { return {}; }
+      }
+      function save() {
+        try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+      }
+
+      var state = load();
+      if (!state.discuss) state.discuss = {};
+
+      function paint() {
+        var nDiscuss = 0;
+        discusses.forEach(function (d) {
+          var n = d.dataset.pickDiscuss;
+          var item = root.querySelector('[data-pick-item="' + n + '"]');
+          if (d.checked) nDiscuss++;
+          if (String(state.card) === n) item.dataset.picked = "card";
+          else if (d.checked) item.dataset.picked = "discuss";
+          else item.removeAttribute("data-picked");
+        });
+
+        var name = null;
+        if (state.card) {
+          var el = root.querySelector('[data-pick-item="' + state.card + '"] h5 a');
+          if (el) name = el.textContent.replace(" ↗", "");
+        }
+        count.textContent = (name ? "card: " + name : "no card") + " · " + nDiscuss + " to discuss";
+
+        // Requirement 2 wants FOUR others besides your own, so a Scout who
+        // ticked their own card as one of the four is short by one.
+        var msgs = [];
+        if (state.card && state.discuss[state.card]) {
+          msgs.push("Your own pioneer is also ticked as one of the four to discuss. Requirement 2 asks for four OTHERS, so pick one more.");
+        }
+        var others = nDiscuss - (state.card && state.discuss[state.card] ? 1 : 0);
+        if (state.card && others > 0 && others < 4) {
+          msgs.push("You have " + others + " other" + (others === 1 ? "" : "s") + " marked. Requirement 2 needs four.");
+        }
+        if (msgs.length) { warn.textContent = msgs.join(" "); warn.hidden = false; }
+        else warn.hidden = true;
+      }
+
+      cards.forEach(function (c) {
+        if (String(state.card) === c.dataset.pickCard) c.checked = true;
+        c.addEventListener("change", function () {
+          state.card = c.dataset.pickCard;
+          save(); paint();
+        });
+      });
+
+      discusses.forEach(function (d) {
+        if (state.discuss[d.dataset.pickDiscuss]) d.checked = true;
+        d.addEventListener("change", function () {
+          state.discuss[d.dataset.pickDiscuss] = d.checked;
+          save(); paint();
+        });
+      });
+
+      var reset = root.querySelector("[data-pick-reset]");
+      if (reset) {
+        reset.addEventListener("click", function () {
+          if (!window.confirm("Clear your pioneer choices?")) return;
+          state = { discuss: {} };
+          save();
+          cards.forEach(function (c) { c.checked = false; });
+          discusses.forEach(function (d) { d.checked = false; });
+          paint();
+        });
+      }
+
+      paint();
+    }
+
+    init();
+    document.addEventListener("astro:page-load", init);
+  })();
+</script>
