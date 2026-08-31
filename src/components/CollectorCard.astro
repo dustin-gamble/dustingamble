@@ -1,0 +1,194 @@
+---
+// Requirement 2's collector's card, as a cut-out template — front and back
+// side by side with a scissors line, matching the printed handout.
+//
+// Deliberately empty on the front: requirement 2 says "a picture on the
+// front", and a Scout drawing it themselves scores exactly the same as one
+// who prints a photo. The back is the part that carries the requirement, so
+// the prompts there are the ones a counselor will actually ask about.
+const back = [
+    { id: "full-name", label: "Full name", lines: 1 },
+    { id: "born-died", label: "Born–died", lines: 1 },
+    { id: "country", label: "Country", lines: 1 },
+    { id: "known-for", label: "Known for", lines: 2 },
+    { id: "mission", label: "Major mission / achievement", lines: 3 },
+    { id: "why", label: "Why I chose this pioneer", lines: 2 },
+];
+---
+
+<div class="cc">
+  <div class="cc-top no-print">
+    <div>
+      <p class="cc-kicker">Requirement 2 · cut-out template</p>
+      <h3>Collector's card</h3>
+      <p class="cc-lede">
+        Print it, cut on the dashed lines, fill it in. Hand-drawn scores exactly the same as printed &mdash;
+        the requirement asks for a picture on the front and information on the back, and says nothing about
+        how the picture got there.
+      </p>
+    </div>
+    <button type="button" class="cc-btn" data-cc-print>Print the template</button>
+  </div>
+
+  <div class="cc-ident no-print">
+    {[{ l: "Scout" }, { l: "Date" }, { l: "Counselor" }].map((f) => (
+      <label class="cc-ident-f"><span>{f.l}</span><input type="text" /></label>
+    ))}
+  </div>
+
+  <div class="cc-sheet">
+    <div class="cc-card">
+      <span class="cc-cut" aria-hidden="true">&#9986;</span>
+      <p class="cc-side">★ Front of card ★</p>
+      <div class="cc-picture"><span>Your picture goes here &mdash; drawn, printed or cut out</span></div>
+      <div class="cc-fill">
+        <span class="cc-lab">Name of space pioneer</span>
+        <span class="cc-rule cc-rule-lg"></span>
+        <span class="cc-lab">Nickname / title <em>(optional)</em></span>
+        <span class="cc-rule"></span>
+      </div>
+    </div>
+
+    <div class="cc-card">
+      <span class="cc-cut" aria-hidden="true">&#9986;</span>
+      <p class="cc-side">★ Back of card ★</p>
+      <div class="cc-back">
+        {back.map((f) => (
+          <div class="cc-field">
+            <span class="cc-lab">{f.label}</span>
+            {Array.from({ length: f.lines }).map(() => <span class="cc-rule"></span>)}
+          </div>
+        ))}
+        <div class="cc-field">
+          <span class="cc-lab">Interesting facts</span>
+          {["", "", ""].map(() => (
+            <span class="cc-bullet"><i aria-hidden="true">•</i><span class="cc-rule"></span></span>
+          ))}
+        </div>
+      </div>
+
+      <p class="cc-remind">
+        Be ready to share your card <strong>and discuss four other space pioneers</strong> with your counselor.
+      </p>
+
+      <div class="cc-others">
+        <span class="cc-lab">Other pioneers I can discuss</span>
+        {[1, 2, 3, 4].map((n) => (
+          <span class="cc-numbered"><i>{n}.</i><span class="cc-rule"></span></span>
+        ))}
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .cc {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    padding: 1rem 1.15rem 1.1rem;
+  }
+
+  .cc-top { display: flex; gap: 1rem; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; }
+  .cc-top h3 { margin: 0.1rem 0 0.4rem; font-size: 1.1rem; }
+
+  .cc-kicker {
+    margin: 0; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em;
+    font-weight: 700; color: var(--accent-strong);
+  }
+
+  .cc-lede { margin: 0; font-size: 0.9rem; line-height: 1.6; color: var(--muted); max-width: 66ch; }
+
+  .cc-btn {
+    font: inherit; font-size: 0.8rem; padding: 0.3rem 0.75rem;
+    border-radius: 999px; border: 1px solid var(--accent);
+    background: var(--accent); color: #fff; cursor: pointer; flex: none;
+  }
+
+  :root[data-theme="dark"] .cc-btn { color: #0f1623; }
+
+  .cc-ident { display: grid; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); gap: 0.6rem; margin: 0.9rem 0 1.1rem; }
+  .cc-ident-f { display: grid; gap: 0.2rem; }
+  .cc-ident-f > span { font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; color: var(--muted); }
+
+  .cc-ident input {
+    font: inherit; font-size: 0.86rem; padding: 0.28rem 0.45rem;
+    border-radius: 6px; border: 1px solid var(--line);
+    background: var(--bg); color: var(--text); width: 100%;
+  }
+
+  .cc-sheet { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  .cc-card {
+    position: relative;
+    border: 2px dashed var(--line);
+    border-radius: 12px;
+    padding: 1.6rem 1rem 1rem;
+    background: var(--bg);
+  }
+
+  .cc-cut { position: absolute; top: -0.55rem; left: 0.8rem; font-size: 0.95rem; color: var(--muted); background: var(--surface); padding: 0 0.25rem; }
+
+  .cc-side {
+    margin: 0 auto 0.8rem; width: fit-content;
+    border: 2px solid var(--text); border-radius: 999px;
+    padding: 0.2rem 0.9rem;
+    font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em;
+  }
+
+  .cc-picture {
+    border: 2px solid var(--text); border-radius: 10px;
+    min-height: 15rem; display: grid; place-items: center; padding: 1rem;
+    text-align: center;
+  }
+
+  .cc-picture span { font-size: 0.78rem; color: var(--muted); max-width: 22ch; line-height: 1.5; }
+
+  .cc-fill { display: grid; gap: 0.15rem; margin-top: 0.9rem; }
+  .cc-back { display: grid; gap: 0.5rem; }
+  .cc-field { display: grid; gap: 0.15rem; }
+
+  .cc-lab { font-size: 0.76rem; font-weight: 700; }
+  .cc-lab em { font-weight: 400; color: var(--muted); }
+
+  .cc-rule { display: block; border-bottom: 1px solid var(--line); height: 1.15rem; }
+  .cc-rule-lg { height: 1.35rem; }
+
+  .cc-bullet, .cc-numbered { display: grid; grid-template-columns: 1.1rem 1fr; gap: 0.3rem; align-items: end; }
+  .cc-bullet i, .cc-numbered i { font-style: normal; font-size: 0.8rem; color: var(--muted); }
+
+  .cc-remind {
+    margin: 0.8rem 0 0.7rem;
+    border: 1px solid var(--line); border-radius: 10px;
+    padding: 0.55rem 0.75rem; text-align: center;
+    font-size: 0.8rem; line-height: 1.5;
+  }
+
+  .cc-others { display: grid; gap: 0.15rem; border: 1px solid var(--line); border-radius: 10px; padding: 0.55rem 0.75rem; }
+
+  @media (max-width: 720px) {
+    .cc-sheet { grid-template-columns: 1fr; }
+  }
+
+  @media print {
+    .cc { border: none; padding: 0; background: none; }
+    .no-print { display: none !important; }
+    .cc-sheet { gap: 0.6rem; }
+    .cc-card { break-inside: avoid; background: none; border-color: #999; }
+    .cc-picture { min-height: 17rem; }
+    .cc-rule { border-color: #999; }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    function init() {
+      var b = document.querySelector("[data-cc-print]");
+      if (!b || b.dataset.wired) return;
+      b.dataset.wired = "1";
+      b.addEventListener("click", function () { window.print(); });
+    }
+    init();
+    document.addEventListener("astro:page-load", init);
+  })();
+</script>
