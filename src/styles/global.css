@@ -1768,3 +1768,10 @@ a.mb-product-card:hover {
   font-size: 0.85rem;
   margin-top: 0.6rem;
 }
+/* Drone Field Guide companion page */
+.companion-gate, .companion-download { border: 1px solid var(--line); border-radius: 0.9rem; padding: 1.1rem 1.3rem; margin: 1.6rem 0; background: var(--surface); }
+.companion-gate h2, .companion-download h2 { margin-top: 0; }
+#law-form { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+#law-form input { flex: 1 1 18rem; border: 1px solid var(--line); border-radius: 0.7rem; padding: 0.52rem 0.8rem; background: var(--bg); color: var(--text); font: inherit; }
+.companion-msg { margin: 0.6rem 0 0; color: var(--muted); }
+.companion-version { color: var(--muted); margin-left: 0.6rem; }

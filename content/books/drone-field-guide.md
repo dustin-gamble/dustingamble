@@ -44,6 +44,10 @@ One of the book's myth cards:
 >
 > **The better rule:** use carbon where the load path is long and the load is real — spars, booms, tubes, motor arms. For skins, fairings, and trays on a small aircraft, choose by minimum gauge, damage tolerance, and repair time. The lightest part is often the one made from the cheap material at the right thickness.
 
+## The companion for your AI
+
+The book's laws, rules, equations, tables, and cards also travel as a companion an AI assistant can use: a Claude skill, and a folder of plain files for any other assistant. It is free with the book, at [the companion page](/drone-field-guide/companion/), which asks you for one law from the last page.
+
 ## A few plates
 
 <div class="book-illustrations">
