@@ -1,0 +1,73 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+const version = "1.0.0";
+---
+<BaseLayout
+  title="Drone Field Guide companion"
+  description="The laws, rules, equations, tables, and cards from Drone Field Guide, packaged as a Claude skill and a knowledge pack for any AI assistant."
+>
+  <section class="prose section-block companion">
+    <p><a href="/books/drone-field-guide/">&larr; Drone Field Guide</a></p>
+    <h1>Take the book with you</h1>
+    <p class="about-lead">Everything in <em>Drone Field Guide</em> that is a number, a rule, or a table, in a form your AI assistant can use.</p>
+    <p>
+      The companion holds the book's laws, the rules of thumb with their conditions, the equations, the lookup
+      tables as working code, the field cards as diagnostic tables, the symptoms, the glossary, and the aircraft
+      data. It does not hold the prose, the figures, or the stories; you have the book for those. Load it and you
+      can ask "size a 4 kg hand-launched wing for 90 minutes" or "the heading swings with the throttle, what do I
+      check" and get an answer that uses the book's numbers, shows its assumptions, and tells you which chapter to open.
+    </p>
+    <p>It is a Claude skill as it stands, and a folder of plain files any assistant can read.</p>
+
+    <div class="companion-gate" id="gate">
+      <h2>One law, please</h2>
+      <p>Type any law from the last page of the book, word for word. Any of them will do.</p>
+      <form id="law-form">
+        <input id="law" type="text" autocomplete="off" placeholder="A new sound is a finding." aria-label="A law from the book" />
+        <button type="submit">Open</button>
+      </form>
+      <p id="law-msg" class="companion-msg" aria-live="polite"></p>
+    </div>
+
+    <div class="companion-download" id="download" hidden>
+      <h2>Download</h2>
+      <p><a class="button-link" href="/downloads/drone-field-guide-companion.zip" download>drone-field-guide-companion.zip</a> <span class="companion-version">version {version}</span></p>
+      <p>Unzips to one folder, <code>drone-field-guide/</code>, about 350 KB. Start with <code>INSTALL.md</code>.</p>
+      <h3>Installing</h3>
+      <ul>
+        <li><strong>Claude:</strong> upload the zip as a custom skill under Settings, or unzip into <code>~/.claude/skills/</code> for Claude Code. It loads on its own when the conversation turns to small aircraft.</li>
+        <li><strong>ChatGPT or Gemini:</strong> make a Project or a Gem, add the files in <code>reference/</code> and <code>tools/</code>, and paste the block from <code>SYSTEM_PROMPT.md</code> as its instructions.</li>
+        <li><strong>Anything else:</strong> the files are Markdown and one Python script. Give them to the assistant with the same prompt.</li>
+      </ul>
+      <h3>What is inside</h3>
+      <ul>
+        <li>43 laws, about 80 rules of thumb with conditions, 119 equations in plain text and TeX</li>
+        <li>the chapter tables, 28 computed lookup tables, and <code>dfg_calc.py</code> with the book's arithmetic as functions</li>
+        <li>the garage and field cards as decision tables, the myths and their better rules, the early symptoms by chapter</li>
+        <li>glossary, symbols, and 42 real aircraft with published figures</li>
+      </ul>
+      <p>
+        The companion carries the book's judgment, not a substitute for yours. Typical values are typical. Measure
+        before you trust. It is for small unmanned aircraft only, and it is licensed for your own use with the book;
+        please do not repost it.
+      </p>
+      <h3>Versions</h3>
+      <p>The companion is updated more often than the book. Version {version} matches the chapter numbering of the printed second proof. Check back here for newer versions; each one replaces the whole folder.</p>
+    </div>
+  </section>
+
+  <script is:inline define:vars={{ laws: ["nobody decides to make it heavier it just gets heavier", "the stall speed you calculated is not the one you have", "a bigger rotor hovers on less power it keeps being true", "test it on a tired pack on a hot afternoon", "more battery is the first fix everyone reaches for and the first one to stop working", "the cg walks aft one change at a time", "the shape you drew is half the drag the rest you bolted on", "the airfoil as built is not the airfoil as drawn", "propeller first then motor then battery", "a thirtysecond thrust test proves thirty seconds", "a warm connector is a failing connector", "know where the protection lives in the pack in the speed controller or nowhere", "size the spar for flight size everything else for the ground", "carbon fiber is one answer among several", "the second unit tells the truth about the first", "decide what breaks first and make it cheap", "tune from the inside out and never tune a mechanical problem", "every centimetre between a sensor and a current is a shield you did not have to design", "size the wiring for the stall current not the average", "the payload is the reason the aircraft exists", "the mission begins before takeoff and ends after recovery", "a launch that only works for one person is not a launch method", "vtol is a runway you carry for the whole flight", "one or two requirements size the aircraft find them first", "the airplane does not read the requirements", "three alternatives that differ in kind or you have one idea", "partly right and early beats fully right and late", "build something full scale at true mass in the first week", "the top unknown always has a test date", "no test without a prediction no model without a measurement", "if it is not written down it is not debt it is a defect", "every gram brings friends", "a schedule can stay green while nothing is learned", "every prototype exists to find out one thing say what it is before you build it", "make small bets and state them in advance", "a test is worth running when its result can change a decision", "a new sound is a finding", "abort criteria are written before the battery goes in", "once control authority is gone the airframe decides", "what was new finds more causes than any log", "flutter is not found by flying a little faster each time", "saturation looks like bad tuning it is not", "pilot error is where the investigation starts not where it ends"] }}>
+    const norm = (t) => t.toLowerCase().replace(/[\u2018\u2019\u201c\u201d]/g, "").replace(/[^a-z0-9 ]/g, "").replace(/\s+/g, " ").trim();
+    const form = document.getElementById("law-form");
+    const msg = document.getElementById("law-msg");
+    const open = () => { document.getElementById("download").hidden = false; document.getElementById("gate").hidden = true; try { localStorage.setItem("dfg-companion", "1"); } catch (e) {} };
+    try { if (localStorage.getItem("dfg-companion") === "1") open(); } catch (e) {}
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const v = norm(document.getElementById("law").value);
+      const ok = v.length >= 12 && laws.some((l) => l === v || l.includes(v) || v.includes(l));
+      if (ok) { msg.textContent = "That is one of them."; open(); }
+      else { msg.textContent = "Not quite. Open the last page of the book and type one word for word."; }
+    });
+  </script>
+</BaseLayout>
