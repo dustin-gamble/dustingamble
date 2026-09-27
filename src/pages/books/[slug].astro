@@ -1,0 +1,39 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getBooks } from "../../lib/content";
+
+export async function getStaticPaths() {
+  return getBooks({ includeDraft: true }).map((book) => ({
+    params: { slug: book.slug },
+    props: { book }
+  }));
+}
+
+const { book } = Astro.props;
+---
+<BaseLayout title={book.title} description={book.summary} type="article" showProgress={true}>
+  <article class="prose book-page">
+    <p><a href="/books/">&larr; Back to books</a></p>
+    <div class="book-hero">
+      <figure class="book-hero-cover">
+        <img src={book.cover} alt={`Cover of ${book.title}`} />
+      </figure>
+      <div class="book-hero-meta">
+        <h1 transition:name={book.slug}>{book.title}</h1>
+        {book.subtitle && <p class="book-subtitle">{book.subtitle}</p>}
+        <p class="meta-row">
+          {book.status && <span class="book-badge">{book.status}</span>}
+          {book.meta && <span>{book.meta}</span>}
+        </p>
+        {book.tags && book.tags.length > 0 && (
+          <ul class="tag-list" aria-label="Tags">
+            {book.tags.map((tag) => <li>{tag}</li>)}
+          </ul>
+        )}
+        <p class="book-summary">{book.summary}</p>
+      </div>
+    </div>
+    <hr />
+    <Fragment set:html={book.html} />
+  </article>
+</BaseLayout>

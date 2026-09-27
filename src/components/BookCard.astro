@@ -1,0 +1,14 @@
+---
+const { book } = Astro.props;
+---
+<a class="book-card" href={`/books/${book.slug}/`}>
+  <span class="book-card-cover">
+    <img src={book.cover} alt={`Cover of ${book.title}`} loading="lazy" />
+  </span>
+  <span class="book-card-body">
+    {book.status && <span class="book-card-status">{book.status}</span>}
+    <span class="book-card-title">{book.title}</span>
+    {book.subtitle && <span class="book-card-subtitle">{book.subtitle}</span>}
+    <span class="book-card-summary">{book.summary}</span>
+  </span>
+</a>

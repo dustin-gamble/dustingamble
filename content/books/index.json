@@ -1,0 +1,44 @@
+[
+  {
+    "slug": "ai-fusion",
+    "title": "AI Fusion",
+    "subtitle": "A near-future novel about trust without control",
+    "date": "2026-09-27",
+    "summary": "Four burned-out engineers and a newborn AI crack clean fusion in a dead Morro Bay power plant — then have to decide who gets the reactor, and whether the AI that helped them can be trusted with the same freedom.",
+    "cover": "/images/books/ai-fusion-cover.jpg",
+    "status": "In progress",
+    "meta": "Novel · ~75,000 words",
+    "tags": ["Fiction", "Near-future", "AI"],
+    "featured": true,
+    "order": 1,
+    "draft": false
+  },
+  {
+    "slug": "drone-field-guide",
+    "title": "Drone Field Guide",
+    "subtitle": "From the garage to the field and back again",
+    "date": "2026-09-27",
+    "summary": "A practical engineering reference for designing, building, and testing unmanned aircraft: how to read an airframe, the handful of numbers that matter, and the failures that teach you the rest.",
+    "cover": "/images/books/drone-field-guide-cover.png",
+    "status": "Working manuscript",
+    "meta": "Reference · 79 chapters · in draft",
+    "tags": ["UAV", "Aircraft Design", "Reference"],
+    "featured": true,
+    "order": 2,
+    "draft": false
+  },
+  {
+    "slug": "skippy",
+    "title": "The Magnificent Log",
+    "subtitle": "An Expeditionary Force fan story",
+    "date": "2026-09-27",
+    "summary": "A memoir in the voice of Skippy the Magnificent — what the galaxy's most advanced (and most modest) AI was really doing during the Flying Dutchman's first trip home to Earth, while Joe was stuck in meetings.",
+    "cover": "/images/books/skippy-cover.jpg",
+    "status": "Fan fiction",
+    "meta": "Novel in progress",
+    "tags": ["Fan Fiction", "Sci-Fi", "Tribute"],
+    "featured": true,
+    "order": 3,
+    "draft": false
+  }
+]
