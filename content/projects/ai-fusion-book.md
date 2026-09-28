@@ -29,4 +29,4 @@ The book reinforced that AI-assisted writing works best when it is treated as a 
 
 ## Links
 
-- Book: https://lifeguidetool.com/aifusion/AI_Fusion_book.html
+- Book: [Read AI Fusion](/books/ai-fusion/)

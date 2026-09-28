@@ -2,23 +2,25 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import WritingCard from "../components/WritingCard.astro";
 import ProjectCard from "../components/ProjectCard.astro";
-import { getFeaturedWriting, getFeaturedProjects } from "../lib/content";
+import BookCard from "../components/BookCard.astro";
+import { getFeaturedWriting, getFeaturedProjects, getFeaturedBooks } from "../lib/content";
 import fs from "node:fs";
 import path from "node:path";
 
 const featuredWriting = getFeaturedWriting(4);
 const featuredProjects = getFeaturedProjects(4);
+const featuredBooks = getFeaturedBooks(6);
 const activeProjects = [
   {
-    title: "Gamble Systems",
-    url: "https://gamble.systems/",
-    summary: "An umbrella brand for the apps, tools, and experiments I am building.",
-    linkLabel: "gamble.systems"
+    title: "WAKE",
+    url: "https://dustin-gamble.github.io/wake/",
+    summary: "An Android app that turns a WaterRower's S4 monitor into analog instruments, 19 games, and a flight down the California coast.",
+    linkLabel: "dustin-gamble.github.io/wake"
   },
   {
-    title: "Troop 308 New Scout Advancement Plan",
-    url: "/projects/troop-308-new-scout-advancement-plan/",
-    summary: "A first-year Scout advancement lane built around Monday meetings, monthly outings, and a dedicated 30-minute merit badge block."
+    title: "Closed-Loop Whole-House Fan",
+    url: "/projects/closed-loop-fan/",
+    summary: "An ESP32 that learns how the house heats and cools and runs a QuietCool whole-house fan over its own 433 MHz radio."
   },
   {
     title: "Take It In",
@@ -27,25 +29,15 @@ const activeProjects = [
     linkLabel: "takeitin.app"
   },
   {
-    title: "Cozy Cauldron",
-    url: "/projects/cozy-cauldron/",
-    summary: "An iOS potion-brewing game shaped by ideas from my kids and built with AI."
-  },
-  {
-    title: "Line Starts Here",
-    url: "/projects/line-starts-here/",
-    summary: "A queue simulator game where you cut through switchback lines before your patience runs out."
-  },
-  {
-    title: "BioGyro",
-    url: "https://biogyro.io/",
-    summary:
-      "A personal metabolic feedback engine that learns how food affects you, and helps you make better decisions in real time."
+    title: "Gamble Systems",
+    url: "https://gamble.systems/",
+    summary: "An umbrella brand for the apps, tools, and experiments I am building.",
+    linkLabel: "gamble.systems"
   },
   {
     title: "AeroVerse",
     url: "https://sim.dustingamble.com/",
-    summary: "A multiplayer, cloud-hosted, agent-generated flight simulator launching soon.",
+    summary: "A multiplayer, cloud-hosted, agent-generated flight simulator.",
     linkLabel: "sim.dustingamble.com"
   }
 ];
@@ -79,6 +71,16 @@ const lowerHomeImages = [
       </figure>
     )}
   </section>
+
+  {featuredBooks.length > 0 && (
+    <section class="section-block" aria-labelledby="books-title">
+      <h2 id="books-title" class="section-heading">Books</h2>
+      <div class="book-grid">
+        {featuredBooks.map((book) => <BookCard book={book} />)}
+      </div>
+      <p><a href="/books/">All books</a></p>
+    </section>
+  )}
 
   <section class="section-block" aria-labelledby="active-projects-title">
     <h2 id="active-projects-title" class="section-heading">Active Projects</h2>

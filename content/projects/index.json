@@ -1,5 +1,25 @@
 [
   {
+    "slug": "wake",
+    "title": "WAKE — Rowing Instruments and Games",
+    "date": "2026-09-11",
+    "summary": "An Android app that reads a WaterRower's S4 monitor over USB and turns it into analog instruments, 19 games, and a flight down the California coast — driven by your real power and stroke.",
+    "tags": ["Android", "Rowing", "Physics", "Games"],
+    "draft": false,
+    "featured": false,
+    "order": 0
+  },
+  {
+    "slug": "closed-loop-fan",
+    "title": "Closed-Loop Whole-House Fan",
+    "date": "2026-09-19",
+    "summary": "Autonomous control for a QuietCool whole-house fan: an ESP32 reads temperatures, learns how the house heats and cools, forecasts the evening, and runs the fan over its own 433 MHz radio.",
+    "tags": ["ESP32", "Home Automation", "Control", "Maker"],
+    "draft": false,
+    "featured": false,
+    "order": 0
+  },
+  {
     "slug": "world-record-endurance-flight-stalker-vxe",
     "title": "World-Record Endurance Flight (Stalker VXE)",
     "date": "2022-04-11",

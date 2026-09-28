@@ -1522,6 +1522,214 @@ a.mb-product-card:hover {
   }
 }
 
+/* ---------- Books ---------- */
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+  gap: 1.1rem;
+  align-items: start;
+}
+
+.book-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+  color: var(--text);
+  text-decoration: none;
+  box-shadow: var(--shadow);
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.book-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+}
+
+.book-card-cover {
+  display: block;
+  background: var(--bg-alt);
+  border-bottom: 1px solid var(--line);
+}
+
+.book-card-cover img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.book-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 0.85rem 0.95rem 1rem;
+}
+
+.book-card-status {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+}
+
+.book-card-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.book-card-subtitle {
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.book-card-summary {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-top: 0.15rem;
+}
+
+.book-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 15rem) 1fr;
+  gap: 1.6rem;
+  align-items: start;
+  margin-top: 0.5rem;
+}
+
+.book-hero-cover {
+  margin: 0;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+.book-hero-cover img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.book-hero-meta h1 {
+  margin: 0;
+}
+
+.book-subtitle {
+  margin: 0.25rem 0 0.6rem;
+  color: var(--muted);
+  font-style: italic;
+  font-size: 1.05rem;
+}
+
+.book-badge {
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  border-radius: 999px;
+  padding: 0.12rem 0.6rem;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.book-summary {
+  font-size: 1.08rem;
+  margin-top: 0.8rem;
+}
+
+.book-figure-wide {
+  margin: 1.4rem 0;
+}
+
+.book-figure-wide img {
+  width: 100%;
+  height: auto;
+  border-radius: 0.75rem;
+  border: 1px solid var(--line);
+}
+
+.book-figure-wide figcaption {
+  margin-top: 0.4rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.book-illustrations {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr));
+  gap: 0.8rem;
+  margin: 1.2rem 0;
+}
+
+.book-illustrations figure {
+  margin: 0;
+}
+
+.book-illustrations img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 0.6rem;
+  border: 1px solid var(--line);
+}
+
+.book-illustrations figcaption {
+  margin-top: 0.3rem;
+  font-size: 0.78rem;
+  color: var(--muted);
+  text-align: center;
+  font-family: "Space Grotesk", sans-serif;
+}
+
+@media (max-width: 640px) {
+  .book-hero {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .book-hero-cover {
+    width: min(15rem, 70%);
+  }
+}
+
+/* ---------- Device screenshots (projects) ---------- */
+.device-shots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1.2rem 0;
+  align-items: flex-start;
+}
+
+.device-shots figure {
+  flex: 1 1 240px;
+  max-width: 320px;
+  margin: 0;
+}
+
+.device-shots img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 0.7rem;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+.device-shots figcaption {
+  margin-top: 0.4rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-align: center;
+  font-family: "Space Grotesk", sans-serif;
+}
+
 /* ---------- Patrol Box 3D ---------- */
 .pb3d {
   margin: 1rem 0 1.5rem;
@@ -1592,3 +1800,10 @@ a.mb-product-card:hover {
   font-size: 0.85rem;
   margin-top: 0.6rem;
 }
+/* Drone Field Guide companion page */
+.companion-gate, .companion-download { border: 1px solid var(--line); border-radius: 0.9rem; padding: 1.1rem 1.3rem; margin: 1.6rem 0; background: var(--surface); }
+.companion-gate h2, .companion-download h2 { margin-top: 0; }
+#law-form { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+#law-form input { flex: 1 1 18rem; border: 1px solid var(--line); border-radius: 0.7rem; padding: 0.52rem 0.8rem; background: var(--bg); color: var(--text); font: inherit; }
+.companion-msg { margin: 0.6rem 0 0; color: var(--muted); }
+.companion-version { color: var(--muted); margin-left: 0.6rem; }
