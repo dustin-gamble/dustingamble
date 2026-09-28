@@ -1325,11 +1325,58 @@ const counselorOrders = orders.groups.filter((g) => g.id !== "scout");
         });
       }
 
+      // ---------------------------------------------------------------
+      // Deep links.
+      //
+      // A deck lives two levels down: inside the counselor panel (which is
+      // [hidden] by default) and inside a collapsed <details>. A plain
+      // "#deck-how-rockets-work" anchor therefore lands on nothing — the
+      // browser cannot scroll to an element with no layout. So we open the
+      // panel and the <details> first, then scroll.
+      //
+      //   #deck-how-rockets-work     open the deck and scroll to it
+      //   #present-how-rockets-work  ...and start presenting immediately
+      //   #meeting-2                 open that meeting's run-of-show
+      //   #counselor / #scout        just pick a view
+      // ---------------------------------------------------------------
+      function reveal(el) {
+        if (!el) return;
+        var panel = el.closest("[data-view-panel]");
+        if (panel) show(panel.dataset.viewPanel);
+        var d = el.closest("details");
+        while (d) { d.open = true; d = d.parentElement && d.parentElement.closest("details"); }
+        // Wait a frame so the newly shown panel has layout to scroll within.
+        requestAnimationFrame(function () {
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      }
+
+      function route(hash) {
+        if (!hash) return false;
+        var h = hash.replace(/^#/, "");
+
+        if (h === "counselor" || h === "scout") { show(h); return true; }
+
+        var present = h.indexOf("present-") === 0;
+        var id = present ? "deck-" + h.slice("present-".length) : h;
+        var el = document.getElementById(id);
+        if (!el) return false;
+
+        reveal(el);
+        if (present) {
+          var btn = el.querySelector("[data-deck-full]");
+          // Let the reveal settle first, or the deck measures itself while
+          // its panel is still hidden and every slide comes out mis-sized.
+          if (btn) setTimeout(function () { btn.click(); }, 250);
+        }
+        return true;
+      }
+
       var saved = null;
       try { saved = localStorage.getItem("se-view"); } catch (e) {}
-      if (location.hash === "#counselor") saved = "counselor";
-      if (location.hash === "#scout") saved = "scout";
       show(saved === "counselor" ? "counselor" : "scout");
+      route(location.hash);
+      window.addEventListener("hashchange", function () { route(location.hash); });
     }
 
     init();
