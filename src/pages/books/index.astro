@@ -1,0 +1,25 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import BookCard from "../../components/BookCard.astro";
+import { getBooks } from "../../lib/content";
+
+const books = getBooks();
+---
+<BaseLayout
+  title="Books"
+  description="Books by Dustin Gamble, in progress: AI Fusion, the Drone Field Guide, and an Expeditionary Force fan story."
+>
+  <section class="prose section-block">
+    <h1>Books</h1>
+    <p>
+      A few books I am working on — a near-future novel, a practical drone-engineering reference, and a
+      fan-fiction tribute. Covers, summaries, and a few samples below. None of these are the whole book.
+    </p>
+  </section>
+
+  <section class="section-block" aria-label="Books">
+    <div class="book-grid">
+      {books.map((book) => <BookCard book={book} />)}
+    </div>
+  </section>
+</BaseLayout>

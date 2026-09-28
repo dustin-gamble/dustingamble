@@ -12,6 +12,7 @@ marked.setOptions({
 
 let writingCache;
 let projectCache;
+let bookCache;
 
 function readJson(filePath) {
   const source = fs.readFileSync(filePath, "utf-8");
@@ -110,6 +111,31 @@ export function getProjects({ includeDraft = false } = {}) {
 
 export function getProjectBySlug(slug) {
   return getProjects({ includeDraft: true }).find((entry) => entry.slug === slug);
+}
+
+export function getBooks({ includeDraft = false } = {}) {
+  if (!bookCache) {
+    bookCache = parseMarkdownCollection("books");
+  }
+
+  const entries = includeDraft
+    ? bookCache
+    : bookCache.filter((entry) => !entry.draft);
+
+  return [...entries].sort((a, b) => {
+    const orderA = Number.isFinite(a.order) ? a.order : 999;
+    const orderB = Number.isFinite(b.order) ? b.order : 999;
+    if (orderA !== orderB) return orderA - orderB;
+    return new Date(b.date) - new Date(a.date);
+  });
+}
+
+export function getBookBySlug(slug) {
+  return getBooks({ includeDraft: true }).find((entry) => entry.slug === slug);
+}
+
+export function getFeaturedBooks(limit = 6) {
+  return getBooks().filter((entry) => entry.featured).slice(0, limit);
 }
 
 export function getFeaturedWriting(limit = 4) {
