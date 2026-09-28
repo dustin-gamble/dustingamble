@@ -24,6 +24,7 @@ const slides = deck.slides;
       <p class="deck-runtime">{deck.runtime}</p>
     </div>
     <div class="deck-head-actions">
+      <button type="button" class="deck-btn" data-deck-link={deck.id} title="Copy a link straight to this deck">Copy link</button>
       <button type="button" class="deck-btn" data-deck-notes aria-pressed="true">Presenter notes</button>
       <button type="button" class="deck-btn" data-deck-full>Present</button>
     </div>
@@ -1026,6 +1027,26 @@ const slides = deck.slides;
         // Leaving real fullscreen (Esc, F11) should also leave projection mode.
         if (!document.fullscreenElement && stage.classList.contains("is-projecting")) exitProjection();
       });
+      // A deck is buried two levels down — inside the counselor panel and a
+      // collapsed <details> — so a bare "#deck-x" anchor cannot reach it. The
+      // page script below opens the way; this button just hands out the URL.
+      var linkBtn = deck.querySelector("[data-deck-link]");
+      if (linkBtn) {
+        linkBtn.addEventListener("click", function () {
+          var url = location.origin + location.pathname + "#deck-" + linkBtn.dataset.deckLink;
+          var done = function () {
+            var was = linkBtn.textContent;
+            linkBtn.textContent = "Copied";
+            setTimeout(function () { linkBtn.textContent = was; }, 1400);
+          };
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(url).then(done, function () { window.prompt("Copy this link:", url); });
+          } else {
+            window.prompt("Copy this link:", url);
+          }
+        });
+      }
+
       window.addEventListener("resize", function () { fit(slides[i]); });
 
       show(0);
