@@ -8,7 +8,11 @@
     "cover": "/images/books/ai-fusion-cover.jpg",
     "status": "In progress",
     "meta": "Novel · ~75,000 words",
-    "tags": ["Fiction", "Near-future", "AI"],
+    "tags": [
+      "Fiction",
+      "Near-future",
+      "AI"
+    ],
     "featured": true,
     "order": 1,
     "draft": false
@@ -18,14 +22,19 @@
     "title": "Drone Field Guide",
     "subtitle": "From the garage to the field and back again",
     "date": "2026-09-27",
-    "summary": "A practical engineering reference for designing, building, and testing unmanned aircraft: how to read an airframe, the handful of numbers that matter, and the failures that teach you the rest.",
+    "summary": "A practical engineering reference for people who design, build, and fly small unmanned aircraft: what to size, what to check, and what to do when it doesn’t fly the way you drew it.",
     "cover": "/images/books/drone-field-guide-cover.png",
-    "status": "Working manuscript",
-    "meta": "Reference · 79 chapters · in draft",
-    "tags": ["UAV", "Aircraft Design", "Reference"],
+    "status": "Paperback · coming soon",
+    "meta": "Reference · 77 chapters · 8.5 × 11 in",
+    "tags": [
+      "UAV",
+      "Aircraft Design",
+      "Reference"
+    ],
     "featured": true,
     "order": 2,
-    "draft": false
+    "draft": false,
+    "link": "https://gamble.systems/drone-field-guide/"
   },
   {
     "slug": "skippy",
@@ -36,7 +45,11 @@
     "cover": "/images/books/skippy-cover.jpg",
     "status": "Fan fiction",
     "meta": "Novel in progress",
-    "tags": ["Fan Fiction", "Sci-Fi", "Tribute"],
+    "tags": [
+      "Fan Fiction",
+      "Sci-Fi",
+      "Tribute"
+    ],
     "featured": true,
     "order": 3,
     "draft": false

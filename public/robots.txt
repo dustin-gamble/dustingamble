@@ -1,6 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /drone-field-guide/companion/
-Disallow: /downloads/
 
 Sitemap: https://dustingamble.com/sitemap.xml

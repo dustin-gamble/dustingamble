@@ -1,7 +1,7 @@
 ---
 const { book } = Astro.props;
 ---
-<a class="book-card" href={`/books/${book.slug}/`}>
+<a class="book-card" href={book.link ?? `/books/${book.slug}/`}>
   <span class="book-card-cover">
     <img src={book.cover} alt={`Cover of ${book.title}`} loading="lazy" />
   </span>

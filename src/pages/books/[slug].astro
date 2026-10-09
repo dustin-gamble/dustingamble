@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import Redirect from "../../components/Redirect.astro";
 import { getBooks } from "../../lib/content";
 
 export async function getStaticPaths() {
@@ -11,6 +12,7 @@ export async function getStaticPaths() {
 
 const { book } = Astro.props;
 ---
+{book.link ? <Redirect to={book.link} title={book.title} /> : (
 <BaseLayout title={book.title} description={book.summary} type="article" showProgress={true}>
   <article class="prose book-page">
     <p><a href="/books/">&larr; Back to books</a></p>
@@ -37,3 +39,4 @@ const { book } = Astro.props;
     <Fragment set:html={book.html} />
   </article>
 </BaseLayout>
+)}
