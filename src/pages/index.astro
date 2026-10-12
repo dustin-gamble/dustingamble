@@ -47,24 +47,14 @@ const mainHeroImage = {
   alt: "Human and AI robotics concept artwork"
 };
 const heroImageExists = fs.existsSync(path.join(publicRoot, mainHeroImage.src.replace(/^\//, "")));
-const lowerHomeImages = [
-  {
-    src: "/images/aerospace_autonomy.png",
-    alt: "Aerospace autonomy concept artwork"
-  },
-  {
-    src: "/images/robot_AI.png",
-    alt: "Robot and AI collaboration concept artwork"
-  }
-].filter((image) => fs.existsSync(path.join(publicRoot, image.src.replace(/^\//, ""))));
 ---
 <BaseLayout
   title="Dustin Gamble"
-  description="Autonomous systems, aerospace engineering, and AI-augmented design workflows. Essays and project notes from Dustin Gamble."
+  description="Dustin Gamble builds unmanned aircraft and the AI-powered tools that help design them. Books, projects, and essays."
 >
   <section class="home-hero section-block">
     <h1>Dustin Gamble</h1>
-    <p>Autonomous systems, aerospace engineering, and AI-augmented design workflows.</p>
+    <p>I build flying things &mdash; and the AI-powered tools that help design them.</p>
     {heroImageExists && (
       <figure class="home-main-visual">
         <img src={mainHeroImage.src} alt={mainHeroImage.alt} loading="eager" />
@@ -115,20 +105,13 @@ const lowerHomeImages = [
     </div>
   </section>
 
-  {lowerHomeImages.length > 0 && (
-    <section class="section-block" aria-labelledby="home-visuals-title">
-      <h2 id="home-visuals-title" class="section-heading">Visual Notes</h2>
-      <div class="home-support-grid">
-        {
-          lowerHomeImages.map((image) => (
-            <figure class="home-support-card">
-              <img src={image.src} alt={image.alt} loading="lazy" />
-            </figure>
-          ))
-        }
-      </div>
-    </section>
-  )}
+  <section class="section-block" aria-labelledby="selected-projects-title">
+    <h2 id="selected-projects-title" class="section-heading">Selected Projects</h2>
+    <div class="grid cols-2">
+      {featuredProjects.map((project) => <ProjectCard project={project} />)}
+    </div>
+    <p><a href="/projects/">View project archive</a></p>
+  </section>
 
   <section class="section-block" aria-labelledby="featured-writing-title">
     <h2 id="featured-writing-title" class="section-heading">Featured Writing</h2>
@@ -138,20 +121,12 @@ const lowerHomeImages = [
     <p><a href="/writing/">Browse all essays</a></p>
   </section>
 
-  <section class="section-block" aria-labelledby="selected-projects-title">
-    <h2 id="selected-projects-title" class="section-heading">Selected Projects</h2>
-    <div class="grid cols-2">
-      {featuredProjects.map((project) => <ProjectCard project={project} />)}
-    </div>
-    <p><a href="/projects/">View project archive</a></p>
-  </section>
-
   <section class="section-block about-teaser" aria-labelledby="about-teaser-title">
     <h2 id="about-teaser-title" class="section-heading">About</h2>
     <p>
-      I build practical aerospace systems and the workflows that support them, from prototype concepts to
-      simulation-heavy design loops. Most of my writing here is about how teams can move faster without
-      losing engineering rigor.
+      My work sits where aerospace engineering, unmanned aircraft, rapid prototyping, simulation, and AI
+      meet. At Lockheed Martin Skunk Works I founded the Drone Innovation Garage to get strange aircraft
+      ideas onto a bench, and into the air, faster.
     </p>
     <p><a href="/about/">Read the full about page</a></p>
   </section>

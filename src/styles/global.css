@@ -200,40 +200,20 @@ textarea:focus-visible {
 }
 
 .home-main-visual {
-  margin: 1.25rem 0 0;
+  margin: 1rem 0 0;
   border-radius: 18px;
   overflow: hidden;
   border: 1px solid var(--line);
   box-shadow: var(--shadow);
 }
 
+/* A slim band, so the Books row starts in the first screen. */
 .home-main-visual img {
   display: block;
   width: 100%;
-  aspect-ratio: 16 / 7;
+  aspect-ratio: 4 / 1;
   object-fit: cover;
-}
-
-.home-support-grid {
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.home-support-card {
-  margin: 0;
-  border-radius: var(--radius);
-  overflow: hidden;
-  border: 1px solid var(--line);
-  background: var(--surface);
-  box-shadow: var(--shadow);
-}
-
-.home-support-card img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 16 / 10;
-  object-fit: cover;
+  object-position: center 38%;
 }
 
 .section-heading {
@@ -707,8 +687,8 @@ button[type="submit"]:hover {
     grid-template-columns: 1fr;
   }
 
-  .home-support-grid {
-    grid-template-columns: 1fr;
+  .home-main-visual img {
+    aspect-ratio: 5 / 2;
   }
 
   .page-shell {
