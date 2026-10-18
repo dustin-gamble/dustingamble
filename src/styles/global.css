@@ -1667,6 +1667,36 @@ a.mb-product-card:hover {
   font-family: "Space Grotesk", sans-serif;
 }
 
+/* Whole sample pages, two up; each links to the full-size page. */
+.book-sample-pages {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: 1rem;
+  margin: 1.2rem 0;
+}
+
+.book-sample-pages figure {
+  margin: 0;
+}
+
+.book-sample-pages img {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 0.4rem;
+  box-shadow: var(--shadow);
+}
+
+.book-sample-pages figcaption {
+  margin-top: 0.4rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-align: center;
+  font-family: "Space Grotesk", sans-serif;
+}
+
 @media (max-width: 640px) {
   .book-hero {
     grid-template-columns: 1fr;

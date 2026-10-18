@@ -73,6 +73,42 @@
     "draft": false
   },
   {
+    "slug": "drone-underway",
+    "title": "Drone Underway",
+    "subtitle": "A field guide to small unmanned boats, from the garage to the water and back again",
+    "date": "2026-10-18",
+    "summary": "Drone Field Guide's method taken to the water, for small unmanned boats: what to size, what to seal, and what to do when it stops on the far shore.",
+    "cover": "/images/books/drone-underway-cover.jpg",
+    "status": "In progress",
+    "meta": "Field guide · 36 chapters · 8.5 × 11 in",
+    "tags": [
+      "Unmanned Boats",
+      "Marine",
+      "Reference"
+    ],
+    "featured": true,
+    "order": 5,
+    "draft": false
+  },
+  {
+    "slug": "drone-overland",
+    "title": "Drone Overland",
+    "subtitle": "A field guide to small unmanned ground vehicles, from the garage to the field and back again",
+    "date": "2026-10-18",
+    "summary": "Drone Field Guide's method taken to the ground, for rovers you can lift: what to size, what to check, and what to do when it stops on the hill.",
+    "cover": "/images/books/drone-overland-cover.jpg",
+    "status": "In progress",
+    "meta": "Field guide · 36 chapters · 8.5 × 11 in",
+    "tags": [
+      "Rovers",
+      "Robotics",
+      "Reference"
+    ],
+    "featured": true,
+    "order": 6,
+    "draft": false
+  },
+  {
     "slug": "skippy",
     "title": "The Magnificent Log",
     "subtitle": "An Expeditionary Force fan story",
@@ -87,7 +123,7 @@
       "Tribute"
     ],
     "featured": true,
-    "order": 5,
+    "order": 7,
     "draft": false
   }
 ]
