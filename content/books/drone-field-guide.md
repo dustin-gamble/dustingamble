@@ -4,7 +4,7 @@ subtitle: "From the garage to the field and back again"
 date: "2026-09-27"
 summary: "A practical engineering reference for people who design, build, and fly small unmanned aircraft: what to size, what to check, and what to do when it doesn’t fly the way you drew it."
 cover: "/images/books/drone-field-guide-cover.png"
-status: "Paperback · coming soon"
+status: "Paperback · available now"
 meta: "Reference · 77 chapters · 8.5 × 11 in"
 tags: ["UAV", "Aircraft Design", "Reference"]
 featured: true
