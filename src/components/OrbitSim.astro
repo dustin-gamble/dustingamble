@@ -23,9 +23,9 @@ const isAscent = mode === "ascent";
   <div class="osim-body">
     <div class="osim-stage">
       <div class="osim-canvas-wrap">
-        {!isAscent && <div class="osim-viewbar" role="group" aria-label="Camera view"><button data-camera="map" aria-pressed="true">✦ Mission map</button><button data-camera="fpv" aria-pressed="false">◉ Cockpit FPV</button><button data-look hidden>Look at Earth ↗</button></div>}
+        {!isAscent && <div class="osim-viewbar" role="group" aria-label="Camera view"><button data-camera="map" aria-pressed="true">✦ Mission map</button><button data-camera="fpv" aria-pressed="false">◉ Cockpit FPV</button><button data-osim-closest>Closest pass ⌖</button><button data-look hidden>Look at Earth ↗</button></div>}
         <canvas data-osim-canvas width={isAscent?560:960} height={isAscent?440:540} role="img"
-          aria-label={isAscent ? "Animated launch to orbit trajectory" : "Cartoon mission map: Earth, Moon, and the calculated spacecraft trajectory"}></canvas>
+          aria-label={isAscent ? "Animated launch to orbit trajectory" : "Mission map with Earth and Moon to scale; automatic lunar approach zoom"}></canvas>
         <div class="osim-clock" data-osim-clock></div>
       </div>
 
@@ -40,7 +40,7 @@ const isAscent = mode === "ascent";
         <button type="button" class="osim-btn" data-osim-reset>Reset</button>
         {!isAscent && <label class="osim-scrub">Flight time<input data-osim-progress type="range" min="0" max="100" step=".1" value="0" aria-label="Flight progress"/></label>}
       </div>
-      {!isAscent && <p class="osim-model-note">Simplified gravity model · cartoon worlds enlarged · cockpit camera faces the selected world</p>}
+      {!isAscent && <p class="osim-model-note">Map: bodies and distances to scale · spacecraft marker enlarged · automatic lunar zoom</p>}
     </div>
 
     <div class="osim-panel">
@@ -95,7 +95,7 @@ const isAscent = mode === "ascent";
   <p class="osim-foot">
     {isAscent
       ? "Earth radius 6,371 km, μ = 398,600 km³/s². Thrust is modelled as a constant 30 m/s² along a simple gravity-turn program — real rockets throttle and stage."
-      : "Teaching model, not an Apollo reconstruction. Earth + Moon gravity; circular lunar orbit at 384,400 km. Cartoon worlds enlarged. Cockpit camera faces the selected world. A real mission must also plan landing and return."}
+      : "Teaching model, not an Apollo reconstruction. Earth + Moon gravity; circular lunar orbit at 384,400 km. Bodies and distances use the same map scale; the spacecraft marker is enlarged. The map zooms near the Moon. The cockpit camera faces the selected world. A real mission must also plan landing and return."}
   </p>
 </div>
 
@@ -335,7 +335,7 @@ const isAscent = mode === "ascent";
       var vx = 0, vy = vCirc + tliKms;
       var moonTheta = (leadDeg * Math.PI) / 180;
       var t = 0;
-      var pts = [], moonPts = [];
+      var pts = [[x,y,0]], moonPts = [[DM*Math.cos(moonTheta),DM*Math.sin(moonTheta)]];
       var closest = 1e9, tClosest = 0, impact = false, apo = 0;
       var prevDr = 1e12, braked = false, maxAfter = 0, burnPt = null;
       var burnTime = null;
@@ -379,9 +379,11 @@ const isAscent = mode === "ascent";
         if (impact) break;
         if (t > 16 * 86400) break;
 
-        if (i % 60 === 0 && pts.length < 4000) { pts.push([x, y, t]); moonPts.push([mx, my]); }
+        if (i % 60 === 0 && pts.length < 4000) { pts.push([x, y, t]); moonPts.push([DM*Math.cos(moonTheta+MOON_W*t), DM*Math.sin(moonTheta+MOON_W*t)]); }
       }
 
+      // Keep the final state, including contact, visible when the slider reaches 100%.
+      pts.push([x,y,t]); moonPts.push([DM*Math.cos(moonTheta+MOON_W*t),DM*Math.sin(moonTheta+MOON_W*t)]);
       return {
         pts: pts, moonPts: moonPts, closest: closest, tClosest: tClosest,
         impact: impact, apogee: apo - RE, t: t, reached: closest < 66000,
@@ -466,39 +468,71 @@ const isAscent = mode === "ascent";
         ctx.beginPath(); ctx.arc(cx, cy, rpx * 1.035, 0, 7); ctx.stroke();
       }
 
-      function planetFace(cx,cy,r,kind) {
+      // Procedural illustrations remain entirely local, including in the portable lessons.
+      function world(cx,cy,r,kind) {
         ctx.save();ctx.translate(cx,cy);
-        var g=ctx.createRadialGradient(-r*.4,-r*.5,0,r*.2,r*.2,r*1.4);
-        g.addColorStop(0,kind==='earth'?'#8ee2eb':'#fff0cb');g.addColorStop(1,kind==='earth'?'#2672ae':'#889ab7');
-        ctx.shadowColor=kind==='earth'?'#65ddeb':'#dbe4ff';ctx.shadowBlur=r*.25;
-        ctx.fillStyle=g;ctx.beginPath();ctx.arc(0,0,r,0,7);ctx.fill();ctx.shadowBlur=0;
-        ctx.save();ctx.beginPath();ctx.arc(0,0,r,0,7);ctx.clip();
+        var g=ctx.createRadialGradient(-r*.4,-r*.45,r*.05,r*.25,r*.2,r*1.3);
+        g.addColorStop(0,kind==='earth'?'#78bad0':'#d8dad8');
+        g.addColorStop(.55,kind==='earth'?'#22648d':'#999fa5');
+        g.addColorStop(1,kind==='earth'?'#081c36':'#343b47');
+        ctx.fillStyle=g;ctx.beginPath();ctx.arc(0,0,r,0,Math.PI*2);ctx.fill();
+        ctx.save();ctx.beginPath();ctx.arc(0,0,r,0,Math.PI*2);ctx.clip();
         if(kind==='earth'){
-          ctx.fillStyle='#a8e6ad';
-          [[[-.75,-.5],[-.28,-.79],[.03,-.46],[-.28,-.13],[-.14,.13],[-.48,.32],[-.83,.03]],[[.3,.12],[.71,-.01],[.8,.37],[.37,.75],[.14,.51]]].forEach(poly=>{ctx.beginPath();poly.forEach((p,i)=>i?ctx.lineTo(p[0]*r,p[1]*r):ctx.moveTo(p[0]*r,p[1]*r));ctx.closePath();ctx.fill();});
-          ctx.strokeStyle='#e9fbff99';ctx.lineWidth=r*.08;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(-r*.58,-r*.38);ctx.quadraticCurveTo(-r*.2,-r*.55,r*.15,-r*.37);ctx.stroke();
+          ctx.fillStyle='#759b88';
+          [[[-.82,-.46],[-.6,-.69],[-.34,-.73],[-.12,-.48],[-.24,-.26],[-.08,-.12],[-.26,.1],[-.49,.19],[-.54,-.12]],
+           [[-.29,.18],[-.07,.27],[-.02,.5],[-.27,.83],[-.35,.52]],
+           [[.12,-.64],[.44,-.77],[.9,-.45],[.72,-.18],[.4,-.12],[.23,.18],[.06,-.14]],
+           [[.25,.07],[.52,.08],[.61,.38],[.35,.62],[.12,.34]],
+           [[.67,.51],[.85,.45],[.98,.64],[.8,.77]]].forEach(poly=>{ctx.beginPath();poly.forEach((p,i)=>i?ctx.lineTo(p[0]*r,p[1]*r):ctx.moveTo(p[0]*r,p[1]*r));ctx.closePath();ctx.fill();});
+          ctx.strokeStyle='#edf5ed88';ctx.lineWidth=Math.max(.5,r*.035);ctx.lineCap='round';
+          [[-.7,-.35,.3,-.58],[-.44,.4,.5,.53],[.15,-.05,.92,-.26]].forEach(c=>{ctx.beginPath();ctx.moveTo(c[0]*r,c[1]*r);ctx.quadraticCurveTo((c[0]+.3)*r,(c[1]-.2)*r,c[2]*r,c[3]*r);ctx.stroke();});
         }else{
-          [[-.44,-.4,.21],[.49,.24,.23],[.34,-.59,.12],[-.5,.53,.12]].forEach(c=>{ctx.fillStyle='#7f91af55';ctx.beginPath();ctx.arc(c[0]*r,c[1]*r,c[2]*r,0,7);ctx.fill();ctx.strokeStyle='#f9f1df66';ctx.lineWidth=2;ctx.stroke();});
+          ctx.fillStyle='#56627066';
+          [[[-.7,-.2],[-.62,-.46],[-.4,-.57],[-.19,-.5],[-.08,-.32],[-.18,-.16],[-.06,.02],[-.2,.21],[-.36,.15],[-.46,.38],[-.65,.25]],
+           [[-.07,-.45],[.11,-.58],[.35,-.48],[.46,-.28],[.34,-.1],[.48,.12],[.28,.26],[.07,.14],[.02,-.04],[-.14,-.19]]].forEach(poly=>{
+            ctx.beginPath();var last=poly[poly.length-1];ctx.moveTo((last[0]+poly[0][0])*r/2,(last[1]+poly[0][1])*r/2);
+            poly.forEach((p,i)=>{var next=poly[(i+1)%poly.length];ctx.quadraticCurveTo(p[0]*r,p[1]*r,(p[0]+next[0])*r/2,(p[1]+next[1])*r/2);});ctx.closePath();ctx.fill();
+          });
+          for(var i=0;i<32;i++){
+            var angle=i*2.39996,rad=Math.sqrt((i+.5)/32)*r*.92,cr=r*(.018+(i%5)*.009);
+            var x=Math.cos(angle)*rad,y=Math.sin(angle)*rad;
+            ctx.fillStyle='#4c596944';ctx.beginPath();ctx.arc(x,y,cr,0,7);ctx.fill();
+            ctx.strokeStyle='#f3f3e366';ctx.lineWidth=Math.max(.3,r*.007);ctx.beginPath();ctx.arc(x,y,cr,.2,Math.PI+ .1);ctx.stroke();
+          }
+          ctx.strokeStyle='#d8dddc55';ctx.lineWidth=Math.max(.3,r*.009);
+          for(var j=0;j<9;j++){var a=j*Math.PI*2/9;ctx.beginPath();ctx.moveTo(-r*.22,r*.58);ctx.lineTo(-r*.22+Math.cos(a)*r*.23,r*.58+Math.sin(a)*r*.23);ctx.stroke();}
         }
-        ctx.restore();ctx.fillStyle='#20334c';[-.2,.2].forEach(x=>{ctx.beginPath();ctx.ellipse(x*r,.08*r,.055*r,.078*r,0,0,7);ctx.fill();});ctx.strokeStyle='#20334c';ctx.lineWidth=Math.max(2,r*.045);ctx.lineCap='round';ctx.beginPath();ctx.arc(0,.19*r,.16*r,.2,Math.PI-.2);ctx.stroke();ctx.fillStyle='#f2a9a266';[-.38,.38].forEach(x=>{ctx.beginPath();ctx.ellipse(x*r,.24*r,.1*r,.055*r,0,0,7);ctx.fill();});ctx.restore();
+        var shade=ctx.createLinearGradient(-r,0,r,0);shade.addColorStop(0,'#07101c00');shade.addColorStop(.55,'#07101c0d');shade.addColorStop(1,'#07101cbb');
+        ctx.fillStyle=shade;ctx.fillRect(-r,-r,r*2,r*2);ctx.restore();
+        if(kind==='earth'){ctx.strokeStyle='#84c6e477';ctx.lineWidth=Math.max(.6,r*.02);ctx.beginPath();ctx.arc(0,0,r*1.025,0,7);ctx.stroke();}
+        ctx.restore();
       }
       function capsule(x,y,angle,burning){
-        ctx.save();ctx.translate(x,y);ctx.rotate(angle);ctx.lineWidth=2;
-        if(burning){ctx.fillStyle='#ffb66d';ctx.beginPath();ctx.moveTo(-14,-6);ctx.quadraticCurveTo(-48,0,-14,6);ctx.fill();ctx.fillStyle='#fff1b3';ctx.beginPath();ctx.moveTo(-14,-3);ctx.lineTo(-34,0);ctx.lineTo(-14,3);ctx.fill();}
-        ctx.fillStyle='#f4ede1';ctx.strokeStyle='#8da5bc';ctx.beginPath();ctx.moveTo(-13,-13);ctx.quadraticCurveTo(8,-12,21,0);ctx.quadraticCurveTo(8,12,-13,13);ctx.closePath();ctx.fill();ctx.stroke();ctx.fillStyle='#6ed5e5';ctx.beginPath();ctx.ellipse(5,0,6,5,0,0,7);ctx.fill();ctx.fillStyle='#8ea6b8';ctx.fillRect(-18,-11,5,22);ctx.restore();
+        ctx.save();ctx.translate(x,y);ctx.rotate(angle);ctx.lineWidth=1;
+        if(burning){ctx.fillStyle='#eca353';ctx.beginPath();ctx.moveTo(-13,-3);ctx.lineTo(-27,0);ctx.lineTo(-13,3);ctx.fill();}
+        ctx.fillStyle='#bcc9d4';ctx.strokeStyle='#657d94';ctx.fillRect(-11,-6,12,12);ctx.strokeRect(-11,-6,12,12);
+        ctx.fillStyle='#e5e7e8';ctx.beginPath();ctx.moveTo(1,-7);ctx.lineTo(12,-2);ctx.lineTo(12,2);ctx.lineTo(1,7);ctx.closePath();ctx.fill();ctx.stroke();
+        ctx.fillStyle='#223f58';ctx.fillRect(5,-2,3,4);ctx.strokeStyle='#8eacbf';ctx.beginPath();ctx.moveTo(-7,-9);ctx.lineTo(-7,9);ctx.stroke();ctx.restore();
       }
       function cockpit(cur,mp,elapsed,W,H){
-        stars(W,H);var dx=mp[0]-cur[0],dy=mp[1]-cur[1],distance=Math.hypot(dx,dy);var lookingEarth=look==='earth';
+        stars(W,H);var distance=Math.hypot(mp[0]-cur[0],mp[1]-cur[1]);var lookingEarth=look==='earth';
         var targetDistance=lookingEarth?Math.hypot(cur[0],cur[1]):distance;
         var radius=lookingEarth?RE:RM;
-        // A Moon/Earth-facing illustration, not a reconstructed Apollo attitude view.
-        var apparent=Math.min(H*.32,Math.max(H*.18,Math.atan2(radius,targetDistance)*W*1.6));
-        planetFace(W*.5,H*.4,apparent,lookingEarth?'earth':'moon');
-        ctx.strokeStyle='#9eeed166';ctx.lineWidth=1;ctx.setLineDash([4,8]);ctx.beginPath();ctx.moveTo(W*.5-90,H*.4);ctx.lineTo(W*.5+90,H*.4);ctx.moveTo(W*.5,H*.4-90);ctx.lineTo(W*.5,H*.4+90);ctx.stroke();ctx.setLineDash([]);
-        ctx.fillStyle='#a8e3dd';ctx.font='14px ui-monospace, monospace';ctx.textAlign='center';ctx.fillText((lookingEarth?'EARTH':'MOON')+'  /  '+km(Math.max(0,targetDistance-radius))+' TO SURFACE',W*.5,H*.4+Math.max(apparent+30,110));
-        ctx.fillStyle='#263a50';ctx.strokeStyle='#65788d';ctx.lineWidth=5;ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(W*.08,0);ctx.lineTo(W*.17,H*.79);ctx.lineTo(W*.83,H*.79);ctx.lineTo(W*.92,0);ctx.lineTo(W,0);ctx.lineTo(W,H);ctx.lineTo(0,H);ctx.closePath();ctx.fill();ctx.stroke();
-        ctx.fillStyle='#132237';ctx.fillRect(W*.2,H*.83,W*.6,H*.17);ctx.fillStyle='#a7f0d5';ctx.textAlign='left';ctx.font='bold '+(W<500?9:16)+'px ui-monospace, monospace';ctx.fillText('APOLLO FLIGHT LAB',W*.23,H*.89);ctx.font=(W<500?9:13)+'px ui-monospace, monospace';ctx.fillText('T + '+elapsed.toFixed(2)+' DAYS',W*.23,H*.95);ctx.textAlign='right';ctx.fillText('COAST / GRAVITY ACTIVE',W*.76,H*.89);ctx.fillText('LOOK: '+(lookingEarth?'HOME':'MOON'),W*.76,H*.95);ctx.textAlign='left';
-        [[.05,.16],[.09,.5],[.91,.5],[.95,.16]].forEach(p=>{ctx.fillStyle='#a8bbc7';ctx.beginPath();ctx.arc(W*p[0],H*p[1],4,0,7);ctx.fill();});
+        // 70-degree horizontal field of view. The body grows with angular size,
+        // without a large decorative minimum that suggests premature contact.
+        var angle=Math.asin(Math.min(.9999,radius/Math.max(radius,targetDistance)));
+        var apparent=Math.min(H*.7,Math.max(1,Math.tan(angle)*W/(2*Math.tan(35*Math.PI/180))));
+        world(W*.5,H*.39,apparent,lookingEarth?'earth':'moon');
+        ctx.strokeStyle='#8dc8d688';ctx.lineWidth=1;
+        [[-1,-1],[1,-1],[-1,1],[1,1]].forEach(c=>{var x=W*.5+c[0]*(apparent+12),y=H*.39+c[1]*(apparent+12);ctx.beginPath();ctx.moveTo(x-c[0]*7,y);ctx.lineTo(x,y);ctx.lineTo(x,y-c[1]*7);ctx.stroke();});
+        ctx.fillStyle='#c3d9e6';ctx.font=(W<500?10:12)+'px ui-monospace, monospace';ctx.textAlign='center';
+        ctx.fillText((lookingEarth?'EARTH':'MOON')+' / '+km(Math.max(0,targetDistance-radius))+' TO SURFACE',W*.5,H*.72);
+        // Narrow window ribs and a restrained instrument panel.
+        ctx.fillStyle='#172535';ctx.strokeStyle='#516478';ctx.lineWidth=2;
+        ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(W*.035,0);ctx.lineTo(W*.12,H*.81);ctx.lineTo(W*.88,H*.81);ctx.lineTo(W*.965,0);ctx.lineTo(W,0);ctx.lineTo(W,H);ctx.lineTo(0,H);ctx.closePath();ctx.fill();ctx.stroke();
+        ctx.fillStyle='#0b1725';ctx.fillRect(W*.14,H*.84,W*.72,H*.16);ctx.fillStyle='#a9cfdf';ctx.textAlign='left';
+        ctx.font=(W<500?9:12)+'px ui-monospace, monospace';ctx.fillText('APOLLO / NAVIGATION',W*.17,H*.9);ctx.fillText('T + '+elapsed.toFixed(2)+' DAYS',W*.17,H*.96);
+        ctx.textAlign='right';ctx.fillText('TARGET: '+(lookingEarth?'EARTH':'MOON'),W*.83,H*.9);ctx.fillText('70° FIELD OF VIEW',W*.83,H*.96);ctx.textAlign='left';
       }
 
       // ---------- ascent draw ----------
@@ -578,49 +612,53 @@ const isAscent = mode === "ascent";
         var W = mode==='moon'?canvasW:cv.width, H = mode==='moon'?canvasH:cv.height;
         stars(W, H);
 
-        var span = DM * 1.18;
-        var scale = (Math.min(W, H) / 2 - 16) / span;
-        var cx = W / 2, cy = H / 2;
-
-        // Moon's orbit
-        ctx.strokeStyle = "rgba(255,255,255,0.16)";
-        ctx.setLineDash([4, 6]); ctx.lineWidth = 1;
-        ctx.beginPath(); ctx.arc(cx, cy, DM * scale, 0, 7); ctx.stroke();
-        ctx.setLineDash([]);
-
-        planetFace(cx,cy,42,'earth');
-        ctx.fillStyle='#acd8e8';ctx.font='bold 13px ui-sans-serif,system-ui,sans-serif';ctx.textAlign='center';ctx.fillText('EARTH',cx,cy+61);ctx.textAlign='left';
-
-        var n = Math.max(2, Math.floor(r.pts.length * p));
-        ctx.strokeStyle = "#9af1d8"; ctx.lineWidth = 3;
-        ctx.beginPath();
-        for (var i = 0; i < n; i++) {
-          var q = r.pts[i];
-          var px = cx + q[0] * scale, py = cy - q[1] * scale;
-          i ? ctx.lineTo(px, py) : ctx.moveTo(px, py);
+        var n = Math.max(1,Math.min(r.pts.length,Math.floor(r.pts.length*p)));
+        var cur=r.pts[n-1],mp=r.moonPts[n-1];
+        var separation=Math.hypot(cur[0]-mp[0],cur[1]-mp[1]);
+        // The camera zooms, not the worlds: one km-to-pixel scale for bodies and path.
+        var blend=Math.max(0,Math.min(1,(100000-separation)/60000));
+        blend=blend*blend*(3-2*blend);
+        var span=DM*1.18*(1-blend)+18000*blend;
+        var scale=(Math.min(W,H)/2-35)/span;
+        var ox=mp[0]*blend,oy=mp[1]*blend,cx=W/2,cy=H/2;
+        function screen(x,y){return [cx+(x-ox)*scale,cy-(y-oy)*scale];}
+        var home=screen(0,0),moon=screen(mp[0],mp[1]),ship=screen(cur[0],cur[1]);
+        ctx.save();ctx.beginPath();ctx.rect(0,0,W,H);ctx.clip();
+        ctx.strokeStyle='#60778d44';ctx.setLineDash([3,6]);ctx.lineWidth=1;
+        if(blend<.5){ctx.beginPath();ctx.arc(home[0],home[1],DM*scale,0,7);ctx.stroke();}ctx.setLineDash([]);
+        world(home[0],home[1],RE*scale,'earth');
+        world(moon[0],moon[1],RM*scale,'moon');
+        ctx.font='11px ui-monospace, monospace';ctx.fillStyle='#b9cadb';ctx.textAlign='center';
+        if(home[0]>15&&home[0]<W-15&&home[1]>15&&home[1]<H-30)ctx.fillText('EARTH',home[0],home[1]+Math.max(18,RE*scale+14));
+        ctx.fillText('MOON',moon[0],moon[1]-Math.max(15,RM*scale+9));ctx.textAlign='left';
+        ctx.strokeStyle='#92d6dc';ctx.lineWidth=1.5;ctx.beginPath();
+        // In the close-up, use a Moon-relative trail. An old Earth-relative
+        // position must not appear to run through the Moon's present position.
+        for(var i=0;i<n;i++){var q=screen(r.pts[i][0]+(mp[0]-r.moonPts[i][0])*blend,r.pts[i][1]+(mp[1]-r.moonPts[i][1])*blend);i?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1]);}ctx.stroke();
+        // The small dot is the calculated position. A leader keeps the enlarged
+        // spacecraft illustration from looking like a collision with a planet.
+        var labelX=Math.max(48,Math.min(W-48,ship[0]+(ship[0]<moon[0]?-48:48)));
+        var labelY=Math.max(48,Math.min(H-52,ship[1]-32));
+        ctx.strokeStyle='#94b5c080';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(ship[0],ship[1]);ctx.lineTo(labelX,labelY);ctx.stroke();
+        ctx.fillStyle=r.impact&&p>=1?'#e6a071':'#f4fbff';ctx.beginPath();ctx.arc(ship[0],ship[1],2,0,7);ctx.fill();
+        capsule(labelX,labelY,-Math.PI/8,p<.03);
+        ctx.fillStyle='#c1d8e1';ctx.font='9px ui-monospace, monospace';ctx.textAlign='center';ctx.fillText('SPACECRAFT',labelX,labelY+20);ctx.textAlign='left';
+        if(r.burnPt&&cur[2]>=r.burnTime){var bt=lead*Math.PI/180+MOON_W*r.burnTime;var bp=screen(r.burnPt[0]+(mp[0]-DM*Math.cos(bt))*blend,r.burnPt[1]+(mp[1]-DM*Math.sin(bt))*blend);ctx.strokeStyle='#e2b680';ctx.beginPath();ctx.arc(bp[0],bp[1],5,0,7);ctx.stroke();}
+        if(blend>.5){
+          ctx.strokeStyle='#d4ad7066';ctx.setLineDash([3,4]);ctx.beginPath();ctx.moveTo(ship[0],ship[1]);ctx.lineTo(moon[0],moon[1]);ctx.stroke();ctx.setLineDash([]);
+          ctx.fillStyle='#d8bf97';ctx.font=(W<500?9:11)+'px ui-monospace, monospace';ctx.textAlign='center';
+          ctx.fillText((r.impact&&p>=1?'CONTACT':km(Math.max(0,separation-RM))+' ABOVE SURFACE'),W/2,H-37);ctx.textAlign='left';
         }
-        ctx.stroke();
-
-        var mp = r.moonPts[n - 1] || r.moonPts[0];
-        if (mp) {
-          var mx = cx + mp[0] * scale, my = cy - mp[1] * scale;
-          planetFace(mx,my,25,'moon');
-          ctx.fillStyle='#ece1c9';ctx.font='bold 12px ui-sans-serif,system-ui,sans-serif';ctx.textAlign='center';ctx.fillText('MOON',mx,my+41);ctx.textAlign='left';
-        }
-        if (r.burnPt && r.pts[n-1] && r.pts[n-1][2]>=r.burnTime) {
-          ctx.strokeStyle = "#ffb45c"; ctx.lineWidth = 2;
-          ctx.beginPath();
-          ctx.arc(cx + r.burnPt[0] * scale, cy - r.burnPt[1] * scale, 7, 0, 7);
-          ctx.stroke();
-          ctx.fillStyle = "rgba(255,180,92,0.9)"; ctx.font = "10px ui-monospace, monospace";
-          ctx.fillText("braking burn", cx + r.burnPt[0] * scale + 10, cy - r.burnPt[1] * scale - 8);
-        }
-        var cur = r.pts[n-1] || r.pts[0];
-        if(cur){var prev=r.pts[Math.max(0,n-2)]||cur;capsule(cx+cur[0]*scale,cy-cur[1]*scale,Math.atan2(-(cur[1]-prev[1]),cur[0]-prev[0]),p<.03);}
-        var days=cur?cur[2]/86400:0;
+        ctx.restore();
+        ctx.fillStyle='#8ba6bc';ctx.font=(W<500?8:10)+'px ui-monospace, monospace';
+        ctx.fillText(blend>.5?'MOON-RELATIVE / AUTO ZOOM':'EARTH–MOON TRANSFER',16,H-16);
+        var barKm=blend>.5?10000:100000,barPx=barKm*scale;
+        ctx.strokeStyle='#8ba6bc';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(W-20-barPx,H-18);ctx.lineTo(W-20,H-18);ctx.stroke();
+        ctx.textAlign='right';ctx.fillText(km(barKm),W-20,H-25);ctx.textAlign='left';
+        var days=cur[2]/86400;
         clock.textContent='T + '+days.toFixed(2)+' days';
-        if(camera==='fpv'&&cur&&mp)cockpit(cur,mp,days,W,H);
-        else{ctx.fillStyle='#9eb4cb';ctx.font='12px ui-sans-serif,system-ui,sans-serif';ctx.fillText(W<500?'ENLARGED WORLDS · TEACHING MODEL':'CARTOON WORLDS ENLARGED · CALCULATED FLIGHT PATH',18,H-17);}
+        cv.setAttribute('aria-label',camera==='fpv'?'Cockpit view facing '+look+'; 70 degree field of view':'Mission map; '+(blend>.5?'lunar approach zoom; ':'Earth–Moon transfer; ')+km(Math.max(0,separation-RM))+' above the Moon; bodies and distances to scale');
+        if(camera==='fpv')cockpit(cur,mp,days,W,H);
         var distance=cur&&mp?Math.hypot(cur[0]-mp[0],cur[1]-mp[1])-RM:0;
         rows([['Moon surface now',km(Math.max(0,distance))],['Closest approach',r.impact?'impact':km(Math.max(0,r.closest-RM))+' altitude'],['Time to closest',(r.tClosest/86400).toFixed(1)+' days']]);
         var scrub=root.querySelector('[data-osim-progress]');if(scrub)scrub.value=String(p*100);
@@ -638,7 +676,7 @@ const isAscent = mode === "ascent";
             verdict.textContent = "You burned, but not hard enough — closest approach " + km(r.closest) + " and then away again. More braking burn.";
           } else if (r.reached) {
             verdict.dataset.tone = "good";
-            verdict.textContent = "Lunar encounter — " + km(r.closest) + " at closest approach after " + (r.tClosest / 86400).toFixed(1) + " days. Apollo took about three. From here a braking burn drops you into lunar orbit.";
+            verdict.textContent = "Clear flyby — " + km(r.closest - RM) + " above the Moon at closest approach, after " + (r.tClosest / 86400).toFixed(1) + " days. Compare with the lunar-orbit preset to see what a braking burn changes.";
           } else if (r.apogee < DM - RE - 30000) {
             verdict.dataset.tone = "bad";
             verdict.textContent = "You did not get out that far — apogee " + km(r.apogee) + " against a Moon orbiting at " + km(DM) + ". You need more burn before timing even matters.";
@@ -714,7 +752,13 @@ const isAscent = mode === "ascent";
         idleSpin();
       }
 
-      root.querySelectorAll('[data-camera]').forEach(function(b){b.addEventListener('click',function(){camera=b.dataset.camera;root.querySelectorAll('[data-camera]').forEach(function(el){el.setAttribute('aria-pressed',String(el===b));});root.querySelector('[data-look]').hidden=camera!=='fpv';cv.setAttribute('aria-label',camera==='map'?'Cartoon mission map: Earth, Moon, and the calculated spacecraft trajectory':'Stylized cockpit view facing '+look+'; distance comes from the flight simulation');draw(lastP);});});
+      root.querySelectorAll('[data-camera]').forEach(function(b){b.addEventListener('click',function(){camera=b.dataset.camera;root.querySelectorAll('[data-camera]').forEach(function(el){el.setAttribute('aria-pressed',String(el===b));});root.querySelector('[data-look]').hidden=camera!=='fpv';root.querySelector('[data-osim-closest]').hidden=camera!=='map';cv.setAttribute('aria-label',camera==='map'?'Mission map with Earth and Moon to scale; automatic lunar approach zoom':'Stylized cockpit view facing '+look+'; distance comes from the flight simulation');draw(lastP);});});
+      var closestButton=root.querySelector('[data-osim-closest]');
+      if(closestButton)closestButton.addEventListener('click',function(){
+        if(raf)cancelAnimationFrame(raf);raf=null;if(!moonCache)draw(0);
+        var index=0;moonCache.pts.forEach(function(p,i){if(Math.abs(p[2]-moonCache.tClosest)<Math.abs(moonCache.pts[index][2]-moonCache.tClosest))index=i;});
+        draw(Math.min(1,(index+1.01)/moonCache.pts.length));
+      });
       var lookButton=root.querySelector('[data-look]');if(lookButton)lookButton.addEventListener('click',function(){look=look==='moon'?'earth':'moon';lookButton.textContent=look==='moon'?'Look at Earth ↗':'Look at Moon ↗';cv.setAttribute('aria-label','Stylized cockpit view facing '+look+'; distance comes from the flight simulation');draw(lastP);});
       var scrub=root.querySelector('[data-osim-progress]');if(scrub)scrub.addEventListener('input',function(){if(raf)cancelAnimationFrame(raf);raf=null;draw(Number(scrub.value)/100);});
       root.querySelector('[data-osim-pause]').addEventListener('click',function(){localPaused=!localPaused;this.setAttribute('aria-pressed',String(localPaused));this.textContent=localPaused?'Resume ▶':'Pause Ⅱ';});
