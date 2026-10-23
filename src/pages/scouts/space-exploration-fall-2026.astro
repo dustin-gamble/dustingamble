@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import SpaceCourseGateway from "../../components/SpaceCourseGateway.astro";
 import SlideDeck from "../../components/SlideDeck.astro";
 import SeriesCalendar from "../../components/SeriesCalendar.astro";
 import FlightSim from "../../components/FlightSim.astro";
@@ -37,64 +38,71 @@ const counselorOrders = orders.groups.filter((g) => g.id !== "scout");
   description="Troop 308's Space Exploration merit badge series: five Monday blocks, interactive launch and orbit simulators, presenter-ready slide decks, ordering lists with buy links, a prediction competition, and a launch day before Thanksgiving."
 >
   <div class="se-page">
-    <p class="se-crumbs">
-      <a href="/scouts/">&larr; Back to Scouts</a> ·
-      <a href="/merit-badges/space-exploration/">Space Exploration badge page</a> ·
-      <a href="/merit-badges/capstones/telemetry-rocket/">Telemetry Rocket capstone</a> ·
-      <a href="/scouts/telemetry/">Ground station</a> ·
-      <a href="/scouts/space-exploration-cards/">Teaching cards</a>
-    </p>
+    <nav class="se-crumbs" aria-label="Breadcrumb">
+      <a href="/scouts/">Scouts</a><span aria-hidden="true">/</span><span>Space Exploration · Fall 2026</span>
+    </nav>
+    <SpaceCourseGateway />
 
-    <p><a href="/scouts/space-lessons/">▶ Open all seven animated lessons</a> · <a href="/scouts/space-exploration-offline/">Offline teaching setup &amp; video checklist</a></p>
-    <header class="se-hero">
-      <span class="se-hero-icon" aria-hidden="true">🚀</span>
-      <div>
-        <p class="kicker">{series.kicker}</p>
-        <h1>{series.title}</h1>
-        <p class="se-hero-sum">{series.summary}</p>
-        <ul class="tag-list" aria-label="Series facts">
-          {series.counselorFacts.map((f) => <li>{f}</li>)}
-        </ul>
-      </div>
-    </header>
+    <div class="se-guide-heading" id="course-guide">
+      <div><p class="se-label">YOUR COURSE GUIDE</p><h2>Find what you need.</h2></div>
+      <p>Choose your view. Open a section to get started.</p>
+    </div>
 
     <!-- ================= audience switch ================= -->
     <div class="se-switch" data-audience-switch role="tablist" aria-label="Choose your view">
-      <button type="button" role="tab" class="se-switch-btn is-on" data-view="scout" aria-selected="true">
+      <button type="button" role="tab" class="se-switch-btn is-on" data-view="scout" id="view-scout" aria-controls="panel-scout" aria-selected="true" tabindex="0">
         <strong>Scout</strong>
-        <span>What to do, study, and buy</span>
+        <span>My checklist, build &amp; launch day</span>
       </button>
-      <button type="button" role="tab" class="se-switch-btn" data-view="counselor" aria-selected="false">
-        <strong>Merit Badge Counselor</strong>
-        <span>Run-of-shows, decks, gear, logistics</span>
+      <button type="button" role="tab" class="se-switch-btn" data-view="counselor" id="view-counselor" aria-controls="panel-counselor" aria-selected="false" tabindex="-1">
+        <strong>Counselor</strong>
+        <span>Lesson plans, handouts &amp; range prep</span>
       </button>
     </div>
 
     <!-- ================= SCOUT VIEW ================= -->
-    <div data-view-panel="scout">
-      <section class="se-block">
-        <h2>The deal</h2>
+    <div data-view-panel="scout" id="panel-scout" role="tabpanel" aria-labelledby="view-scout" class="se-view-layout">
+      <aside class="se-sidebar"><nav aria-label="Scout quick navigation"><p class="se-label">QUICK NAVIGATION</p><a href="#scout-checklist">My checklist<span aria-hidden="true">↗</span></a><a href="#scout-calendar">Dates & deadlines<span aria-hidden="true">↗</span></a><a href="#scout-pioneer">Space pioneer<span aria-hidden="true">↗</span></a><a href="#scout-build">Build & practice<span aria-hidden="true">↗</span></a><a href="#scout-launch">Launch day<span aria-hidden="true">↗</span></a></nav><div class="se-sidebar-note"><span aria-hidden="true">✳</span><strong>Make space move.</strong><p>Animated experiments, ready for a room without Wi-Fi.</p><a href="/scouts/space-lessons/">Open the lessons →</a></div></aside>
+<div class="se-sections"><section class="se-block" id="scout-start">
+        <details class="se-section" open>
+          <summary><span class="se-section-title"><h2>Your mission</h2><span>The five meetings, your own projects, and how the badge comes together.</span></span><span class="se-section-toggle" aria-hidden="true"></span></summary>
+          <div class="se-section-body">
+
         <p class="se-lede">{scoutGuide.theDeal}</p>
         <p class="muted">{scoutGuide.intro}</p>
-      </section>
 
-      <section class="se-block">
-        <h2>Your checklist — everything you have to do, in one place</h2>
+<p class="se-inline-actions"><a href="#scout-checklist">Open my checklist →</a><a href="#scout-calendar">See the dates →</a></p>
+</div>
+        </details>
+      </section>
+<section class="se-block" id="scout-checklist">
+        <details class="se-section">
+          <summary><span class="se-section-title"><h2>Your requirement checklist</h2><span>Track all eight requirements. Save in this browser or print a copy.</span></span><span class="se-section-toggle" aria-hidden="true"></span></summary>
+          <div class="se-section-body">
+
         <p class="muted">
           All eight requirements with a box for each one. Tick them off as you go; it saves in this browser, so
           it will still be here next Monday. Print it and bring it to meetings, or keep it on your phone
           &mdash; either way, this is the sheet I initial.
         </p>
         <ScoutChecklist />
+      </div>
+        </details>
       </section>
+<section class="se-block" id="scout-calendar">
+        <details class="se-section">
+          <summary><span class="se-section-title"><h2>Dates & deadlines</h2><span>Meeting nights, launch day, and backup dates.</span></span><span class="se-section-toggle" aria-hidden="true"></span></summary>
+          <div class="se-section-body">
 
-      <section class="se-block">
-        <h2>Every date, in one place</h2>
         <SeriesCalendar events={calendarEvents} />
+      </div>
+        </details>
       </section>
+<section class="se-block" id="scout-kit">
+        <details class="se-section">
+          <summary><span class="se-section-title"><h2>Your rocket kit</h2><span>What the troop provides, what to bring, and how to earn your kit.</span></span><span class="se-section-toggle" aria-hidden="true"></span></summary>
+          <div class="se-section-body">
 
-      <section class="se-block">
-        <h2>{scoutGuide.buyList.heading}</h2>
         <p class="se-callout-line">
           <span class="se-pill se-pill-strong">{scoutGuide.buyList.total}</span>
           <span class="se-pill se-pill-warn">{scoutGuide.buyList.deadline}</span>
@@ -130,10 +138,14 @@ const counselorOrders = orders.groups.filter((g) => g.id !== "scout");
           </ol>
           <p class="se-note">{scoutGuide.gate.objective}</p>
         </details>
+      </div>
+        </details>
       </section>
+<section class="se-block" id="scout-guide">
+        <details class="se-section">
+          <summary><span class="se-section-title"><h2>Official study guide</h2><span>Free resources from Scouting America, organized by requirement.</span></span><span class="se-section-toggle" aria-hidden="true"></span></summary>
+          <div class="se-section-body">
 
-      <section class="se-block">
-        <h2>The official guide — read it on your phone, it's free</h2>
         <p class="muted">
           Scouting America publishes a page for every single requirement on this badge. It is free, there is no
           pamphlet to buy, and it is the same text I am marking you against. If you only open one link on this
@@ -160,29 +172,41 @@ const counselorOrders = orders.groups.filter((g) => g.id !== "scout");
             </div>
           ))}
         </div>
+      </div>
+        </details>
       </section>
+<section class="se-block" id="scout-pioneer">
+        <details class="se-section">
+          <summary><span class="se-section-title"><h2>Choose your space pioneer</h2><span>Explore 26 people, choose your card, and prepare to discuss four others.</span></span><span class="se-section-toggle" aria-hidden="true"></span></summary>
+          <div class="se-section-body">
 
-      <section class="se-block">
-        <h2>Pick your space pioneer</h2>
         <p class="muted">
           Requirement 2 is one card about your favourite pioneer, plus talking with me about
           <strong>four others</strong>. This is the same list as the paper handout &mdash; same 26 people, same
           numbers &mdash; so you can use whichever you have to hand. Claim your card name at Meeting 1.
         </p>
         <PioneerPicker />
+      </div>
+        </details>
       </section>
+<section class="se-block" id="scout-card">
+        <details class="se-section">
+          <summary><span class="se-section-title"><h2>Make your collector’s card</h2><span>The printable template for your chosen pioneer.</span></span><span class="se-section-toggle" aria-hidden="true"></span></summary>
+          <div class="se-section-body">
 
-      <section class="se-block">
-        <h2>The card template</h2>
         <p class="muted">
           Once you have picked your pioneer, this is the card you make. I hand these out on paper &mdash; this
           copy is here for when you need another one.
         </p>
         <CollectorCard />
+      </div>
+        </details>
       </section>
+<section class="se-block" id="scout-study">
+        <details class="se-section">
+          <summary><span class="se-section-title"><h2>Get ready for each meeting</h2><span>Study prompts and suggested videos for every part of the course.</span></span><span class="se-section-toggle" aria-hidden="true"></span></summary>
+          <div class="se-section-body">
 
-      <section class="se-block">
-        <h2>{scoutGuide.study.heading}</h2>
         <p class="muted">{scoutGuide.study.intro}</p>
         {scoutGuide.study.blocks.map((b) => (
           <details class="se-exp">
@@ -203,30 +227,42 @@ const counselorOrders = orders.groups.filter((g) => g.id !== "scout");
             )}
           </details>
         ))}
+      </div>
+        </details>
       </section>
+<section class="se-block" id="scout-build">
+        <details class="se-section">
+          <summary><span class="se-section-title"><h2>Build your rocket</h2><span>The build lesson and help-desk details.</span></span><span class="se-section-toggle" aria-hidden="true"></span></summary>
+          <div class="se-section-body">
 
-      <section class="se-block">
-        <h2>Building it — at home, at your own pace</h2>
         <p class="muted">
           Your kit arrives in the post and you build it at home. Take your time. If anything goes wrong or you
           would rather have help, bring it to the <strong>November 16</strong> meeting &mdash; there is a help desk
           open all night, spare parts, and no judgement whatsoever.
         </p>
-        <SlideDeck deck={decks["build-night"]} />
+        <p><a class="se-present-link" href="/scouts/space-lessons/build-night/">▶ Open the animated Build Night lesson</a></p><details class="se-exp"><summary>Read the slides &amp; notes</summary><SlideDeck deck={decks["build-night"]} /></details>
 
+      </div>
+        </details>
       </section>
+<section class="se-block" id="scout-crew">
+        <details class="se-section">
+          <summary><span class="se-section-title"><h2>Find your launch-crew role</h2><span>Eight jobs, real callsigns, and a countdown to rehearse.</span></span><span class="se-section-toggle" aria-hidden="true"></span></summary>
+          <div class="se-section-body">
 
-      <section class="se-block">
-        <h2>Launch day is a real range, and you have a job on it</h2>
         <p class="muted">
           Eight positions with real callsigns. You will pick yours on November 16 and practise the calls, then run
           it for real on the 21st. Have a look at what each station does &mdash; and try the countdown clock.
         </p>
         <LaunchOps />
+      </div>
+        </details>
       </section>
+<section class="se-block" id="scout-simulators">
+        <details class="se-section">
+          <summary><span class="se-section-title"><h2>Try it before you fly it</h2><span>Change a motor, add payload, and test your predictions.</span></span><span class="se-section-toggle" aria-hidden="true"></span></summary>
+          <div class="se-section-body">
 
-      <section class="se-block">
-        <h2>Try it before you fly it</h2>
         <p class="muted">
           The same physics you'll be predicting on launch day. Change one thing at a time and watch what happens &mdash;
           this is how you get good at the prediction contest without spending a dollar on motors.
@@ -246,10 +282,14 @@ const counselorOrders = orders.groups.filter((g) => g.id !== "scout");
             <OrbitSim mode="moon" id="scout-moon" />
           </div>
         </details>
+      </div>
+        </details>
       </section>
+<section class="se-block" id="scout-cup">
+        <details class="se-section">
+          <summary><span class="se-section-title"><h2>The Prediction Cup</h2><span>How the competition works and what each award measures.</span></span><span class="se-section-toggle" aria-hidden="true"></span></summary>
+          <div class="se-section-body">
 
-      <section class="se-block">
-        <h2>{competition.name}</h2>
         <p class="se-tagline">{competition.tagline}</p>
         <p>{competition.why}</p>
 
@@ -276,10 +316,14 @@ const counselorOrders = orders.groups.filter((g) => g.id !== "scout");
           </ul>
           <p class="se-note">{competition.note}</p>
         </details>
+      </div>
+        </details>
       </section>
+<section class="se-block" id="scout-launch">
+        <details class="se-section">
+          <summary><span class="se-section-title"><h2>Launch day · November 21</h2><span>What to bring, when to arrive, and how the range works.</span></span><span class="se-section-toggle" aria-hidden="true"></span></summary>
+          <div class="se-section-body">
 
-      <section class="se-block">
-        <h2>{scoutGuide.launchDay.heading}</h2>
         <SlideImage name="model-liftoff" />
         <p class="se-lede">{scoutGuide.launchDay.timing}</p>
         <div class="se-two">
@@ -296,48 +340,20 @@ const counselorOrders = orders.groups.filter((g) => g.id !== "scout");
             </ul>
           </div>
         </div>
-      </section>
-    </div>
-
+      </div>
+        </details>
+      </section></div></div>
     <!-- ================= COUNSELOR VIEW ================= -->
-    <div data-view-panel="counselor" hidden>
-      <section class="se-block">
-        <h2>How this is scoped</h2>
-        <ul>
-          {series.groundRules.map((r) => <li>{r}</li>)}
-        </ul>
-        <p class="se-note"><strong>On the troop calendar.</strong> {series.calendarNote}</p>
-      </section>
+    <div data-view-panel="counselor" id="panel-counselor" role="tabpanel" aria-labelledby="view-counselor" class="se-view-layout" hidden>
+      <aside class="se-sidebar"><nav aria-label="Counselor quick navigation"><p class="se-label">QUICK NAVIGATION</p><a href="#meeting-plans">Meeting plans<span aria-hidden="true">↗</span></a><a href="#handouts">Print handouts<span aria-hidden="true">↗</span></a><a href="#sample-return">Monday’s worksheets<span aria-hidden="true">↗</span></a><a href="#checkout">Individual checkouts<span aria-hidden="true">↗</span></a><a href="#orders">Gear & ordering<span aria-hidden="true">↗</span></a><a href="#counselor-launch">Launch-day operations<span aria-hidden="true">↗</span></a></nav><div class="se-sidebar-note"><span aria-hidden="true">✳</span><strong>Make space move.</strong><p>Animated experiments, ready for a room without Wi-Fi.</p><a href="/scouts/space-lessons/">Open the lessons →</a></div></aside>
+<div class="se-sections"><section class="se-block" id="meeting-plans">
+        <details class="se-section" open>
+          <summary><span class="se-section-title"><h2>The five meeting plans</h2><span>Run-of-shows, animated presentations, materials, and counselor notes.</span></span><span class="se-section-toggle" aria-hidden="true"></span></summary>
+          <div class="se-section-body">
 
-      <section class="se-block">
-        <h2>Critical path</h2>
-        <p class="muted">
-          Two things drive this schedule and neither is the teaching: parts have to ship, and a launch site has to
-          say yes. Everything flagged red has to happen in August.
-        </p>
-        <ol class="se-timeline">
-          {timeline.map((t) => (
-            <li class={`se-tl-item se-risk-${t.risk}`}>
-              <div class="se-tl-when">
-                <span class="se-tl-window">{t.window}</span>
-                <span class="se-tl-owner">{t.owner}</span>
-              </div>
-              <p>{t.what}</p>
-            </li>
-          ))}
-        </ol>
-      </section>
-
-      <section class="se-block">
-        <h2>Season calendar</h2>
-        <SeriesCalendar events={calendarEvents} />
-      </section>
-
-      <section class="se-block">
-        <h2>The five Monday nights</h2>
         <p class="muted">
           Each block is 45 minutes, 0:30&ndash;1:15, slotted into the existing troop meeting so the opening and
-          closing stay where they are. Every night is collapsed &mdash; open the one you're running this week.
+          closing stay where they are. Open the meeting you’re running for its plan and presentation.
         </p>
 
         {meetings.map((m) => (
@@ -400,8 +416,8 @@ const counselorOrders = orders.groups.filter((g) => g.id !== "scout");
               </details>
             )}
 
-            <h4>The deck</h4>
-            <SlideDeck deck={decks[m.deck]} />
+            <p><a class="se-present-link" href={`/scouts/space-lessons/${m.deck}/`}>▶ Open animated presentation</a></p>
+            <details class="se-exp"><summary>Preview slides &amp; counselor notes</summary><SlideDeck deck={decks[m.deck]} /></details>
 
             <div class="se-two">
               <div>
@@ -421,136 +437,16 @@ const counselorOrders = orders.groups.filter((g) => g.id !== "scout");
             <p class="se-risk"><strong>Where this night fails.</strong> {m.risk}</p>
           </details>
         ))}
-      </section>
-
-      <section class="se-block">
-        <details><summary>Optional rocket math charts</summary><SlideDeck deck={decks["rocket-math"]} /></details>
-        <h2>The Telemetry Rocket — parked for now</h2>
-
-        <div class="se-deferred">
-          <p class="se-deferred-tag">{telemetryTrack.statusLabel}</p>
-          <ul class="se-tight">
-            {telemetryTrack.statusWhy.map((w) => <li>{w}</li>)}
-          </ul>
-          <p class="se-deferred-swap"><strong>What replaces it.</strong> {telemetryTrack.replacement}</p>
-        </div>
-
-        <details class="se-exp">
-          <summary>The full crew plan, kept for a future year<span class="se-exp-when">Reference</span></summary>
-          <p class="se-note">{telemetryTrack.ifYouRunItAnyway}</p>
-        <p>{telemetryTrack.intro}</p>
-
-        <div class="se-callout">
-          <h3>{telemetryTrack.theMath.headline}</h3>
-          <p>{telemetryTrack.theMath.detail}</p>
-          <p><strong>{telemetryTrack.theMath.answer}</strong></p>
-        </div>
-
-        <h3>Crew roles</h3>
-        <div class="mb-table-wrap">
-          <table class="se-table">
-            <thead>
-              <tr>
-                <th scope="col">Role</th><th scope="col">Size</th><th scope="col">Owns</th>
-                <th scope="col">Build stages</th><th scope="col">Also earns</th>
-              </tr>
-            </thead>
-            <tbody>
-              {telemetryTrack.crewRoles.map((r) => (
-                <tr>
-                  <td><strong>{r.role}</strong></td>
-                  <td class="se-who">{r.n}</td>
-                  <td>{r.owns}</td>
-                  <td class="se-who">{r.stages}</td>
-                  <td class="se-who">{r.badges}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <p class="muted">{telemetryTrack.rolesNote}</p>
-
-        <h3>Three Saturday crew sessions</h3>
-        {telemetryTrack.sessions.map((s) => (
-          <details class="se-exp">
-            <summary>{s.title}<span class="se-exp-when">{s.when}</span></summary>
-            <ul class="se-tight">
-              {s.what.map((w) => <li>{w}</li>)}
-            </ul>
-            <p class="se-gotcha"><strong>Gotcha.</strong> {s.gotcha}</p>
-          </details>
-        ))}
-
-        <h3>What shows up on Monday nights</h3>
-        <ul>
-          {telemetryTrack.checkpoints.map((c) => (
-            <li><strong>Meeting {c.meeting} · {c.minutes}</strong> — {c.what}</li>
-          ))}
-        </ul>
-
-        <p class="se-note">{telemetryTrack.badgeNote}</p>
-        <p class="se-risk"><strong>Honest risk.</strong> {telemetryTrack.honestRisk}</p>
+      </div>
         </details>
       </section>
+<section class="se-block" id="handouts">
+        <details class="se-section">
+          <summary><span class="se-section-title"><h2>Print-ready handouts</h2><span>Scout checklists, pioneer cards, and your master tracker.</span></span><span class="se-section-toggle" aria-hidden="true"></span></summary>
+          <div class="se-section-body">
+<p class="se-inline-actions"><a href="#sample-return">Sample-return worksheet →</a><a href="#base-design">Base-design worksheet →</a></p>
 
-      <section class="se-block">
-        <h2>The Digital Resource Guide — what it does and doesn't replace</h2>
-        <p>{drg.what}</p>
-        <p class="se-verdict"><strong>Should you just scroll through it in the meeting?</strong> {drg.verdict}</p>
 
-        <div class="se-twocol">
-          <div class="se-col-good">
-            <h3>Lean on it for</h3>
-            <ul class="se-tight">{drg.useItFor.map((x) => <li>{x}</li>)}</ul>
-          </div>
-          <div class="se-col-bad">
-            <h3>Do not lean on it for</h3>
-            <ul class="se-tight">{drg.dontUseItFor.map((x) => <li>{x}</li>)}</ul>
-          </div>
-        </div>
-
-        <p class="muted">
-          Every requirement page, if you want to open one on the projector to settle a question mid-meeting:
-        </p>
-        <div class="se-drg">
-          {drg.pages.map((pg) => (
-            <div class="se-drg-row">
-              <span class="se-drg-req">{pg.req}</span>
-              <div>
-                <a href={pg.url} target="_blank" rel="noopener noreferrer">{pg.title} ↗</a>
-                {pg.subs && (
-                  <span class="se-drg-subs">
-                    {pg.subs.map((sub) => <a href={sub.url} target="_blank" rel="noopener noreferrer">{sub.id}</a>)}
-                  </span>
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section class="se-block">
-        <h2>Requirement 5c — the sample-return card</h2>
-        <p class="muted">
-          Print one per Scout for October 26. Requirement 5c is a robotic round trip and it is <strong>not</strong>
-          the inhabited base &mdash; the base is requirement 7. Keeping them separate is what makes both of them
-          hold up, and this card is the individual evidence for 5c.
-        </p>
-        <SampleReturnCard />
-      </section>
-
-      <section class="se-block">
-        <h2>Requirement 7 — the base design sheet</h2>
-        <p class="muted">
-          The patrol charrette stays exactly as it is &mdash; arguing about a base is how the good ideas turn up.
-          But requirement 7 asks each Scout for drawings of <em>their</em> base, so each Scout gets their own sheet
-          and owns one of the four subsystems out loud during the pitch.
-        </p>
-        <BaseDesignSheet />
-      </section>
-
-      <section class="se-block">
-        <h2>Handouts — print these before Meeting 1</h2>
         <p class="muted">
           Everything that goes out on paper, in one place. The first two are per-Scout; the tracker is yours.
         </p>
@@ -583,34 +479,64 @@ const counselorOrders = orders.groups.filter((g) => g.id !== "scout");
           The pioneer list and the collector's-card template are also on the Scout side as fillable versions
           that save in the browser &mdash; same 26 people, same numbering as the paper.
         </p>
+      </div>
+        </details>
       </section>
+<section class="se-block" id="sample-return">
+        <details class="se-section">
+          <summary><span class="se-section-title"><h2>Sample-return worksheet</h2><span>Requirement 5c · one robotic round trip, one card per Scout.</span></span><span class="se-section-toggle" aria-hidden="true"></span></summary>
+          <div class="se-section-body">
 
-      <section class="se-block">
-        <h2>The Scout's own checklist</h2>
         <p class="muted">
-          Print one per Scout at Meeting 1 and have them bring it every week. This is their record and your
-          audit trail &mdash; it pairs with the checkout prompts below, which are what you ask before you
-          initial a box. A
-          <a href="/handouts/space-exploration-scout-checklist.pdf" download>print-ready PDF ↓</a>
-          is available if you would rather not print from the browser.
+          Print one per Scout for October 26. Requirement 5c is a robotic round trip and it is <strong>not</strong>
+          the inhabited base &mdash; the base is requirement 7. Keeping them separate is what makes both of them
+          hold up, and this card is the individual evidence for 5c.
         </p>
-        <p class="se-callout-line">
-          <a class="se-btn-buy" href="/handouts/space-exploration-scout-checklist.pdf" download>Download the printable PDF ↓</a>
-          <a class="se-btn-alt" href="#" data-goto-scout-checklist>See the fillable version →</a>
-        </p>
+        <SampleReturnCard />
+      </div>
+        </details>
       </section>
+<section class="se-block" id="base-design">
+        <details class="se-section">
+          <summary><span class="se-section-title"><h2>Base-design worksheet</h2><span>Requirement 7 · individual drawings and four base systems.</span></span><span class="se-section-toggle" aria-hidden="true"></span></summary>
+          <div class="se-section-body">
 
-      <section class="se-block">
-        <h2>Signing it off — one Scout at a time</h2>
+        <p class="muted">
+          The patrol charrette stays exactly as it is &mdash; arguing about a base is how the good ideas turn up.
+          But requirement 7 asks each Scout for drawings of <em>their</em> base, so each Scout gets their own sheet
+          and owns one of the four subsystems out loud during the pitch.
+        </p>
+        <BaseDesignSheet />
+      </div>
+        </details>
+      </section>
+<section class="se-block" id="checkout">
+        <details class="se-section">
+          <summary><span class="se-section-title"><h2>Individual checkouts</h2><span>The prompts and record for signing off one Scout at a time.</span></span><span class="se-section-toggle" aria-hidden="true"></span></summary>
+          <div class="se-section-body">
+
         <p class="muted">
           The single biggest way a group merit badge goes wrong is that the room did the requirement and nobody
           checked who actually did it. This is the sheet that prevents that.
         </p>
         <CheckoutSheet />
+      </div>
+        </details>
       </section>
+<section class="se-block" id="counselor-calendar">
+        <details class="se-section">
+          <summary><span class="se-section-title"><h2>Season calendar</h2><span>The whole fall schedule in one place.</span></span><span class="se-section-toggle" aria-hidden="true"></span></summary>
+          <div class="se-section-body">
 
-      <section class="se-block">
-        <h2>The flight-readiness gate</h2>
+        <SeriesCalendar events={calendarEvents} />
+      </div>
+        </details>
+      </section>
+<section class="se-block" id="readiness">
+        <details class="se-section">
+          <summary><span class="se-section-title"><h2>Flight-readiness gate</h2><span>Troop preparation rules before a rocket goes to the pad.</span></span><span class="se-section-toggle" aria-hidden="true"></span></summary>
+          <div class="se-section-body">
+
         <p class="se-policy"><strong>These are troop rules, not badge requirements.</strong> {gate.policyNote}</p>
         <p>{gate.intro}</p>
         <div class="se-cards">
@@ -630,10 +556,14 @@ const counselorOrders = orders.groups.filter((g) => g.id !== "scout");
           </ul>
           <p class="se-note">{gate.note}</p>
         </details>
+      </div>
+        </details>
       </section>
+<section class="se-block" id="orders">
+        <details class="se-section">
+          <summary><span class="se-section-title"><h2>Gear & ordering</h2><span>Kit lists, shared equipment, quantities, and purchase links.</span></span><span class="se-section-toggle" aria-hidden="true"></span></summary>
+          <div class="se-section-body">
 
-      <section class="se-block">
-        <h2>What to order</h2>
         <p>{orders.intro}</p>
         <p class="se-note">{orders.linkNote}</p>
 
@@ -699,58 +629,14 @@ const counselorOrders = orders.groups.filter((g) => g.id !== "scout");
             </ul>
           </details>
         ))}
+      </div>
+        </details>
       </section>
+<section class="se-block" id="counselor-launch">
+        <details class="se-section">
+          <summary><span class="se-section-title"><h2>Launch-day operations</h2><span>Range schedule, packing list, and safety procedures.</span></span><span class="se-section-toggle" aria-hidden="true"></span></summary>
+          <div class="se-section-body">
 
-      <section class="se-block">
-        <h2>{competition.name}</h2>
-        <p class="se-tagline">{competition.tagline}</p>
-        <p>{competition.why}</p>
-        <div class="mb-table-wrap">
-          <table class="se-table">
-            <thead>
-              <tr><th scope="col">Award</th><th scope="col">Scored on</th><th scope="col">Measured with</th><th scope="col">Type</th></tr>
-            </thead>
-            <tbody>
-              {competition.scoring.map((s) => (
-                <tr>
-                  <td><strong>{s.place}</strong></td>
-                  <td>{s.basis}</td>
-                  <td class="se-who">{s.measured}</td>
-                  <td class="se-who">{s.weight}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <p class="se-note"><strong>The trade-off is the lesson.</strong> {competition.tension}</p>
-        <p class="se-risk"><strong>Gear this needs.</strong> {competition.gearNote}</p>
-      </section>
-
-      <section class="se-block">
-        <h2>Guest speaker options</h2>
-        <p>{speakers.intro}</p>
-        {speakers.options.map((s) => (
-          <details class="se-exp">
-            <summary>
-              <span class="se-speaker-rank">{s.rank}</span>
-              {s.name}
-              <span class="se-exp-when">{s.lead}</span>
-            </summary>
-            <p class="se-speaker-org">{s.org} · {s.distance}</p>
-            <p><strong>What they are.</strong> {s.what}</p>
-            <p><strong>Why them.</strong> {s.why}</p>
-            <dl class="se-speaker-meta">
-              <div><dt>The ask</dt><dd>{s.ask}</dd></div>
-              <div><dt>Contact</dt><dd>{s.contact}</dd></div>
-              <div><dt>Lead time</dt><dd>{s.lead}</dd></div>
-            </dl>
-            {s.url && <p><a class="mb-link-btn" href={s.url} target="_blank" rel="noopener noreferrer">Open their page ↗</a></p>}
-          </details>
-        ))}
-      </section>
-
-      <section class="se-block">
-        <h2>Launch day — {launchDay.date}</h2>
         <p class="muted">Backup dates: {launchDay.backup}</p>
         <p>{launchDay.intro}</p>
         <p class="se-note"><strong>Why the 21st and not Thanksgiving weekend.</strong> {launchDay.whyThisDate}</p>
@@ -827,10 +713,238 @@ const counselorOrders = orders.groups.filter((g) => g.id !== "scout");
           {" "}·{" "}
           <a href="https://www.scouting.org/health-and-safety/gss/" target="_blank" rel="noopener noreferrer">Guide to Safe Scouting ↗</a>
         </p>
+      </div>
+        </details>
       </section>
+<section class="se-block" id="counselor-cup">
+        <details class="se-section">
+          <summary><span class="se-section-title"><h2>Competition & scoring</h2><span>Awards, scoring rules, and how to record the results.</span></span><span class="se-section-toggle" aria-hidden="true"></span></summary>
+          <div class="se-section-body">
 
-      <section class="se-block">
-        <h2>Corrections made to the badge page</h2>
+        <p class="se-tagline">{competition.tagline}</p>
+        <p>{competition.why}</p>
+        <div class="mb-table-wrap">
+          <table class="se-table">
+            <thead>
+              <tr><th scope="col">Award</th><th scope="col">Scored on</th><th scope="col">Measured with</th><th scope="col">Type</th></tr>
+            </thead>
+            <tbody>
+              {competition.scoring.map((s) => (
+                <tr>
+                  <td><strong>{s.place}</strong></td>
+                  <td>{s.basis}</td>
+                  <td class="se-who">{s.measured}</td>
+                  <td class="se-who">{s.weight}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="se-note"><strong>The trade-off is the lesson.</strong> {competition.tension}</p>
+        <p class="se-risk"><strong>Gear this needs.</strong> {competition.gearNote}</p>
+      </div>
+        </details>
+      </section>
+<section class="se-block" id="counselor-scope">
+        <details class="se-section">
+          <summary><span class="se-section-title"><h2>Course scope & ground rules</h2><span>Five Monday blocks, individual requirements, and troop logistics.</span></span><span class="se-section-toggle" aria-hidden="true"></span></summary>
+          <div class="se-section-body">
+
+        <ul>
+          {series.groundRules.map((r) => <li>{r}</li>)}
+        </ul>
+        <p class="se-note"><strong>On the troop calendar.</strong> {series.calendarNote}</p>
+      </div>
+        </details>
+      </section>
+<section class="se-block" id="counselor-timeline">
+        <details class="se-section">
+          <summary><span class="se-section-title"><h2>Planning timeline</h2><span>Ordering, permissions, and the critical path to launch day.</span></span><span class="se-section-toggle" aria-hidden="true"></span></summary>
+          <div class="se-section-body">
+
+        <p class="muted">
+          Two things drive this schedule and neither is the teaching: parts have to ship, and a launch site has to
+          say yes. Everything flagged red has to happen in August.
+        </p>
+        <ol class="se-timeline">
+          {timeline.map((t) => (
+            <li class={`se-tl-item se-risk-${t.risk}`}>
+              <div class="se-tl-when">
+                <span class="se-tl-window">{t.window}</span>
+                <span class="se-tl-owner">{t.owner}</span>
+              </div>
+              <p>{t.what}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+        </details>
+      </section>
+<section class="se-block" id="counselor-guide">
+        <details class="se-section">
+          <summary><span class="se-section-title"><h2>Using the official study guide</h2><span>Where it helps and what still needs an individual demonstration.</span></span><span class="se-section-toggle" aria-hidden="true"></span></summary>
+          <div class="se-section-body">
+
+        <p>{drg.what}</p>
+        <p class="se-verdict"><strong>Should you just scroll through it in the meeting?</strong> {drg.verdict}</p>
+
+        <div class="se-twocol">
+          <div class="se-col-good">
+            <h3>Lean on it for</h3>
+            <ul class="se-tight">{drg.useItFor.map((x) => <li>{x}</li>)}</ul>
+          </div>
+          <div class="se-col-bad">
+            <h3>Do not lean on it for</h3>
+            <ul class="se-tight">{drg.dontUseItFor.map((x) => <li>{x}</li>)}</ul>
+          </div>
+        </div>
+
+        <p class="muted">
+          Every requirement page, if you want to open one on the projector to settle a question mid-meeting:
+        </p>
+        <div class="se-drg">
+          {drg.pages.map((pg) => (
+            <div class="se-drg-row">
+              <span class="se-drg-req">{pg.req}</span>
+              <div>
+                <a href={pg.url} target="_blank" rel="noopener noreferrer">{pg.title} ↗</a>
+                {pg.subs && (
+                  <span class="se-drg-subs">
+                    {pg.subs.map((sub) => <a href={sub.url} target="_blank" rel="noopener noreferrer">{sub.id}</a>)}
+                  </span>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+        </details>
+      </section>
+<section class="se-block" id="counselor-checklist">
+        <details class="se-section">
+          <summary><span class="se-section-title"><h2>The Scout’s own checklist</h2><span>Download the PDF or open the fillable Scout version.</span></span><span class="se-section-toggle" aria-hidden="true"></span></summary>
+          <div class="se-section-body">
+
+        <p class="muted">
+          Print one per Scout at Meeting 1 and have them bring it every week. This is their record and your
+          audit trail &mdash; it pairs with the checkout prompts below, which are what you ask before you
+          initial a box. A
+          <a href="/handouts/space-exploration-scout-checklist.pdf" download>print-ready PDF ↓</a>
+          is available if you would rather not print from the browser.
+        </p>
+        <p class="se-callout-line">
+          <a class="se-btn-buy" href="/handouts/space-exploration-scout-checklist.pdf" download>Download the printable PDF ↓</a>
+          <a class="se-btn-alt" href="#" data-goto-scout-checklist>See the fillable version →</a>
+        </p>
+      </div>
+        </details>
+      </section>
+<section class="se-block" id="speakers">
+        <details class="se-section">
+          <summary><span class="se-section-title"><h2>Guest speakers</h2><span>Options, topics, and preparation for an invited speaker.</span></span><span class="se-section-toggle" aria-hidden="true"></span></summary>
+          <div class="se-section-body">
+
+        <p>{speakers.intro}</p>
+        {speakers.options.map((s) => (
+          <details class="se-exp">
+            <summary>
+              <span class="se-speaker-rank">{s.rank}</span>
+              {s.name}
+              <span class="se-exp-when">{s.lead}</span>
+            </summary>
+            <p class="se-speaker-org">{s.org} · {s.distance}</p>
+            <p><strong>What they are.</strong> {s.what}</p>
+            <p><strong>Why them.</strong> {s.why}</p>
+            <dl class="se-speaker-meta">
+              <div><dt>The ask</dt><dd>{s.ask}</dd></div>
+              <div><dt>Contact</dt><dd>{s.contact}</dd></div>
+              <div><dt>Lead time</dt><dd>{s.lead}</dd></div>
+            </dl>
+            {s.url && <p><a class="mb-link-btn" href={s.url} target="_blank" rel="noopener noreferrer">Open their page ↗</a></p>}
+          </details>
+        ))}
+      </div>
+        </details>
+      </section>
+<section class="se-block" id="telemetry-reference">
+        <details class="se-section">
+          <summary><span class="se-section-title"><h2>Telemetry project · deferred</h2><span>The archived crew plan, kept for a future year.</span></span><span class="se-section-toggle" aria-hidden="true"></span></summary>
+          <div class="se-section-body">
+
+
+
+        <div class="se-deferred">
+          <p class="se-deferred-tag">{telemetryTrack.statusLabel}</p>
+          <ul class="se-tight">
+            {telemetryTrack.statusWhy.map((w) => <li>{w}</li>)}
+          </ul>
+          <p class="se-deferred-swap"><strong>What replaces it.</strong> {telemetryTrack.replacement}</p>
+        </div>
+
+        <details class="se-exp">
+          <summary>The full crew plan, kept for a future year<span class="se-exp-when">Reference</span></summary>
+          <p class="se-note">{telemetryTrack.ifYouRunItAnyway}</p>
+        <p>{telemetryTrack.intro}</p>
+
+        <div class="se-callout">
+          <h3>{telemetryTrack.theMath.headline}</h3>
+          <p>{telemetryTrack.theMath.detail}</p>
+          <p><strong>{telemetryTrack.theMath.answer}</strong></p>
+        </div>
+
+        <h3>Crew roles</h3>
+        <div class="mb-table-wrap">
+          <table class="se-table">
+            <thead>
+              <tr>
+                <th scope="col">Role</th><th scope="col">Size</th><th scope="col">Owns</th>
+                <th scope="col">Build stages</th><th scope="col">Also earns</th>
+              </tr>
+            </thead>
+            <tbody>
+              {telemetryTrack.crewRoles.map((r) => (
+                <tr>
+                  <td><strong>{r.role}</strong></td>
+                  <td class="se-who">{r.n}</td>
+                  <td>{r.owns}</td>
+                  <td class="se-who">{r.stages}</td>
+                  <td class="se-who">{r.badges}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="muted">{telemetryTrack.rolesNote}</p>
+
+        <h3>Three Saturday crew sessions</h3>
+        {telemetryTrack.sessions.map((s) => (
+          <details class="se-exp">
+            <summary>{s.title}<span class="se-exp-when">{s.when}</span></summary>
+            <ul class="se-tight">
+              {s.what.map((w) => <li>{w}</li>)}
+            </ul>
+            <p class="se-gotcha"><strong>Gotcha.</strong> {s.gotcha}</p>
+          </details>
+        ))}
+
+        <h3>What shows up on Monday nights</h3>
+        <ul>
+          {telemetryTrack.checkpoints.map((c) => (
+            <li><strong>Meeting {c.meeting} · {c.minutes}</strong> — {c.what}</li>
+          ))}
+        </ul>
+
+        <p class="se-note">{telemetryTrack.badgeNote}</p>
+        <p class="se-risk"><strong>Honest risk.</strong> {telemetryTrack.honestRisk}</p>
+        </details>
+      </div>
+        </details>
+      </section>
+<section class="se-block" id="course-reference">
+        <details class="se-section">
+          <summary><span class="se-section-title"><h2>Course reference notes</h2><span>Corrections and supporting badge-page references.</span></span><span class="se-section-toggle" aria-hidden="true"></span></summary>
+          <div class="se-section-body">
+
         <p class="muted">
           Found while building this series. Everything marked fixed has already been changed on the
           {" "}<a href="/merit-badges/space-exploration/">Space Exploration page</a> and the
@@ -845,8 +959,12 @@ const counselorOrders = orders.groups.filter((g) => g.id !== "scout");
             </li>
           ))}
         </ul>
+      </div>
+        </details>
       </section>
-    </div>
+      <section class="se-block" id="optional-math"><details class="se-section"><summary><span class="se-section-title"><h2>Optional rocket math</h2><span>Impulse, drag, and the rocket equation. Enrichment beyond the requirements.</span></span><span class="se-section-toggle" aria-hidden="true"></span></summary><div class="se-section-body"><p><a class="se-present-link" href="/scouts/space-lessons/rocket-math/">▶ Open animated rocket math</a></p><details><summary>Optional rocket math charts</summary><SlideDeck deck={decks["rocket-math"]} /></details></div></details></section>
+      </div></div>
+    <footer class="se-course-footer"><span>MORE TO EXPLORE</span><a href="/merit-badges/space-exploration/">Badge reference</a><a href="/scouts/space-exploration-cards/">Teaching cards</a><a href="/merit-badges/capstones/telemetry-rocket/">Telemetry capstone</a><a href="/scouts/telemetry/">Ground station</a><a href="#course-top">Back to top ↑</a></footer>
   </div>
 </BaseLayout>
 
@@ -1286,6 +1404,38 @@ const counselorOrders = orders.groups.filter((g) => g.id !== "scout");
     .se-hero { flex-direction: column; gap: 0.5rem; }
     .se-exp-when { margin-left: 0; width: 100%; }
   }
+
+  /* Course navigation stays separate from the full-screen presentation theme. */
+  .se-page{font-family:ui-sans-serif,system-ui,-apple-system,sans-serif;padding:0 0 3rem;font-size:.94rem;line-height:1.65;max-width:76rem}
+  .se-crumbs{display:flex;align-items:center;gap:12px;font-size:11px;color:var(--muted);margin:0 0 22px}.se-crumbs a{text-decoration:none}.se-crumbs>span:nth-child(2){opacity:.4}
+  .se-label{font-size:9px;font-weight:750;letter-spacing:.16em;color:var(--accent-strong);margin:0 0 10px}
+  .se-guide-heading{display:flex;align-items:end;justify-content:space-between;gap:18px;margin:0 0 20px;scroll-margin-top:100px}.se-guide-heading h2{font-family:inherit;font-size:28px;line-height:1.1;letter-spacing:-.04em;margin:0}.se-guide-heading>p{font-size:12px;color:var(--muted);margin:0 0 2px}
+  .se-switch{grid-template-columns:1fr 1fr;max-width:100%;margin:0 0 28px;gap:5px;padding:5px;border-radius:13px;background:var(--bg-alt)}.se-switch-btn{padding:14px 20px;gap:3px;border-radius:9px}.se-switch-btn strong{font-size:15px}.se-switch-btn span{font-size:11px}.se-switch-btn.is-on{background:var(--surface);border-color:var(--line);box-shadow:0 2px 9px #102a3210}.se-switch-btn.is-on strong,.se-switch-btn.is-on span{color:var(--text)}.se-switch-btn.is-on strong{color:var(--accent-strong)}:root[data-theme="dark"] .se-switch-btn.is-on strong,:root[data-theme="dark"] .se-switch-btn.is-on span{color:var(--text)}
+  .se-view-layout{display:grid;grid-template-columns:190px minmax(0,1fr);gap:32px;align-items:start}.se-view-layout[hidden]{display:none}.se-sections{min-width:0}
+  .se-sidebar{position:sticky;top:98px;padding-top:10px}.se-sidebar nav{display:grid;gap:4px}.se-sidebar .se-label{font-size:9px;margin:0 0 12px;padding:0 12px;color:var(--muted)}.se-sidebar nav a{display:flex;justify-content:space-between;gap:10px;align-items:center;text-decoration:none;padding:10px 12px;border-radius:7px;font-size:12px;color:var(--muted);line-height:1.4}.se-sidebar nav a:hover{background:var(--accent-soft);color:var(--accent-strong)}.se-sidebar nav a>span{font-size:10px;opacity:.6}
+  .se-sidebar-note{padding:23px 15px 0;margin-top:18px;border-top:1px solid var(--line)}.se-sidebar-note>span{font-size:29px;display:block;line-height:1;color:var(--accent);margin-bottom:13px}.se-sidebar-note strong{font-size:15px;letter-spacing:-.03em}.se-sidebar-note p{font-size:11px;line-height:1.65;color:var(--muted);margin:9px 0 14px}.se-sidebar-note a{font-size:11px;font-weight:650;text-decoration:none}
+  .se-block{margin:0 0 12px;scroll-margin-top:95px;min-width:0}.se-section{border:1px solid var(--line);background:var(--surface);border-radius:12px;min-width:0}.se-section>summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:20px;cursor:pointer;padding:21px 24px;border-radius:12px}.se-section>summary::-webkit-details-marker{display:none}.se-section>summary:hover{background:color-mix(in srgb,var(--accent-soft) 45%,transparent)}.se-section-title{display:grid;gap:5px;min-width:0}.se-section-title h2{font-family:inherit;font-size:17px;letter-spacing:-.025em;line-height:1.3;font-weight:700;margin:0;padding:0;border:0}.se-section-title>span{font-size:11px;color:var(--muted);line-height:1.5}.se-section-toggle{flex:none;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;width:25px;height:25px;color:var(--accent-strong)}.se-section-toggle:before{content:'+';font-size:17px;line-height:1}.se-section[open]>.se-section-toggle:before,.se-section[open]>summary>.se-section-toggle:before{content:'−'}.se-section[open]>summary{border-radius:12px 12px 0 0;border-bottom:1px solid var(--line)}
+  .se-section-body{padding:23px 24px 26px;min-width:0}.se-section-body>p:first-child{margin-top:0}.se-section-body>p:last-child{margin-bottom:0}.se-section-body>p,.se-section-body>ul,.se-section-body>ol{font-size:14px;line-height:1.75}.se-section-body .se-lede{font-size:16px;line-height:1.65}.se-section-body>.se-note{font-size:12px}.se-section-body .se-numbered li{font-size:13px}.se-section-body>.se-exp,.se-section-body>.se-meeting{background:var(--bg);border-radius:9px}
+  .se-inline-actions{display:flex;gap:17px;flex-wrap:wrap;margin-top:20px}.se-inline-actions a{font-size:12px;font-weight:700;text-decoration:none}.se-present-link{display:inline-flex;align-items:center;background:var(--accent);color:#fff;border:1px solid var(--accent);padding:11px 16px;border-radius:7px;text-decoration:none;font-size:13px;font-weight:700;line-height:1.4}.se-present-link:hover{background:var(--accent-strong);color:#fff}:root[data-theme="dark"] .se-present-link{color:#0b1726}
+  .se-meeting{scroll-margin-top:100px}.se-meeting-title strong{font-size:15px;line-height:1.35}.se-meeting-title span{font-size:11px}.se-meeting-n{width:30px;height:30px;font-size:13px;border-radius:8px}.se-meeting>summary{padding:18px 0;gap:12px}.se-exp>summary{font-size:13px}.se-exp-when{font-size:10px}.se-table{font-size:12px}.se-two{gap:18px}.se-cards,.se-handouts,.se-awards,.se-twocol{grid-template-columns:repeat(2,minmax(0,1fr))}.se-handout-top{flex-wrap:wrap}.se-buy-top{flex-wrap:wrap}.se-handout-when{font-size:9px}.se-tl-item{grid-template-columns:140px minmax(0,1fr);font-size:12px}.se-tl-window{font-size:12px}.se-tl-owner{font-size:10px}
+  .se-course-footer{display:flex;align-items:center;gap:14px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:38px;padding-top:22px;font-size:10px;color:var(--muted)}.se-course-footer>span{font-size:9px;letter-spacing:.12em;font-weight:700;margin-right:6px}.se-course-footer>a{text-decoration:none}.se-course-footer>a:last-child{margin-left:auto}#course-top{scroll-margin-top:95px}
+  @media(max-width:1000px){.se-view-layout{grid-template-columns:160px minmax(0,1fr);gap:20px}.se-sidebar nav a{font-size:11px;padding:9px}.se-sidebar .se-label{padding:0 9px}.se-section>summary{padding:19px 20px}.se-section-body{padding:20px}.se-sidebar-note{padding-inline:9px}.se-two,.se-twocol{grid-template-columns:1fr}.se-tl-item{grid-template-columns:1fr;gap:5px}}
+  @media(max-width:760px){.se-view-layout{grid-template-columns:1fr;gap:18px}.se-sidebar{position:static;padding:0}.se-sidebar nav{display:flex;flex-wrap:wrap;gap:7px}.se-sidebar .se-label{width:100%;padding:0;margin-bottom:2px;font-size:8px}.se-sidebar nav a{border:1px solid var(--line);padding:7px 10px;font-size:10px;background:var(--surface)}.se-sidebar nav a>span{display:none}.se-sidebar-note{display:none}.se-guide-heading{display:block;margin-bottom:16px}.se-guide-heading>p{margin-top:10px;font-size:11px}.se-guide-heading h2{font-size:26px}.se-switch{margin-bottom:20px}.se-switch-btn{padding:13px 14px}.se-switch-btn span{font-size:10px}.se-section-title h2{font-size:16px}.se-section-title>span{font-size:10px}.se-section>summary{gap:14px;padding:18px}.se-section-body{padding:18px}.se-course-footer>a:last-child{margin-left:0}.se-course-footer>span{width:100%}.se-block{scroll-margin-top:130px}.se-guide-heading{scroll-margin-top:130px}}
+  @media(max-width:460px){.se-cards,.se-handouts,.se-awards,.se-twocol,.se-two{grid-template-columns:1fr}.se-section-body{padding:16px 13px}.se-section>summary{padding:17px 15px}.se-section-toggle{width:22px;height:22px}.se-switch-btn{padding:12px}.se-switch-btn span{font-size:9px}.se-crumbs{font-size:10px}.se-section-body>p{font-size:13px}.se-section-body .se-lede{font-size:14px}.se-meeting-title{min-width:0;flex:1}.se-meeting-title strong{font-size:14px}.se-meeting-n{width:25px;height:25px}.se-meeting>summary{gap:8px}.se-meeting{padding-inline:12px}.se-table{min-width:33rem}.se-present-link{font-size:12px}}
+  @media print{.se-sidebar,.se-switch,.se-guide-heading,.se-crumbs,.se-course-footer{display:none}.se-view-layout{display:block}.se-section{border:0}.se-section>summary{border:0!important;padding:0 0 10px}.se-section-body{padding:0}.se-section-toggle{display:none}.se-section:not([open]){display:none}.se-block{break-inside:auto}}
+
+
+  @media(max-width:700px){
+    .se-page :global(.cal-grid){position:relative}
+    .se-page :global(.cal-has){position:static}
+    .se-page :global(.cal-tip){left:0;right:0;transform:none;white-space:normal}
+    :global(body:has(.se-page) .nav-wrap){display:grid;grid-template-columns:1fr auto;gap:9px;padding-block:10px;min-height:0}
+    :global(body:has(.se-page) .nav-wrap nav){grid-column:1/-1;grid-row:2;overflow-x:auto;padding-bottom:3px}
+    :global(body:has(.se-page) .nav-list){flex-wrap:nowrap;gap:17px;width:max-content}
+    :global(body:has(.se-page) .nav-list a){font-size:12px}
+    :global(body:has(.se-page) .theme-toggle){grid-column:2;grid-row:1;padding:5px 10px;font-size:11px}
+    :global(body:has(.se-page) .site-title){font-size:15px}
+  }
 </style>
 
 <script is:inline>
@@ -1303,6 +1453,7 @@ const counselorOrders = orders.groups.filter((g) => g.id !== "scout");
           var on = btns[i].dataset.view === view;
           btns[i].classList.toggle("is-on", on);
           btns[i].setAttribute("aria-selected", String(on));
+          btns[i].tabIndex = on ? 0 : -1;
         }
         for (var j = 0; j < panels.length; j++) {
           panels[j].hidden = panels[j].dataset.viewPanel !== view;
@@ -1312,7 +1463,16 @@ const counselorOrders = orders.groups.filter((g) => g.id !== "scout");
 
       for (var k = 0; k < btns.length; k++) {
         (function (b) {
-          b.addEventListener("click", function () { show(b.dataset.view); });
+          b.addEventListener("click", function () {
+            show(b.dataset.view);
+            try { history.replaceState(null, "", "#" + b.dataset.view); } catch(e) {}
+          });
+          b.addEventListener("keydown", function(e) {
+            if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(e.key)) return;
+            e.preventDefault();
+            var index = e.key === "Home" ? 0 : e.key === "End" ? btns.length - 1 : (Array.from(btns).indexOf(b) + 1) % btns.length;
+            btns[index].click(); btns[index].focus();
+          });
         })(btns[k]);
       }
 
@@ -1324,7 +1484,7 @@ const counselorOrders = orders.groups.filter((g) => g.id !== "scout");
           e.preventDefault();
           show("scout");
           var target = document.querySelector("[data-sck]");
-          if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+          if (target) reveal(target);
         });
       }
 
@@ -1344,6 +1504,8 @@ const counselorOrders = orders.groups.filter((g) => g.id !== "scout");
       // ---------------------------------------------------------------
       function reveal(el) {
         if (!el) return;
+        var ownDetails = el.querySelector(":scope > details.se-section");
+        if (ownDetails) ownDetails.open = true;
         var panel = el.closest("[data-view-panel]");
         if (panel) show(panel.dataset.viewPanel);
         var d = el.closest("details");
@@ -1361,6 +1523,12 @@ const counselorOrders = orders.groups.filter((g) => g.id !== "scout");
         if (h === "counselor" || h === "scout") { show(h); return true; }
 
         var present = h.indexOf("present-") === 0;
+        if (present) {
+          var lesson = h.slice("present-".length);
+          if (["why-we-go", "how-rockets-work", "missions", "build-night", "mission-control", "debrief", "rocket-math"].includes(lesson)) {
+            location.assign("/scouts/space-lessons/" + lesson + "/"); return true;
+          }
+        }
         var id = present ? "deck-" + h.slice("present-".length) : h;
         var el = document.getElementById(id);
         if (!el) return false;
@@ -1374,6 +1542,17 @@ const counselorOrders = orders.groups.filter((g) => g.id !== "scout");
         }
         return true;
       }
+
+      // Reopening the same anchor should work even if its accordion was closed.
+      document.querySelectorAll('.se-page a[href^="#"]').forEach(function(a) {
+        a.addEventListener('click', function(e) {
+          var hash=a.getAttribute('href');
+          if (hash.length > 1 && route(hash)) {
+            e.preventDefault();
+            try { history.pushState(null, '', hash); } catch(e) {}
+          }
+        });
+      });
 
       var saved = null;
       try { saved = localStorage.getItem("se-view"); } catch (e) {}

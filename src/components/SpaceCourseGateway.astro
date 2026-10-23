@@ -1,0 +1,68 @@
+---
+import SpaceLessonHero from './SpaceLessonHero.astro';
+import {presentationThemes} from '../data/space-presentations.js';
+---
+<header class="course-hero" id="course-top">
+  <div class="course-hero-copy">
+    <p class="course-eyebrow">TROOP 308 <span>/</span> FALL 2026</p>
+    <h1>Space <br/><em>Exploration.</em></h1>
+    <p class="course-lede">Big questions. Real rockets. Your guide from the first meeting to the launch pad.</p>
+    <div class="course-actions">
+      <a class="course-primary" href="/scouts/space-lessons/">Open animated lessons <span aria-hidden="true">↗</span></a>
+      <a class="course-secondary" href="#course-guide">Explore the course <span aria-hidden="true">↓</span></a>
+    </div>
+    <p class="course-hero-meta">5 Monday meetings <span>·</span> 45 minutes each <span>·</span> Launch November 21</p>
+  </div>
+  <div class="course-feature">
+    <div class="course-orbit"><SpaceLessonHero kind="world" id="course-guide" /></div>
+    <a class="course-monday" href="/scouts/space-lessons/missions/">
+      <span class="course-eyebrow">OCT 26 · MISSIONS &amp; BASES</span>
+      <strong>Ready for Monday?</strong>
+      <span>Open the presentation <b aria-hidden="true">→</b></span>
+    </a>
+  </div>
+</header>
+
+<nav class="course-shortcuts" aria-label="Teaching essentials">
+  <a href="/handouts/space-lessons-offline.zip" download>
+    <span class="shortcut-icon" aria-hidden="true">↓</span>
+    <span><strong>Take the lessons offline</strong><small>All seven lessons · 5 MB download</small></span>
+    <span class="shortcut-arrow" aria-hidden="true">↗</span>
+  </a>
+  <a href="/scouts/space-exploration-offline/">
+    <span class="shortcut-icon" aria-hidden="true">▷</span>
+    <span><strong>Prepare your videos</strong><small>Offline setup &amp; Monday’s plan</small></span>
+    <span class="shortcut-arrow" aria-hidden="true">↗</span>
+  </a>
+  <a href="#handouts">
+    <span class="shortcut-icon" aria-hidden="true">▤</span>
+    <span><strong>Print the handouts</strong><small>Checklists, cards &amp; worksheets</small></span>
+    <span class="shortcut-arrow" aria-hidden="true">↓</span>
+  </a>
+</nav>
+
+<details class="course-lesson-menu">
+  <summary><span>Looking for a particular lesson?</span><strong>Browse all seven <span aria-hidden="true">＋</span></strong></summary>
+  <nav aria-label="Animated lesson shortcuts">
+    {Object.entries(presentationThemes).map(([id,theme])=><a href={`/scouts/space-lessons/${id}/`}><span>{theme.chapter}</span><strong>{theme.title}</strong><span aria-hidden="true">↗</span></a>)}
+  </nav>
+</details>
+
+<style>
+  .course-hero{scroll-margin-top:110px;--accent:#9af1cf;display:grid;grid-template-columns:1.35fr 1fr;gap:32px;align-items:center;background:radial-gradient(ellipse at 88% 0,#28496366,transparent 65%),#0b1524;color:#f1f6fb;border:1px solid #304559;border-radius:22px;padding:44px 46px;margin:0;overflow:hidden;font-family:ui-sans-serif,system-ui,sans-serif}
+  .course-eyebrow{font-size:10px;font-weight:750;letter-spacing:.18em;color:#9af1cf;margin:0 0 20px}.course-eyebrow>span{margin:0 10px;opacity:.4}
+  .course-hero h1{font-family:inherit;font-size:clamp(44px,5vw,68px);line-height:1.02;letter-spacing:-.055em;margin:0 0 19px;color:#f1f6fb}.course-hero h1 em{font-style:normal;color:#9af1cf}
+  .course-lede{font-size:17px;line-height:1.65;max-width:39ch;color:#b0c3d6;margin:0 0 26px}
+  .course-actions{display:flex;gap:16px;align-items:center;flex-wrap:wrap}.course-actions a{text-decoration:none;font-size:13px;font-weight:750;border-radius:7px;display:inline-flex;align-items:center;gap:20px}
+  .course-primary{padding:14px 18px;background:#a2edce;color:#092f2a}.course-primary:hover{background:#c0fce3;color:#092f2a}.course-secondary{color:#c9daea;padding:12px 0}.course-secondary:hover{color:#fff}
+  .course-hero-meta{font-size:10px;color:#91abc0;letter-spacing:.01em;margin:25px 0 0;line-height:1.7}.course-hero-meta span{padding:0 7px;color:#5e7c95}
+  .course-feature{min-width:0}.course-orbit{height:245px;display:flex;justify-content:center;align-items:center;margin:-22px -10px -3px}.course-orbit :global(.lesson-hero){max-width:330px}.course-orbit :global(.lesson-hero svg){height:270px}.course-orbit :global(.lesson-hero text){display:none}
+  .course-monday{position:relative;display:grid;gap:8px;text-decoration:none;color:#eef8ff;background:#172b3a99;border:1px solid #537a8260;border-radius:11px;padding:19px 22px;transition:background .2s,border-color .2s}.course-monday:hover{color:#fff;background:#213d4d;border-color:#9af1cf}.course-monday .course-eyebrow{font-size:9px;margin:0}.course-monday>strong{font-size:25px;letter-spacing:-.035em;line-height:1.15}.course-monday>span:last-child{font-size:12px;color:#b7cddd}.course-monday b{float:right;color:#9af1cf;font-size:18px}
+  .course-shortcuts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:18px 0 0}.course-shortcuts a{display:flex;align-items:center;gap:12px;padding:20px 18px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--text);text-decoration:none;min-width:0;transition:border-color .2s,transform .2s}.course-shortcuts a:hover{border-color:var(--accent);transform:translateY(-2px)}.course-shortcuts strong{font-size:13px;line-height:1.4;display:block}.course-shortcuts small{font-size:10px;line-height:1.5;display:block;color:var(--muted);margin-top:5px}.shortcut-icon{width:33px;height:33px;border-radius:8px;background:var(--accent-soft);display:grid;place-items:center;color:var(--accent-strong);font-size:23px;flex:none}.shortcut-arrow{font-size:14px;color:var(--muted);margin-left:auto}
+  .course-lesson-menu{margin:14px 0 34px;border-bottom:1px solid var(--line)}.course-lesson-menu>summary{display:flex;justify-content:space-between;gap:15px;padding:13px 3px 17px;list-style:none;cursor:pointer;color:var(--muted);font-size:12px}.course-lesson-menu>summary::-webkit-details-marker{display:none}.course-lesson-menu summary strong{font-size:11px;color:var(--accent-strong);white-space:nowrap}.course-lesson-menu summary strong>span{margin-left:14px}.course-lesson-menu nav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding-bottom:20px}.course-lesson-menu nav a{display:flex;gap:12px;align-items:center;color:var(--text);padding:13px;border:1px solid var(--line);border-radius:7px;text-decoration:none;font-size:12px}.course-lesson-menu nav a:hover{background:var(--accent-soft)}.course-lesson-menu nav span{color:var(--muted);font-size:10px}.course-lesson-menu nav span:last-child{margin-left:auto}
+  @media(max-width:1000px){.course-hero{padding:32px;gap:20px;grid-template-columns:1.25fr 1fr}.course-hero h1{font-size:52px}.course-lede{font-size:15px}.course-shortcuts{gap:9px}.course-shortcuts a{padding:16px 12px;gap:9px}.course-shortcuts strong{font-size:12px}.shortcut-icon{width:27px;height:30px}.shortcut-arrow{display:none}}
+  @media(max-width:700px){.course-hero{grid-template-columns:1fr;padding:29px 25px;gap:22px}.course-hero h1{font-size:clamp(42px,10vw,60px)}.course-hero h1 br{display:block}.course-feature{display:grid;grid-template-columns:1fr}.course-orbit{display:none}.course-monday{padding:17px 19px}.course-monday>strong{font-size:22px}.course-lede{max-width:44ch}.course-hero-meta{margin-top:20px}.course-shortcuts{grid-template-columns:1fr;gap:8px}.course-shortcuts a{padding:16px}.course-shortcuts strong{font-size:13px}.course-shortcuts small{font-size:11px;margin-top:2px}.shortcut-arrow{display:block}.course-lesson-menu nav{grid-template-columns:1fr 1fr}.course-lesson-menu>summary{font-size:11px}.course-lesson-menu{margin-bottom:25px}.course-eyebrow{margin-bottom:17px}}
+  @media(max-width:390px){.course-hero{padding:25px 20px}.course-actions{gap:8px}.course-hero-meta{font-size:9px}.course-lesson-menu nav{grid-template-columns:1fr}}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important}.course-shortcuts a:hover{transform:none}}
+  @media print{.course-hero,.course-shortcuts,.course-lesson-menu{display:none}}
+</style>
