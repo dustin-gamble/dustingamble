@@ -23,8 +23,9 @@ const isAscent = mode === "ascent";
   <div class="osim-body">
     <div class="osim-stage">
       <div class="osim-canvas-wrap">
-        <canvas data-osim-canvas width="560" height="440" role="img"
-          aria-label={isAscent ? "Animated launch to orbit trajectory" : "Animated trajectory from Earth orbit to the Moon"}></canvas>
+        {!isAscent && <div class="osim-viewbar" role="group" aria-label="Camera view"><button data-camera="map" aria-pressed="true">✦ Mission map</button><button data-camera="fpv" aria-pressed="false">◉ Cockpit FPV</button><button data-look hidden>Look at Earth ↗</button></div>}
+        <canvas data-osim-canvas width={isAscent?560:960} height={isAscent?440:540} role="img"
+          aria-label={isAscent ? "Animated launch to orbit trajectory" : "Cartoon mission map: Earth, Moon, and the calculated spacecraft trajectory"}></canvas>
         <div class="osim-clock" data-osim-clock></div>
       </div>
 
@@ -33,10 +34,13 @@ const isAscent = mode === "ascent";
            there meant pressing Burn with the trajectory scrolled off screen. -->
       <div class="osim-actions">
         <button type="button" class="osim-btn osim-btn-go" data-osim-run>
-          {isAscent ? "Launch" : "Burn"}
+          {isAscent ? "Launch" : "Burn & fly →"}
         </button>
+        <button type="button" class="osim-btn" data-osim-pause aria-pressed="false">Pause Ⅱ</button>
         <button type="button" class="osim-btn" data-osim-reset>Reset</button>
+        {!isAscent && <label class="osim-scrub">Flight time<input data-osim-progress type="range" min="0" max="100" step=".1" value="0" aria-label="Flight progress"/></label>}
       </div>
+      {!isAscent && <p class="osim-model-note">Simplified gravity model · cartoon worlds enlarged · cockpit camera faces the selected world</p>}
     </div>
 
     <div class="osim-panel">
@@ -73,9 +77,10 @@ const isAscent = mode === "ascent";
         </>
       )}
 
+      {!isAscent && <p class="osim-task"><strong>TRY THIS</strong> Compare “Fly past” with “Enter lunar orbit.” What does the braking burn change?</p>}
       <div class="osim-presets" data-osim-presets hidden>
         <span class="osim-presets-lab">Try one</span>
-        <button type="button" class="osim-preset" data-preset="3.14|130|0">Free-return flyby</button>
+        <button type="button" class="osim-preset" data-preset="3.14|130|0">Fly past the Moon</button>
         <button type="button" class="osim-preset" data-preset="3.14|134|0">Impact the Moon</button>
         <button type="button" class="osim-preset" data-preset="3.14|130|0.80">Enter lunar orbit</button>
         <button type="button" class="osim-preset" data-preset="3.14|60|0">Miss it entirely</button>
@@ -90,7 +95,7 @@ const isAscent = mode === "ascent";
   <p class="osim-foot">
     {isAscent
       ? "Earth radius 6,371 km, μ = 398,600 km³/s². Thrust is modelled as a constant 30 m/s² along a simple gravity-turn program — real rockets throttle and stage."
-      : "Earth and Moon gravity both integrated. Moon at 384,400 km on a circular 27.3-day orbit. A real mission also has to plan the return."}
+      : "Teaching model, not an Apollo reconstruction. Earth + Moon gravity; circular lunar orbit at 384,400 km. Cartoon worlds enlarged. Cockpit camera faces the selected world. A real mission must also plan landing and return."}
   </p>
 </div>
 
@@ -224,6 +229,36 @@ const isAscent = mode === "ascent";
   @media (max-width: 760px) {
     .osim-body { grid-template-columns: 1fr; }
   }
+
+  .osim-model-note{font-size:9px;line-height:1.35;color:var(--muted);margin:0}
+  .osim-viewbar{display:flex;gap:6px;align-items:center;margin:0 0 8px;flex-wrap:wrap}.osim-viewbar button{font:inherit;font-size:11px;cursor:pointer;color:#bed4e9;border:1px solid #466079;background:#152b43;padding:8px 12px;border-radius:7px}.osim-viewbar button[aria-pressed=true]{background:#a4e8d6;border-color:#a4e8d6;color:#14382f}.osim-viewbar [data-look]{margin-left:auto}.osim-viewbar [hidden]{display:none}.osim-actions{flex-wrap:wrap;justify-content:flex-start;align-items:center}.osim-scrub{display:flex;align-items:center;gap:9px;font-size:10px;margin-left:auto;color:var(--muted)}.osim-scrub input{width:90px;accent-color:#8de1ce}.osim-task{font-size:12px;line-height:1.4;margin:0;padding:9px 11px;border:1px solid #416473;border-radius:8px;background:#23444a44}.osim-task strong{display:block;font-size:8px;letter-spacing:.12em;color:var(--accent-strong);margin-bottom:4px}.osim[data-mode=moon] .osim-clock{top:54px;left:14px;font-size:11px;background:#0a1629bb;color:#bbeedf}.osim[data-mode=moon] .osim-stage canvas{height:clamp(260px,43vh,440px);object-fit:fill;background:#0b1426}.osim button:focus-visible{outline:3px solid #ffd998;outline-offset:3px}
+  :global(.deck-stage.is-projecting.is-projecting .osim[data-mode=moon] .osim-body){grid-template-columns:minmax(0,1fr) 270px;gap:24px}
+  :global(.deck-stage.is-projecting.is-projecting .osim[data-mode=moon] .osim-stage canvas){max-height:43vh;width:100%}
+  :global(.deck-stage.is-projecting.is-projecting .osim[data-mode=moon] .osim-head){display:none}
+  :global(.deck-stage.is-projecting.is-projecting .osim[data-mode=moon] .osim-panel label){display:block;font-size:11px;line-height:1.2}
+  :global(.deck-stage.is-projecting.is-projecting .osim[data-mode=moon] .osim-panel output){display:inline;margin-left:7px}
+  :global(.deck-stage.is-projecting.is-projecting .osim[data-mode=moon] .osim-panel input){display:block;margin:8px 0 0}
+  :global(.deck-stage.is-projecting.is-projecting .osim[data-mode=moon] .osim-panel){gap:12px}
+  :global(.deck-stage.is-projecting.is-projecting .osim[data-mode=moon] .osim-verdict){font-size:11px;min-height:52px;line-height:1.4}
+  @media(max-width:760px){.osim-body{grid-template-columns:1fr}.osim-viewbar button{font-size:10px;padding:7px 9px}.osim-task{font-size:11px}.osim-scrub{margin-left:0}.osim[data-mode=moon] .osim-clock{top:48px;font-size:10px}}
+
+  @media(max-width:650px){
+    :global(.deck-stage.is-projecting.is-projecting .osim[data-mode=moon] .osim-body){grid-template-columns:1fr;gap:9px}
+    :global(.deck-stage.is-projecting.is-projecting .osim[data-mode=moon] .osim-stage canvas){height:24vh;max-height:24vh}
+    :global(.deck-stage.is-projecting.is-projecting .osim[data-mode=moon] .osim-panel){grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+    :global(.deck-stage.is-projecting.is-projecting .osim[data-mode=moon] .osim-panel>label){font-size:9px}
+    :global(.deck-stage.is-projecting.is-projecting .osim[data-mode=moon] .osim-panel>label output){margin-left:0;display:inline}
+    :global(.deck-stage.is-projecting.is-projecting .osim[data-mode=moon] .osim-panel>:not(label)){grid-column:1/-1}
+    :global(.deck-stage.is-projecting.is-projecting .osim[data-mode=moon] .osim-task){font-size:10px;padding:6px 8px}
+    :global(.deck-stage.is-projecting.is-projecting .osim[data-mode=moon] .osim-presets-lab){display:none}
+    :global(.deck-stage.is-projecting.is-projecting .osim[data-mode=moon] .osim-preset){font-size:9px}
+    :global(.deck-stage.is-projecting.is-projecting .osim[data-mode=moon] .osim-readout){font-size:10px;gap:2px 5px}
+    :global(.deck-stage.is-projecting.is-projecting .osim[data-mode=moon] .osim-verdict){font-size:10px;min-height:0;padding:6px 8px}
+    :global(.deck-stage.is-projecting.is-projecting .osim[data-mode=moon] .osim-actions){gap:5px}
+    :global(.deck-stage.is-projecting.is-projecting .osim[data-mode=moon] .osim-btn){font-size:10px;padding:6px 9px}
+    :global(.deck-stage.is-projecting.is-projecting .osim[data-mode=moon] .osim-scrub input){width:68px}
+    :global(.deck-stage.is-projecting.is-projecting .osim[data-mode=moon] .osim-scrub){font-size:8px;gap:5px}
+  }
 </style>
 
 <script is:inline>
@@ -303,6 +338,7 @@ const isAscent = mode === "ascent";
       var pts = [], moonPts = [];
       var closest = 1e9, tClosest = 0, impact = false, apo = 0;
       var prevDr = 1e12, braked = false, maxAfter = 0, burnPt = null;
+      var burnTime = null;
 
       for (var i = 0; i < 400000; i++) {
         var rNow = Math.hypot(x, y);
@@ -325,7 +361,7 @@ const isAscent = mode === "ascent";
           var rvx = vx - mvx, rvy = vy - mvy, rv = Math.hypot(rvx, rvy);
           var k = Math.min(brakeKms, rv * 0.9) / rv;
           vx -= rvx * k; vy -= rvy * k;
-          braked = true; burnPt = [x, y];
+          braked = true; burnPt = [x, y]; burnTime = t;
         }
         prevDr = dRel;
 
@@ -343,13 +379,13 @@ const isAscent = mode === "ascent";
         if (impact) break;
         if (t > 16 * 86400) break;
 
-        if (i % 60 === 0 && pts.length < 4000) { pts.push([x, y]); moonPts.push([mx, my]); }
+        if (i % 60 === 0 && pts.length < 4000) { pts.push([x, y, t]); moonPts.push([mx, my]); }
       }
 
       return {
         pts: pts, moonPts: moonPts, closest: closest, tClosest: tClosest,
         impact: impact, apogee: apo - RE, t: t, reached: closest < 66000,
-        braked: braked, burnPt: burnPt,
+        braked: braked, burnPt: burnPt, burnTime: burnTime,
         captured: braked && maxAfter < 66000 && !impact
       };
     }
@@ -372,6 +408,8 @@ const isAscent = mode === "ascent";
       var verdict = root.querySelector("[data-osim-verdict]");
       var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       var raf = null, spin = 0, idle = null, visible = false, lastP = 0;
+      var camera='map',look='moon',localPaused=false,moonCache=null,moonKey='';
+      var canvasW=cv.width,canvasH=cv.height;
 
       function rows(pairs) {
         readout.innerHTML = pairs.map(function (p) { return "<dt>" + p[0] + "</dt><dd>" + p[1] + "</dd>"; }).join("");
@@ -385,7 +423,7 @@ const isAscent = mode === "ascent";
           out.textContent = digits ? (+input.value).toFixed(digits) : input.value;
           if (mphEl) mphEl.textContent = "= " + mph(+input.value);
         };
-        input.addEventListener("input", function () { sync(); draw(0); });
+        input.addEventListener("input", function () { sync(); if(raf)cancelAnimationFrame(raf);raf=null;lastP=0;verdict.textContent='';draw(0); });
         sync();
       }
 
@@ -428,13 +466,48 @@ const isAscent = mode === "ascent";
         ctx.beginPath(); ctx.arc(cx, cy, rpx * 1.035, 0, 7); ctx.stroke();
       }
 
+      function planetFace(cx,cy,r,kind) {
+        ctx.save();ctx.translate(cx,cy);
+        var g=ctx.createRadialGradient(-r*.4,-r*.5,0,r*.2,r*.2,r*1.4);
+        g.addColorStop(0,kind==='earth'?'#8ee2eb':'#fff0cb');g.addColorStop(1,kind==='earth'?'#2672ae':'#889ab7');
+        ctx.shadowColor=kind==='earth'?'#65ddeb':'#dbe4ff';ctx.shadowBlur=r*.25;
+        ctx.fillStyle=g;ctx.beginPath();ctx.arc(0,0,r,0,7);ctx.fill();ctx.shadowBlur=0;
+        ctx.save();ctx.beginPath();ctx.arc(0,0,r,0,7);ctx.clip();
+        if(kind==='earth'){
+          ctx.fillStyle='#a8e6ad';
+          [[[-.75,-.5],[-.28,-.79],[.03,-.46],[-.28,-.13],[-.14,.13],[-.48,.32],[-.83,.03]],[[.3,.12],[.71,-.01],[.8,.37],[.37,.75],[.14,.51]]].forEach(poly=>{ctx.beginPath();poly.forEach((p,i)=>i?ctx.lineTo(p[0]*r,p[1]*r):ctx.moveTo(p[0]*r,p[1]*r));ctx.closePath();ctx.fill();});
+          ctx.strokeStyle='#e9fbff99';ctx.lineWidth=r*.08;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(-r*.58,-r*.38);ctx.quadraticCurveTo(-r*.2,-r*.55,r*.15,-r*.37);ctx.stroke();
+        }else{
+          [[-.44,-.4,.21],[.49,.24,.23],[.34,-.59,.12],[-.5,.53,.12]].forEach(c=>{ctx.fillStyle='#7f91af55';ctx.beginPath();ctx.arc(c[0]*r,c[1]*r,c[2]*r,0,7);ctx.fill();ctx.strokeStyle='#f9f1df66';ctx.lineWidth=2;ctx.stroke();});
+        }
+        ctx.restore();ctx.fillStyle='#20334c';[-.2,.2].forEach(x=>{ctx.beginPath();ctx.ellipse(x*r,.08*r,.055*r,.078*r,0,0,7);ctx.fill();});ctx.strokeStyle='#20334c';ctx.lineWidth=Math.max(2,r*.045);ctx.lineCap='round';ctx.beginPath();ctx.arc(0,.19*r,.16*r,.2,Math.PI-.2);ctx.stroke();ctx.fillStyle='#f2a9a266';[-.38,.38].forEach(x=>{ctx.beginPath();ctx.ellipse(x*r,.24*r,.1*r,.055*r,0,0,7);ctx.fill();});ctx.restore();
+      }
+      function capsule(x,y,angle,burning){
+        ctx.save();ctx.translate(x,y);ctx.rotate(angle);ctx.lineWidth=2;
+        if(burning){ctx.fillStyle='#ffb66d';ctx.beginPath();ctx.moveTo(-14,-6);ctx.quadraticCurveTo(-48,0,-14,6);ctx.fill();ctx.fillStyle='#fff1b3';ctx.beginPath();ctx.moveTo(-14,-3);ctx.lineTo(-34,0);ctx.lineTo(-14,3);ctx.fill();}
+        ctx.fillStyle='#f4ede1';ctx.strokeStyle='#8da5bc';ctx.beginPath();ctx.moveTo(-13,-13);ctx.quadraticCurveTo(8,-12,21,0);ctx.quadraticCurveTo(8,12,-13,13);ctx.closePath();ctx.fill();ctx.stroke();ctx.fillStyle='#6ed5e5';ctx.beginPath();ctx.ellipse(5,0,6,5,0,0,7);ctx.fill();ctx.fillStyle='#8ea6b8';ctx.fillRect(-18,-11,5,22);ctx.restore();
+      }
+      function cockpit(cur,mp,elapsed,W,H){
+        stars(W,H);var dx=mp[0]-cur[0],dy=mp[1]-cur[1],distance=Math.hypot(dx,dy);var lookingEarth=look==='earth';
+        var targetDistance=lookingEarth?Math.hypot(cur[0],cur[1]):distance;
+        var radius=lookingEarth?RE:RM;
+        // A Moon/Earth-facing illustration, not a reconstructed Apollo attitude view.
+        var apparent=Math.min(H*.32,Math.max(H*.18,Math.atan2(radius,targetDistance)*W*1.6));
+        planetFace(W*.5,H*.4,apparent,lookingEarth?'earth':'moon');
+        ctx.strokeStyle='#9eeed166';ctx.lineWidth=1;ctx.setLineDash([4,8]);ctx.beginPath();ctx.moveTo(W*.5-90,H*.4);ctx.lineTo(W*.5+90,H*.4);ctx.moveTo(W*.5,H*.4-90);ctx.lineTo(W*.5,H*.4+90);ctx.stroke();ctx.setLineDash([]);
+        ctx.fillStyle='#a8e3dd';ctx.font='14px ui-monospace, monospace';ctx.textAlign='center';ctx.fillText((lookingEarth?'EARTH':'MOON')+'  /  '+km(Math.max(0,targetDistance-radius))+' TO SURFACE',W*.5,H*.4+Math.max(apparent+30,110));
+        ctx.fillStyle='#263a50';ctx.strokeStyle='#65788d';ctx.lineWidth=5;ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(W*.08,0);ctx.lineTo(W*.17,H*.79);ctx.lineTo(W*.83,H*.79);ctx.lineTo(W*.92,0);ctx.lineTo(W,0);ctx.lineTo(W,H);ctx.lineTo(0,H);ctx.closePath();ctx.fill();ctx.stroke();
+        ctx.fillStyle='#132237';ctx.fillRect(W*.2,H*.83,W*.6,H*.17);ctx.fillStyle='#a7f0d5';ctx.textAlign='left';ctx.font='bold '+(W<500?9:16)+'px ui-monospace, monospace';ctx.fillText('APOLLO FLIGHT LAB',W*.23,H*.89);ctx.font=(W<500?9:13)+'px ui-monospace, monospace';ctx.fillText('T + '+elapsed.toFixed(2)+' DAYS',W*.23,H*.95);ctx.textAlign='right';ctx.fillText('COAST / GRAVITY ACTIVE',W*.76,H*.89);ctx.fillText('LOOK: '+(lookingEarth?'HOME':'MOON'),W*.76,H*.95);ctx.textAlign='left';
+        [[.05,.16],[.09,.5],[.91,.5],[.95,.16]].forEach(p=>{ctx.fillStyle='#a8bbc7';ctx.beginPath();ctx.arc(W*p[0],H*p[1],4,0,7);ctx.fill();});
+      }
+
       // ---------- ascent draw ----------
       function drawAscent(p) {
         var pitch = +root.querySelector("[data-osim-pitch]").value;
         var dv = +root.querySelector("[data-osim-dv]").value;
         var r = simAscent(pitch, dv);
         r.spin = spin;
-        var W = cv.width, H = cv.height;
+        var W = mode==='moon'?canvasW:cv.width, H = mode==='moon'?canvasH:cv.height;
         stars(W, H);
 
         // FIXED view. Earth is the same size at every setting — otherwise the
@@ -498,9 +571,11 @@ const isAscent = mode === "ascent";
         var tli = +root.querySelector("[data-osim-tli]").value;
         var lead = +root.querySelector("[data-osim-lead]").value;
         var brakeEl = root.querySelector("[data-osim-brake]");
-        var r = simMoon(tli, lead, brakeEl ? +brakeEl.value : 0);
+        var key=tli+'|'+lead+'|'+(brakeEl?brakeEl.value:0);
+        if(key!==moonKey||!moonCache){moonCache=simMoon(tli,lead,brakeEl?+brakeEl.value:0);moonKey=key;}
+        var r=moonCache;
         r.spin = spin;
-        var W = cv.width, H = cv.height;
+        var W = mode==='moon'?canvasW:cv.width, H = mode==='moon'?canvasH:cv.height;
         stars(W, H);
 
         var span = DM * 1.18;
@@ -513,10 +588,11 @@ const isAscent = mode === "ascent";
         ctx.beginPath(); ctx.arc(cx, cy, DM * scale, 0, 7); ctx.stroke();
         ctx.setLineDash([]);
 
-        earth(cx, cy, Math.max(4, RE * scale), r.spin);
+        planetFace(cx,cy,42,'earth');
+        ctx.fillStyle='#acd8e8';ctx.font='bold 13px ui-sans-serif,system-ui,sans-serif';ctx.textAlign='center';ctx.fillText('EARTH',cx,cy+61);ctx.textAlign='left';
 
         var n = Math.max(2, Math.floor(r.pts.length * p));
-        ctx.strokeStyle = "rgba(255,190,90,0.95)"; ctx.lineWidth = 1.8;
+        ctx.strokeStyle = "#9af1d8"; ctx.lineWidth = 3;
         ctx.beginPath();
         for (var i = 0; i < n; i++) {
           var q = r.pts[i];
@@ -528,12 +604,10 @@ const isAscent = mode === "ascent";
         var mp = r.moonPts[n - 1] || r.moonPts[0];
         if (mp) {
           var mx = cx + mp[0] * scale, my = cy - mp[1] * scale;
-          ctx.fillStyle = "#c9ccd4";
-          ctx.beginPath(); ctx.arc(mx, my, Math.max(4, RM * scale), 0, 7); ctx.fill();
-          ctx.strokeStyle = "rgba(255,255,255,0.18)";
-          ctx.beginPath(); ctx.arc(mx, my, Math.max(4, RM * scale) + 6, 0, 7); ctx.stroke();
+          planetFace(mx,my,25,'moon');
+          ctx.fillStyle='#ece1c9';ctx.font='bold 12px ui-sans-serif,system-ui,sans-serif';ctx.textAlign='center';ctx.fillText('MOON',mx,my+41);ctx.textAlign='left';
         }
-        if (r.burnPt) {
+        if (r.burnPt && r.pts[n-1] && r.pts[n-1][2]>=r.burnTime) {
           ctx.strokeStyle = "#ffb45c"; ctx.lineWidth = 2;
           ctx.beginPath();
           ctx.arc(cx + r.burnPt[0] * scale, cy - r.burnPt[1] * scale, 7, 0, 7);
@@ -541,22 +615,16 @@ const isAscent = mode === "ascent";
           ctx.fillStyle = "rgba(255,180,92,0.9)"; ctx.font = "10px ui-monospace, monospace";
           ctx.fillText("braking burn", cx + r.burnPt[0] * scale + 10, cy - r.burnPt[1] * scale - 8);
         }
-        var cur = r.pts[n - 1];
-        if (cur) {
-          ctx.fillStyle = "#fff";
-          ctx.beginPath(); ctx.arc(cx + cur[0] * scale, cy - cur[1] * scale, 3, 0, 7); ctx.fill();
-        }
-
-        var days = (r.t * (n / Math.max(1, r.pts.length))) / 86400;
-        clock.textContent = "T + " + days.toFixed(1) + " days";
-
-        rows([
-          ["Apogee reached", km(r.apogee)],
-          ["Moon's orbit radius", km(DM)],
-          ["Closest approach", r.impact ? "impact" : km(r.closest)],
-          ["Time to closest", (r.tClosest / 86400).toFixed(1) + " days"],
-          ["Burn", tli.toFixed(2) + " km/s (" + mph(tli) + ")"]
-        ]);
+        var cur = r.pts[n-1] || r.pts[0];
+        if(cur){var prev=r.pts[Math.max(0,n-2)]||cur;capsule(cx+cur[0]*scale,cy-cur[1]*scale,Math.atan2(-(cur[1]-prev[1]),cur[0]-prev[0]),p<.03);}
+        var days=cur?cur[2]/86400:0;
+        clock.textContent='T + '+days.toFixed(2)+' days';
+        if(camera==='fpv'&&cur&&mp)cockpit(cur,mp,days,W,H);
+        else{ctx.fillStyle='#9eb4cb';ctx.font='12px ui-sans-serif,system-ui,sans-serif';ctx.fillText(W<500?'ENLARGED WORLDS · TEACHING MODEL':'CARTOON WORLDS ENLARGED · CALCULATED FLIGHT PATH',18,H-17);}
+        var distance=cur&&mp?Math.hypot(cur[0]-mp[0],cur[1]-mp[1])-RM:0;
+        rows([['Moon surface now',km(Math.max(0,distance))],['Closest approach',r.impact?'impact':km(Math.max(0,r.closest-RM))+' altitude'],['Time to closest',(r.tClosest/86400).toFixed(1)+' days']]);
+        var scrub=root.querySelector('[data-osim-progress]');if(scrub)scrub.value=String(p*100);
+        if(p<1){verdict.dataset.tone='';verdict.textContent=p===0?'Set a burn and a lead angle, then predict: flyby, orbit, or miss?':'Watch the Moon move. Your spacecraft must meet it at the right time.';}
 
         if (p >= 1) {
           if (r.captured) {
@@ -582,17 +650,18 @@ const isAscent = mode === "ascent";
       }
 
       var runner = mode === "ascent" ? drawAscent : drawMoon;
-      function draw(p) { runner(p); }
+      function draw(p) { lastP=p;runner(p); }
 
       function animate() {
         if (raf) cancelAnimationFrame(raf);
         verdict.dataset.tone = ""; verdict.textContent = "";
         if (reduce) { draw(1); return; }
-        var start = null, dur = 3200;
+        localPaused=false;root.querySelector('[data-osim-pause]').setAttribute('aria-pressed','false');root.querySelector('[data-osim-pause]').textContent='Pause Ⅱ';
+        var start = null, dur = mode==='moon'?16000:5000;
         var previous = null;
         function step(ts) {
           if (!start) start = ts;
-          if (root.closest('[data-motion-paused="true"]') || !root.getClientRects().length || document.hidden) {
+          if (localPaused || root.closest('[data-motion-paused="true"]') || !root.getClientRects().length || document.hidden) {
             if(previous!==null)start += ts-previous;
             previous=ts; raf=requestAnimationFrame(step);return;
           }
@@ -635,7 +704,7 @@ const isAscent = mode === "ascent";
 
       function idleSpin() {
         idle = requestAnimationFrame(function () {
-          if (visible && !raf && !root.closest('[data-motion-paused="true"]') && !document.hidden) { spin += 0.0035; draw(lastP); }
+          if (visible && !raf && !localPaused && !root.closest('[data-motion-paused="true"]') && !document.hidden) { spin += 0.0035; draw(lastP); }
           idleSpin();
         });
       }
@@ -645,13 +714,19 @@ const isAscent = mode === "ascent";
         idleSpin();
       }
 
+      root.querySelectorAll('[data-camera]').forEach(function(b){b.addEventListener('click',function(){camera=b.dataset.camera;root.querySelectorAll('[data-camera]').forEach(function(el){el.setAttribute('aria-pressed',String(el===b));});root.querySelector('[data-look]').hidden=camera!=='fpv';cv.setAttribute('aria-label',camera==='map'?'Cartoon mission map: Earth, Moon, and the calculated spacecraft trajectory':'Stylized cockpit view facing '+look+'; distance comes from the flight simulation');draw(lastP);});});
+      var lookButton=root.querySelector('[data-look]');if(lookButton)lookButton.addEventListener('click',function(){look=look==='moon'?'earth':'moon';lookButton.textContent=look==='moon'?'Look at Earth ↗':'Look at Moon ↗';cv.setAttribute('aria-label','Stylized cockpit view facing '+look+'; distance comes from the flight simulation');draw(lastP);});
+      var scrub=root.querySelector('[data-osim-progress]');if(scrub)scrub.addEventListener('input',function(){if(raf)cancelAnimationFrame(raf);raf=null;draw(Number(scrub.value)/100);});
+      root.querySelector('[data-osim-pause]').addEventListener('click',function(){localPaused=!localPaused;this.setAttribute('aria-pressed',String(localPaused));this.textContent=localPaused?'Resume ▶':'Pause Ⅱ';});
       root.querySelector("[data-osim-run]").addEventListener("click", animate);
       root.querySelector("[data-osim-reset]").addEventListener("click", function () {
-        if (raf) cancelAnimationFrame(raf);
+        if (raf) cancelAnimationFrame(raf);raf=null;localPaused=false;
+        root.querySelector('[data-osim-pause]').setAttribute('aria-pressed','false');root.querySelector('[data-osim-pause]').textContent='Pause Ⅱ';
         verdict.dataset.tone = ""; verdict.textContent = "";
         draw(0);
       });
 
+      if(mode==='moon'&&'ResizeObserver' in window){new ResizeObserver(function(){var r=cv.getBoundingClientRect();if(r.width<1||r.height<1)return;canvasW=r.width;canvasH=r.height;var d=Math.min(devicePixelRatio||1,2);cv.width=Math.round(canvasW*d);cv.height=Math.round(canvasH*d);ctx.setTransform(d,0,0,d,0,0);draw(lastP);}).observe(cv);}
       draw(0);
     }
 

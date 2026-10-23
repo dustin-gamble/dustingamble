@@ -1,10 +1,11 @@
 ---
+import MissionJourney from "./MissionJourney.astro";
 const { kind = "missions" } = Astro.props;
 const uid = `space-lab-${kind}`;
 const titles = { missions:"TWO WAYS TO EXPLORE", base:"KEEP THE CREW ALIVE", drag:"THE WIND TUNNEL", impulse:"THE ENGINE DUEL", math:"BUILD YOUR Δv BUDGET" };
 const stars = Array.from({length:45},(_,i)=>({x:(i*137+23)%900,y:(i*79+13)%370,r:i%5===0?1.8:.8}));
 ---
-<section class="space-lab" data-lab={kind} aria-label={titles[kind]}>
+{kind === "missions" ? <MissionJourney /> : <section class="space-lab" data-lab={kind} aria-label={titles[kind]}>
   <div class="lab-top"><span><i></i> {titles[kind]}</span><button class="motion-control" data-motion aria-pressed="false">Pause motion Ⅱ</button></div>
   <div class="lab-body">
     <div class="lab-scene">
@@ -122,7 +123,7 @@ const stars = Array.from({length:45},(_,i)=>({x:(i*137+23)%900,y:(i*79+13)%370,r
     {kind === 'math' && <><label class="range-control">Mass ratio <output data-ratio-out>2.0×</output><input data-mass-ratio type="range" min="1" max="5" step=".1" value="2" aria-label="Starting to final mass ratio" /></label><label class="range-control">Specific impulse <output data-isp-out>200 s</output><input data-isp type="range" min="100" max="350" step="10" value="200" aria-label="Specific impulse in seconds" /></label></>}
   </div>
   <p class="lab-caption">{kind==='missions'?'CHALLENGE  /  What can a robot bring back? What can only a person decide on the spot?':kind==='base'?'CHALLENGE  /  Switch to lunar night. What fails first—and what restores it?':kind==='drag'?'CHALLENGE  /  Predict the drag at half speed. Then test your answer.':kind==='impulse'?'CHALLENGE  /  Same final impulse. Different burns. Does that guarantee the same altitude?':'Δv = Iₛₚ × 9.80665 × ln(m₀/mf) · Ideal model: excludes gravity and drag losses.'}</p>
-</section>
+</section>}
 
 <style>
 .space-lab{--cyan:#6fe9fa;--mint:#70ecc7;--purple:#b6a0ff;position:relative;width:100%;border:1px solid #344662;border-radius:20px;background:radial-gradient(ellipse at 35% 15%,#19274d 0%,#0b152a 45%,#080f20 100%);color:#eaf2ff;font-family:Inter,ui-sans-serif,system-ui,sans-serif;overflow:hidden;box-shadow:0 18px 60px #07132c20;text-align:left;isolation:isolate;}
@@ -139,7 +140,7 @@ const stars = Array.from({length:45},(_,i)=>({x:(i*137+23)%900,y:(i*79+13)%370,r
 </style>
 
 <script>
-document.querySelectorAll<HTMLElement>('[data-lab]').forEach(root=>{
+document.querySelectorAll<HTMLElement>('[data-lab]:not([data-mission-journey])').forEach(root=>{
  const kind=root.dataset.lab!;const q=<T extends Element=HTMLElement>(s:string)=>root.querySelector<T>(s)!;
  const put=(s:string,v:string)=>{q(s).textContent=v;};
  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;

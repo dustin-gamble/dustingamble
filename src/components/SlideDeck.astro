@@ -8,6 +8,7 @@ import MotorCutaway from "./MotorCutaway.astro";
 import MissionControl from "./MissionControl.astro";
 import FlightSim from "./FlightSim.astro";
 import OrbitSim from "./OrbitSim.astro";
+import MissionChoice from "./MissionChoice.astro";
 import SlideArt from "./SlideArt.astro";
 import SlideImage from "./SlideImage.astro";
 import LaunchOps from "./LaunchOps.astro";
@@ -46,6 +47,8 @@ const theme = presentationThemes[deck.id] || {color:'#9af1cf',title:deck.title,c
             <SpaceLessonHero kind={theme.hero} id={deck.id}/>
           </div> : <div class="ds ds-title"><p class="ds-kicker">{s.kicker}</p><h4 class="ds-h1">{s.heading}</h4><p class="ds-sub">{s.sub}</p>{s.art && <SlideArt name={s.art}/>}</div>
         )}
+
+        {s.type === "mission-choice" && <div class="ds ds-heavy"><h4 class="ds-h2">{s.heading}</h4><MissionChoice /></div>}
 
         {s.type === "prompt" && (
           <div class="ds ds-prompt">
@@ -995,10 +998,11 @@ const theme = presentationThemes[deck.id] || {color:'#9af1cf',title:deck.title,c
         if(standalone){try{history.replaceState(null,'','#slide-'+(i+1));}catch{}}
         scheduleFit(slides[i]);
         if(stage.classList.contains('is-projecting')&&!reduceMotion){
-          requestAnimationFrame(()=>{slides[i].querySelectorAll('[data-lab] [data-play]').forEach(b=>b.click());});
+          requestAnimationFrame(()=>{slides[i].querySelectorAll('[data-lab]:not([data-mission-journey]) [data-play]').forEach(b=>b.click());});
         }
       }
 
+      if(standalone)window.addEventListener('hashchange',()=>{const match=location.hash.match(/^#slide-(\d+)$/);if(match&&Number(match[1])-1!==i)show(Number(match[1])-1);});
       prev.addEventListener("click", () => show(i - 1));
       next.addEventListener("click", () => show(i + 1));
 

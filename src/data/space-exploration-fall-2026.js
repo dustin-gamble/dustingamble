@@ -14,7 +14,7 @@ export const series = {
         "Five Monday-night 45-minute blocks and a Saturday launch day the weekend before Thanksgiving, taking a Scout from “why do we go to space” to a rocket they built, predicted, flew, recovered, and analyzed. Every minute is mapped to a requirement, and the badge gets signed off with paperwork on a table — not on a tailgate in the wind.",
     groundRules: [
         "45 minutes per Monday. The meeting plan already owns 0:00–0:30 and 1:15–1:30 — this series takes 0:30–1:15 and gives it back on time.",
-        "The troop buys every rocket kit. Scouts earn theirs by clearing the flight-readiness gate — no family pays for anything.",
+        "Scouts buy their own rocket kits. The troop coordinates launch equipment, motors, and range readiness.",
         "Planning for 6–10 Scouts. One launch pad and one shared altimeter is enough at that size.",
         "Requirement 3 cannot be finished in a church parking lot on a Monday night. Launch day is the deliverable — the Mondays exist to make it safe and worth doing.",
         "Five Mondays, not seven. Scouts build at home when the kit arrives, which buys back two whole nights; the November 16 meeting runs a help desk for anyone whose build went sideways. The night that stays is the post-flight one, where the data actually gets analyzed and the badge actually gets signed.",
@@ -25,7 +25,7 @@ export const series = {
         "Launch day Sat Nov 21",
         "6–10 Scouts",
         "Reqs 1–8 covered",
-        "Free to families — troop buys the kits",
+        "Scouts purchase their own rocket kits",
         "Altimeter in every rocket",
     ],
     calendarNote:
@@ -175,8 +175,8 @@ export const timeline = [
     },
     {
         window: "Fri Sep 4",
-        owner: "Counselor",
-        what: "Place the kit order — one Cosmic Cargo + B6-4 pack + C6-5 pack per Scout, plus two or three spare sets. It has to be in hand by Sep 28, which is handout night.",
+        owner: "Scouts / families",
+        what: "Check that each family has ordered its Scout’s Cosmic Cargo kit. Track delivery and offer help with missing kits. The counselor orders shared launch supplies and troop spares.",
         risk: "high",
     },
     {
@@ -344,16 +344,16 @@ export const decks = {
                 heading: "The flight-readiness gate",
                 image: "rocket-on-pad",
                 art: "gate",
-                intro: "You do not get to order a rocket until you have earned it. Four things:",
+                intro: "Scouts buy their own rockets. These four course checkpoints help us prepare for launch:",
                 bullets: [
                     "1. Tonight's requirement 1 discussion — done, you're sitting here.",
                     "2. Your space pioneer card turned in (req 2).",
                     "3. Pass the NAR Model Rocket Safety Code quiz — 8 out of 10, retakes allowed.",
                     "4. Your declared mission objective for launch #2, and a signed launch-day permission slip.",
                 ],
-                note: "Clear all four and I hand you your kit on September 28. The troop is buying — this costs your family nothing.",
+                note: "Order your own Cosmic Cargo rocket kit with a parent or guardian. Bring the kit for the parts lesson and the finished rocket for inspection on November 16.",
                 notes:
-                    "Say the last line plainly — several of these families will be quietly relieved, and one of them needed to hear it. Then be equally plain that the gate is still real: the kit is free but it is earned. Hand out the permission slip and the safety code printout as they leave.",
+                    "Make the purchase responsibility clear: each Scout’s family buys the rocket kit. Share the kit link, check delivery plans, and invite families to contact the counselor privately if they need help. Hand out the permission slip and safety code.",
             },
             {
                 type: "title",
@@ -541,7 +541,7 @@ export const decks = {
                 videoTitle: "Voyagers' Mission to the Outer Solar System (1977 Vintage Video)",
                 play: "Play 2–3 min of the vintage footage.",
                 notes:
-                    "The hook: this was designed with less computing power than a modern key fob, launched in 1977, and both spacecraft are still transmitting from interstellar space. The Grand Tour alignment that let one probe hit four planets happens roughly every 175 years. They got the window.",
+                    "Use Voyager 1 as the specific robotic mission in the discovery chart. It launched in 1977, flew by Jupiter in 1979 and Saturn in 1980, and entered interstellar space in 2012. Ask which observation supports each discovery and why the discovery changed our understanding.",
                 backup: {
                     label: "Modern robotic alternative — great animation",
                     youtubeId: "0-oQRSViZQE",
@@ -558,7 +558,7 @@ export const decks = {
                 videoTitle: "Putting Man on The Moon in 11 Years | The Apollo Program",
                 play: "Play 3–4 min.",
                 notes:
-                    "Compare and contrast is the requirement. Robotic: cheap, patient, expendable, no lunch required, decades of operation. Crewed: expensive, fragile, slow, and irreplaceable at improvising when something breaks — Apollo 13 is the argument for people.",
+                    "Requirement 5a asks for discoveries, importance, and what we learned from each mission. Apollo 11 returned samples: basalt showed that the dark lunar plains came from ancient lava. Contrast physical samples studied in Earth laboratories with Voyager 1’s remote images and measurements. Avoid suggesting that only humans can return samples; robotic sample-return missions exist.",
                 backup: {
                     label: "Modern crewed alternative",
                     youtubeId: "1gmvUPTdoP4",
@@ -566,15 +566,15 @@ export const decks = {
                     videoTitle: "\"Let's light this candle.\" — NASA SpaceX Crew Dragon Launch",
                 },
             },
-            { type: "chart", chart: "missions", heading: "Two missions. Two kinds of evidence.", notes: "Ask each Scout for a discovery and why it matters. The chart supports discussion; watching a clip alone does not earn credit." },
+            { type: "chart", chart: "missions", heading: "What did Voyager 1 and Apollo 11 teach us?", notes: "Requirement 5a: each Scout discusses a robotic and a historic crewed mission, their major discoveries, importance, and what was learned. Pause at each discovery stop. Ask for evidence, then significance. Source facts: NASA Voyager 1 mission page, NASA Apollo 11 Mission Overview, and NASA History of Lunar Exploration. Sources are linked in the chart and the teaching content is embedded for offline use." },
             {
                 type: "orbitsim",
                 sim: "moon",
-                heading: "Flying Apollo's trajectory yourself",
+                heading: "Fly to the Moon: aim, coast, brake",
                 intro:
-                    "You are in a 300 km orbit. One burn stretches that circle out to the Moon — but the Moon is moving at a kilometre a second, so you have to aim at where it will be in three days, not where it is now.",
+                    "Try a flyby, then add a braking burn. Switch between the mission map and a Moon-facing cockpit camera. This simplified model illustrates Apollo navigation; it is not a reconstruction of the actual flight.",
                 notes:
-                    "Start with the lead angle deliberately wrong — set it to 10° and burn. The path reaches the Moon's distance and sails through empty space, because the Moon has not arrived yet. Then walk the lead angle up until you get an encounter. This is the single best five minutes you can spend on why Apollo launches had a narrow window: miss the window and the Moon simply is not there. Ask: 'what happens if the engine fails halfway?' — that is Apollo 13, and the answer is the free-return trajectory.",
+                    "Enrichment supporting the Apollo discussion in 5a. Compare the flyby and lunar-orbit presets, then try a missed encounter. Ask why braking changes the outcome. The cockpit is a stylized camera facing Earth or the Moon, not actual Apollo attitude or optics. A flyby here is not a verified safe free-return trajectory; a real return needs its own planning.",
             },
             {
                 type: "video",
@@ -595,15 +595,15 @@ export const decks = {
                 },
             },
             {
-                type: "prompt",
-                heading: "The argument worth having",
-                question: "We could send ten robots to Mars for the price of one crewed landing. So why send people at all?",
+                type: "mission-choice",
+                heading: "Robots, people—or a team?",
+                question: "Imagine a budget for ten robotic missions or one crewed landing. What would you choose, and why?",
                 image: "apollo-crew",
                 art: "robotic-vs-crewed",
                 answer:
-                    "There is no clean answer and Scouts should leave knowing that. Robots: cheap, patient, expendable, no lunch, decades of operation, no ride home needed. People: expensive, fragile, slow — and unmatched at improvising when something breaks in a way nobody planned for. Apollo 13 is the argument for people. Voyager is the argument against.",
+                    "This is a hypothetical budget, not a verified ten-to-one cost ratio. Compare scientific goals, risk, life support, communication delay, autonomy, and the ability to adapt on site. Robots and people often complement one another. Support a choice with evidence from Voyager 1 and Apollo 11.",
                 notes:
-                    "Let this run. Take a show of hands, then ask two Scouts on opposite sides to defend it. This is the requirement-5 discussion happening naturally instead of you quizzing them. Do not resolve it — tell them working aerospace engineers still argue about this at lunch.",
+                    "Ask for a science goal, an advantage, and a tradeoff. Use the three team buttons to compare choices. This supports the requirement 5a conversation but does not replace each Scout discussing the actual missions and their discoveries. The ten-to-one premise is invented for discussion, not a claim about current mission costs.",
             },
             {
                 type: "bullets",
@@ -968,7 +968,7 @@ export const meetings = [
         homework: [
             "Build your space pioneer card, due September 28 (req 2).",
             "Pass the NAR safety code quiz — take it at home, retakes allowed.",
-            "Get the permission slip signed and bring it back — that plus the quiz and your card gets you a kit on September 28.",
+            "Have a parent sign the permission slip, finish your pioneer card and safety quiz, and order your own rocket kit.",
             "Start looking at one space-related career for requirement 8.",
         ],
         risk: "Hand out the printed calendar. Five Mondays spread across three months is easy to lose track of, and a parent with the dates on the fridge is the difference between a Scout who finishes and one who drifts.",
@@ -1013,7 +1013,7 @@ export const meetings = [
             "Printed build instructions to take home, since building now happens at home",
         ],
         homework: [
-            "Collect your kit tonight if you have cleared the gate. If you have not, clear it and I will have one for you on October 26.",
+            "Bring the rocket kit your family purchased. Tell the counselor if it has not arrived or you need help obtaining one.",
             "BUILD IT AT HOME when it arrives. Take your time, dry-fit everything, keep the fins straight.",
             "Stuck or unsure? Bring it to the November 16 meeting — there's a help desk and I have spare parts.",
             "Read the competition rules. The main prize is for the best prediction, not the highest flight.",
@@ -1160,9 +1160,9 @@ export const meetings = [
 
 export const gate = {
     policyNote:
-        "These are Troop 308 rules about handing out hardware and standing on a live range — not additional Space Exploration merit badge requirements. A counselor may not add to or subtract from the requirements as written (Guide to Advancement 7.0.1.4). A Scout who clears none of these still earns the badge on the requirements as written; what the gate controls is who gets a kit from the troop and who is on our range on November 21, which are budget and range-safety decisions, not advancement ones.",
+        "These are Troop 308 course and range-readiness checkpoints, not additional merit badge requirements. Scouts buy their own rockets. Buying a kit is not contingent on these checkpoints, and course administration does not change the requirements as written. Actual range participation requires the safety preparation and permissions for the event.",
     intro:
-        "The troop buys the kits, so the handout is the leverage rather than the money. Four gates, all clearable in the four weeks between Meeting 1 and Meeting 2. Kits go out at Meeting 2 on September 28 to everyone who has cleared, which leaves seven weeks to build at home before the November 16 inspection. Anyone who clears late gets theirs at Meeting 3 on October 26 — after that there is not enough time and they fly a troop spare.",
+        "Scouts and families purchase their own kits and build at home using the manufacturer’s instructions. Track kit arrival separately from the course checkpoints. Bring the finished rocket for November 16 inspection; contact the counselor early about a missing kit or a build problem.",
     items: [
         {
             n: 1,
@@ -1175,7 +1175,7 @@ export const gate = {
             n: 2,
             title: "Turn in your space pioneer card",
             detail:
-                "Front picture, back information: who they were, what they did, why it mattered, one surprising thing. Hand-drawn scores the same as printed. Due at Meeting 2 on September 28 — the same night the kits go out, so bring it if you want to walk out with a rocket.",
+                "Front picture, back information: who they were, what they did, why it mattered, one surprising thing. Hand-drawn scores the same as printed. Due at Meeting 2 on September 28; this assignment is separate from purchasing your rocket.",
             maps: "Supports req 2 · troop rule",
         },
         {
@@ -1189,7 +1189,7 @@ export const gate = {
             n: 4,
             title: "Declared objective, and a signed permission slip",
             detail:
-                "The Scout writes down their declared mission objective for launch #2, and a parent signs the launch-day permission slip. Requirement 3 says the second launch has to accomplish a specific objective; deciding it now is how it stops being an afterthought on the field. The permission slip is the ordinary troop one — no money on it, because the troop is buying the hardware.",
+                "The Scout writes down a mission objective for launch #2, and a parent signs the launch-day permission slip. Requirement 3 calls for a specific objective on the second launch. The permission slip is separate from the rocket kit that the family purchases.",
             maps: "Supports req 3 · troop rule",
         },
     ],
@@ -1211,30 +1211,21 @@ export const gate = {
 
 export const orders = {
     intro:
-        "Three separate orders with three separate owners. Prices checked against estesrockets.com and vendor listings in August 2026 — re-check at checkout, they move.",
+        "Scouts buy their own rocket kits. The counselor handles shared range equipment and launch consumables; the deferred telemetry project has a separate list. Check current prices and shipping before ordering.",
     linkNote:
-        "Every row has a buy link. Amazon first because most families already have an account and Prime shipping is the difference between a kit arriving in time to build it and not. Where a specific listing was verified, the link goes straight to it; otherwise it is an Amazon search that will always resolve even after a listing changes. The manufacturer link next to it is the authority on specs and the fallback when Amazon is out of stock — Estes ships direct and their education store sometimes has bulk pricing Amazon does not. Nothing here is an affiliate link.",
+        "Use the Estes link for the kit’s instructions and specifications. The Amazon link is a product search; verify the kit and seller before ordering. These are not affiliate links. The Cosmic Cargo price was checked on October 23, 2026; other amounts are planning estimates.",
     groups: [
         {
             id: "scout",
-            title: "Per Scout — the TROOP orders this, one set per Scout",
-            owner: "Counselor · troop budget",
-            deadline: "Order by Friday, September 4, 2026 — kits handed out Sep 28",
-            intro:
-                "One airframe for everybody. Same kit, same motor class, so the competition measures thinking instead of budget — and since the troop is buying, no Scout's flight depends on what their family can spend. The Cosmic Cargo is the pick because it is beginner-level, needs no glue, and — the part that matters — has a real payload bay, which makes requirement 3(g) something the Scout can point at instead of imagine. Multiply every row below by your Scout count and order it in one go: buying ten of each in a single order is cheaper and arrives together.",
+            title: "Each Scout / family — buy your own rocket kit",
+            owner: "Scout with parent or guardian",
+            deadline: "Allow time to build before the November 16 inspection",
+            intro: "Purchase one Cosmic Cargo kit per Scout. Tell the counselor if it is delayed or you need help. Motors and shared launch supplies are coordinated by the counselor.",
             rows: [
-                { item: "Estes Cosmic Cargo rocket kit", detail: "Skill level: beginner. 16.7 in long, 0.98 in dia, 1.27 oz. 12 in parachute. No glue needed. Payload bay.", qty: "1", price: "$16.99", buy: "https://www.amazon.com/s?k=Estes+Cosmic+Cargo+rocket+kit", mfr: "https://estesrockets.com/products/cosmic-cargo" },
-                { item: "Estes B6-4 engine 3-pack", detail: "The safe first flight. Lower and slower — easier to track, easier to recover.", qty: "1", price: "~$12", buy: "https://www.amazon.com/s?k=Estes+B6-4+engines+3+pack", mfr: "https://estesrockets.com/products/b6-4-engines" },
-                { item: "Estes C6-5 engine 3-pack", detail: "The competition flight. Recommended engines for this kit are A8-3, A8-5, B4-4, B6-6, C6-5, C6-7.", qty: "1", price: "~$12", buy: "https://www.amazon.com/s?k=Estes+C6-5+engines+3+pack", mfr: "https://estesrockets.com/products/c6-5-engines" },
-                { item: "Recovery wadding", detail: "Or share the troop's. Do not fly without it — the ejection charge will melt a chute.", qty: "1 pack", price: "~$6", buy: "https://www.amazon.com/s?k=Estes+recovery+wadding", mfr: "https://estesrockets.com/products/recovery-wadding" },
+                { item: "Estes Cosmic Cargo rocket kit", detail: "Beginner kit with a payload bay. Follow the included assembly instructions.", qty: "1", price: "$16.99 listed by Estes", buy: "https://www.amazon.com/s?k=Estes+Cosmic+Cargo+rocket+kit", mfr: "https://estesrockets.com/products/cosmic-cargo" },
             ],
-            total: "≈ $47 per Scout · ≈ $470 for 10 Scouts, before tax and shipping",
-            notes: [
-                "Order every kit and both motor packs together. Split shipments are how you end up on September 28 with rockets and no motors, holding a handout night with nothing to hand out.",
-                "Order two or three sets more than your headcount. Scouts join late, kits get damaged, and a spare is the difference between a Scout flying and a Scout watching.",
-                "Starters are included with the engines. Extra starters are a good $6 of insurance.",
-                "Scouts also need: white glue or plastic cement for the fins if they want a stronger build, sandpaper, and spray paint. Most families already have these.",
-            ],
+            total: "Kit price plus tax and shipping; verify at checkout",
+            notes: ["Scouts buy their own rocket kits; there is no troop kit handout.", "Follow the kit instructions and bring the finished rocket for inspection.", "Confirm launch consumables with the counselor before buying extras."],
         },
         {
             id: "troop",
@@ -1248,13 +1239,13 @@ export const orders = {
                 { item: "Estes Altimeter", detail: "0–9,999 ft, 4-digit LCD, stores 10 flights. Fits a payload section. This is the scoring instrument.", qty: "1", price: "$43.99", buy: "https://www.amazon.com/s?k=Estes+Altimeter+2246", mfr: "https://estesrockets.com/products/altimeter" },
                 { item: "Second Estes Altimeter", detail: "Strongly recommended now that Max Altitude is a scored award — halves the swap time between flights and is your spare when the first one walks off in a pocket.", qty: "1", price: "$43.99", buy: "https://www.amazon.com/s?k=Estes+Altimeter+2246", mfr: "https://estesrockets.com/products/altimeter" },
                 { item: "Two spare Cosmic Cargo kits, pre-built", detail: "One as the reference rocket for the Meeting 2 parts relay, one for the Scout whose kit never arrived. You will need it.", qty: "2", price: "~$34", buy: "https://www.amazon.com/s?k=Estes+Cosmic+Cargo+rocket+kit", mfr: "https://estesrockets.com/products/cosmic-cargo" },
-                { item: "Spare B6-4 and C6-5 engines", detail: "Somebody will forget. Somebody else will misfire. Budget four spare flights.", qty: "2 packs", price: "~$24", buy: "https://www.amazon.com/s?k=Estes+model+rocket+engines+B6-4+C6-5", mfr: "https://estesrockets.com/collections/engines" },
+                { item: "Spare B6-4 and C6-5 engines", detail: "Plan enough manufacturer-approved motors for two flights per Scout, plus misfire and spare-flight margin. Confirm quantities after the roster is final.", qty: "Roster + spares", price: "Confirm total", buy: "https://www.amazon.com/s?k=Estes+model+rocket+engines+B6-4+C6-5", mfr: "https://estesrockets.com/collections/engines" },
                 { item: "Recovery wadding, bulk", detail: "Cheap, and running out mid-launch-day ends the launch day.", qty: "2 packs", price: "~$12", buy: "https://www.amazon.com/s?k=Estes+recovery+wadding+bulk", mfr: "https://estesrockets.com/products/recovery-wadding" },
                 { item: "Nine-part label set, laminated", detail: "Print the requirement 3 part names on cardstock and laminate. Reusable every year — this is the drill that makes 3(a–i) stick.", qty: "2 sets", price: "~$10" },
                 { item: "Two stopwatches", detail: "Required for the Time Aloft award. Two adults time independently and the results get averaged — one timer turns every close call into an argument. Phones work.", qty: "2", price: "~$16 or free" , buy: "https://www.amazon.com/s?k=digital+stopwatch+sports+timer" },
                 { item: "Range gear", detail: "Fire extinguisher or water bucket, first aid kit, orange cones, a bullhorn or a loud voice, and a folding table.", qty: "—", price: "on hand" },
             ],
-            total: "≈ $210–$255",
+            total: "Equipment estimate ≈ $210–$255, plus flight motors for the final roster",
             notes: [
                 "Verify the Estes altimeter actually fits the Cosmic Cargo's 0.98 in payload bay the day it arrives, and definitely before November 16. If it doesn't, you fly the altimeter in your own reference rocket and score by matched flights instead. Check this the day it arrives, not the week of the launch.",
                 "The Porta-Pad II uses a 1/8 in rod, which is all you need in 2026 — everything flying is a C6-5 or below. The 3/16 in Maxi rod in the next group only matters if you ever pick the big rocket back up.",
@@ -1592,7 +1583,7 @@ export function getMeetingByDate(date) {
 
 export const calendarEvents = [
     { date: "2026-08-31", label: "Mon Aug 31", kind: "meeting", title: "Meeting 1 — Why We Go", note: "Claim your space pioneer. Pick up the permission slip and the safety code." },
-    { date: "2026-09-04", label: "Fri Sep 4", kind: "deadline", title: "Troop places the kit order", note: "Counselor task. Kits must be in hand for handout night on September 28." },
+    { date: "2026-09-04", label: "Fri Sep 4", kind: "deadline", title: "Families order their Scout’s rocket kit", note: "Family task. Check shipping so the kit is ready for the September 28 parts lesson." },
     { date: "2026-09-28", label: "Mon Sep 28", kind: "meeting", title: "Meeting 2 — How Rockets Work", note: "Pioneer card due tonight. KITS HANDED OUT to everyone who cleared the gate." },
     { date: "2026-10-26", label: "Mon Oct 26", kind: "meeting", title: "Meeting 3 — Missions and Bases", note: "Robotic vs crewed, flying Apollo's trajectory, and designing a base." },
     { date: "2026-11-16", label: "Mon Nov 16", kind: "meeting", title: "Meeting 4 — Mission Control + Flight Readiness", note: "Bring your finished rocket, motors and permission slip. Build help desk open all night." },
@@ -1781,19 +1772,18 @@ export const scoutGuide = {
         "Eight requirements. Come to five Monday sessions, make a space pioneer card, build your rocket, research a career, and come to launch day on November 21. Everything else we do together in the room. Three things happen on your own time — the pioneer card, the build, and the career research — and none of them takes more than an evening.",
 
     buyList: {
-        heading: "What you get — and it costs you nothing",
-        total: "$0. The troop buys your kit, both motor packs, and your wadding.",
-        deadline: "Kits handed out Monday, September 28 — earn yours first.",
+        heading: "What to buy and what to bring",
+        total: "Scouts buy their own rocket kits.",
+        deadline: "Build and inspection: Monday, November 16.",
         why:
-            "Everybody flies the same rocket on purpose. The competition is scored on how well you predict your own flight, not on who spent the most, so an identical airframe makes it a fair fight — and now nobody's flight depends on what their family can spend. You do not order anything. You earn your kit by clearing the four things below, and I hand it to you.",
+            "Buy one Estes Cosmic Cargo kit with a parent or guardian. Using the same kit keeps the focus on predicting and understanding the flight. Check shipping time, follow the included instructions, and bring your finished rocket for inspection. Contact the counselor privately if you need help obtaining a kit.",
         items: [
-            { item: "Estes Cosmic Cargo kit", price: "Provided", note: "Beginner level, no glue needed for the main structure, and it has a real payload bay. Yours to keep." },
-            { item: "Estes B6-4 engines, 3-pack", price: "Provided", note: "Your first flight. Lower and slower, so it's easier to track and easier to get back." },
-            { item: "Estes C6-5 engines, 3-pack", price: "Provided", note: "Your scored competition flight." },
+            { item: "Estes Cosmic Cargo kit", price: "$16.99 listed by Estes", note: "Each Scout buys their own kit. Beginner level with a payload bay. Check current price, tax, and shipping before ordering.", buy: "https://www.amazon.com/s?k=Estes+Cosmic+Cargo+rocket+kit", mfr: "https://estesrockets.com/products/cosmic-cargo" },
+            { item: "Launch motors", price: "Coordinate with counselor", note: "The counselor selects manufacturer-approved motors for the kit, field, and conditions. Confirm the plan before buying motors separately." },
             { item: "Recovery wadding", price: "Provided", note: "Protects the parachute from the ejection charge. Never fly without it." },
         ],
         alsoNeed:
-            "The only things you need from home are sandpaper, masking tape, and spray paint if you want to decorate it. White glue helps but isn't required for this kit. Nothing here costs you anything — if you are missing something, ask me and it appears.",
+            "Follow the kit’s instructions for supplies; Estes lists clear tape for the Cosmic Cargo. Decoration is optional. Coordinate motors and recovery wadding with the counselor before buying extras. The troop provides the shared launch equipment.",
     },
 
     study: {
@@ -1826,7 +1816,7 @@ export const scoutGuide = {
                 req: "Reqs 3 + 4",
                 title: "How rockets work",
                 forMeeting: "Meeting 2 · Sep 28",
-                doNow: "Read the NAR safety code before this meeting — you have to pass a quiz on it before I hand you a kit. Play with the launch and recovery simulators on this page; they are the same physics you'll be predicting on launch day.",
+                doNow: "Read the NAR safety code before this meeting and complete the safety quiz before range activities. Order your own rocket kit with a parent or guardian. Use the launch and recovery simulators to practice predicting a flight.",
                 videos: [
                     { t: "Rocket Engines Explained", ch: "Martian Wolf", id: "gz8L1i0ODeA" },
                     { t: "How Do Satellites Get & Stay in Orbit?", ch: "SciShow Space", id: "IC1JQu9xGHQ" },
@@ -1864,9 +1854,9 @@ export const scoutGuide = {
     },
 
     gate: {
-        heading: "How you earn your kit",
+        heading: "Your course and launch-readiness checklist",
         intro:
-            "Four things. Clear them and the kit is yours on September 28. These are Troop 308 rules about who gets handed hardware and who stands on our range — they are not extra merit badge requirements, and missing one does not stop you earning the badge.",
+            "Buy your own rocket kit and work through these course checkpoints. They organize our preparation; they do not add merit badge requirements or control whether you may purchase a rocket. Range safety and permissions must be complete before launch.",
         items: [
             "Show up to Meeting 1 on August 31 (or catch up with the counselor on requirement 1).",
             "Turn in your space pioneer card.",

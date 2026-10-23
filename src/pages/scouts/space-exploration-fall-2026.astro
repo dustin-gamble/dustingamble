@@ -100,7 +100,7 @@ const counselorOrders = orders.groups.filter((g) => g.id !== "scout");
       </section>
 <section class="se-block" id="scout-kit">
         <details class="se-section">
-          <summary><span class="se-section-title"><h2>Your rocket kit</h2><span>What the troop provides, what to bring, and how to earn your kit.</span></span><span class="se-section-toggle" aria-hidden="true"></span></summary>
+          <summary><span class="se-section-title"><h2>Your rocket kit</h2><span>Buy your own rocket kit, prepare your build, and check launch readiness.</span></span><span class="se-section-toggle" aria-hidden="true"></span></summary>
           <div class="se-section-body">
 
         <p class="se-callout-line">
@@ -117,8 +117,6 @@ const counselorOrders = orders.groups.filter((g) => g.id !== "scout");
                 <span class="se-buy-price">{it.price}</span>
               </div>
               <p>{it.note}</p>
-              {/* The troop buys these now, so a Scout's list has no links on it.
-                  Kept conditional so the markup still works if that changes. */}
               {(it.buy || it.mfr) && (
                 <p class="se-buy-links">
                   {it.buy && <a class="se-btn-buy" href={it.buy} target="_blank" rel="noopener noreferrer">Buy on Amazon ↗</a>}
