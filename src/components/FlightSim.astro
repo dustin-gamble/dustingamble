@@ -534,8 +534,14 @@ const isLaunch = mode === "launch";
         if (reduce) { progress = 1; draw(1); return; }
         var start = null, dur = mode === "launch" ? 2400 : 4200;
         running = true;
+        var previous = null;
         function step(ts) {
           if (!start) start = ts;
+          if (root.closest('[data-motion-paused="true"]') || !root.getClientRects().length || document.hidden) {
+            if(previous!==null)start += ts-previous;
+            previous=ts; raf=requestAnimationFrame(step);return;
+          }
+          previous=ts;
           progress = Math.min(1, (ts - start) / dur);
           draw(progress);
           if (progress < 1) raf = requestAnimationFrame(step);

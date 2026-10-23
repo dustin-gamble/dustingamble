@@ -45,6 +45,7 @@ const counselorOrders = orders.groups.filter((g) => g.id !== "scout");
       <a href="/scouts/space-exploration-cards/">Teaching cards</a>
     </p>
 
+    <p><a href="/scouts/space-lessons/">▶ Open all seven animated lessons</a> · <a href="/scouts/space-exploration-offline/">Offline teaching setup &amp; video checklist</a></p>
     <header class="se-hero">
       <span class="se-hero-icon" aria-hidden="true">🚀</span>
       <div>
@@ -212,6 +213,7 @@ const counselorOrders = orders.groups.filter((g) => g.id !== "scout");
           open all night, spare parts, and no judgement whatsoever.
         </p>
         <SlideDeck deck={decks["build-night"]} />
+
       </section>
 
       <section class="se-block">
@@ -422,6 +424,7 @@ const counselorOrders = orders.groups.filter((g) => g.id !== "scout");
       </section>
 
       <section class="se-block">
+        <details><summary>Optional rocket math charts</summary><SlideDeck deck={decks["rocket-math"]} /></details>
         <h2>The Telemetry Rocket — parked for now</h2>
 
         <div class="se-deferred">

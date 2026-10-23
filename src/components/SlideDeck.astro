@@ -11,12 +11,18 @@ import OrbitSim from "./OrbitSim.astro";
 import SlideArt from "./SlideArt.astro";
 import SlideImage from "./SlideImage.astro";
 import LaunchOps from "./LaunchOps.astro";
+import SpaceTeachingChart from "./SpaceTeachingChart.astro";
 
-const { deck } = Astro.props;
-const slides = deck.slides;
+import SpaceLessonHero from "./SpaceLessonHero.astro";
+import SpaceLessonExperiment from "./SpaceLessonExperiment.astro";
+import SpaceDeckTheme from "./SpaceDeckTheme.astro";
+import {presentationThemes,presentationDeck} from "../data/space-presentations.js";
+const { deck, standalone = false } = Astro.props;
+const slides = presentationDeck(deck).slides;
+const theme = presentationThemes[deck.id] || {color:'#9af1cf',title:deck.title,chapter:'',hero:'world',tagline:''};
 ---
 
-<section class="deck" data-deck id={`deck-${deck.id}`} aria-label={deck.title}>
+<section class="deck" data-deck data-standalone={String(standalone)} id={`deck-${deck.id}`} aria-label={deck.title} style={`--accent:${theme.color}`}>
   <header class="deck-head">
     <div>
       <p class="kicker">{deck.meeting}</p>
@@ -31,16 +37,14 @@ const slides = deck.slides;
   </header>
 
   <div class="deck-stage" data-deck-stage tabindex="0" role="group" aria-roledescription="slide deck">
+    <div class="lesson-chrome"><a href="/scouts/space-lessons/"><span>✳</span> TROOP 308 / ALL LESSONS</a><span>{theme.chapter} / {theme.title}</span></div>
     {slides.map((s, i) => (
-      <article class="deck-slide" data-slide-index={i} hidden={i !== 0}>
+      <article class="deck-slide" data-slide-index={i} data-slide-type={s.type} hidden={i !== 0}>
         {s.type === "title" && (
-          <div class="ds ds-title">
-            <p class="ds-kicker">{s.kicker}</p>
-            <h4 class="ds-h1">{s.heading}</h4>
-            <p class="ds-sub">{s.sub}</p>
-            {s.image && <SlideImage name={s.image} />}
-            {s.art && <SlideArt name={s.art} />}
-          </div>
+          i===0 ? <div class="ds ds-title ds-cover">
+            <div class="cover-copy"><p class="ds-kicker">{s.kicker}</p><h4 class="ds-h1">{s.heading}</h4><p class="ds-sub">{s.sub}</p><p class="cover-tagline">{theme.tagline}</p></div>
+            <SpaceLessonHero kind={theme.hero} id={deck.id}/>
+          </div> : <div class="ds ds-title"><p class="ds-kicker">{s.kicker}</p><h4 class="ds-h1">{s.heading}</h4><p class="ds-sub">{s.sub}</p>{s.art && <SlideArt name={s.art}/>}</div>
         )}
 
         {s.type === "prompt" && (
@@ -88,20 +92,26 @@ const slides = deck.slides;
           </div>
         )}
 
+        {s.type === "experiment" && <div class="ds ds-heavy ds-experiment"><h4 class="ds-h2">{s.heading}</h4><SpaceLessonExperiment kind={s.experiment}/><p class="experiment-question"><strong>ASK THE ROOM</strong>{s.question}</p></div>}
+
+        {s.type === "chart" && (
+          <div class="ds ds-heavy"><h4 class="ds-h2">{s.heading}</h4><SpaceTeachingChart kind={s.chart} /></div>
+        )}
+
         {s.type === "video" && (
           <div class="ds">
             <h4 class="ds-h2">{s.heading}</h4>
             {s.image && <SlideImage name={s.image} />}
             <div class="ds-video" data-yt={s.youtubeId}>
-              <button type="button" class="ds-video-face" data-yt-play aria-label={`Play: ${s.videoTitle}`}>
+              <button type="button" class="ds-video-face" data-yt-play aria-label={`Play online: ${s.videoTitle}`}>
                 <img
-                  src={`https://i.ytimg.com/vi/${s.youtubeId}/hqdefault.jpg`}
+                  src="/images/space/iss.jpg"
                   alt=""
                   loading="lazy"
                   width="480"
                   height="360"
                 />
-                <span class="ds-video-play" aria-hidden="true">▶</span>
+                <span class="ds-video-play" aria-hidden="true">▶ Online video</span>
               </button>
             </div>
             <p class="ds-video-meta">
@@ -109,6 +119,8 @@ const slides = deck.slides;
               {" "}<a href={`https://www.youtube.com/watch?v=${s.youtubeId}`} target="_blank" rel="noopener noreferrer">open on YouTube ↗</a>
             </p>
             {s.play && <p class="ds-note">{s.play}</p>}
+            <p class="offline-lesson"><strong>Without video:</strong> {s.offline || "Use the local diagrams and discuss the question before advancing."}</p>
+            <label class="local-video-picker">Play a downloaded video <input type="file" accept="video/*" data-local-video /></label>
             {s.backup && (
               <p class="ds-backup">
                 <span class="ds-backup-tag">Backup</span> {s.backup.label} —
@@ -145,7 +157,7 @@ const slides = deck.slides;
             <h4 class="ds-h2">{s.heading}</h4>
             {s.intro && <p class="ds-intro">{s.intro}</p>}
             {s.image && <SlideImage name={s.image} />}
-            <LaunchOps />
+            <LaunchOps presentation />
           </div>
         )}
 
@@ -201,8 +213,8 @@ const slides = deck.slides;
             {s.image && <SlideImage name={s.image} />}
             {s.art && <SlideArt name={s.art} />}
             <p>
-              <a class="mb-link-btn" href="/merit-badges/capstones/telemetry-rocket/#rocket-calc" target="_blank" rel="noopener noreferrer">
-                Open the altitude simulator ↗
+              <a class="mb-link-btn" href="/scouts/space-exploration-fall-2026/#deck-how-rockets-work" target="_blank" rel="noopener noreferrer">
+                Open the course flight simulator ↗
               </a>
             </p>
           </div>
@@ -242,13 +254,19 @@ const slides = deck.slides;
       <span class="deck-count"><span data-deck-cur>1</span> / {slides.length}</span>
       <button type="button" class="deck-nav-btn" data-deck-next aria-label="Next slide">→</button>
       <span class="deck-kbd">click the deck, then use ← →</span>
+      <div class="lesson-playback"><button data-deck-replay title="Replay this slide (R)">↺ Replay</button><button data-deck-motion aria-pressed="false" title="Pause motion (Space)">Ⅱ Pause</button><button data-deck-screen title="Fullscreen (F)">⛶ Fullscreen</button><button data-deck-exit>Exit</button></div>
     </div>
 
-    <p class="deck-fs-hint">← → move · N notes · Esc exit</p>
+    <div class="lesson-progress" aria-hidden="true"><span data-deck-progress></span></div>
   </div>
 </section>
+<SpaceDeckTheme/>
 
 <style>
+  .offline-lesson {font-size:clamp(14px,1.5vw,22px);line-height:1.4;margin:.4em 0;}
+  .local-video-picker {font-size:14px;display:block;} .local-video-picker input {max-width:240px;}
+  .ds-video video {width:100%;height:100%;object-fit:contain;}
+
   .deck {
     border: 1px solid var(--line);
     border-radius: var(--radius);
@@ -854,6 +872,28 @@ const slides = deck.slides;
       const prev = deck.querySelector("[data-deck-prev]");
       const next = deck.querySelector("[data-deck-next]");
       let i = 0;
+      const standalone = deck.dataset.standalone === "true";
+      const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      let paused = reduceMotion;
+      const motion = deck.querySelector('[data-deck-motion]');
+      function syncMotion() {
+        stage.dataset.motionPaused=String(paused);
+        motion.textContent=paused?'▶ Resume':'Ⅱ Pause';motion.setAttribute('aria-pressed',String(paused));
+        slides[i].querySelectorAll('[data-lab]').forEach(lab=>{if(lab.dataset.paused!==String(paused))lab.querySelector('[data-motion]').click();});
+      }
+      function replay() {
+        const sl=slides[i];paused=reduceMotion;syncMotion();
+        sl.querySelector('[data-lops-reset]')?.click();
+        sl.querySelectorAll('[data-experiment]').forEach(el=>el.dispatchEvent(new Event('space:replay')));
+        sl.querySelectorAll('[data-lab]').forEach(lab=>{lab.querySelector('[data-reset]')?.click();if(!reduceMotion)lab.querySelector('[data-play]')?.click();});
+        if(!reduceMotion)sl.querySelectorAll('[data-fsim-run],[data-osim-run]').forEach(b=>b.click());
+        sl.getAnimations({subtree:true}).forEach(animation=>{animation.currentTime=0;});
+      }
+      deck.querySelector('[data-deck-replay]').addEventListener('click',replay);
+      motion.addEventListener('click',()=>{paused=!paused;syncMotion();});
+      deck.querySelector('[data-deck-screen]').addEventListener('click',()=>{try{const promise=document.fullscreenElement?document.exitFullscreen():stage.requestFullscreen();promise?.catch(()=>{});}catch{}});
+      deck.querySelector('[data-deck-exit]').addEventListener('click',()=>{if(standalone)location.href='/scouts/space-lessons/';else exitProjection();});
+      syncMotion();
 
       // Last-resort guard: if a slide still cannot fit the projection, scale it
       // down rather than let it overflow. The CSS above should mean this never
@@ -875,7 +915,7 @@ const slides = deck.slides;
         // sits below the stage top and using stage height overestimates room.
         var stageRect = stage.getBoundingClientRect();
         var top = box.getBoundingClientRect().top;
-        var avail = (stageRect.bottom - 56) - top;
+        var avail = (stageRect.bottom - 86) - top;
         if (avail <= 0) return;
         var deepest = 0;
         var kids = box.querySelectorAll("*");
@@ -942,24 +982,36 @@ const slides = deck.slides;
       }
 
       function show(n) {
+        slides[i].querySelectorAll('video').forEach(v=>v.pause());
+        slides[i].querySelectorAll('[data-lab] [data-reset]').forEach(b=>b.click());
         i = Math.max(0, Math.min(slides.length - 1, n));
         preload(i);
         slides.forEach((s, idx) => (s.hidden = idx !== i));
         cur.textContent = String(i + 1);
         prev.disabled = i === 0;
         next.disabled = i === slides.length - 1;
+        deck.querySelector('[data-deck-progress]').style.width=((i+1)/slides.length*100)+'%';
+        paused=reduceMotion;syncMotion();
+        if(standalone){try{history.replaceState(null,'','#slide-'+(i+1));}catch{}}
         scheduleFit(slides[i]);
+        if(stage.classList.contains('is-projecting')&&!reduceMotion){
+          requestAnimationFrame(()=>{slides[i].querySelectorAll('[data-lab] [data-play]').forEach(b=>b.click());});
+        }
       }
 
       prev.addEventListener("click", () => show(i - 1));
       next.addEventListener("click", () => show(i + 1));
 
       stage.addEventListener("keydown", (e) => {
+        if(e.target.matches('input,select,textarea') && !['Escape','PageDown','PageUp'].includes(e.key))return;
+        if(e.key===' ' && e.target.matches('button,a'))return;
         if (e.key === "ArrowRight" || e.key === "PageDown") { e.preventDefault(); show(i + 1); }
         else if (e.key === "ArrowLeft" || e.key === "PageUp") { e.preventDefault(); show(i - 1); }
         else if (e.key === "Home") { e.preventDefault(); show(0); }
         else if (e.key === "End") { e.preventDefault(); show(slides.length - 1); }
-        else if (e.key === "n" || e.key === "N") { stage.classList.toggle("show-notes"); }
+        else if (e.key === ' '){e.preventDefault();paused=!paused;syncMotion();}
+        else if (e.key.toLowerCase() === 'r')replay();
+        else if (e.key.toLowerCase() === 'f')deck.querySelector('[data-deck-screen]').click();
         else if (e.key === "Escape" && stage.classList.contains("is-projecting")) { exitProjection(); }
       });
 
@@ -972,7 +1024,7 @@ const slides = deck.slides;
 
       const fullBtn = deck.querySelector("[data-deck-full]");
 
-      function enterProjection() {
+      function enterProjection(requestScreen=true) {
         stage.classList.add("is-projecting");
         document.body.classList.add("deck-projecting");
         document.documentElement.style.overflow = "hidden";
@@ -983,7 +1035,7 @@ const slides = deck.slides;
         // class above already gives a full-window deck, so a refusal is not a
         // failure; the presentation still works.
         try {
-          if (stage.requestFullscreen) {
+          if (requestScreen && stage.requestFullscreen) {
             const r = stage.requestFullscreen();
             if (r && r.catch) r.catch(() => {});
           }
@@ -992,6 +1044,7 @@ const slides = deck.slides;
       }
 
       function exitProjection() {
+        if(standalone){if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});return;}
         stage.classList.remove("is-projecting", "show-notes");
         document.body.classList.remove("deck-projecting");
         document.documentElement.style.overflow = "";
@@ -1010,6 +1063,17 @@ const slides = deck.slides;
         else enterProjection();
       });
 
+      deck.querySelectorAll("[data-local-video]").forEach((input) => {
+        let objectUrl;
+        input.addEventListener("change", () => {
+          const file = input.files && input.files[0]; if (!file) return;
+          if (objectUrl) URL.revokeObjectURL(objectUrl);
+          objectUrl = URL.createObjectURL(file);
+          const video = document.createElement("video");
+          video.src = objectUrl; video.controls = true; video.playsInline = true;
+          input.closest(".ds").querySelector("[data-yt]").replaceChildren(video);
+        });
+      });
       deck.querySelectorAll("[data-yt-play]").forEach((btn) => {
         btn.addEventListener("click", () => {
           const wrap = btn.closest("[data-yt]");
@@ -1025,7 +1089,7 @@ const slides = deck.slides;
 
       document.addEventListener("fullscreenchange", function () {
         // Leaving real fullscreen (Esc, F11) should also leave projection mode.
-        if (!document.fullscreenElement && stage.classList.contains("is-projecting")) exitProjection();
+        if (!standalone && !document.fullscreenElement && stage.classList.contains("is-projecting")) exitProjection();
       });
       // A deck is buried two levels down — inside the counselor panel and a
       // collapsed <details> — so a bare "#deck-x" anchor cannot reach it. The
@@ -1049,7 +1113,9 @@ const slides = deck.slides;
 
       window.addEventListener("resize", function () { fit(slides[i]); });
 
-      show(0);
+      const start=standalone&&/^#slide-\d+$/.test(location.hash)?Number(location.hash.slice(7))-1:0;
+      show(start);
+      if(standalone){enterProjection(false);window.addEventListener('load',()=>{if(slides[i].querySelector('[data-lab]'))replay();},{once:true});}
     }
 
     function init() {

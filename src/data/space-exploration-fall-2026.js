@@ -278,6 +278,7 @@ export const decks = {
                 type: "video",
                 heading: "1c — Benefits on Earth",
                 youtubeId: "z-bTkxza4I4",
+                offline: "Ask: which space technology did you use today? Discuss navigation, weather observations and communications.",
                 channel: "Museum of Science, Boston",
                 videoTitle: "Space Exploration's Surprising Earthly Benefits!",
                 play: "Short — play it straight through, then the second one.",
@@ -451,7 +452,7 @@ export const decks = {
                 image: "wind-tunnel-model",
                 art: "predicted-vs-measured",
                 intro:
-                    "Open the rocket calculator on the merit badge site, pick your airframe and motor, and write down your predicted apogee. That number goes on your competition card and you cannot change it after launch day starts.",
+                    "Use the launch simulator in this course, choose a motor and payload, and write down your predicted apogee. That number goes on your competition card and you cannot change it after launch day starts.",
                 notes:
                     "Run one live on the projector first — Cosmic Cargo on a B6-4, then on a C6-5. Ask them to predict which is higher and by how much before you press launch. Then let them do their own on phones. Sealed predictions are what make the competition an engineering contest instead of a spending contest.",
             },
@@ -459,6 +460,7 @@ export const decks = {
                 type: "video",
                 heading: "4c — How satellites stay in orbit",
                 youtubeId: "IC1JQu9xGHQ",
+                offline: "Run the next orbit simulator. Compare straight up with sideways speed: orbit means falling while continually missing Earth.",
                 channel: "SciShow Space",
                 videoTitle: "How Do Satellites Get & Stay in Orbit?",
                 play: "Play through, ~4 min.",
@@ -534,6 +536,7 @@ export const decks = {
                 type: "video",
                 heading: "5a — A robotic mission: Voyager",
                 youtubeId: "uJpJ79AxrzI",
+                offline: "Voyager found active volcanoes on Io. Compare remote images and instrument readings with Apollo\u2019s returned samples on the next comparison chart.",
                 channel: "NASA Jet Propulsion Laboratory",
                 videoTitle: "Voyagers' Mission to the Outer Solar System (1977 Vintage Video)",
                 play: "Play 2–3 min of the vintage footage.",
@@ -550,6 +553,7 @@ export const decks = {
                 type: "video",
                 heading: "5a — A crewed mission: Apollo",
                 youtubeId: "jUW_1XlrWmg",
+                offline: "Apollo 11 landed people on the Moon in 1969 and returned samples. Ask what a person can decide on the spot that a distant operator cannot.",
                 channel: "S3 | Science, Startups, & Stories",
                 videoTitle: "Putting Man on The Moon in 11 Years | The Apollo Program",
                 play: "Play 3–4 min.",
@@ -562,6 +566,7 @@ export const decks = {
                     videoTitle: "\"Let's light this candle.\" — NASA SpaceX Crew Dragon Launch",
                 },
             },
+            { type: "chart", chart: "missions", heading: "Two missions. Two kinds of evidence.", notes: "Ask each Scout for a discovery and why it matters. The chart supports discussion; watching a clip alone does not earn credit." },
             {
                 type: "orbitsim",
                 sim: "moon",
@@ -576,13 +581,14 @@ export const decks = {
                 heading: "Requirement 6 — pick ONE: shuttle or ISS",
                 image: "shuttle-launch",
                 youtubeId: "w4FCkbPykdQ",
+                offline: "Name the orbiter, external tank and two solid boosters. Explain launch, work in orbit, and the orbiter\u2019s unpowered runway landing.",
                 channel: "Real Engineering",
                 videoTitle: "How The Space Shuttle Worked | Full Documentary",
                 play: "Clip only — 4 min from the launch-sequence section. Do not start it at 0:00 and hope.",
                 notes:
                     "Requirement 6 wants purpose, operation, AND components. For the shuttle: orbiter, external tank, two solid rocket boosters, three main engines, payload bay, robotic arm. For the ISS: pressurized modules, truss, solar arrays, radiators, docking ports, life support. Have Scouts pick one and give you all three parts of the answer.",
                 backup: {
-                    label: "If you'd rather do ISS — see Spot the Station in the resources",
+                    label: "Extra: Soyuz transport (does not replace an ISS purpose, operation and components discussion)",
                     youtubeId: "_v7YgDum2Sg",
                     channel: "Jared Owen",
                     videoTitle: "How does the Soyuz Launch work? (and Reentry)",
@@ -633,6 +639,7 @@ export const decks = {
                 notes:
                     "Hand the cards out and run this silent and timed — it is the only individual written work in the whole night and it is the cleanest evidence you will get for 5c. Collect them at the end and initial them. Two questions that rescue a stuck Scout: 'what is the worst thing about that place?' and 'so what did you do about it?' Anyone who does not finish takes it home and brings it back on November 16.",
             },
+            { type: "chart", chart: "base", heading: "Your Moon base: four decisions", notes: "Use this in place of the optional Moon-base video. Every Scout should explain their own design choices, even when sharing a patrol drawing." },
             {
                 type: "charrette",
                 heading: "Base design charrette",
@@ -1888,3 +1895,10 @@ export const scoutGuide = {
         ],
     },
 };
+
+// Optional enrichment; not additional merit-badge requirements.
+decks["rocket-math"] = { id:"rocket-math", title:"Rocket math — optional teaching charts", meeting:"Optional enrichment", runtime:"5–8 min", slides:[
+ {type:"chart", chart:"impulse", heading:"Read the area under the thrust curve", notes:"Both idealized examples deliver 10 N·s. They need not reach the same altitude: mass, drag, and gravity losses matter."},
+ {type:"chart", chart:"drag", heading:"Speed has a squared cost", notes:"Half the speed gives one quarter the drag if density, shape and area stay fixed. Ask for the prediction before explaining."},
+ {type:"chart", chart:"math", heading:"What does propellant buy you?", notes:"Optional enrichment. At mass ratio 1 there is no propellant consumed and ideal delta-v is zero. Higher specific impulse gives more delta-v for the same mass ratio. Sources: NASA Glenn Specific Impulse and Ideal Rocket Equation."}
+]};

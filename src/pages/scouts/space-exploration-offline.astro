@@ -1,0 +1,22 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import {decks} from "../../data/space-exploration-fall-2026.js";
+const videos = Object.values(decks).flatMap(d=>d.slides.filter(s=>s.type === "video"));
+---
+<BaseLayout title="Space Exploration — teach offline" description="Offline preparation for Troop 308’s Space Exploration course.">
+ <h1>Ready for a room without Wi-Fi</h1>
+ <p><a href="/scouts/space-lessons/">▶ Open all seven animated lessons</a></p>
+ <p>Monday, October 26: Missions and Bases. <a href="/handouts/space-lessons-offline.zip" download>Download all seven animated lessons</a>, unzip the folder, and double-click index.html. Photos, diagrams, simulations and animations work without internet or a server.</p>
+ <p>If you have the complete personal teaching kit with saved videos, use its Start Offline.command launcher instead. It opens the lessons and local video files on your computer.</p>
+ <p><a href="/scouts/space-exploration-fall-2026/#present-missions">Present Monday’s lesson</a> · <a href="/scouts/space-exploration-fall-2026/#meeting-3">Run of show</a> · <a href="/scouts/space-exploration-fall-2026/#deck-rocket-math">Optional rocket math charts</a></p>
+ <h2>Before you leave</h2>
+ <ol><li>Unzip the complete teaching folder onto the presentation computer. Keep its files together.</li><li>Run Start Offline.command. The launcher needs Python 3 (already available on the preparation Mac). Leave its Terminal window open.</li><li>Turn Wi-Fi off. Open the lesson, advance through the slides, play every clip you plan to show, and test the Moon simulator.</li><li>Print one Sample Return Card and Base Design Sheet per Scout from the counselor page. Keep the PDFs in the handouts folder as backups.</li></ol>
+ <h2>Video checklist</h2>
+ <p>The original videos are online resources. The portable copy uses a local MP4 when one is included. Otherwise use the “Without video” prompt, or select a downloaded file with the video slide’s file picker. External biographies, shops and resource-guide links still need internet.</p>
+ <ul>{videos.map(s=><li><strong>{s.videoTitle}</strong> ({s.channel}) — <a href={`https://www.youtube.com/watch?v=${s.youtubeId}`}>online original</a><br />{s.offline}</li>)}</ul>
+ <h2>Monday’s 45 minutes</h2>
+ <p>3 min: choose requirement 5 options. 7 min: Voyager and Apollo. 4 min: Moon trajectory. 5 min: compare robotic and crewed missions. 5 min: shuttle purpose, operation and components. 5 min: individual sample-return cards. 2 min: base-systems chart. 10 min: design. 4 min: short pitches and next steps. Keep pitches to about one minute per patrol.</p>
+ <p>Group instruction supports individual discussion and demonstration; a video or a patrol drawing alone does not complete a Scout’s requirements.</p>
+ <h2>Chart sources</h2>
+ <p><a href="https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/specific-impulse/">NASA: Specific impulse</a> · <a href="https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/ideal-rocket-equation/">NASA: Ideal rocket equation</a> · <a href="https://www.scouting.org/merit-badges/space-exploration/">Scouting America: requirements</a></p>
+</BaseLayout>

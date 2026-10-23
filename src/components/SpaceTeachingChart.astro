@@ -1,0 +1,199 @@
+---
+const { kind = "missions" } = Astro.props;
+const uid = `space-lab-${kind}`;
+const titles = { missions:"TWO WAYS TO EXPLORE", base:"KEEP THE CREW ALIVE", drag:"THE WIND TUNNEL", impulse:"THE ENGINE DUEL", math:"BUILD YOUR Δv BUDGET" };
+const stars = Array.from({length:45},(_,i)=>({x:(i*137+23)%900,y:(i*79+13)%370,r:i%5===0?1.8:.8}));
+---
+<section class="space-lab" data-lab={kind} aria-label={titles[kind]}>
+  <div class="lab-top"><span><i></i> {titles[kind]}</span><button class="motion-control" data-motion aria-pressed="false">Pause motion Ⅱ</button></div>
+  <div class="lab-body">
+    <div class="lab-scene">
+      <svg viewBox="0 0 900 380" role="img" aria-labelledby={`${uid}-title`}>
+        <title id={`${uid}-title`}>{kind === "missions" ? "Interactive, schematic Voyager and Apollo journeys, not to scale" : kind === "base" ? "Moon base with solar power, battery, shielding and life support" : kind === "drag" ? "Wind tunnel showing the squared relationship between speed and drag" : kind === "impulse" ? "Two idealized engine burns accumulating equal impulse over different durations" : "Rocket propellant and ideal velocity change"}</title>
+        <defs>
+          <radialGradient id={`${uid}-earth`} cx="30%" cy="25%"><stop stop-color="#53daf9"/><stop offset=".6" stop-color="#1c72ba"/><stop offset="1" stop-color="#092346"/></radialGradient>
+          <linearGradient id={`${uid}-flame`} x1="0" x2="1"><stop stop-color="#ff5f55" stop-opacity="0"/><stop offset=".55" stop-color="#ff9859"/><stop offset="1" stop-color="#fff1b0"/></linearGradient>
+          <linearGradient id={`${uid}-hull`} x1="0" y1="0" x2="0" y2="1"><stop stop-color="#f0f9ff"/><stop offset=".45" stop-color="#91aec8"/><stop offset="1" stop-color="#31445e"/></linearGradient>
+          <radialGradient id={`${uid}-dome`} cx="35%" cy="20%"><stop stop-color="#a3c0ff" stop-opacity=".8"/><stop offset="1" stop-color="#524ba1" stop-opacity=".35"/></radialGradient>
+          <marker id={`${uid}-arrow`} viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 10 5 0 10" fill="#ff9274"/></marker>
+        </defs>
+        {stars.map(s=><circle class="star" cx={s.x} cy={s.y} r={s.r} fill="#cce8ff" opacity=".5"/>)}
+        {kind === "missions" && <>
+          <ellipse cx="120" cy="205" rx="84" ry="84" fill="#27beff" opacity=".07"/>
+          <circle cx="120" cy="205" r="65" fill={`url(#${uid}-earth)`}/>
+          <path d="M82 157 106 151 119 171 98 192 107 207 88 219 67 207M139 221 157 208 167 226 151 254 136 246" fill="#4ae2b2" opacity=".6"/>
+          <text x="120" y="304" text-anchor="middle" class="planet-label">EARTH</text>
+          <g data-robot-world>
+            <circle cx="470" cy="108" r="48" fill="#d8a57f"/><path d="M428 88 Q470 104 513 88M424 108 Q470 124 516 108M431 132 Q470 145 507 132" fill="none" stroke="#9b645b" stroke-width="9" opacity=".6"/>
+            <text x="470" y="186" text-anchor="middle" class="planet-label">JUPITER</text>
+            <circle cx="708" cy="100" r="31" fill="#e9d3a6"/><ellipse cx="708" cy="100" rx="62" ry="14" transform="rotate(-24 708 100)" fill="none" stroke="#c4aa88" stroke-width="9"/>
+            <text x="708" y="172" text-anchor="middle" class="planet-label">SATURN</text>
+          </g>
+          <g data-crew-world opacity=".25"><circle cx="635" cy="277" r="37" fill="#bec8d5"/><circle cx="648" cy="266" r="10" fill="#8c99ab"/><circle cx="618" cy="288" r="7" fill="#8c99ab"/><text x="635" y="343" text-anchor="middle" class="planet-label">MOON</text></g>
+          <path data-robot-path d="M174 175 Q320 15 445 147 Q520 220 676 131 Q755 75 857 47" class="route route-robot"/>
+          <path data-crew-path d="M172 231 Q380 340 600 277 Q390 205 169 236" class="route route-crew" opacity=".25"/>
+          <path data-mission-trace d="M174 175 Q320 15 445 147 Q520 220 676 131 Q755 75 857 47" class="route-trace"/>
+          <g data-craft transform="translate(174 175)"><circle r="24" fill="#70e8ff" opacity=".1"/><g data-probe><path d="M-13 -8 Q0 22 13 -8Z" fill="#edf8ff"/><path d="M0 7V26M-20 20H20M0 -8V-24" stroke="#b6dbef" stroke-width="3"/><rect x="-9" y="8" width="18" height="11" rx="2" fill="#e8bb58"/></g><g data-capsule style="display:none"><path d="M-16 12 0 -15 16 12Z" fill="#edf5ff"/><path d="M-19 13H19" stroke="#ffac73" stroke-width="5"/></g></g>
+          <text x="25" y="355" class="micro">ROUTES ARE SCHEMATIC · DISTANCES AND TIME NOT TO SCALE</text>
+        </>}
+        {kind === "base" && <>
+          <circle data-sun cx="790" cy="64" r="30" fill="#ffd887"/><circle cx="790" cy="64" r="45" fill="#ffd887" opacity=".07"/>
+          <path d="M0 285 Q140 216 305 279 Q480 210 640 257 Q785 208 900 265V380H0Z" fill="#252a43"/>
+          <path d="M0 322 Q180 260 360 320 Q650 255 900 309" fill="none" stroke="#424965" stroke-width="2"/>
+          <ellipse cx="443" cy="300" rx="220" ry="34" fill="#080d1b" opacity=".6"/>
+          <g data-solar><path d="M79 218 184 181 249 214 145 251Z" fill="#155f99" stroke="#6ad6ff" stroke-width="3"/>
+          {[0,1,2,3].map(i=><path d={`M${100+i*24} ${210-i*8}l65 33`} stroke="#74b6dd" stroke-width="1.5"/>)}<path d="M112 230 217 197M145 251V293" stroke="#99b7d4" stroke-width="3"/></g>
+          <path data-power-flow d="M145 270V319H343V284" class="flow"/>
+          <path data-air-flow d="M545 268H711V311H494" class="flow flow-air"/>
+          <g data-habitat><path d="M305 279V238a124 124 0 0 1 248 0V279Z" fill={`url(#${uid}-dome)`} stroke="#a5adff" stroke-width="3"/>
+          <ellipse cx="429" cy="279" rx="124" ry="27" fill="#453f75" stroke="#a5adff" stroke-width="2"/>
+          <path d="M429 115Q360 173 363 279M429 115Q493 173 497 279M305 238H553" fill="none" stroke="#9faff7" opacity=".5" stroke-width="2"/>
+          <rect x="410" y="233" width="38" height="49" rx="18" fill="#15223e" stroke="#c9deff" stroke-width="2"/>
+          {[0,1,2].map(i=><rect class="hab-window" x={338+i*76} y="212" width="22" height="17" rx="5" fill="#7ceaf2"/>)}</g>
+          <g data-shield opacity=".12"><path d="M282 277Q265 95 430 90Q590 95 577 277" fill="none" stroke="#82f9d1" stroke-width="12"/><path d="M276 277Q255 86 430 80Q600 85 585 277" fill="none" stroke="#82f9d1" stroke-width="2"/></g>
+          <g data-life><rect x="669" y="221" width="34" height="73" rx="16" fill="#77d7d9"/><rect x="710" y="231" width="34" height="63" rx="16" fill="#448ea8"/><text x="686" y="267" text-anchor="middle" style="fill:#092338" font-weight="800">O₂</text></g>
+          <g data-battery opacity=".3"><rect x="205" y="290" width="56" height="34" rx="6" fill="#15283a" stroke="#6df4c3" stroke-width="2"/><path d="M234 293 225 309H237L229 321" fill="none" stroke="#6df4c3" stroke-width="3"/></g>
+          <g data-radiation>{[0,1,2,3].map(i=><path class="radiation" d={`M${310+i*64} 25l-24 55`} stroke="#ffb17f" stroke-width="3" stroke-dasharray="8 12"/>)}</g>
+          <text x="150" y="166" text-anchor="middle" class="planet-label">SOLAR POWER</text><text x="430" y="63" text-anchor="middle" class="planet-label">HABITAT + SHIELDING</text><text x="710" y="199" text-anchor="middle" class="planet-label">LIFE SUPPORT</text>
+          <text x="25" y="355" class="micro">CONCEPT MODEL · STORED ENERGY IS FINITE · NOT AN ENGINEERING DESIGN</text>
+        </>}
+        {kind === "drag" && <>
+          <defs><clipPath id={`${uid}-tunnel`}><rect x="24" y="75" width="515" height="220" rx="12"/></clipPath><linearGradient id={`${uid}-graph`} x1="0" y1="0" x2="0" y2="1"><stop stop-color="#ffb08a" stop-opacity=".3"/><stop offset="1" stop-color="#ffb08a" stop-opacity="0"/></linearGradient></defs>
+          <rect x="24" y="75" width="515" height="220" rx="12" fill="#12364d" fill-opacity=".35" stroke="#2c4b65" stroke-width="2"/>
+          <g clip-path={`url(#${uid}-tunnel)`}>{Array.from({length:11},(_,i)=><path class="wind" style={`--wind-delay:${-i*.31}s`} d={`M-60 ${95+i*18}h90`} stroke="#5cdce8" stroke-width="2" opacity=".55"/>)}</g>
+          <g transform="translate(285 175) scale(.8)"><path d="M-120 -27H72Q120 -22 156 0Q120 22 72 27H-120Z" fill={`url(#${uid}-hull)`}/><path d="M-90 -27 -135 -72 -145 -27M-90 27 -135 72 -145 27" fill="#9c8aff"/><circle cx="70" cy="0" r="15" fill="#122a4b" stroke="#72dff8" stroke-width="4"/></g>
+          <path data-drag-arrow d="M340 255H312" stroke="#ff9274" stroke-width="9" marker-end={`url(#${uid}-arrow)`}/>
+          <g class="drag-graph">
+            {[1,4,9].map(n=><g><path d={`M610 ${282-n*23}H856`} stroke="#60738c" stroke-opacity=".25" stroke-dasharray="3 5"/><text x="594" y={288-n*23} text-anchor="end" class="axis">{n}×</text></g>)}
+            <path d="M610 60V282H865" fill="none" stroke="#60738c" stroke-width="2"/>
+            <path d="M610 282 Q733 282 856 75V282Z" fill={`url(#${uid}-graph)`}/>
+            <path d="M610 282 Q733 282 856 75" fill="none" stroke="#ffb08a" stroke-width="3"/>
+            <path data-graph-guide d="M692 282V259H610" fill="none" stroke="#8ceada" stroke-width="2" stroke-dasharray="4 5"/>
+            <circle data-graph-dot cx="692" cy="259" r="7" fill="#c6ffed" stroke="#76debb" stroke-width="3" style="filter:drop-shadow(0 0 9px #80edc8)"/>
+            {[1,2,3].map(n=><text x={610+n*82} y="308" text-anchor="middle" class="axis">{n}×</text>)}
+            <text x="610" y="43" class="planet-label">DRAG ↑</text><text x="850" y="337" text-anchor="end" class="micro">SPEED →</text>
+          </g>
+          <text x="285" y="48" text-anchor="middle" class="planet-label">SAME ROCKET. SAME AIR.</text>
+          <text x="285" y="337" text-anchor="middle" class="big-label" data-drag-label>1× SPEED → 1× DRAG</text>
+        </>}
+        {kind === "impulse" && <>
+          {[0,1].map(i=><g transform={`translate(${70+i*440} 35)`}>
+            <text x="0" y="0" class="planet-label">{i===0?"A · SHORT + STRONG":"B · LONG + GENTLE"}</text>
+            <path data-flame={i} d="M35 72Q-10 28 -52 72Q-10 111 35 72" fill={`url(#${uid}-flame)`} class="engine-flame" opacity="0"/>
+            <path d="M35 49H170L192 72 170 95H35L50 72Z" fill={`url(#${uid}-hull)`}/><rect x="85" y="58" width="45" height="28" rx="5" fill={i===0?'#63e8f4':'#b39aff'}/>
+            <text x="220" y="83" class="big-label">{i===0?'10 N':'5 N'}</text>
+            <path d="M20 145V263H345" stroke="#597086" stroke-width="2" fill="none"/>
+            <rect data-impulse-fill={i} x="20" y={i===0?153:208} width="0" height={i===0?110:55} fill={i===0?'#63e8f4':'#b39aff'} opacity=".6"/>
+            <path d={i===0?'M20 263V153H175V263':'M20 263V208H330V263'} fill="none" stroke={i===0?'#63e8f4':'#b39aff'} stroke-width="2" stroke-dasharray="5 6"/>
+            <text x="20" y="289" class="axis">0</text><text x="166" y="289" class="axis">1 s</text><text x="319" y="289" class="axis">2 s</text><text x="30" y="137" class="axis">thrust (N)</text>
+          </g>)}
+          <text x="25" y="365" class="micro">AREA = IMPULSE · IDEALIZED BURNS, NOT REAL MOTOR CURVES · NOT AN ALTITUDE RACE</text>
+        </>}
+        {kind === "math" && <>
+          <path d="M42 310H854" stroke="#354760" stroke-width="2"/>
+          {[0,1,2,3,4,5,6].map(i=><g><path d={`M${50+i*125} 306v10`} stroke="#64738f"/><text x={50+i*125} y="340" class="axis" text-anchor="middle">{i}</text></g>)}
+          <text x="800" y="369" class="micro">IDEAL Δv · km/s</text>
+          <path data-dv-trail d="M50 260H50" stroke="#6fead7" stroke-width="7" stroke-linecap="round"/>
+          <g data-dv-rocket transform="translate(220 260)"><path class="engine-flame" d="M-35 -14 -60 0 -35 14Z" fill={`url(#${uid}-flame)`}/><path d="M-40 -18H20L56 0 20 18H-40Z" fill={`url(#${uid}-hull)`}/><path d="M-20 -18 -48 -42 -50 -18M-20 18 -48 42 -50 18" fill="#a996ff"/><circle cx="18" cy="0" r="8" fill="#62dbef"/></g>
+          <text x="45" y="53" class="planet-label">STARTING MASS</text><text x="45" y="84" class="axis">1 unit stays. The rest is propellant.</text>
+          <rect x="45" y="109" width="760" height="55" rx="12" fill="#172940"/>
+          <rect x="45" y="109" width="152" height="55" rx="12" fill="#aa96fa"/>
+          <rect data-propellant x="197" y="109" width="152" height="55" rx="6" fill="#62e6c2"/>
+          <text x="121" y="143" text-anchor="middle" style="fill:#101a31" font-weight="800">DRY + PAYLOAD</text>
+          <text data-prop-label x="273" y="143" text-anchor="middle" style="fill:#102d31" font-weight="800">PROPELLANT</text>
+          <text x="45" y="205" class="axis">More propellant helps—but the gain per extra kilogram shrinks.</text>
+        </>}
+      </svg>
+    </div>
+    <aside class="lab-readout">
+      <span class="readout-label" data-label>{kind === 'missions'?'MISSION CLOCK':kind === 'base'?'BASE STATUS':kind === 'drag'?'DRAG MULTIPLIER':kind === 'impulse'?'TOTAL PUSH':'IDEAL VELOCITY CHANGE'}</span>
+      <strong data-number>{kind==='missions'?'1977':kind==='base'?'3 / 4':kind==='drag'?'1.0×':kind==='impulse'?'0 : 0':'1.36'}</strong>
+      <span class="readout-unit" data-unit>{kind==='missions'?'VOYAGER':kind==='base'?'SYSTEMS READY':kind==='drag'?'relative to baseline':kind==='impulse'?'N·s  /  N·s':'km/s'}</span>
+      <div class="meter"><div data-meter></div></div>
+      <h5 data-event>{kind==='missions'?'Earth departure':kind==='base'?'Add radiation shielding':kind==='drag'?'Predict before you slide':kind==='impulse'?'Which engine wins?':'More mass. Smaller gains.'}</h5>
+      <p data-explain>{kind==='missions'?'A robot heads outward. It carries instruments instead of a crew.':kind==='base'?'Power and air are running. The crew still needs shielding.':kind==='drag'?'Twice as fast does not mean twice the drag. Try it.':kind==='impulse'?'Watch the area fill under each thrust curve.':'The rocket equation counts the mass you must accelerate, too.'}</p>
+    </aside>
+  </div>
+  <div class="lab-controls">
+    {kind === 'missions' && <><div class="segmented"><button data-mode="robot" aria-pressed="true">◈ Voyager</button><button data-mode="crew" aria-pressed="false">◉ Apollo 11</button></div><button class="primary" data-play>▶ Launch mission</button><button data-reset>↺ Reset</button><label class="scrub">Journey<input data-progress aria-label="Mission progress" type="range" min="0" max="100" value="0" /></label></>}
+    {kind === 'base' && <><button data-toggle="night" aria-pressed="false">☀ Daylight</button><button data-toggle="battery" aria-pressed="false">＋ Backup power</button><button data-toggle="shield" aria-pressed="false">＋ Shielding</button><button data-toggle="air" aria-pressed="true">✓ Life support</button></>}
+    {kind === 'drag' && <><label class="range-control">Air speed <output data-speed-out>1.0×</output><input data-speed type="range" min="0.5" max="3" step="0.1" value="1" aria-label="Relative air speed" /></label><button data-speed-preset="1">1×</button><button data-speed-preset="2">2×</button><button data-speed-preset="3">3×</button><span class="formula">D = ½ρv²CᴅA</span></>}
+    {kind === 'impulse' && <><button class="primary" data-play>▶ Fire both engines</button><button data-reset>↺ Reset</button><label class="scrub">Burn time<input data-progress type="range" min="0" max="100" value="0" aria-label="Burn progress" /></label><span class="formula" data-time>0.00 s · 3× slow motion</span></>}
+    {kind === 'math' && <><label class="range-control">Mass ratio <output data-ratio-out>2.0×</output><input data-mass-ratio type="range" min="1" max="5" step=".1" value="2" aria-label="Starting to final mass ratio" /></label><label class="range-control">Specific impulse <output data-isp-out>200 s</output><input data-isp type="range" min="100" max="350" step="10" value="200" aria-label="Specific impulse in seconds" /></label></>}
+  </div>
+  <p class="lab-caption">{kind==='missions'?'CHALLENGE  /  What can a robot bring back? What can only a person decide on the spot?':kind==='base'?'CHALLENGE  /  Switch to lunar night. What fails first—and what restores it?':kind==='drag'?'CHALLENGE  /  Predict the drag at half speed. Then test your answer.':kind==='impulse'?'CHALLENGE  /  Same final impulse. Different burns. Does that guarantee the same altitude?':'Δv = Iₛₚ × 9.80665 × ln(m₀/mf) · Ideal model: excludes gravity and drag losses.'}</p>
+</section>
+
+<style>
+.space-lab{--cyan:#6fe9fa;--mint:#70ecc7;--purple:#b6a0ff;position:relative;width:100%;border:1px solid #344662;border-radius:20px;background:radial-gradient(ellipse at 35% 15%,#19274d 0%,#0b152a 45%,#080f20 100%);color:#eaf2ff;font-family:Inter,ui-sans-serif,system-ui,sans-serif;overflow:hidden;box-shadow:0 18px 60px #07132c20;text-align:left;isolation:isolate;}
+.lab-top{display:flex;justify-content:space-between;align-items:center;padding:13px 20px;border-bottom:1px solid #ffffff13;gap:10px;}.lab-top>span{font-size:11px;letter-spacing:.18em;font-weight:800;color:#b3c5e1;display:flex;align-items:center;gap:9px}.lab-top i{width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 12px var(--mint)}
+.lab-body{display:grid;grid-template-columns:minmax(0,1fr) 205px;align-items:stretch;}.lab-scene{min-width:0;display:grid;align-items:center;padding:0 8px;}svg{width:100%;height:auto;max-height:42vh;min-height:180px;display:block;overflow:visible}svg text{font-family:ui-sans-serif,system-ui,sans-serif;fill:#ccdaf1;font-size:17px;}.space-lab svg .planet-label{font-size:15px;font-weight:800;letter-spacing:1.5px}.space-lab svg .axis{font-size:17px;fill:#90a7c3}.space-lab svg .micro{font-size:10px;letter-spacing:1.2px;fill:#8096b6}.space-lab svg .big-label{font-size:26px;font-weight:800;fill:white}.star{animation:twinkle 4s infinite alternate}.star:nth-child(3n){animation-delay:-2s}
+.lab-readout{border-left:1px solid #ffffff13;background:#ffffff03;padding:20px 18px;display:flex;flex-direction:column;justify-content:center;gap:7px;min-width:0}.readout-label{font-size:10px;font-weight:800;letter-spacing:.13em;color:#9db2cf}.lab-readout>strong{font-size:clamp(32px,3.4vw,52px);font-weight:800;letter-spacing:-.04em;color:var(--cyan);line-height:1.1;font-variant-numeric:tabular-nums}.readout-unit{font-size:11px;color:#c0cfe6;letter-spacing:.04em}.meter{height:5px;background:#ffffff10;border-radius:8px;margin:8px 0;overflow:hidden}.meter>div{width:25%;height:100%;background:linear-gradient(90deg,var(--purple),var(--cyan));transition:width .25s}.lab-readout h5{font-size:17px;line-height:1.2;margin:4px 0;color:white;font-weight:700}.lab-readout p{font-size:13px;line-height:1.5;color:#b5c5dc;margin:0;}
+.lab-controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:14px 20px;background:#060d1b88;border-top:1px solid #ffffff13}.space-lab button{font:700 12px/1.2 ui-sans-serif,system-ui,sans-serif;border:1px solid #42516b;border-radius:9px;padding:11px 14px;background:#162239;color:#e4edff;cursor:pointer;white-space:nowrap;min-height:37px;box-shadow:none;}.space-lab button:hover{border-color:var(--cyan);background:#22364d}.space-lab button:focus-visible,.space-lab input:focus-visible{outline:3px solid #f3be79;outline-offset:3px}.space-lab button[aria-pressed=true]{background:#173d43;border-color:#70ecc7;color:#a1ffe1}.space-lab .primary{background:#8ae9f3;color:#0a2638;border-color:#8ae9f3}.space-lab .motion-control{font-size:10px;padding:5px 9px;min-height:27px;background:transparent;color:#a9bbd5}.segmented{display:flex;gap:4px;}.space-lab label{display:flex;align-items:center;gap:9px;font-size:12px;color:#c6d4eb;margin:0;font-weight:600;}.space-lab output{display:inline;white-space:nowrap;color:var(--cyan);font-weight:800;}.space-lab input[type=range]{width:130px;max-width:100%;padding:0;margin:0;accent-color:var(--cyan);height:20px;}.space-lab .range-control{flex-wrap:wrap;}.range-control input{flex-basis:100%;}.space-lab .scrub{margin-left:auto;}.lab-caption{padding:10px 20px 12px!important;margin:0!important;color:#aebfda!important;font:500 11px/1.4 ui-sans-serif,system-ui,sans-serif!important;letter-spacing:.01em;}.formula{font:500 13px ui-monospace,monospace;color:#b6c9e5;margin-left:auto;white-space:nowrap}
+.route{fill:none;stroke:#6582a2;stroke-width:2;stroke-dasharray:5 9}.route-trace{fill:none;stroke:#75ebee;stroke-width:3;filter:drop-shadow(0 0 6px #60e6ff)}[data-craft]{filter:drop-shadow(0 0 7px #78d9ff)}.flow{fill:none;stroke:#ffd283;stroke-width:4;stroke-dasharray:6 9;animation:flow 1s linear infinite}.flow-air{stroke:#6ae5e9;animation-direction:reverse}.radiation{animation:flow 1s linear infinite}.wind{animation:wind var(--wind-duration,1.2s) linear infinite;animation-delay:var(--wind-delay);}.engine-flame{animation:flicker .15s infinite alternate;transform-box:fill-box;transform-origin:right center;}[data-dv-rocket]{transition:transform .6s cubic-bezier(.2,.8,.2,1)}[data-dv-trail],[data-propellant]{transition:all .6s cubic-bezier(.2,.8,.2,1)}[data-sun],[data-shield],[data-battery],.hab-window,[data-solar]{transition:opacity .5s,fill .5s}
+.space-lab[data-paused=true] *{animation-play-state:paused!important;transition:none!important}.space-lab[data-powered=false] .flow,.space-lab[data-powered=false] .hab-window{animation-play-state:paused;opacity:.15}.space-lab[data-air=false] .flow-air{opacity:.1}.space-lab[data-shielded=true] .radiation{opacity:.12}
+@keyframes twinkle{from{opacity:.25}to{opacity:.85}}@keyframes flow{to{stroke-dashoffset:-30}}@keyframes wind{from{transform:translateX(980px)}to{transform:translateX(-70px)}}@keyframes flicker{from{opacity:.65;transform:scaleX(.85)}to{opacity:1;transform:scaleX(1.08)}}
+@media(max-width:900px){.lab-body{grid-template-columns:minmax(0,1fr) 170px}.lab-readout{padding:12px}.lab-readout h5{font-size:15px}.lab-readout p{font-size:12px}.lab-controls{padding:10px 14px;gap:7px}.space-lab button{padding:9px 11px;font-size:11px}.space-lab input[type=range]{width:100px}.lab-top{padding:10px 14px}.lab-caption{padding:9px 14px!important}.lab-scene{padding:0}}
+@media(max-width:600px){.lab-body{grid-template-columns:1fr}.lab-readout{display:grid;grid-template-columns:1fr 1fr;border-left:0;border-top:1px solid #ffffff13;gap:4px 12px}.lab-readout>strong{grid-row:2;font-size:30px}.lab-readout h5{grid-column:2;grid-row:1/3}.lab-readout p{grid-column:2;grid-row:3/5}.meter{margin:4px 0}.space-lab .scrub{margin-left:0}.lab-top>span{font-size:9px}.lab-scene svg{min-height:160px}.lab-controls{gap:6px}}
+@media(prefers-reduced-motion:reduce){.space-lab *{animation:none!important;transition:none!important}}
+</style>
+
+<script>
+document.querySelectorAll<HTMLElement>('[data-lab]').forEach(root=>{
+ const kind=root.dataset.lab!;const q=<T extends Element=HTMLElement>(s:string)=>root.querySelector<T>(s)!;
+ const put=(s:string,v:string)=>{q(s).textContent=v;};
+ const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+ let paused=reduced,playing=false,progress=0,mode='robot',last=0,raf=0;
+ root.dataset.paused=String(paused);q('[data-motion]').setAttribute('aria-pressed',String(paused));put('[data-motion]',paused?'Resume motion ▶':'Pause motion Ⅱ');
+ const display=(number:string,unit:string,event:string,explain:string,meter:number)=>{put('[data-number]',number);put('[data-unit]',unit);put('[data-event]',event);put('[data-explain]',explain);q<HTMLElement>('[data-meter]').style.width=Math.max(0,Math.min(100,meter))+'%';};
+ const syncProgress=()=>{const slider=q<HTMLInputElement>('[data-progress]');if(slider)slider.value=String(progress);};
+ function drawMission(){
+  const crew=mode==='crew';const route=q<SVGPathElement>(crew?'[data-crew-path]':'[data-robot-path]');const len=route.getTotalLength();const p=route.getPointAtLength(len*progress/100);
+  q('[data-craft]').setAttribute('transform',`translate(${p.x} ${p.y})`);q<SVGElement>('[data-probe]').style.display=crew?'none':'';q<SVGElement>('[data-capsule]').style.display=crew?'':'none';
+  ['world','path'].forEach(k=>{q('[data-robot-'+k+']').setAttribute('opacity',crew?'.2':'1');q('[data-crew-'+k+']').setAttribute('opacity',crew?'1':'.2');});
+  const trace=q<SVGPathElement>('[data-mission-trace]');trace.setAttribute('d',route.getAttribute('d')!);trace.style.strokeDasharray=String(len);trace.style.strokeDashoffset=String(len*(1-progress/100));trace.style.stroke=crew?'#c7a7ff':'#75ebee';
+  const steps=crew?[
+   ['1969','APOLLO 11','Leave Earth','Three astronauts launch toward the Moon. The spacecraft must bring them home.'],
+   ['DAY 3','LUNAR ARRIVAL','Enter lunar orbit','Collins remains in orbit. Armstrong and Aldrin prepare the lunar module.'],
+   ['DAY 4','THE LANDING','People on another world','Astronauts collect samples, place experiments and make decisions on location.'],
+   ['DAY 8','RETURN TO EARTH','Bring the evidence home','Lunar samples and observations help scientists reconstruct the Moon’s history.']
+  ]:[
+   ['1977','VOYAGER','Earth departure','A robot heads outward. It carries instruments instead of a crew.'],
+   ['1979','JUPITER FLYBY','A moon with volcanoes','Voyager reveals active volcanism on Io. A distant moon is geologically alive.'],
+   ['1980–81','SATURN FLYBYS','Worlds within the rings','The two spacecraft examine Saturn, its rings and its moons.'],
+   ['BEYOND','VOYAGER 1 & 2','Keep exploring','Voyager 2 continues to Uranus and Neptune. Both later reach interstellar space.']
+  ];const index=progress<20?0:progress<50?1:progress<75?2:3;const s=steps[index];display(s[0],s[1],s[2],s[3],progress);
+ }
+ function drawImpulse(){const t=progress/100*2;[0,1].forEach(i=>{const burn=i===0?1:2;const impulse=(i===0?10:5)*Math.min(t,burn);q(`[data-impulse-fill="${i}"]`).setAttribute('width',String(Math.min(t,burn)*155));q<SVGElement>(`[data-flame="${i}"]`).style.visibility=t>0&&t<burn?'visible':'hidden';});
+ display(`${(10*Math.min(t,1)).toFixed(1)} : ${(5*t).toFixed(1)}`,'N·s  /  N·s',t>=2?'A tie: 10 N·s each':t>=1?'A stops. B keeps pushing.':'Watch the area accumulate',t>=2?'Same impulse does not guarantee the same altitude. Gravity, drag and mass still matter.':'A pushes twice as hard, but B burns twice as long. The area counts the total push.',progress);put('[data-time]',t.toFixed(2)+' s · 3× slow motion');
+ }
+ function render(){if(kind==='missions')drawMission();if(kind==='impulse')drawImpulse();syncProgress();}
+ function stop(){playing=false;cancelAnimationFrame(raf);const btn=q('[data-play]');if(btn)btn.textContent=kind==='missions'?'▶ Launch mission':'▶ Fire both engines';}
+ function tick(now:number){if(!playing)return;if(paused||root.closest('[data-motion-paused="true"]')||document.hidden||!root.getClientRects().length){last=now;raf=requestAnimationFrame(tick);return;}progress=Math.min(100,progress+(now-last)/(kind==='missions'?120:60));last=now;render();if(progress>=100)stop();else raf=requestAnimationFrame(tick);}
+ q('[data-motion]').addEventListener('click',()=>{paused=!paused;root.dataset.paused=String(paused);q('[data-motion]').setAttribute('aria-pressed',String(paused));put('[data-motion]',paused?'Resume motion ▶':'Pause motion Ⅱ');});
+ if(kind==='missions'||kind==='impulse'){
+  render();q('[data-play]').addEventListener('click',()=>{if(playing){stop();return;}if(progress>=100)progress=0;if(reduced){progress=100;render();return;}paused=false;root.dataset.paused='false';q('[data-motion]').setAttribute('aria-pressed','false');put('[data-motion]','Pause motion Ⅱ');playing=true;last=performance.now();put('[data-play]','Ⅱ Pause');raf=requestAnimationFrame(tick);});
+  q('[data-reset]').addEventListener('click',()=>{stop();progress=0;render();});q<HTMLInputElement>('[data-progress]').addEventListener('input',e=>{stop();progress=Number((e.target as HTMLInputElement).value);render();});
+  root.querySelectorAll<HTMLElement>('[data-mode]').forEach(btn=>btn.addEventListener('click',()=>{stop();mode=btn.dataset.mode!;progress=0;root.querySelectorAll<HTMLElement>('[data-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b===btn)));render();}));
+ }
+ if(kind==='base'){
+  const state={night:false,battery:false,shield:false,air:true};
+  const update=()=>{const powered=!state.night||state.battery;const air=powered&&state.air;root.dataset.powered=String(powered);root.dataset.air=String(air);root.dataset.shielded=String(state.shield);
+   q('[data-sun]').setAttribute('opacity',state.night?'.08':'1');q('[data-solar]').setAttribute('opacity',state.night?'.25':'1');q('[data-battery]').setAttribute('opacity',state.battery?'1':'.3');q('[data-shield]').setAttribute('opacity',state.shield?'1':'.12');q('[data-life]').setAttribute('opacity',air?'1':'.25');
+   q('[data-power-flow]').setAttribute('d',state.night?'M233 307H343V284':'M145 270V319H343V284');
+   const ready=Number(powered)+Number(air)+Number(state.shield)+1;
+   const event=!powered?'Power lost':!air?'Air system offline':!state.shield?'Add radiation shielding':state.night?'Stored power buys time':'All systems connected';
+   const text=!powered?'Solar panels cannot power the base through lunar night. Switch on backup power.':!air?'Electricity alone is not enough. Restore the system that circulates and renews the air.':!state.shield?'The habitat needs protection from radiation and small impacts. Add shielding.':state.night?'Batteries are finite. Your design must budget energy for the full dark period.':'Power, shelter and life support work together. Now turn off the sunlight.';
+   display(`${ready} / 4`,'SYSTEMS READY',event,text,ready*25);
+   Object.entries(state).forEach(([key,value])=>{const btn=q(`[data-toggle="${key}"]`);btn.setAttribute('aria-pressed',String(value));btn.textContent=key==='night'?(value?'☾ Lunar night':'☀ Daylight'):key==='battery'?(value?'✓ Backup power':'＋ Backup power'):key==='shield'?(value?'✓ Shielding':'＋ Shielding'):(value?'✓ Life support':'＋ Life support');});
+  };root.querySelectorAll<HTMLElement>('[data-toggle]').forEach(btn=>btn.addEventListener('click',()=>{const key=btn.dataset.toggle as keyof typeof state;state[key]=!state[key];update();}));update();
+ }
+ if(kind==='drag'){
+  const speed=q<HTMLInputElement>('[data-speed]');const update=()=>{const v=Number(speed.value),d=v*v;put('[data-speed-out]',v.toFixed(1)+'×');put('[data-drag-label]',`${v.toFixed(1)}× SPEED → ${d.toFixed(2)}× DRAG`);q('[data-drag-arrow]').setAttribute('d',`M340 255H${340-28*d}`);q('[data-graph-dot]').setAttribute('cx',String(610+v*82));q('[data-graph-dot]').setAttribute('cy',String(282-d*23));q('[data-graph-guide]').setAttribute('d',`M${610+v*82} 282V${282-d*23}H610`);root.style.setProperty('--wind-duration',String(1.2/v)+'s');display(d.toFixed(2)+'×','DRAG FORCE',v===2?'Twice the speed. Four times the drag.':v===.5?'Half the speed. A quarter of the drag.':'Speed has a squared cost.','Only speed changes here. Air density, shape and frontal area stay constant.',d/9*100);};speed.addEventListener('input',update);root.querySelectorAll<HTMLElement>('[data-speed-preset]').forEach(b=>b.addEventListener('click',()=>{speed.value=b.dataset.speedPreset!;update();}));update();
+ }
+ if(kind==='math'){
+  const ratio=q<HTMLInputElement>('[data-mass-ratio]'),isp=q<HTMLInputElement>('[data-isp]');const update=()=>{const r=Number(ratio.value),i=Number(isp.value),dv=i*9.80665*Math.log(r)/1000;put('[data-ratio-out]',r.toFixed(1)+'×');put('[data-isp-out]',i+' s');q('[data-propellant]').setAttribute('width',String((r-1)*152));q('[data-prop-label]').setAttribute('x',String(197+(r-1)*76));q('[data-prop-label]').setAttribute('opacity',r<1.7?'0':'1');q<SVGElement>('[data-dv-rocket] .engine-flame').style.visibility=r===1?'hidden':'visible';const x=50+dv*125;q('[data-dv-rocket]').setAttribute('transform',`translate(${x} 260)`);q('[data-dv-trail]').setAttribute('d',`M50 260H${x}`);display(dv.toFixed(2),'km/s',r===1?'No propellant. No Δv.':'The rocket equation, in motion.','Purple mass stays: structure, payload and empty engine. Green mass is expelled propellant.',dv/6*100);};ratio.addEventListener('input',update);isp.addEventListener('input',update);update();
+ }
+ root.addEventListener('keydown',e=>{if((e.target as HTMLElement).matches('input,button')&&['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Home','End',' '].includes(e.key))e.stopPropagation();});
+});
+</script>

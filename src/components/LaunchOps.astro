@@ -6,6 +6,8 @@
 // is that a Scout stops being a spectator holding a rocket and becomes someone
 // with a callsign whose "GO" is required before anything happens.
 
+const { presentation = false } = Astro.props;
+
 const roles = [
   {
     call: "FLIGHT",
@@ -89,7 +91,7 @@ const countdown = [
 const poll = ["WEATHER", "RSO", "PAD", "DATA", "RECOVERY", "TIMER"];
 ---
 
-<div class="lops" data-lops>
+<div class="lops" data-lops data-presenter={String(presentation)}>
   <div class="lops-tabs" role="tablist" aria-label="Mission control sections">
     <button type="button" role="tab" class="lops-tab is-on" data-lops-tab="roles" aria-selected="true">Crew positions</button>
     <button type="button" role="tab" class="lops-tab" data-lops-tab="clock" aria-selected="false">Countdown clock</button>
@@ -104,8 +106,8 @@ const poll = ["WEATHER", "RSO", "PAD", "DATA", "RECOVERY", "TIMER"];
       makes them work.
     </p>
     <div class="lops-roles">
-      {roles.map((r) => (
-        <article class="lops-role">
+      {roles.map((r, index) => (
+        <article class="lops-role" data-role-index={index} hidden={presentation && index >= 2}>
           <header>
             <span class="lops-call">{r.call}</span>
             <h5>{r.title}</h5>
@@ -117,6 +119,12 @@ const poll = ["WEATHER", "RSO", "PAD", "DATA", "RECOVERY", "TIMER"];
       ))}
     </div>
   </div>
+
+  {presentation && <div class="lops-role-pages" data-role-pages>
+    <button type="button" class="lops-btn" data-role-prev disabled>← Previous crew</button>
+    <span data-role-count aria-live="polite">1–2 of 8</span>
+    <button type="button" class="lops-btn" data-role-next>Next crew →</button>
+  </div>}
 
   <!-- ============ countdown ============ -->
   <div data-lops-panel="clock" hidden>
@@ -403,6 +411,18 @@ const poll = ["WEATHER", "RSO", "PAD", "DATA", "RECOVERY", "TIMER"];
       if (root.dataset.lopsWired) return;
       root.dataset.lopsWired = "1";
 
+      var rolePage = 0;
+      var roleCards = Array.from(root.querySelectorAll('[data-role-index]'));
+      function showRoles() {
+        roleCards.forEach(function(card, index) { card.hidden = Math.floor(index / 2) !== rolePage; });
+        root.querySelector('[data-role-count]').textContent = (rolePage * 2 + 1) + '–' + (rolePage * 2 + 2) + ' of 8';
+        root.querySelector('[data-role-prev]').disabled = rolePage === 0;
+        root.querySelector('[data-role-next]').disabled = rolePage === 3;
+      }
+      if (root.dataset.presenter === 'true') {
+        root.querySelector('[data-role-prev]').addEventListener('click', function() { rolePage = Math.max(0, rolePage - 1); showRoles(); });
+        root.querySelector('[data-role-next]').addEventListener('click', function() { rolePage = Math.min(3, rolePage + 1); showRoles(); });
+      }
       // tabs
       var tabs = root.querySelectorAll("[data-lops-tab]");
       var panels = root.querySelectorAll("[data-lops-panel]");
@@ -414,6 +434,7 @@ const poll = ["WEATHER", "RSO", "PAD", "DATA", "RECOVERY", "TIMER"];
               tabs[j].classList.toggle("is-on", on);
               tabs[j].setAttribute("aria-selected", String(on));
             }
+            if (root.querySelector('[data-role-pages]')) root.querySelector('[data-role-pages]').hidden = b.dataset.lopsTab !== 'roles';
             for (var k = 0; k < panels.length; k++) {
               panels[k].hidden = panels[k].dataset.lopsPanel !== b.dataset.lopsTab;
             }
@@ -452,7 +473,7 @@ const poll = ["WEATHER", "RSO", "PAD", "DATA", "RECOVERY", "TIMER"];
           items[j2].classList.toggle("is-now", j2 === activeIdx);
           items[j2].classList.toggle("is-past", j2 < activeIdx);
         }
-        if (activeIdx >= 0 && items[activeIdx].scrollIntoView) {
+        if (root.dataset.presenter !== "true" && activeIdx >= 0 && items[activeIdx].scrollIntoView) {
           var box = items[activeIdx].parentNode;
           var top = items[activeIdx].offsetTop - box.offsetTop;
           if (top < box.scrollTop || top > box.scrollTop + box.clientHeight - 60) box.scrollTop = top - 20;
@@ -465,8 +486,12 @@ const poll = ["WEATHER", "RSO", "PAD", "DATA", "RECOVERY", "TIMER"];
 
       root.querySelector("[data-lops-start]").addEventListener("click", function () {
         stop();
+        if (root.querySelector('[data-poll][data-state="nogo"]')) {
+          setStatus("hold", "NO-GO — clear the hold before restarting"); return;
+        }
         setStatus(t >= 0 ? "flight" : "counting", t >= 0 ? "In flight" : "Counting");
         timer = setInterval(function () {
+          if (document.hidden || root.closest('[hidden]') || root.closest('[data-motion-paused="true"]')) return;
           t += 1;
           if (t >= 0 && t < 1.5) setStatus("flight", "Liftoff");
           if (t >= END) { t = END; stop(); setStatus("flight", "Flight complete"); }
@@ -506,6 +531,7 @@ const poll = ["WEATHER", "RSO", "PAD", "DATA", "RECOVERY", "TIMER"];
           else pending++;
         }
         if (nogo > 0) {
+          stop(); setStatus("hold", "NO-GO — clock stopped");
           out.textContent = "NO-GO from " + blockers.join(", ") + ". Flight holds the count. Fix it or scrub.";
           out.style.color = "#ff8a5c";
         } else if (pending > 0) {

@@ -205,6 +205,10 @@ Fall 2026.
 | `/scouts/space-exploration-fall-2026/` | The course. Two audiences behind a tab switch. |
 | `/scouts/telemetry/` | Ground-station page (telemetry track is deferred) |
 | `/scouts/space-exploration-cards/` | 12 printable teaching cards |
+| `/scouts/space-lessons/` | Seven animated presentation decks and an offline download |
+| `/scouts/space-presentation/` | Make Space Move: five interactive experiments |
+| `/scouts/space-lab/` | Scrolling chart playground |
+| `/scouts/space-exploration-offline/` | Offline preparation and Monday teaching plan |
 | `/merit-badges/space-exploration/` | Badge reference page |
 
 **Content** lives in `src/data/space-exploration-fall-2026.js` — meetings,
@@ -286,3 +290,28 @@ presenter notes leaking onto the projection.
   never decided.
 - **Rocket math chart** — requested (specific impulse, drag, the rocket
   equation, a quick calculator); not built.
+
+
+### Animated lesson exports
+
+`src/data/space-presentations.js` adds animated demos to copies of the original
+decks. `SpaceDeckTheme` supplies projection styling. Original course content
+and counselor notes remain in the main course; notes never appear in projection.
+
+After changing a lesson, build and refresh the public portable download:
+
+```bash
+npm run build
+python3 scripts/package-space-lessons.py /tmp/space-lessons-export --zip public/handouts/space-lessons-offline.zip
+npm run build
+```
+
+The exported HTML embeds its code and photos, and opens from `index.html`
+without a server. It excludes downloaded videos; use the local-video picker.
+The personal teaching kit's MP4 files must not be added to the public repo.
+`scripts/package-space-offline.py` packages a full private kit; its video folder
+is a separate argument. `scripts/package-space-show.py` exports just the show.
+
+Audit all 58 slides at 1600×900, 1280×720 and 1024×768. Also check the four
+crew pages and Countdown/Flight Card tabs. Pause/replay must affect experiments
+and simulations. Each local video should pause when leaving its slide.

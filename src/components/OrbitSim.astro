@@ -589,8 +589,14 @@ const isAscent = mode === "ascent";
         verdict.dataset.tone = ""; verdict.textContent = "";
         if (reduce) { draw(1); return; }
         var start = null, dur = 3200;
+        var previous = null;
         function step(ts) {
           if (!start) start = ts;
+          if (root.closest('[data-motion-paused="true"]') || !root.getClientRects().length || document.hidden) {
+            if(previous!==null)start += ts-previous;
+            previous=ts; raf=requestAnimationFrame(step);return;
+          }
+          previous=ts;
           var p = Math.min(1, (ts - start) / dur);
           spin += 0.006; lastP = p;
           draw(p);
@@ -629,7 +635,7 @@ const isAscent = mode === "ascent";
 
       function idleSpin() {
         idle = requestAnimationFrame(function () {
-          if (visible && !raf) { spin += 0.0035; draw(lastP); }
+          if (visible && !raf && !root.closest('[data-motion-paused="true"]') && !document.hidden) { spin += 0.0035; draw(lastP); }
           idleSpin();
         });
       }

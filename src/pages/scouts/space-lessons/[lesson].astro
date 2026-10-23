@@ -1,0 +1,10 @@
+---
+import SlideDeck from '../../../components/SlideDeck.astro';
+import {decks} from '../../../data/space-exploration-fall-2026.js';
+import {presentationThemes} from '../../../data/space-presentations.js';
+export function getStaticPaths(){return Object.values(decks).map(deck=>({params:{lesson:deck.id},props:{deck}}));}
+const {deck}=Astro.props;
+const theme=presentationThemes[deck.id];
+---
+<!doctype html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="theme-color" content="#070d18"/><title>{theme.title} — Space Exploration / Troop 308</title><meta name="description" content={`${theme.title}: an animated classroom lesson for the Space Exploration merit badge.`}/></head><body><SlideDeck deck={deck} standalone/><noscript>Enable JavaScript to present this lesson. <a href="/scouts/space-exploration-fall-2026/">Read the full course.</a></noscript></body></html>
+<style is:global>*{box-sizing:border-box}html,body{margin:0;background:#070d18;color:#edf4fc;font-family:ui-sans-serif,system-ui,-apple-system,sans-serif}body{--bg:#070d18;--bg-alt:#101d31;--text:#edf4fc;--muted:#a1b4cd;--line:#35495e;--accent:#9af1cf;--accent-strong:#9af1cf;--surface:#15263b;--accent-soft:#85d9cd12;--radius:12px}button,input,select{font-family:inherit}a{color:var(--accent)}noscript{position:fixed;top:10px;left:10px;z-index:2147483647;background:#173648;padding:15px}</style>
