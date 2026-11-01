@@ -2,41 +2,45 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import WritingCard from "../components/WritingCard.astro";
 import ProjectCard from "../components/ProjectCard.astro";
-import BookCard from "../components/BookCard.astro";
-import { getFeaturedWriting, getFeaturedProjects, getFeaturedBooks } from "../lib/content";
+import BookShelf from "../components/BookShelf.astro";
+import { getFeaturedWriting, getFeaturedProjects } from "../lib/content";
 import fs from "node:fs";
 import path from "node:path";
 
 const featuredWriting = getFeaturedWriting(4);
 const featuredProjects = getFeaturedProjects(4);
-const featuredBooks = getFeaturedBooks(8);
 const activeProjects = [
   {
     title: "WAKE",
     url: "https://dustin-gamble.github.io/wake/",
+    thumb: "/images/projects/thumbs/wake.jpg",
     summary: "An Android app that turns a WaterRower's S4 monitor into analog instruments, 19 games, and a flight down the California coast.",
     linkLabel: "dustin-gamble.github.io/wake"
   },
   {
     title: "Closed-Loop Whole-House Fan",
     url: "/projects/closed-loop-fan/",
+    thumb: "/images/projects/thumbs/closed-loop-fan.jpg",
     summary: "An ESP32 that learns how the house heats and cools and runs a QuietCool whole-house fan over its own 433 MHz radio."
   },
   {
     title: "Take It In",
     url: "/projects/take-it-in/",
+    thumb: "/images/projects/thumbs/take-it-in.jpg",
     summary: "An iOS app that turns flights into cinematic, offline, chaptered journey stories.",
     linkLabel: "takeitin.app"
   },
   {
     title: "Gamble Systems",
     url: "https://gamble.systems/",
+    thumb: "/images/projects/thumbs/gamble-systems.jpg",
     summary: "An umbrella brand for the apps, tools, and experiments I am building.",
     linkLabel: "gamble.systems"
   },
   {
     title: "AeroVerse",
     url: "https://sim.dustingamble.com/",
+    thumb: "/images/projects/thumbs/aeroverse.jpg",
     summary: "A multiplayer, cloud-hosted, agent-generated flight simulator.",
     linkLabel: "sim.dustingamble.com"
   }
@@ -62,43 +66,50 @@ const heroImageExists = fs.existsSync(path.join(publicRoot, mainHeroImage.src.re
     )}
   </section>
 
-  {featuredBooks.length > 0 && (
-    <section class="section-block" aria-labelledby="books-title">
-      <h2 id="books-title" class="section-heading">Books</h2>
-      <div class="book-grid">
-        {featuredBooks.map((book) => <BookCard book={book} />)}
-      </div>
-      <p><a href="/books/">All books</a></p>
-    </section>
-  )}
+  <section class="section-block" aria-labelledby="books-title">
+    <h2 id="books-title" class="section-heading">Books</h2>
+    <BookShelf />
+  </section>
 
   <section class="section-block" aria-labelledby="active-projects-title">
     <h2 id="active-projects-title" class="section-heading">Active Projects</h2>
     <div class="grid cols-2">
       {
         activeProjects.map((project) => (
-          <article class="card">
-            <h3>
-              <a
-                href={project.url}
-                target={project.url.startsWith("/") ? undefined : "_blank"}
-                rel={project.url.startsWith("/") ? undefined : "noopener noreferrer"}
-              >
-                {project.title}
-              </a>
-            </h3>
-            <p>{project.summary}</p>
-            {project.linkLabel && (
-              <p>
+          <article class="card project-card has-thumb">
+            <a
+              class="project-thumb"
+              href={project.url}
+              target={project.url.startsWith("/") ? undefined : "_blank"}
+              rel={project.url.startsWith("/") ? undefined : "noopener noreferrer"}
+              tabindex="-1"
+              aria-hidden="true"
+            >
+              <img src={project.thumb} alt="" width="240" height="240" loading="lazy" />
+            </a>
+            <div class="project-card-body">
+              <h3>
                 <a
                   href={project.url}
                   target={project.url.startsWith("/") ? undefined : "_blank"}
                   rel={project.url.startsWith("/") ? undefined : "noopener noreferrer"}
                 >
-                  {project.linkLabel}
+                  {project.title}
                 </a>
-              </p>
-            )}
+              </h3>
+              <p>{project.summary}</p>
+              {project.linkLabel && (
+                <p>
+                  <a
+                    href={project.url}
+                    target={project.url.startsWith("/") ? undefined : "_blank"}
+                    rel={project.url.startsWith("/") ? undefined : "noopener noreferrer"}
+                  >
+                    {project.linkLabel}
+                  </a>
+                </p>
+              )}
+            </div>
           </article>
         ))
       }

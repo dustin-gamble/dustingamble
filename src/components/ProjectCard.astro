@@ -1,14 +1,22 @@
 ---
 const { project } = Astro.props;
+const href = `/projects/${project.slug}/`;
 ---
-<article class="card project-card">
-  <h3>
-    <a href={`/projects/${project.slug}/`} transition:name={project.slug}>
-      {project.title}
+<article class={`card project-card${project.thumb ? " has-thumb" : ""}`}>
+  {project.thumb && (
+    <a class="project-thumb" href={href} tabindex="-1" aria-hidden="true">
+      <img src={project.thumb} alt="" width="240" height="240" loading="lazy" />
     </a>
-  </h3>
-  <p>{project.summary}</p>
-  <ul class="tag-list" aria-label="Project tags">
-    {project.tags.map((tag) => <li>{tag}</li>)}
-  </ul>
+  )}
+  <div class="project-card-body">
+    <h3>
+      <a href={href} transition:name={project.slug}>
+        {project.title}
+      </a>
+    </h3>
+    <p>{project.summary}</p>
+    <ul class="tag-list" aria-label="Project tags">
+      {project.tags.map((tag) => <li>{tag}</li>)}
+    </ul>
+  </div>
 </article>

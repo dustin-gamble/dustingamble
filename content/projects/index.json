@@ -4,159 +4,241 @@
     "title": "WAKE — Rowing Instruments and Games",
     "date": "2026-09-11",
     "summary": "An Android app that reads a WaterRower's S4 monitor over USB and turns it into analog instruments, 19 games, and a flight down the California coast — driven by your real power and stroke.",
-    "tags": ["Android", "Rowing", "Physics", "Games"],
+    "tags": [
+      "Android",
+      "Rowing",
+      "Physics",
+      "Games"
+    ],
     "draft": false,
     "featured": false,
-    "order": 0
+    "order": 0,
+    "thumb": "/images/projects/thumbs/wake.jpg"
   },
   {
     "slug": "closed-loop-fan",
     "title": "Closed-Loop Whole-House Fan",
     "date": "2026-09-19",
     "summary": "Autonomous control for a QuietCool whole-house fan: an ESP32 reads temperatures, learns how the house heats and cools, forecasts the evening, and runs the fan over its own 433 MHz radio.",
-    "tags": ["ESP32", "Home Automation", "Control", "Maker"],
+    "tags": [
+      "ESP32",
+      "Home Automation",
+      "Control",
+      "Maker"
+    ],
     "draft": false,
     "featured": false,
-    "order": 0
+    "order": 0,
+    "thumb": "/images/projects/thumbs/closed-loop-fan.jpg"
   },
   {
     "slug": "world-record-endurance-flight-stalker-vxe",
     "title": "World-Record Endurance Flight (Stalker VXE)",
     "date": "2022-04-11",
     "summary": "High-level lessons from supporting a 39-hour endurance flight record program.",
-    "tags": ["UAV", "Flight Test", "Endurance"],
+    "tags": [
+      "UAV",
+      "Flight Test",
+      "Endurance"
+    ],
     "draft": false,
     "featured": true,
-    "order": 1
+    "order": 1,
+    "thumb": "/images/projects/thumbs/world-record-endurance-flight-stalker-vxe.jpg"
   },
   {
     "slug": "drone-innovation-garage-dig",
     "title": "Drone Innovation Garage (DIG)",
     "date": "2024-10-01",
     "summary": "An internal rapid-innovation environment for autonomous systems experimentation and mentoring.",
-    "tags": ["Innovation", "Leadership", "Rapid Prototyping"],
+    "tags": [
+      "Innovation",
+      "Leadership",
+      "Rapid Prototyping"
+    ],
     "draft": false,
     "featured": true,
-    "order": 2
+    "order": 2,
+    "thumb": "/images/projects/thumbs/drone-innovation-garage-dig.jpg"
   },
   {
     "slug": "fast-mechanical-safe-decoder",
     "title": "Fast Mechanical Safe Decoder",
     "date": "2020-03-25",
     "summary": "A rapid mechanical concept for decoding combination-safe behavior with physical feedback and iteration.",
-    "tags": ["Experiments", "Mechanisms", "Rapid Prototyping"],
+    "tags": [
+      "Experiments",
+      "Mechanisms",
+      "Rapid Prototyping"
+    ],
     "draft": false,
     "featured": true,
-    "order": 3
+    "order": 3,
+    "thumb": "/images/projects/thumbs/fast-mechanical-safe-decoder.jpg"
   },
   {
     "slug": "electromagnetic-flip-digit-display",
     "title": "Electromagnetic Flip Digit Display",
     "date": "2022-03-20",
     "summary": "A hardware experiment using electromagnetic actuation to create a compact, high-contrast flip-digit display.",
-    "tags": ["Experiments", "Embedded", "Hardware"],
+    "tags": [
+      "Experiments",
+      "Embedded",
+      "Hardware"
+    ],
     "draft": false,
     "featured": true,
-    "order": 4
+    "order": 4,
+    "thumb": "/images/projects/thumbs/electromagnetic-flip-digit-display.jpg"
   },
   {
     "slug": "rbx1-3d-printed-robot-arm",
     "title": "RBX1 Large 3D-Printed Robot Arm",
     "date": "2018-04-01",
     "summary": "Built and tuned a large 3D-printed 6-axis robot arm using stepper motors and kit-driven mechanical integration.",
-    "tags": ["Robotics", "Hardware", "3D Printing"],
+    "tags": [
+      "Robotics",
+      "Hardware",
+      "3D Printing"
+    ],
     "draft": false,
     "featured": false,
-    "order": 5
+    "order": 5,
+    "thumb": "/images/projects/thumbs/rbx1-3d-printed-robot-arm.jpg"
   },
   {
     "slug": "cozy-cauldron",
     "title": "Cozy Cauldron",
     "date": "2026-03-07",
     "summary": "An iOS potion-brewing game prototype inspired by ideas from my kids and developed with AI-assisted workflows.",
-    "tags": ["iOS", "Game Design", "AI Collaboration"],
+    "tags": [
+      "iOS",
+      "Game Design",
+      "AI Collaboration"
+    ],
     "draft": false,
     "featured": false,
-    "order": 6
+    "order": 6,
+    "thumb": "/images/projects/thumbs/cozy-cauldron.jpg"
   },
   {
     "slug": "troop-308-new-scout-advancement-plan",
     "title": "Troop 308 New Scout Advancement Plan",
     "date": "2026-03-17",
     "summary": "A first-year advancement plan for new Scouts, built around Monday meetings, monthly outings, and a dedicated 30-minute merit badge block.",
-    "tags": ["Scouting", "Leadership", "Mentoring"],
+    "tags": [
+      "Scouting",
+      "Leadership",
+      "Mentoring"
+    ],
     "draft": false,
     "featured": false,
-    "order": 7
+    "order": 7,
+    "thumb": "/images/projects/thumbs/troop-308-new-scout-advancement-plan.jpg"
   },
   {
     "slug": "life-guide-tool",
     "title": "Life Guide Tool",
     "date": "2026-03-21",
     "summary": "A growing collection of AI-generated web tools designed to help people think, decide, and reflect more clearly.",
-    "tags": ["AI Tools", "Web", "Product"],
+    "tags": [
+      "AI Tools",
+      "Web",
+      "Product"
+    ],
     "draft": false,
     "featured": false,
-    "order": 8
+    "order": 8,
+    "thumb": "/images/projects/thumbs/life-guide-tool.jpg"
   },
   {
     "slug": "cinebooksai",
     "title": "CineBooksAI",
     "date": "2026-03-21",
     "summary": "An ongoing stream of AI-generated trailers, short videos, and visual storytelling experiments.",
-    "tags": ["AI Media", "Video", "Experiments"],
+    "tags": [
+      "AI Media",
+      "Video",
+      "Experiments"
+    ],
     "draft": false,
     "featured": false,
-    "order": 9
+    "order": 9,
+    "thumb": "/images/projects/thumbs/cinebooksai.jpg"
   },
   {
     "slug": "ai-fusion-book",
     "title": "AI Fusion Book",
     "date": "2026-03-21",
     "summary": "A book project developed with AI-assisted writing workflows and published as a live web experience.",
-    "tags": ["Writing", "AI Collaboration", "Web"],
+    "tags": [
+      "Writing",
+      "AI Collaboration",
+      "Web"
+    ],
     "draft": false,
     "featured": false,
-    "order": 10
+    "order": 10,
+    "thumb": "/images/projects/thumbs/ai-fusion-book.jpg"
   },
   {
     "slug": "line-starts-here",
     "title": "Line Starts Here",
     "date": "2026-04-10",
     "summary": "A queue simulator game where you navigate maze-like lines, cut across lanes, and try to reach the counter before your patience runs out.",
-    "tags": ["iOS", "Game Design", "SpriteKit"],
+    "tags": [
+      "iOS",
+      "Game Design",
+      "SpriteKit"
+    ],
     "draft": false,
     "featured": false,
-    "order": 11
+    "order": 11,
+    "thumb": "/images/projects/thumbs/line-starts-here.jpg"
   },
   {
     "slug": "take-it-in",
     "title": "Take It In",
     "date": "2026-04-30",
     "summary": "An iOS app that turns flights into cinematic, offline, chaptered journey stories.",
-    "tags": ["iOS", "Travel", "AI Storytelling"],
+    "tags": [
+      "iOS",
+      "Travel",
+      "AI Storytelling"
+    ],
     "draft": false,
     "featured": false,
-    "order": 12
+    "order": 12,
+    "thumb": "/images/projects/thumbs/take-it-in.jpg"
   },
   {
     "slug": "olives-art",
     "title": "Olive's Art",
     "date": "2026-05-29",
     "summary": "A small online art shop I built for my daughter Olive to sell her artwork for a school fundraiser.",
-    "tags": ["Web", "For My Kids", "AI Collaboration"],
+    "tags": [
+      "Web",
+      "For My Kids",
+      "AI Collaboration"
+    ],
     "draft": false,
     "featured": false,
-    "order": 13
+    "order": 13,
+    "thumb": "/images/projects/thumbs/olives-art.jpg"
   },
   {
     "slug": "biogyro",
     "title": "BioGyro",
     "date": "2026-08-08",
     "summary": "An iOS app that tracked how food affected your body rather than how many calories it contained. Shipped to the App Store, did not find an audience, and was retired.",
-    "tags": ["iOS", "AI", "Health"],
+    "tags": [
+      "iOS",
+      "AI",
+      "Health"
+    ],
     "draft": false,
     "featured": false,
-    "order": 14
+    "order": 14,
+    "thumb": "/images/projects/thumbs/biogyro.jpg"
   }
 ]
