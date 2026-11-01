@@ -9,6 +9,8 @@ tags:
 draft: false
 ---
 
+<figure class="book-figure-wide"><img src="/images/projects/stalker-vxe.jpg" alt="The Stalker VXE unmanned aircraft in flight at dusk, seen from below, with green and red lights on its wingtips" loading="lazy" /><figcaption>Stalker VXE. Photo: Lockheed Martin.</figcaption></figure>
+
 ## Problem / context
 
 Long-endurance unmanned aircraft programs face a compounding challenge: aerodynamic and propulsion efficiency are necessary, but operational reliability and integration quality usually decide real mission duration. For this effort, the target was a sustained, officially monitored duration flight in the 5-25 kg class with a VTOL-capable platform using hybrid electric propulsion. The event was flown from Santa Margarita, California and adjudicated under official duration-record procedures.
