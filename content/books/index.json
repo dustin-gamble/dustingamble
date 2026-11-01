@@ -40,7 +40,8 @@
     "featured": true,
     "order": 2,
     "draft": false,
-    "series": "Drone Field Guide"
+    "series": "Drone Field Guide",
+    "link": "https://gamble.systems/drone-sketchbook/"
   },
   {
     "slug": "drone-underway",
@@ -59,7 +60,8 @@
     "featured": true,
     "order": 3,
     "draft": false,
-    "series": "Drone Field Guide"
+    "series": "Drone Field Guide",
+    "link": "https://gamble.systems/drone-underway/"
   },
   {
     "slug": "drone-mechanisms",
@@ -78,7 +80,8 @@
     "featured": true,
     "order": 4,
     "draft": false,
-    "series": "Drone Field Guide"
+    "series": "Drone Field Guide",
+    "link": "https://gamble.systems/drone-mechanisms/"
   },
   {
     "slug": "drone-drag",
@@ -97,7 +100,8 @@
     "series": "Drone Field Guide",
     "featured": true,
     "order": 5,
-    "draft": false
+    "draft": false,
+    "link": "https://gamble.systems/drone-drag/"
   },
   {
     "slug": "drone-overland",
@@ -116,7 +120,8 @@
     "featured": true,
     "order": 6,
     "draft": false,
-    "series": "Drone Field Guide"
+    "series": "Drone Field Guide",
+    "link": "https://gamble.systems/drone-overland/"
   },
   {
     "slug": "drone-small",
@@ -135,7 +140,8 @@
     "series": "Drone Field Guide",
     "featured": true,
     "order": 7,
-    "draft": false
+    "draft": false,
+    "link": "https://gamble.systems/drone-small/"
   },
   {
     "slug": "drone-elsewhere",
@@ -154,7 +160,8 @@
     "series": "Drone Field Guide",
     "featured": true,
     "order": 8,
-    "draft": false
+    "draft": false,
+    "link": "https://gamble.systems/drone-elsewhere/"
   },
   {
     "slug": "ai-fusion",

@@ -11,16 +11,7 @@ series: "Drone Field Guide"
 featured: true
 order: 8
 draft: false
+link: "https://gamble.systems/drone-elsewhere/"
 ---
 
-## About the book
-
-Every world sets its own price for moving.
-
-*Drone Elsewhere* takes the method of [Drone Field Guide](https://gamble.systems/drone-field-guide/) to twelve worlds, from Mercury to Pluto, with Earth among them as the yardstick. Each world gets three chapters: the place, how its physics works on a machine, and the concept machines that would work there, from cloud balloons and melt probes to hoppers and a methane sailboat.
-
-These are concepts, each sized on paper from numbers printed beside it.
-
-## Status
-
-In progress. All 42 chapters are written and the draft runs about 265 pages. It is not on sale yet.
+The book has its own page now: [gamble.systems/drone-elsewhere](https://gamble.systems/drone-elsewhere/).

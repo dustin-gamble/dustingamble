@@ -11,16 +11,7 @@ series: "Drone Field Guide"
 featured: true
 order: 5
 draft: false
+link: "https://gamble.systems/drone-drag/"
 ---
 
-## About the book
-
-Every part of a small aircraft costs watts. This book says how many.
-
-Booms, skids, antennas, camera gimbals, exposed motors, stopped rotors and everything else that gets bolted on, each with its price in square centimeters and in watts at the battery. Drag handbooks were built on full-size aircraft. A drone's parts fly at Reynolds numbers one to three orders lower, in propeller wash, and many of the old rules go wrong there.
-
-It closes with how to measure drag yourself: a glide, a flight log, a rig on a roof rack and a tunnel on a bench, and with the tests nobody has run yet.
-
-## Status
-
-In progress. All 54 chapters are written and the review copy runs about 415 pages. It is not on sale yet.
+The book has its own page now: [gamble.systems/drone-drag](https://gamble.systems/drone-drag/).

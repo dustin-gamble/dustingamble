@@ -11,16 +11,7 @@ series: "Drone Field Guide"
 featured: true
 order: 7
 draft: false
+link: "https://gamble.systems/drone-small/"
 ---
 
-## About the book
-
-What to build, what to weigh, and why it flies when it should not.
-
-*Drone Small* takes the method of [Drone Field Guide](https://gamble.systems/drone-field-guide/) down to the kitchen table: find the one number that decides the machine, work it in plain sentences, and write the prediction on a card before the first flight. The air gets thicker as you get smaller, small things bounce, and below a gram flapping wins.
-
-Forty-seven chapters, from the whoop and its four minutes to a rubber ornithopter, a duration model under a gym roof, a monocopter, a blimp, and a model that flies on sunlight alone.
-
-## Status
-
-In progress. All 47 chapters are written and the draft runs about 240 pages. It is not on sale yet.
+The book has its own page now: [gamble.systems/drone-small](https://gamble.systems/drone-small/).
