@@ -1,6 +1,14 @@
 // Auto-generated from a US patent search (source: Google Patents). Do not hand-edit.
 export const patents = [
   {
+    "number": "US12662244B1",
+    "title": "Double hinged tilting mount for coaxial contra rotating electric propulsion",
+    "url": "https://patents.google.com/patent/US12662244B1/en",
+    "granted": true,
+    "year": "2026",
+    "image": null
+  },
+  {
     "number": "US12286226B2",
     "title": "Unmanned aerial vehicle wing pylon system",
     "url": "https://patents.google.com/patent/US12286226B2",
@@ -15,6 +23,14 @@ export const patents = [
     "granted": true,
     "year": "2023",
     "image": "/images/patents/US11667397B2.png"
+  },
+  {
+    "number": "US11230389B2",
+    "title": "System and method of blade-tip facilitated aircraft capture",
+    "url": "https://patents.google.com/patent/US11230389B2/en",
+    "granted": true,
+    "year": "2022",
+    "image": null
   },
   {
     "number": "US10933996B2",
@@ -87,6 +103,14 @@ export const patents = [
     "granted": true,
     "year": "2018",
     "image": "/images/patents/US10046850B2.png"
+  },
+  {
+    "number": "US20260176004A1",
+    "title": "Tilt rotor eVTOL UAV with redundant hybrid propulsion system",
+    "url": "https://patents.google.com/patent/US20260176004A1/en",
+    "granted": false,
+    "year": "2026",
+    "image": null
   },
   {
     "number": "US20260021912A1",
