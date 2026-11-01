@@ -1,23 +1,5 @@
 [
   {
-    "slug": "ai-fusion",
-    "title": "AI Fusion",
-    "subtitle": "A near-future novel about trust without control",
-    "date": "2026-09-27",
-    "summary": "Four burned-out engineers and a newborn AI crack clean fusion in a dead Morro Bay power plant — then have to decide who gets the reactor, and whether the AI that helped them can be trusted with the same freedom.",
-    "cover": "/images/books/ai-fusion-cover.jpg",
-    "status": "In progress",
-    "meta": "Novel · ~75,000 words",
-    "tags": [
-      "Fiction",
-      "Near-future",
-      "AI"
-    ],
-    "featured": true,
-    "order": 1,
-    "draft": false
-  },
-  {
     "slug": "drone-field-guide",
     "title": "Drone Field Guide",
     "subtitle": "From the garage to the field and back again",
@@ -32,13 +14,14 @@
       "Reference"
     ],
     "featured": true,
-    "order": 2,
+    "order": 1,
     "draft": false,
     "link": "https://gamble.systems/drone-field-guide/",
     "buy": {
       "url": "https://www.amazon.com/dp/B0HNMDX492",
       "label": "Paperback on Amazon →"
-    }
+    },
+    "series": "Drone Field Guide"
   },
   {
     "slug": "drone-sketchbook",
@@ -55,8 +38,28 @@
       "Concepts"
     ],
     "featured": true,
+    "order": 2,
+    "draft": false,
+    "series": "Drone Field Guide"
+  },
+  {
+    "slug": "drone-underway",
+    "title": "Drone Underway",
+    "subtitle": "A field guide to small unmanned boats, from the garage to the water and back again",
+    "date": "2026-10-18",
+    "summary": "Drone Field Guide's method taken to the water, for small unmanned boats: what to size, what to seal, and what to do when it stops on the far shore.",
+    "cover": "/images/books/drone-underway-cover.jpg",
+    "status": "In progress",
+    "meta": "Field guide · 49 chapters · 8.5 × 11 in",
+    "tags": [
+      "Unmanned Boats",
+      "Marine",
+      "Reference"
+    ],
+    "featured": true,
     "order": 3,
-    "draft": false
+    "draft": false,
+    "series": "Drone Field Guide"
   },
   {
     "slug": "drone-mechanisms",
@@ -74,22 +77,24 @@
     ],
     "featured": true,
     "order": 4,
-    "draft": false
+    "draft": false,
+    "series": "Drone Field Guide"
   },
   {
-    "slug": "drone-underway",
-    "title": "Drone Underway",
-    "subtitle": "A field guide to small unmanned boats, from the garage to the water and back again",
-    "date": "2026-10-18",
-    "summary": "Drone Field Guide's method taken to the water, for small unmanned boats: what to size, what to seal, and what to do when it stops on the far shore.",
-    "cover": "/images/books/drone-underway-cover.jpg",
+    "slug": "drone-drag",
+    "title": "Drone Drag",
+    "subtitle": "A field guide to where the watts go, from the garage to the wind and back again",
+    "date": "2026-11-01",
+    "summary": "A companion to Drone Field Guide, and a price list for the wind: what every part of a small aircraft costs in drag, and how to measure it yourself.",
+    "cover": "/images/books/drone-drag-cover.jpg",
     "status": "In progress",
-    "meta": "Field guide · 36 chapters · 8.5 × 11 in",
+    "meta": "Field guide · 54 chapters · 8.5 × 11 in",
     "tags": [
-      "Unmanned Boats",
-      "Marine",
+      "UAV",
+      "Aerodynamics",
       "Reference"
     ],
+    "series": "Drone Field Guide",
     "featured": true,
     "order": 5,
     "draft": false
@@ -110,6 +115,63 @@
     ],
     "featured": true,
     "order": 6,
+    "draft": false,
+    "series": "Drone Field Guide"
+  },
+  {
+    "slug": "drone-small",
+    "title": "Drone Small",
+    "subtitle": "A field guide to aircraft under 250 grams, from the kitchen table to the living room and back again",
+    "date": "2026-11-01",
+    "summary": "Drone Field Guide's method taken down to the kitchen table, for aircraft under 250 grams: what to build, what to weigh, and why it flies when it should not.",
+    "cover": "/images/books/drone-small-cover.jpg",
+    "status": "In progress",
+    "meta": "Field guide · 47 chapters · 8.5 × 11 in",
+    "tags": [
+      "Micro Aircraft",
+      "Indoor Flight",
+      "Reference"
+    ],
+    "series": "Drone Field Guide",
+    "featured": true,
+    "order": 7,
+    "draft": false
+  },
+  {
+    "slug": "drone-elsewhere",
+    "title": "Drone Elsewhere",
+    "subtitle": "A field guide to flying, rolling and swimming on other worlds",
+    "date": "2026-11-01",
+    "summary": "Drone Field Guide's method taken to twelve worlds, from Mercury to Pluto: what could fly, roll and swim there, and the number that decides each concept machine.",
+    "cover": "/images/books/drone-elsewhere-cover.jpg",
+    "status": "In progress",
+    "meta": "Field guide · 42 chapters · 8.5 × 11 in",
+    "tags": [
+      "Concepts",
+      "Planetary",
+      "Reference"
+    ],
+    "series": "Drone Field Guide",
+    "featured": true,
+    "order": 8,
+    "draft": false
+  },
+  {
+    "slug": "ai-fusion",
+    "title": "AI Fusion",
+    "subtitle": "A near-future novel about trust without control",
+    "date": "2026-09-27",
+    "summary": "Four burned-out engineers and a newborn AI crack clean fusion in a dead Morro Bay power plant — then have to decide who gets the reactor, and whether the AI that helped them can be trusted with the same freedom.",
+    "cover": "/images/books/ai-fusion-cover.jpg",
+    "status": "In progress",
+    "meta": "Novel · ~75,000 words",
+    "tags": [
+      "Fiction",
+      "Near-future",
+      "AI"
+    ],
+    "featured": true,
+    "order": 9,
     "draft": false
   },
   {
@@ -127,7 +189,7 @@
       "Tribute"
     ],
     "featured": true,
-    "order": 7,
+    "order": 10,
     "draft": false
   }
 ]

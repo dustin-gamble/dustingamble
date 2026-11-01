@@ -1,0 +1,46 @@
+---
+import { getBooks } from "../lib/content";
+
+const books = getBooks();
+const collection = books.filter((book) => book.series === "Drone Field Guide");
+const novels = books.filter((book) => book.series !== "Drone Field Guide");
+const onSale = collection.find((book) => book.buy);
+const href = (book) => book.link ?? `/books/${book.slug}/`;
+---
+<div class="shelf">
+  <div class="shelf-head">
+    <p class="shelf-eyebrow">The Drone Field Guide collection</p>
+    <p class="shelf-title">A world of machines. A way of thinking.</p>
+    <p class="shelf-lede">Flying, rolling, swimming, and imagining what comes next.</p>
+  </div>
+
+  <div class="shelf-row">
+    {collection.map((book) => (
+      <a class="shelf-book" href={href(book)}>
+        <span class="shelf-cover">
+          <img src={`/images/books/shelf/${book.slug}.jpg`} alt={`Cover of ${book.title}`} width="440" height="570" loading="lazy" />
+        </span>
+        <span class="shelf-name">{book.title.replace(/^Drone /, "")}</span>
+        {book.buy && <span class="shelf-tag">Out now</span>}
+      </a>
+    ))}
+  </div>
+
+  <div class="shelf-foot">
+    <div class="shelf-actions">
+      {onSale && (
+        <a class="button-link" href={onSale.buy.url} target="_blank" rel="noopener noreferrer">{onSale.title}: {onSale.buy.label}</a>
+      )}
+      <a href="/books/">All books</a>
+    </div>
+    <div class="shelf-novels">
+      <span class="shelf-novels-label">And two novels</span>
+      {novels.map((book) => (
+        <a class="shelf-novel" href={href(book)}>
+          <img src={`/images/books/shelf/${book.slug}.jpg`} alt="" width="300" height="450" loading="lazy" />
+          <span>{book.title}</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</div>

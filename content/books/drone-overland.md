@@ -7,6 +7,7 @@ cover: "/images/books/drone-overland-cover.jpg"
 status: "In progress"
 meta: "Field guide · 36 chapters · 8.5 × 11 in"
 tags: ["Rovers", "Robotics", "Reference"]
+series: "Drone Field Guide"
 featured: true
 order: 6
 draft: false
@@ -33,6 +34,6 @@ Thirty-six chapters, from reading a chassis across a parking lot to the second r
 
 ## Status
 
-In progress. All 36 chapters are written and the draft runs about 175 pages; the plates are still being drawn. It still needs my edit and a final review before it prints, and it is not on sale yet.
+In progress. All 36 chapters are written and every plate is drawn; the draft runs about 215 pages. It still needs my edit and a final review before it prints, and it is not on sale yet.
 
 Written from my outline, rules and numbers with an AI writing assistant; every figure is computed from the worked example's own inputs, and an AI illustrator draws the plates from my briefs.

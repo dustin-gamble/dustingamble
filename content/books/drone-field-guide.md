@@ -7,8 +7,9 @@ cover: "/images/books/drone-field-guide-cover.png"
 status: "Paperback · available now"
 meta: "Reference · 77 chapters · 314 pages · 8.5 × 11 in"
 tags: ["UAV", "Aircraft Design", "Reference"]
+series: "Drone Field Guide"
 featured: true
-order: 2
+order: 1
 draft: false
 link: "https://gamble.systems/drone-field-guide/"
 buy:

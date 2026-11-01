@@ -7,8 +7,9 @@ cover: "/images/books/drone-sketchbook-cover.jpg"
 status: "In progress"
 meta: "Concept book · 222 designs · 8.5 × 11 in"
 tags: ["UAV", "Aircraft Design", "Concepts"]
+series: "Drone Field Guide"
 featured: true
-order: 3
+order: 2
 draft: false
 ---
 
@@ -42,6 +43,6 @@ The designs are grouped by the constraint that forced the shape, not by what the
 
 ## Status
 
-In progress. All 222 designs are written, across 24 categories, and the layout proof runs about 260 pages. The plates are still being drawn, so it is not ready to print.
+All 222 designs are written and drawn, across 24 categories, and the book runs 260 pages. It is in its final checks and not on sale yet.
 
 It was made the way Drone Field Guide was made. I set the categories, the designs, and the number that decides each one. An AI writing assistant drafted the pages from that direction, and an AI illustrator drew the plates from my briefs. None of the plates depicts a real aircraft or program.

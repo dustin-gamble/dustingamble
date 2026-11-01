@@ -7,6 +7,7 @@ cover: "/images/books/drone-mechanisms-cover.jpg"
 status: "In progress"
 meta: "Book of parts · 1,003 mechanisms · 8.5 × 11 in"
 tags: ["UAV", "Mechanisms", "Design"]
+series: "Drone Field Guide"
 featured: true
 order: 4
 draft: false
@@ -43,7 +44,7 @@ Every mechanism is drawn so the trick can be seen at a glance, open and shut, fo
 
 ## Status
 
-In progress. All 1,003 mechanisms are written, across 25 chapters, and the review copy runs about 300 pages. The plates are still being drawn, and each one is checked against a single question before it goes in: would the mechanism work as drawn. It is not on sale yet.
+All 1,003 mechanisms are written and drawn, across 25 chapters, and the book runs about 305 pages. Each plate was checked against a single question before it went in: would the mechanism work as drawn. It is in its final checks and not on sale yet.
 
 The numbers are first-order estimates with their conditions. Every entry reads *Drawn, not built* until I build one at home and measure it.
 
