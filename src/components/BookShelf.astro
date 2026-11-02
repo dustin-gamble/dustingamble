@@ -4,7 +4,9 @@ import { getBooks } from "../lib/content";
 const books = getBooks();
 const collection = books.filter((book) => book.series === "Drone Field Guide");
 const novels = books.filter((book) => book.series !== "Drone Field Guide");
-const onSale = collection.find((book) => book.buy);
+const onSale = collection.filter((book) => book.buy);
+const words = ["", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight"];
+const amazonAuthor = "https://www.amazon.com/s?i=stripbooks&rh=p_27%3ADustin%2BGamble";
 const href = (book) => book.link ?? `/books/${book.slug}/`;
 ---
 <div class="shelf">
@@ -28,8 +30,11 @@ const href = (book) => book.link ?? `/books/${book.slug}/`;
 
   <div class="shelf-foot">
     <div class="shelf-actions">
-      {onSale && (
-        <a class="button-link" href={onSale.buy.url} target="_blank" rel="noopener noreferrer">{onSale.title}: {onSale.buy.label}</a>
+      {onSale.length === 1 && (
+        <a class="button-link" href={onSale[0].buy.url} target="_blank" rel="noopener noreferrer">{onSale[0].title}: {onSale[0].buy.label}</a>
+      )}
+      {onSale.length > 1 && (
+        <a class="button-link" href={amazonAuthor} target="_blank" rel="noopener noreferrer">{words[onSale.length] ?? onSale.length} out now on Amazon →</a>
       )}
       <a href="/books/">All books</a>
     </div>

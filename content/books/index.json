@@ -30,7 +30,7 @@
     "date": "2026-10-11",
     "summary": "Two hundred small unmanned aircraft that could be built, one to a page: what each one is, why anyone would build it, what it costs, and the one number that decides whether it flies.",
     "cover": "/images/books/drone-sketchbook-cover.jpg",
-    "status": "In progress",
+    "status": "Paperback · available now",
     "meta": "Concept book · 222 designs · 8.5 × 11 in",
     "tags": [
       "UAV",
@@ -41,7 +41,11 @@
     "order": 2,
     "draft": false,
     "series": "Drone Field Guide",
-    "link": "https://gamble.systems/drone-sketchbook/"
+    "link": "https://gamble.systems/drone-sketchbook/",
+    "buy": {
+      "url": "https://www.amazon.com/dp/B0HQ1GR2CL",
+      "label": "Paperback on Amazon →"
+    }
   },
   {
     "slug": "drone-underway",
@@ -70,7 +74,7 @@
     "date": "2026-10-16",
     "summary": "About a thousand small mechanisms for unmanned aircraft, four to a page: what each one removes, how it works, the one number that decides whether it holds, how it fails, and one variation to try.",
     "cover": "/images/books/drone-mechanisms-cover.jpg",
-    "status": "In progress",
+    "status": "Paperback · available now",
     "meta": "Book of parts · 1,003 mechanisms · 8.5 × 11 in",
     "tags": [
       "UAV",
@@ -81,7 +85,11 @@
     "order": 4,
     "draft": false,
     "series": "Drone Field Guide",
-    "link": "https://gamble.systems/drone-mechanisms/"
+    "link": "https://gamble.systems/drone-mechanisms/",
+    "buy": {
+      "url": "https://www.amazon.com/dp/B0HQ1GD5S9",
+      "label": "Paperback on Amazon →"
+    }
   },
   {
     "slug": "drone-drag",
