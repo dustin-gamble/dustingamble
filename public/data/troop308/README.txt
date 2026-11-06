@@ -1,7 +1,7 @@
 Troop 308 Scout Tracker data folder
 
-The deployed tracker reads the sanitized JSON snapshot:
-- scout-tracker-current.json  (first names only — no PII)
+The deployed tracker reads the anonymized JSON snapshot:
+- scout-tracker-current.json  (no names: Scouts appear as "Scout 1", "Scout 2"…, numbered by rank)
 
 To update the live table:
 1. Place a fresh CSV export into private-data/troop308/Troop0308BMBIPReport_current.csv

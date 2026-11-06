@@ -1,5 +1,5 @@
 /* Troop 308 Eagle Progress Tracker
-   Reads the sanitized JSON snapshot (first names only, no PII).
+   Reads the anonymized JSON snapshot: Scouts appear as "Scout 1", "Scout 2"…, never by name.
    Renders scout cards with badge mini-cards and click-to-expand detail. */
 
 const RANK_ORDER = {
@@ -85,7 +85,7 @@ function renderScoutCard(scout) {
 
   return `<div class="scout-row" data-scout-id="${esc(scout.id)}">
     <div class="scout-row-header">
-      <h3 class="scout-name">${esc(scout.firstName)}</h3>
+      <h3 class="scout-name">${esc(scout.label)}</h3>
       <span class="scout-rank">${esc(scout.rank || 'New Scout')}</span>
       <div class="scout-progress-summary">
         ${progressRing(earnedCount + startedCount, total)}
@@ -117,7 +117,7 @@ function renderDetail(scout) {
 
   return `<div class="detail-card">
     <div class="detail-header">
-      <h2>${esc(scout.firstName)}</h2>
+      <h2>${esc(scout.label)}</h2>
       <span class="detail-rank">${esc(scout.rank || 'New Scout')}</span>
       <button class="detail-close" type="button">&times; Close</button>
     </div>
@@ -211,7 +211,7 @@ function mountTracker() {
 
       data.scouts.sort((a, b) => {
         const rd = (RANK_ORDER[b.rank || ''] ?? -1) - (RANK_ORDER[a.rank || ''] ?? -1);
-        return rd !== 0 ? rd : a.firstName.localeCompare(b.firstName);
+        return rd !== 0 ? rd : a.label.localeCompare(b.label, undefined, { numeric: true });
       });
 
       listEl.innerHTML = data.scouts.map(renderScoutCard).join('');

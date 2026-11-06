@@ -160,23 +160,18 @@ function requirementState(scout, requirement) {
   return best.status;
 }
 
-function publicIdFactory() {
-  const counts = new Map();
-  return (firstName) => {
-    const slug = firstName.toLowerCase().replace(/[^a-z0-9]+/gu, '-').replace(/^-|-$/gu, '') || 'scout';
-    const next = (counts.get(slug) || 0) + 1;
-    counts.set(slug, next);
-    return `${slug}-${next}`;
-  };
-}
+// The public page never shows names. Scouts are numbered "Scout 1", "Scout 2"…
+// by rank, then Eagle badges earned, then all badges earned.
+const RANK_ORDER = {
+  '': 0, Scout: 1, Tenderfoot: 2, 'Second Class': 3,
+  'First Class': 4, Star: 5, Life: 6, Eagle: 7
+};
+const earnedCount = (list) => list.filter((item) => item.status === 'earned').length;
 
 const raw = fs.readFileSync(inputPath, 'utf8');
 const report = parseReport(raw);
 const aggregated = aggregate(report.rows);
-const makeId = publicIdFactory();
-
 const scouts = aggregated
-  .sort((a, b) => a.firstName.localeCompare(b.firstName))
   .map((scout) => {
     const badges = [...scout.badges.entries()]
       .sort((a, b) => a[0].localeCompare(b[0]))
@@ -187,18 +182,17 @@ const scouts = aggregated
       status: requirementState(scout, requirement)
     }));
 
-    return {
-      id: makeId(scout.firstName),
-      firstName: scout.firstName,
-      rank: scout.rank,
-      badges,
-      eagleStates
-    };
-  });
+    return { rank: scout.rank, badges, eagleStates };
+  })
+  .sort((a, b) =>
+    (RANK_ORDER[b.rank] ?? -1) - (RANK_ORDER[a.rank] ?? -1)
+    || earnedCount(b.eagleStates) - earnedCount(a.eagleStates)
+    || earnedCount(b.badges) - earnedCount(a.badges))
+  .map((scout, index) => ({ id: `scout-${index + 1}`, label: `Scout ${index + 1}`, ...scout }));
 
 const output = {
   generatedAt: report.generatedAt,
-  sourceKind: 'sanitized-snapshot',
+  sourceKind: 'anonymized-snapshot',
   eagleRequirementCount: EAGLE_REQUIREMENTS.length,
   eagleRequirementLabels: EAGLE_REQUIREMENTS.map((item) => item.label),
   scouts

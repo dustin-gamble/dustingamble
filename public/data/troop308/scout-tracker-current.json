@@ -1,6 +1,6 @@
 {
   "generatedAt": "03/22/2026 11:32:12",
-  "sourceKind": "sanitized-snapshot",
+  "sourceKind": "anonymized-snapshot",
   "eagleRequirementCount": 14,
   "eagleRequirementLabels": [
     "First Aid",
@@ -20,306 +20,8 @@
   ],
   "scouts": [
     {
-      "id": "august-1",
-      "firstName": "August",
-      "rank": "First Class",
-      "badges": [
-        {
-          "badge": "Archery",
-          "status": "inProgress"
-        },
-        {
-          "badge": "Art",
-          "status": "inProgress"
-        },
-        {
-          "badge": "Camping",
-          "status": "inProgress"
-        },
-        {
-          "badge": "Chess",
-          "status": "mbcApproved"
-        },
-        {
-          "badge": "Communication",
-          "status": "inProgress"
-        },
-        {
-          "badge": "Cooking",
-          "status": "inProgress"
-        },
-        {
-          "badge": "Electronics",
-          "status": "inProgress"
-        },
-        {
-          "badge": "Emergency Preparedness",
-          "status": "inProgress"
-        },
-        {
-          "badge": "Fingerprinting",
-          "status": "inProgress"
-        },
-        {
-          "badge": "First Aid",
-          "status": "inProgress"
-        },
-        {
-          "badge": "Fishing",
-          "status": "inProgress"
-        },
-        {
-          "badge": "Geology",
-          "status": "inProgress"
-        },
-        {
-          "badge": "Hiking",
-          "status": "inProgress"
-        },
-        {
-          "badge": "Insect Study",
-          "status": "inProgress"
-        },
-        {
-          "badge": "Pulp and Paper",
-          "status": "inProgress"
-        },
-        {
-          "badge": "Snow Sports",
-          "status": "earned"
-        },
-        {
-          "badge": "Soil and Water Conservation",
-          "status": "inProgress"
-        },
-        {
-          "badge": "Sustainability",
-          "status": "inProgress"
-        },
-        {
-          "badge": "Swimming",
-          "status": "inProgress"
-        },
-        {
-          "badge": "Weather",
-          "status": "inProgress"
-        }
-      ],
-      "eagleStates": [
-        {
-          "label": "First Aid",
-          "status": "inProgress"
-        },
-        {
-          "label": "Citizenship in Society",
-          "status": "missing"
-        },
-        {
-          "label": "Citizenship in the Community",
-          "status": "missing"
-        },
-        {
-          "label": "Citizenship in the Nation",
-          "status": "missing"
-        },
-        {
-          "label": "Citizenship in the World",
-          "status": "missing"
-        },
-        {
-          "label": "Communication",
-          "status": "inProgress"
-        },
-        {
-          "label": "Cooking",
-          "status": "inProgress"
-        },
-        {
-          "label": "Personal Fitness",
-          "status": "missing"
-        },
-        {
-          "label": "Personal Management",
-          "status": "missing"
-        },
-        {
-          "label": "Camping",
-          "status": "inProgress"
-        },
-        {
-          "label": "Family Life",
-          "status": "missing"
-        },
-        {
-          "label": "Emergency Preparedness or Lifesaving",
-          "status": "inProgress"
-        },
-        {
-          "label": "Environmental Science or Sustainability",
-          "status": "inProgress"
-        },
-        {
-          "label": "Swimming or Hiking or Cycling",
-          "status": "inProgress"
-        }
-      ]
-    },
-    {
-      "id": "cohen-1",
-      "firstName": "Cohen",
-      "rank": "First Class",
-      "badges": [
-        {
-          "badge": "Archery",
-          "status": "inProgress"
-        },
-        {
-          "badge": "Art",
-          "status": "inProgress"
-        },
-        {
-          "badge": "Camping",
-          "status": "inProgress"
-        },
-        {
-          "badge": "Chess",
-          "status": "mbcApproved"
-        },
-        {
-          "badge": "Communication",
-          "status": "inProgress"
-        },
-        {
-          "badge": "Electronics",
-          "status": "inProgress"
-        },
-        {
-          "badge": "Emergency Preparedness",
-          "status": "inProgress"
-        },
-        {
-          "badge": "Fingerprinting",
-          "status": "inProgress"
-        },
-        {
-          "badge": "First Aid",
-          "status": "inProgress"
-        },
-        {
-          "badge": "Fishing",
-          "status": "inProgress"
-        },
-        {
-          "badge": "Geology",
-          "status": "inProgress"
-        },
-        {
-          "badge": "Journalism",
-          "status": "inProgress"
-        },
-        {
-          "badge": "Mining in Society",
-          "status": "inProgress"
-        },
-        {
-          "badge": "Public Speaking",
-          "status": "inProgress"
-        },
-        {
-          "badge": "Pulp and Paper",
-          "status": "inProgress"
-        },
-        {
-          "badge": "Scholarship",
-          "status": "inProgress"
-        },
-        {
-          "badge": "Snow Sports",
-          "status": "earned"
-        },
-        {
-          "badge": "Soil and Water Conservation",
-          "status": "inProgress"
-        },
-        {
-          "badge": "Sports",
-          "status": "inProgress"
-        },
-        {
-          "badge": "Sustainability",
-          "status": "inProgress"
-        },
-        {
-          "badge": "Swimming",
-          "status": "inProgress"
-        },
-        {
-          "badge": "Weather",
-          "status": "inProgress"
-        }
-      ],
-      "eagleStates": [
-        {
-          "label": "First Aid",
-          "status": "inProgress"
-        },
-        {
-          "label": "Citizenship in Society",
-          "status": "missing"
-        },
-        {
-          "label": "Citizenship in the Community",
-          "status": "missing"
-        },
-        {
-          "label": "Citizenship in the Nation",
-          "status": "missing"
-        },
-        {
-          "label": "Citizenship in the World",
-          "status": "missing"
-        },
-        {
-          "label": "Communication",
-          "status": "inProgress"
-        },
-        {
-          "label": "Cooking",
-          "status": "missing"
-        },
-        {
-          "label": "Personal Fitness",
-          "status": "missing"
-        },
-        {
-          "label": "Personal Management",
-          "status": "missing"
-        },
-        {
-          "label": "Camping",
-          "status": "inProgress"
-        },
-        {
-          "label": "Family Life",
-          "status": "missing"
-        },
-        {
-          "label": "Emergency Preparedness or Lifesaving",
-          "status": "inProgress"
-        },
-        {
-          "label": "Environmental Science or Sustainability",
-          "status": "inProgress"
-        },
-        {
-          "label": "Swimming or Hiking or Cycling",
-          "status": "inProgress"
-        }
-      ]
-    },
-    {
-      "id": "cole-1",
-      "firstName": "Cole",
+      "id": "scout-1",
+      "label": "Scout 1",
       "rank": "Life",
       "badges": [
         {
@@ -475,8 +177,8 @@
       ]
     },
     {
-      "id": "collin-1",
-      "firstName": "Collin",
+      "id": "scout-2",
+      "label": "Scout 2",
       "rank": "Star",
       "badges": [
         {
@@ -592,8 +294,306 @@
       ]
     },
     {
-      "id": "grady-1",
-      "firstName": "Grady",
+      "id": "scout-3",
+      "label": "Scout 3",
+      "rank": "First Class",
+      "badges": [
+        {
+          "badge": "Archery",
+          "status": "inProgress"
+        },
+        {
+          "badge": "Art",
+          "status": "inProgress"
+        },
+        {
+          "badge": "Camping",
+          "status": "inProgress"
+        },
+        {
+          "badge": "Chess",
+          "status": "mbcApproved"
+        },
+        {
+          "badge": "Communication",
+          "status": "inProgress"
+        },
+        {
+          "badge": "Cooking",
+          "status": "inProgress"
+        },
+        {
+          "badge": "Electronics",
+          "status": "inProgress"
+        },
+        {
+          "badge": "Emergency Preparedness",
+          "status": "inProgress"
+        },
+        {
+          "badge": "Fingerprinting",
+          "status": "inProgress"
+        },
+        {
+          "badge": "First Aid",
+          "status": "inProgress"
+        },
+        {
+          "badge": "Fishing",
+          "status": "inProgress"
+        },
+        {
+          "badge": "Geology",
+          "status": "inProgress"
+        },
+        {
+          "badge": "Hiking",
+          "status": "inProgress"
+        },
+        {
+          "badge": "Insect Study",
+          "status": "inProgress"
+        },
+        {
+          "badge": "Pulp and Paper",
+          "status": "inProgress"
+        },
+        {
+          "badge": "Snow Sports",
+          "status": "earned"
+        },
+        {
+          "badge": "Soil and Water Conservation",
+          "status": "inProgress"
+        },
+        {
+          "badge": "Sustainability",
+          "status": "inProgress"
+        },
+        {
+          "badge": "Swimming",
+          "status": "inProgress"
+        },
+        {
+          "badge": "Weather",
+          "status": "inProgress"
+        }
+      ],
+      "eagleStates": [
+        {
+          "label": "First Aid",
+          "status": "inProgress"
+        },
+        {
+          "label": "Citizenship in Society",
+          "status": "missing"
+        },
+        {
+          "label": "Citizenship in the Community",
+          "status": "missing"
+        },
+        {
+          "label": "Citizenship in the Nation",
+          "status": "missing"
+        },
+        {
+          "label": "Citizenship in the World",
+          "status": "missing"
+        },
+        {
+          "label": "Communication",
+          "status": "inProgress"
+        },
+        {
+          "label": "Cooking",
+          "status": "inProgress"
+        },
+        {
+          "label": "Personal Fitness",
+          "status": "missing"
+        },
+        {
+          "label": "Personal Management",
+          "status": "missing"
+        },
+        {
+          "label": "Camping",
+          "status": "inProgress"
+        },
+        {
+          "label": "Family Life",
+          "status": "missing"
+        },
+        {
+          "label": "Emergency Preparedness or Lifesaving",
+          "status": "inProgress"
+        },
+        {
+          "label": "Environmental Science or Sustainability",
+          "status": "inProgress"
+        },
+        {
+          "label": "Swimming or Hiking or Cycling",
+          "status": "inProgress"
+        }
+      ]
+    },
+    {
+      "id": "scout-4",
+      "label": "Scout 4",
+      "rank": "First Class",
+      "badges": [
+        {
+          "badge": "Archery",
+          "status": "inProgress"
+        },
+        {
+          "badge": "Art",
+          "status": "inProgress"
+        },
+        {
+          "badge": "Camping",
+          "status": "inProgress"
+        },
+        {
+          "badge": "Chess",
+          "status": "mbcApproved"
+        },
+        {
+          "badge": "Communication",
+          "status": "inProgress"
+        },
+        {
+          "badge": "Electronics",
+          "status": "inProgress"
+        },
+        {
+          "badge": "Emergency Preparedness",
+          "status": "inProgress"
+        },
+        {
+          "badge": "Fingerprinting",
+          "status": "inProgress"
+        },
+        {
+          "badge": "First Aid",
+          "status": "inProgress"
+        },
+        {
+          "badge": "Fishing",
+          "status": "inProgress"
+        },
+        {
+          "badge": "Geology",
+          "status": "inProgress"
+        },
+        {
+          "badge": "Journalism",
+          "status": "inProgress"
+        },
+        {
+          "badge": "Mining in Society",
+          "status": "inProgress"
+        },
+        {
+          "badge": "Public Speaking",
+          "status": "inProgress"
+        },
+        {
+          "badge": "Pulp and Paper",
+          "status": "inProgress"
+        },
+        {
+          "badge": "Scholarship",
+          "status": "inProgress"
+        },
+        {
+          "badge": "Snow Sports",
+          "status": "earned"
+        },
+        {
+          "badge": "Soil and Water Conservation",
+          "status": "inProgress"
+        },
+        {
+          "badge": "Sports",
+          "status": "inProgress"
+        },
+        {
+          "badge": "Sustainability",
+          "status": "inProgress"
+        },
+        {
+          "badge": "Swimming",
+          "status": "inProgress"
+        },
+        {
+          "badge": "Weather",
+          "status": "inProgress"
+        }
+      ],
+      "eagleStates": [
+        {
+          "label": "First Aid",
+          "status": "inProgress"
+        },
+        {
+          "label": "Citizenship in Society",
+          "status": "missing"
+        },
+        {
+          "label": "Citizenship in the Community",
+          "status": "missing"
+        },
+        {
+          "label": "Citizenship in the Nation",
+          "status": "missing"
+        },
+        {
+          "label": "Citizenship in the World",
+          "status": "missing"
+        },
+        {
+          "label": "Communication",
+          "status": "inProgress"
+        },
+        {
+          "label": "Cooking",
+          "status": "missing"
+        },
+        {
+          "label": "Personal Fitness",
+          "status": "missing"
+        },
+        {
+          "label": "Personal Management",
+          "status": "missing"
+        },
+        {
+          "label": "Camping",
+          "status": "inProgress"
+        },
+        {
+          "label": "Family Life",
+          "status": "missing"
+        },
+        {
+          "label": "Emergency Preparedness or Lifesaving",
+          "status": "inProgress"
+        },
+        {
+          "label": "Environmental Science or Sustainability",
+          "status": "inProgress"
+        },
+        {
+          "label": "Swimming or Hiking or Cycling",
+          "status": "inProgress"
+        }
+      ]
+    },
+    {
+      "id": "scout-5",
+      "label": "Scout 5",
       "rank": "First Class",
       "badges": [
         {
@@ -761,166 +761,8 @@
       ]
     },
     {
-      "id": "hayden-1",
-      "firstName": "Hayden",
-      "rank": "Scout",
-      "badges": [
-        {
-          "badge": "Chess",
-          "status": "mbcApproved"
-        },
-        {
-          "badge": "Communication",
-          "status": "inProgress"
-        },
-        {
-          "badge": "Emergency Preparedness",
-          "status": "inProgress"
-        },
-        {
-          "badge": "Snow Sports",
-          "status": "inProgress"
-        }
-      ],
-      "eagleStates": [
-        {
-          "label": "First Aid",
-          "status": "missing"
-        },
-        {
-          "label": "Citizenship in Society",
-          "status": "missing"
-        },
-        {
-          "label": "Citizenship in the Community",
-          "status": "missing"
-        },
-        {
-          "label": "Citizenship in the Nation",
-          "status": "missing"
-        },
-        {
-          "label": "Citizenship in the World",
-          "status": "missing"
-        },
-        {
-          "label": "Communication",
-          "status": "inProgress"
-        },
-        {
-          "label": "Cooking",
-          "status": "missing"
-        },
-        {
-          "label": "Personal Fitness",
-          "status": "missing"
-        },
-        {
-          "label": "Personal Management",
-          "status": "missing"
-        },
-        {
-          "label": "Camping",
-          "status": "missing"
-        },
-        {
-          "label": "Family Life",
-          "status": "missing"
-        },
-        {
-          "label": "Emergency Preparedness or Lifesaving",
-          "status": "inProgress"
-        },
-        {
-          "label": "Environmental Science or Sustainability",
-          "status": "missing"
-        },
-        {
-          "label": "Swimming or Hiking or Cycling",
-          "status": "missing"
-        }
-      ]
-    },
-    {
-      "id": "jasper-1",
-      "firstName": "Jasper",
-      "rank": "",
-      "badges": [
-        {
-          "badge": "Communication",
-          "status": "inProgress"
-        },
-        {
-          "badge": "Emergency Preparedness",
-          "status": "inProgress"
-        },
-        {
-          "badge": "Snow Sports",
-          "status": "inProgress"
-        }
-      ],
-      "eagleStates": [
-        {
-          "label": "First Aid",
-          "status": "missing"
-        },
-        {
-          "label": "Citizenship in Society",
-          "status": "missing"
-        },
-        {
-          "label": "Citizenship in the Community",
-          "status": "missing"
-        },
-        {
-          "label": "Citizenship in the Nation",
-          "status": "missing"
-        },
-        {
-          "label": "Citizenship in the World",
-          "status": "missing"
-        },
-        {
-          "label": "Communication",
-          "status": "inProgress"
-        },
-        {
-          "label": "Cooking",
-          "status": "missing"
-        },
-        {
-          "label": "Personal Fitness",
-          "status": "missing"
-        },
-        {
-          "label": "Personal Management",
-          "status": "missing"
-        },
-        {
-          "label": "Camping",
-          "status": "missing"
-        },
-        {
-          "label": "Family Life",
-          "status": "missing"
-        },
-        {
-          "label": "Emergency Preparedness or Lifesaving",
-          "status": "inProgress"
-        },
-        {
-          "label": "Environmental Science or Sustainability",
-          "status": "missing"
-        },
-        {
-          "label": "Swimming or Hiking or Cycling",
-          "status": "missing"
-        }
-      ]
-    },
-    {
-      "id": "noah-1",
-      "firstName": "Noah",
+      "id": "scout-6",
+      "label": "Scout 6",
       "rank": "First Class",
       "badges": [
         {
@@ -1036,8 +878,85 @@
       ]
     },
     {
-      "id": "preston-1",
-      "firstName": "Preston",
+      "id": "scout-7",
+      "label": "Scout 7",
+      "rank": "Tenderfoot",
+      "badges": [
+        {
+          "badge": "Communication",
+          "status": "inProgress"
+        },
+        {
+          "badge": "Emergency Preparedness",
+          "status": "inProgress"
+        },
+        {
+          "badge": "Snow Sports",
+          "status": "inProgress"
+        }
+      ],
+      "eagleStates": [
+        {
+          "label": "First Aid",
+          "status": "missing"
+        },
+        {
+          "label": "Citizenship in Society",
+          "status": "missing"
+        },
+        {
+          "label": "Citizenship in the Community",
+          "status": "missing"
+        },
+        {
+          "label": "Citizenship in the Nation",
+          "status": "missing"
+        },
+        {
+          "label": "Citizenship in the World",
+          "status": "missing"
+        },
+        {
+          "label": "Communication",
+          "status": "inProgress"
+        },
+        {
+          "label": "Cooking",
+          "status": "missing"
+        },
+        {
+          "label": "Personal Fitness",
+          "status": "missing"
+        },
+        {
+          "label": "Personal Management",
+          "status": "missing"
+        },
+        {
+          "label": "Camping",
+          "status": "missing"
+        },
+        {
+          "label": "Family Life",
+          "status": "missing"
+        },
+        {
+          "label": "Emergency Preparedness or Lifesaving",
+          "status": "inProgress"
+        },
+        {
+          "label": "Environmental Science or Sustainability",
+          "status": "missing"
+        },
+        {
+          "label": "Swimming or Hiking or Cycling",
+          "status": "missing"
+        }
+      ]
+    },
+    {
+      "id": "scout-8",
+      "label": "Scout 8",
       "rank": "Scout",
       "badges": [
         {
@@ -1117,9 +1036,90 @@
       ]
     },
     {
-      "id": "timothy-1",
-      "firstName": "Timothy",
-      "rank": "Tenderfoot",
+      "id": "scout-9",
+      "label": "Scout 9",
+      "rank": "Scout",
+      "badges": [
+        {
+          "badge": "Chess",
+          "status": "mbcApproved"
+        },
+        {
+          "badge": "Communication",
+          "status": "inProgress"
+        },
+        {
+          "badge": "Emergency Preparedness",
+          "status": "inProgress"
+        },
+        {
+          "badge": "Snow Sports",
+          "status": "inProgress"
+        }
+      ],
+      "eagleStates": [
+        {
+          "label": "First Aid",
+          "status": "missing"
+        },
+        {
+          "label": "Citizenship in Society",
+          "status": "missing"
+        },
+        {
+          "label": "Citizenship in the Community",
+          "status": "missing"
+        },
+        {
+          "label": "Citizenship in the Nation",
+          "status": "missing"
+        },
+        {
+          "label": "Citizenship in the World",
+          "status": "missing"
+        },
+        {
+          "label": "Communication",
+          "status": "inProgress"
+        },
+        {
+          "label": "Cooking",
+          "status": "missing"
+        },
+        {
+          "label": "Personal Fitness",
+          "status": "missing"
+        },
+        {
+          "label": "Personal Management",
+          "status": "missing"
+        },
+        {
+          "label": "Camping",
+          "status": "missing"
+        },
+        {
+          "label": "Family Life",
+          "status": "missing"
+        },
+        {
+          "label": "Emergency Preparedness or Lifesaving",
+          "status": "inProgress"
+        },
+        {
+          "label": "Environmental Science or Sustainability",
+          "status": "missing"
+        },
+        {
+          "label": "Swimming or Hiking or Cycling",
+          "status": "missing"
+        }
+      ]
+    },
+    {
+      "id": "scout-10",
+      "label": "Scout 10",
+      "rank": "",
       "badges": [
         {
           "badge": "Communication",

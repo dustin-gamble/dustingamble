@@ -6,7 +6,7 @@ export const patents = [
     "url": "https://patents.google.com/patent/US12662244B1/en",
     "granted": true,
     "year": "2026",
-    "image": null
+    "image": "/images/patents/US12662244B1.png"
   },
   {
     "number": "US12286226B2",
@@ -30,7 +30,7 @@ export const patents = [
     "url": "https://patents.google.com/patent/US11230389B2/en",
     "granted": true,
     "year": "2022",
-    "image": null
+    "image": "/images/patents/US11230389B2.png"
   },
   {
     "number": "US10933996B2",
@@ -110,7 +110,7 @@ export const patents = [
     "url": "https://patents.google.com/patent/US20260176004A1/en",
     "granted": false,
     "year": "2026",
-    "image": null
+    "image": "/images/patents/US20260176004A1.png"
   },
   {
     "number": "US20260021912A1",
@@ -118,7 +118,7 @@ export const patents = [
     "url": "https://patents.google.com/patent/US20260021912A1/en",
     "granted": false,
     "year": "2026",
-    "image": null
+    "image": "/images/patents/US20260021912A1.png"
   },
   {
     "number": "US20250346373A1",
@@ -126,7 +126,7 @@ export const patents = [
     "url": "https://patents.google.com/patent/US20250346373A1",
     "granted": false,
     "year": "2025",
-    "image": null
+    "image": "/images/patents/US20250346373A1.png"
   },
   {
     "number": "US20240092498A1",
