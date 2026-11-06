@@ -8,7 +8,7 @@ status: "In progress"
 meta: "Novel · ~75,000 words"
 tags: ["Fiction", "Near-future", "AI"]
 featured: true
-order: 9
+order: 11
 draft: false
 ---
 
