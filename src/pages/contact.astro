@@ -1,0 +1,124 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+// The form posts to the gamble.systems Worker, which emails the message on. No email address is in this page or its script.
+---
+<BaseLayout
+  title="Contact"
+  description="Send Dustin Gamble a message: books, drones, projects, Scouts, or anything else."
+>
+  <section class="prose section-block">
+    <h1>Contact</h1>
+    <p>
+      Questions about a book, a project, or a Scout program, or just want to say hello? Send a note here and it comes
+      straight to me. I read everything, and I'll reply to the email address you give.
+    </p>
+  </section>
+
+  <section class="section-block" aria-label="Contact form">
+    <form id="contact-form" class="form-grid contact-form" novalidate>
+      <label>
+        Name
+        <input name="name" type="text" autocomplete="name" maxlength="100" required />
+      </label>
+      <label>
+        Email
+        <input name="email" type="email" autocomplete="email" maxlength="254" required />
+      </label>
+      <label>
+        Message
+        <textarea name="message" rows="7" maxlength="5000" required></textarea>
+      </label>
+      <label class="contact-trap" aria-hidden="true">
+        Leave this empty
+        <input name="website" type="text" tabindex="-1" autocomplete="off" />
+      </label>
+      <div class="contact-actions">
+        <button type="submit">Send message</button>
+        <p class="contact-status" role="status" aria-live="polite"></p>
+      </div>
+    </form>
+    <div class="contact-sent" hidden>
+      <p><strong>Thanks, your message is on its way.</strong> I'll get back to you at the address you gave.</p>
+      <p><button type="button" class="button-link contact-again">Send another</button></p>
+    </div>
+    <noscript><p class="contact-status">The form needs JavaScript turned on. You can also reach me on <a href="https://www.linkedin.com/in/dustin-gamble-90276215/">LinkedIn</a>.</p></noscript>
+  </section>
+
+  <style>
+    .contact-form textarea { resize: vertical; min-height: 9rem; }
+    .contact-form[hidden], .contact-sent[hidden] { display: none; }
+    .contact-trap { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+    .contact-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 1rem; }
+    .contact-actions button[disabled] { opacity: 0.6; cursor: progress; }
+    .contact-status { margin: 0; color: var(--muted); font-size: 0.92rem; }
+    .contact-status.is-error { color: #b4442c; }
+    .contact-sent { max-width: 40rem; border: 1px solid var(--line); border-radius: 0.8rem; padding: 0.9rem 1.1rem; background: var(--surface); }
+    .contact-sent p { margin: 0.3rem 0; }
+  </style>
+
+  <script>
+    const local = ["localhost", "127.0.0.1"].includes(location.hostname);
+    const endpoint = local ? "http://127.0.0.1:8787/api/contact" : "https://gamble.systems/api/contact";
+
+    function mount() {
+      const form = document.getElementById("contact-form") as HTMLFormElement | null;
+      if (!form || form.dataset.mounted) return;
+      form.dataset.mounted = "true";
+      const sent = form.parentElement!.querySelector(".contact-sent") as HTMLElement;
+      const status = form.querySelector(".contact-status") as HTMLElement;
+      const button = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+      let shownAt = Date.now();
+
+      const say = (text: string, error = false) => {
+        status.textContent = text;
+        status.classList.toggle("is-error", error);
+      };
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const data = new FormData(form);
+        const name = String(data.get("name") || "").trim();
+        const email = String(data.get("email") || "").trim();
+        const message = String(data.get("message") || "").trim();
+        if (!name) return say("Add your name.", true);
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return say("That email address doesn't look right.", true);
+        if (message.length < 2) return say("Add a message.", true);
+
+        button.disabled = true;
+        say("Sending…");
+        try {
+          const res = await fetch(endpoint, {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({
+              name, email, message,
+              website: String(data.get("website") || ""),
+              elapsed: Date.now() - shownAt,
+              page: location.href,
+            }),
+          });
+          const out = await res.json().catch(() => ({ ok: false }));
+          if (!res.ok || !out.ok) throw new Error(out.error || "The message did not send. Try again in a minute.");
+          form.reset();
+          say("");
+          form.hidden = true;
+          sent.hidden = false;
+        } catch (err) {
+          const text = err instanceof TypeError ? "Couldn't reach the server. Check your connection and try again." : (err as Error).message;
+          say(text, true);
+        } finally {
+          button.disabled = false;
+        }
+      });
+
+      sent.querySelector(".contact-again")!.addEventListener("click", () => {
+        sent.hidden = true;
+        form.hidden = false;
+        shownAt = Date.now();
+        (form.querySelector('input[name="name"]') as HTMLInputElement).focus();
+      });
+    }
+
+    document.addEventListener("astro:page-load", mount);
+  </script>
+</BaseLayout>
