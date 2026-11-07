@@ -2177,3 +2177,25 @@ a.mb-product-card:hover {
     gap: 0.4rem;
   }
 }
+
+/* Writing cards for essays with no image: a topic line icon in the accent colour (WritingCard.astro). */
+.writing-thumb-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.writing-thumb-icon svg {
+  width: 58%;
+  height: 58%;
+  transition: transform 0.2s;
+}
+.has-thumb:hover .writing-thumb-icon svg {
+  transform: scale(1.06);
+}
+@media (prefers-reduced-motion: reduce) {
+  .writing-thumb-icon svg {
+    transition: none;
+  }
+}

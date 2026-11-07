@@ -127,7 +127,7 @@ const heroImageExists = fs.existsSync(path.join(publicRoot, mainHeroImage.src.re
   <section class="section-block" aria-labelledby="featured-writing-title">
     <h2 id="featured-writing-title" class="section-heading">Featured Writing</h2>
     <div class="grid cols-2">
-      {featuredWriting.map((post) => <WritingCard post={post} showThumb />)}
+      {featuredWriting.map((post) => <WritingCard post={post} />)}
     </div>
     <p><a href="/writing/">Browse all essays</a></p>
   </section>

@@ -61,6 +61,7 @@
   },
   {
     "slug": "valuing-people-motivation-and-energy",
+    "thumb": "/images/writing/thumbs/valuing-people-motivation-and-energy.jpg",
     "title": "Valuing People: Motivation and Energy in Real Teams",
     "date": "2026-02-07",
     "summary": "Motivation is hard to generate and easy to lose, so valuing people has to be built into daily team behavior.",
@@ -80,6 +81,7 @@
   },
   {
     "slug": "simulation-first-engineering-shortening-the-loop",
+    "icon": "plot",
     "title": "Simulation-First Engineering: Shortening the Loop",
     "date": "2026-01-21",
     "summary": "Shorter design cycles come from better simulation habits, not bigger models or more process overhead.",
@@ -89,6 +91,7 @@
   },
   {
     "slug": "modular-aircraft-why-reconfigurability-matters",
+    "icon": "modular",
     "title": "Modular Aircraft: Why Reconfigurability Matters",
     "date": "2026-01-14",
     "summary": "Reconfigurable aircraft architectures reduce organizational risk and increase mission adaptability.",
@@ -98,6 +101,7 @@
   },
   {
     "slug": "long-endurance-uavs-the-unsexy-lessons",
+    "icon": "glider",
     "title": "Long-Endurance UAVs: The Unsexy Lessons",
     "date": "2026-01-08",
     "summary": "Endurance comes from operational discipline and integration quality more than any single breakthrough.",
@@ -107,6 +111,7 @@
   },
   {
     "slug": "building-an-innovation-lab-inside-a-big-company",
+    "icon": "bulb",
     "title": "Building an Innovation Lab Inside a Big Company",
     "date": "2025-12-30",
     "summary": "A practical playbook for creating a rapid innovation environment that survives contact with reality.",
