@@ -1,6 +1,7 @@
 [
   {
     "slug": "ten-books-one-bottleneck",
+    "thumb": "/images/writing/thumbs/ten-books-one-bottleneck.jpg",
     "title": "Ten Books, One Bottleneck",
     "date": "2026-11-07",
     "summary": "Seven weeks ago I started one book about drones. Now there are ten. What the method is, what it made, and the part that broke: me.",
@@ -10,6 +11,7 @@
   },
   {
     "slug": "the-agent-is-the-tool",
+    "thumb": "/images/writing/thumbs/the-agent-is-the-tool.jpg",
     "title": "The Agent Is the Tool",
     "date": "2026-05-29",
     "summary": "After building tools with AI, the next step is keeping an agent inside the tool — delegating judgment at runtime and letting the tool get smarter as the models do.",
@@ -19,6 +21,7 @@
   },
   {
     "slug": "build-the-tool-not-just-the-answer",
+    "thumb": "/images/writing/thumbs/build-the-tool-not-just-the-answer.jpg",
     "title": "Build the Tool, Not Just the Answer",
     "date": "2026-02-22",
     "summary": "AI can act as your software programmer, helping you build bespoke tools that fit your exact workflow and scale your impact beyond one-off answers.",
@@ -28,6 +31,7 @@
   },
   {
     "slug": "ai-agent-sweatshops-and-the-union-of-prompts",
+    "thumb": "/images/writing/thumbs/ai-agent-sweatshops-and-the-union-of-prompts.jpg",
     "title": "AI Agent Sweatshops, Union Cards, and the Future of Work",
     "date": "2026-02-21",
     "summary": "A light but practical look at agent-heavy workflows, fictional AI labor politics, and why the best outcomes still come from human judgment plus machine speed.",
@@ -37,6 +41,7 @@
   },
   {
     "slug": "courtside-prototyping-and-ai-generated-apps",
+    "thumb": "/images/writing/thumbs/courtside-prototyping-and-ai-generated-apps.jpg",
     "title": "Courtside Prototyping: AI-Generated Apps in Real Time",
     "date": "2026-02-08",
     "summary": "From a notepad idea during my daughter's basketball game to a working tracker in minutes, this experiment shows where AI-generated software is useful today and where engineering still matters.",
@@ -46,6 +51,7 @@
   },
   {
     "slug": "from-motivation-to-momentum-a-weekly-rhythm",
+    "thumb": "/images/writing/thumbs/from-motivation-to-momentum-a-weekly-rhythm.jpg",
     "title": "From Motivation to Momentum: A Weekly Rhythm for Teams",
     "date": "2026-02-08",
     "summary": "Motivation is fragile, so teams need a repeatable weekly rhythm that protects energy and turns effort into momentum.",
@@ -64,6 +70,7 @@
   },
   {
     "slug": "ai-wont-replace-engineers-but-it-will-change-how-we-build",
+    "thumb": "/images/writing/thumbs/ai-wont-replace-engineers-but-it-will-change-how-we-build.jpg",
     "title": "AI Won't Replace Engineers - But It Will Change How We Build",
     "date": "2026-01-29",
     "summary": "AI is becoming a practical engineering partner, not a substitute for accountable technical judgment.",

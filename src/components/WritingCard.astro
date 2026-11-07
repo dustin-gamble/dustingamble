@@ -1,21 +1,32 @@
 ---
 import { formatDate } from "../lib/content";
 
-const { post, compact = false } = Astro.props;
+// showThumb: the home page's Featured Writing shows each essay's small image (post.thumb, 240x240,
+// cut from an image already in the essay). The Writing index leaves it off, since not every essay has one.
+const { post, compact = false, showThumb = false } = Astro.props;
+const href = `/writing/${post.slug}/`;
+const thumb = showThumb && post.thumb;
 ---
-<article class={`card writing-card ${compact ? "compact" : ""}`}>
-  <p class="meta-row">
-    <time datetime={post.date}>{formatDate(post.date)}</time>
-    <span aria-hidden="true">&middot;</span>
-    <span>{post.readingTime} min read</span>
-  </p>
-  <h3>
-    <a href={`/writing/${post.slug}/`} transition:name={post.slug}>
-      {post.title}
+<article class={`card writing-card ${compact ? "compact" : ""}${thumb ? " has-thumb" : ""}`}>
+  {thumb && (
+    <a class="project-thumb" href={href} tabindex="-1" aria-hidden="true">
+      <img src={post.thumb} alt="" width="240" height="240" loading="lazy" />
     </a>
-  </h3>
-  <p>{post.summary}</p>
-  <ul class="tag-list" aria-label="Tags">
-    {post.tags.map((tag) => <li>{tag}</li>)}
-  </ul>
+  )}
+  <div class="project-card-body">
+    <p class="meta-row">
+      <time datetime={post.date}>{formatDate(post.date)}</time>
+      <span aria-hidden="true">&middot;</span>
+      <span>{post.readingTime} min read</span>
+    </p>
+    <h3>
+      <a href={href} transition:name={post.slug}>
+        {post.title}
+      </a>
+    </h3>
+    <p>{post.summary}</p>
+    <ul class="tag-list" aria-label="Tags">
+      {post.tags.map((tag) => <li>{tag}</li>)}
+    </ul>
+  </div>
 </article>
