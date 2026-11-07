@@ -12,7 +12,8 @@ const generalReferenceKeys = [
 
 const monthFormatter = new Intl.DateTimeFormat("en-US", {
   month: "long",
-  year: "numeric"
+  year: "numeric",
+  timeZone: "UTC"
 });
 
 const months = troop308Meetings.reduce((groups, meeting) => {

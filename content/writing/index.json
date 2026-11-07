@@ -1,5 +1,14 @@
 [
   {
+    "slug": "ten-books-one-bottleneck",
+    "title": "Ten Books, One Bottleneck",
+    "date": "2026-11-07",
+    "summary": "Seven weeks ago I started one book about drones. Now there are ten. What the method is, what it made, and the part that broke: me.",
+    "tags": ["AI", "Agents", "Books", "Drones", "Engineering Judgment"],
+    "draft": false,
+    "featured": true
+  },
+  {
     "slug": "the-agent-is-the-tool",
     "title": "The Agent Is the Tool",
     "date": "2026-05-29",

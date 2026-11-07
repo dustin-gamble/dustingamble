@@ -147,9 +147,11 @@ export function getFeaturedProjects(limit = 4) {
 }
 
 export function formatDate(dateString) {
+  // "2026-05-29" parses as UTC midnight; format in UTC so it doesn't print as the day before in US time zones.
   return new Intl.DateTimeFormat("en-US", {
     year: "numeric",
     month: "long",
-    day: "numeric"
+    day: "numeric",
+    timeZone: "UTC"
   }).format(new Date(dateString));
 }
