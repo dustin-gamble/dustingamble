@@ -212,6 +212,26 @@
     "link": "https://gamble.systems/drone-assistant/"
   },
   {
+    "slug": "drone-propeller",
+    "title": "Drone Propeller",
+    "subtitle": "A field guide to the spinning wing, from the garage to the thrust stand and back again",
+    "date": "2026-11-10",
+    "summary": "A propeller is just a wing that spins. Drone Field Guide's method for the props on every kind of small drone and boat: how to choose one, and how to test it.",
+    "cover": "/images/books/drone-propeller-cover.jpg",
+    "status": "In progress",
+    "meta": "Field guide · 37 chapters · 8.5 × 11 in",
+    "tags": [
+      "Propellers",
+      "Aerodynamics",
+      "Reference"
+    ],
+    "series": "Drone Field Guide",
+    "featured": true,
+    "order": 11,
+    "draft": false,
+    "link": "https://gamble.systems/drone-propeller/"
+  },
+  {
     "slug": "ai-fusion",
     "title": "AI Fusion",
     "subtitle": "A near-future novel about trust without control",
@@ -226,7 +246,7 @@
       "AI"
     ],
     "featured": true,
-    "order": 11,
+    "order": 12,
     "draft": false
   },
   {
@@ -244,7 +264,7 @@
       "Tribute"
     ],
     "featured": true,
-    "order": 12,
+    "order": 13,
     "draft": false
   }
 ]

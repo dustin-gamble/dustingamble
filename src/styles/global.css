@@ -1880,12 +1880,12 @@ a.mb-product-card:hover {
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  gap: 1.6%;
+  gap: 1.3%;
   margin: 2.4rem 1% 0;
 }
 
 .shelf-book {
-  width: 8.3%;
+  width: 7.5%;
   text-decoration: none;
   color: var(--muted);
 }
@@ -1942,8 +1942,9 @@ a.mb-product-card:hover {
   display: block;
   margin-top: 0.95rem;
   font-family: "Space Grotesk", sans-serif;
-  font-size: 0.74rem;
-  letter-spacing: 0.03em;
+  font-size: 0.68rem;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
 }
 
 .shelf-book:hover .shelf-name {

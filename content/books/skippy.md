@@ -8,7 +8,7 @@ status: "Fan fiction"
 meta: "Novel in progress"
 tags: ["Fan Fiction", "Sci-Fi", "Tribute"]
 featured: true
-order: 12
+order: 13
 draft: false
 ---
 
