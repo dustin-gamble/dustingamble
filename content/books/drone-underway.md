@@ -4,7 +4,7 @@ subtitle: "A field guide to small unmanned boats, from the garage to the water a
 date: "2026-10-18"
 summary: "Drone Field Guide's method taken to the water, for small unmanned boats: what to size, what to seal, and what to do when it stops on the far shore."
 cover: "/images/books/drone-underway-cover.jpg"
-status: "Paperback · available now"
+status: "Paperback · on Amazon since November 8, 2026"
 meta: "Field guide · 49 chapters · 8.5 × 11 in"
 tags: ["Unmanned Boats", "Marine", "Reference"]
 series: "Drone Field Guide"

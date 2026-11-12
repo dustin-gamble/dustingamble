@@ -4,7 +4,7 @@ subtitle: "A thousand hinges, latches, folds and joints, and the number that dec
 date: "2026-10-16"
 summary: "About a thousand small mechanisms for unmanned aircraft, four to a page: what each one removes, how it works, the one number that decides whether it holds, how it fails, and one variation to try."
 cover: "/images/books/drone-mechanisms-cover.jpg"
-status: "Paperback · available now"
+status: "Paperback · on Amazon since November 2, 2026"
 meta: "Book of parts · 1,003 mechanisms · 8.5 × 11 in"
 tags: ["UAV", "Mechanisms", "Design"]
 series: "Drone Field Guide"

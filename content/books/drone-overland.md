@@ -4,7 +4,7 @@ subtitle: "A field guide to small unmanned ground vehicles, from the garage to t
 date: "2026-10-18"
 summary: "Drone Field Guide's method taken to the ground, for rovers you can lift: what to size, what to check, and what to do when it stops on the hill."
 cover: "/images/books/drone-overland-cover.jpg"
-status: "Paperback · available now"
+status: "Paperback · on Amazon since November 8, 2026"
 meta: "Field guide · 36 chapters · 8.5 × 11 in"
 tags: ["Rovers", "Robotics", "Reference"]
 series: "Drone Field Guide"
