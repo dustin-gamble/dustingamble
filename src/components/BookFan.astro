@@ -8,7 +8,7 @@ const others = collection.filter((book) => book !== lead);
 const half = Math.floor(others.length / 2);
 const fan = [...others.slice(0, half), lead, ...others.slice(half)];
 const middle = (fan.length - 1) / 2;
-const step = Math.min(12, 90 / (fan.length - 1));   // eleven covers fan out 9 degrees apart
+const step = Math.min(12, 90 / (fan.length - 1));   // ten covers fan out 10 degrees apart
 const href = (book) => book.link ?? `/books/${book.slug}/`;
 ---
 <div class="fan-panel">

@@ -28,7 +28,7 @@ That sounds like a brag. It isn't. It's the problem I want to write about.
 <a href="https://gamble.systems/drone-underway/"><img src="/images/books/shelf/drone-underway.jpg" alt="Drone Underway" width="440" height="570" loading="lazy" /></a>
 <a href="https://gamble.systems/drone-overland/"><img src="/images/books/shelf/drone-overland.jpg" alt="Drone Overland" width="440" height="570" loading="lazy" /></a>
 <a href="https://gamble.systems/drone-small/"><img src="/images/books/shelf/drone-small.jpg" alt="Drone Small" width="440" height="570" loading="lazy" /></a>
-<a href="https://gamble.systems/drone-underground/"><img src="/images/books/shelf/drone-underground.jpg" alt="Drone Underground" width="440" height="570" loading="lazy" /></a>
+<a href="https://gamble.systems/drone-propeller/"><img src="/images/books/shelf/drone-propeller.jpg" alt="Drone Propeller" width="440" height="570" loading="lazy" /></a>
 </div>
 <figcaption>The ten books, in the order I'm finishing them. The first three are out. Drag is next.</figcaption>
 </figure>
